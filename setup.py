@@ -6,8 +6,9 @@ setup(
     description='Python routines to process XAS spectra',
     author='Marco A. Alsina',
     author_email='marco.alsina@utalca.cl',
+    url='https://github.com/marcoalsina/pyxas',
     license='BSD',
-    packages=['pyxas'],
+    packages=['pyxas', 'pyxas.io', 'pyxas.plot', 'pyxas.fit'],
     long_description=open('README.md').read(),
     install_requires=[
         'numpy>=1.16.4',
