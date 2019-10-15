@@ -93,7 +93,7 @@ class DataReport:
         else:
             print (self.content)
 
-			
+
 def index_dups(energy,tol=1e-4):
     '''
     This function returns an index array
@@ -114,8 +114,8 @@ def index_dups(energy,tol=1e-4):
     dif = diff(energy)
     index = argwhere(dif < tol)
 
-    return index+1
-	
+    return (index+1)
+
 
 def read_dnd(fname, scan='mu', tol=1e-4):
     '''
@@ -138,6 +138,7 @@ def read_dnd(fname, scan='mu', tol=1e-4):
     energy, (fluo,mu), mu_ref
     '''
     from os import path
+    import warnings
     from numpy import loadtxt, delete
     import larch
     from larch import Group
@@ -145,22 +146,19 @@ def read_dnd(fname, scan='mu', tol=1e-4):
     
     # Testing that the file exits in the current directory 
     if not path.isfile(fname):
-        print ('Error: file %s do not exists in the current path.' % fname)
-        return
+        raise IOError('file %s does not exist in the current path.' % fname)
     
     scandict = {'fluo':16, 'mu':17, 'mu_ref':18}
-    
     # testing that the scan string exits in the current dictionary 
     if scan not in scandict:
-    #    print 'Warning: scan type not recognized.'
-    #    print "Extracting transmission data ('mu')."
+        warnings.warn("scan type %s not recognized. Extracting transmission spectrum ('mu')." %scan)
         scan = 'mu'
     
     raw    = loadtxt(fname, usecols=(0,scandict[scan],scandict['mu_ref']))
+    # deleting duplicate energy points
     index  = index_dups(raw[:,0],tol)
     raw    = delete(raw,index,0)
     if scan == 'mu_ref':
-    #    print 'Warning: only reference scan requested.'
     #    print "Extracting only reference data ('mu_ref')."
         data = Group(**{'energy':raw[:,0], scan:raw[:,1], 'mu_ref':raw[:,2]})
     else:
@@ -186,18 +184,18 @@ def calibrate_energy(data, e0, session):
                of the calibration energy.
     '''
     # calculation of E0 based on Ifeffit standard
+    import warnings
     import larch    
     from larch.xafs import find_e0
     
     if hasattr(data, 'e_offset'):
-        print ('Warning: Data group was already aligned or calibrated!')
-        print ('Resetting energy to original value.')
+        warnings.warn('data group was already aligned or calibrated! Resetting energy to original value.')
         data.energy = data.energy-data.e_offset
         data.e_offset = 0
     
     data.e_offset = e0-find_e0(data.energy, data.mu_ref, _larch=session)
     
-    # currently this script modifies the energy array!!
+    # currently this script modifies the energy array!
     data.energy = data.energy+data.e_offset
 
     
@@ -219,6 +217,7 @@ def align_scans(objdat, refdat, session, e_offset=0, window=[-50,50]):
     e_offset : Appended value to the data group with the magnitude
                of the alignment energy.
     '''
+    import warnings
     from numpy import where, gradient, sum
     from scipy.interpolate import UnivariateSpline
     from scipy.optimize import fmin
@@ -226,10 +225,9 @@ def align_scans(objdat, refdat, session, e_offset=0, window=[-50,50]):
     from larch.math import remove_dups
     from larch.xafs import find_e0
 
-    objdat.energy = remove_dups(objdat.energy)
+    #objdat.energy = remove_dups(objdat.energy)
     if hasattr(objdat, 'e_offset'):
-        print ('Warning: Data group was already aligned or calibrated!')
-        print ('Resetting energy to original value.')
+        warnings.warn('Data group was already aligned or calibrated! Resetting energy to original value.')
         objdat.energy = objdat.energy-objdat.e_offset
         objdat.e_offset = 0
     
@@ -275,16 +273,16 @@ def merge_scans(group, scan='mu', order='3'):
     Output:
     merge: Larch group containing the merged xmu scans.
     '''
+    import warnings
     from numpy import size, resize, append, mean
-    from scipy.interpolate import interp1d, UnivariateSpline
+    from scipy.interpolate import UnivariateSpline
     from larch.math import remove_dups
     from larch import Group
     
     scanlist = ['fluo','mu', 'mu_ref']
     # Testing that the scan string exists in the current dictionary 
     if scan not in scanlist:
-    #    print 'Warning: scan type not recognized.'
-    #    print "Merging transmission data ('mu')."
+        warnings.warn("scan type %s not recognized. Merging transmission data ('mu').")
         scan = 'mu'
     
     # Energy arrays are compared to create the interpolation array
@@ -314,7 +312,6 @@ def merge_scans(group, scan='mu', order='3'):
         # the getattr method is employed to recycle the variable scan
         gpenergy  = remove_dups(gr.energy)
         mu_spline = UnivariateSpline(gpenergy, getattr(gr,scan), s=0, k=order)
-        #mu_spline = interp1d(gpenergy, getattr(gr,scan), kind='linear')
         
         # appending the interpolated data to the container
         mu = append(mu, mu_spline(energy), axis=0)
@@ -361,7 +358,7 @@ def get_scan_type(data):
     try:
         scan is not None
     except ValueError:
-        print ('Error: scan type not recognized!')
+        print ('scan type not recognized!')
 
     return (scan)
 
