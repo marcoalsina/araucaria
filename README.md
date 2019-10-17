@@ -12,7 +12,7 @@ name@machine:~$ cd pyxas.master
 name@machine:~$ pip install .
 ```
 Pip should be able to download the required dependencies.
-If you have conda installed in your machine, be sure to activate your envrionment before running pip.
+If you have conda installed in your machine (Anaconda or Miniconda), be sure to activate your envrionment before running pip.
 ```console
 name@machine:~$ conda activate <yourenvironment>
 ```
