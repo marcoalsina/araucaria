@@ -7,31 +7,30 @@ Collection of functions to plot XAS data.
 Implemented functions:
     fig_xas_template
     plot_merged_scans
-
-Marco A. Alsina
-08/23/2019
 '''
 
-def fig_xas_template(panels='xx', **fig_pars):
+def fig_xas_template(panels='xx', fig_pars=None, **fig_kws):
     '''
     This funtion returns a Matpoltlib figure and
     axes object based on user specification regarding 
     the XAFS spectra to plot.
+    Panel elements (axes) are indexed in row-major, i.e.
+    C-style order.
     --------------
     Required input:
-    panels [str] : characters defining the XAFS spectra
-                   to plot. Valid arguments are as follows:
+    panels [str] : characters defining the type of 
+                   panels (axes) to plot.
+                   Valid arguments are as follows:
                    'd': derivative of XANES spectra.
                    'x': XANES spectra.
                    'e': EXAFS spectra.
                    'r': FT EXAFS spectra.
+                   '/': designates a new row.
                    characters can be concatenated to
-                   produce multiple panels.
-                   Examples: 'dxe', 'xx', 'xer'.
-    fig_pars: dictionary with arguments for the figure.
+                   produce multiple panels and rows.
+                   Examples: 'dxe', 'xx', 'xer', 'xx/xx'.
+    fig_pars [dict]: optional arguments for the figure.
     Valid arguments include:
-        fig_w    [float]: figure width in inches.
-        fig_h    [float]: figure height in inches.
         e_range   [list]: XANES energy range.
         e_ticks   [list]: XANES energy tick marks.
         mu_range  [list]: XANES norm absorption range.
@@ -47,129 +46,144 @@ def fig_xas_template(panels='xx', **fig_pars):
         r_ticks   [list]: FT EXAFS r tick marks.
         mag_range [list]: FT EXAFS magnitude range.
         mag_ticks [list]: FT EXAFS magnitude tick marks.
-        
+    fig_kws [dict]: valid arguments to pass to the Matplotlib
+                    subplots instance.  
     --------------
     Output:
     fig :  Matplolib figure object.
     ax:    Matplotlib axes object.
     '''
+    import sys
+    from numpy import ravel
     import matplotlib as mpl
     import matplotlib.pyplot as plt
 
     # valid axis type
     valid_panel_types = ['d', 'x', 'e', 'r']
 
-    # converting argument to list of strings
-    panels = list(panels)
+    # counting the number of rows
+    rows  = panels.split('/')
+    nrows = len(rows)
+
+    # veryfing that each row has the same number of elements
+    if nrows == 1:
+        ncols = len(panels)
+    else:
+        ncols = len(rows[0])
+        for cols in rows[1:]:
+            if len(cols) != ncols:
+                raise ValueError('number of columns does not match between rows')
+                sys.exit(1)
+
+    # converting panel argument to list of strings
+    panels = ''.join(rows)    # merging all rows in a single string
+    panels = list(panels)     # separating string in characters
 
     try:    
         for panel in panels:
             panel in valid_panel_types
     except ValueError:
-        print ('Error: %s panel type not recognized!' % panel)
+        print('%s panel type not recognized!' % panel)
+        sys.exit(1)
 
     # creating figure and axes
-    try:
-        fig, axes = plt.subplots(1, len(panels), figsize=(fig_pars['fig_w'], fig_pars['fig_h']))
-    except:
-        fig, axes = plt.subplots(1, len(panels))
+    fig, axes = plt.subplots(nrows, ncols, **fig_kws)
 
-    # formatting panels (axes)
-    for i, panel in enumerate(panels):
+    # formatting axes
+    for i, ax in enumerate(ravel(axes)):
         # XANES derivative axis
-        if panel == 'd':
-            axes[i].set_xlabel('Energy [eV]')
-            axes[i].set_ylabel('Deriv. abs. [a.u.]')
-
+        if panels[i] == 'd':
+            ax.set_xlabel(r'Energy [$eV$]')
+            ax.set_ylabel('Deriv. abs. [a.u.]')
             try:
-                axes[i].set_xlim(fig_pars['e_range'])
+                ax.set_xlim(fig_pars['e_range'])
             except:
                 pass
             try:
-                axes[i].set_ylim(fig_pars['dmu_range'])
+                ax.set_ylim(fig_pars['dmu_range'])
             except:
                 pass
             try:
-                axes[i].set_xticks(fig_pars['e_ticks'])
+                ax.set_xticks(fig_pars['e_ticks'])
             except:
                 pass
             try:
-                axes[i].set_yticks(fig_pars['dmu_ticks'])
+                ax.set_yticks(fig_pars['dmu_ticks'])
             except:
                 pass
 
         # XANES axis
-        elif panel == 'x':
-            axes[i].set_xlabel('Energy [eV]')
-            axes[i].set_ylabel('Norm. abs. [a.u.]')
+        elif panels[i] == 'x':
+            ax.set_xlabel(r'Energy [$eV$]')
+            ax.set_ylabel('Norm. abs. [a.u.]')
             try:
-                axes[i].set_xlim(fig_pars['e_range'])
+                ax.set_xlim(fig_pars['e_range'])
             except:
                 pass
             try:
-                axes[i].set_ylim(fig_pars['mu_range'])
+                ax.set_ylim(fig_pars['mu_range'])
             except:
                 pass
             try:
-                axes[i].set_xticks(fig_pars['e_ticks'])
+                ax.set_xticks(fig_pars['e_ticks'])
             except:
                 pass
             try:
-                axes[i].set_yticks(fig_pars['mu_ticks'])
+                ax.set_yticks(fig_pars['mu_ticks'])
             except:
                 pass
 
         # EXAFS axis
-        elif panel == 'e':
+        elif panels[i] == 'e':
             try:
                 k = fig_pars['k_mult']
             except:
                 k = 2
-            axes[i].set_xlabel(r'$k$ [$\AA^{-1}$]')
-            axes[i].set_ylabel(r'$k^%i\chi(k)$' % k)
+            ax.set_xlabel(r'$k$ [$\AA^{-1}$]')
+            ax.set_ylabel(r'$k^%i\chi(k)$' % k)
             try:
-                axes[i].set_xlim(fig_pars['k_range'])
+                ax.set_xlim(fig_pars['k_range'])
             except:
                 pass
             try:
-                axes[i].set_ylim(fig_pars['chi_range'])
+                ax.set_ylim(fig_pars['chi_range'])
             except:
                 pass
             try:
-                axes[i].set_xticks(fig_pars['k_ticks'])
+                ax.set_xticks(fig_pars['k_ticks'])
             except:
                 pass
             try:
-                axes[i].set_yticks(fig_pars['chi_ticks'])
+                ax.set_yticks(fig_pars['chi_ticks'])
             except:
                 pass
 
         # FT EXAFS axis
-        if panel == 'r':
+        if panels[i] == 'r':
             try:
                 k = fig_pars['k_mult']
             except:
                 k = 2
-            axes[i].set_xlabel(r'$R$ [$\AA$]')
-            axes[i].set_ylabel(r'|$\chi(R)$|  [$\AA^{-%i}$]' % (k+1))
+            ax.set_xlabel(r'$R$ [$\AA$]')
+            ax.set_ylabel(r'|$\chi(R)$|  [$\AA^{-%i}$]' % (k+1))
             try:
-                axes[i].set_xlim(fig_pars['r_range'])
+                ax.set_xlim(fig_pars['r_range'])
             except:
                 pass
             try:
-                axes[i].set_ylim(fig_pars['mag_range'])
+                ax.set_ylim(fig_pars['mag_range'])
             except:
                 pass
             try:
-                axes[i].set_xticks(fig_pars['r_ticks'])
+                ax.set_xticks(fig_pars['r_ticks'])
             except:
                 pass
             try:
-                axes[i].set_yticks(fig_pars['mag_ticks'])
+                ax.set_yticks(fig_pars['mag_ticks'])
             except:
                 pass
-        
-    return (fig, axes)  
+
+    return (fig, axes)
 
 def plot_merged_scans(group, merge, edge, scan='mu', **pre_edge_kws):
     '''
@@ -199,16 +213,14 @@ def plot_merged_scans(group, merge, edge, scan='mu', **pre_edge_kws):
     
     # plot parameters
     lw = 1.2                                       # line width
-    fig_pars = {'fig_w'   : 12.0,                  # image width
-                'fig_h'   : 4.00,                  # image height
-                'e_range' : [edge-50,edge+75],     # plotting window energy
+    fig_pars = {'e_range' : [edge-50,edge+75],     # plotting window energy
                 'mu_range': [-0.1,1.5],            # plotting window mu
                 'k_mult'  : 2,                     # k multiplier
                 'k_range' : [0,16]                 # plotting window k-space
                 }
-    
+    fig_kws = {'figsize': (12,4)}                  # image with and height
     # plot decorations
-    fig, axes = fig_xas_template(panels='dxe', **fig_pars)
+    fig, axes = fig_xas_template(panels='dxe', fig_pars=fig_pars, **fig_kws)
     for ax in axes:
         ax.grid()
         if ax == axes[0]:

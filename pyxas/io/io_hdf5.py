@@ -27,6 +27,7 @@ def read_hdf5(filename, name=None):
     data [group]  : group data.
     '''
     import os
+    import sys
     import h5py
     import numpy as np
     
@@ -34,11 +35,11 @@ def read_hdf5(filename, name=None):
     if os.path.isfile(filename):
         hdf5 = h5py.File(filename, "r")
     else:
-        print ("Error: File %s does not exists." % filename)
-        return
+        raise IOError('File %s does not exists.' % filename)
+        sys.exit(1)
     
     if name is None:
-        print ("Error: must specify the required dataset name.")
+        raise IOError('must specify the required dataset name.')
         return
     elif name in hdf5:
         data = {}
@@ -52,8 +53,8 @@ def read_hdf5(filename, name=None):
             
             #print '%s dataset: %s <%s>' % (flag, key, vtype)
     else:
-        print ("Error: requested dataset does not exists in the file!")
-        return
+        raise IOError('requested dataset %s does not exists in the file %s!' % (name, filename))
+        sys.exit(1)
     
     hdf5.close()
     return data
@@ -71,6 +72,7 @@ def write_hdf5(filename, data, name='dataset1', replace=False):
     Output:
     data [group]    : group data.
     '''
+    import sys
     import os
     import h5py
     
@@ -88,7 +90,7 @@ def write_hdf5(filename, data, name='dataset1', replace=False):
             if replace:
                 hdf5.__delitem__(name)
             else:
-                print ("Operation cancelled: Dataset %s already exists in database %s!" % (name, filename))
+                print ('Operation canceled: Dataset %s already exists in database %s!' % (name, filename))
                 return
     
     group = hdf5.create_group(name)
@@ -96,7 +98,8 @@ def write_hdf5(filename, data, name='dataset1', replace=False):
         write_recursive_hdf5(group,data)
         print ('%s writen to file %s' % (name, filename))
     except:
-        print ('Error: data not written to file.')
+        raise IOError('data cannot be written to file %s.' % filename)
+        sys.exit(1)
     
     hdf5.close()
     return
