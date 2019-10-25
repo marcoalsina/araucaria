@@ -47,7 +47,7 @@ def fig_xas_template(panels='xx', fig_pars=None, **fig_kws):
         r_ticks   [list]: FT EXAFS r tick marks.
         mag_range [list]: FT EXAFS magnitude range.
         mag_ticks [list]: FT EXAFS magnitude tick marks.
-    fig_kws [dict]: valid arguments to pass to the Matplotlib
+    fig_kws [dict]: arguments to pass to the Matplotlib
                     subplots instance.  
     --------------
     Output:
@@ -268,19 +268,20 @@ def plot_merged_scans(group, merge, edge, scan='mu', **pre_edge_kws):
 def fig_lcf(out, step=0.5, fig_pars=None, **fig_kws):
     '''
     This funtion returns a Matpoltlib figure and
-    axes object containing the results of an LCF analysis.
+    axes object containing the plotted results of an LCF analysis.
     --------------
     Required input:
     out [obj]      : valid LMFIT object for the LCF.
+    step [float]   : vertical separation step between plots.
     fig_pars [dict]: optional arguments for the figure.
                      Check the function 'fig_xas_template'
                      for valid arguments.
-    fig_kws [dict]: valid arguments to pass to the Matplotlib
+    fig_kws [dict]: arguments to pass to the Matplotlib
                     subplots instance.  
     --------------
     Output:
     fig :  Matplolib figure object.
-    ax:    Matplotlib axes object.
+    axes:  Matplotlib axes object.
     '''
     from numpy import gradient, ptp
     import larch
