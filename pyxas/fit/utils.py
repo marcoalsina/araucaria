@@ -15,8 +15,9 @@ def sum_standards(pars, data):
     the amplitude values stored in a dictionary with lcf parameters.
     '''
     from numpy import sum as npsum
-    return npsum([pars['amp'+str(i)]* getattr(data, 'std'+str(i)) 
-                   for i in range(1,len(pars)+1)], axis=0)
+    return (npsum([pars['amp'+str(i)]* getattr(data, 'std'+str(i)) 
+                   for i in range(1,len(pars)+1)], axis=0))
+
 
 def residuals(pars,data):
     '''
@@ -26,6 +27,31 @@ def residuals(pars,data):
     '''
     return (data.sample - sum_standards(pars, data))/data.eps
 
+
+def lcf_report(out):
+    '''
+    This function returns an updated LCF report.
+    '''
+    import os
+    from lmfit import fit_report
+    
+    header = '[[Parameters]]\n'
+    for key in out.pars_kws:
+        val    = ' '.join(key.split('_'))
+        header = header + '    {0:19}= {1}\n'\
+        .format(val, out.pars_kws[key])
+    
+    header = header+'[[Data]]\n'
+    for key in data_kws:
+        val    = ' '.join(key.split('_'))
+        if 'path' in key:
+            keyval = os.path.abspath(out.data_kws[key])
+        else:
+            keyval = out.data_kws[key]
+        header = header + '    {0:19}= {1}\n'\
+        .format(val, keyval)
+
+    return (header+fit_report(out))
 
 
 def get_lcf_data(files, reference, error=True):
