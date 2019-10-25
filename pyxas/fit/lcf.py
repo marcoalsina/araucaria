@@ -26,7 +26,6 @@ def residuals(pars,data):
     of a spectrum from its linear combination fit with known
     standards
     '''
-    import numpy as np
     return (data.sample - sum_standards(pars, data))/data.eps
 
 
