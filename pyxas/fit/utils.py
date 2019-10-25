@@ -15,7 +15,7 @@ def sum_standards(pars, data):
     the amplitude values stored in a dictionary with lcf parameters.
     '''
     from numpy import sum as npsum
-    return (npsum([pars['amp'+str(i)]* getattr(data, 'std'+str(i)) 
+    return (npsum([pars['amp'+str(i)]* getattr(data, 'ref'+str(i)) 
                    for i in range(1,len(pars)+1)], axis=0))
 
 
