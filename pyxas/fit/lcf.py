@@ -19,7 +19,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     from larch.xafs import pre_edge, autobk
     from pyxas import get_scan_type
     from pyxas.io import read_hdf5
-    #from pyxas.fit import residuals, sum_standards, fit_report
+    from pyxas.fit import residuals, sum_standards
     
     # verifying fit type
     fit_types = ['dxanes', 'xanes','exafs']
