@@ -91,7 +91,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
             # interpolation values for the corresponding x-variable
             # inside the fit window
             index = where((getattr(data, xvar) >= fit_window[0]) &
-                             (getattr(data, xvar) <= fit_window[1]))
+                          (getattr(data, xvar) <= fit_window[1]))
             xvals = getattr(data,xvar)[index]
             
             # storing the y-variable
