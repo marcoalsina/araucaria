@@ -25,7 +25,7 @@ def residuals(pars,data):
     of a spectrum from its linear combination fit with known
     standards
     '''
-    return (data.sample - sum_standards(pars, data))/data.eps
+    return (data.spectrum - sum_standards(pars, data))/data.eps
 
 
 def lcf_report(out):
