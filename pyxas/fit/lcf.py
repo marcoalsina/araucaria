@@ -2,106 +2,146 @@
 '''
 filename: lcf.py
 
-Colletion of routines to work with LCF log files.
-
-Implemented functions:
-    sum_standards
-    residuals
-    get_lcf_data
-    get_chi2
+Routine to perform LCF on a XAS spectrum
 '''
 
-def sum_standards(pars, data):
+def lcf(data_kws, fit_type, fit_window, k_mult=2,
+        sum_one=True, pre_edge_kws=None, autobk_kws=None):
     '''
-    This function returns the linear sum of standards based on 
-    the amplitude values stored in a dictionary with lcf parameters.
-    '''
-    from numpy import sum as npsum
-    return npsum([pars['amp'+str(i)]* getattr(data, 'std'+str(i)) 
-                   for i in range(1,len(pars)+1)], axis=0)
-
-def residuals(pars,data):
-    '''
-    This function returns the residuals of the substraction
-    of a spectrum from its linear combination fit with known
-    standards
-    '''
-    return (data.sample - sum_standards(pars, data))/data.eps
-
-
-
-def get_lcf_data(files, reference, error=True):
-    '''
-    This function reads a list of lcf log files and returns 
-    a numpy array with the values associated with the specified reference
-    The calculated standard deviation can be retrieved optionally.
+    Include description of function...
     '''
     import os
-    from numpy import append, float
+    from numpy import where, gradient
+    from scipy.interpolate import interp1d
+    from lmfit import Parameters, minimize
+    import larch
+    from larch import Group
+    from larch.xafs import pre_edge, autobk
+    from pyxas import get_scan_type
+    from pyxas.io import read_hdf5
+    #from pyxas.fit import residuals, sum_standards, fit_report
+    
+    # verifying fit type
+    fit_types = ['dxanes', 'xanes','exafs']
+    if fit_type not in fit_types:
+        raise ValueError('fit_type %s not recognized.'%fit_type)
+    
+    # counting the number of spectra
+    # and checking if filepaths exist
+    nspectra = 0
+    for key in data_kws:
+        if 'name' in key:
+            nspectra += 1
+        elif 'path' in key:
+            if os.path.isfile(data_kws[key]):
+                True
+            else:
+                raise IOError('File %s does not exist.' % data_kws[key]) 
+    
+    # required datasets
+    # at least a spectrum and a single reference must be provided
+    req_keys =['spectrum_path', 'spectrum_name', 'ref1_path', 'ref1_name']
+    for i in range(nspectra-2):
+        req_keys.append('ref%i_path' % (i+1))
+        req_keys.append('ref%i_name' % (i+1))
+    
+    for key in req_keys:
+        if key not in data_kws:
+            raise ValueError("Argument '%s' is missing." % key)
+    
+    # reading and processing spectra
+    session = larch.Interpreter(with_plugins=False)
+    datgroup = Group()   # container for spectra to perform LCF analysis
+    
+    for i in range(nspectra):
+        # reading spectra 
+        dname = 'spectrum' if i==0 else 'ref'+str(i)
+        data = Group(**read_hdf5(data_kws[req_keys[2*i]], name=data_kws[req_keys[2*i+1]]))
+        scantype = get_scan_type(data)
+        
+        # standard report parameters
+        pars_kws = {'fit_type':fit_type, 'fit_window':fit_window, 'sum_one':sum_one}
+        
+        # processing xanes spectra
+        if pre_edge_kws is None:
+            pre_edge(data.energy, getattr(data, scantype), group=data, _larch=session)
+            pars_kws['pre_edge_kws'] = 'default'
+        else:
+            pre_edge(data.energy, getattr(data, scantype), group=data, _larch=session, **pre_edge_kws)
+            pars_kws['pre_edge_kws'] = pre_edge_kws
+        
+        if fit_type == 'exafs':
+            # prceossing exafs spectra
+            if autobk_kws is None:
+                autobk(data.energy, getattr(data, scantype), group=data, _larch=session)
+                pars_kws['autobk_kws'] = 'default'
+            else:
+                autobk(data.energy, getattr(data, scantype), group=data, _larch=session, **autobk_kws)
+                pars_kws['autobk_kws'] = autobk_kws
+            
+            pars_kws['k_mult'] = k_mult
+            # storing name of x-variable (exafs)
+            xvar = 'k'
+        else:
+            # storing name of x-variable (xanes)
+            xvar = 'energy'
+        
+        if i == 0:
+            # first value is the spectrum, so we extract the 
+            # interpolation values for the corresponding x-variable
+            # inside the fit window
+            index = where((getattr(data, xvar) >= fit_window[0]) &
+                             (getattr(data, xvar) <= fit_window[1]))
+            xvals = getattr(data,xvar)[index]
+            
+            # storing the y-variable
+            if fit_type == 'exafs':
+                yvals = xvals**k_mult*data.chi[index]
+            elif fit_type == 'xanes':
+                yvals = data.norm[index]
+            else:
+                yvals = gradient(data.norm[index])
 
-    reference = reference
-    vallist   = []    # container for values
-    errlist   = []    # container for errors
+        else:
+            # spline interpolation of references
+            if fit_type == 'exafs':
+                s = interp1d(getattr(data, xvar), getattr(data, xvar)**k_mult*data.chi)
+            elif fit_type =='xanes':
+                s = interp1d(getattr(data, xvar), data.norm)
+            else:
+                s = interp1d(getattr(data, xvar), gradient(data.norm))
+            yvals = s(xvals)
+        
+        # setting corresponding y-variable as an attribute of datgroup
+        setattr(datgroup, dname, yvals)
 
-    for file in files:
-        getref = True
-        getval = False
-        f = open(file, 'r')
-        while getref:
-            line = f.readline()
-            if reference in line:
-                # Reference found in line, we extract the standard index
-                index = line.split()[0][-1]
-                stdval = "amp"+index
-                getref = False
-                getval = True
-            elif "[[Correlations" in line:
-                # This line indicates that we already passed the reference values
-                # There is nothing else to search so return zeroes instead
-                vallist = append(vallist,0.00)
-                errlist = append(errlist,0.00)
-                getref = False
-                break
+    # setting x-variable as an attribute of datgroup
+    setattr(datgroup, xvar, xvals)
+    
+    # setting parameters for fit model
+    params = Parameters()
+    expr = str(1)
+    
+    for i in range(0, nspectra-1):
+        parname = 'amp'+str(i+1)
+        if (i == nspectra-2) and (sum_one == True):
+            params.add(parname, expr=expr)
+        else:
+            params.add(parname, value=0.5, min=0, max=1, vary=True)
+            expr += ' - amp'+str(i+1)
+    
+    # setting uncertainty
+    datgroup.eps  = 1.0
 
-        while getval:
-            line = f.readline()
-            if stdval in line:
-                val = float(line.split()[1]) * 100
-                err = float(line.split()[3]) * 100
-                vallist = append(vallist,val)
-                errlist = append(errlist,err)
-                getval = False
-
-    if error:
-        return (vallist, errlist)
-    else:
-        return vallist
-
-def get_chi2(files, reduced=False):
-    '''
-    This function reads a list of lcf log files and returns 
-    a numpy array with the chi-squared values associated with the fit.
-    The reduced chi-square can be retrieved optionally.
-
-    '''
-    import os
-    from numpy import append, float
-
-    if reduced:
-        reference = " reduced chi-square"
-    else:
-        reference = "    chi-square"
-
-    vallist = []    # container for values
-
-    for file in files:
-        getval = True
-        f = open(file, 'r')
-        while getval:
-            line = f.readline()
-            if reference in line:
-                val = float(line.split("=")[1])
-                vallist = append(vallist,val)
-                getval = False
-
-    return vallist
+    # perform fit
+    out = minimize(residuals, params, args=(datgroup,),)
+    
+    # storing data and argumens
+    fit = sum_standards(out.params, datgroup)
+    datgroup.fit = fit
+    
+    out.data_group = datgroup
+    out.data_kws = data_kws
+    out.pars_kws = pars_kws
+    
+    return (out)
