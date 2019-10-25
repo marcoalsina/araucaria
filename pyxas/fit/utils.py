@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 '''
 filename: utils.py
-Colletion of routines to work with LCF log files.
+
+Colletion of routines to work with LCF output and log files.
+
 Implemented functions:
     sum_standards
     residuals
