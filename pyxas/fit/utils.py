@@ -5,16 +5,16 @@ filename: utils.py
 Colletion of routines to work with LCF output and log files.
 
 Implemented functions:
-    sum_standards
+    sum_references
     residuals
     get_lcf_data
     get_chi2
 '''
 
-def sum_standards(pars, data):
+def sum_references(pars, data):
     '''
-    This function returns the linear sum of standards based on 
-    the amplitude values stored in a dictionary with lcf parameters.
+    This function returns the linear sum of references based on 
+    the amplitude values stored in a dictionary with LCF parameters.
     '''
     from numpy import sum as npsum
     return (npsum([pars['amp'+str(i)]* getattr(data, 'ref'+str(i)) 
@@ -24,15 +24,16 @@ def sum_standards(pars, data):
 def residuals(pars,data):
     '''
     This function returns the residuals of the substraction
-    of a spectrum from its linear combination fit with known
-    standards
+    of a spectrum from its LCF with known references
+    standards.
     '''
-    return (data.spectrum - sum_standards(pars, data))/data.eps
+    return (data.spectrum - sum_references(pars, data))/data.eps
 
 
 def lcf_report(out):
     '''
-    This function returns an updated LCF report.
+    This function recieves an lmfit object and
+    returns an LCF report.
     '''
     import os
     from lmfit import fit_report
@@ -58,7 +59,7 @@ def lcf_report(out):
 
 def get_lcf_data(files, reference, error=True):
     '''
-    This function reads a list of lcf log files and returns 
+    This function reads a list of LCF log files and returns 
     a numpy array with the values associated with the specified reference
     The calculated standard deviation can be retrieved optionally.
     '''
@@ -103,6 +104,7 @@ def get_lcf_data(files, reference, error=True):
     else:
         return (vallist)
 
+
 def get_chi2(files, reduced=False):
     '''
     This function reads a list of lcf log files and returns 
@@ -130,3 +132,41 @@ def get_chi2(files, reduced=False):
                 getval = False
 
     return (vallist)
+
+
+def save_lcf_data(filepath, self):
+    '''
+    This function saves LCF data in a file
+    specificed by filepath.
+    '''
+    from numpy import column_stack, savetxt
+    from .fit import lcf_report
+    
+    # saving LCF spectra
+    rep_header = lcf_report(self)
+    
+    if self.pars_kws['fit_type'] == 'exafs':
+        data_header = 'k [A-1]\t' + 'k^%s chi(k)'%self.pars_kws['k_mult']+ '\tFit\tResidual'
+        data = column_stack((data_group.k, data_group.spectrum, fit, res))
+    else:
+        data = column_stack((data_group.energy, data_group.spectrum, fit, res))
+        if self.pars_kws['fit_type'] == 'xanes':
+            data_header = 'Energy [eV]\t' + 'Norm. abs. [adim]'+ '\tFit\tResidual'
+        else:
+            data_header = 'Energy [eV]\t' + 'Deriv. norm. abs. [adim]'+ '\tFit\tResidual'
+    
+    savetxt(filepath, data, fmt='%.6f',  header=rep_header + '\n' + data_header)
+    return
+
+
+def save_lcf_report(filepath, self):
+    '''
+    This function saves an LCF report 
+    in a file specificed by filepath.
+    '''
+    from .utils import lcf_report
+    
+    fout    = open(reppath, 'w')
+    fout.write(lcf_report(self))
+    fout.close()
+    return
