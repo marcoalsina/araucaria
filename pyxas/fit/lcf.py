@@ -19,7 +19,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     from larch.xafs import pre_edge, autobk
     from pyxas import get_scan_type
     from pyxas.io import read_hdf5
-    from pyxas.fit import residuals, sum_standards
+    from pyxas.fit import residuals, sum_references
     from pyxas.fit import save_lcf_report, save_lcf_data
     
     # verifying fit type
@@ -138,7 +138,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     out = minimize(residuals, params, args=(datgroup,),)
     
     # storing data and argumens
-    fit = sum_standards(out.params, datgroup)
+    fit = sum_references(out.params, datgroup)
     datgroup.fit = fit
     
     out.data_group = datgroup
