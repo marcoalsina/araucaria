@@ -4,6 +4,10 @@ filename: utils.py
 
 Colletion of routines to work with LCF output and log files.
 
+Implemented methods (class lmfit out):
+    save_lcf_data
+    save_lcf_report
+
 Implemented functions:
     sum_references
     residuals
