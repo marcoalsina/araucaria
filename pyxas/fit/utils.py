@@ -151,9 +151,9 @@ def save_lcf_data(self, filepath):
     
     if self.pars_kws['fit_type'] == 'exafs':
         data_header = 'k [A-1]\t' + 'k^%s chi(k)'%self.pars_kws['k_mult']+ '\tFit\tResidual'
-        data = column_stack((self.data_group.k, self.data_group.spectrum, self.fit, self.residual))
+        data = column_stack((self.data_group.k, self.data_group.spectrum, self.data_group.fit, self.residual))
     else:
-        data = column_stack((self.data_group.energy, self.data_group.spectrum, self.fit, self.residual))
+        data = column_stack((self.data_group.energy, self.data_group.spectrum, self.data_group.fit, self.residual))
         if self.pars_kws['fit_type'] == 'xanes':
             data_header = 'Energy [eV]\t' + 'Norm. abs. [adim]'+ '\tFit\tResidual'
         else:
