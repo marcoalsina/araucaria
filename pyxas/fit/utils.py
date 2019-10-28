@@ -15,6 +15,45 @@ Implemented functions:
     get_chi2
 '''
 
+def save_lcf_data(self, filepath):
+    '''
+    This function saves LCF data in a file
+    specificed by filepath.
+    '''
+    from numpy import column_stack, savetxt
+    from .fit import lcf_report
+    
+    # saving LCF spectra
+    rep_header = lcf_report(self)
+    
+    if self.pars_kws['fit_type'] == 'exafs':
+        data_header = 'k [A-1]\t' + 'k^%s chi(k)'%self.pars_kws['k_mult']+ '\tFit\tResidual'
+        data = column_stack((self.data_group.k, self.data_group.spectrum, self.data_group.fit, self.residual))
+    else:
+        data = column_stack((self.data_group.energy, self.data_group.spectrum, self.data_group.fit, self.residual))
+        if self.pars_kws['fit_type'] == 'xanes':
+            data_header = 'Energy [eV]\t' + 'Norm. abs. [adim]'+ '\tFit\tResidual'
+        else:
+            data_header = 'Energy [eV]\t' + 'Deriv. norm. abs. [adim]'+ '\tFit\tResidual'
+    
+    savetxt(filepath, data, fmt='%.6f',  header=rep_header + '\n' + data_header)
+    return
+
+
+def save_lcf_report(filepath, self):
+    '''
+    This function saves an LCF report 
+    in a file specificed by filepath.
+    '''
+    from .utils import lcf_report
+    
+    fout    = open(reppath, 'w')
+    fout.write(lcf_report(self))
+    fout.close()
+    return
+
+
+
 def sum_references(pars, data):
     '''
     This function returns the linear sum of references based on 
@@ -136,41 +175,3 @@ def get_chi2(files, reduced=False):
                 getval = False
 
     return (vallist)
-
-
-def save_lcf_data(self, filepath):
-    '''
-    This function saves LCF data in a file
-    specificed by filepath.
-    '''
-    from numpy import column_stack, savetxt
-    from .fit import lcf_report
-    
-    # saving LCF spectra
-    rep_header = lcf_report(self)
-    
-    if self.pars_kws['fit_type'] == 'exafs':
-        data_header = 'k [A-1]\t' + 'k^%s chi(k)'%self.pars_kws['k_mult']+ '\tFit\tResidual'
-        data = column_stack((self.data_group.k, self.data_group.spectrum, self.data_group.fit, self.residual))
-    else:
-        data = column_stack((self.data_group.energy, self.data_group.spectrum, self.data_group.fit, self.residual))
-        if self.pars_kws['fit_type'] == 'xanes':
-            data_header = 'Energy [eV]\t' + 'Norm. abs. [adim]'+ '\tFit\tResidual'
-        else:
-            data_header = 'Energy [eV]\t' + 'Deriv. norm. abs. [adim]'+ '\tFit\tResidual'
-    
-    savetxt(filepath, data, fmt='%.6f',  header=rep_header + '\n' + data_header)
-    return
-
-
-def save_lcf_report(filepath, self):
-    '''
-    This function saves an LCF report 
-    in a file specificed by filepath.
-    '''
-    from .utils import lcf_report
-    
-    fout    = open(reppath, 'w')
-    fout.write(lcf_report(self))
-    fout.close()
-    return
