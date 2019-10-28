@@ -21,7 +21,7 @@ def save_lcf_data(self, filepath):
     specificed by filepath.
     '''
     from numpy import column_stack, savetxt
-    from .fit import lcf_report
+    from .utils import lcf_report
     
     # saving LCF spectra
     rep_header = lcf_report(self)
