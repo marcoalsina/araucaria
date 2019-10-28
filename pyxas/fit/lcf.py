@@ -11,6 +11,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     Include description of function...
     '''
     import os
+    import types
     from numpy import where, gradient
     from scipy.interpolate import interp1d
     from lmfit import Parameters, minimize
@@ -146,7 +147,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     out.pars_kws = pars_kws
 
     # assigning save methods to out object
-    out.save_lcf_report = save_lcf_report
-    out.save_lcf_data = save_lcf_data
+    out.save_lcf_report = types.MethodType(save_lcf_report, out)
+    out.save_lcf_data = types.MethodType(save_lcf_data, out)
 
     return (out)
