@@ -47,7 +47,7 @@ def save_lcf_report(filepath, self):
     '''
     from .utils import lcf_report
     
-    fout    = open(reppath, 'w')
+    fout = open(filepath, 'w')
     fout.write(lcf_report(self))
     fout.close()
     return
