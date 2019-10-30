@@ -163,7 +163,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     # perform fit
     out = minimize(residuals, params, args=(datgroup,),)
     
-    # storing data and argumens
+    # storing data and arguments
     fit = sum_references(out.params, datgroup)
     datgroup.fit = fit
     
