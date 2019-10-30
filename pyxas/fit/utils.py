@@ -44,6 +44,19 @@ def lcf_report(self):
     return (header+fit_report(self))
 
 
+def save_lcf_report(filepath, self):
+    '''
+    This function saves an LCF report 
+    in a file specificed by filepath.
+    '''
+    from .utils import lcf_report
+    
+    fout = open(filepath, 'w')
+    fout.write(lcf_report(self))
+    fout.close()
+    return
+
+
 def save_lcf_data(self, filepath):
     '''
     This function saves LCF data in a file
@@ -66,19 +79,6 @@ def save_lcf_data(self, filepath):
             data_header = 'Energy [eV]\t' + 'Deriv. norm. abs. [adim]'+ '\tFit\tResidual'
     
     savetxt(filepath, data, fmt='%.6f',  header=rep_header + '\n' + data_header)
-    return
-
-
-def save_lcf_report(filepath, self):
-    '''
-    This function saves an LCF report 
-    in a file specificed by filepath.
-    '''
-    from .utils import lcf_report
-    
-    fout = open(filepath, 'w')
-    fout.write(lcf_report(self))
-    fout.close()
     return
 
 
