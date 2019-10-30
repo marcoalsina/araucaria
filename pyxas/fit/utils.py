@@ -43,6 +43,7 @@ def lcf_report(self):
 
     return (header+fit_report(self))
 
+
 def save_lcf_data(self, filepath):
     '''
     This function saves LCF data in a file
