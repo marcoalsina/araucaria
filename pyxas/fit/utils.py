@@ -32,7 +32,7 @@ def lcf_report(self):
         .format(val, self.pars_kws[key])
     
     header = header+'[[Data]]\n'
-    for key in out.data_kws:
+    for key in self.data_kws:
         val    = ' '.join(key.split('_'))
         if 'path' in key:
             keyval = os.path.abspath(self.data_kws[key])
