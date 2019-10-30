@@ -5,8 +5,10 @@ filename: utils.py
 Colletion of routines to work with LCF output and log files.
 
 Implemented methods (class lmfit out):
-    save_lcf_data
+    lcf_report
     save_lcf_report
+    save_lcf_data
+
 
 Implemented functions:
     sum_references
@@ -14,6 +16,32 @@ Implemented functions:
     get_lcf_data
     get_chi2
 '''
+
+def lcf_report(self):
+    '''
+    This function recieves an lmfit object and
+    returns an LCF report.
+    '''
+    import os
+    from lmfit import fit_report
+    
+    header = '[[Parameters]]\n'
+    for key in self.pars_kws:
+        val    = ' '.join(key.split('_'))
+        header = header + '    {0:19}= {1}\n'\
+        .format(val, self.pars_kws[key])
+    
+    header = header+'[[Data]]\n'
+    for key in out.data_kws:
+        val    = ' '.join(key.split('_'))
+        if 'path' in key:
+            keyval = os.path.abspath(self.data_kws[key])
+        else:
+            keyval = self.data_kws[key]
+        header = header + '    {0:19}= {1}\n'\
+        .format(val, keyval)
+
+    return (header+fit_report(self))
 
 def save_lcf_data(self, filepath):
     '''
@@ -71,33 +99,6 @@ def residuals(pars,data):
     standards.
     '''
     return (data.spectrum - sum_references(pars, data))/data.eps
-
-
-def lcf_report(out):
-    '''
-    This function recieves an lmfit object and
-    returns an LCF report.
-    '''
-    import os
-    from lmfit import fit_report
-    
-    header = '[[Parameters]]\n'
-    for key in out.pars_kws:
-        val    = ' '.join(key.split('_'))
-        header = header + '    {0:19}= {1}\n'\
-        .format(val, out.pars_kws[key])
-    
-    header = header+'[[Data]]\n'
-    for key in out.data_kws:
-        val    = ' '.join(key.split('_'))
-        if 'path' in key:
-            keyval = os.path.abspath(out.data_kws[key])
-        else:
-            keyval = out.data_kws[key]
-        header = header + '    {0:19}= {1}\n'\
-        .format(val, keyval)
-
-    return (header+fit_report(out))
 
 
 def get_lcf_data(files, reference, error=True):
