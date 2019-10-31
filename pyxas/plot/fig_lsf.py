@@ -15,7 +15,7 @@ def fig_lsf(out, annotate=True, fontsize=8, fig_pars=None, **fig_kws):
     Required input:
     out [obj]      : valid feffit object.
     annotate [bool]: if 'true' it annotates the first shell
-                     fit results on the plot.
+                     fit results on the figure.
     fontsize [int] : font size for legend and annotations.
     fig_pars [dict]: optional arguments for the figure.
                      Check the function 'fig_xas_template'
