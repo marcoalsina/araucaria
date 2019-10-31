@@ -110,7 +110,7 @@ def fig_lcf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
         axes[1].plot(out.data_group.energy, 0.5*step + out.data_group.fit, label='fit')
         axes[1].plot(out.data_group.energy, out.residual, label='residual')
     
-    axes[1].axhline(0, color='darkgray', lw=0.5*lw, dashes=[4,1])
+    axes[1].axhline(0, color='darkgray', dashes=[4,1])
     axes[1].legend(loc='upper right', edgecolor='k', fontsize=fontsize)
     
     # increasing y-lim to include legend
