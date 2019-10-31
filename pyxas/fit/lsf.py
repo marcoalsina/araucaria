@@ -43,7 +43,7 @@ def lsf(data_kws, pars, path_pars, k_mult=2, pre_edge_kws=None,
     from larch.xafs.feffit import feffit, feffit_transform, feffit_dataset
     from pyxas import get_scan_type
     from pyxas.io import read_hdf5
-    #from pyxas.fit import lsf_report, save_lsf_report, save_lsf_data
+    from pyxas.fit import lsf_report, save_lsf_report, save_lsf_data
     
     # counting the number of feffpaths
     nfpaths = 0
