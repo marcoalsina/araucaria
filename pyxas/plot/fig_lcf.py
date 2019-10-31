@@ -127,9 +127,9 @@ def fig_lcf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
             summary += '\n'
 
         if out.pars_kws['fit_type'] == 'dxanes':
-            axes[1].text(xloc, yloc[0] + 0.9*ptp(yloc), summary, ha='right', va='top', fontsize=fsize)
+            axes[1].text(xloc, yloc[0] + 0.9*ptp(yloc), summary, ha='right', va='top', fontsize=fontsize)
         else:
-            axes[1].text(xloc, yloc[0] + 0.5*ptp(yloc), summary, ha='right', va='top', fontsize=fsize)
+            axes[1].text(xloc, yloc[0] + 0.5*ptp(yloc), summary, ha='right', va='top', fontsize=fontsize)
 
     # axes decorators
     for ax in axes:
