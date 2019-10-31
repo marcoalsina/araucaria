@@ -130,7 +130,7 @@ def save_lsf_report(self, filepath):
     This function saves a feffit least squares
     fit report in a file specificed by filepath.
     '''
-    #from .utils import lsf_report
+    from .utils import lsf_report
 
     fout = open(filepath, 'w')
     fout.write(lsf_report(self))
@@ -146,7 +146,7 @@ def save_lsf_data(self, filepath, save='exafs'):
     Default save is 'exafs'.
     '''
     from numpy import column_stack, savetxt
-    #from .utils import lsf_report
+    from .utils import lsf_report
 
     # verifying save type
     save_types = ['exafs', 'xftf']
