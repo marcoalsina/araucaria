@@ -31,6 +31,10 @@ def fig_xas_template(panels='xx', fig_pars=None, **fig_kws):
                    Examples: 'dxe', 'xx', 'xer', 'xx/xx'.
     fig_pars [dict]: optional arguments for the figure.
     Valid arguments include:
+        prop_cycle[list]: list of dictionaries of prop_cycle for
+                          each panel. List is cycled if the elements 
+                          of the list are less than the number of 
+                          panels.
         e_range   [list]: XANES energy range.
         e_ticks   [list]: XANES energy tick marks.
         mu_range  [list]: XANES norm absorption range.
@@ -88,6 +92,13 @@ def fig_xas_template(panels='xx', fig_pars=None, **fig_kws):
 
     # formatting axes
     for i, ax in enumerate(ravel(axes)):
+        # prop_cycles
+        for i, cycle in enumerate(itertools.cycle(fig_pars['prop_cycle'])):
+            if i < nrows*ncols:
+                ax.set_prop_cycle(**cycle)
+            else:
+                break
+ 
         # XANES derivative axis
         if panels[i] == 'd':
             ax.set_xlabel(r'Energy [$eV$]')
