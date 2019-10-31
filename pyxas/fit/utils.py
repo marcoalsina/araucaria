@@ -6,10 +6,12 @@ Colletion of routines to work with LCF output and log files.
 
 Implemented methods (class lmfit out):
     lcf_report
-    lsf_repot
     save_lcf_report
-    save_lsf_report
     save_lcf_data
+    
+Implemented methods (class feffit out):
+    lsf_report
+    save_lsf_report
     save_lsf_data
 
 
@@ -47,44 +49,6 @@ def lcf_report(self):
     return (header+fit_report(self))
 
 
-def lsf_report(self):
-    '''
-    This function recieves a feffit object and
-    returns an updated least squares fit report.
-    '''
-    import os
-    from larch.xafs.feffit import feffit_report
-
-    insert = '[[Parameters]]\n'
-    for key in self.pars_kws:
-        val    = ' '.join(key.split('_'))
-        insert = insert + '   {0:19}= {1}\n'\
-        .format(val, self.pars_kws[key])
-
-    report = feffit_report(self)
-
-    # searching for data section
-    search_string = '[[Data]]'
-    index         = report.index(search_string)
-
-    pre_report  = report[:index]
-    post_report = report[index+len(search_string):]
-
-    insert = insert+'\n'+search_string+'\n'
-    for key in self.data_kws:
-        if 'spectrum' in key:
-            val    = ' '.join(key.split('_'))
-            if 'path':
-                keyval = os.path.abspath(self.data_kws[key])
-            elif 'name' in key:
-                keyval = self.data_kws[key]
-
-            insert = insert + '   {0:19}= {1}\n'.format(val, keyval)
-
-    report = pre_report + insert + post_report
-    return (report)
-
-
 def save_lcf_report(self, filepath):
     '''
     This function saves an LCF report 
@@ -94,19 +58,6 @@ def save_lcf_report(self, filepath):
 
     fout = open(filepath, 'w')
     fout.write(lcf_report(self))
-    fout.close()
-    return
-
-
-def save_lsf_report(self, filepath):
-    '''
-    This function saves a feffit least squares
-    fit report in a file specificed by filepath.
-    '''
-    #from .utils import lsf_report
-
-    fout = open(filepath, 'w')
-    fout.write(lsf_report(self))
     fout.close()
     return
 
@@ -133,6 +84,57 @@ def save_lcf_data(self, filepath):
             data_header = 'Energy [eV]\t' + 'Deriv. norm. abs. [adim]'+ '\tFit\tResidual'
 
     savetxt(filepath, data, fmt='%.6f',  header=rep_header + '\n' + data_header)
+    return
+
+
+def lsf_report(self):
+    '''
+    This function recieves a feffit object and
+    returns an updated least squares fit report.
+    '''
+    import os
+    from larch.xafs.feffit import feffit_report
+
+    insert = '[[Parameters]]\n'
+    for key in self.pars_kws:
+        val    = ' '.join(key.split('_'))
+        insert = insert + '   {0:19}= {1}\n'\
+        .format(val, self.pars_kws[key])
+
+    report = feffit_report(self)
+
+    # searching for data section
+    search_string = '[[Data]]'
+    index         = report.index(search_string)
+
+    pre_report  = report[:index]
+    post_report = report[index+len(search_string)+1:]
+
+    insert = insert+'\n'+search_string+'\n'
+    for key in self.data_kws:
+        if 'spectrum' in key:
+            val    = ' '.join(key.split('_'))
+            if 'path':
+                keyval = os.path.abspath(self.data_kws[key])
+            elif 'name' in key:
+                keyval = self.data_kws[key]
+
+            insert = insert + '   {0:19}= {1}\n'.format(val, keyval)
+
+    report = pre_report + insert + post_report
+    return (report)
+
+
+def save_lsf_report(self, filepath):
+    '''
+    This function saves a feffit least squares
+    fit report in a file specificed by filepath.
+    '''
+    #from .utils import lsf_report
+
+    fout = open(filepath, 'w')
+    fout.write(lsf_report(self))
+    fout.close()
     return
 
 
