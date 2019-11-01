@@ -31,9 +31,9 @@ def fig_xas_template(panels='xx', fig_pars=None, **fig_kws):
                    Examples: 'dxe', 'xx', 'xer', 'xx/xx'.
     fig_pars [dict]: optional arguments for the figure.
     Valid arguments include:
-        prop_cycle[list]: list of dictionaries of prop_cycle for
-                          each panel. List is cycled if the elements 
-                          of the list are less than the number of 
+        prop_cycle[list]: list of prop_cycle dictionaries for each
+                          panel. List is cycled if the elements of 
+                          the list are less than the number of 
                           panels.
         e_range   [list]: XANES energy range.
         e_ticks   [list]: XANES energy tick marks.
@@ -57,6 +57,7 @@ def fig_xas_template(panels='xx', fig_pars=None, **fig_kws):
     fig :  Matplolib figure object.
     ax:    Matplotlib axes object.
     '''
+    from itertools import cycle
     from numpy import ravel
     import matplotlib as mpl
     import matplotlib.pyplot as plt
@@ -91,13 +92,19 @@ def fig_xas_template(panels='xx', fig_pars=None, **fig_kws):
     fig, axes = plt.subplots(nrows, ncols, **fig_kws)
 
     # formatting axes
+    try:
+        prop_cycler = cycle(fig_pars['prop_cycle'])
+        prop_elem   = next(prop_cycler)
+    except:
+        pass
+    
     for i, ax in enumerate(ravel(axes)):
         # prop_cycles
-        for i, cycle in enumerate(itertools.cycle(fig_pars['prop_cycle'])):
-            if i < nrows*ncols:
-                ax.set_prop_cycle(**cycle)
-            else:
-                break
+        try:
+            ax.set_prop_cycle(**prop_elem)
+            prop_elem   = next(prop_cycler)
+        except:
+            pass
  
         # XANES derivative axis
         if panels[i] == 'd':
