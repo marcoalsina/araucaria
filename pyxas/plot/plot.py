@@ -7,7 +7,6 @@ Collection of functions to plot XAS data.
 Implemented functions:
     fig_xas_template
     plot_merged_scans
-    fig_lcf
 '''
 
 def fig_xas_template(panels='xx', fig_pars=None, **fig_kws):
@@ -32,6 +31,10 @@ def fig_xas_template(panels='xx', fig_pars=None, **fig_kws):
                    Examples: 'dxe', 'xx', 'xer', 'xx/xx'.
     fig_pars [dict]: optional arguments for the figure.
     Valid arguments include:
+        prop_cycle[list]: list of prop_cycle dictionaries for each
+                          panel. List is cycled if the elements of 
+                          the list are less than the number of 
+                          panels.
         e_range   [list]: XANES energy range.
         e_ticks   [list]: XANES energy tick marks.
         mu_range  [list]: XANES norm absorption range.
@@ -54,6 +57,7 @@ def fig_xas_template(panels='xx', fig_pars=None, **fig_kws):
     fig :  Matplolib figure object.
     ax:    Matplotlib axes object.
     '''
+    from itertools import cycle
     from numpy import ravel
     import matplotlib as mpl
     import matplotlib.pyplot as plt
@@ -88,7 +92,20 @@ def fig_xas_template(panels='xx', fig_pars=None, **fig_kws):
     fig, axes = plt.subplots(nrows, ncols, **fig_kws)
 
     # formatting axes
+    try:
+        prop_cycler = cycle(fig_pars['prop_cycle'])
+        prop_elem   = next(prop_cycler)
+    except:
+        pass
+    
     for i, ax in enumerate(ravel(axes)):
+        # prop_cycles
+        try:
+            ax.set_prop_cycle(**prop_elem)
+            prop_elem   = next(prop_cycler)
+        except:
+            pass
+ 
         # XANES derivative axis
         if panels[i] == 'd':
             ax.set_xlabel(r'Energy [$eV$]')
@@ -263,140 +280,3 @@ def plot_merged_scans(group, merge, edge, scan='mu', **pre_edge_kws):
             
     plt.tight_layout()
     plt.show()
-
-
-def fig_lcf(out, step=0.5, fig_pars=None, **fig_kws):
-    '''
-    This funtion returns a Matpoltlib figure and
-    axes object containing the plotted results of an LCF analysis.
-    --------------
-    Required input:
-    out [obj]      : valid LMFIT object for the LCF.
-    step [float]   : vertical separation step between plots.
-    fig_pars [dict]: optional arguments for the figure.
-                     Check the function 'fig_xas_template'
-                     for valid arguments.
-    fig_kws [dict]: arguments to pass to the Matplotlib
-                    subplots instance.  
-    --------------
-    Output:
-    fig :  Matplolib figure object.
-    axes:  Matplotlib axes object.
-    '''
-    from numpy import gradient, ptp
-    import larch
-    from larch import Group
-    from larch.xafs import pre_edge, autobk
-    import matplotlib.pyplot as plt
-    from pyxas import get_scan_type
-    from pyxas.io import read_hdf5
-    from pyxas.plot import fig_xas_template
-    
-    # figure settings
-    lw    = 1.5    # line width
-    fsize = 8      # font size
-    
-    # verifying the out object
-    try:
-        out.pars_kws
-        out.data_kws
-    except:
-        raise ValueError('Object is not a valid lmift object from LCF.')
-    
-    # setting the figure type
-    if out.pars_kws['fit_type'] == 'exafs':
-        panels = 'ee'
-    elif out.pars_kws['fit_type'] == 'xanes':
-        panels = 'xx'
-    else:
-        panels = 'dd'
-    
-    fig, axes = fig_xas_template(panels=panels, fig_pars=fig_pars, **fig_kws)
-    
-    # reading original spectra
-    names = []
-    paths = []
-    for item in out.data_kws:
-        if 'name' in item:
-            names.append(out.data_kws[item])
-        elif 'path' in item:
-            paths.append(out.data_kws[item])
-    
-    # processing original spectra
-    session = larch.Interpreter(with_plugins=False)
-    for i, name in enumerate(names):
-        data = Group(**read_hdf5(paths[i], name=name))
-        scantype = get_scan_type(data)
-    
-        if out.pars_kws['pre_edge_kws'] == 'default':
-            pre_edge(data.energy, getattr(data, scantype), group=data, _larch=session)
-        else:
-            pre_edge(data.energy, getattr(data, scantype), group=data, _larch=session, 
-                     **out.pars_kws['pre_edge_kws'])
-    
-        # plotting original spectra
-        xloc = axes[0].set_xlim()[0] + 0.98*ptp(axes[0].set_xlim())
-        # EXAFS spectra
-        if out.pars_kws['fit_type'] == 'exafs':
-            if out.pars_kws['autobk_kws'] == 'default':
-                autobk(data.energy, getattr(data, scantype), group=data, _larch=session)
-            else:
-                autobk(data.energy, getattr(data, scantype), group=data, _larch=session, 
-                       **out.pars_kws['autobk_kws'])
-        
-            axes[0].plot(data.k, i*step + data.k**out.pars_kws['k_mult']*data.chi, lw=lw, zorder=4)
-            axes[0].text(xloc, 0.5 + i*step, name, fontsize=fsize, ha='right')
-    
-        # XANES spectra
-        elif out.pars_kws['fit_type'] == 'xanes':
-            axes[0].plot(data.energy, i*step + data.norm, lw=lw, zorder=4)
-            axes[0].text(xloc, 1.1 + i*step, name, fontsize=fsize, ha='right')
-    
-        # DXANES spectra
-        else:
-            axes[0].plot(data.energy, i*step + gradient(data.norm), lw=lw, zorder=4)
-            axes[0].text(xloc, 0.1 + i*step, name, fontsize=fsize, ha='right')
-
-    # plotting fitted data
-    # EXAFS fit
-    if out.pars_kws['fit_type'] == 'exafs':
-        axes[1].plot(out.data_group.k, 1.5*step+out.data_group.spectrum, lw=lw, label=names[0])
-        axes[1].plot(out.data_group.k, 1.5*step+out.data_group.fit, color='firebrick', label='fit')
-        axes[1].plot(out.data_group.k, out.residual, color='0.4', label='residual')
-    
-    # XANES or DXANES fit
-    else:
-        axes[1].plot(out.data_group.energy, 0.5*step + out.data_group.spectrum, lw=lw, label=names[0])
-        axes[1].plot(out.data_group.energy, 0.5*step + out.data_group.fit, color='firebrick', label='fit')
-        axes[1].plot(out.data_group.energy, out.residual, color='0.4', label='residual')
-    
-    axes[1].axhline(0, color='darkgray', lw=0.5*lw, dashes=[4,1])
-    axes[1].legend(loc='upper right', edgecolor='k', fontsize=fsize)
-    
-    # increasing y-lim to include legend
-    yloc = axes[1].get_ylim()
-    axes[1].set_ylim(yloc[0], 1.3*yloc[1])
-    
-    # summary results for plot
-    summary = r'red-$\chi^2$ = %1.4f' % out.redchi +'\n'
-    for i in range(1,len(out.params)+1):
-        val = out.params['amp'+str(i)].value
-        err = out.params['amp'+str(i)].stderr
-        summary += names[i]+r': %1.2f$\pm$%1.2f' % (val, err)
-        summary += '\n'
-
-    if out.pars_kws['fit_type'] == 'dxanes':
-        axes[1].text(xloc, yloc[0] + 0.9*ptp(yloc), summary, ha='right', va='top', fontsize=fsize)
-    else:
-        axes[1].text(xloc, yloc[0] + 0.5*ptp(yloc), summary, ha='right', va='top', fontsize=fsize)
-
-    # axes decorators
-    for ax in axes:
-        ax.set_yticks([])
-        ax.axvline(out.pars_kws['fit_window'][0], color='darkgray', lw=0.5*lw, dashes=[4,1])
-        ax.axvline(out.pars_kws['fit_window'][1], color='darkgray', lw=0.5*lw, dashes=[4,1])
-    
-    fig.tight_layout()
-    fig.subplots_adjust(wspace=0.2)
-    
-    return(fig, axes)

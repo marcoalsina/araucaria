@@ -8,9 +8,35 @@ Routine to perform LCF on a XAS spectrum
 def lcf(data_kws, fit_type, fit_window, k_mult=2,
         sum_one=True, pre_edge_kws=None, autobk_kws=None):
     '''
-    Include description of function...
+    This function performs a linear combination fit 
+    on a spectrum given a set of references.
+    --------------
+    Required input:
+    data_kws [dict]    : dictionary containing the filepaths of
+                         the databases containing the spectrum and
+                         references, along with the file names.
+                         It requires at least the following keys:
+                         'spectrum_path',
+                         'spectrum_name',
+                         'ref1_path',
+                         'ref1_name'.
+    fit_type [string]  : fit type. Accepted values are 'dxanes',
+                         'xanes', or 'exafs'.
+    fit_window [list]  : min/max fit window in either energy or
+                         wavenumber. Requires 2 values.
+    k_mult [int]       : multiplier for wavenumber k. Only used
+                         for 'exafs' fit. Default value is 2.
+    sum_one [bool]     : If 'true' the sum of fractions is forced
+                         to be one. Default is 'true'.
+    pre_edge_kws [dict]: dictionary with pre-edge parameters.
+    autobk_kws [dict]  : dictionary with autobk parameters.
+    --------------
+    Output:
+    out [obj]: Fit object containing the results of the
+               linear combination fit.
     '''
     import os
+    import types
     from numpy import where, gradient
     from scipy.interpolate import interp1d
     from lmfit import Parameters, minimize
@@ -20,7 +46,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     from pyxas import get_scan_type
     from pyxas.io import read_hdf5
     from pyxas.fit import residuals, sum_references
-    from pyxas.fit import save_lcf_report, save_lcf_data
+    from pyxas.fit import lcf_report, save_lcf_report, save_lcf_data
     
     # verifying fit type
     fit_types = ['dxanes', 'xanes','exafs']
@@ -137,16 +163,17 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     # perform fit
     out = minimize(residuals, params, args=(datgroup,),)
     
-    # storing data and argumens
+    # storing data and arguments
     fit = sum_references(out.params, datgroup)
     datgroup.fit = fit
     
     out.data_group = datgroup
-    out.data_kws = data_kws
-    out.pars_kws = pars_kws
+    out.data_kws   = data_kws
+    out.pars_kws   = pars_kws
 
     # assigning save methods to out object
-    out.save_lcf_report = save_lcf_report
-    out.save_lcf_data = save_lcf_data
+    out.lcf_report      = types.MethodType(lcf_report, out)
+    out.save_lcf_report = types.MethodType(save_lcf_report, out)
+    out.save_lcf_data   = types.MethodType(save_lcf_data, out)
 
     return (out)
