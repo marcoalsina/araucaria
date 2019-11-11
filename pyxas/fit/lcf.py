@@ -22,7 +22,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
                          'ref1_name'.
     fit_type [string]  : fit type. Accepted values are 'dxanes',
                          'xanes', or 'exafs'.
-    fit_windows [list] : min/max fit window in either energy or
+    fit_window [list]  : min/max fit window in either energy or
                          wavenumber. Requires 2 values.
     k_mult [int]       : multiplier for wavenumber k. Only used
                          for 'exafs' fit. Default value is 2.
