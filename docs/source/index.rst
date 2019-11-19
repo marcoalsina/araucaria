@@ -11,8 +11,9 @@ Getting started with pyxas
    :maxdepth: 2
    :caption: Contents:
 
-.. automodule:: pyxas.main
-   :members:
+   install
+   modules
+
 
 
 Indices and tables
