@@ -1,4 +1,8 @@
 # pyxas
+
+[![License](https://img.shields.io/badge/License-BSD%202--Clause-green.svg)](https://github.com/marcoalsina/pyxas/blob/master/README.md)
+
+
 A collection of python routines to process and analyze X-ray absorption spectra.
 
 ## How to install
