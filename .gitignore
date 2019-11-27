@@ -3,6 +3,9 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Distribution / Packaging
+*.egg-info/
+
 # Sphinx documentation
 docs/build
 
