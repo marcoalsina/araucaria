@@ -37,7 +37,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     '''
     import os
     import types
-    from numpy import where, gradient
+    from numpy import where, gradient, around
     from scipy.interpolate import interp1d
     from lmfit import Parameters, minimize
     import larch
@@ -69,49 +69,54 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     # at least a spectrum and a single reference must be provided
     req_keys =['spectrum_path', 'spectrum_name', 'ref1_path', 'ref1_name']
     for i in range(nspectra-2):
-        req_keys.append('ref%i_path' % (i+1))
-        req_keys.append('ref%i_name' % (i+1))
+        req_keys.append('ref%i_path' % (i+2))
+        req_keys.append('ref%i_name' % (i+2))
     
     for key in req_keys:
         if key not in data_kws:
             raise ValueError("Argument '%s' is missing." % key)
+
+    # storing report parameters
+    pars_kws = {'fit_type':fit_type, 'fit_window':fit_window, 'sum_one':sum_one}
+    if pre_edge_kws is None:
+        pars_kws['pre_edge_kws'] = 'default'
+    else:
+        pars_kws['pre_edge_kws'] = pre_edge_kws
+
+    # report parameters for exafs lcf
+    if fit_type == 'exafs':
+        pars_kws['k_mult'] = k_mult
+        xvar = 'k'    # storing name of x-variable (exafs)
+        if autobk_kws is None:
+            pars_kws['autobk_kws'] = 'default'
+        else:
+            pars_kws['autobk_kws'] = autobk_kws
     
+    # report parameters for xanes/dxanes lcf
+    else:
+        xvar = 'energy'    # storing name of x-variable (xanes/dxanes)
+
     # reading and processing spectra
     session = larch.Interpreter(with_plugins=False)
-    datgroup = Group()   # container for spectra to perform LCF analysis
-    
+    datgroup = Group()   # container for spectra to perform LCF analysis    
     for i in range(nspectra):
-        # reading spectra 
+        # reading spectra based on required keys
         dname = 'spectrum' if i==0 else 'ref'+str(i)
-        data = Group(**read_hdf5(data_kws[req_keys[2*i]], name=data_kws[req_keys[2*i+1]]))
+        data  = Group(**read_hdf5(data_kws[req_keys[2*i]], name=data_kws[req_keys[2*i+1]]))
         scantype = get_scan_type(data)
-        
-        # standard report parameters
-        pars_kws = {'fit_type':fit_type, 'fit_window':fit_window, 'sum_one':sum_one}
         
         # processing xanes spectra
         if pre_edge_kws is None:
             pre_edge(data.energy, getattr(data, scantype), group=data, _larch=session)
-            pars_kws['pre_edge_kws'] = 'default'
         else:
             pre_edge(data.energy, getattr(data, scantype), group=data, _larch=session, **pre_edge_kws)
-            pars_kws['pre_edge_kws'] = pre_edge_kws
         
         if fit_type == 'exafs':
             # prceossing exafs spectra
             if autobk_kws is None:
                 autobk(data.energy, getattr(data, scantype), group=data, _larch=session)
-                pars_kws['autobk_kws'] = 'default'
             else:
                 autobk(data.energy, getattr(data, scantype), group=data, _larch=session, **autobk_kws)
-                pars_kws['autobk_kws'] = autobk_kws
-            
-            pars_kws['k_mult'] = k_mult
-            # storing name of x-variable (exafs)
-            xvar = 'k'
-        else:
-            # storing name of x-variable (xanes)
-            xvar = 'energy'
         
         if i == 0:
             # first value is the spectrum, so we extract the 
@@ -132,11 +137,11 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
         else:
             # spline interpolation of references
             if fit_type == 'exafs':
-                s = interp1d(getattr(data, xvar), getattr(data, xvar)**k_mult*data.chi)
+                s = interp1d(getattr(data, xvar), getattr(data, xvar)**k_mult*data.chi, kind='cubic')
             elif fit_type =='xanes':
-                s = interp1d(getattr(data, xvar), data.norm)
+                s = interp1d(getattr(data, xvar), data.norm, kind='cubic')
             else:
-                s = interp1d(getattr(data, xvar), gradient(data.norm))
+                s = interp1d(getattr(data, xvar), gradient(data.norm), kind='cubic')
             yvals = s(xvals)
         
         # setting corresponding y-variable as an attribute of datgroup
@@ -146,15 +151,16 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     setattr(datgroup, xvar, xvals)
     
     # setting parameters for fit model
-    params = Parameters()
-    expr = str(1)
+    initval = around(1/(nspectra-1), decimals=1)
+    params  = Parameters()
+    expr    = str(1)
     
     for i in range(0, nspectra-1):
         parname = 'amp'+str(i+1)
         if (i == nspectra-2) and (sum_one == True):
             params.add(parname, expr=expr)
         else:
-            params.add(parname, value=0.5, min=0, max=1, vary=True)
+            params.add(parname, value=initval, min=0, max=1, vary=True)
             expr += ' - amp'+str(i+1)
     
     # setting uncertainty

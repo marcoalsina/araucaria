@@ -1,10 +1,5 @@
-#!/usr/bin/env python
-'''
-filename: fig_lcf.py
-
-Function to plot results of a linear combination
-fit on a XAFS spectrum.
-'''
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 def fig_lcf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
     '''
@@ -40,8 +35,8 @@ def fig_lcf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
     try:
         out.pars_kws
         out.data_kws
-    except:
-        raise ValueError('Object is not a valid lmift object from LCF.')
+    except ValueError:
+        print('Object is not a valid lmift object from LCF.')
     
     # setting the figure type
     if out.pars_kws['fit_type'] == 'exafs':
@@ -85,17 +80,17 @@ def fig_lcf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
                        **out.pars_kws['autobk_kws'])
         
             axes[0].plot(data.k, i*step + data.k**out.pars_kws['k_mult']*data.chi)
-            axes[0].text(xloc, 0.5 + i*step, name, fontsize=fontsize, ha='right')
+            axes[0].text(xloc, (0.5 + i)*step, name, fontsize=fontsize, ha='right')
     
         # XANES spectra
         elif out.pars_kws['fit_type'] == 'xanes':
             axes[0].plot(data.energy, i*step + data.norm)
-            axes[0].text(xloc, 1.1 + i*step, name, fontsize=fontsize, ha='right')
+            axes[0].text(xloc, 1 + (0.25 + i)*step, name, fontsize=fontsize, ha='right')
     
         # DXANES spectra
         else:
             axes[0].plot(data.energy, i*step + gradient(data.norm))
-            axes[0].text(xloc, 0.1 + i*step, name, fontsize=fontsize, ha='right')
+            axes[0].text(xloc, (0.25 + i)*step, name, fontsize=fontsize, ha='right')
 
     # plotting fitted data
     # EXAFS fit
@@ -110,7 +105,6 @@ def fig_lcf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
         axes[1].plot(out.data_group.energy, 0.5*step + out.data_group.fit, label='fit')
         axes[1].plot(out.data_group.energy, out.residual, label='residual')
     
-    axes[1].axhline(0, color='darkgray', dashes=[4,1])
     axes[1].legend(loc='upper right', edgecolor='k', fontsize=fontsize)
     
     # increasing y-lim to include legend
@@ -119,23 +113,27 @@ def fig_lcf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
     
     if annotate:
         # summary results for plot
-        summary = r'red-$\chi^2$ = %1.4f' % out.redchi +'\n'
+        summary = r'$\chi^2$ = %1.4f' % out.chisqr +'\n'
         for i in range(1,len(out.params)+1):
             val = out.params['amp'+str(i)].value
             err = out.params['amp'+str(i)].stderr
             summary += names[i]+r': %1.2f$\pm$%1.2f' % (val, err)
             summary += '\n'
 
-        if out.pars_kws['fit_type'] == 'dxanes':
-            axes[1].text(xloc, yloc[0] + 0.9*ptp(yloc), summary, ha='right', va='top', fontsize=fontsize)
+        if out.pars_kws['fit_type']   == 'dxanes':
+            axes[1].text(xloc, yloc[0] + 0.6*ptp(yloc), summary, ha='right', va='center', fontsize=fontsize)
+        elif out.pars_kws['fit_type'] == 'xanes':
+            axes[1].text(xloc, yloc[0] + 0.4*ptp(yloc), summary, ha='right', va='center', fontsize=fontsize)
         else:
             axes[1].text(xloc, yloc[0] + 0.5*ptp(yloc), summary, ha='right', va='top', fontsize=fontsize)
 
     # axes decorators
+    axline_kws = {'color': 'lightgray', 'dashes': [4,2], 'linewidth': 1.0, 'zorder':-2} 
     for ax in axes:
         ax.set_yticks([])
-        ax.axvline(out.pars_kws['fit_window'][0], color='darkgray', dashes=[4,1])
-        ax.axvline(out.pars_kws['fit_window'][1], color='darkgray', dashes=[4,1])
+        ax.axvline(out.pars_kws['fit_window'][0], **axline_kws)
+        ax.axvline(out.pars_kws['fit_window'][1], **axline_kws)
+    axes[1].axhline(0, **axline_kws)
     
     fig.tight_layout()
     fig.subplots_adjust(wspace=0.2)

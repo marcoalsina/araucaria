@@ -192,6 +192,56 @@ def residuals(pars,data):
     return (data.spectrum - sum_references(pars, data))/data.eps
 
 
+def get_lcf_data_legacy(files, reference, error=True):
+    '''
+    This function reads a list of LCF log files and returns 
+    a numpy array with the values associated with the specified reference
+    The calculated standard deviation can be retrieved optionally.
+    IMPORTANT: This is a legacy function from a previous LCF log file format.
+    '''
+    import os
+    from numpy import append, float
+
+    reference = reference
+    vallist   = []    # container for values
+    errlist   = []    # container for errors
+
+    for file in files:
+        getref = True
+        getval = False
+        f = open(file, 'r')
+        while getref:
+            line = f.readline()
+            if reference in line:
+                # Reference found in line, we extract the standard index
+                index = line.split(',')[0][-2:-1]
+                stdval = "amp"+index
+                getref = False
+                getval = True
+
+            elif "[[Correlations" in line:
+                # This line indicates that we already passed the reference values
+                # There is nothing else to search so return zeroes instead
+                vallist = append(vallist,0.00)
+                errlist = append(errlist,0.00)
+                getref = False
+                break
+
+        while getval:
+            line = f.readline()
+            if stdval in line:
+                val = float(line.split()[1]) * 100
+                err = float(line.split()[3]) * 100
+                vallist = append(vallist,val)
+                errlist = append(errlist,err)
+                getval = False
+
+    if error:
+        return (vallist, errlist)
+    else:
+        return (vallist)
+
+
 def get_lcf_data(files, reference, error=True):
     '''
     This function reads a list of LCF log files and returns 
@@ -217,8 +267,9 @@ def get_lcf_data(files, reference, error=True):
                 stdval = "amp"+index
                 getref = False
                 getval = True
-            elif "[[Correlations" in line:
-                # This line indicates that we already passed the reference values
+
+            elif "[[Fit Statistics]]" in line:
+                # This line indicates that we already passed the [[Data]] section
                 # There is nothing else to search so return zeroes instead
                 vallist = append(vallist,0.00)
                 errlist = append(errlist,0.00)

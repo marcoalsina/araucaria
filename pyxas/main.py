@@ -1,44 +1,52 @@
-#!/usr/bin/env python
-'''
-filename: main.py
-
-Collection of functions to work with XAS data.
-
-Implemented classes:
-    DataReport
-
-Implemented functions:
-    index_dups
-    read_dnd
-    calibrate_energy
-    align_scans
-    merge_scans
-    get_scan_type
-    xftf_pha
-'''
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+"""Basic functions to work with XAS spectra.
+"""
 
 class DataReport:
-    '''
-    This class allows to print information
-    about the processed XAS spectra.
-    '''
+    """Data Report class.
+    
+    This class allows to print user defined information
+    of the processed XAS spectra.
+
+    Column types can be specified with the method :func:`~main.ClassReport.set_columns`.
+    Content is added *row wise* with the method :func:`~main.ClassReport.add_content`.
+    Content is printed to `stdout` with the method :func:`~main.ClassReport.show`.
+
+    Attributes
+    ----------
+    decimal : int
+        Printed decimals for float content.
+    marker: str
+        Character for row separator.
+    """
+
     def __init__(self):
         self.decimal = 3    # decimals for float types
         self.content = ''   # container for contents of report
-        self.marker = '='   # separator marker
-        self.cols = None
+        self.marker  = '='  # separator marker
+        self.cols    = None
 
     def set_columns(self, **pars):
-        '''
-        Sets length and title for each column.
-        Accepted parameters include the following:
-        cols [list] : Lengths for each column field.
-        names [list]: Names for each column field.
+        """Sets parameters for each printed column.
         
-        Optional parameters:
-        decimal [int]: decimal point for floats.
-        marker [str] : separator string.
-        '''
+        This method sets the length and title of each
+        column that will be printed.
+        Optional parameters include the number of decimals,
+        and the row separator marker.
+
+        Parameters
+        ----------
+        cols : list, `float`
+            List with the length for each column field.
+        names : list, `str`
+            List with the names for each column field.
+        decimal : 'int', optional
+            Decimal point for floats.
+        marker : 'str', optional
+            Character for row separation.
+        """
+
         self.cols = pars['cols']
         self.names = pars['names']
         try:    
@@ -54,10 +62,16 @@ class DataReport:
         self.row_len = sum(self.cols)
     
     def add_content(self, content):
-        '''
-        Adds a row of content for the report.
-        Content must be provided as a list of strings for each columnd field.
-        '''
+        """Adds a row of content for the report.
+
+        Parameters
+        ----------
+        content : list, `str`
+            List with values for each column in a report row.
+            The list of values must match the col length specified
+            with the method :func:`~main.ClassReport.set_columns`.
+        """
+
         if self.cols is None:
             raise ValueError("Columns have not been set!")
         elif len(content) != self.ncols:
@@ -74,9 +88,18 @@ class DataReport:
         self.content += '\n'
         
     def show(self, header=True, endrule=True):
-        '''
-        Prints the report to stdout.
-        '''
+        """Prints the report to stdout.
+
+        Parameters
+        ----------
+        header : bool, optional
+            Controls the print of a header rule separator.
+            Default value is `True`.
+        endrule: bool, optional
+            Controls the print of an end rule separator.
+            Default value is `True`.
+        """
+
         self.separator = self.marker*self.row_len
         if header:
             header_format = ''
@@ -94,245 +117,37 @@ class DataReport:
             print (self.content)
 
 
-def index_dups(energy,tol=1e-4):
-    '''
-    This function returns an index array
-    with consecutive energy duplicates.
-    Consecutive energy values are considered 
-    duplicates if their absolute difference 
-    is below the given tolerance.
-    --------------
-    Required input:
-    energy [array]: energy array.
-    tol [float]   : tolerance value.
-    -------------
-    Output:
-    index [array]: index array with duplicates.
-    '''
+def index_dups(energy, tol=1e-4):
+    """Index of duplicates.
+
+    This utility function returns an index array with 
+    consecutive energy duplicates.
+
+    Consecutive energy values are considered duplicates 
+    if their absolute difference is below a given tolerance.
+
+    The returned index can be used to remove duplicates
+    in the energy and other channels of the spectrum.
+
+    Parameters
+    ----------
+    energy : ndarray
+        Energy array to analyze for duplicates.
+    tol : float
+        Tolerance value to identify duplicate values.
+
+    Returns
+    -------
+    index : ndarray
+        Index array containing the location of duplicates.
+    """
+
     from numpy import argwhere, diff
 
     dif = diff(energy)
     index = argwhere(dif < tol)
 
     return (index+1)
-
-
-def read_dnd(fname, scan='mu', tol=1e-4):
-    '''
-    This function returns a Larch Group with 
-    XAFS data from sector 5BM-D of the APS.
-    --------------
-    Required input:
-    fname [string]: filename containing the data.
-    scan [string] :  eiher 'fluo', 'mu', or 'mu_ref'.
-    tol [float]   : tolerance value to remove duplicates.
-    
-    Extracted columns:
-    column 0 : energy (eV).
-    column 16: IF/IO (corrected for deadtime) <-- 'fluo'
-    column 17: -log(IT/IO) (corrected for background) <-- 'mu'
-    column 18: -log(IT2/IT) (corrected for background) <-- 'mu_ref'
-    -------------
-    Output:
-    dat: Larch group containing the following arrays:
-    energy, (fluo,mu), mu_ref
-    '''
-    from os import path
-    import warnings
-    from numpy import loadtxt, delete
-    import larch
-    from larch import Group
-    from pyxas import index_dups
-    
-    # Testing that the file exits in the current directory 
-    if not path.isfile(fname):
-        raise IOError('file %s does not exist in the current path.' % fname)
-    
-    scandict = {'fluo':16, 'mu':17, 'mu_ref':18}
-    # testing that the scan string exits in the current dictionary 
-    if scan not in scandict:
-        warnings.warn("scan type %s not recognized. Extracting transmission spectrum ('mu')." %scan)
-        scan = 'mu'
-    
-    raw    = loadtxt(fname, usecols=(0,scandict[scan],scandict['mu_ref']))
-    # deleting duplicate energy points
-    index  = index_dups(raw[:,0],tol)
-    raw    = delete(raw,index,0)
-    if scan == 'mu_ref':
-    #    print "Extracting only reference data ('mu_ref')."
-        data = Group(**{'energy':raw[:,0], scan:raw[:,1], 'mu_ref':raw[:,2]})
-    else:
-        # Extracting the requested data
-        data = Group(**{'energy':raw[:,0], scan:raw[:,1], 'mu_ref':raw[:,2]})
-    
-    return (data)
-
-
-def calibrate_energy(data, e0, session):
-    '''
-    This function calibrates the threshold energy
-    of the "reference channel" based on the arbitrary 
-    value assigned for E0 (enot).
-    --------------
-    Required input:
-    data: Larch group containing the spectra to calibrate.
-    e0: arbitrary value for calibration of e0.
-    session: valid Larch session.
-    --------------
-    Output:
-    e_offset : Appended value to the data group with the magnitude
-               of the calibration energy.
-    '''
-    # calculation of E0 based on Ifeffit standard
-    import warnings
-    import larch    
-    from larch.xafs import find_e0
-    
-    if hasattr(data, 'e_offset'):
-        warnings.warn('data group was already aligned or calibrated! Resetting energy to original value.')
-        data.energy = data.energy-data.e_offset
-        data.e_offset = 0
-    
-    data.e_offset = e0-find_e0(data.energy, data.mu_ref, _larch=session)
-    
-    # currently this script modifies the energy array!
-    data.energy = data.energy+data.e_offset
-
-    
-def align_scans(objdat, refdat, session, e_offset=0, window=[-50,50]):
-    '''
-    This function aligns the first derivative of
-    the reference channel of a data group against 
-    the first derivative of the reference channel
-    of a reference group.
-    --------------
-    Required input:
-    objdat: objective data group.
-    refdat: reference data group.
-    session: valid Larch session.
-    e_offset: initial energy offset value for alignment (optional).
-    window: array with +- window values for alignment w/r to e0 (optional).
-    --------------
-    Output:
-    e_offset : Appended value to the data group with the magnitude
-               of the alignment energy.
-    '''
-    import warnings
-    from numpy import where, gradient, sum
-    from scipy.interpolate import UnivariateSpline
-    from scipy.optimize import fmin
-    import larch
-    from larch.math import remove_dups
-    from larch.xafs import find_e0
-
-    #objdat.energy = remove_dups(objdat.energy)
-    if hasattr(objdat, 'e_offset'):
-        warnings.warn('Data group was already aligned or calibrated! Resetting energy to original value.')
-        objdat.energy = objdat.energy-objdat.e_offset
-        objdat.e_offset = 0
-    
-    # calculation of e0 to determine the optimization window
-    e0 = find_e0(refdat.energy, refdat.mu_ref, _larch=session)
-    min_lim = e0+window[0]
-    max_lim = e0+window[1]
-    
-    # calculation of energy points for interpolation and comparison
-    # this energy array is static
-    index = where((refdat.energy >= min_lim) & (refdat.energy <= max_lim))
-    ref_energy = refdat.energy[index]
-    
-    # both the reference mu and the objetive mu
-    # exist in the same energy grid as the reference
-    ref_spline = UnivariateSpline(refdat.energy, refdat.mu_ref, s=0)
-    ref_dmu = gradient(ref_spline(ref_energy))/gradient(ref_energy)
-    
-    
-    # the objective function is the difference of derivatives
-    def objfunc(x):
-        obj_spline = UnivariateSpline(objdat.energy + x, objdat.mu_ref, s=0)
-        obj_dmu = gradient(obj_spline(ref_energy))/gradient(ref_energy)
-        return sum((ref_dmu - obj_dmu)**2)
-    
-    objdat.e_offset = fmin(objfunc, e_offset, disp=False)[0]
-    
-    # currently this script modifies the energy array of objdat.
-    objdat.energy = objdat.energy + objdat.e_offset
-
-
-def merge_scans(group, scan='mu', order='3'):
-    '''
-    This function rebins the scans provided in the
-    list group, and merges in the xmu space.
-    --------------
-    Required input:
-    group: list of Larch groups to be merged in xmu.
-    refdat: reference data group.
-    scan [string]:  eiher 'fluo', 'mu', or 'mu_ref'.
-    order [int]: spline order. Defaults to 3. 
-    --------------
-    Output:
-    merge: Larch group containing the merged xmu scans.
-    '''
-    import warnings
-    from numpy import size, resize, append, mean
-    from scipy.interpolate import UnivariateSpline
-    from larch.math import remove_dups
-    from larch import Group
-    
-    scanlist = ['fluo','mu', 'mu_ref']
-    # Testing that the scan string exists in the current dictionary 
-    if scan not in scanlist:
-        warnings.warn("scan type %s not recognized. Merging transmission data ('mu').")
-        scan = 'mu'
-    
-    # Energy arrays are compared to create the interpolation array
-    # that is completely contained in all the previous arrays.
-    energy_eval=0
-    for i in range(len(group)):
-        # Searching the energy array with the largest initial value.
-        # Alternative algorithm is to search the array with lowest final value.
-        if group[i].energy[0] > energy_eval:
-            energy_eval = group[i].energy[0]
-            gindex = i
-    
-    energy = group[gindex].energy
-    for gr in group:
-        # Determining the last point in the selected energy array that
-        # is contained in the other energy vectors
-        while energy[-1] > gr.energy[-1]:
-            energy = energy[:-1]
-    
-    energy = remove_dups(energy)
-    mu = []      # container for the interpolated data
-    if scan != 'mu_ref':
-        mu_ref = []  # container for the interpolated reference channel
-    
-    for gr in group:
-        # interpolation of the initial data
-        # the getattr method is employed to recycle the variable scan
-        gpenergy  = remove_dups(gr.energy)
-        mu_spline = UnivariateSpline(gpenergy, getattr(gr,scan), s=0, k=order)
-        
-        # appending the interpolated data to the container
-        mu = append(mu, mu_spline(energy), axis=0)
-        
-        if scan != 'mu_ref':
-            # interpolating also the reference channel
-            mu_ref_spline= UnivariateSpline(gpenergy, gr.mu_ref, s=0)
-            mu_ref = append(mu_ref, mu_ref_spline(energy), axis=0)
-            
-    # resizing the container
-    mu = resize(mu,(len(group), len(energy)))
-    # calculating the average of the spectra
-    mu_avg = mean(mu, axis=0)
-    
-    if scan != 'mu_ref':
-        mu_ref = resize(mu_ref,(len(group), len(energy)))
-        mu_ref_avg = mean(mu_ref, axis=0)    
-        data = Group(**{'energy':energy, scan:mu_avg, 'mu_ref':mu_ref_avg})
-    else:
-        data = Group(**{'energy':energy, scan:mu_avg})
-    return (data)
 
 def get_scan_type(data):
     '''

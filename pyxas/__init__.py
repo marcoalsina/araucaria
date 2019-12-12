@@ -1,6 +1,7 @@
-#!/usr/bin/env python
-from .main import index_dups, DataReport
-from .main import read_dnd, calibrate_energy, align_scans, merge_scans, get_scan_type
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from .main import index_dups, get_scan_type, DataReport
 from .main import xftf_pha
+from .merge import calibrate_energy, align_scans, merge_scans
 
 __version__ = '0.1.1'
