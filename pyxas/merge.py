@@ -103,7 +103,7 @@ def merge_scans(group, scantype='mu', kind='cubic'):
     group: list of Larch groups to be merged in xmu.
     refdat: reference data group.
     scantype [string]:  eiher 'fluo', 'mu', or 'mu_ref'.
-    kind [string]: spline kind. Defaults to 'cubic'. 
+    kind [string]: spline kind. Default is 'cubic'. 
     --------------
     Output:
     merge: Larch group containing the merged xmu scans.
@@ -115,12 +115,12 @@ def merge_scans(group, scantype='mu', kind='cubic'):
     
     scanlist = ['fluo','mu', 'mu_ref']
     # Testing that the scan string exists in the current dictionary 
-    if scantype| not in scanlist:
+    if scantype not in scanlist:
         warnings.warn("scan type %s not recognized. Merging transmission data ('mu').")
         scantype = 'mu'
     
-    # Energy arrays are compared to create the interpolation array
-    # that is completely contained in all the previous arrays.
+    # Energy arrays are first compared to create an interpolation array
+    # that is fully contained in the original arrays.
     energy_eval=0
     for i in range(len(group)):
         # Searching the energy array with the largest initial value.
@@ -137,20 +137,20 @@ def merge_scans(group, scantype='mu', kind='cubic'):
             energy = energy[:-1]
     
     mu = []      # container for the interpolated data
-    if scan != 'mu_ref':
+    if scantype != 'mu_ref':
         mu_ref = []  # container for the interpolated reference channel
     
     for gr in group:
         # interpolation of the initial data
         # the getattr method is employed to recycle the variable scan
-        mu_spline = interp1d(gpenergy, getattr(gr,scan), kind=kind)
+        mu_spline = interp1d(gr.energy, getattr(gr,scantype), kind=kind)
         
         # appending the interpolated data to the container
         mu = append(mu, mu_spline(energy), axis=0)
         
-        if scan != 'mu_ref':
+        if scantype != 'mu_ref':
             # interpolating also the reference channel
-            mu_ref_spline= interp1d(gpenergy, gr.mu_ref, kind=kind)
+            mu_ref_spline= interp1d(gr.energy, gr.mu_ref, kind=kind)
             mu_ref = append(mu_ref, mu_ref_spline(energy), axis=0)
             
     # resizing the container
@@ -158,10 +158,150 @@ def merge_scans(group, scantype='mu', kind='cubic'):
     # calculating the average of the spectra
     mu_avg = mean(mu, axis=0)
     
-    if scan != 'mu_ref':
+    if scantype != 'mu_ref':
         mu_ref = resize(mu_ref,(len(group), len(energy)))
         mu_ref_avg = mean(mu_ref, axis=0)    
-        data = Group(**{'energy':energy, scan:mu_avg, 'mu_ref':mu_ref_avg})
+        data = Group(**{'energy':energy, scantype:mu_avg, 'mu_ref':mu_ref_avg})
     else:
-        data = Group(**{'energy':energy, scan:mu_avg})
+        data = Group(**{'energy':energy, scantype:mu_avg})
     return (data)
+
+def merge_spectra(fpaths, scantype='mu', ftype='dnd', align_kws=None, 
+                  print_report=True, write_kws=None):
+    """Merge XAS scans.
+
+    This function ...
+    
+    Parameters
+    ----------
+    fpaths : list
+    scantype : string
+    ftype : string
+    align_kws : dict
+    write_kws : dict
+    
+    Returns
+    -------
+    group : list of larch groups
+    merge : larch group
+    
+    """
+    from os import path
+    import numpy as np
+    import larch
+    from larch import Group
+    from pyxas.io import write_hdf5, read_hdf5, read_dnd
+    from pyxas import calibrate_energy, align_scans, merge_scans
+    from .merge import merge_report
+    
+    # testing that files exist in the given path 
+    for fpath in fpaths:
+        if not path.isfile(fpath):
+            raise IOError('file %s does not exists.' % fpath)
+    
+    # checking alignment keys from input
+    req_keys = ['name', 'dbpath']
+    if align_kws is not None:
+        for key in req_keys:
+            if key not in align_kws:
+                raise ValueError ("Either 'name' or 'dbpath' key is missing in the align dictionary.")
+            else:
+                align = True
+        
+        # setting initial energy offset for alignment routine
+        try:
+            e_offset = align_kws['e_offset']
+        except:
+            e_offset = 0.0    
+        
+        # reading reference scan
+        ref = Group(**read_hdf5(align_kws['dbpath'], align_kws['name']))
+    else:
+        align = False
+
+    # loading larch session
+    session = larch.Interpreter(with_plugins=False)
+    
+    # reading files
+    group = []
+    for fpath in fpaths:
+        if ftype == 'dnd':
+            data = read_dnd(fpath, scantype)
+        else:
+            raise ValueError("File type '%s' is currently not supported." % ftype)
+        if align:
+            align_scans(data, ref, session, e_offset=e_offset)
+        
+        data.name = path.split(fpath)[1]
+        group = np.append(group, data)
+    
+    # merging scans
+    if len(fpaths) > 1:
+        merge = merge_scans(group, scantype)
+    else:
+        merge = data
+    
+    # saving list of merged scans as attribute
+    merge.merged_scans = str([data.name for data in group])
+    
+    # print merge report
+    if print_report:
+        report = merge_report(group, merge)
+        report.show()
+    
+    # writting merge group in a hdf5 database
+    # checking writting keys from input
+    if write_kws is not None:
+        for key in req_keys:
+            if key not in align_kws:
+                raise ValueError ("Either 'name' or 'dbpath' key is missing in the write dictionary.")
+        # setting replace option in write_hdf5
+        try:
+            replace = write_kws['replace']
+        except:
+            replace = False
+        
+        write_hdf5(write_kws['dbpath'], merge, name = write_kws['name'], replace=replace)
+
+    return(group, merge)
+
+def merge_report(group, merge):
+    """Report of merge on XAS spectra.
+    
+    Parameters
+    ----------
+    
+    Returns
+    -------
+    
+    """
+    import larch
+    from larch.xafs import pre_edge
+    from pyxas import get_scan_type, DataReport
+    
+    # larch parameters
+    session = larch.Interpreter(with_plugins=False)
+    
+    # initializing report
+    report_pars = {'cols': [3,24,10,10,10,10], 
+                   'names': ['id', 'filename', 'scantype', 'step', 'e_offset', 'e0 [eV]']}
+    report      = DataReport()
+    report.set_columns(**report_pars)
+
+    # retrieving values from data group
+    for i, data in enumerate(group):
+        scantype = get_scan_type(data)
+        pre_edge(data.energy, getattr(data, scantype), group=data, _larch=session)
+        try:
+            data.e_offset
+        except:
+            data.e_offset = 0.0
+            
+        report.add_content([i+1, data.name, scantype, data.edge_step, data.e_offset, data.e0])
+
+    # retrieving values from merge
+    report.add_midrule()
+    pre_edge(merge.energy, getattr(merge, scantype), group=merge, _larch=session)
+    report.add_content(['','merge', scantype, merge.edge_step, 0.0, merge.e0])
+    
+    return (report)

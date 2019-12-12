@@ -62,7 +62,7 @@ class DataReport:
         self.row_len = sum(self.cols)
     
     def add_content(self, content):
-        """Adds a row of content for the report.
+        """Adds a row of content to the report.
 
         Parameters
         ----------
@@ -86,7 +86,21 @@ class DataReport:
         
         self.content += content_format.format(*content)
         self.content += '\n'
+
+    def add_midrule(self, marker='-'):
+        """Adds a midrule to the report.
+
+        Parameters
+        ----------
+        marker : `str`
+            Character to be used for the midrule.
+            Default is "-".
+
+        """
         
+        self.content += marker*self.row_len
+        self.content += '\n'        
+
     def show(self, header=True, endrule=True):
         """Prints the report to stdout.
 
