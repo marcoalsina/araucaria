@@ -78,7 +78,5 @@ def fig_lsf(out, annotate=True, fontsize=8, fig_pars=None, **fig_kws):
 
     # ax legend
     axes[0].legend(loc='lower right', edgecolor='k', fontsize=fontsize, numpoints=1)
-    
-    fig.tight_layout()
-    fig.subplots_adjust(wspace=0.4)
+
     return(fig, axes)

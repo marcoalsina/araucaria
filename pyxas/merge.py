@@ -166,6 +166,47 @@ def merge_scans(group, scantype='mu', kind='cubic'):
         data = Group(**{'energy':energy, scantype:mu_avg})
     return (data)
 
+def merge_report(group, merge):
+    """Report of merge on XAS spectra.
+    
+    Parameters
+    ----------
+    
+    Returns
+    -------
+
+    """
+    import larch
+    from larch.xafs import pre_edge
+    from pyxas import get_scan_type, DataReport
+
+    # larch parameters
+    session = larch.Interpreter(with_plugins=False)
+
+    # initializing report
+    report_pars = {'cols': [3,24,10,10,10,10], 
+                   'names': ['id', 'filename', 'scantype', 'step', 'e_offset', 'e0 [eV]']}
+    report      = DataReport()
+    report.set_columns(**report_pars)
+
+    # retrieving values from data group
+    for i, data in enumerate(group):
+        scantype = get_scan_type(data)
+        pre_edge(data.energy, getattr(data, scantype), group=data, _larch=session)
+        try:
+            data.e_offset
+        except:
+            data.e_offset = 0.0
+
+        report.add_content([i+1, data.name, scantype, data.edge_step, data.e_offset, data.e0])
+
+    # retrieving values from merge
+    report.add_midrule()
+    pre_edge(merge.energy, getattr(merge, scantype), group=merge, _larch=session)
+    report.add_content(['','merge', scantype, merge.edge_step, 0.0, merge.e0])
+
+    return (report)
+
 def merge_spectra(fpaths, scantype='mu', ftype='dnd', align_kws=None, 
                   print_report=True, write_kws=None):
     """Merge XAS scans.
@@ -175,8 +216,8 @@ def merge_spectra(fpaths, scantype='mu', ftype='dnd', align_kws=None,
     Parameters
     ----------
     fpaths : list
-    scantype : string
-    ftype : string
+    scantype : str
+    ftype : str
     align_kws : dict
     write_kws : dict
     
@@ -190,10 +231,17 @@ def merge_spectra(fpaths, scantype='mu', ftype='dnd', align_kws=None,
     import numpy as np
     import larch
     from larch import Group
-    from pyxas.io import write_hdf5, read_hdf5, read_dnd
-    from pyxas import calibrate_energy, align_scans, merge_scans
-    from .merge import merge_report
+    import pyxas.io
+    from .merge import calibrate_energy, align_scans, merge_scans, merge_report
     
+    # supporting reading formats
+    format_dict = {'dnd' : 'read_dnd', 
+                   'xmu' : 'read_xmu' }
+    
+    # testing that file type is supported    
+    if ftype not in format_dict:
+        raise ValueError("file type %s currently not supported")
+
     # testing that files exist in the given path 
     for fpath in fpaths:
         if not path.isfile(fpath):
@@ -215,40 +263,39 @@ def merge_spectra(fpaths, scantype='mu', ftype='dnd', align_kws=None,
             e_offset = 0.0    
         
         # reading reference scan
-        ref = Group(**read_hdf5(align_kws['dbpath'], align_kws['name']))
+        ref = Group(**pyxas.io.read_hdf5(align_kws['dbpath'], align_kws['name']))
     else:
         align = False
 
     # loading larch session
     session = larch.Interpreter(with_plugins=False)
-    
+
     # reading files
     group = []
     for fpath in fpaths:
-        if ftype == 'dnd':
-            data = read_dnd(fpath, scantype)
-        else:
-            raise ValueError("File type '%s' is currently not supported." % ftype)
+        # retrieving reading function
+        read_func = getattr(pyxas.io, format_dict[ftype])
+        data      = read_func(fpath, scantype)
         if align:
             align_scans(data, ref, session, e_offset=e_offset)
         
         data.name = path.split(fpath)[1]
         group = np.append(group, data)
-    
+
     # merging scans
     if len(fpaths) > 1:
         merge = merge_scans(group, scantype)
     else:
         merge = data
-    
+
     # saving list of merged scans as attribute
     merge.merged_scans = str([data.name for data in group])
-    
+
     # print merge report
     if print_report:
         report = merge_report(group, merge)
         report.show()
-    
+
     # writting merge group in a hdf5 database
     # checking writting keys from input
     if write_kws is not None:
@@ -260,48 +307,10 @@ def merge_spectra(fpaths, scantype='mu', ftype='dnd', align_kws=None,
             replace = write_kws['replace']
         except:
             replace = False
-        
-        write_hdf5(write_kws['dbpath'], merge, name = write_kws['name'], replace=replace)
+
+        pyxas.io.write_hdf5(write_kws['dbpath'], merge, 
+                            name = write_kws['name'], replace=replace)
 
     return(group, merge)
 
-def merge_report(group, merge):
-    """Report of merge on XAS spectra.
-    
-    Parameters
-    ----------
-    
-    Returns
-    -------
-    
-    """
-    import larch
-    from larch.xafs import pre_edge
-    from pyxas import get_scan_type, DataReport
-    
-    # larch parameters
-    session = larch.Interpreter(with_plugins=False)
-    
-    # initializing report
-    report_pars = {'cols': [3,24,10,10,10,10], 
-                   'names': ['id', 'filename', 'scantype', 'step', 'e_offset', 'e0 [eV]']}
-    report      = DataReport()
-    report.set_columns(**report_pars)
-
-    # retrieving values from data group
-    for i, data in enumerate(group):
-        scantype = get_scan_type(data)
-        pre_edge(data.energy, getattr(data, scantype), group=data, _larch=session)
-        try:
-            data.e_offset
-        except:
-            data.e_offset = 0.0
-            
-        report.add_content([i+1, data.name, scantype, data.edge_step, data.e_offset, data.e0])
-
-    # retrieving values from merge
-    report.add_midrule()
-    pre_edge(merge.energy, getattr(merge, scantype), group=merge, _larch=session)
-    report.add_content(['','merge', scantype, merge.edge_step, 0.0, merge.e0])
-    
-    return (report)
+#def merge_ref():

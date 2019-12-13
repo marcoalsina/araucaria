@@ -71,8 +71,6 @@ def fig_merge(group, merge, pre_edge_kws=None,
     axes[1].plot(merge.energy, merge.flat, label='merge')
     axes[2].plot(merge.k, merge.k**k_mult*merge.chi)
 
-    axes[1].legend(loc=0, fontsize=8, edgecolor='k')            
-    fig.tight_layout()
-    fig.subplots_adjust(wspace=0.3)
+    axes[1].legend(loc=0, fontsize=8, edgecolor='k')
     
     return (fig, axes)

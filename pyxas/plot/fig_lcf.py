@@ -134,8 +134,5 @@ def fig_lcf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
         ax.axvline(out.pars_kws['fit_window'][0], **axline_kws)
         ax.axvline(out.pars_kws['fit_window'][1], **axline_kws)
     axes[1].axhline(0, **axline_kws)
-    
-    fig.tight_layout()
-    fig.subplots_adjust(wspace=0.2)
-    
+   
     return(fig, axes)
