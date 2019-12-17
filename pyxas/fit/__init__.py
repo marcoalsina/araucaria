@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 from .lcf import lcf
 from .lsf import lsf
 from .utils import sum_references, residuals, lcf_report
