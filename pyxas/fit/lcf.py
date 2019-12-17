@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Routines to perform linear combination fit (LCF) analysis on a XAS spectrum.
+Routine to perform linear combination fit (LCF) analysis on a XAS spectrum.
 """
 
 def lcf(data_kws, fit_type, fit_window, k_mult=2,
