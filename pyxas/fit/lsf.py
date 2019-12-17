@@ -1,14 +1,13 @@
 #!/usr/bin/env python
-'''
-filename: lsf.py
-
-Routine to perform a feffit least squares fit 
-on a XAS spectrum.
-'''
+# -*- coding: utf-8 -*-
+"""
+Routine to perform a feffit least squares fit (LSF) on a XAS spectrum.
+"""
 
 def lsf(data_kws, pars, path_pars, k_mult=2, pre_edge_kws=None, 
         autobk_kws=None, xftf_kws=None):
-    '''
+    """Least squares fit on a XAS spectrum.
+    
     This function performs a least squares fit
     on a spectrum given a FEFF calculation.
     --------------
@@ -32,7 +31,7 @@ def lsf(data_kws, pars, path_pars, k_mult=2, pre_edge_kws=None,
     Output:
     out [obj]: Fit object containing the results of the
                linear combination fit.
-    '''
+    """
     import os
     import types
     import larch
