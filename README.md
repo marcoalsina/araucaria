@@ -7,7 +7,7 @@ A collection of python routines to process and analyze X-ray absorption spectra.
 
 ## How to install
 Pyxas is still in development for an official release.
-If you still want to test the development version, the following install options are available:
+If you want to test the development version, the following install options are available:
 
 ### Install with Git
 If you have Git in your machine you can execute the following command in the console:
