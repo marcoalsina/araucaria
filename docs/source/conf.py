@@ -15,6 +15,11 @@ import sys
 import sphinx_rtd_theme
 sys.path.insert(0, os.path.abspath('.'))
 
+# retrieving the version
+f   = open(os.path.join('..','..','version'), 'r')
+ver = f.readline()
+f.close()
+
 
 # -- Project information -----------------------------------------------------
 
@@ -23,7 +28,7 @@ copyright = '2019, Marco A. Alsina'
 author    = 'Marco A. Alsina'
 
 # The full version, including alpha/beta/rc tags
-release = '0.1.1'
+release   = ver
 
 
 # -- General configuration ---------------------------------------------------
