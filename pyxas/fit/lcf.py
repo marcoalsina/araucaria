@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Routine to perform linear combination fit (LCF) analysis on a XAS spectrum.
+Collection of routines to perform linear combination fit (LCF) 
+analysis on a XAS spectrum.
 """
 
 def lcf(data_kws, fit_type, fit_window, k_mult=2,
@@ -33,7 +34,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     Output:
     out [obj]: Fit object containing the results of the
                linear combination fit.
-    '''
+    """
     import os
     import types
     from numpy import where, gradient, around
@@ -182,3 +183,22 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     out.save_lcf_data   = types.MethodType(save_lcf_data, out)
 
     return (out)
+
+def sum_references(pars, data):
+    '''
+    This function returns the linear sum of references based on 
+    the amplitude values stored in a dictionary with LCF parameters.
+    '''
+    from numpy import sum as npsum
+    return (npsum([pars['amp'+str(i)]* getattr(data, 'ref'+str(i)) 
+                   for i in range(1,len(pars)+1)], axis=0))
+
+
+def residuals(pars,data):
+    """
+    This function returns the residuals of the substraction
+    of a spectrum from its LCF with known references
+    standards.
+    """
+    from .fit import sum_references
+    return ((data.spectrum - sum_references(pars, data))/data.eps)

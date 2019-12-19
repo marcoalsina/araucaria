@@ -1,32 +1,29 @@
 #!/usr/bin/env python
-'''
-filename: utils.py
-
+# -*- coding: utf-8 -*-
+"""
 Colletion of routines to work with LCF output and log files.
 
 Implemented methods (class lmfit out):
-    lcf_report
-    save_lcf_report
-    save_lcf_data
+* lcf_report
+* save_lcf_report
+* save_lcf_data
     
 Implemented methods (class feffit out):
-    lsf_report
-    save_lsf_report
-    save_lsf_data
+* lsf_report
+* save_lsf_report
+* save_lsf_data
 
 
 Implemented functions:
-    sum_references
-    residuals
-    get_lcf_data
-    get_chi2
-'''
+* get_lcf_data
+* get_chi2
+"""
 
 def lcf_report(self):
-    '''
+    """Linear combination fit report (LCF).
     This function recieves an lmfit object and
     returns an LCF report.
-    '''
+    """
     import os
     from lmfit import fit_report
 
@@ -50,10 +47,11 @@ def lcf_report(self):
 
 
 def save_lcf_report(self, filepath):
-    '''
+    """Saves LCF report to file.
+    
     This function saves an LCF report 
     in a file specificed by filepath.
-    '''
+    """
     from .utils import lcf_report
 
     fout = open(filepath, 'w')
@@ -63,10 +61,11 @@ def save_lcf_report(self, filepath):
 
 
 def save_lcf_data(self, filepath):
-    '''
+    """Saves LCF data to file.
+    
     This function saves LCF data in a file
     specificed by filepath.
-    '''
+    """
     from numpy import column_stack, savetxt
     from .utils import lcf_report
 
@@ -88,10 +87,11 @@ def save_lcf_data(self, filepath):
 
 
 def lsf_report(self):
-    '''
+    """FEEFIT least squares fit (LSF) report.
+    
     This function recieves a feffit object and
     returns an updated least squares fit report.
-    '''
+    """
     import os
     from larch.xafs.feffit import feffit_report
 
@@ -171,34 +171,13 @@ def save_lsf_data(self, filepath, save='exafs'):
     savetxt(filepath, data, fmt='%.6f',  header=rep_header + '\n' + data_header)
     return
 
-
-
-def sum_references(pars, data):
-    '''
-    This function returns the linear sum of references based on 
-    the amplitude values stored in a dictionary with LCF parameters.
-    '''
-    from numpy import sum as npsum
-    return (npsum([pars['amp'+str(i)]* getattr(data, 'ref'+str(i)) 
-                   for i in range(1,len(pars)+1)], axis=0))
-
-
-def residuals(pars,data):
-    '''
-    This function returns the residuals of the substraction
-    of a spectrum from its LCF with known references
-    standards.
-    '''
-    return (data.spectrum - sum_references(pars, data))/data.eps
-
-
 def get_lcf_data_legacy(files, reference, error=True):
-    '''
+    """
     This function reads a list of LCF log files and returns 
     a numpy array with the values associated with the specified reference
     The calculated standard deviation can be retrieved optionally.
     IMPORTANT: This is a legacy function from a previous LCF log file format.
-    '''
+    """
     import os
     from numpy import append, float
 
@@ -292,11 +271,11 @@ def get_lcf_data(files, reference, error=True):
 
 
 def get_chi2(files, reduced=False):
-    '''
+    """
     This function reads a list of lcf log files and returns 
     a numpy array with the chi-squared values associated with the fit.
     The reduced chi-square can be retrieved optionally.
-    '''
+    """
     import os
     from numpy import append, float
 
