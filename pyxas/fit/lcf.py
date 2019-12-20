@@ -46,7 +46,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     from pyxas import get_scan_type
     from pyxas.io import read_hdf5
     from .lcf import residuals, sum_references
-    from .utils import fit_report, save_fit_report, save_lcf_data
+    from .utils import fit_report, save_fit_report, save_fit_data
     
     # verifying fit type
     fit_types = ['dxanes', 'xanes','exafs']
@@ -180,7 +180,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     # assigning save methods to out object
     out.lcf_report      = types.MethodType(fit_report, out)
     out.save_lcf_report = types.MethodType(save_fit_report, out)
-    out.save_lcf_data   = types.MethodType(save_lcf_data, out)
+    out.save_lcf_data   = types.MethodType(save_fit_data, out)
 
     return (out)
 
