@@ -4,8 +4,9 @@
 Colletion of routines to work with LCF output and log files.
 
 Implemented methods (class lmfit out):
-* lcf_report
-* save_lcf_report
+* fit_report
+* save_fit_report
+* save_ecf_data
 * save_lcf_data
     
 Implemented methods (class feffit out):
@@ -19,15 +20,22 @@ Implemented functions:
 * get_chi2
 """
 
-def lcf_report(self):
-    """Linear combination fit report (LCF).
+def fit_report(self):
+    """Fit report.
+    
     This function recieves an lmfit object and
-    returns an LCF report.
+    returns a fit report.
     """
     import os
     from lmfit import fit_report
+    
+    # assigning title
+    if 'ncomps' in self.pars_kws:
+        title = '='*11+' EXTRACT COMPONENTS FIT RESULTS '+'='*11+'\n'
+    else:
+        title = '='*11+' LINEAR COMBINATION FIT RESULTS '+'='*11+'\n'
 
-    header = '[[Parameters]]\n'
+    header = title + '[[Parameters]]\n'
     for key in self.pars_kws:
         val    = ' '.join(key.split('_'))
         header = header + '    {0:19}= {1}\n'\
@@ -45,42 +53,55 @@ def lcf_report(self):
 
     return (header+fit_report(self))
 
-
-def save_lcf_report(self, filepath):
-    """Saves LCF report to file.
+def save_fit_report(self, filepath):
+    """Saves fit report to file.
     
-    This function saves an LCF report 
+    This function saves an fit report 
     in a file specificed by filepath.
     """
-    from .utils import lcf_report
+    from .utils import fit_report
 
     fout = open(filepath, 'w')
-    fout.write(lcf_report(self))
+    fout.write(fit_report(self))
     fout.close()
-    return
+    return    
 
 
-def save_lcf_data(self, filepath):
+def save_fit_data(self, filepath):
     """Saves LCF data to file.
     
     This function saves LCF data in a file
     specificed by filepath.
     """
     from numpy import column_stack, savetxt
-    from .utils import lcf_report
+    from .utils import fit_report
+
+    # fit report
+    rep_header = fit_report(self)
+
+    # saving ECF spectra
+    if 'ncomps' in self.pars_kws:
+        if self.pars_kws['fit_type'] == 'exafs':
+            data_header = 'k [A-1]\t' + 'k^%s chi_1(k)\t'%self.pars_kws['k_mult'] + 'k^%s chi_2(k)'%self.pars_kws['k_mult']
+            data = column_stack((self.data_group.k, self.data_group.comps['x1_mean'], self.data_group.comps['x2_mean']))
+        else:
+            data = column_stack((self.data_group.energy, self.data_group.comps['x1_mean'], self.data_group.comps['x2_mean']))
+            if self.pars_kws['fit_type'] == 'xanes':
+                data_header = 'Energy [eV]\t' + 'Norm. abs. x1 [adim]\t' + 'Norm. abs. x2 [adim]'
+            else:
+                data_header = 'Energy [eV]\t' + 'Deriv. norm. abs. x1 [adim]\t' +  'Deriv. norm. abs. x2 [adim]'
 
     # saving LCF spectra
-    rep_header = lcf_report(self)
-
-    if self.pars_kws['fit_type'] == 'exafs':
-        data_header = 'k [A-1]\t' + 'k^%s chi(k)'%self.pars_kws['k_mult']+ '\tFit\tResidual'
-        data = column_stack((self.data_group.k, self.data_group.spectrum, self.data_group.fit, self.residual))
     else:
-        data = column_stack((self.data_group.energy, self.data_group.spectrum, self.data_group.fit, self.residual))
-        if self.pars_kws['fit_type'] == 'xanes':
-            data_header = 'Energy [eV]\t' + 'Norm. abs. [adim]'+ '\tFit\tResidual'
+        if self.pars_kws['fit_type'] == 'exafs':
+            data_header = 'k [A-1]\t' + 'k^%s chi(k)'%self.pars_kws['k_mult']+ '\tFit\tResidual'
+            data = column_stack((self.data_group.k, self.data_group.spectrum, self.data_group.fit, self.residual))
         else:
-            data_header = 'Energy [eV]\t' + 'Deriv. norm. abs. [adim]'+ '\tFit\tResidual'
+            data = column_stack((self.data_group.energy, self.data_group.spectrum, self.data_group.fit, self.residual))
+            if self.pars_kws['fit_type'] == 'xanes':
+                data_header = 'Energy [eV]\t' + 'Norm. abs. [adim]'+ '\tFit\tResidual'
+            else:
+                data_header = 'Energy [eV]\t' + 'Deriv. norm. abs. [adim]'+ '\tFit\tResidual'
 
     savetxt(filepath, data, fmt='%.6f',  header=rep_header + '\n' + data_header)
     return
