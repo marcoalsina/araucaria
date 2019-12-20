@@ -1,10 +1,13 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-def fig_lcf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+def fig_ecf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
     '''
     This funtion returns a Matpoltlib figure and
-    axes object containing the plotted results of an LCF analysis.
+    axes object containing the plotted results of an ECF analysis.
     --------------
     Required input:
     out [obj]       : valid LMFIT object for the LCF.
@@ -36,7 +39,7 @@ def fig_lcf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
         out.pars_kws
         out.data_kws
     except ValueError:
-        print('Object is not a valid lmift object from LCF.')
+        print('Object is not a valid lmift object from ECF.')
     
     # setting the figure type
     if out.pars_kws['fit_type'] == 'exafs':
@@ -93,17 +96,23 @@ def fig_lcf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
             axes[0].text(xloc, (0.25 + i)*step, name, fontsize=fontsize, ha='right')
 
     # plotting fitted data
+    ncomps   = out.pars_kws['ncomps']
+    nspectra = len(names)
+    ncols    = int(nspectra*(nspectra-1)/2)
+    
     # EXAFS fit
     if out.pars_kws['fit_type'] == 'exafs':
-        axes[1].plot(out.data_group.k, 1.5*step+out.data_group.spectrum, label=names[0])
-        axes[1].plot(out.data_group.k, 1.5*step+out.data_group.fit, label='fit')
-        axes[1].plot(out.data_group.k, out.residual, label='residual')
+        for i in range(ncomps):
+            axes[1].plot(out.data_group.k, out.data_group.comps['x%s_mean'%(i+1)], label='x%s'%(i+1))
+            for j in range(ncols):
+                axes[1].plot(out.data_group.k, out.data_group.comps['x%s'%(i+1)][:,j], zorder=-1)
+        
     
     # XANES or DXANES fit
     else:
-        axes[1].plot(out.data_group.energy, 0.5*step + out.data_group.spectrum, label=names[0])
-        axes[1].plot(out.data_group.energy, 0.5*step + out.data_group.fit, label='fit')
-        axes[1].plot(out.data_group.energy, out.residual, label='residual')
+        for i in range(ncomps):
+            axes[1].plot(out.data_group.energy, 0.5*step + \
+                         out.data_group.comps['x%s_mean'%(i+1)], label='x%s'%(i+1))
     
     axes[1].legend(loc='upper right', edgecolor='k', fontsize=fontsize)
     
@@ -111,21 +120,21 @@ def fig_lcf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
     yloc = axes[1].get_ylim()
     axes[1].set_ylim(yloc[0], 1.3*yloc[1])
     
-    if annotate:
+    #if annotate:
         # summary results for plot
-        summary = r'$\chi^2$ = %1.4f' % out.chisqr +'\n'
-        for i in range(1,len(out.params)+1):
-            val = out.params['amp'+str(i)].value
-            err = out.params['amp'+str(i)].stderr
-            summary += names[i]+r': %1.2f$\pm$%1.2f' % (val, err)
-            summary += '\n'
+        #summary = r'$\chi^2$ = %1.4f' % out.chisqr +'\n'
+        #for i in range(1,len(out.params)+1):
+            #val = out.params['amp'+str(i)].value
+            #err = out.params['amp'+str(i)].stderr
+            #summary += names[i]+r': %1.2f$\pm$%1.2f' % (val, err)
+            #summary += '\n'
 
-        if out.pars_kws['fit_type']   == 'dxanes':
-            axes[1].text(xloc, yloc[0] + 0.6*ptp(yloc), summary, ha='right', va='center', fontsize=fontsize)
-        elif out.pars_kws['fit_type'] == 'xanes':
-            axes[1].text(xloc, yloc[0] + 0.4*ptp(yloc), summary, ha='right', va='center', fontsize=fontsize)
-        else:
-            axes[1].text(xloc, yloc[0] + 0.5*ptp(yloc), summary, ha='right', va='top', fontsize=fontsize)
+        #if out.pars_kws['fit_type']   == 'dxanes':
+            #axes[1].text(xloc, yloc[0] + 0.6*ptp(yloc), summary, ha='right', va='center', fontsize=fontsize)
+        #elif out.pars_kws['fit_type'] == 'xanes':
+            #axes[1].text(xloc, yloc[0] + 0.4*ptp(yloc), summary, ha='right', va='center', fontsize=fontsize)
+        #else:
+            #axes[1].text(xloc, yloc[0] + 0.5*ptp(yloc), summary, ha='right', va='top', fontsize=fontsize)
 
     # axes decorators
     axline_kws = {'color': 'lightgray', 'dashes': [4,2], 'linewidth': 1.0, 'zorder':-2} 
@@ -133,6 +142,5 @@ def fig_lcf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
         ax.set_yticks([])
         ax.axvline(out.pars_kws['fit_window'][0], **axline_kws)
         ax.axvline(out.pars_kws['fit_window'][1], **axline_kws)
-    axes[1].axhline(0, **axline_kws)
    
     return(fig, axes)

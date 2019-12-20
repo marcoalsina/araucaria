@@ -49,7 +49,7 @@ def ecf(data_kws, fit_type, fit_window, ncomps=2, method='bfgs',
     from larch.xafs import pre_edge, autobk
     from pyxas import get_scan_type
     from pyxas.io import read_hdf5
-    from .utils import fit_report, save_fit_report
+    from .utils import fit_report, save_fit_report, save_fit_data
     
     # verifying fit type
     fit_types = ['dxanes', 'xanes','exafs']
@@ -185,7 +185,8 @@ def ecf(data_kws, fit_type, fit_window, ncomps=2, method='bfgs',
     out = minimize(ecf_minfunc, params, method=method, args=(datgroup, True),)
 
     # retrieving components
-    comps = get_comps(out.params, datgroup)
+    comps, weights = get_comps(out.params, datgroup)
+    datgroup.comps = comps
     
     # storing data and arguments
     out.data_group = datgroup
@@ -195,7 +196,7 @@ def ecf(data_kws, fit_type, fit_window, ncomps=2, method='bfgs',
     # assigning save methods to out object
     out.ecf_report      = types.MethodType(fit_report, out)
     out.save_ecf_report = types.MethodType(save_fit_report, out)
-    #out.save_ecf_data   = types.MethodType(save_ecf_data, out)
+    out.save_ecf_data   = types.MethodType(save_fit_data, out)
 
     return (out)
 
@@ -221,7 +222,7 @@ def ecf_minfunc(pars, data, weighted=True):
         # norm-2 over weighted standard deviation
         # we first calculate the sum of standard deviation for each approximation of comps
         sdsum_x1 = npsum(npsqrt((comps['x1']-vstack(comps['x1_mean']) )**2), axis=0)
-        sdsum_x2 = npsum(npsqrt((comps['x1']-vstack(comps['x1_mean']) )**2), axis=0)
+        sdsum_x2 = npsum(npsqrt((comps['x2']-vstack(comps['x2_mean']) )**2), axis=0)
         # we finalize produce the average based on weights for each comp
         norm_sigma = average(sdsum_x1, weights=weights['x1']) + \
                      average(sdsum_x2, weights=weights['x2'])
@@ -234,7 +235,7 @@ def get_comps(pars, data, weighted=True):
     """
     from numpy import empty, mean, average, ones
     from numpy import sum as npsum
-    
+
     nspectra = len(pars)
 
     # initializing dict for components (x1,x2,...)
@@ -242,8 +243,8 @@ def get_comps(pars, data, weighted=True):
     # it is more efficient to initialize the entire matrix
     # and then start populating it with data
     # IMPORTANT: Currently ncomps is hardcoded to 2.
-    comps   = {}    # container for components
-    weights = {}    # container for weights (if average requested)
+    comps   = dict()    # container for components
+    weights = dict()    # container for weights (if average requested)
     nrows   = len(data.dat1)    # dat1 used as reference
     ncols   = int(nspectra*(nspectra-1)/2)
 
@@ -257,17 +258,17 @@ def get_comps(pars, data, weighted=True):
     for h in range(1,nspectra+1):
         for k in range(h+1, nspectra+1):
             if data.ncomps == 2:
-                denom = pars['amp1'+str(h)] - pars['amp1'+str(k)] + data.xi
+                denom = pars['amp1'+str(h)].value - pars['amp1'+str(k)].value + data.xi
 
-                comps['x1'][:,j] = ((1 - pars['amp1'+str(k)]) * getattr(data, 'dat'+str(h)) -\
-                                    (1 - pars['amp1'+str(h)]) * getattr(data, 'dat'+str(k))) / denom
+                comps['x1'][:,j] = ((1 - pars['amp1'+str(k)].value) * getattr(data, 'dat'+str(h)) -\
+                                    (1 - pars['amp1'+str(h)].value) * getattr(data, 'dat'+str(k))) / denom
 
-                comps['x2'][:,j] = (  (- pars['amp1'+str(k)]) * getattr(data, 'dat'+str(h)) +\
-                                      (  pars['amp1'+str(h)]) * getattr(data, 'dat'+str(k))) / denom
+                comps['x2'][:,j] = (  (- pars['amp1'+str(k)].value) * getattr(data, 'dat'+str(h)) +\
+                                      (  pars['amp1'+str(h)].value) * getattr(data, 'dat'+str(k))) / denom
 
                 if weighted:
-                    weights['x1'][j]  = (pars['amp1'+str(h)] + pars['amp1'+str(k)])/2
-                    weights['x2'][j]  = ((1 - pars['amp1'+str(h)]) + (1 - pars['amp1'+str(k)]))/2
+                    weights['x1'][j]  = (pars['amp1'+str(h)].value + pars['amp1'+str(k)].value)/2
+                    weights['x2'][j]  = ((1 - pars['amp1'+str(h)].value) + (1 - pars['amp1'+str(k)].value))/2
 
             j += 1    # updating counter
 
