@@ -4,7 +4,7 @@
 Collection of routines to extract components from a XAS dataset.
 """
 
-def ecf(data_kws, fit_type, fit_window, ncomps=2, method='cg',
+def ecf(data_kws, fit_type, fit_window, ncomps=2, method='bfgs',
                  k_mult=2, pre_edge_kws=None, autobk_kws=None):
     """Extraction of components from a XAS dataset.
     
@@ -49,13 +49,13 @@ def ecf(data_kws, fit_type, fit_window, ncomps=2, method='cg',
     from larch.xafs import pre_edge, autobk
     from pyxas import get_scan_type
     from pyxas.io import read_hdf5
-    from pyxas.fit import lcf_report
+    from .utils import fit_report, save_fit_report
     
     # verifying fit type
     fit_types = ['dxanes', 'xanes','exafs']
     if fit_type not in fit_types:
         raise ValueError('fit_type %s not recognized.'%fit_type)
-    
+
     # counting the number of spectra (nspectra)
     # and veifying that filepaths exist
     nspectra = 0
@@ -82,7 +82,7 @@ def ecf(data_kws, fit_type, fit_window, ncomps=2, method='cg',
     for i in range(nspectra-2):
         req_keys.append('dat%i_path' % (i+2))
         req_keys.append('dat%i_name' % (i+2))
-    
+
     for key in req_keys:
         if key not in data_kws:
             raise ValueError("Argument '%s' is missing." % key)
@@ -102,7 +102,7 @@ def ecf(data_kws, fit_type, fit_window, ncomps=2, method='cg',
             pars_kws['autobk_kws'] = 'default'
         else:
             pars_kws['autobk_kws'] = autobk_kws
-    
+
     # report parameters for xanes/dxanes lcf
     else:
         xvar = 'energy'    # storing name of x-variable (xanes/dxanes)
@@ -111,7 +111,7 @@ def ecf(data_kws, fit_type, fit_window, ncomps=2, method='cg',
     session   = larch.Interpreter(with_plugins=False)
     fullgroup = Group()   # container for full dataset
     datgroup  = Group()   # containerfor interpolated spectra
-    
+
     # first a group containing the entire processed dataset is created
     # the spectra with the lowest number of points in the fit region is then
     # selected for interpolation
@@ -120,41 +120,41 @@ def ecf(data_kws, fit_type, fit_window, ncomps=2, method='cg',
         dname = 'dat'+str(i+1)
         data  = Group(**read_hdf5(data_kws[req_keys[2*i]], name=data_kws[req_keys[2*i+1]]))
         scantype = get_scan_type(data)
-        
+
         # processing xanes spectra
         if pre_edge_kws is None:
             pre_edge(data.energy, getattr(data, scantype), group=data, _larch=session)
         else:
             pre_edge(data.energy, getattr(data, scantype), group=data, _larch=session, **pre_edge_kws)
-        
+
         # prceossing exafs spectra
         if fit_type == 'exafs':
             if autobk_kws is None:
                 autobk(data.energy, getattr(data, scantype), group=data, _larch=session)
             else:
                 autobk(data.energy, getattr(data, scantype), group=data, _larch=session, **autobk_kws)
-        
+
         # setting xvar index for spectra interpolation
         # initially we consider the entire length of xvar from the first data element
         if i == 0:
             xvals = getattr(data,xvar)
-        
+
         # saving the index for the respective data element
         iindex = where((getattr(data, xvar) >= fit_window[0]) &
                           (getattr(data, xvar) <= fit_window[1]))
         ixvals = getattr(data,xvar)[iindex]
-        
+
         # the smallest xvar index is kept for interpolation
         if len(ixvals) < len(xvals):
             xvals = ixvals
-        
+
         # storing the full data element as an attribute of fullgroup
         setattr(fullgroup, dname, data)
 
     # parameters for fit model
     params   = Parameters()
     initvals = around(linspace(0.2,0.8, num=nspectra), decimals=1)
-    
+
     # data interpolation based on xvals
     for i in range(nspectra):
         dname = 'dat'+str(i+1)
@@ -167,7 +167,7 @@ def ecf(data_kws, fit_type, fit_window, ncomps=2, method='cg',
         else:
             s = interp1d(getattr(data, xvar), gradient(data.norm), kind='cubic')
         yvals = s(xvals)
-    
+
         # setting corresponding y-variable as an attribute of datgroup
         setattr(datgroup, dname, yvals)
 
@@ -182,32 +182,58 @@ def ecf(data_kws, fit_type, fit_window, ncomps=2, method='cg',
     datgroup.xi     = 1e-4   # xi value to prevent division by zero 
     
     # perform fit
-    out = minimize(ec_minfunc, params, method='cg', args=(datgroup,),)
-    #help(minimize)
+    out = minimize(ecf_minfunc, params, method=method, args=(datgroup, True),)
+
+    # retrieving components
+    comps = get_comps(out.params, datgroup)
     
-     # storing data and arguments
-    #fit = sum_references(out.params, datgroup)
-    #datgroup.fit = fit
-    
+    # storing data and arguments
     out.data_group = datgroup
     out.data_kws   = data_kws
     out.pars_kws   = pars_kws
 
     # assigning save methods to out object
-    out.fit_report      = types.MethodType(lcf_report, out)
-    out.save_fit_report = types.MethodType(save_lcf_report, out)
-    out.save_fit_data   = types.MethodType(save_lcf_data, out)
+    out.ecf_report      = types.MethodType(fit_report, out)
+    out.save_ecf_report = types.MethodType(save_fit_report, out)
+    #out.save_ecf_data   = types.MethodType(save_ecf_data, out)
 
     return (out)
 
-def ecf_minfunc(pars, data):
+def ecf_minfunc(pars, data, weighted=True):
     """
     This function returns the residuals of the substraction
     of a spectrum from its LCF with known references
     standards.
     """
-    from numpy import empty, mean, std
+    from numpy import average, vstack
+    from numpy import sum as npsum
+    from numpy import sqrt as npsqrt
     from numpy.linalg import norm
+    from .ecf import get_comps
+
+    # retrieving components and weights
+    comps, weights = get_comps(pars,data, weighted=weighted)
+
+    if data.ncomps == 2:
+        # norm-2 over difference
+        norm_x     = norm(comps['x1_mean']-comps['x2_mean'])
+
+        # norm-2 over weighted standard deviation
+        # we first calculate the sum of standard deviation for each approximation of comps
+        sdsum_x1 = npsum(npsqrt((comps['x1']-vstack(comps['x1_mean']) )**2), axis=0)
+        sdsum_x2 = npsum(npsqrt((comps['x1']-vstack(comps['x1_mean']) )**2), axis=0)
+        # we finalize produce the average based on weights for each comp
+        norm_sigma = average(sdsum_x1, weights=weights['x1']) + \
+                     average(sdsum_x2, weights=weights['x2'])
+
+    return (norm_sigma - norm_x)
+
+def get_comps(pars, data, weighted=True):
+    """
+    Retrieve averaged components from fit.
+    """
+    from numpy import empty, mean, average, ones
+    from numpy import sum as npsum
     
     nspectra = len(pars)
 
@@ -216,12 +242,14 @@ def ecf_minfunc(pars, data):
     # it is more efficient to initialize the entire matrix
     # and then start populating it with data
     # IMPORTANT: Currently ncomps is hardcoded to 2.
-    comps = {}
-    nrows = len(data.dat1) 
-    ncols = int(nspectra*(nspectra-1)/2)
-    
+    comps   = {}    # container for components
+    weights = {}    # container for weights (if average requested)
+    nrows   = len(data.dat1)    # dat1 used as reference
+    ncols   = int(nspectra*(nspectra-1)/2)
+
     for i in range(data.ncomps):
-        comps['x%s'%(i+1)] = empty((nrows,ncols))
+        comps['x%s'%(i+1)]   = empty((nrows,ncols))
+        weights['x%s'%(i+1)] = empty(ncols)
 
     # we use hk notation to compute components
     # hk indexing starts from 1
@@ -230,22 +258,32 @@ def ecf_minfunc(pars, data):
         for k in range(h+1, nspectra+1):
             if data.ncomps == 2:
                 denom = pars['amp1'+str(h)] - pars['amp1'+str(k)] + data.xi
-                
-                comps['x1'][:,j] = ((1 - pars['amp1'+str(k)]) * getattr(data, 'dat'+str(h)) -
+
+                comps['x1'][:,j] = ((1 - pars['amp1'+str(k)]) * getattr(data, 'dat'+str(h)) -\
                                     (1 - pars['amp1'+str(h)]) * getattr(data, 'dat'+str(k))) / denom
-                
-                comps['x2'][:,j] = (  (- pars['amp1'+str(k)]) * getattr(data, 'dat'+str(h)) +
+
+                comps['x2'][:,j] = (  (- pars['amp1'+str(k)]) * getattr(data, 'dat'+str(h)) +\
                                       (  pars['amp1'+str(h)]) * getattr(data, 'dat'+str(k))) / denom
+
+                if weighted:
+                    weights['x1'][j]  = (pars['amp1'+str(h)] + pars['amp1'+str(k)])/2
+                    weights['x2'][j]  = ((1 - pars['amp1'+str(h)]) + (1 - pars['amp1'+str(k)]))/2
+
             j += 1    # updating counter
-    
-    # once calculation of components is done we can return the residual value
-    if data.ncomps == 2:
+
+    # normalizing weights
+    if weighted:
         for i in range(data.ncomps):
-            comps['x%s_mean'%(i+1)] = mean(comps['x%s'%(i+1)], axis=1)
-        
-        # norm over difference
-        norm_x     = norm(comps['x1_mean']-comps['x2_mean'])
-        # norm over standard deviation
-        norm_sigma = norm(std(comps['x1'], axis=1)) + norm(std(comps['x1'], axis=1))
-        
-    return (norm_sigma - norm_x)
+            weights['x%s'%(i+1)] = weights['x%s'%(i+1)]/npsum(weights['x%s'%(i+1)])
+
+    # once calculation of components is done we can retrieve either mean or weighted average
+    if data.ncomps == 2:
+        if weighted:
+            for i in range(data.ncomps):
+                comps['x%s_mean'%(i+1)] = average(comps['x%s'%(i+1)], weights=weights['x%s'%(i+1)], axis=1)
+        else:
+            for i in range(data.ncomps):
+                comps['x%s_mean'%(i+1)] = mean(comps['x%s'%(i+1)], axis=1)
+                weights['x%s'%(i+1)]    = ones(ncols)/npsum(ones(ncols))
+
+    return(comps, weights)
