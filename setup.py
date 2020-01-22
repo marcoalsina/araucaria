@@ -1,7 +1,8 @@
+import os
 from setuptools import setup
 
 # retrieving version
-f   = open('version', 'r')
+f   = open(os.path.join('pyxas','version'), 'r')
 ver = f.readline()
 f.close()
 
