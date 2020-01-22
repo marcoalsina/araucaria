@@ -16,7 +16,7 @@ import sphinx_rtd_theme
 sys.path.insert(0, os.path.abspath('.'))
 
 # retrieving the version
-f   = open(os.path.join(os.pardir, os.pardir, 'version'), 'r')
+f   = open(os.path.join(os.pardir, os.pardir, 'pyxas', 'version'), 'r')
 ver = f.readline()
 f.close()
 
