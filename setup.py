@@ -16,9 +16,15 @@ setup(
     license     = 'BSD',
     packages    = ['pyxas', 'pyxas.io', 'pyxas.plot', 'pyxas.fit'],
     long_description = open('README.md').read(),
+    include_package_data = True,
     install_requires = [
         'numpy>=1.16.4',
         'scipy>=1.3.1',
         'matplotlib>=3.1.0',
-        'xraylarch>=0.9.46'],
+        'xraylarch>=0.9.46',
+        'lmfit>=1.0.0',
+        'h5py>=2.10.0',
+        'sqlalchemy>=1.3.13',
+        'pyshortcuts>=1.7',
+    ],
 )
