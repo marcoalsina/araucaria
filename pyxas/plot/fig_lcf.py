@@ -4,7 +4,8 @@
 def fig_lcf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
     '''
     This funtion returns a Matpoltlib figure and
-    axes object containing the plotted results of an LCF analysis.
+    axes objects containing the plotted result of
+    linear combination fit (LCF) on a XAS spectrum.
     --------------
     Required input:
     out [obj]       : valid LMFIT object for the LCF.

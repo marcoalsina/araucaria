@@ -1,10 +1,5 @@
-#!/usr/bin/env python
-"""
-filename: fig_lsf.py
-
-Function to plot results of a feffit
-least squares fit on an XAFS spectrm.
-"""
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
 
 def fig_lsf(out, annotate=True, fontsize=8, fig_pars=None, **fig_kws):
     """
