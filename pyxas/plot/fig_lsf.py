@@ -1,24 +1,25 @@
 #!/usr/bin/env python
-'''
+"""
 filename: fig_lsf.py
 
 Function to plot results of a feffit
 least squares fit on an XAFS spectrm.
-'''
+"""
 
 def fig_lsf(out, annotate=True, fontsize=8, fig_pars=None, **fig_kws):
-    '''
+    """
     This funtion returns a Matpoltlib figure and
-    axes object containing the plotted results of 
-    a feffit least squares fit of an EXAFS spectrum.
+    axes objects containing the plotted results of 
+    a feff least-squares fit (feffit) on an EXAFS 
+    spectrum.
     --------------
     Required input:
     out [obj]      : valid feffit object.
-    annotate [bool]: if 'true' it annotates the first shell
-                     fit results on the figure.
+    annotate [bool]: if 'true' it annotates the results of
+                     the first shell fitting on the figure.
     fontsize [int] : font size for legend and annotations.
     fig_pars [dict]: optional arguments for the figure.
-                     Check the function 'fig_xas_template'
+                     Check the function ´fig_xas_template´
                      for valid arguments.
     fig_kws [dict] : arguments to pass to the Matplotlib
                      subplots instance.  
@@ -26,7 +27,7 @@ def fig_lsf(out, annotate=True, fontsize=8, fig_pars=None, **fig_kws):
     Output:
     fig :  Matplolib figure object.
     axes:  Matplotlib axes object.
-    '''
+    """
     from numpy import gradient, ptp
     import larch
     from larch import Group
@@ -46,10 +47,11 @@ def fig_lsf(out, annotate=True, fontsize=8, fig_pars=None, **fig_kws):
     # setting the figure type
     fig, axes = fig_xas_template(panels='er', fig_pars=fig_pars, **fig_kws)
     
-    # plotting original spectra
+    # plotting data and fit result
     dset    = out.datasets[0].data
     model   = out.datasets[0].model
-    pardir = out.datasets[0].pathlist[0].path_paramvals()
+    pardir  = out.datasets[0].pathlist[0].path_paramvals()
+    reff    = out.datasets[0].pathlist[0].reff
     k_mult  = out.pars_kws['k_mult']
 
     axes[0].plot(dset.k, dset.k**k_mult*dset.chi, label=out.data_kws['spectrum_name'])
@@ -70,10 +72,10 @@ def fig_lsf(out, annotate=True, fontsize=8, fig_pars=None, **fig_kws):
         r'$\Delta E_0$ = %1.2f $eV$'%(
             pardir['s02'],
             pardir['degen'],
-            pardir['deltar'],
+            pardir['deltar'] + reff,
             pardir['sigma2'],
             pardir['e0'])
-        
+
         axes[1].text(2.5,0.2, summary, fontsize=fontsize)
 
     # ax legend
