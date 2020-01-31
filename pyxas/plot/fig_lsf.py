@@ -47,7 +47,10 @@ def fig_lsf(out, annotate=True, fontsize=8, fig_pars=None, **fig_kws):
     model   = out.datasets[0].model
     pardir  = out.datasets[0].pathlist[0].path_paramvals()
     reff    = out.datasets[0].pathlist[0].reff
-    k_mult  = out.pars_kws['k_mult']
+    try:
+        k_mult = fig_pars['k_mult']
+    except:
+        k_mult = out.pars_kws['k_mult']
 
     axes[0].plot(dset.k, dset.k**k_mult*dset.chi, label=out.data_kws['spectrum_name'])
     axes[0].plot(model.k, model.k**k_mult*model.chi, label='fit')
