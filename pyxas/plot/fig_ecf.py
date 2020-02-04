@@ -1,9 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
 def fig_ecf(out, annotate=True, fontsize=8, step=0.5, fig_pars=None, **fig_kws):
     '''
     This funtion returns a Matpoltlib figure and
