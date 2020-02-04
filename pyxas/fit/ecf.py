@@ -7,10 +7,9 @@ Collection of routines to extract components from a XAS dataset.
 def ecf(data_kws, fit_type, fit_window, ncomps=2, method='bfgs',
                  k_mult=2, pre_edge_kws=None, autobk_kws=None):
     """Extraction of components from a XAS dataset.
-    
+
     This function performs extraction of componentes from a XAS
     dataset based on maximization of signal difference between components.
-    
 
     --------------
     Required input:
@@ -50,14 +49,14 @@ def ecf(data_kws, fit_type, fit_window, ncomps=2, method='bfgs',
     from pyxas import get_scan_type
     from pyxas.io import read_hdf5
     from .utils import fit_report, save_fit_report, save_fit_data
-    
+
     # verifying fit type
     fit_types = ['dxanes', 'xanes','exafs']
     if fit_type not in fit_types:
         raise ValueError('fit_type %s not recognized.'%fit_type)
 
     # counting the number of spectra (nspectra)
-    # and veifying that filepaths exist
+    # and verifying that filepaths exist
     nspectra = 0
     for key in data_kws:
         if 'name' in key:
@@ -110,7 +109,7 @@ def ecf(data_kws, fit_type, fit_window, ncomps=2, method='bfgs',
     # reading and processing spectra
     session   = larch.Interpreter(with_plugins=False)
     fullgroup = Group()   # container for full dataset
-    datgroup  = Group()   # containerfor interpolated spectra
+    datgroup  = Group()   # container for interpolated spectra
 
     # first a group containing the entire processed dataset is created
     # the spectra with the lowest number of points in the fit region is then
@@ -127,7 +126,7 @@ def ecf(data_kws, fit_type, fit_window, ncomps=2, method='bfgs',
         else:
             pre_edge(data.energy, getattr(data, scantype), group=data, _larch=session, **pre_edge_kws)
 
-        # prceossing exafs spectra
+        # processing exafs spectra
         if fit_type == 'exafs':
             if autobk_kws is None:
                 autobk(data.energy, getattr(data, scantype), group=data, _larch=session)
@@ -152,6 +151,7 @@ def ecf(data_kws, fit_type, fit_window, ncomps=2, method='bfgs',
         setattr(fullgroup, dname, data)
 
     # parameters for fit model
+    # initial values are progressively assigned from 0.2 to 0.8
     params   = Parameters()
     initvals = around(linspace(0.2,0.8, num=nspectra), decimals=1)
 
@@ -245,8 +245,8 @@ def get_comps(pars, data, weighted=True):
     # IMPORTANT: Currently ncomps is hardcoded to 2.
     comps   = dict()    # container for components
     weights = dict()    # container for weights (if average requested)
-    nrows   = len(data.dat1)    # dat1 used as reference
-    ncols   = int(nspectra*(nspectra-1)/2)
+    nrows   = len(data.dat1)                  # dat1 used as reference
+    ncols   = int(nspectra*(nspectra-1)/2)    # possible permutations
 
     for i in range(data.ncomps):
         comps['x%s'%(i+1)]   = empty((nrows,ncols))
@@ -267,8 +267,10 @@ def get_comps(pars, data, weighted=True):
                                       (  pars['amp1'+str(h)].value) * getattr(data, 'dat'+str(k))) / denom
 
                 if weighted:
-                    weights['x1'][j]  = (pars['amp1'+str(h)].value + pars['amp1'+str(k)].value)/2
-                    weights['x2'][j]  = ((1 - pars['amp1'+str(h)].value) + (1 - pars['amp1'+str(k)].value))/2
+                    #weights['x1'][j]  = (pars['amp1'+str(h)].value + pars['amp1'+str(k)].value)/2
+                    #weights['x2'][j]  = ((1 - pars['amp1'+str(h)].value) + (1 - pars['amp1'+str(k)].value))/2
+                    weights['x1'][j]  = abs(pars['amp1'+str(h)].value - pars['amp1'+str(k)].value)
+                    weights['x2'][j]  = abs(pars['amp1'+str(h)].value - pars['amp1'+str(k)].value)
 
             j += 1    # updating counter
 
