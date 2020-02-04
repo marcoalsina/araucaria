@@ -1,5 +1,10 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
+"""
+Collection of routines to perform linear combination fit (LCF) 
+analysis on a XAS spectrum.
+"""
 
 def lcf(data_kws, fit_type, fit_window, k_mult=2,
         sum_one=True, pre_edge_kws=None, autobk_kws=None):
@@ -41,8 +46,8 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     from larch.xafs import pre_edge, autobk
     from pyxas import get_scan_type
     from pyxas.io import read_hdf5
-    from pyxas.fit import residuals, sum_references
-    from pyxas.fit import lcf_report, save_lcf_report, save_lcf_data
+    from .lcf import residuals, sum_references
+    from .utils import fit_report, save_fit_report, save_fit_data
     
     # verifying fit type
     fit_types = ['dxanes', 'xanes','exafs']
@@ -174,8 +179,26 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     out.pars_kws   = pars_kws
 
     # assigning save methods to out object
-    out.lcf_report      = types.MethodType(lcf_report, out)
-    out.save_lcf_report = types.MethodType(save_lcf_report, out)
-    out.save_lcf_data   = types.MethodType(save_lcf_data, out)
+    out.lcf_report      = types.MethodType(fit_report, out)
+    out.save_lcf_report = types.MethodType(save_fit_report, out)
+    out.save_lcf_data   = types.MethodType(save_fit_data, out)
 
     return (out)
+
+def sum_references(pars, data):
+    '''
+    This function returns the linear sum of references based on 
+    the amplitude values stored in a dictionary with LCF parameters.
+    '''
+    from numpy import sum as npsum
+    return (npsum([pars['amp'+str(i)]* getattr(data, 'ref'+str(i)) 
+                   for i in range(1,len(pars)+1)], axis=0))
+
+def residuals(pars,data):
+    """
+    This function returns the residuals of the substraction
+    of a spectrum from its LCF with known references
+    standards.
+    """
+    from .lcf import sum_references
+    return ((data.spectrum - sum_references(pars, data))/data.eps)
