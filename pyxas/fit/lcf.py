@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 """
 Collection of routines to perform linear combination fit (LCF) 
 analysis on a XAS spectrum.
@@ -9,7 +10,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
         sum_one=True, pre_edge_kws=None, autobk_kws=None):
     """
     This function performs a linear combination fit 
-    on a spectrum given a set of references.
+    (LCF) on a XAS spectrum given a set of references.
     --------------
     Required input:
     data_kws [dict]    : dictionary containing the filepaths of
@@ -29,7 +30,7 @@ def lcf(data_kws, fit_type, fit_window, k_mult=2,
     sum_one [bool]     : If 'true' the sum of fractions is forced
                          to be one. Default is 'true'.
     pre_edge_kws [dict]: dictionary with pre-edge parameters.
-    autobk_kws [dict]  : dictionary with autobk parameters.
+    autobk_kws [dict]  : dictionary with autobk parameters. 
     --------------
     Output:
     out [obj]: Fit object containing the results of the
@@ -192,7 +193,6 @@ def sum_references(pars, data):
     from numpy import sum as npsum
     return (npsum([pars['amp'+str(i)]* getattr(data, 'ref'+str(i)) 
                    for i in range(1,len(pars)+1)], axis=0))
-
 
 def residuals(pars,data):
     """
