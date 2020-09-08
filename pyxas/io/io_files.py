@@ -1,39 +1,94 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-"""Basic functions to read/write files.
+__DOC__="""
+Functions to read files from different beamlines.
+
+function        description
+--------        -----------
+read_p65        Reads a file from P65 beamline (PETRA III)
+read_dnd        Reads a file fom DND-CAT beamline (APS).
+read_xmu        Reads a file based on given columns.
+
+read_file       Base function to read a file based on given columns.
+read_rawfile    Base function to read a file based on given raw columns.
 """
 
-def read_dnd(fpath, scan='mu', tol=1e-4):
-    """Reads a spectrum file from DND-CAT.
+def read_p65(fpath, scan='mu', tol=1e-4):
+    """Reads a XAFS file from the P65 beamline.
  
-    This function returns a Larch Group with 
-    a XAFS spectrum from sector 5BM-D of the
-    Advanced Photon Source (APS).
-
+    The P65 beamline is located in the PETRA III storage ring (DESY, Zurich, Germany).
+    
     Parameters
     ----------
     fpath : str
-        Filepath to the spectrum to read.
-    scan : {'fluo', 'mu', 'mu_ref'}
-        Channel to retrieve from the file.
-        Default value `mu` (transmission).
+        Path to the file.
+    scan : str
+        Requested measurement, either transmission ('mu'), fluorescence ('fluo'),
+        or transmission reference ('mu_ref').
     tol : float
-        Tolerance value to remove duplicate
-        energy values.
+        Tolerance in energy units to remove duplicate values.
 
     Returns
     -------
     data : ndarray group
-        Larch group containing the following arrays:
-        energy, (fluo,mu), mu_ref.
+        Group containing the following arrays: {'energy', 'mu'/'fluo', 'mu_ref'}
+    
+    Notes
+    -----
+        The transmission reference measurement is always returned when ``scan`` is either 'mu' or 'fluo'.
+        The option 'mu_ref' will return only the transmission reference measurement.
+    
+    See also
+    --------
+    :func:`~.main.index_dups`
+    :func:`read_rawfile`
+    """
+    import warnings
+    from .io_files import read_rawfile
+    
+    scandict = ['fluo', 'mu', 'mu_ref']
+    chdict   = {'i0': 10, 'it1': 11, 'it2':12, 'if':13}
+    
+    # testing that the scan string exits in the current dictionary 
+    if scan not in scandict:
+        warnings.warn("scan type %s not recognized. Extracting transmission spectrum ('mu')." %scan)
+        scan = 'mu'
 
-   Notes
-   ----- 
-   `read_dnd` assumes that the file columns contain the following:
-    column 0 : energy (eV)
-    column 16: IF/IO (corrected for deadtime) <-- 'fluo'
-    column 17: -log(IT/IO) (corrected for background) <-- 'mu'
-    column 18: -log(IT2/IT) (corrected for background) <-- 'mu_ref'
+    usecols  = (0, chdict['i0'], chdict['it1'], chdict['it2'], chdict['if'])
+    data     = read_rawfile(fpath, usecols, scan, tol)
+    return (data)
+
+
+
+def read_dnd(fpath, scan='mu', tol=1e-4):
+    """Reads a XAFS file from the DND-CAT beamline.
+ 
+    DND-CAT corresponds to sector 5BM-D of the Advanced Photon Source (APS, Argonne, USA).
+    
+    Parameters
+    ----------
+    fpath : str
+        Path to the file.
+    scan : str
+        Requested measurement, either transmission ('mu'), fluorescence ('fluo'),
+        or transmission reference ('mu_ref').
+    tol : float
+        Tolerance in energy units to remove duplicate values.
+
+    Returns
+    -------
+    data : ndarray group
+        Group containing the following arrays: {'energy', 'mu'/'fluo', 'mu_ref'}
+    
+    Notes
+    -----
+    The transmission reference measurement is always returned when ``scan`` is either 'mu' or 'fluo'.
+    The option 'mu_ref' will return only the transmission reference measurement.
+        
+    See also
+    --------
+    :func:`~.main.index_dups`
+    :func:`read_file`
     """
     import warnings
     from .io_files import read_file
@@ -49,39 +104,39 @@ def read_dnd(fpath, scan='mu', tol=1e-4):
     return (data)
 
 def read_xmu(fpath, scan='mu', tol=1e-4):
-    """Reads a generic spectrum file.
+    """Reads a generic XAFS file in plain format.
  
-    This function returns a Larch Group with 
-    a XAFS spectrum from a generic file.
-
     Parameters
     ----------
     fpath : str
-        Filepath to the spectrum to read.
-    scan : {'fluo', 'mu', 'mu_ref'}
-        Channel to retrieve from the file.
-        Default value `mu` (transmission).
+        Path to the file.
+    scan : str
+        Requested measurement, either transmission ('mu'), fluorescence ('fluo'),
+        or transmission reference ('mu_ref').
     tol : float
-        Tolerance value to remove duplicate
-        energy values.
+        Tolerance in energy units to remove duplicate values.
 
     Returns
     -------
     data : ndarray group
-        Larch group containing the following arrays:
-        energy, mu, mu_ref.
-
-   Notes
-   ----- 
-   `read_xmu` assumes that the file columns contain the following:
-    column 0 : energy (eV)
-    column 1 : IF/IO        <-- 'fluo'
-               -log(IT/IO)  <-- 'mu'
-    column 2 : -log(IT2/IT) <-- 'mu_ref'
-
-    The choice for either 'mu' or 'fluo' is only descriptive, since
-    the algorithm will assume that either channel is stored in
-    column 1 of the file.
+        Group containing the following arrays: {'energy', 'mu'/'fluo', 'mu_ref'}
+    
+    Notes
+    -----
+    The transmission reference measurement is always returned when ``scan`` is either 'mu' or 'fluo'.
+    The option 'mu_ref' will return only the transmission reference measurement.
+    
+    :func:`read_xmu` assumes the following column order in the file:
+    
+    1. energy
+    2. transmission/fluorescence measurement
+    3. transmission reference measurement
+    
+    See also
+    --------
+    :func:`~.main.index_dups`
+    :func:`read_file`
+    
     """
     import warnings
     from .io_files import read_file
@@ -98,31 +153,50 @@ def read_xmu(fpath, scan='mu', tol=1e-4):
     return (data)
 
 def read_file(fpath, usecols, scan, tol):
-    """Utility function to read a spectrum file.
+    """Utility function to read a XAFS file in plain format.
         
     Parameters
     ----------
     fpath : str
-        Filepath to the spectrum to read.
+        Path to the file.
     usecols : tuple
-        Tuple with columns to extract from file.
-    scan : {'fluo', 'mu', 'mu_ref'}
-        Channel to retrieve from the file.
+        Tuple with column indexes to extract from the file.
+    scan : str
+        Assigned measurement, either transmission ('mu'), fluorescence ('fluo'),
+        or transmission reference ('mu_ref').
     tol : float
-        Tolerance value to remove duplicate
-        energy values.
+        Tolerance in energy units to remove duplicate values.
 
     Returns
     -------
     data : ndarray group
-        Larch group containing the following arrays:
-        energy, mu, mu_ref.
+        Group containing the following arrays: {'energy', 'mu'/'fluo', 'mu_ref'}.
+    
+    Raises
+    ------
+    IOError
+        If the file does not exist in the specified path.
+    
+    Notes
+    -----
+    The transmission reference measurement is always returned when ``scan`` is either 'mu' or 'fluo'.
+    The option 'mu_ref' will return only the transmission reference measurement.
+    
+    ``usecols`` should be a tuple with column indexes in the following order:
+    
+    1. energy
+    2. transmission/fluorescence measurement (mu/fluo)
+    3. reference meausrement (mu_ref)
+    
+    Warning
+    -------
+    The indexing order of ``usecols`` must be respected, or
+    the assigned measurement will likely be incorrect.
 
     """
     from os import path
     from numpy import loadtxt, delete
-    from larch import Group
-    from pyxas import index_dups
+    from pyxas import Group, index_dups
 
     # Testing that the file exits in the current directory 
     if not path.isfile(fpath):
@@ -141,4 +215,79 @@ def read_file(fpath, usecols, scan, tol):
         # Extracting the requested data
         data = Group(**{'energy':raw[:,0], scan:raw[:,1], 'mu_ref':raw[:,2]})
 
+    return (data)
+    
+def read_rawfile(fpath, usecols, scan, tol):
+    """Utility function to read a raw XAFS file.
+    
+    Parameters
+    ----------
+    fpath : str
+        Path to the file.
+    usecols : tuple
+        Tuple with columns indexes to extract from the file.
+    scan : str
+        Computed measurement, either transmission ('mu'), fluorescence ('fluo'),
+        or transmission reference ('mu_ref').
+    tol : float
+        Tolerance value to remove duplicate energy values.
+
+    Returns
+    -------
+    data : ndarray group
+        Group containing the following arrays: {'energy', 'mu'/'fluo', 'mu_ref'}.
+        
+    Raises
+    ------
+    IOError
+        If the file does not exist in the specified path.
+        
+    Notes
+    -----
+    The transmission reference measurement is always returned when ``scan`` is either 'mu' or 'fluo'.
+    The option 'mu_ref' will return only the transmission reference measurement.
+    
+    ``usecols`` should be a tuple with column indexes in the following order:
+    
+    1. energy
+    2. monochromator intensity (I0)
+    3. transmitted intensity (IT1)
+    4. transmitted intensity (IT2)
+    5. fluorescence intensity (IF)
+    
+    Warning
+    -------
+    The indexing order of ``usecols`` must be respected, or 
+    the computed measurement will likely be incorrect.
+
+    """
+    from os import path
+    from numpy import loadtxt, delete, log
+    from pyxas import Group, index_dups
+
+    # Testing that the file exits in the current directory 
+    if not path.isfile(fpath):
+        raise IOError('file %s does not exists.' % fpath)
+        
+    raw    = loadtxt(fpath, usecols=usecols)
+
+    # deleting duplicate energy points
+    index  = index_dups(raw[:,0],tol)
+    raw    = delete(raw,index,0)
+    
+    # convention cols {'energy', 'i0', 'it1', 'it2', 'if'}
+    mu_ref = -log(raw[:,3]/raw[:,2])
+    
+    if scan == 'mu_ref':
+        # print "Computing only reference measurement ('mu_ref')."
+        data = Group(**{'energy':raw[:,0], 'mu_ref':mu_ref})
+    elif scan == 'mu':
+        # transmission measurement
+        mu = -log(raw[:,2]/raw[:,1])
+        data = Group(**{'energy':raw[:,0], scan:mu, 'mu_ref':mu_ref})
+    else:
+        # fluorescence measurement
+        fluo = raw[:,4]/raw[:,1]
+        data = Group(**{'energy':raw[:,0], scan:fluo, 'mu_ref':mu_ref})
+        
     return (data)
