@@ -12,7 +12,8 @@ Documentation for pyxas
    :caption: Contents:
 
    install
-   modules
+   main_modules
+   io_modules
 
 
 
