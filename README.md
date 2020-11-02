@@ -23,7 +23,7 @@ If you have [`Git`](https://git-scm.com/) in your machine, you can execute the f
 ```
 
 ``pip`` should be able to download the required dependencies.
-If you have [`Conda`](https://docs.conda.io/en/latest/)` installed (Anaconda or Miniconda), be sure to activate your environment:
+If you have [`Conda`](https://docs.conda.io/en/latest/) installed (Anaconda or Miniconda), be sure to activate your environment:
 
 ```shell
    name@machine:~$ conda activate <yourenvironment>
