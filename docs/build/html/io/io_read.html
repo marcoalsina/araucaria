@@ -1,0 +1,652 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>IO read module &mdash; araucaria 0.1.4
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="IO write module" href="io_write.html" />
+    <link rel="prev" title="IO module" href="../io_module.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../main_module.html">Main module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../io_module.html">IO module</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">IO read module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#read-xafs-files">Read XAFS files</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#read-lcf-files">Read LCF files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="io_write.html">IO write module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io_hdf5.html">IO HDF5 module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../io_module.html">IO module</a> &raquo;</li>
+        
+      <li>IO read module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/io/io_read.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-araucaria.io.io_read">
+<span id="io-read-module"></span><h1>IO read module<a class="headerlink" href="#module-araucaria.io.io_read" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-araucaria.io.io_read" title="araucaria.io.io_read"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io_read</span></code></a> submodule offers functions to perform the following tasks:</p>
+<ol class="arabic simple">
+<li><p>Read XAFS files in common formats;</p></li>
+<li><p>Read data from report files of Linear Combination Fitting (LCF) analysis.</p></li>
+</ol>
+<div class="section" id="read-xafs-files">
+<h2>Read XAFS files<a class="headerlink" href="#read-xafs-files" title="Permalink to this headline">¶</a></h2>
+<p>The following functions are currently implemented to read XAFS files:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.io.io_read.read_p65" title="araucaria.io.io_read.read_p65"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_p65()</span></code></a></p></td>
+<td><p>Reads a XAFS file from the P65 beamline (PETRA III).</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.io.io_read.read_dnd" title="araucaria.io.io_read.read_dnd"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_dnd()</span></code></a></p></td>
+<td><p>Reads a XAFS file fom the DND-CAT beamline (APS).</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.io.io_read.read_xmu" title="araucaria.io.io_read.read_xmu"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_xmu()</span></code></a></p></td>
+<td><p>Reads a XAFS file based on specified columns.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.io.io_read.read_file" title="araucaria.io.io_read.read_file"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_file()</span></code></a></p></td>
+<td><p>Utility function to read a XAFS file based on specified columns.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.io.io_read.read_rawfile" title="araucaria.io.io_read.read_rawfile"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_rawfile()</span></code></a></p></td>
+<td><p>Utility function to read a XAFS file based on specified count columns.</p></td>
+</tr>
+</tbody>
+</table>
+<p>By convention these read functions will return a <code class="docutils literal notranslate"><span class="pre">group</span></code> class with the following attributes:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">group.energy</span></code>: the energy array.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">group.mu</span></code>: the transmission mu(E) array. Returned if <code class="docutils literal notranslate"><span class="pre">scan='mu'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">group.fluo</span></code> : the fluorescence mu(E) array. Returned if <code class="docutils literal notranslate"><span class="pre">scan='fluo'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">group.mu_ref</span></code>: the transmission reference array. Returned if <code class="docutils literal notranslate"><span class="pre">ref=True</span></code>.</p></li>
+</ul>
+<p>The attribute <code class="docutils literal notranslate"><span class="pre">mu_ref</span></code> is also returned by default when <code class="docutils literal notranslate"><span class="pre">scan</span></code> is either ‘mu’ or ‘fluo’.</p>
+<p>Choose <code class="docutils literal notranslate"><span class="pre">scan</span> <span class="pre">=</span> <span class="pre">None</span></code> and <code class="docutils literal notranslate"><span class="pre">ref=True</span></code> to return only the transmission reference.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">group</span></code> returned by any read method will contain either a <code class="docutils literal notranslate"><span class="pre">mu</span></code>
+or a <code class="docutils literal notranslate"><span class="pre">fluo</span></code> ìnstance, but not both. If both instances are required, create an
+additional <code class="docutils literal notranslate"><span class="pre">group</span></code> by calling the read method with a different <code class="docutils literal notranslate"><span class="pre">scan</span></code> value.</p>
+</div>
+</div>
+<div class="section" id="read-lcf-files">
+<h2>Read LCF files<a class="headerlink" href="#read-lcf-files" title="Permalink to this headline">¶</a></h2>
+<p>The following functions can be used to extract batch information from
+linear combination fit (LCF) report files:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.io.io_read.read_lcf_coefs" title="araucaria.io.io_read.read_lcf_coefs"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_lcf_coefs()</span></code></a></p></td>
+<td><p>Returns amplitude coefficients for a given reference.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.io.io_read.read_lcf_chisqr" title="araucaria.io.io_read.read_lcf_chisqr"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_lcf_chisqr()</span></code></a></p></td>
+<td><p>Returns chi-square statistics.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The previous functions expect valid LCF report files
+generated by <a class="reference internal" href="io_write.html#araucaria.io.io_write.write_lcf_report" title="araucaria.io.io_write.write_lcf_report"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_lcf_report()</span></code></a>.</p>
+</div>
+<dl class="py function">
+<dt id="araucaria.io.io_read.read_p65">
+<code class="sig-prename descclassname">araucaria.io.io_read.</code><code class="sig-name descname">read_p65</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fpath</span></em>, <em class="sig-param"><span class="n">scan</span><span class="o">=</span><span class="default_value">'mu'</span></em>, <em class="sig-param"><span class="n">ref</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">0.0001</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_read.read_p65" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a XAFS file from the P65 beamline.</p>
+<p>P65 is located in the PETRA III storage ring (DESY, Hamburg, Germany).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to file.</p></li>
+<li><p><strong>scan</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Requested mu(E). Accepted values are transmission (‘mu’), fluorescence (‘fluo’),
+or None. The default is ‘mu’.</p></li>
+<li><p><strong>ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the transmission reference (‘mu_ref’) should also be returned.
+The default is True.</p></li>
+<li><p><strong>tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Tolerance in energy units to remove duplicate values. The default is 1e-4,</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Group containing the requested arrays.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#araucaria.io.io_read.read_rawfile" title="araucaria.io.io_read.read_rawfile"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_rawfile</span></code></a></dt><dd><p>Reads a XAFS file based on specified count columns.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_p65</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;p65_testfile.xdi&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting mu and mu_ref scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_p65</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">group_mu</span><span class="p">,</span> <span class="s1">&#39;mu&#39;</span><span class="p">),</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">group_mu</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">))</span>
+<span class="go">True True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting only fluo scan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_fluo</span> <span class="o">=</span> <span class="n">read_p65</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;fluo&#39;</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">group_fluo</span><span class="p">,</span> <span class="s1">&#39;fluo&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting only mu_ref scan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_ref</span> <span class="o">=</span> <span class="n">read_p65</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">group_ref</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_read.read_dnd">
+<code class="sig-prename descclassname">araucaria.io.io_read.</code><code class="sig-name descname">read_dnd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fpath</span></em>, <em class="sig-param"><span class="n">scan</span><span class="o">=</span><span class="default_value">'mu'</span></em>, <em class="sig-param"><span class="n">ref</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">0.0001</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_read.read_dnd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a XAFS file from the DND-CAT beamline (5-BMD).</p>
+<p>DND-CAT is located in the Advanced Photon Source (APS, Argonne, USA).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to file.</p></li>
+<li><p><strong>scan</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Requested mu(E). Accepted values are transmission (‘mu’), fluorescence (‘fluo’),
+or None. The default is ‘mu’.</p></li>
+<li><p><strong>ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the transmission reference (‘mu_ref’) should also be returned.
+The default is True.</p></li>
+<li><p><strong>tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Tolerance in energy units to remove duplicate values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Group containing the requested arrays.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#araucaria.io.io_read.read_file" title="araucaria.io.io_read.read_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_file</span></code></a></dt><dd><p>Reads a XAFS file based on specified columns.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_dnd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile.dat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting mu and mu_ref scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">group_mu</span><span class="p">,</span> <span class="s1">&#39;mu&#39;</span><span class="p">),</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">group_mu</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">))</span>
+<span class="go">True True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting only fluo scan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_fluo</span> <span class="o">=</span> <span class="n">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;fluo&#39;</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">group_fluo</span><span class="p">,</span> <span class="s1">&#39;fluo&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting only mu_ref scan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_ref</span> <span class="o">=</span> <span class="n">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">group_ref</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_read.read_xmu">
+<code class="sig-prename descclassname">araucaria.io.io_read.</code><code class="sig-name descname">read_xmu</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fpath</span></em>, <em class="sig-param"><span class="n">scan</span><span class="o">=</span><span class="default_value">'mu'</span></em>, <em class="sig-param"><span class="n">ref</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">0.0001</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_read.read_xmu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a generic XAFS file in plain format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to file.</p></li>
+<li><p><strong>scan</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Requested mu(E). Accepted values are transmission (‘mu’), fluorescence (‘fluo’),
+or None. The default is ‘mu’.</p></li>
+<li><p><strong>ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the transmission reference (‘mu_ref’) should also be returned.
+The default is True.</p></li>
+<li><p><strong>tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Tolerance in energy units to remove duplicate values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Group containing the requested arrays.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><a class="reference internal" href="#araucaria.io.io_read.read_xmu" title="araucaria.io.io_read.read_xmu"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_xmu()</span></code></a> assumes the following column order in the file:</p>
+<ol class="arabic simple">
+<li><p>energy.</p></li>
+<li><p>transmission/fluorescence mu(E).</p></li>
+<li><p>transmission reference.</p></li>
+</ol>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#araucaria.io.io_read.read_file" title="araucaria.io.io_read.read_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_file</span></code></a></dt><dd><p>Reads a XAFS file based on specified columns.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_xmu</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;xmu_testfile.xmu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting mu and mu_ref scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_xmu</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">group_mu</span><span class="p">,</span> <span class="s1">&#39;mu&#39;</span><span class="p">),</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">group_mu</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">))</span>
+<span class="go">True True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting only fluo scan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_fluo</span> <span class="o">=</span> <span class="n">read_xmu</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;fluo&#39;</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">group_fluo</span><span class="p">,</span> <span class="s1">&#39;fluo&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting only mu_ref scan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_ref</span> <span class="o">=</span> <span class="n">read_xmu</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="nb">hasattr</span><span class="p">(</span><span class="n">group_ref</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">))</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_read.read_file">
+<code class="sig-prename descclassname">araucaria.io.io_read.</code><code class="sig-name descname">read_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fpath</span></em>, <em class="sig-param"><span class="n">usecols</span></em>, <em class="sig-param"><span class="n">scan</span></em>, <em class="sig-param"><span class="n">ref</span></em>, <em class="sig-param"><span class="n">tol</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_read.read_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility function to read a XAFS file based on specified columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to file.</p></li>
+<li><p><strong>usecols</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – Tuple with column indexes to extract from the file.</p></li>
+<li><p><strong>scan</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Assigned mu(E), either transmission (‘mu’), fluorescence (‘fluo’),
+or transmission reference (‘mu_ref’).</p></li>
+<li><p><strong>ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the transmission reference (‘mu_ref’) should also be returned.</p></li>
+<li><p><strong>tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Tolerance in energy units to remove duplicate values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Group containing the requested arrays.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If the file does not exist in the specified path.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If no mu(E) or transmission reference are requested.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">ref</span></code> is not a valid boolean.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><code class="docutils literal notranslate"><span class="pre">usecols</span></code> should provide column indexes in the following order:</p>
+<ol class="arabic simple">
+<li><p>energy.</p></li>
+<li><p>transmission/fluorescence mu(E).</p></li>
+<li><p>transmission reference.</p></li>
+</ol>
+<p>In only the <code class="docutils literal notranslate"><span class="pre">mu_ref</span></code> scan is requested , <code class="docutils literal notranslate"><span class="pre">usecols</span></code> should provide
+column indexes in the following order:</p>
+<ol class="arabic simple">
+<li><p>energy</p></li>
+<li><p>transmission reference.</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The indexing order of <code class="docutils literal notranslate"><span class="pre">usecols</span></code> must be respected,
+or the assigned mu(E) will be incorrect.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_read.read_rawfile">
+<code class="sig-prename descclassname">araucaria.io.io_read.</code><code class="sig-name descname">read_rawfile</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fpath</span></em>, <em class="sig-param"><span class="n">usecols</span></em>, <em class="sig-param"><span class="n">scan</span></em>, <em class="sig-param"><span class="n">ref</span></em>, <em class="sig-param"><span class="n">tol</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_read.read_rawfile" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility function to read a XAFS file based on specified count columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to file.</p></li>
+<li><p><strong>usecols</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – Tuple with columns indexes to extract from the file.</p></li>
+<li><p><strong>scan</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Computed mu(E), either transmission (‘mu’), fluorescence (‘fluo’),
+or transmission reference (‘mu_ref’).</p></li>
+<li><p><strong>ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the transmission reference (‘mu_ref’) should also be returned.</p></li>
+<li><p><strong>tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Tolerance value to remove duplicate energy values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Group containing the requested arrays.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If the file does not exist in the specified path.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If no mu(E) or transmission reference are requested.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">ref</span></code> is not a valid boolean.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><code class="docutils literal notranslate"><span class="pre">usecols</span></code> should provide column indexes in the following order:</p>
+<ol class="arabic simple">
+<li><p>energy.</p></li>
+<li><p>monochromator intensity (I0).</p></li>
+<li><p>transmitted intensity (IT1).</p></li>
+<li><p>transmitted intensity (IT2).</p></li>
+<li><p>fluorescence intensity (IF).</p></li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The indexing order of <code class="docutils literal notranslate"><span class="pre">usecols</span></code> must be respected,
+or the computed mu(E) will be incorrect.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_read.read_lcf_coefs">
+<code class="sig-prename descclassname">araucaria.io.io_read.</code><code class="sig-name descname">read_lcf_coefs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fpaths</span></em>, <em class="sig-param"><span class="n">refgroup</span></em>, <em class="sig-param"><span class="n">error</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_read.read_lcf_coefs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns amplitude coefficients for a given LCF reference.</p>
+<p>Amplitude coefficients are read directly from a list of paths
+to LCF report files generated by <a class="reference internal" href="io_write.html#araucaria.io.io_write.write_lcf_report" title="araucaria.io.io_write.write_lcf_report"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_lcf_report()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpaths</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>]) – List of paths to valid LCF report files.</p></li>
+<li><p><strong>refgroup</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the reference group.</p></li>
+<li><p><strong>error</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If True the error of the fit will also be returned.
+The default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>], <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Amplitude coefficients and error for the reference in the LCF.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If a file does not exist in the specified path.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If a file is not a valid LCF report.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">refgroup</span></code> was fitted during the LCF analysis (i.e. not a reference).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_lcf_coefs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;test_lcf_report.log&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">read_lcf_coefs</span><span class="p">([</span><span class="n">fpath</span><span class="p">],</span> <span class="s1">&#39;group1&#39;</span><span class="p">)</span>
+<span class="go">([0.40034377], [0.01195335])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">read_lcf_coefs</span><span class="p">([</span><span class="n">fpath</span><span class="p">],</span> <span class="s1">&#39;group2&#39;</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">[0.59428689]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_read.read_lcf_chisqr">
+<code class="sig-prename descclassname">araucaria.io.io_read.</code><code class="sig-name descname">read_lcf_chisqr</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fpaths</span></em>, <em class="sig-param"><span class="n">redchi</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_read.read_lcf_chisqr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns chi square statistic for LCF reports.</p>
+<p>Chi square values are read directly from a list of paths
+to LCF report files generated by <a class="reference internal" href="io_write.html#araucaria.io.io_write.write_lcf_report" title="araucaria.io.io_write.write_lcf_report"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_lcf_report()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpaths</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>]) – List of paths to valid LCF report files.</p></li>
+<li><p><strong>redchi</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the reduced chi square statistic should be returned
+instead.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Chi square values. Reduced chi square values are optionally
+returned if <code class="docutils literal notranslate"><span class="pre">redchi=True</span></code>.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If a file does not exist in the specified path.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If a file is not a valid LCF report.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_lcf_chisqr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;test_lcf_report.log&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">read_lcf_chisqr</span><span class="p">([</span><span class="n">fpath</span><span class="p">])</span>
+<span class="go">[1.40551323]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">read_lcf_chisqr</span><span class="p">([</span><span class="n">fpath</span><span class="p">],</span> <span class="n">redchi</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">[0.01011161]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="io_write.html" class="btn btn-neutral float-right" title="IO write module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../io_module.html" class="btn btn-neutral float-left" title="IO module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, Marco A. Alsina
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
