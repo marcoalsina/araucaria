@@ -12,19 +12,22 @@
 #
 import os
 import sys
+from datetime import datetime
 import sphinx_rtd_theme
-sys.path.insert(0, os.path.abspath('.'))
+sys.path.insert(0, os.path.abspath(os.path.join(os.pardir, os.pardir)))
 
 # retrieving the version
-f   = open(os.path.join(os.pardir, os.pardir, 'pyxas', 'version'), 'r')
+f   = open(os.path.join(os.pardir, os.pardir, 'araucaria', 'version'), 'r')
 ver = f.readline()
 f.close()
 
+# retrieving date
+now = datetime.now()
 
 # -- Project information -----------------------------------------------------
 
-project   = 'pyxas'
-copyright = '2019, Marco A. Alsina'
+project   = 'araucaria'
+copyright = '%s, Marco A. Alsina' % now.year
 author    = 'Marco A. Alsina'
 
 # The full version, including alpha/beta/rc tags
@@ -36,10 +39,14 @@ release   = ver
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = ['sphinx.ext.autodoc', 
-              'sphinx.ext.coverage', 
-              'sphinx.ext.napoleon',
+extensions = ['matplotlib.sphinxext.plot_directive',
+              'sphinx.ext.napoleon',  # this needs to be loaded first
+              'sphinx.ext.autodoc',
+              'sphinx_autodoc_typehints',
+              'sphinx.ext.intersphinx',
               'sphinx_rtd_theme',
+              'sphinx.ext.mathjax',
+              'sphinx.ext.coverage',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -56,10 +63,31 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme     = 'sphinx_rtd_theme'
+
+# style for docstring Example code
+pygments_style = 'colorful'
+
+# type hints parameters
+set_type_checking_flag   = True
+typehints_fully_qualified= False
+autodoc_typehints = 'description'  # show type hints in doc body instead of signature
+autoclass_content = 'both'         # get docstring from class level and init simultaneously
+
+# plot parameters
+plot_include_source = True
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 #html_static_path = ['_static']
-autodoc_member_order = 'bysource'
+autodoc_default_options = {
+    'member-order': 'bysource',
+}
+
+intersphinx_mapping = {'python': ('https://docs.python.org/3', None),
+                       'numpy': ('https://numpy.org/doc/stable/', None),
+                       'scipy': ('https://numpy.org/doc/stable/', None),
+                       'matplotlib': ('https://matplotlib.org/', None),
+                       'h5py' : ('https://docs.h5py.org/en/latest/', None)
+                       }

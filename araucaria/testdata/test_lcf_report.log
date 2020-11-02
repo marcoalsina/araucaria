@@ -1,0 +1,26 @@
+lcf report file created by araucaria
+date: 2020-11-01 23:54:09
+name: lcf_report.log
+[[Parameters]]
+    fit_type           = exafs
+    fit_range          = [3, 10]
+    sum_one            = False
+    pre_edge_kws       = None
+    kweight            = 0
+    autobk_kws         = None
+[[Groups]]
+    scan               = group3
+    ref1               = group1
+    ref2               = group2
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 10
+    # data points      = 141
+    # variables        = 2
+    chi-square         = 1.40551323
+    reduced chi-square = 0.01011161
+    Akaike info crit   = -645.778389
+    Bayesian info crit = -639.880869
+[[Variables]]
+    amp1:  0.40034377 +/- 0.01195335 (2.99%) (init = 0.5)
+    amp2:  0.59428689 +/- 0.01199230 (2.02%) (init = 0.5)
