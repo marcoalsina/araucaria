@@ -1,32 +1,42 @@
-# pyxas
+# araucaria
 
-[![License](https://img.shields.io/badge/License-BSD%202--Clause-green.svg)](https://github.com/marcoalsina/pyxas/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/License-BSD%202--Clause-green.svg)](https://github.com/marcoalsina/araucaria/blob/master/LICENSE)
 
 
-A collection of python routines to process and analyze X-ray absorption spectra.
+``araucaria`` is a Python library to read, process and analyze X-ray absorption fine structure 
+(XAFS) spectra. The library is designed to be modular, transparent, and light-weight, allowing 
+the development of systematic routines that are reproducible, exchangeable, and readily extensible.
+
+The library is under active develeopment, but in its current state allows to perform both
+routine and advanced tasks on XAFS spectra such as linear combination fitting (LCF). 
+Additional functionality will be added on a regular basis.
 
 ## How to install
-Pyxas is still in development for an official release.
-If you want to test the development version, the following install options are available:
+The following install options are curently available for the development version of ``araucaria``:
 
-### Install with Git
-If you have Git in your machine you can execute the following command in the console:
+###Install with Git
 
-```console
-name@machine:~$ pip install git+https://github.com/marcoalsina/pyxas.git
-```
-Pip should be able to download the required dependencies.
-If you have conda installed in your machine (Anaconda or Miniconda), be sure to activate your envrionment before running pip.
-```console
-name@machine:~$ conda activate <yourenvironment>
-```
+If you have `Git <https://git-scm.com/>`_ in your machine, you can execute the following command in the console:
 
-### Install with http
-If you don't have git installed you can download the source and install directly. Open up a terminal and execute the following:
+.. code-block:: bash
 
-```console
-name@machine:~$ wget https://github.com/marcoalsina/pyxas/archive/master.zip
-name@machine:~$ unzip master.zip
-name@machine:~$ cd pyxas-master
-name@machine:~$ pip install .
-```
+   name@machine:~$ pip install git+https://github.com/marcoalsina/araucaria.git
+
+``pip`` should be able to download the required dependencies.
+If you have `Conda <https://docs.conda.io/en/latest/>`_ installed (Anaconda or Miniconda), be sure to activate your environment:
+
+.. code-block:: bash
+
+   name@machine:~$ conda activate <yourenvironment>
+
+###Install with http
+
+Alternatively, you can download the source code and install ``araucaria`` directly.
+Open up a `terminal` and execute the following commands:
+
+.. code-block:: bash
+
+    name@machine:~$ wget https://github.com/marcoalsina/araucaria/archive/master.zip
+    name@machine:~$ unzip master.zip
+    name@machine:~$ cd araucaria-master
+    name@machine:~$ pip install .

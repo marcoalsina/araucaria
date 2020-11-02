@@ -1,1 +1,2 @@
-include pyxas/version
+include araucaria/version
+include araucaria/testdata/*
