@@ -14,7 +14,7 @@ Additional functionality will be added on a regular basis.
 ## How to install
 The following install options are curently available for the development version of ``araucaria``:
 
-###Install with Git
+### Install with Git
 
 If you have `Git <https://git-scm.com/>`_ in your machine, you can execute the following command in the console:
 
@@ -29,7 +29,7 @@ If you have `Conda <https://docs.conda.io/en/latest/>`_ installed (Anaconda or M
 
    name@machine:~$ conda activate <yourenvironment>
 
-###Install with http
+### Install with http
 
 Alternatively, you can download the source code and install ``araucaria`` directly.
 Open up a `terminal` and execute the following commands:
