@@ -7,7 +7,9 @@ __pycache__/
 *.egg-info/
 
 # Sphinx documentation
-docs/build
+#docs/build
+docs/build/doctrees
+docs/build/plot_directive
 
 # Installer logs
 pip-log.txt
