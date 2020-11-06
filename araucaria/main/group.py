@@ -38,7 +38,7 @@ class Group(object):
         Parameters
         ----------
         content
-            Dictionary with content for the Group.
+            Dictionary with content for the group.
         
         Returns
         -------
