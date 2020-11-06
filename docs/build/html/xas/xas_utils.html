@@ -239,40 +239,6 @@
 </div>
 </dd></dl>
 
-<dl class="py function">
-<dt id="araucaria.xas.xasutils.xftf_phase">
-<code class="sig-prename descclassname">araucaria.xas.xasutils.</code><code class="sig-name descname">xftf_phase</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="n">kmult</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasutils.xftf_phase" title="Permalink to this definition">¶</a></dt>
-<dd><p>Phase-corrected magnitude of FFT EXAFS dataset.</p>
-<p>This function writes the phase corrected
-magnitude of the forward XAFS fourier-transform
-for the data and, if available, the FEFFIT model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>group</strong> (<em>ndarray group</em>) – Group containing the FFT EXAFS data.</p></li>
-<li><p><strong>path</strong> (<em>ndarray group</em>) – FEFF group path to extract the phase shift</p></li>
-<li><p><strong>int</strong> (<em>kmult</em>) – k-multiplier of the EXAFS data.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
-</dd>
-</dl>
-<p class="rubric">Notes</p>
-<p>The following data is appended to the parsed Group:</p>
-<ul class="simple">
-<li><p>group.data.chir_pha_mag.</p></li>
-<li><p>group.model.chir_pha_mag (optional).</p></li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>This function depends on <code class="xref py py-func docutils literal notranslate"><span class="pre">larch.xafs.xftf_fast()</span></code>.</p>
-</div>
-</dd></dl>
-
 </div>
 
 

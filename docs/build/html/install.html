@@ -168,23 +168,22 @@
             
   <div class="section" id="how-to-install">
 <h1>How to install<a class="headerlink" href="#how-to-install" title="Permalink to this headline">¶</a></h1>
-<p>The following install options are curently available for the development version of <code class="docutils literal notranslate"><span class="pre">araucaria</span></code>:</p>
-<div class="section" id="install-with-git">
-<h2>Install with Git<a class="headerlink" href="#install-with-git" title="Permalink to this headline">¶</a></h2>
-<p>If you have <a class="reference external" href="https://git-scm.com/">Git</a> in your machine, you can execute the following command in the console:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>name@machine:~$ pip install git+https://github.com/marcoalsina/araucaria.git
+<p>If you have <a class="reference external" href="https://docs.conda.io/en/latest/">Conda</a> installed (Anaconda or Miniconda), be sure to activate your environment before installing <code class="docutils literal notranslate"><span class="pre">araucaria</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>name@machine:~$ conda activate &lt;yourenvironment&gt;
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">pip</span></code> should be able to download the required dependencies.
-If you have <a class="reference external" href="https://docs.conda.io/en/latest/">Conda</a> installed (Anaconda or Miniconda), be sure to activate your environment:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>name@machine:~$ conda activate &lt;yourenvironment&gt;
+<p>The alpha release of <code class="docutils literal notranslate"><span class="pre">araucaria</span></code> can be installed with <code class="docutils literal notranslate"><span class="pre">pip</span></code>, which conveniently checks and downloads the required dependencies. The following install options are curently available:</p>
+<div class="section" id="install-with-git">
+<h2>Install with Git<a class="headerlink" href="#install-with-git" title="Permalink to this headline">¶</a></h2>
+<p>If you have <a class="reference external" href="https://git-scm.com/">Git</a> in your machine, you can install directly by executing the following command in a terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>name@machine:~$ pip install git+https://github.com/marcoalsina/araucaria.git
 </pre></div>
 </div>
 </div>
 <div class="section" id="install-with-http">
 <h2>Install with http<a class="headerlink" href="#install-with-http" title="Permalink to this headline">¶</a></h2>
 <p>Alternatively, you can download the source code and install <code class="docutils literal notranslate"><span class="pre">araucaria</span></code> directly.
-Open up a <cite>terminal</cite> and execute the following commands:</p>
+Open up a terminal and execute the following commands:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>name@machine:~$ wget https://github.com/marcoalsina/araucaria/archive/master.zip
 name@machine:~$ unzip master.zip
 name@machine:~$ <span class="nb">cd</span> araucaria-master

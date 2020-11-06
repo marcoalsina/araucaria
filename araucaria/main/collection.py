@@ -8,7 +8,7 @@ from numpy import ndarray, linspace
 class Collection(object):
     """Collection storage class.
     
-    This class stores collections of :class:`~araucaria.main.group.Group` classes.
+    This class stores a collection of :class:`~araucaria.main.group.Group` objects.
     
     Parameters
     ----------

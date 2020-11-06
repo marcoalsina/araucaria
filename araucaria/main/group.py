@@ -38,7 +38,7 @@ class Group(object):
         Parameters
         ----------
         content
-            Dictionary with content to add to the Group.
+            Dictionary with content for the Group.
         
         Returns
         -------
@@ -66,7 +66,7 @@ class Group(object):
                 setattr(self, key, val)
 
     def get_mode(self) -> str:
-        """Returns scan type of mu(E) for the group.
+        """Returns scan mode of mu(E) for the group.
 
         Parameters
         ----------
@@ -75,16 +75,16 @@ class Group(object):
         Returns
         -------
         :
-            Scan type of mu(E). Either 'fluo', 'mu', or 'mu_ref'.
+            Scan mode of mu(E). Either 'fluo', 'mu', or 'mu_ref'.
     
         Raises
         ------
         ValueError
-            If the scan type is unavailable or not recognized.
+            If the scan mode is unavailable or not recognized.
     
         Important
         ---------
-        The scan type of mu(E) is assigned during reading of a file, 
+        The scan mode of mu(E) is assigned during reading of a file, 
         and should adhere to the following convention:
         
         - ``mu`` corresponds to a transmision mode scan.
@@ -125,7 +125,7 @@ class Group(object):
         return scan
 
     def has_ref(self) -> bool:
-        """Tests if a reference scan for mu(E) is present in the group.
+        """Tests if the group contains a reference scan for mu(E).
 
         Parameters
         ----------
