@@ -76,13 +76,15 @@ def read_hdf5(fpath: Path, name: str)-> Group:
     if name in hdf5:
         data = {}
         for key, record in hdf5.get(name).items():
-            #vtype = type(record).__name__
             if isinstance(record, Dataset):
-                try:
-                    eval_record = literal_eval(record[()])
+                # verifying strings saved as bytes
+                if isinstance(record[()], bytes):
+                    # converting to string with asstr
+                    # evaluating the string with literal_eval
+                    eval_record = literal_eval( record.asstr()[()] )
                     if isinstance(eval_record, converted_types):
                         data[key] = eval_record
-                except:
+                else:
                     data[key]=record[()]
             
             #print '%s dataset: %s <%s>' % (flag, key, vtype)
@@ -192,7 +194,8 @@ def write_recursive_hdf5(dataset: Dataset, group: Group) -> None:
     Only :class:`str`, :class:`float`, :class:`int` and :class:`~numpy.ndarray` 
     types are currently supported for recursive writting into an HDF5 :class:`~h5py.Dataset`.
     
-    :class:`dict` and :class:`list` types will be convertet and stored as :class:`~numpy.str`.
+    :class:`dict` and :class:`list` types will be convertet to :class:`~numpy.str`, which is in
+    turn saved as :class:`bytes` in the HDF5 database.
     If read with :func:`read_hdf5`, such records will be automatically converted to their
     original type in the group.
     
@@ -405,7 +408,6 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     ----------------------------------------------------
     3   xmu_testfile  mu    1  11873  None              
     ====================================================
-
     """
     # verifying existence of path:
     if isfile(fpath):
@@ -440,7 +442,7 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
         extra_content = False  # aux variable for 'merged_scans'
         try:
             # merged_scans is saved as string, so we count the number of commas
-            nscans = hdf5[key]['merged_scans'][()].count(',') + 1
+            nscans = hdf5[key]['merged_scans'].asstr()[()].count(',') + 1
         except:
             nscans = 1
 
@@ -452,7 +454,7 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
                         # storing the col merge_index
                         merge_index = len(field_vals)
                     try:
-                        list_scans = literal_eval(hdf5[key]['merged_scans'][()])
+                        list_scans = literal_eval(hdf5[key]['merged_scans'].asstr()[()] )
                         field_vals.append(list_scans[0])
                         extra_content = True
                     except:
