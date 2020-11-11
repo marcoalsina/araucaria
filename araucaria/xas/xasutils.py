@@ -10,31 +10,48 @@ The :mod:`~araucaria.xas.xasutils` module offers the following XAFS utility func
    * - Function
      - Description
    * - :func:`etok`
-     - Converts energies to wavenumbers.
+     - Converts photo-electron energy to wavenumber.
    * - :func:`ktoe`
-     - Converts wavenumbers to energies.
+     - Converts photo-electron wavenumber to energy.
 """
 
 from numpy import ndarray
-from scipy.constants import hbar    # reduced planck constant
-from scipy.constants import m_e, e  # electron mass and and elementary charge
+from scipy.constants import hbar  # reduced planck constant
+from scipy.constants import m_e   # electron mass
+from scipy.constants import eV    # electron volt in joules
 
 # constants
-k2e = 1.e20 * hbar**2 / (2 * m_e * e)
-e2k = 1/k2e
+# 1e10 converts from 1/meter to 1/angstrom
+k2e = (1e10 * hbar)**2 / (2 * m_e * eV)
 
 def etok(energy: ndarray) -> ndarray:
-    """Converts photo-electron energies to wavenumbers.
-    
+    """Converts photo-electron energy to wavenumber.
+
     Parameters
     ----------
     energy
-        Array of photo-electron energies.
+        Array of photo-electron energies (eV).
     
     Returns
     -------
     :
-        Arary of photo-electron wavenumbers.
+        Array of photo-electron wavenumbers (:math:`Å^{-1}`).
+
+    Notes
+    -----
+    Conversion is performed considering the non-relativistic
+    approximation:
+
+    .. math::
+
+        k = \\frac{\sqrt{2mE}}{\hbar}  
+
+    Where
+
+    - :math:`k`: photo-electron wavenumber.
+    - :math:`E`: kinetic energy of the photo-electron.
+    - :math:`m`: electron mass.
+    - :math:`\hbar`: reduced Planck constant.
     
     Example
     -------
@@ -48,17 +65,21 @@ def etok(energy: ndarray) -> ndarray:
     return sqrt(energy/k2e)
 
 def ktoe(k: ndarray) -> ndarray:
-    """Converts photo-electron wavenumbers to energies.
+    """Converts photo-electron wavenumber to energy.
     
     Parameters
     ----------
     k
-        Array with photo-electron wavenumbers.
+        Array with photo-electron wavenumbers (:math:`Å^{-1}`).
     
     Returns
     -------
     :
-        Array with photo-electron energies.
+        Array with photo-electron energies (eV).
+
+    See also
+    --------
+    etok : Converts photo-electron energy to wavenumber.
 
     Example
     -------

@@ -84,7 +84,7 @@ def check_objattrs(obj: object, objtype: TypeVar, attrlist: list=None,
     return boolist
 
 def check_xrange(x_range: list, x: ndarray, refval: float=None) -> list:
-    """Returns range values for an array.
+    """Returns range values inside an array.
     
     Parameters
     ----------
@@ -100,7 +100,7 @@ def check_xrange(x_range: list, x: ndarray, refval: float=None) -> list:
     Returns
     -------
     :
-        New range values for the array.
+        New range values inside the array.
     
     Examples
     --------
@@ -143,7 +143,7 @@ def check_xrange(x_range: list, x: ndarray, refval: float=None) -> list:
     return [x_min, x_max]
 
 def index_xrange(x_range: list, x: ndarray, refval: float=None) -> ndarray:
-    """Returns index of values within a given range for an array.
+    """Returns indexes of range values inside an array.
     
     Parameters
     ----------
@@ -158,7 +158,7 @@ def index_xrange(x_range: list, x: ndarray, refval: float=None) -> ndarray:
     Returns
     -------
     :
-        Array with index of values within the range.
+        Array with indexes of range values inside the array.
     
     Examples
     --------
@@ -196,8 +196,6 @@ def index_xrange(x_range: list, x: ndarray, refval: float=None) -> ndarray:
 def index_dups(data: ndarray, tol: float=1e-4) -> ndarray:
     """Index of duplicate values.
 
-    This utility function returns an index array with 
-    consecutive duplicates.
 
     Parameters
     ----------
@@ -214,11 +212,12 @@ def index_dups(data: ndarray, tol: float=1e-4) -> ndarray:
         
     Notes
     -----
+    A value in ``data`` is considered a duplicate if the
+    difference with respect to the previous value is strictly
+    lower than the given ``tol`` value.
+
     If the dimension of ``data`` is larger than 1 the array will be 
     flattened by indexing the elements in row-major (i.e. C-style).
-    
-    Consecutive values in ``data`` are considered duplicates if 
-    their difference is strictly lower than the given ``tol`` value.
     
     Examples
     --------    
@@ -251,9 +250,6 @@ def index_dups(data: ndarray, tol: float=1e-4) -> ndarray:
 
 def index_nans(data: ndarray, axis: int=0):
     """Index of NaN values in an array.
-    
-    This utility function returns an index array 
-    with NaN values in a given axis.
     
     Parameters
     ----------

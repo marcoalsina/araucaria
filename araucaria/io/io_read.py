@@ -104,23 +104,25 @@ def read_p65(fpath: Path, scan: str='mu', ref: bool=True, tol: float=1e-4) -> Gr
     
     Examples
     --------
-    >>> from araucaria.testdata import get_testpath
+    >>> from araucaria import Group
     >>> from araucaria.io import read_p65
+    >>> from araucaria.testdata import get_testpath
+    >>> from araucaria.utils import check_objattrs
     >>> fpath = get_testpath('p65_testfile.xdi')
     >>> # extracting mu and mu_ref scans
     >>> group_mu = read_p65(fpath, scan='mu')
-    >>> print(hasattr(group_mu, 'mu'), hasattr(group_mu, 'mu_ref'))
-    True True
+    >>> check_objattrs(group_mu, Group, attrlist=['mu', 'mu_ref'])
+    [True, True]
     
     >>> # extracting only fluo scan
     >>> group_fluo = read_p65(fpath, scan='fluo', ref=False)
-    >>> print(hasattr(group_fluo, 'fluo'))
-    True
+    >>> check_objattrs(group_fluo, Group, attrlist=['fluo'])
+    [True]
     
     >>> # extracting only mu_ref scan
     >>> group_ref = read_p65(fpath, scan=None, ref=True)
-    >>> print(hasattr(group_ref, 'mu_ref'))
-    True
+    >>> check_objattrs(group_ref, Group, attrlist=['mu_ref'])
+    [True]
     """
     # default modes and channels
     scandict = ['mu', 'fluo', None]
@@ -164,23 +166,25 @@ def read_dnd(fpath: Path, scan: str='mu', ref: bool=True, tol: float=1e-4) -> Gr
     
     Examples
     --------
-    >>> from araucaria.testdata import get_testpath
+    >>> from araucaria import Group
     >>> from araucaria.io import read_dnd
+    >>> from araucaria.testdata import get_testpath
+    >>> from araucaria.utils import check_objattrs
     >>> fpath = get_testpath('dnd_testfile.dat')
     >>> # extracting mu and mu_ref scans
     >>> group_mu = read_dnd(fpath, scan='mu')
-    >>> print(hasattr(group_mu, 'mu'), hasattr(group_mu, 'mu_ref'))
-    True True
+    >>> check_objattrs(group_mu, Group, attrlist=['mu', 'mu_ref'])
+    [True, True]
     
     >>> # extracting only fluo scan
     >>> group_fluo = read_dnd(fpath, scan='fluo', ref=False)
-    >>> print(hasattr(group_fluo, 'fluo'))
-    True
+    >>> check_objattrs(group_fluo, Group, attrlist=['fluo'])
+    [True]
     
     >>> # extracting only mu_ref scan
     >>> group_ref = read_dnd(fpath, scan=None, ref=True)
-    >>> print(hasattr(group_ref, 'mu_ref'))
-    True
+    >>> check_objattrs(group_ref, Group, attrlist=['mu_ref'])
+    [True]
     """
     # default modes and channels    
     scandict = ['mu', 'fluo', None]
@@ -234,23 +238,25 @@ def read_xmu(fpath: Path, scan: str='mu', ref: bool=True, tol: float=1e-4) -> Gr
     
     Examples
     --------
-    >>> from araucaria.testdata import get_testpath
+    >>> from araucaria import Group
     >>> from araucaria.io import read_xmu
+    >>> from araucaria.testdata import get_testpath
+    >>> from araucaria.utils import check_objattrs
     >>> fpath = get_testpath('xmu_testfile.xmu')
     >>> # extracting mu and mu_ref scans
     >>> group_mu = read_xmu(fpath, scan='mu')
-    >>> print(hasattr(group_mu, 'mu'), hasattr(group_mu, 'mu_ref'))
-    True True
+    >>> check_objattrs(group_mu, Group, attrlist=['mu', 'mu_ref'])
+    [True, True]
     
     >>> # extracting only fluo scan
     >>> group_fluo = read_xmu(fpath, scan='fluo', ref=False)
-    >>> print(hasattr(group_fluo, 'fluo'))
-    True
+    >>> check_objattrs(group_fluo, Group, attrlist=['fluo'])
+    [True]
     
     >>> # extracting only mu_ref scan
     >>> group_ref = read_xmu(fpath, scan=None, ref=True)
-    >>> print(hasattr(group_ref, 'mu_ref'))
-    True
+    >>> check_objattrs(group_ref, Group, attrlist=['mu_ref'])
+    [True]
     """
     # default modes and channels
     scandict = ['mu', 'fluo', None]

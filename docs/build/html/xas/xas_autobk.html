@@ -222,7 +222,8 @@ The default is False.</p></li>
 </dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p><code class="docutils literal notranslate"><span class="pre">rbkg</span></code> cannot be lower than 2 x grid resolution of <span class="math notranslate nohighlight">\(\chi(R)\)</span>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rbkg</span></code> cannot be lower than 2 x <span class="math notranslate nohighlight">\(\pi /(kstep \cdot nfft)\)</span>, which
+corresponds to the grid resolution of <span class="math notranslate nohighlight">\(\chi(R)\)</span>.</p>
 </div>
 <p class="rubric">Notes</p>
 <p>The Autobk algorithm approximates a XAFS bakground signal by
@@ -239,10 +240,10 @@ will be included as attributes of <code class="docutils literal notranslate"><sp
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>    <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile.dat&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group</span>    <span class="o">=</span> <span class="n">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>  <span class="c1"># extracting mu and mu_ref scans</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pre</span>      <span class="o">=</span> <span class="n">pre_edge</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span>    <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;e0&#39;</span><span class="p">,</span> <span class="s1">&#39;edge_step&#39;</span><span class="p">,</span> <span class="s1">&#39;bkg&#39;</span><span class="p">,</span> <span class="s1">&#39;chie&#39;</span><span class="p">,</span> <span class="s1">&#39;chi&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span>    <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bkg&#39;</span><span class="p">,</span> <span class="s1">&#39;chie&#39;</span><span class="p">,</span> <span class="s1">&#39;chi&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;autobk_pars&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">autbk</span>    <span class="o">=</span> <span class="n">autobk</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
-<span class="go">[True, True, True, True, True, True]</span>
+<span class="go">[True, True, True, True, True]</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># plotting original and background spectrum</span>

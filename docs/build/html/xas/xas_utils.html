@@ -182,28 +182,40 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p><a class="reference internal" href="#araucaria.xas.xasutils.etok" title="araucaria.xas.xasutils.etok"><code class="xref py py-func docutils literal notranslate"><span class="pre">etok()</span></code></a></p></td>
-<td><p>Converts energies to wavenumbers.</p></td>
+<td><p>Converts photo-electron energy to wavenumber.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.xas.xasutils.ktoe" title="araucaria.xas.xasutils.ktoe"><code class="xref py py-func docutils literal notranslate"><span class="pre">ktoe()</span></code></a></p></td>
-<td><p>Converts wavenumbers to energies.</p></td>
+<td><p>Converts photo-electron wavenumber to energy.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py function">
 <dt id="araucaria.xas.xasutils.etok">
 <code class="sig-prename descclassname">araucaria.xas.xasutils.</code><code class="sig-name descname">etok</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">energy</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasutils.etok" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts photo-electron energies to wavenumbers.</p>
+<dd><p>Converts photo-electron energy to wavenumber.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>energy</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array of photo-electron energies.</p>
+<dd class="field-odd"><p><strong>energy</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array of photo-electron energies (eV).</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Arary of photo-electron wavenumbers.</p>
+<dd class="field-odd"><p>Array of photo-electron wavenumbers (<span class="math notranslate nohighlight">\(Å^{-1}\)</span>).</p>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>Conversion is performed considering the non-relativistic
+approximation:</p>
+<div class="math notranslate nohighlight">
+\[k = \frac{\sqrt{2mE}}{\hbar}\]</div>
+<p>Where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(k\)</span>: photo-electron wavenumber.</p></li>
+<li><p><span class="math notranslate nohighlight">\(E\)</span>: kinetic energy of the photo-electron.</p></li>
+<li><p><span class="math notranslate nohighlight">\(m\)</span>: electron mass.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hbar\)</span>: reduced Planck constant.</p></li>
+</ul>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">etok</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="mi">400</span>      <span class="c1"># eV</span>
@@ -217,18 +229,25 @@
 <dl class="py function">
 <dt id="araucaria.xas.xasutils.ktoe">
 <code class="sig-prename descclassname">araucaria.xas.xasutils.</code><code class="sig-name descname">ktoe</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">k</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasutils.ktoe" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts photo-electron wavenumbers to energies.</p>
+<dd><p>Converts photo-electron wavenumber to energy.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>k</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array with photo-electron wavenumbers.</p>
+<dd class="field-odd"><p><strong>k</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array with photo-electron wavenumbers (<span class="math notranslate nohighlight">\(Å^{-1}\)</span>).</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Array with photo-electron energies.</p>
+<dd class="field-odd"><p>Array with photo-electron energies (eV).</p>
 </dd>
 </dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#araucaria.xas.xasutils.etok" title="araucaria.xas.xasutils.etok"><code class="xref py py-obj docutils literal notranslate"><span class="pre">etok</span></code></a></dt><dd><p>Converts photo-electron energy to wavenumber.</p>
+</dd>
+</dl>
+</div>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">ktoe</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">k</span> <span class="o">=</span> <span class="mi">10</span>      <span class="c1"># A^{-1}</span>

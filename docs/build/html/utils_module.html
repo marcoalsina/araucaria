@@ -236,7 +236,7 @@ are not in the object. The detault is False.</p></li>
 <dl class="py function">
 <dt id="araucaria.utils.check_xrange">
 <code class="sig-prename descclassname">araucaria.utils.</code><code class="sig-name descname">check_xrange</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x_range</span></em>, <em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">refval</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.check_xrange" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns range values for an array.</p>
+<dd><p>Returns range values inside an array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -251,7 +251,7 @@ If None, x_range is assumed to contain absolute values.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>New range values for the array.</p>
+<dd class="field-odd"><p>New range values inside the array.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -278,7 +278,7 @@ If None, x_range is assumed to contain absolute values.</p></li>
 <dl class="py function">
 <dt id="araucaria.utils.index_xrange">
 <code class="sig-prename descclassname">araucaria.utils.</code><code class="sig-name descname">index_xrange</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x_range</span></em>, <em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">refval</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_xrange" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns index of values within a given range for an array.</p>
+<dd><p>Returns indexes of range values inside an array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -292,7 +292,7 @@ If None, x_range is assumed to contain absolute values.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Array with index of values within the range.</p>
+<dd class="field-odd"><p>Array with indexes of range values inside the array.</p>
 </dd>
 </dl>
 <p class="rubric">Examples</p>
@@ -320,8 +320,6 @@ If None, x_range is assumed to contain absolute values.</p></li>
 <dt id="araucaria.utils.index_dups">
 <code class="sig-prename descclassname">araucaria.utils.</code><code class="sig-name descname">index_dups</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">0.0001</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_dups" title="Permalink to this definition">¶</a></dt>
 <dd><p>Index of duplicate values.</p>
-<p>This utility function returns an index array with
-consecutive duplicates.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -337,10 +335,11 @@ consecutive duplicates.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
+<p>A value in <code class="docutils literal notranslate"><span class="pre">data</span></code> is considered a duplicate if the
+difference with respect to the previous value is strictly
+lower than the given <code class="docutils literal notranslate"><span class="pre">tol</span></code> value.</p>
 <p>If the dimension of <code class="docutils literal notranslate"><span class="pre">data</span></code> is larger than 1 the array will be
 flattened by indexing the elements in row-major (i.e. C-style).</p>
-<p>Consecutive values in <code class="docutils literal notranslate"><span class="pre">data</span></code> are considered duplicates if
-their difference is strictly lower than the given <code class="docutils literal notranslate"><span class="pre">tol</span></code> value.</p>
 <p class="rubric">Examples</p>
 <p><a class="reference internal" href="#araucaria.utils.index_dups" title="araucaria.utils.index_dups"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_dups()</span></code></a> is useful to remove duplicates and ensure monotonicity of a 1-D array.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span><span class="p">,</span> <span class="n">delete</span>
@@ -369,8 +368,6 @@ their difference is strictly lower than the given <code class="docutils literal 
 <dt id="araucaria.utils.index_nans">
 <code class="sig-prename descclassname">araucaria.utils.</code><code class="sig-name descname">index_nans</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_nans" title="Permalink to this definition">¶</a></dt>
 <dd><p>Index of NaN values in an array.</p>
-<p>This utility function returns an index array
-with NaN values in a given axis.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">

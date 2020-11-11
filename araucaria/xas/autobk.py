@@ -1,15 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from warnings import warn
-from numpy import (pi, sign, sqrt, ceil, copy, ptp, 
-                   arange, zeros, inf, ndarray, 
-                   array, concatenate)
+from numpy import (pi, sign, sqrt, ceil, copy,
+                   ptp, arange, zeros, inf, 
+                   ndarray, array, concatenate)
 from scipy.interpolate import interp1d, splrep, splev
 from lmfit import Parameters, minimize
-from araucaria import Group
+from .. import Group
 from .normalize import pre_edge
 from .xasft import ftwindow, xftf_kwin
-from .xasutils import e2k
+from .xasutils import etok, ktoe
 from ..utils import index_nearest, check_objattrs, check_xrange
 
 fmt_coef = 'coef_%2.2i'  # formated coefficient
@@ -22,32 +22,32 @@ def spline_eval(kraw, mu, knots, coefs, order, kout):
     #eval bkg(kraw) and chi(k) for knots, coefs, order
     bkg = splev(kraw, [knots, coefs, order])
     chi = interp1d(kraw, (mu-bkg), kind='cubic')(kout)
-    return bkg, chi
+    return (bkg, chi)
 
-def resid(pars, ncoefs=1, knots=None, order=3, irbkg=1, nfft=2048,
+def residuals(pars, knots=None, order=3, irbkg=1, nfft=2048,
             kraw=None, mu=None, kout=None, ftwin=1, kweight=1, 
             chi_std=None, nclamp=0, clamp_lo=1, clamp_hi=1):
     # residuals function
-    coefs    = [pars[fmt_coef % i].value for i in range(ncoefs)]
+    coefs    = [pars[fmt_coef % i].value for i in range(len(pars.keys()))]
     bkg, chi = spline_eval(kraw, mu, knots, coefs, order, kout)
     if chi_std is not None:
         chi = chi - chi_std
     out =  realimag(xftf_kwin(chi*ftwin, nfft=nfft)[:irbkg])
     if nclamp == 0:
         return out
-    # spline clamps:
-    scale       = (1.0 + 100*(out*out).sum())/(len(out)*nclamp)
-    scaled_chik = scale * chi * kout**kweight
+    # spline clamps
+    scale       = (1.0 + 100*(out**2).sum() )/ (len(out)*nclamp)
+    scaled_chik = scale * kout**kweight * chi
     return concatenate((out,
                         abs(clamp_lo)*scaled_chik[:nclamp],
                         abs(clamp_hi)*scaled_chik[-nclamp:]))
 
 
 def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf], 
-           kweight: int=1, win: str='hanning',  dk:float=0.1, 
+           kweight: int=1, win: str='hanning',  dk: float=0.1, 
            nfft: int=2048, kstep: float=0.05, k_std: ndarray=None, 
            chi_std: ndarray=None, nclamp: int=2, clamp_lo: int=1, 
-           clamp_hi: int=1, update:bool = False) -> dict:
+           clamp_hi: int=1, update: bool=False) -> dict:
     """Autobk algorithm to remove background of a XAFS scan.
 
     Parameters
@@ -104,7 +104,8 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
 
     Warning
     -------
-    ``rbkg`` cannot be lower than 2 x grid resolution of :math:`\chi(R)`.
+    ``rbkg`` cannot be lower than 2 x :math:`\pi /(kstep \cdot nfft)`, which 
+    corresponds to the grid resolution of :math:`\chi(R)`.
 
     Notes
     -----
@@ -128,10 +129,10 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
         >>> fpath    = get_testpath('dnd_testfile.dat')
         >>> group    = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
         >>> pre      = pre_edge(group, update=True)
-        >>> attrs    = ['e0', 'edge_step', 'bkg', 'chie', 'chi', 'k']
+        >>> attrs    = ['bkg', 'chie', 'chi', 'k', 'autobk_pars']
         >>> autbk    = autobk(group, update=True)
         >>> check_objattrs(group, Group, attrs)
-        [True, True, True, True, True, True]
+        [True, True, True, True, True]
 
         >>> # plotting original and background spectrum
         >>> import matplotlib.pyplot as plt
@@ -149,38 +150,39 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
     # checking class and attributes
     check_objattrs(group, Group, attrlist=['e0', 'edge_step'], exceptions=True)
 
-    #extracting data and mu as independent arrays
+    # extracting data and mu as independent arrays
     energy    = group.energy
     mu        = getattr(group, group.get_mode())
     e0        = group.e0
     edge_step = group.edge_step
 
-    # get array index for e0 (ie0)
+    # index for e0 (ie0)
     ie0   = index_nearest(energy, e0)
     e0    = energy[ie0]
 
-    # get array index for rbkg (irbkg)
+    # index for rbkg (irbkg)
     rgrid = pi / (kstep * nfft)
     if rbkg < 2*rgrid:
         warn('rbkg is lower than 2 x grid resolution of chi(R). Resetting tbkg to this limit.')
         rbkg = 2*rgrid
     irbkg = int(ceil(rbkg/rgrid))
 
-    # save ungridded k (kraw) and grided k (kout)
-    # and ftwin (*k-weight) for FT in residual
-    enpe = energy[ie0:] - e0
-    kraw = sign(enpe) * sqrt(e2k*abs(enpe))
+    # ungridded k (kraw)
+    enrel = energy[ie0:] - e0
+    kraw  = sign(enrel) * etok(abs(enrel))
 
-    # calculating krange
+    # grided k (kout)
     krange = check_xrange(k_range, kraw)
     kout   = kstep * arange(ceil(krange[1]/kstep) )
-    iemax  = min(len(energy), 2 + index_nearest(energy, e0 + (krange[1]**2)/e2k)) - 1
+
+    # index for max energy
+    iemax  = min(len(energy), 2 + index_nearest(energy, e0 + ktoe(krange[1])) ) - 1
 
     # interpolate provided chi(k) onto the kout grid
     if chi_std is not None and k_std is not None:
         chi_std = interp1d(kout, k_std, chi_std, kind='cubic')(kout)
         
-    # pre-load FT window
+    # FT window (*k**kweight)
     ftwin = kout**kweight * ftwindow(kout, x_range=krange, win=win, dx1=dk)
 
     # calc k-value and initial guess for y-values of spline params
@@ -190,12 +192,12 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
 
     for i in range(nspl):
         # looping through the spline points
-        # spline window in kraw is [ik-5, ik + 5], except at the extremes of the array
+        # spline window in kraw is [ik - 5, ik + 5], except at the extremes of the array
         # a weighted average for mu is calculated in the extremes and center of this window.
-        q        = krange[0] + i*ptp(krange)/(nspl - 1)
-        ik       = index_nearest(kraw, q)
-        i1       = min(len(kraw)-1, ik + 5)
-        i2       = max(0, ik - 5)
+        q   = krange[0] + i*ptp(krange)/(nspl - 1)
+        ik  = index_nearest(kraw, q)
+        i1  = min(len(kraw)-1, ik + 5)
+        i2  = max(0, ik - 5)
         spl_k.append(kraw[ik])
         spl_e.append(energy[ik+ie0])
         spl_y.append( (mu[i1+ie0] + 2*mu[ik+ie0]  + mu[i2+ie0]) / 4.0 )
@@ -213,19 +215,19 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
     initbkg, initchi = spline_eval(kraw[:iemax-ie0+1], mu[ie0:iemax+1],
                                    knots, coefs, order, kout)
 
-    result = minimize(resid, params, method='leastsq',
+    result = minimize(residuals, params, method='leastsq',
                       gtol=tol, ftol=tol, xtol=tol, epsfcn=tol,
-                      kws = dict(ncoefs  =len(coefs),
-                                 chi_std =chi_std,
+                      kws = dict(chi_std =chi_std,
                                  knots=knots, order=order,
                                  kraw=kraw[:iemax-ie0+1],
-                                 mu=mu[ie0:iemax+1], irbkg=irbkg, kout=kout,
-                                 ftwin=ftwin, kweight=kweight,
-                                 nfft=nfft, nclamp=nclamp,
-                                 clamp_lo=clamp_lo, clamp_hi=clamp_hi))
+                                 mu=mu[ie0:iemax+1], irbkg=irbkg, 
+                                 kout=kout, ftwin=ftwin, 
+                                 kweight=kweight, nfft=nfft, 
+                                 nclamp=nclamp, clamp_lo=clamp_lo, 
+                                 clamp_hi=clamp_hi))
 
-    # write final results
-    coefs = [result.params[fmt_coef % i].value for i in range(len(coefs))]
+    # optimized coefficients
+    coefs    = [result.params[fmt_coef % i].value for i in range(len(coefs))]
     bkg, chi = spline_eval(kraw[:iemax-ie0+1], mu[ie0:iemax+1],
                            knots, coefs, order, kout)
     obkg = copy(mu)

@@ -6,10 +6,10 @@ from araucaria.utils import check_objattrs
 fpath    = get_testpath('dnd_testfile.dat')
 group    = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
 pre      = pre_edge(group, update=True)
-attrs    = ['e0', 'edge_step', 'bkg', 'chie', 'chi', 'k']
+attrs    = ['bkg', 'chie', 'chi', 'k', 'autobk_pars']
 autbk    = autobk(group, update=True)
 check_objattrs(group, Group, attrs)
-# [True, True, True, True, True, True]
+# [True, True, True, True, True]
 
 # plotting original and background spectrum
 import matplotlib.pyplot as plt

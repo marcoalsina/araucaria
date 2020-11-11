@@ -35,8 +35,8 @@ Where
 - :math:`\epsilon(k)`: residuals.
 - :math:`kw`         : weighting coefficient for the photoelectron wavenumber.
 
-The :mod:`~araucaria.fit.lcf` module offers functions to perform linear combintation 
-fitting (LCF) on a XAFS scan. The following functions are currently implemented:
+The :mod:`~araucaria.fit.lcf` module offers the following functions to perform linear 
+combintation fitting (LCF) on a XAFS scan:
 
 .. list-table::
    :widths: auto

@@ -8,7 +8,7 @@ Documentation for araucaria
 
 ``araucaria`` is a Python library to read, process and analyze X-ray absorption fine structure 
 (XAFS) spectra. The library is designed to be modular, transparent, and light-weight, allowing 
-the development of systematic routines that are reproducible, exchangeable, and readily extensible.
+the development of routines that are reproducible, exchangeable, and readily extensible.
 
 The library is under active develeopment, but in its current state allows to perform both
 routine and advanced tasks on XAFS spectra such as linear combination fitting (LCF). 
