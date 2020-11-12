@@ -47,6 +47,7 @@ extensions = ['matplotlib.sphinxext.plot_directive',
               'sphinx_rtd_theme',
               'sphinx.ext.mathjax',
               'sphinx.ext.coverage',
+              'sphinx_copybutton',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -85,9 +86,15 @@ autodoc_default_options = {
     'member-order': 'bysource',
 }
 
+# intersphinx maps
 intersphinx_mapping = {'python': ('https://docs.python.org/3', None),
                        'numpy': ('https://numpy.org/doc/stable/', None),
                        'scipy': ('https://numpy.org/doc/stable/', None),
                        'matplotlib': ('https://matplotlib.org/', None),
                        'h5py' : ('https://docs.h5py.org/en/latest/', None)
                        }
+
+#copybutton options
+copybutton_prompt_text = r'>>> |\.\.\. '
+copybutton_prompt_is_regexp = True
+copybutton_only_copy_prompt_lines = True
