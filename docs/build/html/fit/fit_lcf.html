@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>LCF module &mdash; araucaria 0.1.4
+  <title>LCFit module &mdash; araucaria 0.1.4
  documentation</title>
   
 
@@ -94,7 +94,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../io_module.html">IO module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../xas_module.html">XAS module</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../fit_module.html">Fit module</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">LCF module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">LCFit module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
@@ -148,7 +148,7 @@
         
           <li><a href="../fit_module.html">Fit module</a> &raquo;</li>
         
-      <li>LCF module</li>
+      <li>LCFit module</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -167,14 +167,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-araucaria.fit.lcf">
-<span id="lcf-module"></span><h1>LCF module<a class="headerlink" href="#module-araucaria.fit.lcf" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-araucaria.fit.lcfit">
+<span id="lcfit-module"></span><h1>LCFit module<a class="headerlink" href="#module-araucaria.fit.lcfit" title="Permalink to this headline">¶</a></h1>
 <p>Linear combination fitting (LCF) refers to the interpretation of an unknown XAFS signal as a
 summation of known XAFS reference signals.</p>
 <p>For the case of the XANES region of an unknown spectrum <span class="math notranslate nohighlight">\(\mu_s(E)\)</span>, LCF translates into
 obtaining the amplitude coefficients <span class="math notranslate nohighlight">\(\alpha_i\)</span> that minimize the residuals of the following equation:</p>
 <div class="math notranslate nohighlight">
-\[\mu_s(E) = \sum_{i=1}^n \alpha_i \mu_i(E) + \epsilon(E), \quad i \in \{1,\cdots,n \}\]</div>
+\[\mu_s(E) = \sum_{i=1}^n \alpha_i \mu_i(E) + \epsilon(E), \quad i \in \{1,\dots,n \}\]</div>
+<p>Considering the following set of constraints:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}0 \leq &amp;\alpha_i \leq 1, \quad i \in \{1,\dots,n \}\\\sum_{i=1}^n &amp;\alpha_i = 1 \quad\textrm{(optional)}\end{aligned}\end{align} \]</div>
 <p>Where</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(E\)</span>          : photoelectron energy.</p></li>
@@ -187,7 +190,10 @@ obtaining the amplitude coefficients <span class="math notranslate nohighlight">
 <p>Analogously, for the case of the EXAFS region of an unknown spectrum <span class="math notranslate nohighlight">\(\chi(k)\)</span>,
 LCF translates into minimizing the residuals of the following equation:</p>
 <div class="math notranslate nohighlight">
-\[k^{kw}\chi_s(k) = \sum_{i=1}^n \alpha_i k^{kw}\chi_i(k) + \epsilon(k), \quad i \in \{1,\cdots,n \}\]</div>
+\[k^{kw}\chi_s(k) = \sum_{i=1}^n \alpha_i k^{kw}\chi_i(k) + \epsilon(k), \quad i \in \{1,\dots,n \}\]</div>
+<p>Considering the following set of constraints:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}0 \leq &amp;\alpha_i \leq 1, \quad i \in \{1,\dots,n \}\\\sum_{i=1}^n &amp;\alpha_i = 1 \quad\textrm{(optional)}\end{aligned}\end{align} \]</div>
 <p>Where</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(k\)</span>          : photoelectron wavenumber.</p></li>
@@ -196,7 +202,7 @@ LCF translates into minimizing the residuals of the following equation:</p>
 <li><p><span class="math notranslate nohighlight">\(\epsilon(k)\)</span>: residuals.</p></li>
 <li><p><span class="math notranslate nohighlight">\(kw\)</span>         : weighting coefficient for the photoelectron wavenumber.</p></li>
 </ul>
-<p>The <a class="reference internal" href="#module-araucaria.fit.lcf" title="araucaria.fit.lcf"><code class="xref py py-mod docutils literal notranslate"><span class="pre">lcf</span></code></a> module offers the following functions to perform linear
+<p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">lcf</span></code> module offers the following functions to perform linear
 combintation fitting (LCF) on a XAFS scan:</p>
 <table class="colwidths-auto docutils align-default">
 <thead>
@@ -205,23 +211,23 @@ combintation fitting (LCF) on a XAFS scan:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.fit.lcf.lcf" title="araucaria.fit.lcf.lcf"><code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.fit.lcfit.lcf" title="araucaria.fit.lcfit.lcf"><code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code></a></p></td>
 <td><p>Performs a LCF on a XAFS spectrum.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.fit.lcf.lcf_report" title="araucaria.fit.lcf.lcf_report"><code class="xref py py-func docutils literal notranslate"><span class="pre">lcf_report()</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.fit.lcfit.lcf_report" title="araucaria.fit.lcfit.lcf_report"><code class="xref py py-func docutils literal notranslate"><span class="pre">lcf_report()</span></code></a></p></td>
 <td><p>Returns a formatted LCF report.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.fit.lcf.sum_references" title="araucaria.fit.lcf.sum_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">sum_references()</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.fit.lcfit.sum_references" title="araucaria.fit.lcfit.sum_references"><code class="xref py py-func docutils literal notranslate"><span class="pre">sum_references()</span></code></a></p></td>
 <td><p>Sum of weighted references.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.fit.lcf.residuals" title="araucaria.fit.lcf.residuals"><code class="xref py py-func docutils literal notranslate"><span class="pre">residuals()</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.fit.lcfit.residuals" title="araucaria.fit.lcfit.residuals"><code class="xref py py-func docutils literal notranslate"><span class="pre">residuals()</span></code></a></p></td>
 <td><p>Calculates residuals for LCF.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py function">
-<dt id="araucaria.fit.lcf.lcf">
-<code class="sig-prename descclassname">araucaria.fit.lcf.</code><code class="sig-name descname">lcf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">collection</span></em>, <em class="sig-param"><span class="n">fit_type</span><span class="o">=</span><span class="default_value">'xanes'</span></em>, <em class="sig-param"><span class="n">fit_range</span><span class="o">=</span><span class="default_value">[- inf, inf]</span></em>, <em class="sig-param"><span class="n">scantag</span><span class="o">=</span><span class="default_value">'scan'</span></em>, <em class="sig-param"><span class="n">reftag</span><span class="o">=</span><span class="default_value">'ref'</span></em>, <em class="sig-param"><span class="n">kweight</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">sum_one</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">pre_edge_kws</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">autobk_kws</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">update</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.fit.lcf.lcf" title="Permalink to this definition">¶</a></dt>
+<dt id="araucaria.fit.lcfit.lcf">
+<code class="sig-prename descclassname">araucaria.fit.lcfit.</code><code class="sig-name descname">lcf</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">collection</span></em>, <em class="sig-param"><span class="n">fit_type</span><span class="o">=</span><span class="default_value">'xanes'</span></em>, <em class="sig-param"><span class="n">fit_range</span><span class="o">=</span><span class="default_value">[- inf, inf]</span></em>, <em class="sig-param"><span class="n">scantag</span><span class="o">=</span><span class="default_value">'scan'</span></em>, <em class="sig-param"><span class="n">reftag</span><span class="o">=</span><span class="default_value">'ref'</span></em>, <em class="sig-param"><span class="n">kweight</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">sum_one</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">pre_edge_kws</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">autobk_kws</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">update</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.fit.lcfit.lcf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs linear combination fitting on a XAFS spectrum.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -340,8 +346,8 @@ respective group.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="araucaria.fit.lcf.lcf_report">
-<code class="sig-prename descclassname">araucaria.fit.lcf.</code><code class="sig-name descname">lcf_report</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.fit.lcf.lcf_report" title="Permalink to this definition">¶</a></dt>
+<dt id="araucaria.fit.lcfit.lcf_report">
+<code class="sig-prename descclassname">araucaria.fit.lcfit.</code><code class="sig-name descname">lcf_report</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.fit.lcfit.lcf_report" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a formatted LCF Report to <code class="docutils literal notranslate"><span class="pre">sys.stdout</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -362,7 +368,7 @@ respective group.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p><a class="reference internal" href="#araucaria.fit.lcf.lcf_report" title="araucaria.fit.lcf.lcf_report"><code class="xref py py-func docutils literal notranslate"><span class="pre">lcf_report()</span></code></a> is a wrapper for <code class="xref py py-func docutils literal notranslate"><span class="pre">fit_report()</span></code> of <code class="docutils literal notranslate"><span class="pre">lmfit</span></code>,
+<p><a class="reference internal" href="#araucaria.fit.lcfit.lcf_report" title="araucaria.fit.lcfit.lcf_report"><code class="xref py py-func docutils literal notranslate"><span class="pre">lcf_report()</span></code></a> is a wrapper for <code class="xref py py-func docutils literal notranslate"><span class="pre">fit_report()</span></code> of <code class="docutils literal notranslate"><span class="pre">lmfit</span></code>,
 that attaches additional information on group names and calling parameters.</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">seed</span><span class="p">,</span> <span class="n">normal</span>
@@ -416,8 +422,8 @@ that attaches additional information on group names and calling parameters.</p>
 </dd></dl>
 
 <dl class="py function">
-<dt id="araucaria.fit.lcf.sum_references">
-<code class="sig-prename descclassname">araucaria.fit.lcf.</code><code class="sig-name descname">sum_references</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pars</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.fit.lcf.sum_references" title="Permalink to this definition">¶</a></dt>
+<dt id="araucaria.fit.lcfit.sum_references">
+<code class="sig-prename descclassname">araucaria.fit.lcfit.</code><code class="sig-name descname">sum_references</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pars</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.fit.lcfit.sum_references" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the sum of references weighted by amplitude coefficients.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -456,8 +462,8 @@ number of ‘ref’ keys in <code class="docutils literal notranslate"><span cla
 </dd></dl>
 
 <dl class="py function">
-<dt id="araucaria.fit.lcf.residuals">
-<code class="sig-prename descclassname">araucaria.fit.lcf.</code><code class="sig-name descname">residuals</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pars</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.fit.lcf.residuals" title="Permalink to this definition">¶</a></dt>
+<dt id="araucaria.fit.lcfit.residuals">
+<code class="sig-prename descclassname">araucaria.fit.lcfit.</code><code class="sig-name descname">residuals</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pars</span></em>, <em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.fit.lcfit.residuals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Residuals between a spectrum and a linear combination of references.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

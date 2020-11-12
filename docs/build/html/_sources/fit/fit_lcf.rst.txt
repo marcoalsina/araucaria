@@ -1,4 +1,4 @@
-LCF module
-----------
-.. automodule:: araucaria.fit.lcf
+LCFit module
+------------
+.. automodule:: araucaria.fit.lcfit
     :members:

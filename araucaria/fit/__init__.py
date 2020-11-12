@@ -6,6 +6,6 @@ non-linear least-squares fitting (LSF) considering ab-initio models (e.g. Feffit
 
 The following submodules are currently implemented:
 
-- The :class:`~araucaria.fit.lcf` module contains routines to perform LCF analysis.
+- The :class:`~araucaria.fit.lcfit` module contains routines to perform LCF analysis.
 """
-from .lcf import lcf, lcf_report, sum_references, residuals
+from .lcfit import lcf, lcf_report, sum_references, residuals

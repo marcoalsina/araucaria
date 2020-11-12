@@ -9,7 +9,15 @@ obtaining the amplitude coefficients :math:`\\alpha_i` that minimize the residua
 
 .. math::
     
-    \mu_s(E) = \sum_{i=1}^n \\alpha_i \mu_i(E) + \epsilon(E), \quad i \in \{1,\cdots,n \}
+    \mu_s(E) = \sum_{i=1}^n \\alpha_i \mu_i(E) + \epsilon(E), \quad i \in \{1,\dots,n \}
+
+Considering the following set of constraints:
+
+.. math::
+
+        0 \leq &\\alpha_i \leq 1, \quad i \in \{1,\dots,n \}
+
+        \sum_{i=1}^n &\\alpha_i = 1 \quad\\textrm{(optional)}
 
 Where
 
@@ -25,7 +33,15 @@ LCF translates into minimizing the residuals of the following equation:
 
 .. math::
     
-    k^{kw}\chi_s(k) = \sum_{i=1}^n \\alpha_i k^{kw}\chi_i(k) + \epsilon(k), \quad i \in \{1,\cdots,n \}
+    k^{kw}\chi_s(k) = \sum_{i=1}^n \\alpha_i k^{kw}\chi_i(k) + \epsilon(k), \quad i \in \{1,\dots,n \}
+
+Considering the following set of constraints:
+
+.. math::
+
+        0 \leq &\\alpha_i \leq 1, \quad i \in \{1,\dots,n \}
+
+        \sum_{i=1}^n &\\alpha_i = 1 \quad\\textrm{(optional)}
 
 Where
 
