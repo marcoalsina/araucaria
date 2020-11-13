@@ -225,13 +225,34 @@ The default is False.</p></li>
 </dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p><code class="docutils literal notranslate"><span class="pre">rbkg</span></code> cannot be lower than 2 x <span class="math notranslate nohighlight">\(\pi /(kstep \cdot nfft)\)</span>, which
+<p><code class="docutils literal notranslate"><span class="pre">rbkg</span></code> cannot be lower than 2 x <span class="math notranslate nohighlight">\(\pi\)</span>/(kstep x nfft), which
 corresponds to the grid resolution of <span class="math notranslate nohighlight">\(\chi(R)\)</span>.</p>
 </div>
 <p class="rubric">Notes</p>
-<p>The Autobk algorithm approximates a XAFS bakground signal by
-fitting a cubic spline to chi(R) below the <code class="docutils literal notranslate"><span class="pre">rbkg</span></code> value.
-This spline is then removed from the original signal.</p>
+<p>The Autobk algorithm approximates an EXAFS bakground signal by
+fitting a cubic B-spline to the <span class="math notranslate nohighlight">\(\chi(R)\)</span> signal below
+a <code class="docutils literal notranslate"><span class="pre">rbkg</span></code> value.</p>
+<p>The background removal is performed as follows:</p>
+<ol class="arabic simple">
+<li><p>The B-spline is constructed considering approximately equally
+distant knots in <code class="docutils literal notranslate"><span class="pre">krange</span></code>. The number of knots is calculated as
+the integer value of 2 * <code class="docutils literal notranslate"><span class="pre">rbkg</span></code> * <code class="docutils literal notranslate"><span class="pre">krange</span></code> /<span class="math notranslate nohighlight">\(\pi\)</span> + 2, with
+a minimum value of 5 and a maximum value of 64.</p></li>
+<li><p>The initial coefficients (<span class="math notranslate nohighlight">\(c_i\)</span>) for the B-spline at each
+knot are calculated with a weighted average window:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[c_i = \frac{\mu_{i-5} + 2 \cdot \mu_i + \mu_{i+5}}{4}\]</div>
+<ol class="arabic simple" start="3">
+<li><p>The coefficients of the B-spline are then optimized in order to
+fit <span class="math notranslate nohighlight">\(\chi(R)\)</span> below the <code class="docutils literal notranslate"><span class="pre">rbkg</span></code> value.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">nclamp</span></code> is provided, the given number of points at the
+extremes of the weighted <span class="math notranslate nohighlight">\(\chi(k)\)</span> signal are also included
+in the minimize function, in order to fit such points considering
+the <code class="docutils literal notranslate"><span class="pre">clamp_lo</span></code> and <code class="docutils literal notranslate"><span class="pre">clamp_hi</span></code> weights.</p></li>
+<li><p>The fitted B-spline is removed from <span class="math notranslate nohighlight">\(\mu(E)\)</span> in order to
+compute <span class="math notranslate nohighlight">\(\chi(k)\)</span>.</p></li>
+</ol>
 <p>If <code class="docutils literal notranslate"><span class="pre">update=True</span></code> the contents of the returned dictionary
 will be included as attributes of <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p>
 <p class="rubric">Example</p>

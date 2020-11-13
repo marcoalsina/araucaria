@@ -104,14 +104,37 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
 
     Warning
     -------
-    ``rbkg`` cannot be lower than 2 x :math:`\pi /(kstep \cdot nfft)`, which 
+    ``rbkg`` cannot be lower than 2 x :math:`\pi`/(kstep x nfft), which 
     corresponds to the grid resolution of :math:`\chi(R)`.
 
     Notes
     -----
-    The Autobk algorithm approximates a XAFS bakground signal by 
-    fitting a cubic spline to chi(R) below the ``rbkg`` value.
-    This spline is then removed from the original signal.
+    The Autobk algorithm approximates an EXAFS bakground signal by 
+    fitting a cubic B-spline to the :math:`\chi(R)` signal below
+    a ``rbkg`` value.
+
+    The background removal is performed as follows:
+
+    1. The B-spline is constructed considering approximately equally 
+       distant knots in ``krange``. The number of knots is calculated as
+       the integer value of 2 * ``rbkg`` * ``krange`` /:math:`\pi` + 2, with 
+       a minimum value of 5 and a maximum value of 64.
+
+    2. The initial coefficients (:math:`c_i`) for the B-spline at each 
+       knot are calculated with a weighted average window:
+    
+    .. math::
+
+            c_i = \\frac{\mu_{i-5} + 2 \cdot \mu_i + \mu_{i+5}}{4}
+
+    3. The coefficients of the B-spline are then optimized in order to
+       fit :math:`\chi(R)` below the ``rbkg`` value.
+    4. If ``nclamp`` is provided, the given number of points at the 
+       extremes of the weighted :math:`\chi(k)` signal are also included 
+       in the minimize function, in order to fit such points considering
+       the ``clamp_lo`` and ``clamp_hi`` weights.
+    5. The fitted B-spline is removed from :math:`\mu(E)` in order to 
+       compute :math:`\chi(k)`.
 
     If ``update=True`` the contents of the returned dictionary 
     will be included as attributes of ``group``.
