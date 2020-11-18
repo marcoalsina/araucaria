@@ -16,7 +16,7 @@ print(chiq.dtype)
 # plotting reverse FFT signal
 import matplotlib.pyplot as plt
 from araucaria.plot import fig_xas_template
-fig, ax = fig_xas_template(panels='re', pars={'kweight':0})
+fig, ax = fig_xas_template(panels='re', fig_pars={'kweight':0})
 line = ax[0].plot(freq, abs(chir))
 xlim = ax[0].set_xlim(0,2)
 xlab = ax[0].set_xlabel('$R/\pi$ [$\AA$]')

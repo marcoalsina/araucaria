@@ -5,7 +5,7 @@ The :mod:`~araucaria.xas.merge` module offers the following functions to pre-pro
 and merge scans:
 
 .. list-table::
-   :widths: 25 50
+   :widths: auto
    :header-rows: 1
 
    * - Function
@@ -276,10 +276,11 @@ def merge(collection: Collection, taglist: List[str]=['all'],
     Parameters
     ----------
     collection
-        Collection containing the groups to be merged.
+        Collection with the groups to be merged.
     taglist
-        List with keys to filter groups in the Collection based 
-        on the ``tags`` attribute. The default is ['all'].
+        List with keys to filter groups to be merged based 
+        on their ``tags`` attributes in the Collection.
+        The default is ['all'].
     only_mu_ref
         Indicates if only the reference scans should be merged.
         The default is False.
@@ -304,26 +305,33 @@ def merge(collection: Collection, taglist: List[str]=['all'],
 
     Warning
     -------
-    If only one group in ``collection`` is selected for merge, a None report and the single group will be returned.
+    If only one group in ``collection`` is selected for merge, a None report 
+    and the single group will be returned.
     
-    If different scan types are being merged, the scan attribute of the merge group will be labelled ``mu``.
+    If different scan types are being merged, the scan attribute of the merge 
+    group will be labelled ``mu``.
 
     Notes
     -----
-    If ``only_mu_ref=False`` the scan arrays of the selected groups will be merged, as determined 
-    by the :func:`~araucaria.main.group.Group.get_mode` method. The ``mu_ref`` arrays of the 
-    selected groups will also be merged separately. This is the detault behavior.
+    If ``only_mu_ref=False`` the scan arrays of the selected groups will be 
+    merged, as determined by the :func:`~araucaria.main.group.Group.get_mode` 
+    method. The ``mu_ref`` arrays of the selected groups will also be merged 
+    separately. This is the detault behavior.
     
-    If ``only_mu_ref=True`` only the ``mu_ref`` arrays of the selected groups will be merged.
+    If ``only_mu_ref=True`` only the ``mu_ref`` arrays of the selected groups 
+    will be merged.
     
     The following attribute will be created for the returned group:
     
     - ``group.merged_scans``: list with the merged scan files.
     
+    See also
+    --------
+    :func:`~araucaria.plot.fig_merge.fig_merge`: Plots merged scans.
+
     Example
     -------
-    >>> from numpy import allclose
-    >>> from araucaria import Group, Collection
+    >>> from araucaria import Collection
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.io import read_dnd
     >>> from araucaria.xas import merge
@@ -398,7 +406,7 @@ def merge(collection: Collection, taglist: List[str]=['all'],
             e0 = find_e0(group, use_mu_ref=True, update=False)
             report.add_row([i+1, group.__name__, 'mu_ref', e_offset, e0])
         
-    mu_ref_avg = mean(mu_ref, axis=0)    
+    mu_ref_avg = mean(mu_ref, axis=1)    
     
     # adding midrule
     report.add_midrule()
@@ -418,7 +426,7 @@ def merge(collection: Collection, taglist: List[str]=['all'],
         report.add_row(['','merge', mergescan, 0.0, e0])
         
     else:
-        merge = Group(**{'energy':energy, mode:mu_avg})
+        merge = Group(**{'energy':energy, 'mu_ref':mu_ref_avg})
         
         # storing data on report
         e0 = find_e0(merge, use_mu_ref=True, update=False)

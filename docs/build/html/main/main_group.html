@@ -203,7 +203,7 @@
 <dd class="field-odd"><p><strong>content</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – Dictionary with content for the group.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p></p>
@@ -220,6 +220,34 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group</span><span class="o">.</span><span class="n">add_content</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,])</span>
 <span class="go">[True]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt id="araucaria.main.group.Group.copy">
+<code class="sig-name descname">copy</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.group.Group.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a copy of the group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Copy of the group.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">allclose</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">content</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;energy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group1</span>  <span class="o">=</span> <span class="n">Group</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group1</span><span class="o">.</span><span class="n">add_content</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group2</span> <span class="o">=</span> <span class="n">group1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allclose</span><span class="p">(</span><span class="n">group1</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="n">group2</span><span class="o">.</span><span class="n">energy</span><span class="p">)</span>
+<span class="go">True</span>
 </pre></div>
 </div>
 </dd></dl>

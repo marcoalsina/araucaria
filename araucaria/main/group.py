@@ -1,5 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from __future__ import annotations
+from copy import copy
+
 class Group(object):
     """Group storage class.
 
@@ -64,6 +67,31 @@ class Group(object):
         else:
             for key, val in content.items():
                 setattr(self, key, val)
+
+    def copy(self) -> Group:
+        """Returns a copy of the group.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        :
+            Copy of the group.
+
+        Example
+        -------
+        >>> from numpy import allclose
+        >>> from araucaria import Group
+        >>> content = {'energy': [1,2,3,4,5,6]}
+        >>> group1  = Group()
+        >>> group1.add_content(content)
+        >>> group2 = group1.copy()
+        >>> allclose(group1.energy, group2.energy)
+        True
+        """
+        return copy(self)
 
     def get_mode(self) -> str:
         """Returns scan mode of mu(E) for the group.

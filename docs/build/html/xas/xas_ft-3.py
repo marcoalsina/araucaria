@@ -19,7 +19,7 @@ check_objattrs(group, Group, attrs)
 # plotting forward FFT signal
 import matplotlib.pyplot as plt
 from araucaria.plot import fig_xas_template
-fig, ax = fig_xas_template(panels='rq', pars={'kweight': kw})
+fig, ax = fig_xas_template(panels='rq', fig_pars={'kweight': kw})
 line = ax[0].plot(group.r, group.chir_mag)
 line = ax[0].plot(group.r, group.rwin, color='firebrick')
 xlim = ax[0].set_xlim(0,6)

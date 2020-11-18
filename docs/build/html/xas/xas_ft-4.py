@@ -16,7 +16,7 @@ print(chir.dtype)
 # plotting forward FFT signal
 import matplotlib.pyplot as plt
 from araucaria.plot import fig_xas_template
-fig, ax = fig_xas_template(panels='er', pars={'kweight':0})
+fig, ax = fig_xas_template(panels='er', fig_pars={'kweight':0})
 line = ax[0].plot(k, win*chi)
 line = ax[1].plot(freq[:int(nfft/2)], abs(chir[:int(nfft/2)]))
 xlim = ax[1].set_xlim(0,2)

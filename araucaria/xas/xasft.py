@@ -278,7 +278,7 @@ def xftf(group: Group, k_range: list=[0,20], kweight: int=0,
         >>> # plotting forward FFT signal
         >>> import matplotlib.pyplot as plt
         >>> from araucaria.plot import fig_xas_template
-        >>> fig, ax = fig_xas_template(panels='er', pars={'kweight':kw})
+        >>> fig, ax = fig_xas_template(panels='er', fig_pars={'kweight':kw})
         >>> line = ax[0].plot(group.k, group.k**kw*group.chi)
         >>> line = ax[0].plot(group.k, group.kwin, color='firebrick')
         >>> xlim = ax[0].set_xlim(0,12)
@@ -419,7 +419,7 @@ def xftr(group: Group , r_range: list=[0,20], rweight: int=0,
         >>> # plotting forward FFT signal
         >>> import matplotlib.pyplot as plt
         >>> from araucaria.plot import fig_xas_template
-        >>> fig, ax = fig_xas_template(panels='rq', pars={'kweight': kw})
+        >>> fig, ax = fig_xas_template(panels='rq', fig_pars={'kweight': kw})
         >>> line = ax[0].plot(group.r, group.chir_mag)
         >>> line = ax[0].plot(group.r, group.rwin, color='firebrick')
         >>> xlim = ax[0].set_xlim(0,6)
@@ -520,7 +520,7 @@ def xftf_kwin(chi: ndarray, nfft: int=2048, kstep: float=0.05) -> ndarray:
         >>> # plotting forward FFT signal
         >>> import matplotlib.pyplot as plt
         >>> from araucaria.plot import fig_xas_template
-        >>> fig, ax = fig_xas_template(panels='er', pars={'kweight':0})
+        >>> fig, ax = fig_xas_template(panels='er', fig_pars={'kweight':0})
         >>> line = ax[0].plot(k, win*chi)
         >>> line = ax[1].plot(freq[:int(nfft/2)], abs(chir[:int(nfft/2)]))
         >>> xlim = ax[1].set_xlim(0,2)
@@ -578,7 +578,7 @@ def xftr_kwin(chir: ndarray, nfft: int=2048, kstep: float=0.05) -> ndarray:
         >>> # plotting reverse FFT signal
         >>> import matplotlib.pyplot as plt
         >>> from araucaria.plot import fig_xas_template
-        >>> fig, ax = fig_xas_template(panels='re', pars={'kweight':0})
+        >>> fig, ax = fig_xas_template(panels='re', fig_pars={'kweight':0})
         >>> line = ax[0].plot(freq, abs(chir))
         >>> xlim = ax[0].set_xlim(0,2)
         >>> xlab = ax[0].set_xlabel('$R/\pi$ [$\AA$]')

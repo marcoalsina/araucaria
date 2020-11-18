@@ -71,8 +71,10 @@ class FigPars(dict):
     q_range    : List[float]
     q_ticks    : List[float]
 
-def fig_xas_template(panels: str='xx', pars: FigPars=None, **fig_kws:dict) -> Tuple[Figure,Axes]:
-    """Returns a ``Matplotlib`` figure and axes object to plot XAS spectra.
+def fig_xas_template(panels: str='xx', fig_pars: FigPars=None, 
+                     **fig_kws:dict) -> Tuple[Figure,Axes]:
+    """Returns a preset ``Matplotlib`` figure and axes object 
+    to plot XAS spectra.
 
     Panel elements (axes) are indexed in row-major (C-style order).
 
@@ -80,7 +82,7 @@ def fig_xas_template(panels: str='xx', pars: FigPars=None, **fig_kws:dict) -> Tu
     ----------
     panels
         Panels to plot. Valid arguments are as follows:
-        
+
         - 'd'   : derivative of XANES spectra.
         - 'x'   : XANES spectra.
         - 'e'   : EXAFS spectra.
@@ -90,8 +92,8 @@ def fig_xas_template(panels: str='xx', pars: FigPars=None, **fig_kws:dict) -> Tu
 
         The characters can be concatenated to produce multiple panels and rows.
         Examples: 'dxe', 'xx', 'xer', 'xx/xx'.
-    pars
-        Optional dictionary arguments for the figure.
+    fig_pars
+        Dictionary arguments for the figure.
         See :class:`~araucaria.plot.template.FigPars` for details.    
     fig_kws
         Additional arguments to pass to the :meth:`~matplotlib.figure.Figure.subplots` 
@@ -122,8 +124,7 @@ def fig_xas_template(panels: str='xx', pars: FigPars=None, **fig_kws:dict) -> Tu
         ...         'mu_range': (0,1.5),
         ...         'k_range' : (0,15),
         ...         'r_range' : (0,6)}
-        >>> fig, axes = fig_xas_template('dx/er', pars=pars)
-        >>> fig.tight_layout()
+        >>> fig, axes = fig_xas_template('dx/er', fig_pars=pars)
         >>> plt.show(block=False)
     """
     # valid axis type
@@ -159,22 +160,22 @@ def fig_xas_template(panels: str='xx', pars: FigPars=None, **fig_kws:dict) -> Tu
     fig, axes = subplots(nrows, ncols, **fig_kws)
 
     # empty dict if None was provided
-    if pars is None:
-        pars = {}
+    if fig_pars is None:
+        fig_pars = {}
 
     # formatting axes
-    if 'prop_cycle' in pars:
-        prop_cycler = cycle(pars['prop_cycle'])
+    if 'prop_cycle' in fig_pars:
+        prop_cycler = cycle(fig_pars['prop_cycle'])
         
     # setting k multiplier for EXAFS plots
-    if 'kweight' in pars:
-        k = pars['kweight']
+    if 'kweight' in fig_pars:
+        k = fig_pars['kweight']
     else:
         k = 2  # default value
     
     for i, ax in enumerate(ravel(axes)):
         # prop_cycles
-        if 'prop_cycle' in pars:
+        if 'prop_cycle' in fig_pars:
             prop_elem   = next(prop_cycler)
             ax.set_prop_cycle(**prop_elem)
         else:
@@ -218,8 +219,10 @@ def fig_xas_template(panels: str='xx', pars: FigPars=None, **fig_kws:dict) -> Tu
         
         # setting attribute values for each pannel (axes)
         for j, key in enumerate(keys):
-            if key in pars:
-                getattr(ax, met[j])(pars[key])
+            if key in fig_pars:
+                getattr(ax, met[j])(fig_pars[key])
             else:
                 pass
+
+    fig.tight_layout()
     return (fig, axes)
