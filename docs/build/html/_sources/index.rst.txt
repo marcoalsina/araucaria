@@ -10,7 +10,7 @@ Documentation for araucaria
 (XAFS) spectra. The library is designed to be modular, transparent, and light-weight, allowing 
 the development of routines that are reproducible, exchangeable, and readily extensible.
 
-The library is under active develeopment, but in its current state allows to perform both
+The library is under active develeopment. Its current state allows to perform both
 routine and advanced tasks on XAFS spectra such as linear combination fitting (LCF). 
 Additional functionality will be added on a regular basis.
 

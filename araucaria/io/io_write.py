@@ -129,9 +129,9 @@ def write_lcf(fpath: Path, group: FitGroup, fmt: str='%12.8g',
     :func:`lcf_report`, in addition to the following columns:
     
         - ``energy``   : array with energy values. 
-          Returned only if ``fit_type='xanes'`` or ``fit_type='dxanes'``.
+          Returned only if ``fit_region='xanes'`` or ``fit_region='dxanes'``.
         - ``k``        : array with wavenumber values. 
-          Returned only if ``fit_type='exafs'``.
+          Returned only if ``fit_region='exafs'``.
         - ``scan``     : array with values of the fitted spectrum.
         - ``ref``      : array with interpolated values for each reference spectrum.
         - ``fit``      : array with fit result.
@@ -164,7 +164,7 @@ def write_lcf(fpath: Path, group: FitGroup, fmt: str='%12.8g',
     >>> for i,group in enumerate((group1,group2, group3)):
     ...     collection.add_group(group, tag=tags[i])
     >>> # performing lcf
-    >>> out = lcf(collection, fit_type='exafs', fit_range=[3,10], 
+    >>> out = lcf(collection, fit_region='exafs', fit_range=[3,10], 
     ...           kweight=0, sum_one=False)
     >>> # saving lcf to a file
     >>> write_lcf('new_fit.lcf', out)
@@ -179,9 +179,9 @@ def write_lcf(fpath: Path, group: FitGroup, fmt: str='%12.8g',
     header = '\n'.join((header, lcf_report(group)))
     
     reflist = ['ref'+str(i+1) for i in range(len(group.refgroups))]
-    # storing data according to fit_type
+    # storing data according to fit_region
     data_header = '\t'.join(('fit', 'scan', *[name for name in reflist], 'residual'))
-    if group.lcf_pars['fit_type'] == 'exafs':
+    if group.lcf_pars['fit_region'] == 'exafs':
         data_header = 'k\t' + data_header
         data = stack((group.k, group.scan, group.fit,
                        *[getattr(group, name) for name in reflist],
@@ -246,7 +246,7 @@ def write_lcf_report(fpath: Path, group: FitGroup,
     >>> for i,group in enumerate((group1,group2, group3)):
     ...     collection.add_group(group, tag=tags[i])
     >>> # performing lcf
-    >>> out = lcf(collection, fit_type='exafs', fit_range=[3,10], 
+    >>> out = lcf(collection, fit_region='exafs', fit_range=[3,10], 
     ...           kweight=0, sum_one=False)
     >>> # saving lcf report to a file
     >>> write_lcf_report('lcf_report.log', out)

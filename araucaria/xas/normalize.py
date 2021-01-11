@@ -239,7 +239,7 @@ def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
             e0 = energy[index_nearest(energy, e0)]
             
     elif hasattr(group, 'e0'):
-        if group.e0 < min(energy) or e0 > max(energy):
+        if group.e0 < min(energy) or group.e0 > max(energy):
             raise IndexError('group.e0 is outside the energy range.')
         else:
             e0 = energy[index_nearest(energy, group.e0)]
@@ -297,8 +297,7 @@ def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
     norm = (mu - pre_edge) / edge_step
     
     # flattened mu
-    norm_post = (post_edge - pre_edge) / edge_step
-    flat       = (mu - post_edge + norm_post[ie0])
+    flat       = ( (mu - post_edge) / edge_step + 1.0)
     flat[:ie0] = norm[:ie0]
     
     # output dictionaries

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>IO write module &mdash; araucaria 0.1.4
+  <title>IO write module &mdash; araucaria 0.1.5
  documentation</title>
   
 
@@ -228,7 +228,7 @@ The previous file can be overwritten with the option <code class="docutils liter
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="#araucaria.io.io_write.write_file" title="araucaria.io.io_write.write_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_file</span></code></a></dt><dd><p>Writes an array to a file.</p>
+<dt><a class="reference internal" href="#araucaria.io.io_write.write_file" title="araucaria.io.io_write.write_file"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_file()</span></code></a></dt><dd><p>Writes an array to a file.</p>
 </dd>
 </dl>
 </div>
@@ -278,9 +278,9 @@ The previous file can be overwritten with the option <code class="docutils liter
 <blockquote>
 <div><ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">energy</span></code>   : array with energy values.
-Returned only if <code class="docutils literal notranslate"><span class="pre">fit_type='xanes'</span></code> or <code class="docutils literal notranslate"><span class="pre">fit_type='dxanes'</span></code>.</p></li>
+Returned only if <code class="docutils literal notranslate"><span class="pre">fit_region='xanes'</span></code> or <code class="docutils literal notranslate"><span class="pre">fit_region='dxanes'</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">k</span></code>        : array with wavenumber values.
-Returned only if <code class="docutils literal notranslate"><span class="pre">fit_type='exafs'</span></code>.</p></li>
+Returned only if <code class="docutils literal notranslate"><span class="pre">fit_region='exafs'</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">scan</span></code>     : array with values of the fitted spectrum.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ref</span></code>      : array with interpolated values for each reference spectrum.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">fit</span></code>      : array with fit result.</p></li>
@@ -316,7 +316,7 @@ Returned only if <code class="docutils literal notranslate"><span class="pre">fi
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">((</span><span class="n">group1</span><span class="p">,</span><span class="n">group2</span><span class="p">,</span> <span class="n">group3</span><span class="p">)):</span>
 <span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tags</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># performing lcf</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">lcf</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">fit_type</span><span class="o">=</span><span class="s1">&#39;exafs&#39;</span><span class="p">,</span> <span class="n">fit_range</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">lcf</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">fit_region</span><span class="o">=</span><span class="s1">&#39;exafs&#39;</span><span class="p">,</span> <span class="n">fit_range</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span>
 <span class="gp">... </span>          <span class="n">kweight</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sum_one</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving lcf to a file</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">write_lcf</span><span class="p">(</span><span class="s1">&#39;new_fit.lcf&#39;</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
@@ -373,7 +373,7 @@ Returned only if <code class="docutils literal notranslate"><span class="pre">fi
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">((</span><span class="n">group1</span><span class="p">,</span><span class="n">group2</span><span class="p">,</span> <span class="n">group3</span><span class="p">)):</span>
 <span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tags</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># performing lcf</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">lcf</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">fit_type</span><span class="o">=</span><span class="s1">&#39;exafs&#39;</span><span class="p">,</span> <span class="n">fit_range</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">lcf</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">fit_region</span><span class="o">=</span><span class="s1">&#39;exafs&#39;</span><span class="p">,</span> <span class="n">fit_range</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span>
 <span class="gp">... </span>          <span class="n">kweight</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sum_one</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving lcf report to a file</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">write_lcf_report</span><span class="p">(</span><span class="s1">&#39;lcf_report.log&#39;</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
@@ -398,7 +398,7 @@ Returned only if <code class="docutils literal notranslate"><span class="pre">fi
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Confirmation message.</p>
@@ -462,7 +462,7 @@ Returned only if <code class="docutils literal notranslate"><span class="pre">fi
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2020, Marco A. Alsina
+        &copy; Copyright 2021, Marco A. Alsina
 
     </p>
   </div>

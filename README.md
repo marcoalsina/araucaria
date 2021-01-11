@@ -40,3 +40,8 @@ name@machine:~$ unzip master.zip
 name@machine:~$ cd araucaria-master
 name@machine:~$ pip install .
 ```
+
+## Documentation
+
+The official documentation of `araucaria` is available at 
+[https://marcoalsina.github.io/araucaria/build/html/index.html](https://marcoalsina.github.io/araucaria/build/html/index.html).
