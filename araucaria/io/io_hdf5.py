@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 The :mod:`~araucaria.io.io_hdf5` submodule offers the following functions to read, write and 
-manipulate data in ``HDF5``:
+manipulate data in the Hierarchical Data Format ``HDF5``:
 
 .. list-table::
    :widths: 25 50
@@ -80,8 +80,12 @@ def read_hdf5(fpath: Path, name: str)-> Group:
                 # verifying strings saved as bytes
                 if isinstance(record[()], bytes):
                     # converting to string with asstr
-                    # evaluating the string with literal_eval
-                    eval_record = literal_eval( record.asstr()[()] )
+                    try:
+                        # evaluating the string with literal_eval
+                        eval_record = literal_eval( record.asstr()[()] )
+                    except:
+                        # if conversion fails then keeping as str
+                        eval_record = record.asstr()[()]
                     if isinstance(eval_record, converted_types):
                         data[key] = eval_record
                 else:
@@ -107,9 +111,9 @@ def write_hdf5(fpath: Path, group: Group, name: str='dataset1',
     group
         Group to write in the HDF5 file.
     name
-        Name for the dataset in the HDF5 file (the default is 'dataset1').
+        Name for the dataset in the HDF5 file. The default is 'dataset1'.
     replace
-        Replace previous dataset (the default is False).
+        Replace previous dataset. The default is False.
 
     Returns
     -------
@@ -224,9 +228,9 @@ def rename_dataset_hdf5(fpath: Path, name: str, newname: str) -> None:
     fpath
         Path to HDF5 file.
     name
-        Name of the Group dataset.
+        Name of Group dataset.
     newname
-        New name for the Group dataset.
+        New name for Group dataset.
 
     Returns
     -------
@@ -285,7 +289,7 @@ def delete_dataset_hdf5(fpath: Path, name: str) -> None:
     fpath
         Path to HDF5 file.
     name
-        Name of the dataset to delete.
+        Name of dataset to delete.
     
     Returns
     -------
