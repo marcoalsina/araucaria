@@ -7,8 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>IO HDF5 module &mdash; araucaria 0.1.5
- documentation</title>
+  <title>IO HDF5 module &mdash; araucaria 0.1.6 documentation</title>
   
 
   
@@ -175,7 +174,7 @@
   <div class="section" id="module-araucaria.io.io_hdf5">
 <span id="io-hdf5-module"></span><h1>IO HDF5 module<a class="headerlink" href="#module-araucaria.io.io_hdf5" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference internal" href="#module-araucaria.io.io_hdf5" title="araucaria.io.io_hdf5"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io_hdf5</span></code></a> submodule offers the following functions to read, write and
-manipulate data in <code class="docutils literal notranslate"><span class="pre">HDF5</span></code>:</p>
+manipulate data in the Hierarchical Data Format <code class="docutils literal notranslate"><span class="pre">HDF5</span></code>:</p>
 <table class="colwidths-given docutils align-default">
 <colgroup>
 <col style="width: 33%" />
@@ -251,8 +250,8 @@ manipulate data in <code class="docutils literal notranslate"><span class="pre">
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to HDF5 file.</p></li>
 <li><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>) – Group to write in the HDF5 file.</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name for the dataset in the HDF5 file (the default is ‘dataset1’).</p></li>
-<li><p><strong>replace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Replace previous dataset (the default is False).</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name for the dataset in the HDF5 file. The default is ‘dataset1’.</p></li>
+<li><p><strong>replace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Replace previous dataset. The default is False.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -324,8 +323,8 @@ original type in the group.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to HDF5 file.</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the Group dataset.</p></li>
-<li><p><strong>newname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – New name for the Group dataset.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of Group dataset.</p></li>
+<li><p><strong>newname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – New name for Group dataset.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -366,7 +365,7 @@ original type in the group.</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to HDF5 file.</p></li>
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the dataset to delete.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of dataset to delete.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -500,7 +499,7 @@ original type in the group.</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2021, Marco A. Alsina
+        &copy; Copyright 2020-2021, Marco A. Alsina
 
     </p>
   </div>

@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from typing import Tuple
+from numpy import gradient
 from matplotlib.pyplot import Axes, Figure
 from .. import Group, Collection
 from ..xas import pre_edge, autobk
@@ -57,13 +58,16 @@ def fig_merge(merge: Group, collection: Collection,
     Optional arguments such as ``pre_edge_kws`` and ``autobk_kws`` are used 
     to calculate the normalized :math:`\mu(E)` and :math:`\chi(k)`  
     signals. Such parameters have no effect on the merge operation.
+    
+    By default legends are not included in the figure. However they can be
+    requested for any axis (see Example).
 
     See also 
     --------
-	:func:`~araucaria.xas.merge.merge` : Merges groups in a collection.
+	:func:`~araucaria.xas.merge.merge` : Merge groups in a collection.
     
-    Examples
-    --------
+    Example
+    -------
     .. plot::
         :context: reset
 
@@ -81,6 +85,7 @@ def fig_merge(merge: Group, collection: Collection,
         ...     collection.add_group(group_mu)         # adding group to collection
         >>> report, merge = merge(collection)
         >>> fig, ax = fig_merge(merge, collection)
+        >>> leg     = ax[2].legend(fontsize=8)
         >>> plt.show(block=False)
     """
     # checking class and attributes
@@ -105,16 +110,23 @@ def fig_merge(merge: Group, collection: Collection,
         pre_edge_kws = {}
     if autobk_kws is None:
         autobk_kws = {}
+        
+    # ensuring a reasonable figsize
+    if fig_kws is None:
+        fig_kws = {'figsize' : (8,3)}
+    elif 'figsize' not in fig_kws:
+        fig_kws['figsize'] = (8, 3)
 
     # plot decorations
-    fig, axes = fig_xas_template(panels='xe', fig_pars=fig_pars, **fig_kws)
+    fig, axes = fig_xas_template(panels='dxe', fig_pars=fig_pars, **fig_kws)
     for ax in axes:
-        ax.grid()
         if ax == axes[0]:
+            ax.set_title('Deriv. normalized absorption')
+        elif ax == axes[1]:
             ax.set_title('Normalized absorption')
         else:
             ax.set_title('Extended fine structure')
-    
+
     # processing original scans
     for i, item in enumerate(merged_scans):
         group = collection.get_group(item)
@@ -123,19 +135,26 @@ def fig_merge(merge: Group, collection: Collection,
         pre_edge(group, update=True, **pre_edge_kws)
         autobk(group, update=True, **autobk_kws)
         
-        # plotting sscans
-        axes[0].plot(group.energy, group.norm, label=item)
-        axes[1].plot(group.k, group.k**kweight*group.chi)
-    
-    # processing merged spectra
+        # calculating first derivative
+        dmude = gradient(group.norm)/gradient(group.energy)
+        
+        # plotting scans
+        axes[0].plot(group.energy, dmude,  label=item)
+        axes[1].plot(group.energy, group.norm, label=item)
+        axes[2].plot(group.k, group.k**kweight*group.chi, label=item)
+
+    # processing merged spectra (copy)
     merge_copy = merge.copy()
     pre_edge(merge_copy, update=True, **pre_edge_kws)
     autobk(merge_copy, update=True, **autobk_kws)
     
+    # calculating first derivative
+    dmude = gradient(merge_copy.norm)/gradient(merge_copy.energy)
+
     # plotting spectra
-    axes[0].plot(merge_copy.energy, merge_copy.norm, label='merge')
-    axes[1].plot(merge_copy.k, merge_copy.k**kweight*merge_copy.chi)
-    axes[0].legend(loc=0, fontsize=8, edgecolor='k')
+    axes[0].plot(merge_copy.energy, dmude, label='merge')
+    axes[1].plot(merge_copy.energy, merge_copy.norm, label='merge')
+    axes[2].plot(merge_copy.k, merge_copy.k**kweight*merge_copy.chi, label='merge')
 
     return (fig, axes)
 

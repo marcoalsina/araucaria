@@ -7,8 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Plot module &mdash; araucaria 0.1.5
- documentation</title>
+  <title>Plot module &mdash; araucaria 0.1.6 documentation</title>
   
 
   
@@ -179,7 +178,10 @@ plotting XAS spectra. The following functions are currently implemented:</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#araucaria.plot.template.fig_xas_template" title="araucaria.plot.template.fig_xas_template"><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_xas_template()</span></code></a></p></td>
 <td><p>Presets a plot of XAS spectra.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.plot.fig_merge.fig_merge" title="araucaria.plot.fig_merge.fig_merge"><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_merge()</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.plot.fig_pre_edge.fig_pre_edge" title="araucaria.plot.fig_pre_edge.fig_pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_pre_edge()</span></code></a></p></td>
+<td><p>Plot the results of pre-edge substratction and normalization.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.plot.fig_merge.fig_merge" title="araucaria.plot.fig_merge.fig_merge"><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_merge()</span></code></a></p></td>
 <td><p>Plot the results of a merge operation.</p></td>
 </tr>
 </tbody>
@@ -281,6 +283,72 @@ routine of <code class="docutils literal notranslate"><span class="pre">Matplotl
 </div>
 </dd></dl>
 
+<span class="target" id="module-araucaria.plot.fig_pre_edge"></span><dl class="py function">
+<dt id="araucaria.plot.fig_pre_edge.fig_pre_edge">
+<code class="sig-prename descclassname">araucaria.plot.fig_pre_edge.</code><code class="sig-name descname">fig_pre_edge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">show_pre_edge</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">show_post_edge</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fig_pars</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">fig_kws</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.plot.fig_pre_edge.fig_pre_edge" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the results of pre-edge substraction and normalization of a scan.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<a class="reference internal" href="main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>) – Group with the normalized scan.</p></li>
+<li><p><strong>show_pre_edge</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the pre-edge fit curve should be plotted.
+The detault is True.</p></li>
+<li><p><strong>show_post_edge</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the post-edge fit curve should be plotted.
+The detault is True.</p></li>
+<li><p><strong>fig_pars</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#araucaria.plot.template.FigPars" title="araucaria.plot.template.FigPars"><code class="xref py py-class docutils literal notranslate"><span class="pre">FigPars</span></code></a>]) – Dictionary arguments for the figure.
+See <a class="reference internal" href="#araucaria.plot.template.FigPars" title="araucaria.plot.template.FigPars"><code class="xref py py-class docutils literal notranslate"><span class="pre">FigPars</span></code></a> for details.</p></li>
+<li><p><strong>fig_kws</strong> – Additional arguments to pass to the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure.subplots" title="(in Matplotlib v3.3.3)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subplots()</span></code></a>
+routine of <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>figure</em> – Matplolib figure object.</p></li>
+<li><p><em>axes</em> – Matplotlib axes object.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid Group instance.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If attributes from <a class="reference internal" href="xas/xas_normalize.html#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>
+    do not exist in <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The returned plot contains the original <span class="math notranslate nohighlight">\(\mu(E)\)</span>, the
+adjusted pre-edge and post-edge curves (optional), and the
+normalized and flattened <span class="math notranslate nohighlight">\(\mu(E)\)</span>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="xas/xas_normalize.html#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a></dt><dd><p>Pre-edge substaction and normalization of a scan.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_dnd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">pre_edge</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.plot</span> <span class="kn">import</span> <span class="n">fig_pre_edge</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>   <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile.dat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group</span>   <span class="o">=</span> <span class="n">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pre</span>     <span class="o">=</span> <span class="n">pre_edge</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig_pre_edge</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//plot_module-2.py">Source code</a>, <a class="reference external" href=".//plot_module-2.png">png</a>, <a class="reference external" href=".//plot_module-2.hires.png">hires.png</a>, <a class="reference external" href=".//plot_module-2.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="_images/plot_module-2.png" src="_images/plot_module-2.png" />
+</div>
+</dd></dl>
+
 <span class="target" id="module-araucaria.plot.fig_merge"></span><dl class="py function">
 <dt id="araucaria.plot.fig_merge.fig_merge">
 <code class="sig-prename descclassname">araucaria.plot.fig_merge.</code><code class="sig-name descname">fig_merge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">merge</span></em>, <em class="sig-param"><span class="n">collection</span></em>, <em class="sig-param"><span class="n">pre_edge_kws</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">autobk_kws</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fig_pars</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">fig_kws</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.plot.fig_merge.fig_merge" title="Permalink to this definition">¶</a></dt>
@@ -325,15 +393,17 @@ normalized <span class="math notranslate nohighlight">\(\mu(E)\)</span> and  <sp
 <p>Optional arguments such as <code class="docutils literal notranslate"><span class="pre">pre_edge_kws</span></code> and <code class="docutils literal notranslate"><span class="pre">autobk_kws</span></code> are used
 to calculate the normalized <span class="math notranslate nohighlight">\(\mu(E)\)</span> and <span class="math notranslate nohighlight">\(\chi(k)\)</span>
 signals. Such parameters have no effect on the merge operation.</p>
+<p>By default legends are not included in the figure. However they can be
+requested for any axis (see Example).</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="xas/xas_merge.html#araucaria.xas.merge.merge" title="araucaria.xas.merge.merge"><code class="xref py py-func docutils literal notranslate"><span class="pre">merge()</span></code></a></dt><dd><p>Merges groups in a collection.</p>
+<dt><a class="reference internal" href="xas/xas_merge.html#araucaria.xas.merge.merge" title="araucaria.xas.merge.merge"><code class="xref py py-func docutils literal notranslate"><span class="pre">merge()</span></code></a></dt><dd><p>Merge groups in a collection.</p>
 </dd>
 </dl>
 </div>
-<p class="rubric">Examples</p>
+<p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
@@ -348,12 +418,13 @@ signals. Such parameters have no effect on the merge operation.</p>
 <span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group_mu</span><span class="p">)</span>         <span class="c1"># adding group to collection</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="p">,</span> <span class="n">merge</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig_merge</span><span class="p">(</span><span class="n">merge</span><span class="p">,</span> <span class="n">collection</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leg</span>     <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>(<a class="reference external" href=".//plot_module-2.py">Source code</a>, <a class="reference external" href=".//plot_module-2.png">png</a>, <a class="reference external" href=".//plot_module-2.hires.png">hires.png</a>, <a class="reference external" href=".//plot_module-2.pdf">pdf</a>)</p>
+<p>(<a class="reference external" href=".//plot_module-3.py">Source code</a>, <a class="reference external" href=".//plot_module-3.png">png</a>, <a class="reference external" href=".//plot_module-3.hires.png">hires.png</a>, <a class="reference external" href=".//plot_module-3.pdf">pdf</a>)</p>
 <div class="figure align-default">
-<img alt="_images/plot_module-2.png" src="_images/plot_module-2.png" />
+<img alt="_images/plot_module-3.png" src="_images/plot_module-3.png" />
 </div>
 </dd></dl>
 
@@ -380,7 +451,7 @@ signals. Such parameters have no effect on the merge operation.</p>
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2021, Marco A. Alsina
+        &copy; Copyright 2020-2021, Marco A. Alsina
 
     </p>
   </div>

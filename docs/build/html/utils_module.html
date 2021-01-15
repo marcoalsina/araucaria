@@ -7,8 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Utilities module &mdash; araucaria 0.1.5
- documentation</title>
+  <title>Utilities module &mdash; araucaria 0.1.6 documentation</title>
   
 
   
@@ -434,7 +433,7 @@ The detault is 0.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array to search for nearest value.</p></li>
-<li><p><strong>val</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Search value.</p></li>
+<li><p><strong>val</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Search value. It supports <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.19)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>.</p></li>
 <li><p><strong>kind</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Either ‘lower’, ‘nearest’ or ‘higher’.
 The default is ‘nearest’. See Notes for details.</p></li>
 </ul>
@@ -458,7 +457,7 @@ minimum value of <code class="docutils literal notranslate"><span class="pre">da
 <li><p>If <code class="docutils literal notranslate"><span class="pre">kind='nearest'</span></code> the returned index will be of the nearest
 value with respect to <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p></li>
 <li><p>If <code class="docutils literal notranslate"><span class="pre">kind='higher'</span></code> the returned index will be of a value
-strictly higher than <code class="docutils literal notranslate"><span class="pre">val</span></code>, or -1 if <code class="docutils literal notranslate"><span class="pre">val</span></code> if higher than the
+strictly higher than <code class="docutils literal notranslate"><span class="pre">val</span></code>, or -1 if <code class="docutils literal notranslate"><span class="pre">val</span></code> is higher than the
 maximum value of <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p></li>
 </ul>
 <p class="rubric">Examples</p>
@@ -509,7 +508,7 @@ maximum value of <code class="docutils literal notranslate"><span class="pre">da
   <div role="contentinfo">
     <p>
         
-        &copy; Copyright 2021, Marco A. Alsina
+        &copy; Copyright 2020-2021, Marco A. Alsina
 
     </p>
   </div>

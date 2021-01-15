@@ -73,7 +73,8 @@ class Report:
         ['Name', 'Description']
         """
         self.names = names
-        self.ncols   = len(self.names)
+        self.ncols = len(self.names)
+        self.nrows = 0
     
     def add_row(self, row: list) -> None:
         """Adds a row of content to the report.
@@ -131,6 +132,7 @@ class Report:
             self.content = array(row_format, dtype=object)
         else:
             self.content = vstack((self.content, array(row_format)))
+        self.nrows += 1
 
     def add_midrule(self, marker: str = '-') -> None:
         """Adds a midrule to the report.
@@ -159,6 +161,7 @@ class Report:
             self.content = array(midrule, dtype=object)
         else:
             self.content = vstack((self.content, midrule))
+        self.nrows += 1
 
     def show(self, header: bool=True, endrule: bool=True, 
              print_report: bool=True) -> Optional[str]:
@@ -200,36 +203,46 @@ class Report:
         =====================
         """
         linesep    = '\n'
-        nrow, ncol = self.content.shape
         
-        # extracting column sizes
+        # calculating column sizes
         name_sizes     = [len(name) for name in self.names]
-        col_sizes      = [len(max(self.content[:,i], key=len)) for i in range(ncol)]
+
+        if self.nrows == 0:
+            col_sizes = [0 for i in range(self.ncols)]
+            content   = []
+        elif self.nrows == 1:
+            col_sizes = [len(self.content[i]) for i in range(self.ncols)]
+            content   = [self.content, ]
+        else:
+            col_sizes = [len(max(self.content[:,i], key=len)) for i in range(self.ncols)]
+            content   = self.content
+
         self.col_sizes = []
+        content_format = ''
         
         for i in range(self.ncols):
             self.col_sizes.append(max(col_sizes[i], name_sizes[i]) + self.sep)
+            content_format += '{%i:<%i}' % (i, self.col_sizes[-1])
+        
         # formatted content
         # gests reseted with each call to show()
         print_str      = ''
-        for i, row in enumerate(self.content):
+
+        for i, row in enumerate(content):
             # content format gets reseted for each row
-            content_format = ''  # format of row content
             print_row      = []  # container of printed values
             if all(row == row[0]):
                 # midrule condition
                 print_row = [row[0]*size for size in self.col_sizes]
             else:
                 print_row = row
-            for j in range(ncol):
-                content_format += '{%i:<%i}' % (j, self.col_sizes[j])
             
             # conditional to print str with linesep
-            if (i + 1) == nrow:
+            if (i + 1) == self.nrows:
                 print_str += content_format.format(*print_row)
             else:
                 print_str += content_format.format(*print_row) + linesep
-        
+
         separator = self.marker*sum(self.col_sizes)
         if header:
             header_format = ''
@@ -240,10 +253,13 @@ class Report:
             header_str = separator + linesep
             header_str += header_format.format(*self.names) + linesep
             header_str += separator + linesep
-            print_str  = header_str + print_str
+            print_str = header_str + print_str
 
         if endrule:
-            print_str += linesep + separator
+            if self.nrows == 0:
+                print_str += separator
+            else:
+                print_str += linesep + separator
     
         if print_report:
             print(print_str)

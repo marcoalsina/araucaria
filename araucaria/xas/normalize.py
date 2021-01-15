@@ -164,6 +164,10 @@ def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
         If attribute ``energy`` does not exist in ``group``.
     IndexError
         If ``e0`` is outside the range of ``group.energy``.
+    ValueError
+        If ``pre_range`` contains less than two energy points.
+    ValueError
+        If ``post_range`` contains less than two energy points.
     
     Warning
     -------
@@ -190,39 +194,17 @@ def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
     
     Example
     -------
-    .. plot::
-        :context: reset
-        
-        >>> from araucaria.testdata import get_testpath
-        >>> from araucaria import Group
-        >>> from araucaria.io import read_dnd
-        >>> from araucaria.xas import pre_edge
-        >>> from araucaria.utils import check_objattrs
-        >>> fpath    = get_testpath('dnd_testfile.dat')
-        >>> group = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
-        >>> attrs = ['e0', 'edge_step', 'pre_edge', 'post_edge', 'norm', 'flat']
-        >>> pre    = pre_edge(group, update=True)
-        >>> check_objattrs(group, Group, attrs)
-        [True, True, True, True, True, True]
-        
-        >>> # plotting original and normalized spectrum
-        >>> import matplotlib.pyplot as plt
-        >>> from araucaria.plot import fig_xas_template
-        >>> fig, ax = fig_xas_template(panels='xx')
-        >>> line = ax[0].plot(group.energy, group.pre_edge, 
-        ...                   color='gray', ls='--', label='pre-edge')
-        >>> line = ax[0].plot(group.energy, group.post_edge, 
-        ...                   color='gray', ls=':', label='post-edge')
-        >>> line = ax[0].plot(group.energy, group.mu, label='mu')
-        >>> text = ax[0].set_ylabel('Absorbance')
-        >>> leg  = ax[0].legend()
-        >>> line = ax[1].plot(group.energy, group.norm, label='norm')
-        >>> line = ax[1].plot(group.energy, group.flat, label='flat')
-        >>> line = ax[1].axhline(0, color='gray', ls=':')
-        >>> line = ax[1].axhline(1, color='gray', ls=':')
-        >>> leg  = ax[1].legend()
-        >>> fig.tight_layout()
-        >>> plt.show(block=False)
+    >>> from araucaria.testdata import get_testpath
+    >>> from araucaria import Group
+    >>> from araucaria.io import read_dnd
+    >>> from araucaria.xas import pre_edge
+    >>> from araucaria.utils import check_objattrs
+    >>> fpath = get_testpath('dnd_testfile.dat')
+    >>> group = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
+    >>> attrs = ['e0', 'edge_step', 'pre_edge', 'post_edge', 'norm', 'flat']
+    >>> pre   = pre_edge(group, update=True)
+    >>> check_objattrs(group, Group, attrs)
+    [True, True, True, True, True, True]
     """
     # checking class and attributes
     check_objattrs(group, Group, attrlist=['energy'], exceptions=True)
@@ -258,11 +240,12 @@ def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
     # 1 is added to pre_index[1] to include it during slicing
     pre_index    = [0,-1]
     pre_index[0] = index_nearest(energy, prerange[0] + e0, kind='lower')
-    pre_index[1] = index_nearest(energy, prerange[1] + e0) + 1
+    pre_index[1] = index_nearest(energy, prerange[1] + e0)
     
     # indices must be at least 2 values apart
     if ptp(pre_index) < 2:
-        pre_index[1] = min(len(energy), pre_index[0] + 2)
+        raise ValueError('energy range for pre-edge fit provides less than 2 points. consider increasing it.')
+        #pre_index[1] = min(len(energy), pre_index[0] + 2)
 
     omu       = mu * energy**nvict
     pre_coefs = polyfit(energy[pre_index[0]:pre_index[1]], 
@@ -273,11 +256,12 @@ def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
     # 1 is added to post_index[1] to include it during slicing
     post_index    = [0,-1]
     post_index[0] = index_nearest(energy, postrange[0] + e0, kind='lower')
-    post_index[1] = index_nearest(energy, postrange[1] + e0) + 1
+    post_index[1] = index_nearest(energy, postrange[1] + e0)
 
     # indices must be at least 2 values apart
     if ptp(post_index) < 2:
-        post_index[1] = min(len(energy), post_index[0] + 2)
+        raise ValueError('energy range for post-edge fit provides less than 2 points. consider increasing it')
+        #post_index[1] = min(len(energy), post_index[0] + 2)
 
     if nnorm is None:
         nnorm = 2

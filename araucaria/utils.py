@@ -23,8 +23,8 @@ The :mod:`~araucaria.utils` module offers the following utility functions:
      - Index of nearest value in an array.
 """
 from typing import List, Union, TypeVar
-from numpy import (ndarray, diff, argwhere, where, ravel,
-                   apply_along_axis, isnan, isinf)
+from numpy import (ndarray, diff, abs, argwhere, where, 
+                   ravel, apply_along_axis, isnan, isinf)
 from . import Group
 
 def check_objattrs(obj: object, objtype: TypeVar, attrlist: list=None, 
@@ -331,7 +331,7 @@ def index_nearest(data: ndarray, val: float, kind: str='nearest') -> float:
         Array to search for nearest value.
 
     val
-        Search value.
+        Search value. It supports :data:`~numpy.inf`.
     kind
         Either 'lower', 'nearest' or 'higher'. 
         The default is 'nearest'. See Notes for details. 
@@ -356,7 +356,7 @@ def index_nearest(data: ndarray, val: float, kind: str='nearest') -> float:
     - If ``kind='nearest'`` the returned index will be of the nearest
       value with respect to ``val``.
     - If ``kind='higher'`` the returned index will be of a value
-      strictly higher than ``val``, or -1 if ``val`` if higher than the
+      strictly higher than ``val``, or -1 if ``val`` is higher than the
       maximum value of ``data``.
     
     Examples
@@ -380,25 +380,22 @@ def index_nearest(data: ndarray, val: float, kind: str='nearest') -> float:
     >>> print(index, energy[index], val)
     4 8980.0 8965
     """
-    from numpy import abs, where
     kinds = ['lower', 'nearest', 'higher']
     
     if kind not in kinds:
         raise ValueError('kind %s not recognized.' % kind)
     
-    if kind == 'nearest':
-        index = abs(data - val).argmin()
+    if val <= data[0]:
+        index = 0
+    elif val >= data[-1]:
+        index = len(data) - 1  # index starts from cero.
+    elif kind == 'nearest':
+        index = abs(data-val).argmin()
     elif kind == 'lower':
-        if val <= data[0]:
-            index = 0
-        else:
-            index = max(where(data<=val)[0])
-    else:
-        if val >= data[-1]:
-            index = -1
-        else:
-            index = min(where(data>=val)[0])
-            
+        index = max(where(data<=val)[0])
+    else: # kind higher
+        index = min(where(data>=val)[0])
+
     return index
 
 if __name__ == '__main__':

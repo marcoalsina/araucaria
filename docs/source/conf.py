@@ -27,7 +27,7 @@ now = datetime.now()
 # -- Project information -----------------------------------------------------
 
 project   = 'araucaria'
-copyright = '%s, Marco A. Alsina' % now.year
+copyright = '2020-%s, Marco A. Alsina' % now.year
 author    = 'Marco A. Alsina'
 
 # The full version, including alpha/beta/rc tags
