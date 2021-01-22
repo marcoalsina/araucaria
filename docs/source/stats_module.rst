@@ -7,4 +7,4 @@ Statistics module
    :hidden:
 
    stats/stats_genesd
-   stats/stats_smooth
+   stats/stats_window

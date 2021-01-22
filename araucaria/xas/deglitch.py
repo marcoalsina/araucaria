@@ -8,7 +8,7 @@ from .. import Group
 from ..utils import check_objattrs
 from ..xas.normalize import find_e0
 from ..stats.genesd import genesd
-from ..stats.smooth import roll_med
+from ..stats.window import roll_med
 
 def deglitch(group: Group, e_window: Union[str,list]='xas', sg_window_length: int=9, 
              sg_polyorder:int =3, alpha: float=.025, 
@@ -66,9 +66,8 @@ def deglitch(group: Group, e_window: Union[str,list]='xas', sg_window_length: in
 
     Warning
     -------
-    Running this algorithm with ``update=True`` will overwrite
-    the ``energy`` and the absorption attribute (i.e. ``mu``, ``fluo`` 
-    or ``mu_ref``) of ``group``.
+    Running :func:`~araucaria.xas.deglitch.deglitch` with ``update=True`` will overwrite
+    the ``energy`` and the absorption attribute of ``group``.
 
     Notes
     -----

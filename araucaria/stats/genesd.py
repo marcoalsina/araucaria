@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 The :mod:`~araucaria.stats.genesd` module offers the following 
-functions to detect outliers in a univariate data array using the 
-generalized extreme Studentized deviate test :
+functions to detect outliers in a univariate array using the 
+generalized extreme Studentized deviate test:
 
 .. list-table::
    :widths: auto
@@ -30,7 +30,7 @@ def genesd(data: ndarray, r: int, alpha: float) -> Tuple[str, list]:
     
     This function uses the generalized extreme Studentized 
     deviate (ESD) test to detect one or more outliers 
-    in univariate data [1]_ [2]_.
+    in univariate data [1]_.
 
     Parameters
     ----------
@@ -50,7 +50,20 @@ def genesd(data: ndarray, r: int, alpha: float) -> Tuple[str, list]:
 
     Notes
     -----
+    Identification of outliers is performed with an hypothesis test [2]_:
+    
+    - :math:`H_0`:  there are no outliers in the data.
+    - :math:`H_1`: there are up to :math:`r` outliers in the data.
+    
+    The algorithm performs the following operations:
 
+    1. The :math:`R_i` test statistics are computed for :math:`r` potential outliers, 
+       removing the largest potential outlier from the data at each succesive calculation 
+       of the test statistic.
+    2. The :math:`\\lambda_i` critical values are computed for :math:`r` potential outliers, 
+       considering a significance level of :math:`\\alpha` for the t-distribution.
+    3. Both values are compared, and the largest number of outliers where 
+       :math:`R_i > \\lambda_i` is accepted as the number of outliers.
 
     References
     ----------
@@ -160,9 +173,10 @@ def find_ri(data: ndarray, r: int) -> Tuple[float, float]:
     - :math:`\\bar{x}_{n-i+1}`: sample mean of reduced array.
     - :math:`s_{n-i+1}`       : sample standard deviation of reduced array.
     - :math:`n-i+1`           : number of points in the reduced array.
+    - :math:`r`               : maximum number of outliers.
 
     After each calculation rhe observation that maximizes :math:`| x_i − \\bar{x} |` 
-    is removed, and the i-th statistic is computed with n - i + 1 observations. 
+    is removed, and :math:`R_i` is computed with n - i + 1 observations. 
     This procedure is repeated until r observations have been removed 
     from the array.
 
@@ -242,6 +256,7 @@ def find_critvals(n: int, r: int, alpha: float) -> list:
     - :math:`\\alpha` : significance level.
     - :math:`t_{p,v}` : percent point function of the t-distribution 
       at :math:`p` value and :math:`v` degrees of freedom.
+    - :math:`r`               : maximum number of outliers.
 
     Example
     -------

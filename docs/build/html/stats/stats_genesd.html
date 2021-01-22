@@ -40,7 +40,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Smooth module" href="stats_smooth.html" />
+    <link rel="next" title="Window module" href="stats_window.html" />
     <link rel="prev" title="Statistics module" href="../stats_module.html" /> 
 </head>
 
@@ -99,7 +99,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../stats_module.html">Statistics module</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">genESD module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stats_smooth.html">Smooth module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stats_window.html">Window module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../utils_module.html">Utilities module</a></li>
@@ -174,8 +174,8 @@
   <div class="section" id="module-araucaria.stats.genesd">
 <span id="genesd-module"></span><h1>genESD module<a class="headerlink" href="#module-araucaria.stats.genesd" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference internal" href="#module-araucaria.stats.genesd" title="araucaria.stats.genesd"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genesd</span></code></a> module offers the following
-functions to detect outliers in a univariate data array using the
-generalized extreme Studentized deviate test :</p>
+functions to detect outliers in a univariate array using the
+generalized extreme Studentized deviate test:</p>
 <table class="colwidths-auto docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Function</p></th>
@@ -200,7 +200,7 @@ generalized extreme Studentized deviate test :</p>
 <dd><p>Identifes outliers in a data array.</p>
 <p>This function uses the generalized extreme Studentized
 deviate (ESD) test to detect one or more outliers
-in univariate data <a class="footnote-reference brackets" href="#id3" id="id1">1</a> <a class="footnote-reference brackets" href="#id4" id="id2">2</a>.</p>
+in univariate data <a class="footnote-reference brackets" href="#id3" id="id1">1</a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -221,6 +221,21 @@ in univariate data <a class="footnote-reference brackets" href="#id3" id="id1">1
 </dd>
 </dl>
 <p class="rubric">Notes</p>
+<p>Identification of outliers is performed with an hypothesis test <a class="footnote-reference brackets" href="#id4" id="id2">2</a>:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_0\)</span>:  there are no outliers in the data.</p></li>
+<li><p><span class="math notranslate nohighlight">\(H_1\)</span>: there are up to <span class="math notranslate nohighlight">\(r\)</span> outliers in the data.</p></li>
+</ul>
+<p>The algorithm performs the following operations:</p>
+<ol class="arabic simple">
+<li><p>The <span class="math notranslate nohighlight">\(R_i\)</span> test statistics are computed for <span class="math notranslate nohighlight">\(r\)</span> potential outliers,
+removing the largest potential outlier from the data at each succesive calculation
+of the test statistic.</p></li>
+<li><p>The <span class="math notranslate nohighlight">\(\lambda_i\)</span> critical values are computed for <span class="math notranslate nohighlight">\(r\)</span> potential outliers,
+considering a significance level of <span class="math notranslate nohighlight">\(\alpha\)</span> for the t-distribution.</p></li>
+<li><p>Both values are compared, and the largest number of outliers where
+<span class="math notranslate nohighlight">\(R_i &gt; \lambda_i\)</span> is accepted as the number of outliers.</p></li>
+</ol>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
 <dt class="label" id="id3"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
@@ -295,9 +310,10 @@ generalized extreme Studentized deviate (ESD) test.</p>
 <li><p><span class="math notranslate nohighlight">\(\bar{x}_{n-i+1}\)</span>: sample mean of reduced array.</p></li>
 <li><p><span class="math notranslate nohighlight">\(s_{n-i+1}\)</span>       : sample standard deviation of reduced array.</p></li>
 <li><p><span class="math notranslate nohighlight">\(n-i+1\)</span>           : number of points in the reduced array.</p></li>
+<li><p><span class="math notranslate nohighlight">\(r\)</span>               : maximum number of outliers.</p></li>
 </ul>
 <p>After each calculation rhe observation that maximizes <span class="math notranslate nohighlight">\(| x_i − \bar{x} |\)</span>
-is removed, and the i-th statistic is computed with n - i + 1 observations.
+is removed, and <span class="math notranslate nohighlight">\(R_i\)</span> is computed with n - i + 1 observations.
 This procedure is repeated until r observations have been removed
 from the array.</p>
 <p class="rubric">Example</p>
@@ -353,6 +369,7 @@ generalized extreme Studentized deviate (ESD) test.</p>
 <li><p><span class="math notranslate nohighlight">\(\alpha\)</span> : significance level.</p></li>
 <li><p><span class="math notranslate nohighlight">\(t_{p,v}\)</span> : percent point function of the t-distribution
 at <span class="math notranslate nohighlight">\(p\)</span> value and <span class="math notranslate nohighlight">\(v\)</span> degrees of freedom.</p></li>
+<li><p><span class="math notranslate nohighlight">\(r\)</span>               : maximum number of outliers.</p></li>
 </ul>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">find_critvals</span>
@@ -381,7 +398,7 @@ at <span class="math notranslate nohighlight">\(p\)</span> value and <span class
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="stats_smooth.html" class="btn btn-neutral float-right" title="Smooth module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="stats_window.html" class="btn btn-neutral float-right" title="Window module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../stats_module.html" class="btn btn-neutral float-left" title="Statistics module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
