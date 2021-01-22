@@ -39,6 +39,7 @@ def get_testfiles() -> list:
     >>> for file in testfiles:
     ...    if 'dnd' in file:
     ...        print(file)
+    dnd_glitchfile.dat
     dnd_testfile.dat
     dnd_testfile2.dat
     dnd_testfile3.dat

@@ -29,6 +29,7 @@ Additional functionality will be added on a regular basis.
    xas_module
    fit_module
    plot_module
+   stats_module
    utils_module
    testdata_module
 

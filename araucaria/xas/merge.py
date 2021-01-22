@@ -401,10 +401,10 @@ def merge(collection: Collection, taglist: List[str]=['all'],
 
             # storing data on report
             e0 = find_e0(group, update=False)
-            report.add_row([i+1, group.__name__, mode, e_offset, e0])
+            report.add_row([i+1, group.name, mode, e_offset, e0])
         else:
             e0 = find_e0(group, use_mu_ref=True, update=False)
-            report.add_row([i+1, group.__name__, 'mu_ref', e_offset, e0])
+            report.add_row([i+1, group.name, 'mu_ref', e_offset, e0])
         
     mu_ref_avg = mean(mu_ref, axis=1)    
     

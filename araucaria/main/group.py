@@ -24,19 +24,19 @@ class Group(object):
     """
     def __init__(self, name: str=None, **kwargs:dict):
         if name is None:
-            name = hex(id(self))
-        self.__name__ = name
+            name  = hex(id(self))
+        self.name = name
         for key, val in kwargs.items():
             setattr(self, key, val)
 
     def __repr__(self):
-        if self.__name__ is not None:
-            return '<Group %s>' % self.__name__
+        if self.name is not None:
+            return '<Group %s>' % self.name
         else:
             return '<Group>'
 
     def add_content(self, content: dict) -> None:
-        """Adds content to the Group.
+        """Adds content to the group.
         
         Parameters
         ----------
@@ -56,17 +56,51 @@ class Group(object):
         -------
         >>> from araucaria import Group
         >>> from araucaria.utils import check_objattrs
-        >>> content = {'name': 'group1'}
+        >>> content = {'var': 'xas'}
         >>> group   = Group()
         >>> group.add_content(content)
-        >>> check_objattrs(group, Group, attrlist=['name',])
-        [True]
+        >>> check_objattrs(group, Group, attrlist=['name', 'var'])
+        [True, True]
         """
         if not isinstance(content, dict):
-            raise TypeError('conent is not a valid dictionary.')
+            raise TypeError('content is not a valid dictionary.')
         else:
             for key, val in content.items():
                 setattr(self, key, val)
+
+    def rename(self, newname: str) -> None:
+        """Renames the group.
+        
+        Parameters
+        ----------
+        newname
+            New name for the group.
+        
+        Returns
+        -------
+        :
+        
+        Raises
+        ------
+        TypeError
+            If ``newname`` is not a string.
+
+        Example
+        -------
+        >>> from araucaria import Group
+        >>> content = {'name': 'group1'}
+        >>> group   = Group(name = 'group1')
+        >>> print(group.name)
+        group1
+        >>> group.rename('group2')
+        >>> print(group.name)
+        group2
+        """
+        if not isinstance(newname, str):
+            raise TypeError('newname is not a valid string.')
+        else:
+            self.name = newname
+        
 
     def copy(self) -> Group:
         """Returns a copy of the group.
@@ -210,14 +244,14 @@ class FitGroup(object):
     """
     def __init__(self, name: str=None, **kwargs:dict):
         if name is None:
-            name = hex(id(self))
-        self.__name__ = name
+            name  = hex(id(self))
+        self.name = name
         for key, val in kwargs.items():
             setattr(self, key, val)
 
     def __repr__(self):
-        if self.__name__ is not None:
-            return '<FitGroup %s>' % self.__name__
+        if self.name is not None:
+            return '<FitGroup %s>' % self.name
         else:
             return '<FitGroup>'
 

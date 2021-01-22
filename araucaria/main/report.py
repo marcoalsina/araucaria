@@ -38,7 +38,7 @@ class Report:
         # setting objects attributes
         if name is None:
             name = hex(id(self))
-        self.__name__= name
+        self.name    = name
         self.sep     = sep     # separation for columns
         self.sdigits = sdigits # significant digits for float types
         self.marker  = marker  # separator marker
@@ -46,8 +46,8 @@ class Report:
         
     
     def __repr__(self):
-        if self.__name__ is not None:
-            return '<Report %s>' % self.__name__
+        if self.name is not None:
+            return '<Report %s>' % self.name
         else:
             return '<Report>'    
     

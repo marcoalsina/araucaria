@@ -7,6 +7,7 @@ XAS module
    :hidden:
 
    xas/xas_merge
+   xas/xas_deglitch
    xas/xas_normalize
    xas/xas_autobk
    xas/xas_ft

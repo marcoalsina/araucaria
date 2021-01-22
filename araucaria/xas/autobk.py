@@ -199,7 +199,7 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
     kout   = kstep * arange(ceil(krange[1]/kstep) )
 
     # index for max energy
-    iemax  = min(len(energy), index_nearest(energy, e0 + ktoe(krange[1])) )
+    iemax  = min(len(energy) - 1, index_nearest(energy, e0 + ktoe(krange[1])) )
 
     # interpolate provided chi(k) onto the kout grid
     if chi_std is not None and k_std is not None:
@@ -279,5 +279,8 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
               }
     if update:
         group.add_content(content)
-
     return content
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()

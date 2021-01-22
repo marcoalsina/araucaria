@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Deglitch module &mdash; araucaria 0.1.7 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Normalize module" href="xas_normalize.html" />
+    <link rel="prev" title="Merge module" href="xas_merge.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io_module.html">IO module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../xas_module.html">XAS module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="xas_merge.html">Merge module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Deglitch module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xas_normalize.html">Normalize module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xas_autobk.html">Autobk module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xas_ft.html">XASFT module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xas_utils.html">XASutils module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../xas_module.html">XAS module</a> &raquo;</li>
+        
+      <li>Deglitch module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/xas/xas_deglitch.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-araucaria.xas.deglitch">
+<span id="deglitch-module"></span><h1>Deglitch module<a class="headerlink" href="#module-araucaria.xas.deglitch" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="araucaria.xas.deglitch.deglitch">
+<code class="sig-prename descclassname">araucaria.xas.deglitch.</code><code class="sig-name descname">deglitch</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">e_window</span><span class="o">=</span><span class="default_value">'xas'</span></em>, <em class="sig-param"><span class="n">sg_window_length</span><span class="o">=</span><span class="default_value">9</span></em>, <em class="sig-param"><span class="n">sg_polyorder</span><span class="o">=</span><span class="default_value">3</span></em>, <em class="sig-param"><span class="n">alpha</span><span class="o">=</span><span class="default_value">0.025</span></em>, <em class="sig-param"><span class="n">max_glitches</span><span class="o">=</span><span class="default_value">'default'</span></em>, <em class="sig-param"><span class="n">max_glitch_length</span><span class="o">=</span><span class="default_value">4</span></em>, <em class="sig-param"><span class="n">update</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.deglitch.deglitch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Algorithm to deglitch a XAFS spectrum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>) – Group containing the spectrum to deglitch.</p></li>
+<li><p><strong>e_window</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>]) – Energy window to seach for outliers.
+Oprions are ‘xas’, ‘xanes’ and ‘exafs’.
+Alternatively a list with 2 floats can be provided for
+the start and end energy for the search.
+See the Notes for further details. The default is ‘xas’.</p></li>
+<li><p><strong>sg_window_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Windows length for the Savitzky-Golay filter on the normalized spectrum.
+Must be an odd value. The default is 7.</p></li>
+<li><p><strong>sg_polyorder</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Polynomial order for the Savitzky-Golay filter on the normalized spectrum.
+The default is 3.</p></li>
+<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Significance level for generalized ESD test for outliers.
+The default is 0.025.</p></li>
+<li><p><strong>max_glitches</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Maximum number of outliers to remove.
+The default is the floor division of the array length by 10.</p></li>
+<li><p><strong>max_glitch_length</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Maximum length of glitch in energy points. The default is 4.</p></li>
+<li><p><strong>update</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the group should be updated with the autobk attributes.
+The default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>Dictionary with the following arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">index_glitches</span></code> : indices of glitches in the original energy array.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">energy_glitches</span></code>: glitches in the original energy array.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">energy</span></code>         : deglitched energy array.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mu</span></code>             : deglitched array. Returned if <code class="docutils literal notranslate"><span class="pre">group.get_mode()</span> <span class="pre">=</span> <span class="pre">'mu'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fluo</span></code>           : deglitched array. Returned if <code class="docutils literal notranslate"><span class="pre">group.get_mode()</span> <span class="pre">=</span> <span class="pre">'fluo'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mu_ref</span></code>         : deglitched array. Returned if <code class="docutils literal notranslate"><span class="pre">group.get_mode()</span> <span class="pre">=</span> <span class="pre">'mu_ref'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">deglitch_pars</span></code>  : dictionary with deglitch parameters.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid Group instance.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If attribute <code class="docutils literal notranslate"><span class="pre">energy</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Running this algorithm with <code class="docutils literal notranslate"><span class="pre">update=True</span></code> will overwrite
+the <code class="docutils literal notranslate"><span class="pre">energy</span></code> and the absorption attribute (i.e. <code class="docutils literal notranslate"><span class="pre">mu</span></code>, <code class="docutils literal notranslate"><span class="pre">fluo</span></code>
+or <code class="docutils literal notranslate"><span class="pre">mu_ref</span></code>) of <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p>
+</div>
+<p class="rubric">Notes</p>
+<p>This function deglitches a XAFS spectrum through a
+two-step fitting with Savitzky-Golay filter and outlier
+identification with a generalized extreme Studentized deviate (ESD)
+test <a class="footnote-reference brackets" href="#id2" id="id1">1</a>.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">e_window='xas'</span></code> considers the full spectrum for deglitching.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">e_window='xanes'</span></code> considers the beginning of the energy array
+up to 150 eV above <span class="math notranslate nohighlight">\(E_0\)</span>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">e_window='exafs'</span></code> considers from 150eV above <span class="math notranslate nohighlight">\(E_0\)</span> to the
+end of the energy array</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">e_window=[float,float]</span></code> provides start and end energies in eV.</p></li>
+</ul>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Wallace, S. M., Alsina, M. A., &amp; Gaillard, J. F. (2020)
+“An algorithm for the automatic deglitching of x-ray absorption
+spectroscopy data”. arXiv preprint arXiv:2011.14467.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">allclose</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_dnd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">deglitch</span><span class="p">,</span> <span class="n">pre_edge</span><span class="p">,</span> <span class="n">autobk</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>  <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_glitchfile.dat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group</span>  <span class="o">=</span> <span class="n">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;fluo&#39;</span><span class="p">)</span>  <span class="c1"># extracting fluo and mu_ref scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cgroup</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">degli</span>  <span class="o">=</span> <span class="n">deglitch</span><span class="p">(</span><span class="n">cgroup</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span>  <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;index_glitches&#39;</span><span class="p">,</span> <span class="s1">&#39;energy_glitches&#39;</span><span class="p">,</span> <span class="s1">&#39;deglitch_pars&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">cgroup</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+<span class="go">[True, True, True]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allclose</span><span class="p">(</span><span class="n">cgroup</span><span class="o">.</span><span class="n">energy_glitches</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">energy</span><span class="p">[</span><span class="n">cgroup</span><span class="o">.</span><span class="n">index_glitches</span><span class="p">])</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">cgroup</span><span class="o">.</span><span class="n">energy_glitches</span><span class="p">)</span>
+<span class="go">[7552.2789 7548.1747 7390.512  7387.2613]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># plotting original and deglitched spectrum</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.plot</span> <span class="kn">import</span> <span class="n">fig_xas_template</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="p">[</span><span class="n">group</span><span class="p">,</span> <span class="n">cgroup</span><span class="p">]:</span>
+<span class="gp">... </span>    <span class="n">pre</span>   <span class="o">=</span> <span class="n">pre_edge</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">autbk</span> <span class="o">=</span> <span class="n">autobk</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig_xas_template</span><span class="p">(</span><span class="n">panels</span><span class="o">=</span><span class="s1">&#39;xe&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span>  <span class="n">group</span><span class="o">.</span><span class="n">norm</span><span class="p">,</span>  <span class="n">label</span><span class="o">=</span><span class="s1">&#39;original&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cgroup</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="n">cgroup</span><span class="o">.</span><span class="n">norm</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span><span class="s1">&#39;degliched&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">k</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">group</span><span class="o">.</span><span class="n">chi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">cgroup</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="n">cgroup</span><span class="o">.</span><span class="n">k</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">cgroup</span><span class="o">.</span><span class="n">chi</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leg</span>  <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../xas/xas_deglitch-1.py">Source code</a>, <a class="reference external" href="../xas/xas_deglitch-1.png">png</a>, <a class="reference external" href="../xas/xas_deglitch-1.hires.png">hires.png</a>, <a class="reference external" href="../xas/xas_deglitch-1.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/xas_deglitch-1.png" src="../_images/xas_deglitch-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="xas_normalize.html" class="btn btn-neutral float-right" title="Normalize module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="xas_merge.html" class="btn btn-neutral float-left" title="Merge module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020-2021, Marco A. Alsina
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -26,6 +26,10 @@ class Collection(object):
     The ``tags`` attribute classifies group names based on a 
     ``tag`` key, which is useful for manipulations of groups.
     
+    Warning
+    -------
+    Each group can only have a single ``tag`` key. 
+    
     Example
     -------
     >>> from araucaria import Collection
@@ -35,13 +39,13 @@ class Collection(object):
     """
     def __init__(self, name: str=None):
         if name is None:
-            name = hex(id(self))
-        self.__name__   = name
+            name  = hex(id(self))
+        self.name = name
         self.tags: dict = {}
 
     def __repr__(self):
-        if self.__name__ is not None:
-            return '<Collection %s>' % self.__name__
+        if self.name is not None:
+            return '<Collection %s>' % self.name
         else:
             return '<Collection>'
     
@@ -70,16 +74,16 @@ class Collection(object):
         >>> from araucaria import Collection, Group
         >>> from araucaria.utils import check_objattrs
         >>> collection = Collection()
-        >>> group1 = Group(**{'name': 'group1'})
-        >>> group2 = Group(**{'name': 'group2'})
-        >>> for group in (group1, group2):
+        >>> g1 = Group(**{'name': 'group1'})
+        >>> g2 = Group(**{'name': 'group2'})
+        >>> for group in (g1, g2):
         ...     collection.add_group(group)
         >>> check_objattrs(collection, Collection, attrlist=['group1','group2'])
         [True, True]
         
         >>> # using tags
-        >>> group3 = Group(**{'name': 'group3'})
-        >>> collection.add_group(group3, tag='ref')
+        >>> g3 = Group(**{'name': 'group3'})
+        >>> collection.add_group(g3, tag='ref')
         >>> for key, value in collection.tags.items():
         ...     print(key, value, type(value))
         scan ['group1', 'group2'] <class 'list'>
@@ -87,7 +91,7 @@ class Collection(object):
         """
         if not isinstance(group, Group):
             raise TypeError('group is not a valid Group instance.')
-        name = group.__name__
+        name = group.name
         setattr(self, name, group)
         
         # updating tags
@@ -96,6 +100,62 @@ class Collection(object):
             self.tags[tag].sort()
         else:
             self.tags[tag] = [name]
+
+    def rename_group(self, name: str, newname: str) -> None:
+        """Renames a group in the Collection.
+        
+        Parameters
+        -----------
+        name
+            Name of group to modify.
+        newname
+            New name for the group.
+        
+        Returns
+        -------
+        :
+        
+        Raises
+        ------
+        AttributeError
+            If ``name`` is not a group in the Collection.
+        TypeError
+            If ``newname`` is not a string.
+        
+        Example
+        -------
+        >>> from araucaria import Collection, Group
+        >>> collection = Collection()
+        >>> g1   = Group(**{'name': 'group1'})
+        >>> g2   = Group(**{'name': 'group2'})
+        >>> for i, group in enumerate([g1, g2]):
+        ...     collection.add_group(group)
+        >>> collection.rename_group('group1', 'group3')
+        >>> print(collection.get_names())
+        ['group2', 'group3']
+        >>> print(collection.group3.name)
+        group3
+        """
+        if not hasattr(self, name):
+            raise AttributeError('collection has no %s group.' % name)
+        elif not isinstance(newname, str):
+            raise TypeError('newname is not a valid string.')
+        else:
+            self.__dict__[newname] = self.__dict__.pop(name)
+            
+            # retrieving original tag key
+            for key, val in self.tags.items():
+                if name in val:
+                    tag = key
+                    break
+            
+            # replacing record name with new name
+            self.tags[tag].remove(name)
+            self.tags[tag].append(newname)
+            self.tags[tag].sort()
+            
+            # modifying name of group
+            self.__dict__[newname].name = newname
 
     def retag(self, name: str, tag: str) -> None:
         """Modifies tag of a group in the Collection.
@@ -120,10 +180,10 @@ class Collection(object):
         -------
         >>> from araucaria import Collection, Group
         >>> collection = Collection()
-        >>> group1     = Group(**{'name': 'group1'})
-        >>> group2     = Group(**{'name': 'group2'})
-        >>> tags       = ('scan', 'ref')
-        >>> for i, group in enumerate([group1, group2]):
+        >>> g1   = Group(**{'name': 'group1'})
+        >>> g2   = Group(**{'name': 'group2'})
+        >>> tags = ('scan', 'ref')
+        >>> for i, group in enumerate([g1, g2]):
         ...     collection.add_group(group, tag=tags[i])
         >>> collection.retag('group1', 'ref')
         >>> for key, value in collection.tags.items():
@@ -180,12 +240,12 @@ class Collection(object):
         >>> from araucaria import Collection, Group
         >>> from araucaria.utils import check_objattrs
         >>> collection = Collection()
-        >>> group1 = Group(**{'name': 'group1'})
-        >>> collection.add_group(group1)
-        >>> gcopy  = collection.get_group('group1')
+        >>> g1    = Group(**{'name': 'group1'})
+        >>> collection.add_group(g1)
+        >>> gcopy = collection.get_group('group1')
         >>> check_objattrs(gcopy, Group)
         True
-        >>> print(gcopy.__name__)
+        >>> print(gcopy.name)
         group1
         """
         if not hasattr(self, name):
@@ -216,12 +276,12 @@ class Collection(object):
         -------
         >>> from araucaria import Collection, Group
         >>> collection = Collection()
-        >>> group1 = Group(**{'name': 'group1'})
-        >>> group2 = Group(**{'name': 'group2'})
-        >>> group3 = Group(**{'name': 'group3'})
-        >>> group4 = Group(**{'name': 'group4'})
-        >>> tags   = ('scan', 'ref', 'ref', 'scan')
-        >>> for i, group in enumerate([group1, group2, group3, group4]):
+        >>> g1   = Group(**{'name': 'group1'})
+        >>> g2   = Group(**{'name': 'group2'})
+        >>> g3   = Group(**{'name': 'group3'})
+        >>> g4   = Group(**{'name': 'group4'})
+        >>> tags = ('scan', 'ref', 'ref', 'scan')
+        >>> for i, group in enumerate([g1, g2, g3, g4]):
         ...     collection.add_group(group, tag=tags[i])
         >>> collection.get_names()
         ['group1', 'group2', 'group3', 'group4']
@@ -269,9 +329,9 @@ class Collection(object):
         >>> from araucaria import Collection, Group
         >>> from araucaria.utils import check_objattrs
         >>> collection = Collection()
-        >>> group1 = Group(**{'name': 'group1'})
-        >>> group2 = Group(**{'name': 'group2'})
-        >>> for group in (group1, group2):
+        >>> g1 = Group(**{'name': 'group1'})
+        >>> g2 = Group(**{'name': 'group2'})
+        >>> for group in (g1, g2):
         ...     collection.add_group(group)
         >>> check_objattrs(collection, Collection, attrlist=['group1','group2'])
         [True, True]
@@ -338,10 +398,10 @@ class Collection(object):
         >>> from numpy import linspace
         >>> from araucaria import Collection, Group
         >>> collection = Collection()
-        >>> group1     = Group(**{'name': 'group1', 'energy': linspace(1000, 2000, 6)})
-        >>> group2     = Group(**{'name': 'group2', 'energy': linspace(1500, 2500, 11)})
-        >>> tags       = ('scan', 'ref')
-        >>> for i, group in enumerate([group1, group2]):
+        >>> g1   = Group(**{'name': 'group1', 'energy': linspace(1000, 2000, 6)})
+        >>> g2   = Group(**{'name': 'group2', 'energy': linspace(1500, 2500, 11)})
+        >>> tags = ('scan', 'ref')
+        >>> for i, group in enumerate([g1, g2]):
         ...     collection.add_group(group, tag=tags[i])
         >>> # mcer for tag 'scan'
         >>> print(collection.get_mcer(taglist=['scan']))

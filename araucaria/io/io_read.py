@@ -356,7 +356,7 @@ def read_file(fpath: Path, usecols: tuple, scan: str, ref: bool, tol: float) -> 
         group = Group(**{'energy':raw[:,0], scan:raw[:,1]})
 
     # saving filename in group
-    group.__name__ = basename(fpath)
+    group.name = basename(fpath)
     return (group)
     
 def read_rawfile(fpath: Path, usecols: tuple, scan: str, ref: bool, tol: float) -> Group:
@@ -450,7 +450,7 @@ def read_rawfile(fpath: Path, usecols: tuple, scan: str, ref: bool, tol: float) 
             group = Group(**{'energy':raw[:,0], scan:fluo})
 
     # saving filename in group
-    group.__name__ = basename(fpath)
+    group.name = basename(fpath)
     return (group)
 
 def read_lcf_coefs(fpaths: List[Path], refgroup: str, 

@@ -97,7 +97,7 @@ def read_hdf5(fpath: Path, name: str)-> Group:
     
     hdf5.close()
     group = Group(**data)
-    group.__name__ = name
+    group.name = name
     return group
 
 def write_hdf5(fpath: Path, group: Group, name: str='dataset1', 

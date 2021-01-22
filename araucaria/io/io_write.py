@@ -91,7 +91,7 @@ def write_xmu(fpath: Path, group: Group, fmt: str='%12.8g',
     header = set_header(fpath, 'xmu')
     header = '\n'.join((header, cols))
 
-    msg = write_file(fpath, data, name=group.__name__, header=header, 
+    msg = write_file(fpath, data, name=group.name, header=header, 
                      fmt=fmt, replace=replace)
     return (msg)
 
