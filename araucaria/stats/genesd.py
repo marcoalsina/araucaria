@@ -50,7 +50,7 @@ def genesd(data: ndarray, r: int, alpha: float) -> Tuple[str, list]:
 
     Notes
     -----
-    Identification of outliers is performed with an hypothesis test [2]_:
+    The identification of outliers considers the following hypothesis test:
     
     - :math:`H_0`:  there are no outliers in the data.
     - :math:`H_1`: there are up to :math:`r` outliers in the data.
@@ -69,8 +69,6 @@ def genesd(data: ndarray, r: int, alpha: float) -> Tuple[str, list]:
     ----------
     .. [1] Rosner, B. (1983) "Percentage Points for a Generalized ESD 
        Many-Outlier Procedure", Technometrics, 25(2), pp. 165-172.
-
-    .. [2] https://www.itl.nist.gov/div898/handbook/eda/section3/eda35h3.htm
 
     Example
     -------
