@@ -7,8 +7,10 @@ import doctest
 import os
 
 temp_files = ['database.h5',
+              'database2.h5',
               'new_file.xmu',
-              'new_fit.lcf', 'lcf_report.log',
+              'new_fit.lcf',
+              'lcf_report.log',
               ]
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Autobk module &mdash; araucaria 0.1.7 documentation</title>
+  <title>Autobk module &mdash; araucaria 0.1.7a documentation</title>
   
 
   
@@ -187,15 +187,15 @@
 <li><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>) – Group containing the spectrum for background removal.</p></li>
 <li><p><strong>rbkg</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Distance (Å) for <span class="math notranslate nohighlight">\(\chi(R)\)</span> above which the signal is ignored.
 The default is 1.0.</p></li>
-<li><p><strong>k_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – Wavenumber range (<span class="math notranslate nohighlight">\(Å^{-1}\)</span>).The default is [0, <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.19)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>].</p></li>
+<li><p><strong>k_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – Wavenumber range (<span class="math notranslate nohighlight">\(Å^{-1}\)</span>).The default is [0, <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>].</p></li>
 <li><p><strong>kweight</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Exponent for weighting chi(k) by k**kweight.
 The default is 1.</p></li>
 <li><p><strong>win</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the the FT window type. The default is ‘hanning’.</p></li>
 <li><p><strong>dk</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Tapering parameter for the FT window. The default is 0.1.</p></li>
 <li><p><strong>nfft</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Array size for the FT.  The default is 2048.</p></li>
 <li><p><strong>kstep</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Wavenumber step size for the FT (<span class="math notranslate nohighlight">\(Å^{-1}\)</span>).  The default is 0.05.</p></li>
-<li><p><strong>k_std</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]) – Optional k array for standard <span class="math notranslate nohighlight">\(\chi(k)\)</span>.</p></li>
-<li><p><strong>chi_std</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]) – Optional array for standard <span class="math notranslate nohighlight">\(\chi(k)\)</span>.</p></li>
+<li><p><strong>k_std</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]) – Optional k array for standard <span class="math notranslate nohighlight">\(\chi(k)\)</span>.</p></li>
+<li><p><strong>chi_std</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]) – Optional array for standard <span class="math notranslate nohighlight">\(\chi(k)\)</span>.</p></li>
 <li><p><strong>nclamp</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of energy end-points for clamp. The default is 2.</p></li>
 <li><p><strong>clamp_lo</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Weight of low-energy clamp. The default is 1.</p></li>
 <li><p><strong>clamp_hi</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Weight of high-energy clamp. The default is 1.</p></li>
@@ -230,7 +230,7 @@ The default is False.</p></li>
 corresponds to the grid resolution of <span class="math notranslate nohighlight">\(\chi(R)\)</span>.</p>
 </div>
 <p class="rubric">Notes</p>
-<p>The Autobk algorithm approximates an EXAFS bakground signal by
+<p>The Autobk algorithm <a class="footnote-reference brackets" href="#id2" id="id1">1</a> approximates an EXAFS bakground signal by
 fitting a cubic B-spline to the <span class="math notranslate nohighlight">\(\chi(R)\)</span> signal below
 a <code class="docutils literal notranslate"><span class="pre">rbkg</span></code> value.</p>
 <p>The background removal is performed as follows:</p>
@@ -256,17 +256,25 @@ compute <span class="math notranslate nohighlight">\(\chi(k)\)</span>.</p></li>
 </ol>
 <p>If <code class="docutils literal notranslate"><span class="pre">update=True</span></code> the contents of the returned dictionary
 will be included as attributes of <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Newville, M., Livins, P., Yacoby, Y., Rehr, J. J.,  &amp; Stern, E. A. (1993)
+“Near-edge x-ray-absorption fine structure of Pb: A comparison of theory
+and experiment”. Physical Review B, 47(21), pp. 14126–14131.</p>
+</dd>
+</dl>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_dnd</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">pre_edge</span><span class="p">,</span> <span class="n">autobk</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>    <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile.dat&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">group</span>    <span class="o">=</span> <span class="n">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>  <span class="c1"># extracting mu and mu_ref scans</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pre</span>      <span class="o">=</span> <span class="n">pre_edge</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span>    <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bkg&#39;</span><span class="p">,</span> <span class="s1">&#39;chie&#39;</span><span class="p">,</span> <span class="s1">&#39;chi&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;autobk_pars&#39;</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">autbk</span>    <span class="o">=</span> <span class="n">autobk</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile.dat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group</span> <span class="o">=</span> <span class="n">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>  <span class="c1"># extracting mu and mu_ref scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pre</span>   <span class="o">=</span> <span class="n">pre_edge</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;bkg&#39;</span><span class="p">,</span> <span class="s1">&#39;chie&#39;</span><span class="p">,</span> <span class="s1">&#39;chi&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;autobk_pars&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">autbk</span> <span class="o">=</span> <span class="n">autobk</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
 <span class="go">[True, True, True, True, True]</span>
 </pre></div>

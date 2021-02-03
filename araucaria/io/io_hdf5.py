@@ -24,7 +24,7 @@ manipulate data in the Hierarchical Data Format ``HDF5``:
 from os.path import isfile
 from ast import literal_eval
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Union
 from numpy import ndarray, inf
 from h5py import File, Dataset
 from .. import Group, Report
@@ -70,35 +70,73 @@ def read_hdf5(fpath: Path, name: str)-> Group:
     else:
         raise IOError("file %s does not exists." % fpath)
 
-    # convereted types for reading datasets
-    converted_types = (dict, list)
-    
     if name in hdf5:
         data = {}
         for key, record in hdf5.get(name).items():
             if isinstance(record, Dataset):
                 # verifying strings saved as bytes
                 if isinstance(record[()], bytes):
-                    # converting to string with asstr
-                    try:
-                        # evaluating the string with literal_eval
-                        eval_record = literal_eval( record.asstr()[()] )
-                    except:
-                        # if conversion fails then keeping as str
-                        eval_record = record.asstr()[()]
-                    if isinstance(eval_record, converted_types):
-                        data[key] = eval_record
+                    # converting bytes record to proper type
+                    eval_record = convert_bytes_hdf5(record)
+                    data[key] = eval_record
                 else:
                     data[key]=record[()]
-            
-            #print '%s dataset: %s <%s>' % (flag, key, vtype)
+
     else:
         raise ValueError("%s does not exists in %s!" % (name, fpath))
     
     hdf5.close()
     group = Group(**data)
-    group.name = name
     return group
+
+
+def convert_bytes_hdf5(record: Dataset) -> Union[dict, list, str]:
+    """Utility function to convert a :class:`bytes` record from an HDF5 file.
+    
+    Returned value will be either a :class:`dict`, :class:`list`, 
+    or :class:`str`.
+    
+    Parameters
+    ----------
+    record : 
+        HDF5 dataset record.        
+    
+    Returns
+    -------
+    :
+        Converted record.
+
+    Raises
+    ------
+    TypeError:
+        If  value stored inside ``record`` is not of type 
+        :class:`bytes`.
+
+    Notes
+    -----
+    ``araucaria`` stores :class:`dict` or :class:`list` records 
+    as :class:`bytes` in the HDF5 file.
+    Such records  need to be converted back to their original 
+    types during reading.
+    """
+    if not isinstance(record[()], bytes):
+        raise TypeError ('record %s is not of type bytes.' % record)
+    
+    conv_types = (dict, list)
+    opt_types  = (int, float, str)
+    record_str = record.asstr()[()]
+    try:
+        eval_record = literal_eval( record_str )
+    except:
+        eval_record = record.asstr()[()]
+     
+    if isinstance(eval_record, conv_types):
+        # return either dict or list
+        return eval_record
+    elif isinstance(eval_record, opt_types):
+        # int, float types were originally stored as str
+        return record_str
+
 
 def write_hdf5(fpath: Path, group: Group, name: str='dataset1', 
                replace: bool=False) -> None:
@@ -211,7 +249,7 @@ def write_recursive_hdf5(dataset: Dataset, group: Group) -> None:
     for key in dir(group):
         if '__' not in key:
             record =getattr(group,key)
-            vtype = type(record).__name__
+            #vtype = type(record).__name__
         
             if isinstance(record, accepted_types):
                 dataset.create_dataset(key, data=record)
@@ -219,6 +257,7 @@ def write_recursive_hdf5(dataset: Dataset, group: Group) -> None:
             elif isinstance(record, converted_types):
                 dataset.create_dataset(key, data=str(record))
     return
+
 
 def rename_dataset_hdf5(fpath: Path, name: str, newname: str) -> None:
     """Renames a dataset in an HDF5 file.
@@ -344,7 +383,7 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     optional
         List with optional parameters. See Notes for details.
     pre_edge_kws
-        Dictionary with arguments for :func:`pre_edge`.
+        Dictionary with arguments for :func:`~araucaria.xas.normalize.pre_edge`.
 
     Returns
     -------
@@ -354,9 +393,7 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     Raises
     ------
     IOError
-        If the HDF5 file does not exist in the specified path.
-    ValueError
-        If any requested parameter in ``optional`` is not recognized.        
+        If the HDF5 file does not exist in the specified path.      
 
     Notes
     -----
@@ -366,15 +403,21 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     2. Dataset name.
     3. Measurement mode.
     4. Numbers of scans.
-    5. absorption edge step :math:`\Delta\mu(E_0)`, if ``optional=['edge_step']``.
-    6. absorption threshold energy :math:`E_0`, if ``optional=['e0']``.
+    5. Absorption edge step :math:`\Delta\mu(E_0)`, if ``optional=['edge_step']``.
+    6. Absorption threshold energy :math:`E_0`, if ``optional=['e0']``.
     7. Merged scans, if ``optional=['merged_scans']``.
+    8. Optional parameters if they exist as attributes in the dataset.
+
+    The number of scans and names of merged files are retrieved 
+    from the ``merged_scans`` attribute of the HDF5 dataset.
     
-    The number of scans and names of merged files are retrieved from the 
-    ``merged_scans`` attribute of the HDF5 dataset.
-    
-    The absorption threshold and the edge step are retrieved by calling the function
-    :func:`~araucaria.xas.normalize.pre_edge`.
+    The absorption threshold and the edge step are retrieved by 
+    calling the function :func:`~araucaria.xas.normalize.pre_edge`.
+
+    Optional parameters will be retrieved from the dataset as 
+    attributes. Currently only :class:`str`, :class:`float` or
+    :class:`int` will be retrieved. Otherswise an empty character
+    will be printed in the report.
 
     See also
     --------
@@ -412,6 +455,27 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     ----------------------------------------------------
     3   xmu_testfile  mu    1  11873  None              
     ====================================================
+    
+    
+    >>> # printing custom parameters
+    >>> from araucaria.testdata import get_testpath
+    >>> from araucaria.io import read_xmu, write_hdf5
+    >>> fpath = get_testpath('xmu_testfile.xmu')
+    >>> # extracting mu and mu_ref scans
+    >>> group_mu = read_xmu(fpath, scan='mu')
+    >>> # adding additional attributes
+    >>> group_mu.symbol = 'Zn'
+    >>> group_mu.temp   = 25.0
+    >>> # saving a new hdf5 file
+    >>> write_hdf5('database2.h5', group_mu, name='xmu_testfile', replace=True)
+    xmu_testfile written to database2.h5.
+    >>> report = summary_hdf5('database2.h5', optional=['symbol','temp'])
+    >>> report.show()
+    =========================================
+    id  dataset       mode  n  symbol  temp  
+    =========================================
+    1   xmu_testfile  mu    1  Zn      25    
+    =========================================
     """
     # verifying existence of path:
     if isfile(fpath):
@@ -430,11 +494,7 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     # verifying optional values
     if optional is not None:
         for opt_val in optional:
-            if opt_val not in opt_list:
-                hdf5.close()
-                raise ValueError("optional parameter '%s' not recognized." % opt_val)
-            else:
-                field_names.append(opt_val)
+            field_names.append(opt_val)
 
     # instanciating report class
     report   = Report()
@@ -467,6 +527,24 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
                 elif opt_val in opt_list[1:]:
                     out = pre_edge(data, **pre_edge_kws)
                     field_vals.append(out[opt_val])
+                else:
+                    # custom optinal field
+                    try:
+                        val = hdf5[key][opt_val]
+                        if isinstance(val[()], (int, float)):
+                            # if val is int or float print it
+                            field_vals.append(val[()])
+                        elif isinstance(val[()], bytes):
+                            # if val is bytes we convert it and check
+                            val = convert_bytes_hdf5(val)
+                            if isinstance(val, str):
+                                field_vals.append(val)
+                            else:
+                                field_vals.append('')
+                        else:
+                            field_vals.append('')
+                    except:
+                        field_vals.append('')
 
         report.add_row(field_vals)
         
@@ -490,6 +568,6 @@ if __name__ == '__main__':
     doctest.testmod()
 
     # removing temp files    
-    for fpath in ['database.h5',]:
+    for fpath in ['database.h5', 'database2.h5']:
         if os.path.exists(fpath):
             os.remove(fpath)

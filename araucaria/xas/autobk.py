@@ -109,7 +109,7 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
 
     Notes
     -----
-    The Autobk algorithm approximates an EXAFS bakground signal by 
+    The Autobk algorithm [1]_ approximates an EXAFS bakground signal by 
     fitting a cubic B-spline to the :math:`\chi(R)` signal below
     a ``rbkg`` value.
 
@@ -139,6 +139,12 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
     If ``update=True`` the contents of the returned dictionary 
     will be included as attributes of ``group``.
     
+    References
+    ----------
+    .. [1]  Newville, M., Livins, P., Yacoby, Y., Rehr, J. J.,  & Stern, E. A. (1993) 
+       "Near-edge x-ray-absorption fine structure of Pb: A comparison of theory 
+       and experiment". Physical Review B, 47(21), pp. 14126–14131.
+    
     Example
     -------
     .. plot::
@@ -149,11 +155,11 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
         >>> from araucaria.io import read_dnd
         >>> from araucaria.xas import pre_edge, autobk
         >>> from araucaria.utils import check_objattrs
-        >>> fpath    = get_testpath('dnd_testfile.dat')
-        >>> group    = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
-        >>> pre      = pre_edge(group, update=True)
-        >>> attrs    = ['bkg', 'chie', 'chi', 'k', 'autobk_pars']
-        >>> autbk    = autobk(group, update=True)
+        >>> fpath = get_testpath('dnd_testfile.dat')
+        >>> group = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
+        >>> pre   = pre_edge(group, update=True)
+        >>> attrs = ['bkg', 'chie', 'chi', 'k', 'autobk_pars']
+        >>> autbk = autobk(group, update=True)
         >>> check_objattrs(group, Group, attrs)
         [True, True, True, True, True]
 

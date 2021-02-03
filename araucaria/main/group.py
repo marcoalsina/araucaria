@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from __future__ import annotations
-from copy import copy
+from copy import deepcopy
 
 class Group(object):
     """Group storage class.
@@ -103,7 +103,7 @@ class Group(object):
         
 
     def copy(self) -> Group:
-        """Returns a copy of the group.
+        """Returns a deep copy of the group.
 
         Parameters
         ----------
@@ -113,6 +113,7 @@ class Group(object):
         -------
         :
             Copy of the group.
+
 
         Example
         -------
@@ -125,7 +126,7 @@ class Group(object):
         >>> allclose(group1.energy, group2.energy)
         True
         """
-        return copy(self)
+        return deepcopy(self)
 
     def get_mode(self) -> str:
         """Returns scan mode of mu(E) for the group.

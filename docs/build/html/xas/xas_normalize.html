@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Normalize module &mdash; araucaria 0.1.7 documentation</title>
+  <title>Normalize module &mdash; araucaria 0.1.7a documentation</title>
   
 
   
@@ -195,12 +195,19 @@
 </table>
 <dl class="py function">
 <dt id="araucaria.xas.normalize.find_e0">
-<code class="sig-prename descclassname">araucaria.xas.normalize.</code><code class="sig-name descname">find_e0</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">use_mu_ref</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">update</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.normalize.find_e0" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">araucaria.xas.normalize.</code><code class="sig-name descname">find_e0</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'maxder'</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">0.0001</span></em>, <em class="sig-param"><span class="n">pre_edge_kws</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_mu_ref</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">update</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.normalize.find_e0" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the absorption threshold energy of a scan.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>) – Group containing the spectrum to calculate <cite>e0</cite>.</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the method to find <cite>e0</cite>. Valid names are ‘maxder’ and ‘halfedge’.
+See Notes for details. The default is ‘maxder’.</p></li>
+<li><p><strong>tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Tolerance value for convergence of <cite>e0</cite> calculation.
+Only used if <code class="docutils literal notranslate"><span class="pre">method='halfedge'</span></code>. The defailt is 1e-4.</p></li>
+<li><p><strong>pre_edge_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Dictionary with arguments for <a class="reference internal" href="#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>.
+Only used if <code class="docutils literal notranslate"><span class="pre">method='halfedge'</span></code>. The defailt is None, which considers
+default values for normalization.</p></li>
 <li><p><strong>use_mu_ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if <cite>e0</cite> should be calculated with the
 reference scan. The default is False.</p></li>
 <li><p><strong>update</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the group should be updated with the
@@ -211,7 +218,7 @@ value of <cite>e0</cite>. The default is False.</p></li>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Value of e0.</p>
+<dd class="field-odd"><p>Value of <cite>e0</cite>.</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
@@ -219,24 +226,31 @@ value of <cite>e0</cite>. The default is False.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If attribute <code class="docutils literal notranslate"><span class="pre">energy</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If attribute <code class="docutils literal notranslate"><span class="pre">mu_ref</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">group</span></code>
     when <code class="docutils literal notranslate"><span class="pre">use_mu_ref</span> <span class="pre">=</span> <span class="pre">True</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">method</span></code> is not recocgnized.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>The absorption threshold is calculated as the point with maximum derivative,
-with some checks to avoid selection of spurious glitches.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">use_mu_ref=False</span></code> then the absorption threshold will be calculated
+<p>If <code class="docutils literal notranslate"><span class="pre">method=maxder</span></code> the absorption threshold will be calculated as the
+maximum derivative in absorption.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">method=halfedge</span></code> the absorption threshold will be calculated iteratively
+as half the edge step. This method calls <a class="reference internal" href="#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>
+to compute the edge step at each iteration. Parameters for the pre-edge calculation
+can be passed with the <code class="docutils literal notranslate"><span class="pre">pre_edge_kws</span></code> parameter. A tolerance for the error between
+iterations can be set with the <code class="docutils literal notranslate"><span class="pre">tol</span></code> parameter.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">use_mu_ref=False</span></code> the absorption threshold will be calculated
 for the scan attribute of <code class="docutils literal notranslate"><span class="pre">group</span></code>, as determined by the
 <a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group.get_mode" title="araucaria.main.group.Group.get_mode"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_mode()</span></code></a> method.
 This is the default behavior.</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">use_mu_ref=True</span></code> then the absorption threshold will be calculated
-for the <code class="docutils literal notranslate"><span class="pre">group.mu_ref</span></code> attribute.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">use_mu_ref=True</span></code> the absorption threshold will be calculated for the
+<code class="docutils literal notranslate"><span class="pre">group.mu_ref</span></code> attribute.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">update=True</span></code> the following attribute will be created in <code class="docutils literal notranslate"><span class="pre">group</span></code>:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">group.e0</span></code>: absorption threshold energy <span class="math notranslate nohighlight">\(E_0\)</span>.</p></li>
 </ul>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># computing e0 as the maximum derivative</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_dnd</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">find_e0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile.dat&#39;</span><span class="p">)</span>
@@ -245,6 +259,11 @@ for the <code class="docutils literal notranslate"><span class="pre">group.mu_re
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># find e0 of reference scan</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">find_e0</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">use_mu_ref</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">29203.249</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># computing e0 as half the edge step</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find_e0</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;halfedge&#39;</span><span class="p">,</span> <span class="n">use_mu_ref</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">29200.62</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -259,14 +278,15 @@ for the <code class="docutils literal notranslate"><span class="pre">group.mu_re
 <li><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>) – Group containing the spectrum for pre-edge substraction and normalization.</p></li>
 <li><p><strong>e0</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]) – Absorption threshold energy. If None it will seach for the
 value stored in <code class="docutils literal notranslate"><span class="pre">group.e0</span></code>. Otherwise it will be calculated
-using <a class="reference internal" href="#araucaria.xas.normalize.find_e0" title="araucaria.xas.normalize.find_e0"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_e0()</span></code></a>.</p></li>
+using <a class="reference internal" href="#araucaria.xas.normalize.find_e0" title="araucaria.xas.normalize.find_e0"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_e0()</span></code></a>. with default
+parameters.</p></li>
 <li><p><strong>nvict</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Energy exponent for pre-edge fit with a Victoreen polynomial.
 The default is 0. See Notes for details.</p></li>
 <li><p><strong>nnorm</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Degree of polynomial for post-edge fit. The default is 2.</p></li>
 <li><p><strong>pre_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – Energy range with respect to <cite>e0</cite> for the pre-edge fit.
-The default is [-<a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.19)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>, -50].</p></li>
+The default is [-<a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>, -50].</p></li>
 <li><p><strong>post_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – Energy range with respect to <cite>e0</cite> for the post-edge fit.
-The default is [100, <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.19)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>].</p></li>
+The default is [100, <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>].</p></li>
 <li><p><strong>update</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the group should be updated with the normalization attributes.
 The default is False.</p></li>
 </ul>

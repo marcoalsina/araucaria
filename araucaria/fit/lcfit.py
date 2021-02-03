@@ -96,7 +96,8 @@ def lcf(collection: Collection, fit_region: str='xanes',
         XAFS region to perform the LCF. Accepted values are 'dxanes',
         'xanes', or 'exafs'. The default is 'xanes'.
     fit_range
-        LCF domain range in absolute values.
+        LCF domain range in absolute values. Energy units are expected
+        for 'dxanes' or 'xanes', while k units are expected for 'exafs'.
         The default is [-:data:`~numpy.inf`, :data:`~numpy.inf`].
     method
         Name of the fitting method to use.
@@ -350,7 +351,7 @@ def lcf_report(group: FitGroup) -> str:
     Parameters
     ----------
     group
-        Valid FitGroup from :func:`lcf``.
+        Valid FitGroup from :func:`lcf`.
     
     Returns
     -------
@@ -368,7 +369,7 @@ def lcf_report(group: FitGroup) -> str:
     Notes
     -----
     :func:`lcf_report` is a wrapper for :func:`fit_report` of ``lmfit``,
-    that attaches additional information on group names and calling parameters.
+    that writes additional information on group names and calling parameters.
     
     Example
     -------

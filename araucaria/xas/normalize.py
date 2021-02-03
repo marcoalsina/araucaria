@@ -20,13 +20,25 @@ from scipy import polyfit, polyval
 from .. import Group
 from ..utils import index_nearest, check_objattrs, check_xrange
 
-def find_e0(group: Group, use_mu_ref: bool=False, update: bool=False) -> float:
+def find_e0(group: Group, method: str='maxder', tol: float=1e-4,
+            pre_edge_kws: dict=None, use_mu_ref: bool=False, 
+            update: bool=False) -> float:
     """Calculates the absorption threshold energy of a scan.
 
     Parameters
     ----------
     group
         Group containing the spectrum to calculate `e0`.
+    method
+        Name of the method to find `e0`. Valid names are 'maxder' and 'halfedge'.
+        See Notes for details. The default is 'maxder'.
+    tol
+        Tolerance value for convergence of `e0` calculation.
+        Only used if ``method='halfedge'``. The defailt is 1e-4.
+    pre_edge_kws
+        Dictionary with arguments for :func:`~araucaria.xas.normalize.pre_edge`.
+        Only used if ``method='halfedge'``. The defailt is None, which considers
+        default values for normalization.
     use_mu_ref
         Indicates if `e0` should be calculated with the 
         reference scan. The default is False.
@@ -37,7 +49,7 @@ def find_e0(group: Group, use_mu_ref: bool=False, update: bool=False) -> float:
     Returns
     -------
     :
-        Value of e0.
+        Value of `e0`.
 
     Raises
     ------
@@ -48,26 +60,35 @@ def find_e0(group: Group, use_mu_ref: bool=False, update: bool=False) -> float:
     AttributeError
         If attribute ``mu_ref`` does not exist in ``group``
         when ``use_mu_ref = True``.
+    ValueError
+        If ``method`` is not recocgnized.
 
     Notes
     -----
-    The absorption threshold is calculated as the point with maximum derivative, 
-    with some checks to avoid selection of spurious glitches.
+    If ``method=maxder`` the absorption threshold will be calculated as the 
+    maximum derivative in absorption.
+    
+    If ``method=halfedge`` the absorption threshold will be calculated iteratively 
+    as half the edge step. This method calls :func:`~araucaria.xas.normalize.pre_edge`
+    to compute the edge step at each iteration. Parameters for the pre-edge calculation
+    can be passed with the ``pre_edge_kws`` parameter. A tolerance for the error between 
+    iterations can be set with the ``tol`` parameter.
 
-    If ``use_mu_ref=False`` then the absorption threshold will be calculated 
+    If ``use_mu_ref=False`` the absorption threshold will be calculated 
     for the scan attribute of ``group``, as determined by the 
     :func:`~araucaria.main.group.Group.get_mode` method.
     This is the default behavior.
-
-    If ``use_mu_ref=True`` then the absorption threshold will be calculated 
-    for the ``group.mu_ref`` attribute.
+    
+    If ``use_mu_ref=True`` the absorption threshold will be calculated for the 
+    ``group.mu_ref`` attribute.
 
     If ``update=True`` the following attribute will be created in ``group``:
 
     - ``group.e0``: absorption threshold energy :math:`E_0`.
     
-    Example
-    -------
+    Examples
+    --------
+    >>> # computing e0 as the maximum derivative
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.io import read_dnd
     >>> from araucaria.xas import find_e0
@@ -77,7 +98,15 @@ def find_e0(group: Group, use_mu_ref: bool=False, update: bool=False) -> float:
     >>> # find e0 of reference scan
     >>> find_e0(group, use_mu_ref=True)
     29203.249
-    """    
+    
+    >>> # computing e0 as half the edge step
+    >>> find_e0(group, method='halfedge', use_mu_ref=True)
+    29200.62
+    """
+    valid_methods = ('maxder', 'halfedge')
+    if method not in valid_methods:
+        raise ValueError('method %s not recognized.' % method)
+    
     # checking class and attributes
     if use_mu_ref:
         check_objattrs(group, Group, attrlist=['energy', 'mu_ref'], exceptions=True)
@@ -90,14 +119,14 @@ def find_e0(group: Group, use_mu_ref: bool=False, update: bool=False) -> float:
     energy = group.energy
 
     # find points of high derivative
-    # between 6 and 10% total points are substracted from analysis
+    # between 6 and 10% total points at edges are substracted from analysis
     dmu    = gradient(mu)/gradient(energy)
     dmu[where(~isfinite(dmu))] = -1.0
     nmin   = max(3, int(len(dmu)*0.05))  
     maxdmu = max(dmu[nmin:-nmin])
-    
+
     # make exception if maxdmu equals zero
-    high_deriv_pts = where(dmu >  maxdmu*0.1)[0]
+    high_deriv_pts    = where(dmu >  maxdmu*0.1)[0]
     idmu_max, dmu_max = 0, 0
 
     for i in high_deriv_pts:
@@ -109,9 +138,38 @@ def find_e0(group: Group, use_mu_ref: bool=False, update: bool=False) -> float:
             idmu_max, dmu_max = i, dmu[i]
 
     e0 = energy[idmu_max]
+
+    # computing half edge
+    if method == valid_methods[1]:
+        e0_vals = [e0]  # container for iterative e0 values
+        maxcount= 10    # maximum number of iterations
+        cond    = True  # conditional variable to exit the iterations
+        group   = Group(**{'energy': energy, 'mu': mu})
+
+        while cond:
+            if pre_edge_kws is None:
+                pre = pre_edge(group, e0 = e0_vals[-1])
+            else:
+                pre = pre_edge(group, e0 = e0_vals[-1], **pre_edge_kws)
+
+            ie0    = index_nearest(energy, e0_vals[-1])
+            halfed = ( pre['post_edge'][ie0] + pre['pre_edge'][ie0] ) / 2
+            
+            nie0   = index_nearest(mu, halfed)
+            ne0    = energy[nie0]
+            e0_vals.append(ne0)
+
+            if (abs(e0_vals[-1] - e0_vals[-2]) < tol) or (len(e0_vals) > maxcount):
+                cond = False
+
+        # retrieving the last value in the list
+        e0 = e0_vals[-1]
+
     if update:
         group.e0 = e0
+
     return e0
+
 
 def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
              pre_range: list=[-inf,-50], post_range: list=[100,inf],
@@ -125,7 +183,8 @@ def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
     e0
         Absorption threshold energy. If None it will seach for the 
         value stored in ``group.e0``. Otherwise it will be calculated
-        using :func:`~araucaria.xas.normalize.find_e0`.
+        using :func:`~araucaria.xas.normalize.find_e0`. with default 
+        parameters.
     nvict
         Energy exponent for pre-edge fit with a Victoreen polynomial.
         The default is 0. See Notes for details.

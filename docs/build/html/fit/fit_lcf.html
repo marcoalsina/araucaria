@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>LCFit module &mdash; araucaria 0.1.7 documentation</title>
+  <title>LCFit module &mdash; araucaria 0.1.7a documentation</title>
   
 
   
@@ -239,8 +239,9 @@ combintation fitting (LCF) on a XAFS scan:</p>
 with the reference scans.</p></li>
 <li><p><strong>fit_region</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – XAFS region to perform the LCF. Accepted values are ‘dxanes’,
 ‘xanes’, or ‘exafs’. The default is ‘xanes’.</p></li>
-<li><p><strong>fit_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – LCF domain range in absolute values.
-The default is [-<a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.19)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.19)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>].</p></li>
+<li><p><strong>fit_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – LCF domain range in absolute values. Energy units are expected
+for ‘dxanes’ or ‘xanes’, while k units are expected for ‘exafs’.
+The default is [-<a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>].</p></li>
 <li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the fitting method to use.
 For valid names please check the <a class="reference external" href="https://lmfit.github.io/lmfit-py/fitting.html#lmfit.minimizer.minimize">minimize()</a>
 documentation of <code class="docutils literal notranslate"><span class="pre">lmfit</span></code>.</p></li>
@@ -358,7 +359,7 @@ respective group.</p>
 <dd><p>Returns a formatted LCF Report to <code class="docutils literal notranslate"><span class="pre">sys.stdout</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.FitGroup" title="araucaria.main.group.FitGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FitGroup</span></code></a>) – Valid FitGroup from <code class="xref py py-func docutils literal notranslate"><span class="pre">lcf`()</span></code>.</p>
+<dd class="field-odd"><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.FitGroup" title="araucaria.main.group.FitGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FitGroup</span></code></a>) – Valid FitGroup from <a class="reference internal" href="#araucaria.fit.lcfit.lcf" title="araucaria.fit.lcfit.lcf"><code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code></a>.</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
@@ -376,7 +377,7 @@ respective group.</p>
 </dl>
 <p class="rubric">Notes</p>
 <p><a class="reference internal" href="#araucaria.fit.lcfit.lcf_report" title="araucaria.fit.lcfit.lcf_report"><code class="xref py py-func docutils literal notranslate"><span class="pre">lcf_report()</span></code></a> is a wrapper for <code class="xref py py-func docutils literal notranslate"><span class="pre">fit_report()</span></code> of <code class="docutils literal notranslate"><span class="pre">lmfit</span></code>,
-that attaches additional information on group names and calling parameters.</p>
+that writes additional information on group names and calling parameters.</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">seed</span><span class="p">,</span> <span class="n">normal</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">arange</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
@@ -443,7 +444,7 @@ should exist in the dictionary.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Sum of references weighted by amplitude coefficients.</p>
@@ -484,7 +485,7 @@ the dictionary.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Array with residuals.</p>

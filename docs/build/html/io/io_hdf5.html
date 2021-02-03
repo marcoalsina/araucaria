@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>IO HDF5 module &mdash; araucaria 0.1.7 documentation</title>
+  <title>IO HDF5 module &mdash; araucaria 0.1.7a documentation</title>
   
 
   
@@ -243,6 +243,34 @@ manipulate data in the Hierarchical Data Format <code class="docutils literal no
 </dd></dl>
 
 <dl class="py function">
+<dt id="araucaria.io.io_hdf5.convert_bytes_hdf5">
+<code class="sig-prename descclassname">araucaria.io.io_hdf5.</code><code class="sig-name descname">convert_bytes_hdf5</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">record</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.convert_bytes_hdf5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility function to convert a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> record from an HDF5 file.</p>
+<p>Returned value will be either a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>,
+or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>record</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>) – HDF5 dataset record.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Converted record.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>TypeError:</strong> – If  value stored inside <code class="docutils literal notranslate"><span class="pre">record</span></code> is not of type
+    <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><code class="docutils literal notranslate"><span class="pre">araucaria</span></code> stores <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> records
+as <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> in the HDF5 file.
+Such records  need to be converted back to their original
+types during reading.</p>
+</dd></dl>
+
+<dl class="py function">
 <dt id="araucaria.io.io_hdf5.write_hdf5">
 <code class="sig-prename descclassname">araucaria.io.io_hdf5.</code><code class="sig-name descname">write_hdf5</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fpath</span></em>, <em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">'dataset1'</span></em>, <em class="sig-param"><span class="n">replace</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.write_hdf5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes a group dataset into an HDF5 file.</p>
@@ -307,7 +335,7 @@ The previous dataset can be overwritten with the option <code class="docutils li
 </dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Only <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>
+<p>Only <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>
 types are currently supported for recursive writting into an HDF5 <a class="reference external" href="https://docs.h5py.org/en/latest/high/dataset.html#h5py.Dataset" title="(in h5py v3.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a>.</p>
 <p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> types will be convertet to <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, which is in
 turn saved as <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> in the HDF5 database.
@@ -407,7 +435,7 @@ original type in the group.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to HDF5 file.</p></li>
 <li><p><strong>optional</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>]) – List with optional parameters. See Notes for details.</p></li>
-<li><p><strong>pre_edge_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – Dictionary with arguments for <code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code>.</p></li>
+<li><p><strong>pre_edge_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – Dictionary with arguments for <a class="reference internal" href="../xas/xas_normalize.html#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -417,10 +445,7 @@ original type in the group.</p>
 <dd class="field-odd"><p>Report for datasets in the HDF5 file.</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If the HDF5 file does not exist in the specified path.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If any requested parameter in <code class="docutils literal notranslate"><span class="pre">optional</span></code> is not recognized.</p></li>
-</ul>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If the HDF5 file does not exist in the specified path.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
@@ -430,14 +455,19 @@ original type in the group.</p>
 <li><p>Dataset name.</p></li>
 <li><p>Measurement mode.</p></li>
 <li><p>Numbers of scans.</p></li>
-<li><p>absorption edge step <span class="math notranslate nohighlight">\(\Delta\mu(E_0)\)</span>, if <code class="docutils literal notranslate"><span class="pre">optional=['edge_step']</span></code>.</p></li>
-<li><p>absorption threshold energy <span class="math notranslate nohighlight">\(E_0\)</span>, if <code class="docutils literal notranslate"><span class="pre">optional=['e0']</span></code>.</p></li>
+<li><p>Absorption edge step <span class="math notranslate nohighlight">\(\Delta\mu(E_0)\)</span>, if <code class="docutils literal notranslate"><span class="pre">optional=['edge_step']</span></code>.</p></li>
+<li><p>Absorption threshold energy <span class="math notranslate nohighlight">\(E_0\)</span>, if <code class="docutils literal notranslate"><span class="pre">optional=['e0']</span></code>.</p></li>
 <li><p>Merged scans, if <code class="docutils literal notranslate"><span class="pre">optional=['merged_scans']</span></code>.</p></li>
+<li><p>Optional parameters if they exist as attributes in the dataset.</p></li>
 </ol>
-<p>The number of scans and names of merged files are retrieved from the
-<code class="docutils literal notranslate"><span class="pre">merged_scans</span></code> attribute of the HDF5 dataset.</p>
-<p>The absorption threshold and the edge step are retrieved by calling the function
-<a class="reference internal" href="../xas/xas_normalize.html#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>.</p>
+<p>The number of scans and names of merged files are retrieved
+from the <code class="docutils literal notranslate"><span class="pre">merged_scans</span></code> attribute of the HDF5 dataset.</p>
+<p>The absorption threshold and the edge step are retrieved by
+calling the function <a class="reference internal" href="../xas/xas_normalize.html#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>.</p>
+<p>Optional parameters will be retrieved from the dataset as
+attributes. Currently only <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> or
+<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> will be retrieved. Otherswise an empty character
+will be printed in the report.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <p><a class="reference internal" href="#araucaria.io.io_hdf5.read_hdf5" title="araucaria.io.io_hdf5.read_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_hdf5()</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Report</span></code></p>
@@ -473,6 +503,27 @@ original type in the group.</p>
 <span class="go">----------------------------------------------------</span>
 <span class="go">3   xmu_testfile  mu    1  11873  None</span>
 <span class="go">====================================================</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># printing custom parameters</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_xmu</span><span class="p">,</span> <span class="n">write_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;xmu_testfile.xmu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting mu and mu_ref scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_xmu</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># adding additional attributes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="s1">&#39;Zn&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span><span class="o">.</span><span class="n">temp</span>   <span class="o">=</span> <span class="mf">25.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving a new hdf5 file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">write_hdf5</span><span class="p">(</span><span class="s1">&#39;database2.h5&#39;</span><span class="p">,</span> <span class="n">group_mu</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;xmu_testfile&#39;</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">xmu_testfile written to database2.h5.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span> <span class="o">=</span> <span class="n">summary_hdf5</span><span class="p">(</span><span class="s1">&#39;database2.h5&#39;</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">,</span><span class="s1">&#39;temp&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="go">=========================================</span>
+<span class="go">id  dataset       mode  n  symbol  temp</span>
+<span class="go">=========================================</span>
+<span class="go">1   xmu_testfile  mu    1  Zn      25</span>
+<span class="go">=========================================</span>
 </pre></div>
 </div>
 </dd></dl>

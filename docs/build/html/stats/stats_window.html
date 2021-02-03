@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Window module &mdash; araucaria 0.1.7 documentation</title>
+  <title>Window module &mdash; araucaria 0.1.7a documentation</title>
   
 
   
@@ -180,7 +180,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array to compute the rolling median.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array to compute the rolling median.</p></li>
 <li><p><strong>window</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Size of the rolling window for analysis.</p></li>
 <li><p><strong>min_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Minimum sample points to calculate the median in each window.
 The default is 2.</p></li>
@@ -190,7 +190,7 @@ The default is ‘nan’.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.19)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Rolling median of the array.</p>
@@ -206,17 +206,17 @@ The default is ‘nan’.</p></li>
 </dl>
 <p class="rubric">Notes</p>
 <p>This function calculates the median of a moving window. Results are returned in the
-index corresponding to the center of the window. The function ignores <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v1.19)"><code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code></a>
+index corresponding to the center of the window. The function ignores <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code></a>
 values in the array.</p>
 <ul class="simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">edgemethod='nan'</span></code> uses <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v1.19)"><code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code></a> values for missing values at the edges.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edgemethod='nan'</span></code> uses <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code></a> values for missing values at the edges.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">edgemethod='calc'</span></code> uses an abbreviated window at the edges
 (e.g. the first sample will have (window/2)+1 points in the calculation).</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">edgemethod='extend'</span></code> uses the nearest calculated value for missing values at the edges.</p></li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>If <code class="docutils literal notranslate"><span class="pre">window</span></code> is less than <code class="docutils literal notranslate"><span class="pre">min_samples</span></code>, <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v1.19)"><code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code></a> is given as the median.</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">window</span></code> is less than <code class="docutils literal notranslate"><span class="pre">min_samples</span></code>, <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code></a> is given as the median.</p>
 </div>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">linspace</span>

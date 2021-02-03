@@ -3,11 +3,11 @@ from araucaria import Group
 from araucaria.io import read_dnd
 from araucaria.xas import pre_edge, autobk
 from araucaria.utils import check_objattrs
-fpath    = get_testpath('dnd_testfile.dat')
-group    = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
-pre      = pre_edge(group, update=True)
-attrs    = ['bkg', 'chie', 'chi', 'k', 'autobk_pars']
-autbk    = autobk(group, update=True)
+fpath = get_testpath('dnd_testfile.dat')
+group = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
+pre   = pre_edge(group, update=True)
+attrs = ['bkg', 'chie', 'chi', 'k', 'autobk_pars']
+autbk = autobk(group, update=True)
 check_objattrs(group, Group, attrs)
 # [True, True, True, True, True]
 
