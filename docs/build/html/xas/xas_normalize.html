@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Normalize module &mdash; araucaria 0.1.7a documentation</title>
+  <title>Normalize module &mdash; araucaria 0.1.7b documentation</title>
   
 
   
@@ -248,6 +248,15 @@ This is the default behavior.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">group.e0</span></code>: absorption threshold energy <span class="math notranslate nohighlight">\(E_0\)</span>.</p></li>
 </ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Computing <cite>e0</cite> with <code class="docutils literal notranslate"><span class="pre">method=halfedge</span></code> is sensitive to the parameters used
+to compute the edge step by <a class="reference internal" href="#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>.
+Therefore, different parameters for calculation of the edge step will yield
+different values of <cite>e0</cite> by this method.</p>
+<p>Currently <code class="docutils literal notranslate"><span class="pre">method=halfedge</span></code> considers a maximum of 10 iterations to compute
+<cite>e0</cite>.</p>
+</div>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># computing e0 as the maximum derivative</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>

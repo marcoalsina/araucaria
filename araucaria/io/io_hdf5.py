@@ -86,8 +86,10 @@ def read_hdf5(fpath: Path, name: str)-> Group:
         raise ValueError("%s does not exists in %s!" % (name, fpath))
     
     hdf5.close()
+    # writting group and saving name
     group = Group(**data)
-    return group
+    group.name = name
+    return (group)
 
 
 def convert_bytes_hdf5(record: Dataset) -> Union[dict, list, str]:

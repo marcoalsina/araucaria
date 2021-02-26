@@ -85,6 +85,16 @@ def find_e0(group: Group, method: str='maxder', tol: float=1e-4,
     If ``update=True`` the following attribute will be created in ``group``:
 
     - ``group.e0``: absorption threshold energy :math:`E_0`.
+
+    Important
+    ---------
+    Computing `e0` with ``method=halfedge`` is sensitive to the parameters used
+    to compute the edge step by :func:`~araucaria.xas.normalize.pre_edge`.
+    Therefore, different parameters for calculation of the edge step will yield 
+    different values of `e0` by this method.
+    
+    Currently ``method=halfedge`` considers a maximum of 10 iterations to compute
+    `e0`.
     
     Examples
     --------
@@ -152,11 +162,20 @@ def find_e0(group: Group, method: str='maxder', tol: float=1e-4,
             else:
                 pre = pre_edge(group, e0 = e0_vals[-1], **pre_edge_kws)
 
-            ie0    = index_nearest(energy, e0_vals[-1])
-            halfed = ( pre['post_edge'][ie0] + pre['pre_edge'][ie0] ) / 2
+            # calculating half edge step value
+            ie0        = index_nearest(energy, e0_vals[-1])
+            halfed     = ( pre['post_edge'][ie0] + pre['pre_edge'][ie0] ) / 2
             
-            nie0   = index_nearest(mu, halfed)
-            ne0    = energy[nie0]
+            # checking range within energy array
+            prerange   = check_xrange(pre['pre_edge_pars']['pre_range'],  energy, refval=e0_vals[-1])
+            postrange  = check_xrange(pre['pre_edge_pars']['post_range'], energy, refval=e0_vals[-1])
+            
+            # finding half edge step energy is constrained near the edge
+            pre_index  = index_nearest(energy, prerange[1]  + e0)
+            post_index = index_nearest(energy, postrange[0] + e0, kind='lower')
+            
+            nie0   = index_nearest(mu[pre_index:post_index+1], halfed)
+            ne0    = energy[pre_index + nie0]
             e0_vals.append(ne0)
 
             if (abs(e0_vals[-1] - e0_vals[-2]) < tol) or (len(e0_vals) > maxcount):
