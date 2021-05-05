@@ -7,7 +7,8 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>genESD module &mdash; araucaria 0.1.7b documentation</title>
+  <title>genESD module &mdash; araucaria 0.1.7c
+ documentation</title>
   
 
   
@@ -30,10 +31,11 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -89,6 +91,7 @@
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
@@ -171,7 +174,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-araucaria.stats.genesd">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.stats.genesd">
 <span id="genesd-module"></span><h1>genESD module<a class="headerlink" href="#module-araucaria.stats.genesd" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference internal" href="#module-araucaria.stats.genesd" title="araucaria.stats.genesd"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genesd</span></code></a> module offers the following
 functions to detect outliers in a univariate array using the
@@ -196,7 +223,7 @@ generalized extreme Studentized deviate test:</p>
 </table>
 <dl class="py function">
 <dt id="araucaria.stats.genesd.genesd">
-<code class="sig-prename descclassname">araucaria.stats.genesd.</code><code class="sig-name descname">genesd</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">r</span></em>, <em class="sig-param"><span class="n">alpha</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.genesd.genesd" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.stats.genesd.</span></code><code class="sig-name descname"><span class="pre">genesd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.genesd.genesd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Identifes outliers in a data array.</p>
 <p>This function uses the generalized extreme Studentized
 deviate (ESD) test to detect one or more outliers
@@ -276,7 +303,7 @@ Many-Outlier Procedure”, Technometrics, 25(2), pp. 165-172.</p>
 
 <dl class="py function">
 <dt id="araucaria.stats.genesd.find_ri">
-<code class="sig-prename descclassname">araucaria.stats.genesd.</code><code class="sig-name descname">find_ri</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">r</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.genesd.find_ri" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.stats.genesd.</span></code><code class="sig-name descname"><span class="pre">find_ri</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.genesd.find_ri" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the <span class="math notranslate nohighlight">\(R_i\)</span> test statistics for the
 generalized extreme Studentized deviate (ESD) test.</p>
 <dl class="field-list simple">
@@ -335,7 +362,7 @@ from the array.</p>
 
 <dl class="py function">
 <dt id="araucaria.stats.genesd.find_critvals">
-<code class="sig-prename descclassname">araucaria.stats.genesd.</code><code class="sig-name descname">find_critvals</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">n</span></em>, <em class="sig-param"><span class="n">r</span></em>, <em class="sig-param"><span class="n">alpha</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.genesd.find_critvals" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.stats.genesd.</span></code><code class="sig-name descname"><span class="pre">find_critvals</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.genesd.find_critvals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes critical values <span class="math notranslate nohighlight">\(\lambda_i\)</span> for the
 generalized extreme Studentized deviate (ESD) test.</p>
 <dl class="field-list simple">

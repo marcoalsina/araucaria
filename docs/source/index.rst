@@ -19,6 +19,7 @@ Additional functionality will be added on a regular basis.
    :caption: Contents
 
    install
+   tutorials
 
 .. toctree::
    :maxdepth: 2

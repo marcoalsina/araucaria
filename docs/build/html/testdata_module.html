@@ -7,7 +7,8 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Testdata module &mdash; araucaria 0.1.7b documentation</title>
+  <title>Testdata module &mdash; araucaria 0.1.7c
+ documentation</title>
   
 
   
@@ -30,10 +31,9 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -88,6 +88,7 @@
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
@@ -164,7 +165,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-araucaria.testdata">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.testdata">
 <span id="testdata-module"></span><h1>Testdata module<a class="headerlink" href="#module-araucaria.testdata" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference internal" href="#module-araucaria.testdata" title="araucaria.testdata"><code class="xref py py-mod docutils literal notranslate"><span class="pre">testdata</span></code></a> module contain the test datasets
 used for documenting functionality and testing.</p>
@@ -177,7 +202,7 @@ the datasets:</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><code class="xref py py-func docutils literal notranslate"><span class="pre">get_tesfiles()</span></code></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.testdata.utils.get_testfiles" title="araucaria.testdata.utils.get_testfiles"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_testfiles()</span></code></a></p></td>
 <td><p>Returns the available test files.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.testdata.utils.get_testpath" title="araucaria.testdata.utils.get_testpath"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_testpath()</span></code></a></p></td>
@@ -187,7 +212,7 @@ the datasets:</p>
 </table>
 <dl class="py function">
 <dt id="araucaria.testdata.utils.get_testfiles">
-<code class="sig-prename descclassname">araucaria.testdata.utils.</code><code class="sig-name descname">get_testfiles</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.testdata.utils.get_testfiles" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.testdata.utils.</span></code><code class="sig-name descname"><span class="pre">get_testfiles</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.testdata.utils.get_testfiles" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the available test files.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -216,7 +241,7 @@ the datasets:</p>
 
 <dl class="py function">
 <dt id="araucaria.testdata.utils.get_testpath">
-<code class="sig-prename descclassname">araucaria.testdata.utils.</code><code class="sig-name descname">get_testpath</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">filename</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.testdata.utils.get_testpath" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.testdata.utils.</span></code><code class="sig-name descname"><span class="pre">get_testpath</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.testdata.utils.get_testpath" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the path to the requested test file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

@@ -7,7 +7,8 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Plot module &mdash; araucaria 0.1.7b documentation</title>
+  <title>Plot module &mdash; araucaria 0.1.7c
+ documentation</title>
   
 
   
@@ -30,10 +31,11 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -89,6 +91,7 @@
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
@@ -165,7 +168,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-araucaria.plot">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.plot">
 <span id="plot-module"></span><h1>Plot module<a class="headerlink" href="#module-araucaria.plot" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference internal" href="#module-araucaria.plot" title="araucaria.plot"><code class="xref py py-mod docutils literal notranslate"><span class="pre">plot</span></code></a> module offers classes and functions to preset <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> axes for
 plotting XAS spectra. The following functions are currently implemented:</p>
@@ -189,7 +216,7 @@ plotting XAS spectra. The following functions are currently implemented:</p>
 </table>
 <span class="target" id="module-araucaria.plot.template"></span><dl class="py class">
 <dt id="araucaria.plot.template.FigPars">
-<em class="property">class </em><code class="sig-prename descclassname">araucaria.plot.template.</code><code class="sig-name descname">FigPars</code><a class="headerlink" href="#araucaria.plot.template.FigPars" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">araucaria.plot.template.</span></code><code class="sig-name descname"><span class="pre">FigPars</span></code><a class="headerlink" href="#araucaria.plot.template.FigPars" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class dictionary with argument for plotting functions.</p>
 <p>This utility class stores arguments to preset
 <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> axes.</p>
@@ -199,7 +226,7 @@ plotting XAS spectra. The following functions are currently implemented:</p>
 <li><p><strong>prop_cycle</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List of property cycle dictionaries for each
 axes. List is iterated if the elements of
 the list are less than the number of panels.
-See the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_prop_cycle.html#matplotlib.axes.Axes.set_prop_cycle" title="(in Matplotlib v3.3.4)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_prop_cycle()</span></code></a>
+See the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.axes.Axes.set_prop_cycle.html#matplotlib.axes.Axes.set_prop_cycle" title="(in Matplotlib v3.4.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">set_prop_cycle()</span></code></a>
 method for further details.</p></li>
 <li><p><strong>e_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – XANES energy range.</p></li>
 <li><p><strong>e_ticks</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – XANES energy tick marks.</p></li>
@@ -225,7 +252,7 @@ method for further details.</p></li>
 
 <dl class="py function">
 <dt id="araucaria.plot.template.fig_xas_template">
-<code class="sig-prename descclassname">araucaria.plot.template.</code><code class="sig-name descname">fig_xas_template</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">panels</span><span class="o">=</span><span class="default_value">'xx'</span></em>, <em class="sig-param"><span class="n">fig_pars</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">fig_kws</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.plot.template.fig_xas_template" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.plot.template.</span></code><code class="sig-name descname"><span class="pre">fig_xas_template</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">panels</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xx'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_pars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fig_kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.plot.template.fig_xas_template" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a preset <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> figure and axes object
 to plot XAS spectra.</p>
 <p>Panel elements (axes) are indexed in row-major (C-style order).</p>
@@ -246,12 +273,12 @@ Examples: ‘dxe’, ‘xx’, ‘xer’, ‘xx/xx’.</p>
 </p></li>
 <li><p><strong>fig_pars</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#araucaria.plot.template.FigPars" title="araucaria.plot.template.FigPars"><code class="xref py py-class docutils literal notranslate"><span class="pre">FigPars</span></code></a>]) – Dictionary arguments for the figure.
 See <a class="reference internal" href="#araucaria.plot.template.FigPars" title="araucaria.plot.template.FigPars"><code class="xref py py-class docutils literal notranslate"><span class="pre">FigPars</span></code></a> for details.</p></li>
-<li><p><strong>fig_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – Additional arguments to pass to the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure.subplots" title="(in Matplotlib v3.3.4)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subplots()</span></code></a>
+<li><p><strong>fig_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – Additional arguments to pass to the <a class="reference external" href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure.subplots" title="(in Matplotlib v3.4.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subplots()</span></code></a>
 routine of <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="(in Matplotlib v3.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code>]</p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">
@@ -286,7 +313,7 @@ routine of <code class="docutils literal notranslate"><span class="pre">Matplotl
 
 <span class="target" id="module-araucaria.plot.fig_pre_edge"></span><dl class="py function">
 <dt id="araucaria.plot.fig_pre_edge.fig_pre_edge">
-<code class="sig-prename descclassname">araucaria.plot.fig_pre_edge.</code><code class="sig-name descname">fig_pre_edge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">show_pre_edge</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">show_post_edge</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">fig_pars</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">fig_kws</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.plot.fig_pre_edge.fig_pre_edge" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.plot.fig_pre_edge.</span></code><code class="sig-name descname"><span class="pre">fig_pre_edge</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_pre_edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_post_edge</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_pars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fig_kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.plot.fig_pre_edge.fig_pre_edge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the results of pre-edge substraction and normalization of a scan.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -298,12 +325,12 @@ The detault is True.</p></li>
 The detault is True.</p></li>
 <li><p><strong>fig_pars</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#araucaria.plot.template.FigPars" title="araucaria.plot.template.FigPars"><code class="xref py py-class docutils literal notranslate"><span class="pre">FigPars</span></code></a>]) – Dictionary arguments for the figure.
 See <a class="reference internal" href="#araucaria.plot.template.FigPars" title="araucaria.plot.template.FigPars"><code class="xref py py-class docutils literal notranslate"><span class="pre">FigPars</span></code></a> for details.</p></li>
-<li><p><strong>fig_kws</strong> – Additional arguments to pass to the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure.subplots" title="(in Matplotlib v3.3.4)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subplots()</span></code></a>
+<li><p><strong>fig_kws</strong> – Additional arguments to pass to the <a class="reference external" href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure.subplots" title="(in Matplotlib v3.4.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subplots()</span></code></a>
 routine of <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="(in Matplotlib v3.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code>]</p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">
@@ -352,7 +379,7 @@ normalized and flattened <span class="math notranslate nohighlight">\(\mu(E)\)</
 
 <span class="target" id="module-araucaria.plot.fig_merge"></span><dl class="py function">
 <dt id="araucaria.plot.fig_merge.fig_merge">
-<code class="sig-prename descclassname">araucaria.plot.fig_merge.</code><code class="sig-name descname">fig_merge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">merge</span></em>, <em class="sig-param"><span class="n">collection</span></em>, <em class="sig-param"><span class="n">pre_edge_kws</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">autobk_kws</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">fig_pars</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">fig_kws</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.plot.fig_merge.fig_merge" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.plot.fig_merge.</span></code><code class="sig-name descname"><span class="pre">fig_merge</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">merge</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_edge_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autobk_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_pars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fig_kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.plot.fig_merge.fig_merge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plots the results of a merge operation in a collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -363,12 +390,12 @@ normalized and flattened <span class="math notranslate nohighlight">\(\mu(E)\)</
 <li><p><strong>autobk_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Dictionary with arguments for background removal.</p></li>
 <li><p><strong>fig_pars</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference internal" href="#araucaria.plot.template.FigPars" title="araucaria.plot.template.FigPars"><code class="xref py py-class docutils literal notranslate"><span class="pre">FigPars</span></code></a>]) – Dictionary arguments for the figure.
 See <a class="reference internal" href="#araucaria.plot.template.FigPars" title="araucaria.plot.template.FigPars"><code class="xref py py-class docutils literal notranslate"><span class="pre">FigPars</span></code></a> for details.</p></li>
-<li><p><strong>fig_kws</strong> – Additional arguments to pass to the <a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure.subplots" title="(in Matplotlib v3.3.4)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subplots()</span></code></a>
+<li><p><strong>fig_kws</strong> – Additional arguments to pass to the <a class="reference external" href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure.subplots" title="(in Matplotlib v3.4.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subplots()</span></code></a>
 routine of <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.figure.Figure.html#matplotlib.figure.Figure" title="(in Matplotlib v3.3.4)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code>]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="(in Matplotlib v3.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code>]</p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">

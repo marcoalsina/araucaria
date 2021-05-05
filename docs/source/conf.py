@@ -45,6 +45,7 @@ extensions = ['matplotlib.sphinxext.plot_directive',
               'sphinx_autodoc_typehints',
               'sphinx.ext.intersphinx',
               'sphinx_rtd_theme',
+              'nbsphinx',
               'sphinx.ext.mathjax',
               'sphinx.ext.coverage',
               'sphinx_copybutton',
@@ -72,8 +73,8 @@ pygments_style = 'colorful'
 # type hints parameters
 set_type_checking_flag   = True
 typehints_fully_qualified= False
-autodoc_typehints = 'description'  # show type hints in doc body instead of signature
-autoclass_content = 'both'         # get docstring from class level and init simultaneously
+autodoc_typehints        = 'description'  # show type hints in doc body instead of signature
+autoclass_content        = 'both'         # get docstring from class level and init simultaneously
 
 # plot parameters
 plot_include_source = True

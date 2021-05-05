@@ -7,7 +7,8 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Window module &mdash; araucaria 0.1.7b documentation</title>
+  <title>Window module &mdash; araucaria 0.1.7c
+ documentation</title>
   
 
   
@@ -30,10 +31,9 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -89,6 +89,7 @@
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
@@ -171,11 +172,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-araucaria.stats.window">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.stats.window">
 <span id="window-module"></span><h1>Window module<a class="headerlink" href="#module-araucaria.stats.window" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="araucaria.stats.window.roll_med">
-<code class="sig-prename descclassname">araucaria.stats.window.</code><code class="sig-name descname">roll_med</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">window</span></em>, <em class="sig-param"><span class="n">min_samples</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">edgemethod</span><span class="o">=</span><span class="default_value">'nan'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.window.roll_med" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.stats.window.</span></code><code class="sig-name descname"><span class="pre">roll_med</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edgemethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nan'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.window.roll_med" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the rolling median of a univariate array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

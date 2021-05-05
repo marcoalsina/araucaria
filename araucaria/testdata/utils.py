@@ -10,7 +10,7 @@ the datasets:
 
    * - Function
      - Description
-   * - :func:`get_tesfiles`
+   * - :func:`get_testfiles`
      - Returns the available test files.
    * - :func:`get_testpath`
      - Returns path to the requested test file.
@@ -50,6 +50,8 @@ def get_testfiles() -> list:
     for item in olist:
         if ('__' in item) or ('utils' in item):
             clist.remove(item)
+    clist.sort()
+
     return (clist)
 
 def get_testpath(filename:str) -> Path:

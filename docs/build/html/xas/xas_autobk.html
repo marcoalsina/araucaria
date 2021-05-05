@@ -7,7 +7,8 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Autobk module &mdash; araucaria 0.1.7b documentation</title>
+  <title>Autobk module &mdash; araucaria 0.1.7c
+ documentation</title>
   
 
   
@@ -30,10 +31,11 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -89,6 +91,7 @@
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
@@ -175,11 +178,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-araucaria.xas.autobk">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.xas.autobk">
 <span id="autobk-module"></span><h1>Autobk module<a class="headerlink" href="#module-araucaria.xas.autobk" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt id="araucaria.xas.autobk.autobk">
-<code class="sig-prename descclassname">araucaria.xas.autobk.</code><code class="sig-name descname">autobk</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">rbkg</span><span class="o">=</span><span class="default_value">1.0</span></em>, <em class="sig-param"><span class="n">k_range</span><span class="o">=</span><span class="default_value">[0, inf]</span></em>, <em class="sig-param"><span class="n">kweight</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">win</span><span class="o">=</span><span class="default_value">'hanning'</span></em>, <em class="sig-param"><span class="n">dk</span><span class="o">=</span><span class="default_value">0.1</span></em>, <em class="sig-param"><span class="n">nfft</span><span class="o">=</span><span class="default_value">2048</span></em>, <em class="sig-param"><span class="n">kstep</span><span class="o">=</span><span class="default_value">0.05</span></em>, <em class="sig-param"><span class="n">k_std</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">chi_std</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nclamp</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">clamp_lo</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">clamp_hi</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">update</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.autobk.autobk" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.xas.autobk.</span></code><code class="sig-name descname"><span class="pre">autobk</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rbkg</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">inf]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hanning'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dk</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2048</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kstep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_std</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">chi_std</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nclamp</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clamp_lo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clamp_hi</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.autobk.autobk" title="Permalink to this definition">¶</a></dt>
 <dd><p>Autobk algorithm to remove background of a XAFS scan.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

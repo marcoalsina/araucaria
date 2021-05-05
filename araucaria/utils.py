@@ -9,6 +9,8 @@ The :mod:`~araucaria.utils` module offers the following utility functions:
 
    * - Function
      - Description
+   * - :func:`get_version`
+     - Returns version of araucaria.
    * - :func:`check_objattrs`
      - Check type and attributes of an object.
    * - :func:`check_xrange`
@@ -26,6 +28,50 @@ from typing import List, Union, TypeVar
 from numpy import (ndarray, diff, abs, argwhere, where, 
                    ravel, apply_along_axis, isnan, isinf)
 from . import Group
+
+def get_version(dependencies:bool=False) -> str:
+    """Returns installed version of araucaria.
+
+    Parameters
+    ----------
+    dependencies
+        Condition to additionally get version of
+        dependencies. The default is False.
+
+    Returns
+    -------
+    :
+        Printable string with version of araucaria.
+
+    Examples
+    --------
+    >>> from araucaria.utils import get_version
+    >>> print(get_version()) #doctest: +ELLIPSIS
+    Araucaria version     : ...
+    """
+    import os,sys
+    import numpy as np
+    import scipy as sp
+    import lmfit as lm
+    import matplotlib as mpl
+    import araucaria as ara
+
+    libr = ('Python', 'Numpy', 'Scipy', 'Lmfit', 'Matplotlib')
+    verf = ''    # string container
+
+    if dependencies:
+        for i, lib in enumerate((sys, np, sp, lm, mpl)):
+            if lib == sys: 
+                ver = lib.version
+            else:
+                ver = lib.__version__
+            verf   += '{0:22}: {1}\n'.format(libr[i]+' version',ver)
+
+    ver   = ara.__version__
+    verf += '{0:22}: {1}'.format('Araucaria version', ver)
+
+    return verf
+
 
 def check_objattrs(obj: object, objtype: TypeVar, attrlist: list=None, 
                    exceptions: bool=False) -> List[bool]:
@@ -81,6 +127,7 @@ def check_objattrs(obj: object, objtype: TypeVar, attrlist: list=None,
                 boolist.append(False)
         else:
             boolist.append(True)
+
     return boolist
 
 def check_xrange(x_range: list, x: ndarray, refval: float=None) -> list:

@@ -7,7 +7,8 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Merge module &mdash; araucaria 0.1.7b documentation</title>
+  <title>Merge module &mdash; araucaria 0.1.7c
+ documentation</title>
   
 
   
@@ -30,10 +31,9 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -89,6 +89,7 @@
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
@@ -175,7 +176,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-araucaria.xas.merge">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.xas.merge">
 <span id="merge-module"></span><h1>Merge module<a class="headerlink" href="#module-araucaria.xas.merge" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference internal" href="#module-araucaria.xas.merge" title="araucaria.xas.merge"><code class="xref py py-mod docutils literal notranslate"><span class="pre">merge</span></code></a> module offers the following functions to pre-process
 and merge scans:</p>
@@ -199,7 +224,7 @@ and merge scans:</p>
 </table>
 <dl class="py function">
 <dt id="araucaria.xas.merge.calibrate">
-<code class="sig-prename descclassname">araucaria.xas.merge.</code><code class="sig-name descname">calibrate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">e0</span></em>, <em class="sig-param"><span class="n">update</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.merge.calibrate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.xas.merge.</span></code><code class="sig-name descname"><span class="pre">calibrate</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.merge.calibrate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calibrates the absorption threshold energy of the reference scan.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -243,7 +268,7 @@ reverted to its original values before performing calibration with the new <code
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="xas_normalize.html#araucaria.xas.normalize.find_e0" title="araucaria.xas.normalize.find_e0"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_e0()</span></code></a></dt><dd><p>Finds the absorption threshold value.</p>
+<dt><a class="reference internal" href="xas_normalize.html#araucaria.xas.normalize.find_e0" title="araucaria.xas.normalize.find_e0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_e0</span></code></a></dt><dd><p>Finds the absorption threshold value.</p>
 </dd>
 </dl>
 </div>
@@ -263,7 +288,7 @@ reverted to its original values before performing calibration with the new <code
 
 <dl class="py function">
 <dt id="araucaria.xas.merge.align">
-<code class="sig-prename descclassname">araucaria.xas.merge.</code><code class="sig-name descname">align</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">refgroup</span></em>, <em class="sig-param"><span class="n">offset</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">window</span><span class="o">=</span><span class="default_value">[- 50, 50]</span></em>, <em class="sig-param"><span class="n">use_mu_ref</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">update</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.merge.align" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.xas.merge.</span></code><code class="sig-name descname"><span class="pre">align</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refgroup</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">50,</span> <span class="pre">50]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mu_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.merge.align" title="Permalink to this definition">¶</a></dt>
 <dd><p>Aligns the scan of a data group with respect to a reference.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -324,7 +349,7 @@ array will be reverted to its original values before performing alignment.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="xas_normalize.html#araucaria.xas.normalize.find_e0" title="araucaria.xas.normalize.find_e0"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_e0()</span></code></a></dt><dd><p>Finds the absorption threshold value.</p>
+<dt><a class="reference internal" href="xas_normalize.html#araucaria.xas.normalize.find_e0" title="araucaria.xas.normalize.find_e0"><code class="xref py py-obj docutils literal notranslate"><span class="pre">find_e0</span></code></a></dt><dd><p>Finds the absorption threshold value.</p>
 </dd>
 </dl>
 </div>
@@ -361,7 +386,7 @@ array will be reverted to its original values before performing alignment.</p>
 
 <dl class="py function">
 <dt id="araucaria.xas.merge.merge">
-<code class="sig-prename descclassname">araucaria.xas.merge.</code><code class="sig-name descname">merge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">collection</span></em>, <em class="sig-param"><span class="n">taglist</span><span class="o">=</span><span class="default_value">['all']</span></em>, <em class="sig-param"><span class="n">only_mu_ref</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.merge.merge" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.xas.merge.</span></code><code class="sig-name descname"><span class="pre">merge</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">only_mu_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.merge.merge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Merge groups in a collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -429,17 +454,17 @@ will be merged.</p>
 <span class="gp">... </span>    <span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>  <span class="c1"># extracting mu and mu_ref scans</span>
 <span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group_mu</span><span class="p">)</span>         <span class="c1"># adding group to collection</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="p">,</span> <span class="n">merge</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="p">,</span> <span class="n">mgroup</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="go">================================================</span>
-<span class="go">id  filename           mode  e_offset  e0 [eV]</span>
-<span class="go">================================================</span>
-<span class="go">1   dnd_testfile.dat   mu    0         29203</span>
-<span class="go">2   dnd_testfile2.dat  mu    0         29203</span>
-<span class="go">3   dnd_testfile3.dat  mu    0         29203</span>
-<span class="go">------------------------------------------------</span>
-<span class="go">    merge              mu    0         29203</span>
-<span class="go">================================================</span>
+<span class="go">===================================================</span>
+<span class="go">id  filename           mode  e_offset[eV]  e0[eV]</span>
+<span class="go">===================================================</span>
+<span class="go">1   dnd_testfile.dat   mu    0             29203</span>
+<span class="go">2   dnd_testfile2.dat  mu    0             29203</span>
+<span class="go">3   dnd_testfile3.dat  mu    0             29203</span>
+<span class="go">---------------------------------------------------</span>
+<span class="go">    merge              mu    0             29203</span>
+<span class="go">===================================================</span>
 </pre></div>
 </div>
 </dd></dl>

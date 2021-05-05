@@ -7,7 +7,8 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Normalize module &mdash; araucaria 0.1.7b documentation</title>
+  <title>Normalize module &mdash; araucaria 0.1.7c
+ documentation</title>
   
 
   
@@ -30,10 +31,11 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
         <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -89,6 +91,7 @@
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
@@ -175,7 +178,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-araucaria.xas.normalize">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.xas.normalize">
 <span id="normalize-module"></span><h1>Normalize module<a class="headerlink" href="#module-araucaria.xas.normalize" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference internal" href="#module-araucaria.xas.normalize" title="araucaria.xas.normalize"><code class="xref py py-mod docutils literal notranslate"><span class="pre">normalize</span></code></a> module offers the following functions to normalize a scan:</p>
 <table class="colwidths-auto docutils align-default">
@@ -195,7 +222,7 @@
 </table>
 <dl class="py function">
 <dt id="araucaria.xas.normalize.find_e0">
-<code class="sig-prename descclassname">araucaria.xas.normalize.</code><code class="sig-name descname">find_e0</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">method</span><span class="o">=</span><span class="default_value">'maxder'</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">0.0001</span></em>, <em class="sig-param"><span class="n">pre_edge_kws</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">use_mu_ref</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">update</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.normalize.find_e0" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.xas.normalize.</span></code><code class="sig-name descname"><span class="pre">find_e0</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'maxder'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_edge_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_mu_ref</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.normalize.find_e0" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates the absorption threshold energy of a scan.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -279,7 +306,7 @@ different values of <cite>e0</cite> by this method.</p>
 
 <dl class="py function">
 <dt id="araucaria.xas.normalize.pre_edge">
-<code class="sig-prename descclassname">araucaria.xas.normalize.</code><code class="sig-name descname">pre_edge</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">e0</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">nvict</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">nnorm</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">pre_range</span><span class="o">=</span><span class="default_value">[- inf, - 50]</span></em>, <em class="sig-param"><span class="n">post_range</span><span class="o">=</span><span class="default_value">[100, inf]</span></em>, <em class="sig-param"><span class="n">update</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.normalize.pre_edge" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.xas.normalize.</span></code><code class="sig-name descname"><span class="pre">pre_edge</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nvict</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nnorm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">inf,</span> <span class="pre">-</span> <span class="pre">50]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">post_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[100,</span> <span class="pre">inf]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.normalize.pre_edge" title="Permalink to this definition">¶</a></dt>
 <dd><p>Pre-edge substaction and normalization of a scan.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

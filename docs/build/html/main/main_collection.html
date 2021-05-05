@@ -7,7 +7,8 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Collection class &mdash; araucaria 0.1.7b documentation</title>
+  <title>Collection class &mdash; araucaria 0.1.7c
+ documentation</title>
   
 
   
@@ -30,10 +31,9 @@
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
-        <script src="../_static/language_data.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -89,6 +89,7 @@
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
@@ -172,11 +173,35 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="collection-class">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="collection-class">
 <h1>Collection class<a class="headerlink" href="#collection-class" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt id="araucaria.main.collection.Collection">
-<em class="property">class </em><code class="sig-prename descclassname">araucaria.main.collection.</code><code class="sig-name descname">Collection</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">araucaria.main.collection.</span></code><code class="sig-name descname"><span class="pre">Collection</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collection storage class.</p>
 <p>This class stores a collection of <a class="reference internal" href="main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a> objects.</p>
 <dl class="field-list simple">
@@ -186,7 +211,7 @@
 </dl>
 <dl class="py attribute">
 <dt id="araucaria.main.collection.Collection.tags">
-<code class="sig-name descname">tags</code><a class="headerlink" href="#araucaria.main.collection.Collection.tags" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">tags</span></code><a class="headerlink" href="#araucaria.main.collection.Collection.tags" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary with available groups in the collection based on tag keys.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -212,7 +237,7 @@ The <code class="docutils literal notranslate"><span class="pre">tags</span></co
 </div>
 <dl class="py method">
 <dt id="araucaria.main.collection.Collection.add_group">
-<code class="sig-name descname">add_group</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">group</span></em>, <em class="sig-param"><span class="n">tag</span><span class="o">=</span><span class="default_value">'scan'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.add_group" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">add_group</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scan'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.add_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a data group to the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -223,7 +248,7 @@ The default is ‘scan’.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p></p>
@@ -257,7 +282,7 @@ The default is ‘scan’.</p></li>
 
 <dl class="py method">
 <dt id="araucaria.main.collection.Collection.rename_group">
-<code class="sig-name descname">rename_group</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">newname</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.rename_group" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">rename_group</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.rename_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renames a group in the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -267,7 +292,7 @@ The default is ‘scan’.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p></p>
@@ -297,7 +322,7 @@ The default is ‘scan’.</p></li>
 
 <dl class="py method">
 <dt id="araucaria.main.collection.Collection.retag">
-<code class="sig-name descname">retag</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">tag</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.retag" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">retag</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.retag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modifies tag of a group in the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -307,7 +332,7 @@ The default is ‘scan’.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p></p>
@@ -334,7 +359,7 @@ The default is ‘scan’.</p></li>
 
 <dl class="py method">
 <dt id="araucaria.main.collection.Collection.get_group">
-<code class="sig-name descname">get_group</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_group" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_group</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a data group from the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -367,7 +392,7 @@ The default is ‘scan’.</p></li>
 
 <dl class="py method">
 <dt id="araucaria.main.collection.Collection.get_names">
-<code class="sig-name descname">get_names</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">taglist</span><span class="o">=</span><span class="default_value">['all']</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_names" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_names</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns group names in the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -406,14 +431,14 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 
 <dl class="py method">
 <dt id="araucaria.main.collection.Collection.del_group">
-<code class="sig-name descname">del_group</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.del_group" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">del_group</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.del_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes a data group from the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>name</strong> – Name of group to remove.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="docutils literal notranslate"><span class="pre">None</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p></p>
@@ -445,7 +470,7 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 
 <dl class="py method">
 <dt id="araucaria.main.collection.Collection.get_mcer">
-<code class="sig-name descname">get_mcer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">num</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">taglist</span><span class="o">=</span><span class="default_value">['all']</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_mcer" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">get_mcer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_mcer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the minimum common energy range for the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

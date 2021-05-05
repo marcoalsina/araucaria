@@ -341,17 +341,17 @@ def merge(collection: Collection, taglist: List[str]=['all'],
     ...     fpath = get_testpath(file)
     ...     group_mu = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
     ...     collection.add_group(group_mu)         # adding group to collection
-    >>> report, merge = merge(collection)
+    >>> report, mgroup = merge(collection)
     >>> report.show()
-    ================================================
-    id  filename           mode  e_offset  e0 [eV]  
-    ================================================
-    1   dnd_testfile.dat   mu    0         29203    
-    2   dnd_testfile2.dat  mu    0         29203    
-    3   dnd_testfile3.dat  mu    0         29203    
-    ------------------------------------------------
-        merge              mu    0         29203    
-    ================================================
+    ===================================================
+    id  filename           mode  e_offset[eV]  e0[eV]  
+    ===================================================
+    1   dnd_testfile.dat   mu    0             29203   
+    2   dnd_testfile2.dat  mu    0             29203   
+    3   dnd_testfile3.dat  mu    0             29203   
+    ---------------------------------------------------
+        merge              mu    0             29203   
+    ===================================================
     """
     # checking class and attributes
     check_objattrs(collection, Collection, attrlist=['tags'], exceptions=True)
@@ -359,7 +359,7 @@ def merge(collection: Collection, taglist: List[str]=['all'],
     listgroups = collection.get_names(taglist=taglist)
 
     # initializing report
-    names  = ['id', 'filename', 'mode', 'e_offset', 'e0 [eV]']
+    names  = ['id', 'filename', 'mode', 'e_offset[eV]', 'e0[eV]']
     report = Report()
     report.set_columns(names)
     

@@ -7,7 +7,8 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Utilities module &mdash; araucaria 0.1.7b documentation</title>
+  <title>Utilities module &mdash; araucaria 0.1.7c
+ documentation</title>
   
 
   
@@ -30,10 +31,9 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
-        <script src="_static/language_data.js"></script>
         <script src="_static/clipboard.min.js"></script>
         <script src="_static/copybutton.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -89,6 +89,7 @@
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
@@ -165,7 +166,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="module-araucaria.utils">
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.utils">
 <span id="utilities-module"></span><h1>Utilities module<a class="headerlink" href="#module-araucaria.utils" title="Permalink to this headline">¶</a></h1>
 <p>The <a class="reference internal" href="#module-araucaria.utils" title="araucaria.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code></a> module offers the following utility functions:</p>
 <table class="colwidths-auto docutils align-default">
@@ -175,29 +200,56 @@
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.utils.check_objattrs" title="araucaria.utils.check_objattrs"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_objattrs()</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.utils.get_version" title="araucaria.utils.get_version"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_version()</span></code></a></p></td>
+<td><p>Returns version of araucaria.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.utils.check_objattrs" title="araucaria.utils.check_objattrs"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_objattrs()</span></code></a></p></td>
 <td><p>Check type and attributes of an object.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.utils.check_xrange" title="araucaria.utils.check_xrange"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_xrange()</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.utils.check_xrange" title="araucaria.utils.check_xrange"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_xrange()</span></code></a></p></td>
 <td><p>Range values for an array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.utils.index_xrange" title="araucaria.utils.index_xrange"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_xrange()</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.utils.index_xrange" title="araucaria.utils.index_xrange"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_xrange()</span></code></a></p></td>
 <td><p>Index of values in given range for an array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.utils.index_dups" title="araucaria.utils.index_dups"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_dups()</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.utils.index_dups" title="araucaria.utils.index_dups"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_dups()</span></code></a></p></td>
 <td><p>Index of duplicate values in an array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.utils.index_nans" title="araucaria.utils.index_nans"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_nans()</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.utils.index_nans" title="araucaria.utils.index_nans"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_nans()</span></code></a></p></td>
 <td><p>Index of NaN values in an array.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.utils.index_nearest" title="araucaria.utils.index_nearest"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_nearest()</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.utils.index_nearest" title="araucaria.utils.index_nearest"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_nearest()</span></code></a></p></td>
 <td><p>Index of nearest value in an array.</p></td>
 </tr>
 </tbody>
 </table>
 <dl class="py function">
+<dt id="araucaria.utils.get_version">
+<code class="sig-prename descclassname"><span class="pre">araucaria.utils.</span></code><code class="sig-name descname"><span class="pre">get_version</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dependencies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.get_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns installed version of araucaria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dependencies</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Condition to additionally get version of
+dependencies. The default is False.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Printable string with version of araucaria.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">get_version</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">get_version</span><span class="p">())</span> 
+<span class="go">Araucaria version     : ...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
 <dt id="araucaria.utils.check_objattrs">
-<code class="sig-prename descclassname">araucaria.utils.</code><code class="sig-name descname">check_objattrs</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">obj</span></em>, <em class="sig-param"><span class="n">objtype</span></em>, <em class="sig-param"><span class="n">attrlist</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">exceptions</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.check_objattrs" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.utils.</span></code><code class="sig-name descname"><span class="pre">check_objattrs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exceptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.check_objattrs" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check type and attributes of an object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -238,7 +290,7 @@ are not in the object. The detault is False.</p></li>
 
 <dl class="py function">
 <dt id="araucaria.utils.check_xrange">
-<code class="sig-prename descclassname">araucaria.utils.</code><code class="sig-name descname">check_xrange</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x_range</span></em>, <em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">refval</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.check_xrange" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.utils.</span></code><code class="sig-name descname"><span class="pre">check_xrange</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.check_xrange" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns range values inside an array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -280,7 +332,7 @@ If None, x_range is assumed to contain absolute values.</p></li>
 
 <dl class="py function">
 <dt id="araucaria.utils.index_xrange">
-<code class="sig-prename descclassname">araucaria.utils.</code><code class="sig-name descname">index_xrange</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">x_range</span></em>, <em class="sig-param"><span class="n">x</span></em>, <em class="sig-param"><span class="n">refval</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_xrange" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.utils.</span></code><code class="sig-name descname"><span class="pre">index_xrange</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_xrange" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns indexes of range values inside an array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -321,7 +373,7 @@ If None, x_range is assumed to contain absolute values.</p></li>
 
 <dl class="py function">
 <dt id="araucaria.utils.index_dups">
-<code class="sig-prename descclassname">araucaria.utils.</code><code class="sig-name descname">index_dups</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">tol</span><span class="o">=</span><span class="default_value">0.0001</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_dups" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.utils.</span></code><code class="sig-name descname"><span class="pre">index_dups</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_dups" title="Permalink to this definition">¶</a></dt>
 <dd><p>Index of duplicate values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -369,7 +421,7 @@ flattened by indexing the elements in row-major (i.e. C-style).</p>
 
 <dl class="py function">
 <dt id="araucaria.utils.index_nans">
-<code class="sig-prename descclassname">araucaria.utils.</code><code class="sig-name descname">index_nans</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">axis</span><span class="o">=</span><span class="default_value">0</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_nans" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.utils.</span></code><code class="sig-name descname"><span class="pre">index_nans</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_nans" title="Permalink to this definition">¶</a></dt>
 <dd><p>Index of NaN values in an array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -428,7 +480,7 @@ The detault is 0.</p></li>
 
 <dl class="py function">
 <dt id="araucaria.utils.index_nearest">
-<code class="sig-prename descclassname">araucaria.utils.</code><code class="sig-name descname">index_nearest</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">val</span></em>, <em class="sig-param"><span class="n">kind</span><span class="o">=</span><span class="default_value">'nearest'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_nearest" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname"><span class="pre">araucaria.utils.</span></code><code class="sig-name descname"><span class="pre">index_nearest</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_nearest" title="Permalink to this definition">¶</a></dt>
 <dd><p>Index of nearest value in an array.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
