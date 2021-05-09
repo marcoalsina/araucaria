@@ -11,9 +11,13 @@ manipulate data in the Hierarchical Data Format ``HDF5``:
    * - Function
      - Description
    * - :func:`read_hdf5`
-     - Reads a group dataset from an HDF5 file.
+     - Reads a single group dataset from an HDF5 file.
+   * - :func:`read_all_hdf5`
+     - Reads all group datasets from an HDF5 file.
    * - :func:`write_hdf5`
-     - Writes a group dataset into an HDF5 file.
+     - Writes a single group dataset in an HDF5 file.
+   * - :func:`write_collection_hdf5`
+     - Writes a collection in an HDF5 file.
    * - :func:`rename_dataset_hdf5`
      - Renames a group dataset in an HDF5 file.
    * - :func:`delete_dataset_hdf5`
@@ -27,11 +31,11 @@ from pathlib import Path
 from typing import Optional, Union
 from numpy import ndarray, inf
 from h5py import File, Dataset
-from .. import Group, Report
+from .. import Group, Report, Collection
 from ..xas import pre_edge
 
 def read_hdf5(fpath: Path, name: str)-> Group:
-    """Reads a group dataset from an HDF5 file.
+    """Reads a single group dataset from an HDF5 file.
     
     Parameters
     ----------
@@ -86,11 +90,70 @@ def read_hdf5(fpath: Path, name: str)-> Group:
         raise ValueError("%s does not exists in %s!" % (name, fpath))
     
     hdf5.close()
+
     # writting group and saving name
     group = Group(**data)
     group.name = name
     return (group)
 
+def read_all_hdf5(fpath: Path)-> Collection:
+    """Reads all group datasets from an HDF5 file.
+    
+    Parameters
+    ----------
+    fpath
+        Path to HDF5 file.
+
+    Returns
+    -------
+    :
+        Collection containing the requested datasets.
+
+    Raises
+    ------
+    IOError
+        If the HDF5 file does not exist in the specified path.
+    
+    Example
+    -------
+    >>> from araucaria import Collection
+    >>> from araucaria.testdata import get_testpath
+    >>> from araucaria.utils import check_objattrs
+    >>> from araucaria.io import read_all_hdf5
+    >>> fpath = get_testpath('test_database.h5')
+    >>> # reading database
+    >>> collection = read_all_hdf5(fpath)
+    >>> check_objattrs(collection, Collection)
+    True
+    >>> collection.get_names()
+    ['dnd_testfile', 'p65_testfile', 'xmu_testfile']
+    """    
+    # verifying existence of path:
+    if isfile(fpath):
+        hdf5 = File(fpath, "r")
+    else:
+        raise IOError("file %s does not exists." % fpath)
+
+    collection = Collection()
+    for name in hdf5:
+        data = {}
+        for key, record in hdf5.get(name).items():
+            if isinstance(record, Dataset):
+                # verifying strings saved as bytes
+                if isinstance(record[()], bytes):
+                    # converting bytes record to proper type
+                    eval_record = convert_bytes_hdf5(record)
+                    data[key] = eval_record
+                else:
+                    data[key]=record[()]
+        group = Group(**data)
+        group.name = name
+        collection.add_group(group)
+    
+    hdf5.close()
+
+    # writting collection
+    return (collection)
 
 def convert_bytes_hdf5(record: Dataset) -> Union[dict, list, str]:
     """Utility function to convert a :class:`bytes` record from an HDF5 file.
@@ -139,11 +202,10 @@ def convert_bytes_hdf5(record: Dataset) -> Union[dict, list, str]:
         # int, float types were originally stored as str
         return record_str
 
-
 def write_hdf5(fpath: Path, group: Group, name: str='dataset1', 
                replace: bool=False) -> None:
-    """Writes a group dataset into an HDF5 file.
-    
+    """Writes a group dataset in an HDF5 file.
+
     Parameters
     ----------
     fpath
@@ -172,10 +234,10 @@ def write_hdf5(fpath: Path, group: Group, name: str='dataset1',
     -----
     If the file specified by ``fpath`` does not exists, it will be automatically created.
     If the file already exists then the dataset will be appended.
-    
-    By default the write operation will be cancelled if ``name`` already exists in the HDF5 file.
+
+    By default the write operation will be canceled if ``name`` already exists in the HDF5 file.
     The previous dataset can be overwritten with the option ``replace=True``. 
-    
+
     Example
     --------
     >>> from araucaria.testdata import get_testpath
@@ -190,6 +252,85 @@ def write_hdf5(fpath: Path, group: Group, name: str='dataset1',
     # testing that the group exists 
     if type(group) is not Group:
         raise TypeError('%s is not a valid Group instance.' % group)
+
+    # verifying existence of path:
+    # (a)ppend to existing file
+    # (w)rite to new file.
+    if isfile(fpath):
+        hdf5 = File(fpath, "a")
+    else:
+        hdf5 = File(fpath, "w")
+
+    # testing name on the dataset
+    if name in hdf5:
+        # dataset present in the file
+            if replace:
+                hdf5.__delitem__(name)
+            else:
+                hdf5.close()
+                raise ValueError("%s already exists in %s." % (name, fpath))
+
+    dataset = hdf5.create_group(name)
+    try:
+        write_recursive_hdf5(dataset, group)
+        print("%s written to %s." % (name, fpath))
+    except:
+        hdf5.__delitem__(name)
+        hdf5.close()
+        raise IOError("%s couldn't be written to %s." % (name, fpath))
+
+    hdf5.close()
+    return
+
+def write_collection_hdf5(fpath: Path, collection: Collection, 
+                          replace: bool=False) -> None:
+    """Writes a collection in an HDF5 file.
+    
+    Parameters
+    ----------
+    fpath
+        Path to HDF5 file.
+    collection
+        Collection to write in the HDF5 file.
+    replace
+        Replace previous dataset. The default is False.
+
+    Returns
+    -------
+    :
+    
+    Raises
+    ------
+    IOError
+        If dataset cannot be written to the HDF5 file.
+    ValueError
+        If ``name`` dataset already exists in the HDF5 file and ``replace=False``.
+
+    Notes
+    -----
+    If the file specified by ``fpath`` does not exists, it will be automatically created.
+    If the file already exists then the datasets in the collection will be appended.
+    
+    By default the write operation will be canceled if any dataset in ``collection``
+    already exists in the HDF5 file.
+    Previous datasets can be overwritten with the option ``replace=True``. 
+    
+    Example
+    --------
+    >>> from araucaria.testdata import get_testpath
+    >>> from araucaria.io import read_all_hdf5, write_collection_hdf5
+    >>> fpath = get_testpath('test_database.h5')
+    >>> # reading database
+    >>> collection = read_all_hdf5(fpath)
+    >>> # saving collection in a new hdf5 file
+    >>> write_collection_hdf5('database.h5', collection, replace=True)
+    dnd_testfile written to database.h5.
+    p65_testfile written to database.h5.
+    xmu_testfile written to database.h5.
+    """    
+    # testing that the group exists 
+    if type(collection) is not Collection:
+        raise TypeError('%s is not a valid Collection instance.' % collection)
     
     # verifying existence of path:
     # (a)ppend to existing file
@@ -198,29 +339,33 @@ def write_hdf5(fpath: Path, group: Group, name: str='dataset1',
         hdf5 = File(fpath, "a")
     else:
         hdf5 = File(fpath, "w")
+
+    names = collection.get_names()
+    for name in names:    
+        # testing name on the dataset
+        if name in hdf5:
+            # dataset present in the file
+                if replace:
+                    hdf5.__delitem__(name)
+                else:
+                    hdf5.close()
+                    raise ValueError("%s already exists in %s." % (name, fpath))
     
-    # testing name of the dataset
-    if name in hdf5:
-        # dataset present in the file
-            if replace:
-                hdf5.__delitem__(name)
-            else:
-                hdf5.close()
-                raise ValueError("%s already exists in %s." % (name, fpath))
-    
-    dataset = hdf5.create_group(name)
-    try:
-        write_recursive_hdf5(dataset, group)
-        print("%s written to %s." % (name, fpath))
-    except:
-        hdf5.close()
-        raise IOError("%s couldn't be written to %s." % (name, fpath))
-    
+        dataset = hdf5.create_group(name)
+        group   = collection.get_group(name)
+        try:
+            write_recursive_hdf5(dataset, group)
+            print("%s written to %s." % (name, fpath))
+        except:
+            hdf5.__delitem__(name)
+            hdf5.close()
+            raise IOError("%s couldn't be written to %s." % (name, fpath))
+
     hdf5.close()
     return
-    
+
 def write_recursive_hdf5(dataset: Dataset, group: Group) -> None:
-    """Utility function to write a Group recursively into an HDF5 file.
+    """Utility function to write a Group recursively in an HDF5 file.
     
     Parameters
     ----------
@@ -236,9 +381,9 @@ def write_recursive_hdf5(dataset: Dataset, group: Group) -> None:
     Warning
     -------
     Only :class:`str`, :class:`float`, :class:`int` and :class:`~numpy.ndarray` 
-    types are currently supported for recursive writting into an HDF5 :class:`~h5py.Dataset`.
+    types are currently supported for recursive writting in an HDF5 :class:`~h5py.Dataset`.
     
-    :class:`dict` and :class:`list` types will be convertet to :class:`~numpy.str`, which is in
+    :class:`dict` and :class:`list` types will be convertet to :class:`str`, which is in
     turn saved as :class:`bytes` in the HDF5 database.
     If read with :func:`read_hdf5`, such records will be automatically converted to their
     original type in the group.
@@ -259,7 +404,6 @@ def write_recursive_hdf5(dataset: Dataset, group: Group) -> None:
             elif isinstance(record, converted_types):
                 dataset.create_dataset(key, data=str(record))
     return
-
 
 def rename_dataset_hdf5(fpath: Path, name: str, newname: str) -> None:
     """Renames a dataset in an HDF5 file.
@@ -424,7 +568,7 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     See also
     --------
     :func:`read_hdf5`
-    :class:`~araucaria.main.repot.Report`
+    :class:`~araucaria.main.report.Report`
     
     Examples
     --------
@@ -530,7 +674,7 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
                     out = pre_edge(data, **pre_edge_kws)
                     field_vals.append(out[opt_val])
                 else:
-                    # custom optinal field
+                    # custom optional field
                     try:
                         val = hdf5[key][opt_val]
                         if isinstance(val[()], (int, float)):
