@@ -1,0 +1,599 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Utilities module &mdash; araucaria 0.1.7c
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Testdata module" href="testdata_module.html" />
+    <link rel="prev" title="Window module" href="stats/stats_window.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="stats_module.html">Statistics module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Utilities module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/utils_module.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.utils">
+<span id="utilities-module"></span><h1>Utilities module<a class="headerlink" href="#module-araucaria.utils" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-araucaria.utils" title="araucaria.utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">utils</span></code></a> module offers the following utility functions:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.utils.get_version" title="araucaria.utils.get_version"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_version()</span></code></a></p></td>
+<td><p>Returns version of araucaria.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.utils.check_objattrs" title="araucaria.utils.check_objattrs"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_objattrs()</span></code></a></p></td>
+<td><p>Check type and attributes of an object.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.utils.check_xrange" title="araucaria.utils.check_xrange"><code class="xref py py-func docutils literal notranslate"><span class="pre">check_xrange()</span></code></a></p></td>
+<td><p>Range values for an array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.utils.index_xrange" title="araucaria.utils.index_xrange"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_xrange()</span></code></a></p></td>
+<td><p>Index of values in given range for an array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.utils.index_dups" title="araucaria.utils.index_dups"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_dups()</span></code></a></p></td>
+<td><p>Index of duplicate values in an array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.utils.index_nans" title="araucaria.utils.index_nans"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_nans()</span></code></a></p></td>
+<td><p>Index of NaN values in an array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.utils.index_nearest" title="araucaria.utils.index_nearest"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_nearest()</span></code></a></p></td>
+<td><p>Index of nearest value in an array.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt id="araucaria.utils.get_version">
+<code class="sig-prename descclassname"><span class="pre">araucaria.utils.</span></code><code class="sig-name descname"><span class="pre">get_version</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dependencies</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.get_version" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns installed version of araucaria.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>dependencies</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Condition to additionally get version of
+dependencies. The default is False.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Printable string with version of araucaria.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">get_version</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">get_version</span><span class="p">())</span> 
+<span class="go">Araucaria version     : ...</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.utils.check_objattrs">
+<code class="sig-prename descclassname"><span class="pre">araucaria.utils.</span></code><code class="sig-name descname"><span class="pre">check_objattrs</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objtype</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrlist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exceptions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.check_objattrs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check type and attributes of an object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>obj</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a>) – Object to check.</p></li>
+<li><p><strong>objtype</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TypeVar" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TypeVar</span></code></a>) – Type for the object.</p></li>
+<li><p><strong>attrlist</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>]) – List with names of attributes to check.</p></li>
+<li><p><strong>exceptions</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Condition to raise exceptions if attributes
+are not in the object. The detault is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List with booleans for each attribute of the object.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">obj</span></code> is not an instance of <code class="docutils literal notranslate"><span class="pre">objtype</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;energy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">],</span> <span class="s1">&#39;mu&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># checking class type</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># checking class type and attributes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alist</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span> <span class="o">=</span> <span class="n">alist</span><span class="p">)</span>
+<span class="go">[True, True, False]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.utils.check_xrange">
+<code class="sig-prename descclassname"><span class="pre">araucaria.utils.</span></code><code class="sig-name descname"><span class="pre">check_xrange</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.check_xrange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns range values inside an array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List with min and max values.
+Supports <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a> values.</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array with values.</p></li>
+<li><p><strong>refval</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]) – If given, x_range is assumed to contain values relative to refval.
+If None, x_range is assumed to contain absolute values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>New range values inside the array.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">inf</span><span class="p">,</span> <span class="n">linspace</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_xrange</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k_range</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">inf</span><span class="p">,</span><span class="n">inf</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span>       <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">krange</span> <span class="o">=</span> <span class="n">check_xrange</span><span class="p">(</span><span class="n">k_range</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">krange</span><span class="p">)</span>
+<span class="go">[0.0, 15.0]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># using a reference value</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e_range</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy</span>  <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">8900</span><span class="p">,</span> <span class="mi">9100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e0</span>      <span class="o">=</span> <span class="mi">8979</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">erange</span>  <span class="o">=</span> <span class="n">check_xrange</span><span class="p">(</span><span class="n">e_range</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">refval</span><span class="o">=</span><span class="n">e0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">erange</span><span class="p">)</span>
+<span class="go">[-79.0, -50]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.utils.index_xrange">
+<code class="sig-prename descclassname"><span class="pre">araucaria.utils.</span></code><code class="sig-name descname"><span class="pre">index_xrange</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x_range</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refval</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_xrange" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns indexes of range values inside an array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>x_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List with real min and max values.</p></li>
+<li><p><strong>x</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array with values.</p></li>
+<li><p><strong>refval</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]) – If given, x_range is assumed to contain values relative to refval.
+If None, x_range is assumed to contain absolute values.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Array with indexes of range values inside the array.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">arange</span><span class="p">,</span> <span class="n">inf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">index_xrange</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k_range</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span>       <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span>   <span class="o">=</span> <span class="n">index_xrange</span><span class="p">(</span><span class="n">k_range</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+<span class="go">array([4, 5, 6, 7, 8])</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># using a reference value</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e_range</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="n">inf</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy</span>  <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">8900</span><span class="p">,</span> <span class="mi">9100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e0</span>      <span class="o">=</span> <span class="mi">8979</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span>   <span class="o">=</span> <span class="n">index_xrange</span><span class="p">(</span><span class="n">e_range</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">refval</span><span class="o">=</span><span class="n">e0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">energy</span><span class="p">[</span><span class="n">index</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="go">(8900, 8929)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.utils.index_dups">
+<code class="sig-prename descclassname"><span class="pre">araucaria.utils.</span></code><code class="sig-name descname"><span class="pre">index_dups</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0001</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_dups" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index of duplicate values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array to search for duplicates.</p></li>
+<li><p><strong>tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Tolerance value (the detault is 1e-4).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Index array with the location of duplicates.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>A value in <code class="docutils literal notranslate"><span class="pre">data</span></code> is considered a duplicate if the
+difference with respect to the previous value is strictly
+lower than the given <code class="docutils literal notranslate"><span class="pre">tol</span></code> value.</p>
+<p>If the dimension of <code class="docutils literal notranslate"><span class="pre">data</span></code> is larger than 1 the array will be
+flattened by indexing the elements in row-major (i.e. C-style).</p>
+<p class="rubric">Examples</p>
+<p><a class="reference internal" href="#araucaria.utils.index_dups" title="araucaria.utils.index_dups"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_dups()</span></code></a> is useful to remove duplicates and ensure monotonicity of a 1-D array.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span><span class="p">,</span> <span class="n">delete</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">index_dups</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mi">9000</span><span class="p">,</span> <span class="mf">9000.1</span><span class="p">,</span> <span class="mi">9005</span><span class="p">,</span> <span class="mf">9005.1</span><span class="p">,</span> <span class="mi">9008</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span>  <span class="o">=</span> <span class="n">index_dups</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+<span class="go">[1 3]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># duplicactes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">energy</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+<span class="go">[9000.1 9005.1]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># removing duplicates</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">delete</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">new_energy</span> <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span><span class="n">index</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">new_energy</span><span class="p">)</span>
+<span class="go">[9000. 9005. 9008.]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.utils.index_nans">
+<code class="sig-prename descclassname"><span class="pre">araucaria.utils.</span></code><code class="sig-name descname"><span class="pre">index_nans</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">axis</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_nans" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index of NaN values in an array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array to search for NaN values.</p></li>
+<li><p><strong>axis</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Axis along which NaN values will be searched.
+The detault is 0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Index array with NaN values in the given axis.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IndexError" title="(in Python v3.9)"><strong>IndexError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">axis</span></code> is greater than the dimension of <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p><a class="reference internal" href="#araucaria.utils.index_nans" title="araucaria.utils.index_nans"><code class="xref py py-func docutils literal notranslate"><span class="pre">index_nans()</span></code></a> is useful to remove NaN values from arrays.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">arange</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span> <span class="n">delete</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">index_nans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span>      <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">nan</span><span class="p">;</span> <span class="n">data</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">nan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="go">[[ 0.  1.  2.  3.]</span>
+<span class="go"> [ 4.  5. nan  7.]</span>
+<span class="go"> [ 8.  9. 10. 11.]</span>
+<span class="go"> [12. nan 14. 15.]</span>
+<span class="go"> [16. 17. 18. 19.]]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># removing NaN values from rows</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rindex</span> <span class="o">=</span> <span class="n">index_nans</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">rindex</span><span class="p">)</span>
+<span class="go">[[1]</span>
+<span class="go"> [3]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">delete</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">rindex</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<span class="go">[[ 0.  1.  2.  3.]</span>
+<span class="go"> [ 8.  9. 10. 11.]</span>
+<span class="go"> [16. 17. 18. 19.]]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># removing NaN values from columns</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cindex</span> <span class="o">=</span> <span class="n">index_nans</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">cindex</span><span class="p">)</span>
+<span class="go">[[1]</span>
+<span class="go"> [2]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">delete</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">cindex</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="go">[[ 0.  3.]</span>
+<span class="go"> [ 4.  7.]</span>
+<span class="go"> [ 8. 11.]</span>
+<span class="go"> [12. 15.]</span>
+<span class="go"> [16. 19.]]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.utils.index_nearest">
+<code class="sig-prename descclassname"><span class="pre">araucaria.utils.</span></code><code class="sig-name descname"><span class="pre">index_nearest</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kind</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nearest'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.utils.index_nearest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Index of nearest value in an array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array to search for nearest value.</p></li>
+<li><p><strong>val</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Search value. It supports <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>.</p></li>
+<li><p><strong>kind</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Either ‘lower’, ‘nearest’ or ‘higher’.
+The default is ‘nearest’. See Notes for details.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Index of nearest value in the array.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">kind</span></code> is not recognized.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">kind</span></code> parameter controls the returned index:</p>
+<ul class="simple">
+<li><p>If <code class="docutils literal notranslate"><span class="pre">kind='lower'</span></code> the returned index will be of a value
+strictly lower than <code class="docutils literal notranslate"><span class="pre">val</span></code>, or 0 if <code class="docutils literal notranslate"><span class="pre">val</span></code> if lower than the
+minimum value of <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">kind='nearest'</span></code> the returned index will be of the nearest
+value with respect to <code class="docutils literal notranslate"><span class="pre">val</span></code>.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">kind='higher'</span></code> the returned index will be of a value
+strictly higher than <code class="docutils literal notranslate"><span class="pre">val</span></code>, or -1 if <code class="docutils literal notranslate"><span class="pre">val</span></code> is higher than the
+maximum value of <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p></li>
+</ul>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">linspace</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">index_nearest</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">8900</span><span class="p">,</span> <span class="mi">9000</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">val</span>    <span class="o">=</span> <span class="mi">8965</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># find nearest value</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span>  <span class="o">=</span> <span class="n">index_nearest</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">energy</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">val</span><span class="p">)</span>
+<span class="go">3 8960.0 8965</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># find strictly lower nearest value</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span>  <span class="o">=</span> <span class="n">index_nearest</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">energy</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">val</span><span class="p">)</span>
+<span class="go">3 8960.0 8965</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># find strictly higher nearest value</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">index</span>  <span class="o">=</span> <span class="n">index_nearest</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">val</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;higher&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">energy</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">val</span><span class="p">)</span>
+<span class="go">4 8980.0 8965</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="testdata_module.html" class="btn btn-neutral float-right" title="Testdata module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="stats/stats_window.html" class="btn btn-neutral float-left" title="Window module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020-2021, Marco A. Alsina
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,473 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>genESD module &mdash; araucaria 0.1.7c
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Window module" href="stats_window.html" />
+    <link rel="prev" title="Statistics module" href="../stats_module.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../stats_module.html">Statistics module</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">genESD module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stats_window.html">Window module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../stats_module.html">Statistics module</a> &raquo;</li>
+        
+      <li>genESD module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/stats/stats_genesd.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.stats.genesd">
+<span id="genesd-module"></span><h1>genESD module<a class="headerlink" href="#module-araucaria.stats.genesd" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-araucaria.stats.genesd" title="araucaria.stats.genesd"><code class="xref py py-mod docutils literal notranslate"><span class="pre">genesd</span></code></a> module offers the following
+functions to detect outliers in a univariate array using the
+generalized extreme Studentized deviate test:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.stats.genesd.genesd" title="araucaria.stats.genesd.genesd"><code class="xref py py-func docutils literal notranslate"><span class="pre">genesd()</span></code></a></p></td>
+<td><p>Identifies outliers in a data array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.stats.genesd.find_ri" title="araucaria.stats.genesd.find_ri"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_ri()</span></code></a></p></td>
+<td><p>Computes the Ri statistics for the generalized ESD test.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.stats.genesd.find_critvals" title="araucaria.stats.genesd.find_critvals"><code class="xref py py-func docutils literal notranslate"><span class="pre">find_critvals()</span></code></a></p></td>
+<td><p>Computes the critical values for the generalized ESD test.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt id="araucaria.stats.genesd.genesd">
+<code class="sig-prename descclassname"><span class="pre">araucaria.stats.genesd.</span></code><code class="sig-name descname"><span class="pre">genesd</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.genesd.genesd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Identifes outliers in a data array.</p>
+<p>This function uses the generalized extreme Studentized
+deviate (ESD) test to detect one or more outliers
+in univariate data <a class="footnote-reference brackets" href="#id2" id="id1">1</a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array to identify outliers.</p></li>
+<li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Maximum number of outliers.</p></li>
+<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Significance level for the statistical test.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>report</em> – Report of the generalized ESD test.</p></li>
+<li><p><em>index</em> – Indices of outliers in the data.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The identification of outliers considers the following hypothesis test:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(H_0\)</span>:  there are no outliers in the data.</p></li>
+<li><p><span class="math notranslate nohighlight">\(H_1\)</span>: there are up to <span class="math notranslate nohighlight">\(r\)</span> outliers in the data.</p></li>
+</ul>
+<p>The algorithm performs the following operations:</p>
+<ol class="arabic simple">
+<li><p>The <span class="math notranslate nohighlight">\(R_i\)</span> test statistics are computed for <span class="math notranslate nohighlight">\(r\)</span> potential outliers,
+removing the largest potential outlier from the data at each succesive calculation
+of the test statistic.</p></li>
+<li><p>The <span class="math notranslate nohighlight">\(\lambda_i\)</span> critical values are computed for <span class="math notranslate nohighlight">\(r\)</span> potential outliers,
+considering a significance level of <span class="math notranslate nohighlight">\(\alpha\)</span> for the t-distribution.</p></li>
+<li><p>Both values are compared, and the largest number of outliers where
+<span class="math notranslate nohighlight">\(R_i &gt; \lambda_i\)</span> is accepted as the number of outliers.</p></li>
+</ol>
+<p class="rubric">References</p>
+<dl class="footnote brackets">
+<dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p>Rosner, B. (1983) “Percentage Points for a Generalized ESD
+Many-Outlier Procedure”, Technometrics, 25(2), pp. 165-172.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># calculating outliers for Rosner data (1983):</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">loadtxt</span><span class="p">,</span> <span class="n">allclose</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">genesd</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span>  <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;rosner.dat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span>  <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>     <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="n">genesd</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
+<span class="go">Generalized ESD test for outliers</span>
+<span class="go">  H0: there are no outliers in the data</span>
+<span class="go">  H1: there are up to 5 outliers in the data</span>
+<span class="go">  Significance level:  alpha = 0.05</span>
+<span class="go">  Critical region:  Reject H0 if R_i &gt; lambda_i</span>
+<span class="go">=====================================</span>
+<span class="go">n outliers  x_i    R_i     lambda_i</span>
+<span class="go">=====================================</span>
+<span class="go">1           6.01   3.1189  3.1588</span>
+<span class="go">2           5.42   2.943   3.1514</span>
+<span class="go">3           5.34   3.1794  3.1439    *</span>
+<span class="go">4           4.64   2.8102  3.1362</span>
+<span class="go">5           -0.25  2.8156  3.1282</span>
+<span class="go">=====================================</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+<span class="go">[6.01 5.42 5.34]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.stats.genesd.find_ri">
+<code class="sig-prename descclassname"><span class="pre">araucaria.stats.genesd.</span></code><code class="sig-name descname"><span class="pre">find_ri</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.genesd.find_ri" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the <span class="math notranslate nohighlight">\(R_i\)</span> test statistics for the
+generalized extreme Studentized deviate (ESD) test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array to compute test statistic.</p></li>
+<li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Maximum number of outliers.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>Test statistic for the generalized ESD test.</p></li>
+<li><p>Value of data points furthest from the mean.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The <span class="math notranslate nohighlight">\(R_i\)</span> test statistics are calculated as follows:</p>
+<div class="math notranslate nohighlight">
+\[R_i = \frac{\textrm{max} | x_i - \bar{x}_{n-i+1}| }{s_{n-i+1}}
+\quad i \in \{1,2, \dots, r \}\]</div>
+<p>Where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bar{x}_{n-i+1}\)</span>: sample mean of reduced array.</p></li>
+<li><p><span class="math notranslate nohighlight">\(s_{n-i+1}\)</span>       : sample standard deviation of reduced array.</p></li>
+<li><p><span class="math notranslate nohighlight">\(n-i+1\)</span>           : number of points in the reduced array.</p></li>
+<li><p><span class="math notranslate nohighlight">\(r\)</span>               : maximum number of outliers.</p></li>
+</ul>
+<p>After each calculation rhe observation that maximizes <span class="math notranslate nohighlight">\(| x_i − \bar{x} |\)</span>
+is removed, and <span class="math notranslate nohighlight">\(R_i\)</span> is computed with n - i + 1 observations.
+This procedure is repeated until r observations have been removed
+from the array.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># calculating test statistics from Rosner&#39;s data (1983):</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">loadtxt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">find_ri</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span>  <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;rosner.dat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span>  <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>     <span class="o">=</span> <span class="mi">5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ri</span><span class="p">,</span><span class="n">xi</span> <span class="o">=</span> <span class="n">find_ri</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">r</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">ri</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%1.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">val</span><span class="p">)</span>
+<span class="go">3.119</span>
+<span class="go">2.943</span>
+<span class="go">3.179</span>
+<span class="go">2.810</span>
+<span class="go">2.816</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.stats.genesd.find_critvals">
+<code class="sig-prename descclassname"><span class="pre">araucaria.stats.genesd.</span></code><code class="sig-name descname"><span class="pre">find_critvals</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.genesd.find_critvals" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes critical values <span class="math notranslate nohighlight">\(\lambda_i\)</span> for the
+generalized extreme Studentized deviate (ESD) test.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>n</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of data points.</p></li>
+<li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Maximum number of outliers.</p></li>
+<li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Significance level for the statistical test.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Critical values.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The <span class="math notranslate nohighlight">\(\lambda_i\)</span> values are calculated as follows:</p>
+<div class="math notranslate nohighlight">
+\[\lambda_i = \frac{ (n-i)\ t_{p, n-i-1} }{ \sqrt{(n-i-1-t_{n-i-1}^2)(n-i+1)} }
+\quad i \in \{1,2, \dots, r \}\]</div>
+<div class="math notranslate nohighlight">
+\[p = 1 - \frac{\alpha}{2(n-i+1)}\]</div>
+<p>Where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(n\)</span>       : number of points in the array.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> : significance level.</p></li>
+<li><p><span class="math notranslate nohighlight">\(t_{p,v}\)</span> : percent point function of the t-distribution
+at <span class="math notranslate nohighlight">\(p\)</span> value and <span class="math notranslate nohighlight">\(v\)</span> degrees of freedom.</p></li>
+<li><p><span class="math notranslate nohighlight">\(r\)</span>               : maximum number of outliers.</p></li>
+</ul>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">find_critvals</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n</span>     <span class="o">=</span> <span class="mi">54</span>    <span class="c1"># number of points</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">r</span>     <span class="o">=</span> <span class="mi">5</span>     <span class="c1"># max number of outliers</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># significance level</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lambd</span> <span class="o">=</span> <span class="n">find_critvals</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">lambd</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%1.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">val</span><span class="p">)</span>
+<span class="go">3.159</span>
+<span class="go">3.151</span>
+<span class="go">3.144</span>
+<span class="go">3.136</span>
+<span class="go">3.128</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="stats_window.html" class="btn btn-neutral float-right" title="Window module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../stats_module.html" class="btn btn-neutral float-left" title="Statistics module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020-2021, Marco A. Alsina
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

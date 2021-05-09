@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>IO write module &mdash; araucaria 0.1.7c
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="IO HDF5 module" href="io_hdf5.html" />
+    <link rel="prev" title="IO read module" href="io_read.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../main_module.html">Main module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../io_module.html">IO module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="io_read.html">IO read module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">IO write module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io_hdf5.html">IO HDF5 module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../io_module.html">IO module</a> &raquo;</li>
+        
+      <li>IO write module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/io/io_write.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.io.io_write">
+<span id="io-write-module"></span><h1>IO write module<a class="headerlink" href="#module-araucaria.io.io_write" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-araucaria.io.io_write" title="araucaria.io.io_write"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io_write</span></code></a> submodule offers the following functions to write files:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.io.io_write.write_xmu" title="araucaria.io.io_write.write_xmu"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_xmu()</span></code></a></p></td>
+<td><p>Writes a XAFS group in xmu format.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.io.io_write.write_lcf" title="araucaria.io.io_write.write_lcf"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_lcf()</span></code></a></p></td>
+<td><p>Writes LCF data to a file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.io.io_write.write_lcf_report" title="araucaria.io.io_write.write_lcf_report"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_lcf_report()</span></code></a></p></td>
+<td><p>Writes a LCF report to a file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.io.io_write.write_file" title="araucaria.io.io_write.write_file"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_file()</span></code></a></p></td>
+<td><p>Utility function to write an array to a file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.io.io_write.set_header" title="araucaria.io.io_write.set_header"><code class="xref py py-func docutils literal notranslate"><span class="pre">set_header()</span></code></a></p></td>
+<td><p>Utility function to write a file header.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt id="araucaria.io.io_write.write_xmu">
+<code class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></code><code class="sig-name descname"><span class="pre">write_xmu</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%12.8g'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_write.write_xmu" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a file in xmu format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to file.</p></li>
+<li><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>) – Group dataset to write in file.</p></li>
+<li><p><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Format for numbers. The default is ‘%12.8g’.</p></li>
+<li><p><strong>replace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if a previous file should be replaced. The detault is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Confirmation message.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid Group instance.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>By default the operation will be cancelled if the file already exists.
+The previous file can be overwritten with the option <code class="docutils literal notranslate"><span class="pre">replace=True</span></code>.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#araucaria.io.io_write.write_file" title="araucaria.io.io_write.write_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">write_file</span></code></a></dt><dd><p>Writes an array to a file.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_xmu</span><span class="p">,</span> <span class="n">write_xmu</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;xmu_testfile.xmu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting mu and mu_ref scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_xmu</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving a new xmu file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">write_xmu</span><span class="p">(</span><span class="s1">&#39;new_file.xmu&#39;</span><span class="p">,</span> <span class="n">group_mu</span><span class="p">)</span>
+<span class="go">&#39;xmu_testfile.xmu written to new_file.xmu.&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_write.write_lcf">
+<code class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></code><code class="sig-name descname"><span class="pre">write_lcf</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%12.8g'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_write.write_lcf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes LCF data to a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to file.</p></li>
+<li><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.FitGroup" title="araucaria.main.group.FitGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FitGroup</span></code></a>) – Valid FitGroup from <code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code>.</p></li>
+<li><p><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Format for numbers. The default is ‘%12.8g’.</p></li>
+<li><p><strong>replace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Replace previous file. The detault is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Confirmation message.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid FitGroup instance.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If attribute <code class="docutils literal notranslate"><span class="pre">min_pars</span></code>, <code class="docutils literal notranslate"><span class="pre">scangroup</span></code>,
+    or <code class="docutils literal notranslate"><span class="pre">refgroups</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>The returned file will contain in the header the output from
+<code class="xref py py-func docutils literal notranslate"><span class="pre">lcf_report()</span></code>, in addition to the following columns:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">energy</span></code>   : array with energy values.
+Returned only if <code class="docutils literal notranslate"><span class="pre">fit_region='xanes'</span></code> or <code class="docutils literal notranslate"><span class="pre">fit_region='dxanes'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">k</span></code>        : array with wavenumber values.
+Returned only if <code class="docutils literal notranslate"><span class="pre">fit_region='exafs'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scan</span></code>     : array with values of the fitted spectrum.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ref</span></code>      : array with interpolated values for each reference spectrum.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fit</span></code>      : array with fit result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">residual</span></code> : fit residuals.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#araucaria.io.io_write.write_file" title="araucaria.io.io_write.write_file"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_file()</span></code></a></dt><dd><p>Writes an array to a file.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">seed</span><span class="p">,</span> <span class="n">normal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">arange</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Collection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.fit</span> <span class="kn">import</span> <span class="n">lcf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">write_lcf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>  <span class="c1"># seed of random values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span>    <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>  <span class="mi">12</span><span class="p">,</span>   <span class="mf">0.05</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eps</span>  <span class="o">=</span> <span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f1</span>   <span class="o">=</span> <span class="mf">1.2</span>  <span class="c1"># freq 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f2</span>   <span class="o">=</span> <span class="mf">2.6</span>  <span class="c1"># freq 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">amp1</span> <span class="o">=</span> <span class="mf">0.4</span>  <span class="c1"># amp 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">amp2</span> <span class="o">=</span> <span class="mf">0.6</span>  <span class="c1"># amp 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group1</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group1&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span> <span class="s1">&#39;chi&#39;</span><span class="p">:</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">f1</span><span class="o">*</span><span class="n">k</span><span class="p">)})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group2</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group2&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span> <span class="s1">&#39;chi&#39;</span><span class="p">:</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">f2</span><span class="o">*</span><span class="n">k</span><span class="p">)})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group3</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group3&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+<span class="gp">... </span>                  <span class="s1">&#39;chi&#39;</span> <span class="p">:</span> <span class="n">amp1</span> <span class="o">*</span> <span class="n">group1</span><span class="o">.</span><span class="n">chi</span> <span class="o">+</span> <span class="n">amp2</span> <span class="o">*</span> <span class="n">group2</span><span class="o">.</span><span class="n">chi</span> <span class="o">+</span> <span class="n">eps</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ref&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">((</span><span class="n">group1</span><span class="p">,</span><span class="n">group2</span><span class="p">,</span> <span class="n">group3</span><span class="p">)):</span>
+<span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tags</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># performing lcf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">lcf</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">fit_region</span><span class="o">=</span><span class="s1">&#39;exafs&#39;</span><span class="p">,</span> <span class="n">fit_range</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span>
+<span class="gp">... </span>          <span class="n">kweight</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sum_one</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving lcf to a file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">write_lcf</span><span class="p">(</span><span class="s1">&#39;new_fit.lcf&#39;</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+<span class="go">&#39;lcf data written to new_fit.lcf.&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_write.write_lcf_report">
+<code class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></code><code class="sig-name descname"><span class="pre">write_lcf_report</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_write.write_lcf_report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a LCF report to a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to file.</p></li>
+<li><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.FitGroup" title="araucaria.main.group.FitGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FitGroup</span></code></a>) – Valid FitGroup from <code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code>.</p></li>
+<li><p><strong>replace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Replace previous file. The detault is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Confirmation message.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid FitGroup instance.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If attribute <code class="docutils literal notranslate"><span class="pre">min_pars</span></code>, <code class="docutils literal notranslate"><span class="pre">lcf_pars</span></code>, <code class="docutils literal notranslate"><span class="pre">scangroup</span></code>,
+    or <code class="docutils literal notranslate"><span class="pre">refgroups</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">seed</span><span class="p">,</span> <span class="n">normal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">arange</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Collection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.fit</span> <span class="kn">import</span> <span class="n">lcf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">write_lcf_report</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>  <span class="c1"># seed of random values</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">k</span>    <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>  <span class="mi">12</span><span class="p">,</span>   <span class="mf">0.05</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eps</span>  <span class="o">=</span> <span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f1</span>   <span class="o">=</span> <span class="mf">1.2</span>  <span class="c1"># freq 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f2</span>   <span class="o">=</span> <span class="mf">2.6</span>  <span class="c1"># freq 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">amp1</span> <span class="o">=</span> <span class="mf">0.4</span>  <span class="c1"># amp 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">amp2</span> <span class="o">=</span> <span class="mf">0.6</span>  <span class="c1"># amp 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group1</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group1&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span> <span class="s1">&#39;chi&#39;</span><span class="p">:</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">f1</span><span class="o">*</span><span class="n">k</span><span class="p">)})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group2</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group2&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span> <span class="s1">&#39;chi&#39;</span><span class="p">:</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">f2</span><span class="o">*</span><span class="n">k</span><span class="p">)})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group3</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group3&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">:</span> <span class="n">k</span><span class="p">,</span>
+<span class="gp">... </span>                  <span class="s1">&#39;chi&#39;</span> <span class="p">:</span> <span class="n">amp1</span> <span class="o">*</span> <span class="n">group1</span><span class="o">.</span><span class="n">chi</span> <span class="o">+</span> <span class="n">amp2</span> <span class="o">*</span> <span class="n">group2</span><span class="o">.</span><span class="n">chi</span> <span class="o">+</span> <span class="n">eps</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tags</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ref&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">((</span><span class="n">group1</span><span class="p">,</span><span class="n">group2</span><span class="p">,</span> <span class="n">group3</span><span class="p">)):</span>
+<span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tags</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># performing lcf</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">lcf</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">fit_region</span><span class="o">=</span><span class="s1">&#39;exafs&#39;</span><span class="p">,</span> <span class="n">fit_range</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span>
+<span class="gp">... </span>          <span class="n">kweight</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sum_one</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving lcf report to a file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">write_lcf_report</span><span class="p">(</span><span class="s1">&#39;lcf_report.log&#39;</span><span class="p">,</span> <span class="n">out</span><span class="p">)</span>
+<span class="go">&#39;lcf report written to lcf_report.log.&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_write.write_file">
+<code class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></code><code class="sig-name descname"><span class="pre">write_file</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%12.8g'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_write.write_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility function to write a data array to a file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to file.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – array to write in file.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of object to write.</p></li>
+<li><p><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Format for numbers. The default is ‘%12.8g’.</p></li>
+<li><p><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Header for the file.</p></li>
+<li><p><strong>replace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Replace previous file. The detault is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Confirmation message.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If the file already exists and <code class="docutils literal notranslate"><span class="pre">replace=False</span></code>.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_write.set_header">
+<code class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></code><code class="sig-name descname"><span class="pre">set_header</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_write.set_header" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility function for write a file header.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> – Path to file.</p></li>
+<li><p><strong>file_type</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Short descriptor for type of file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Header for file.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">set_header</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">header</span> <span class="o">=</span> <span class="n">set_header</span><span class="p">(</span><span class="s1">&#39;testdata.xmu&#39;</span><span class="p">,</span> <span class="s1">&#39;xmu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">header</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">&#39;xmu file created by araucaria&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">header</span><span class="o">.</span><span class="n">splitlines</span><span class="p">()[</span><span class="mi">2</span><span class="p">]</span>
+<span class="go">&#39;name: testdata.xmu&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="io_hdf5.html" class="btn btn-neutral float-right" title="IO HDF5 module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="io_read.html" class="btn btn-neutral float-left" title="IO read module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020-2021, Marco A. Alsina
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

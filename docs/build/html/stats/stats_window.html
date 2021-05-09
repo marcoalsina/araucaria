@@ -1,0 +1,328 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Window module &mdash; araucaria 0.1.7c
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Utilities module" href="../utils_module.html" />
+    <link rel="prev" title="genESD module" href="stats_genesd.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../stats_module.html">Statistics module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="stats_genesd.html">genESD module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Window module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../stats_module.html">Statistics module</a> &raquo;</li>
+        
+      <li>Window module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/stats/stats_window.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.stats.window">
+<span id="window-module"></span><h1>Window module<a class="headerlink" href="#module-araucaria.stats.window" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt id="araucaria.stats.window.roll_med">
+<code class="sig-prename descclassname"><span class="pre">araucaria.stats.window.</span></code><code class="sig-name descname"><span class="pre">roll_med</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edgemethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nan'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.window.roll_med" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the rolling median of a univariate array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array to compute the rolling median.</p></li>
+<li><p><strong>window</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Size of the rolling window for analysis.</p></li>
+<li><p><strong>min_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Minimum sample points to calculate the median in each window.
+The default is 2.</p></li>
+<li><p><strong>edgemethod</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Dictates how medians are calculated at the edges of the array.
+Options are ‘nan’, ‘calc’ and ‘extend’. See the Notes for further details.
+The default is ‘nan’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Rolling median of the array.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">window</span></code> is not an odd value.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">window</span></code> is smaller or equal than 3.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">window</span></code> is not an integer.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">edgemethod</span></code> is not recognized.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function calculates the median of a moving window. Results are returned in the
+index corresponding to the center of the window. The function ignores <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code></a>
+values in the array.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edgemethod='nan'</span></code> uses <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code></a> values for missing values at the edges.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edgemethod='calc'</span></code> uses an abbreviated window at the edges
+(e.g. the first sample will have (window/2)+1 points in the calculation).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edgemethod='extend'</span></code> uses the nearest calculated value for missing values at the edges.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">window</span></code> is less than <code class="docutils literal notranslate"><span class="pre">min_samples</span></code>, <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code></a> is given as the median.</p>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">linspace</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">roll_med</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># generating a signal and its rolling median</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f1</span>   <span class="o">=</span> <span class="mf">0.2</span> <span class="c1"># frequency</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>    <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>    <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">f1</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;signal&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;calc&#39;</span><span class="p">,</span> <span class="s1">&#39;extend&#39;</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">]:</span>
+<span class="gp">... </span>   <span class="n">fy</span>   <span class="o">=</span> <span class="n">roll_med</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">edgemethod</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+<span class="gp">... </span>   <span class="n">line</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">fy</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lab</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lab</span> <span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../stats/stats_window-1.py">Source code</a>, <a class="reference external" href="../stats/stats_window-1.png">png</a>, <a class="reference external" href="../stats/stats_window-1.hires.png">hires.png</a>, <a class="reference external" href="../stats/stats_window-1.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/stats_window-1.png" src="../_images/stats_window-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../utils_module.html" class="btn btn-neutral float-right" title="Utilities module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="stats_genesd.html" class="btn btn-neutral float-left" title="genESD module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020-2021, Marco A. Alsina
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

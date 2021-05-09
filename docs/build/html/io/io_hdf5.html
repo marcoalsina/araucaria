@@ -1,0 +1,702 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>IO HDF5 module &mdash; araucaria 0.1.7c
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="XAS module" href="../xas_module.html" />
+    <link rel="prev" title="IO write module" href="io_write.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../main_module.html">Main module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../io_module.html">IO module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="io_read.html">IO read module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="io_write.html">IO write module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">IO HDF5 module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../io_module.html">IO module</a> &raquo;</li>
+        
+      <li>IO HDF5 module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/io/io_hdf5.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.io.io_hdf5">
+<span id="io-hdf5-module"></span><h1>IO HDF5 module<a class="headerlink" href="#module-araucaria.io.io_hdf5" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-araucaria.io.io_hdf5" title="araucaria.io.io_hdf5"><code class="xref py py-mod docutils literal notranslate"><span class="pre">io_hdf5</span></code></a> submodule offers the following functions to read, write and
+manipulate data in the Hierarchical Data Format <code class="docutils literal notranslate"><span class="pre">HDF5</span></code>:</p>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 67%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.io.io_hdf5.read_hdf5" title="araucaria.io.io_hdf5.read_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_hdf5()</span></code></a></p></td>
+<td><p>Reads a single group dataset from an HDF5 file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.io.io_hdf5.read_all_hdf5" title="araucaria.io.io_hdf5.read_all_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_all_hdf5()</span></code></a></p></td>
+<td><p>Reads all group datasets from an HDF5 file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.io.io_hdf5.write_hdf5" title="araucaria.io.io_hdf5.write_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_hdf5()</span></code></a></p></td>
+<td><p>Writes a single group dataset in an HDF5 file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.io.io_hdf5.write_collection_hdf5" title="araucaria.io.io_hdf5.write_collection_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_collection_hdf5()</span></code></a></p></td>
+<td><p>Writes a collection in an HDF5 file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.io.io_hdf5.rename_dataset_hdf5" title="araucaria.io.io_hdf5.rename_dataset_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">rename_dataset_hdf5()</span></code></a></p></td>
+<td><p>Renames a group dataset in an HDF5 file.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.io.io_hdf5.delete_dataset_hdf5" title="araucaria.io.io_hdf5.delete_dataset_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">delete_dataset_hdf5()</span></code></a></p></td>
+<td><p>Deletes a group dataset in an HDF5 file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.io.io_hdf5.summary_hdf5" title="araucaria.io.io_hdf5.summary_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">summary_hdf5()</span></code></a></p></td>
+<td><p>Returns a summary of datasets in an HDF5 file.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt id="araucaria.io.io_hdf5.read_hdf5">
+<code class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></code><code class="sig-name descname"><span class="pre">read_hdf5</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.read_hdf5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads a single group dataset from an HDF5 file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to HDF5 file.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Dataset name to retrieve from the HDF5 file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Group containing the requested dataset.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If the HDF5 file does not exist in the specified path.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> does not exist in the HDF5 file.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;test_database.h5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting dnd_testfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;dnd_testfile&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">group_mu</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">])</span>
+<span class="go">[True, True]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_hdf5.read_all_hdf5">
+<code class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></code><code class="sig-name descname"><span class="pre">read_all_hdf5</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.read_all_hdf5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads all group datasets from an HDF5 file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to HDF5 file.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection" title="araucaria.main.collection.Collection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Collection</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Collection containing the requested datasets.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If the HDF5 file does not exist in the specified path.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_all_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;test_database.h5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># reading database</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_all_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">Collection</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
+<span class="go">[&#39;dnd_testfile&#39;, &#39;p65_testfile&#39;, &#39;xmu_testfile&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_hdf5.convert_bytes_hdf5">
+<code class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></code><code class="sig-name descname"><span class="pre">convert_bytes_hdf5</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.convert_bytes_hdf5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility function to convert a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> record from an HDF5 file.</p>
+<p>Returned value will be either a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>,
+or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>record</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>) – HDF5 dataset record.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Converted record.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>TypeError:</strong> – If  value stored inside <code class="docutils literal notranslate"><span class="pre">record</span></code> is not of type
+    <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a>.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><code class="docutils literal notranslate"><span class="pre">araucaria</span></code> stores <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> records
+as <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> in the HDF5 file.
+Such records  need to be converted back to their original
+types during reading.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_hdf5.write_hdf5">
+<code class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></code><code class="sig-name descname"><span class="pre">write_hdf5</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'dataset1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.write_hdf5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a group dataset in an HDF5 file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to HDF5 file.</p></li>
+<li><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>) – Group to write in the HDF5 file.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name for the dataset in the HDF5 file. The default is ‘dataset1’.</p></li>
+<li><p><strong>replace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Replace previous dataset. The default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If dataset cannot be written to the HDF5 file.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid Group instance.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> dataset already exists in the HDF5 file and <code class="docutils literal notranslate"><span class="pre">replace=False</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>If the file specified by <code class="docutils literal notranslate"><span class="pre">fpath</span></code> does not exists, it will be automatically created.
+If the file already exists then the dataset will be appended.</p>
+<p>By default the write operation will be canceled if <code class="docutils literal notranslate"><span class="pre">name</span></code> already exists in the HDF5 file.
+The previous dataset can be overwritten with the option <code class="docutils literal notranslate"><span class="pre">replace=True</span></code>.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_xmu</span><span class="p">,</span> <span class="n">write_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;xmu_testfile.xmu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting mu and mu_ref scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_xmu</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving a new hdf5 file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">write_hdf5</span><span class="p">(</span><span class="s1">&#39;database.h5&#39;</span><span class="p">,</span> <span class="n">group_mu</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;xmu_testfile&#39;</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">xmu_testfile written to database.h5.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_hdf5.write_collection_hdf5">
+<code class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></code><code class="sig-name descname"><span class="pre">write_collection_hdf5</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.write_collection_hdf5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a collection in an HDF5 file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to HDF5 file.</p></li>
+<li><p><strong>collection</strong> (<a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection" title="araucaria.main.collection.Collection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Collection</span></code></a>) – Collection to write in the HDF5 file.</p></li>
+<li><p><strong>replace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Replace previous dataset. The default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If dataset cannot be written to the HDF5 file.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> dataset already exists in the HDF5 file and <code class="docutils literal notranslate"><span class="pre">replace=False</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>If the file specified by <code class="docutils literal notranslate"><span class="pre">fpath</span></code> does not exists, it will be automatically created.
+If the file already exists then the datasets in the collection will be appended.</p>
+<p>By default the write operation will be canceled if any dataset in <code class="docutils literal notranslate"><span class="pre">collection</span></code>
+already exists in the HDF5 file.
+Previous datasets can be overwritten with the option <code class="docutils literal notranslate"><span class="pre">replace=True</span></code>.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_all_hdf5</span><span class="p">,</span> <span class="n">write_collection_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;test_database.h5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># reading database</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_all_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving collection in a new hdf5 file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">write_collection_hdf5</span><span class="p">(</span><span class="s1">&#39;database.h5&#39;</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">dnd_testfile written to database.h5.</span>
+<span class="go">p65_testfile written to database.h5.</span>
+<span class="go">xmu_testfile written to database.h5.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_hdf5.write_recursive_hdf5">
+<code class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></code><code class="sig-name descname"><span class="pre">write_recursive_hdf5</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.write_recursive_hdf5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Utility function to write a Group recursively in an HDF5 file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dataset</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code>) – Dataset in the HDF5 file.</p></li>
+<li><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>) – Group to write in the HDF5 file.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Only <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>
+types are currently supported for recursive writting in an HDF5 <a class="reference external" href="https://docs.h5py.org/en/latest/high/dataset.html#h5py.Dataset" title="(in h5py v3.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a>.</p>
+<p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> types will be convertet to <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, which is in
+turn saved as <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> in the HDF5 database.
+If read with <a class="reference internal" href="#araucaria.io.io_hdf5.read_hdf5" title="araucaria.io.io_hdf5.read_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_hdf5()</span></code></a>, such records will be automatically converted to their
+original type in the group.</p>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_hdf5.rename_dataset_hdf5">
+<code class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></code><code class="sig-name descname"><span class="pre">rename_dataset_hdf5</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.rename_dataset_hdf5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renames a dataset in an HDF5 file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to HDF5 file.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of Group dataset.</p></li>
+<li><p><strong>newname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – New name for Group dataset.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If the HDF5 file does not exist in the specified path.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> dataset does not exist in the HDF5 file.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">newname</span></code> dataset already exists in the HDF5 file.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_xmu</span><span class="p">,</span> <span class="n">write_hdf5</span><span class="p">,</span> <span class="n">rename_dataset_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;xmu_testfile.xmu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting mu and mu_ref scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_xmu</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving a new hdf5 file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">write_hdf5</span><span class="p">(</span><span class="s1">&#39;database.h5&#39;</span><span class="p">,</span> <span class="n">group_mu</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;xmu_testfile&#39;</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">xmu_testfile written to database.h5.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># renaming dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rename_dataset_hdf5</span><span class="p">(</span><span class="s1">&#39;database.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;xmu_testfile&#39;</span><span class="p">,</span> <span class="s1">&#39;xmu_renamed&#39;</span><span class="p">)</span>
+<span class="go">xmu_testfile renamed to xmu_renamed in database.h5.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_hdf5.delete_dataset_hdf5">
+<code class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></code><code class="sig-name descname"><span class="pre">delete_dataset_hdf5</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.delete_dataset_hdf5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes a dataset from an HDF5 file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to HDF5 file.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of dataset to delete.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If the HDF5 file does not exist in the specified path.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> dataset does not exist in the HDF5 file.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_xmu</span><span class="p">,</span> <span class="n">write_hdf5</span><span class="p">,</span> <span class="n">rename_dataset_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;xmu_testfile.xmu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting mu and mu_ref scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_xmu</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving a new hdf5 file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">write_hdf5</span><span class="p">(</span><span class="s1">&#39;database.h5&#39;</span><span class="p">,</span> <span class="n">group_mu</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;xmu_testfile&#39;</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">xmu_testfile written to database.h5.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># deleting dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">delete_dataset_hdf5</span><span class="p">(</span><span class="s1">&#39;database.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;xmu_testfile&#39;</span><span class="p">)</span>
+<span class="go">xmu_testfile deleted from database.h5.</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt id="araucaria.io.io_hdf5.summary_hdf5">
+<code class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></code><code class="sig-name descname"><span class="pre">summary_hdf5</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">pre_edge_kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.summary_hdf5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a summary report of datasets in an HDF5 file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to HDF5 file.</p></li>
+<li><p><strong>optional</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>]) – List with optional parameters. See Notes for details.</p></li>
+<li><p><strong>pre_edge_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – Dictionary with arguments for <a class="reference internal" href="../xas/xas_normalize.html#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../main/main_report.html#araucaria.main.report.Report" title="araucaria.main.report.Report"><code class="xref py py-class docutils literal notranslate"><span class="pre">Report</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Report for datasets in the HDF5 file.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If the HDF5 file does not exist in the specified path.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>Summary data includes the following:</p>
+<ol class="arabic simple">
+<li><p>Dataset index.</p></li>
+<li><p>Dataset name.</p></li>
+<li><p>Measurement mode.</p></li>
+<li><p>Numbers of scans.</p></li>
+<li><p>Absorption edge step <span class="math notranslate nohighlight">\(\Delta\mu(E_0)\)</span>, if <code class="docutils literal notranslate"><span class="pre">optional=['edge_step']</span></code>.</p></li>
+<li><p>Absorption threshold energy <span class="math notranslate nohighlight">\(E_0\)</span>, if <code class="docutils literal notranslate"><span class="pre">optional=['e0']</span></code>.</p></li>
+<li><p>Merged scans, if <code class="docutils literal notranslate"><span class="pre">optional=['merged_scans']</span></code>.</p></li>
+<li><p>Optional parameters if they exist as attributes in the dataset.</p></li>
+</ol>
+<p>The number of scans and names of merged files are retrieved
+from the <code class="docutils literal notranslate"><span class="pre">merged_scans</span></code> attribute of the HDF5 dataset.</p>
+<p>The absorption threshold and the edge step are retrieved by
+calling the function <a class="reference internal" href="../xas/xas_normalize.html#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>.</p>
+<p>Optional parameters will be retrieved from the dataset as
+attributes. Currently only <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> or
+<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> will be retrieved. Otherswise an empty character
+will be printed in the report.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#araucaria.io.io_hdf5.read_hdf5" title="araucaria.io.io_hdf5.read_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_hdf5()</span></code></a>, <a class="reference internal" href="../main/main_report.html#araucaria.main.report.Report" title="araucaria.main.report.Report"><code class="xref py py-class docutils literal notranslate"><span class="pre">Report</span></code></a></p>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">summary_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;test_database.h5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># printing default summary</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span> <span class="o">=</span> <span class="n">summary_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="go">===========================</span>
+<span class="go">id  dataset       mode  n</span>
+<span class="go">===========================</span>
+<span class="go">1   dnd_testfile  mu    3</span>
+<span class="go">2   p65_testfile  mu    2</span>
+<span class="go">3   xmu_testfile  mu    1</span>
+<span class="go">===========================</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># printing summary with merged scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span> <span class="o">=</span> <span class="n">summary_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;e0&#39;</span><span class="p">,</span> <span class="s1">&#39;merged_scans&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="go">====================================================</span>
+<span class="go">id  dataset       mode  n  e0     merged_scans</span>
+<span class="go">====================================================</span>
+<span class="go">1   dnd_testfile  mu    3  29203  dnd_test_001.dat</span>
+<span class="go">                                  dnd_test_002.dat</span>
+<span class="go">                                  dnd_test_003.dat</span>
+<span class="go">----------------------------------------------------</span>
+<span class="go">2   p65_testfile  mu    2  18011  p65_test_001.xdi</span>
+<span class="go">                                  p65_test_002.xdi</span>
+<span class="go">----------------------------------------------------</span>
+<span class="go">3   xmu_testfile  mu    1  11873  None</span>
+<span class="go">====================================================</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># printing custom parameters</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_xmu</span><span class="p">,</span> <span class="n">write_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;xmu_testfile.xmu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting mu and mu_ref scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_xmu</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># adding additional attributes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span><span class="o">.</span><span class="n">symbol</span> <span class="o">=</span> <span class="s1">&#39;Zn&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span><span class="o">.</span><span class="n">temp</span>   <span class="o">=</span> <span class="mf">25.0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving a new hdf5 file</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">write_hdf5</span><span class="p">(</span><span class="s1">&#39;database2.h5&#39;</span><span class="p">,</span> <span class="n">group_mu</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;xmu_testfile&#39;</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">xmu_testfile written to database2.h5.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span> <span class="o">=</span> <span class="n">summary_hdf5</span><span class="p">(</span><span class="s1">&#39;database2.h5&#39;</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">,</span><span class="s1">&#39;temp&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="go">=========================================</span>
+<span class="go">id  dataset       mode  n  symbol  temp</span>
+<span class="go">=========================================</span>
+<span class="go">1   xmu_testfile  mu    1  Zn      25</span>
+<span class="go">=========================================</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../xas_module.html" class="btn btn-neutral float-right" title="XAS module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="io_write.html" class="btn btn-neutral float-left" title="IO write module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020-2021, Marco A. Alsina
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
