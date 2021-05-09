@@ -9,5 +9,5 @@ The :mod:`~araucaria.main` module contains the core classes of the library:
 - The :class:`~araucaria.main.report.Report` class  provides a simple framework to print dataset information to ``sys.stdout``.
 """
 from .group import Group, FitGroup
-from .collection import Collection
 from .report import Report
+from .collection import Collection

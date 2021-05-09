@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from itertools import chain
-from typing import List
-from . import Group
-from numpy import ndarray, linspace
+from typing import List, Optional
+from numpy import ndarray, linspace, inf
+from . import Group, Report
 
 class Collection(object):
     """Collection storage class.
@@ -24,7 +24,7 @@ class Collection(object):
     -----
     Each group will be stored as an attribute of the collection.
     The ``tags`` attribute classifies group names based on a 
-    ``tag`` key, which is useful for manipulations of groups.
+    ``tag`` key, which is useful for joint manipulation of groups.
     
     Warning
     -------
@@ -50,7 +50,7 @@ class Collection(object):
             return '<Collection>'
     
     def add_group(self, group: Group, tag: str='scan') -> None:
-        """Adds a data group to the Collection.
+        """Adds a group dataset to the Collection.
         
         Parameters
         ----------
@@ -157,6 +157,49 @@ class Collection(object):
             # modifying name of group
             self.__dict__[newname].name = newname
 
+    def get_tag(self, name) -> str:
+        """Returns tag for a group in the Collection.
+
+        Parameters
+        ----------
+        name
+            Name of group to retrieve tag.
+
+        Returns
+        -------
+        :
+            Tag of the group.
+
+        Raises
+        ------
+        TypeError
+            If ``name`` is not in a group in the Collection.
+        
+        Example
+        -------
+        >>> from araucaria import Collection, Group
+        >>> collection = Collection()
+        >>> g1   = Group(**{'name': 'group1'})
+        >>> g2   = Group(**{'name': 'group2'})
+        >>> tags = ('scan', 'ref')
+        >>> for i, group in enumerate([g1, g2]):
+        ...     collection.add_group(group, tag=tags[i])
+        >>> print(collection.get_tag('group1'))
+        scan
+        >>> print(collection.get_tag('group2'))
+        ref
+        """
+        if not hasattr(self, name):
+            raise AttributeError('collection has no %s group.' % name)
+        
+        # retrieving original tag key
+        for key, val in self.tags.items():
+            if name in val:
+                tag = key
+                break
+
+        return tag
+
     def retag(self, name: str, tag: str) -> None:
         """Modifies tag of a group in the Collection.
         
@@ -189,15 +232,9 @@ class Collection(object):
         >>> for key, value in collection.tags.items():
         ...     print(key, value)
         ref ['group1', 'group2']
-        """
-        if not hasattr(self, name):
-            raise AttributeError('collection has no %s group.' % name)
-        
+        """        
         # retrieving original tag key
-        for key, val in self.tags.items():
-            if name in val:
-                initag = key
-                break
+        initag = self.get_tag(name)
         
         if initag == tag:
             # nothing needs to be changed
@@ -218,7 +255,7 @@ class Collection(object):
                 self.tags[tag] = name
 
     def get_group(self, name) -> Group:
-        """Returns a data group from the Collection.
+        """Returns a group dataset from the Collection.
         
         Parameters
         ----------
@@ -308,7 +345,7 @@ class Collection(object):
         return names
 
     def del_group(self, name) -> None:
-        """Removes a data group from the Collection.
+        """Removes a group dataset from the Collection.
         
         Parameters
         ----------
@@ -361,6 +398,186 @@ class Collection(object):
 
         # removing group
         delattr(self, name)
+
+    def summary(self, taglist: List[str]=['all'], optional: Optional[list]=None, 
+                **pre_edge_kws:dict) -> Report:
+        """Returns a summary report of group datasets in the Collection.
+
+        Parameters
+        ----------
+        taglist
+            List with keys to filter groups in the Collection based 
+            on the ``tags`` attribute. The default is ['all'].
+        optional
+            List with optional parameters. See Notes for details.
+        pre_edge_kws
+            Dictionary with arguments for :func:`~araucaria.xas.normalize.pre_edge`.
+
+        Returns
+        -------
+        :
+            Report for datasets in the HDF5 file.
+
+        Raises
+        ------
+        ValueError
+            If any item in ``taglist`` is not a key of the ``tags`` attribute.
+
+        Notes
+        -----
+        Summary data includes the following:
+
+        1. Dataset index.
+        2. Dataset name.
+        3. Dataset tag.
+        4. Measurement mode.
+        5. Numbers of scans.
+        6. Absorption edge step :math:`\Delta\mu(E_0)`, if ``optional=['edge_step']``.
+        7. Absorption threshold energy :math:`E_0`, if ``optional=['e0']``.
+        8. Merged scans, if ``optional=['merged_scans']``.
+        9. Optional parameters if they exist as attributes in the dataset.
+
+        The number of scans and names of merged files are retrieved 
+        from the ``merged_scans`` attribute of ``collection``.
+
+        The absorption threshold and the edge step are retrieved by 
+        calling the function :func:`~araucaria.xas.normalize.pre_edge`.
+
+        Optional parameters will be retrieved from the dataset as 
+        attributes. Currently only :class:`str`, :class:`float` or
+        :class:`int` will be retrieved. Otherswise an empty character
+        will be printed in the report.
+
+        See also
+        --------
+        :class:`~araucaria.main.report.Report`
+
+        Examples
+        --------
+        >>> from araucaria.testdata import get_testpath
+        >>> from araucaria.io import read_all_hdf5
+        >>> fpath      = get_testpath('test_database.h5')
+        >>> collection = read_all_hdf5(fpath)
+        >>> # printing default summary
+        >>> report = collection.summary()
+        >>> report.show()
+        =================================
+        id  dataset       tag   mode  n  
+        =================================
+        1   dnd_testfile  scan  mu    3  
+        2   p65_testfile  scan  mu    2  
+        3   xmu_testfile  scan  mu    1  
+        =================================
+    
+        >>> # printing summary with merged scans
+        >>> report = collection.summary(optional=['e0', 'merged_scans'])
+        >>> report.show()
+        ==========================================================
+        id  dataset       tag   mode  n  e0     merged_scans      
+        ==========================================================
+        1   dnd_testfile  scan  mu    3  29203  dnd_test_001.dat  
+                                                dnd_test_002.dat  
+                                                dnd_test_003.dat  
+        ----------------------------------------------------------
+        2   p65_testfile  scan  mu    2  18011  p65_test_001.xdi  
+                                                p65_test_002.xdi  
+        ----------------------------------------------------------
+        3   xmu_testfile  scan  mu    1  11873  None              
+        ==========================================================
+    
+        >>> # printing custom summary
+        >>> from araucaria.testdata import get_testpath
+        >>> from araucaria import Collection
+        >>> from araucaria.io import read_xmu
+        >>> fpath = get_testpath('xmu_testfile.xmu')
+        >>> # extracting mu and mu_ref scans
+        >>> group_mu = read_xmu(fpath, scan='mu')
+        >>> # adding additional attributes
+        >>> group_mu.symbol = 'Zn'
+        >>> group_mu.temp   = 25.0
+        >>> # saving in a collection
+        >>> collection = Collection()
+        >>> collection.add_group(group_mu)
+        >>> report = collection.summary(optional=['symbol','temp'])
+        >>> report.show()
+        ===================================================
+        id  dataset           tag   mode  n  symbol  temp  
+        ===================================================
+        1   xmu_testfile.xmu  scan  mu    1  Zn      25    
+        ===================================================
+        """
+        from ..xas import pre_edge
+
+        # list with parameter names
+        field_names = ['id', 'dataset', 'tag', 'mode', 'n']
+        opt_list    = ['merged_scans', 'edge_step', 'e0']
+
+        if pre_edge_kws == {}:
+            # default values
+            pre_edge_kws={'pre_range':[-150,-50], 'nnorm':3, 'post_range':[150, inf]}
+
+        # verifying optional values
+        if optional is not None:
+            for opt_val in optional:
+                field_names.append(opt_val)
+
+        # instanciating report class
+        report   = Report()
+        report.set_columns(field_names)
+
+        for i, name in enumerate(self.get_names(taglist=taglist)):
+            data    = self.get_group(name)
+            scanval = data.get_mode()
+            tag     = self.get_tag(name)
+            extra_content = False  # aux variable for 'merged_scans'
+            try:
+                # number of merged_scans
+                nscans = len(data.merged_scans)
+            except:
+                nscans = 1
+
+            field_vals = [i+1, name, tag, scanval, nscans]
+            if optional is not None:
+                for j, opt_val in enumerate(optional):
+                    if opt_val == 'merged_scans':
+                        if i == 0:
+                            # storing the col merge_index
+                            merge_index = len(field_vals)
+                        try:
+                            list_scans = data.merged_scans
+                            field_vals.append(data.merged_scans[0])
+                            extra_content = True
+                        except:
+                            field_vals.append('None')
+
+                    elif opt_val in opt_list[1:]:
+                        out = pre_edge(data, **pre_edge_kws)
+                        field_vals.append(out[opt_val])
+                    else:
+                        # custom optional field
+                        try:
+                            val = getattr(data, opt_val)
+                            if isinstance(val, (int, float, str)):
+                                # if val is int or float print it
+                                field_vals.append(val)
+                            else:
+                                field_vals.append('')
+                        except:
+                            field_vals.append('')
+            report.add_row(field_vals)
+        
+            if extra_content:
+                for item in list_scans[1:]:
+                    field_vals = []
+                    for j,index in enumerate(field_names):
+                        if j !=  merge_index:
+                            field_vals.append('')
+                        else:
+                            field_vals.append(item)
+                    report.add_row(field_vals)
+                report.add_midrule()
+
+        return report
 
     def get_mcer(self, num: int=None, taglist: List[str]=['all']) -> ndarray:
         """Returns the minimum common energy range for the Collection.

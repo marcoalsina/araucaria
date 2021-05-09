@@ -31,7 +31,7 @@ from pathlib import Path
 from typing import Optional, Union
 from numpy import ndarray, inf
 from h5py import File, Dataset
-from .. import Group, Collection, Report
+from .. import Group, Report, Collection
 from ..xas import pre_edge
 
 def read_hdf5(fpath: Path, name: str)-> Group:
@@ -568,7 +568,7 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     See also
     --------
     :func:`read_hdf5`
-    :class:`~araucaria.main.repot.Report`
+    :class:`~araucaria.main.report.Report`
     
     Examples
     --------
@@ -674,7 +674,7 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
                     out = pre_edge(data, **pre_edge_kws)
                     field_vals.append(out[opt_val])
                 else:
-                    # custom optinal field
+                    # custom optional field
                     try:
                         val = hdf5[key][opt_val]
                         if isinstance(val[()], (int, float)):
