@@ -68,6 +68,8 @@ class Collection(object):
         ------
         TypeError
             If ``group`` is not a valid Group instance.
+        ValueError
+            If ``group.name`` is already in the Collection.
 
         Example
         -------
@@ -92,7 +94,10 @@ class Collection(object):
         if not isinstance(group, Group):
             raise TypeError('group is not a valid Group instance.')
         name = group.name
-        setattr(self, name, group)
+        if name in self.get_names():
+            raise ValueError('group name already in the Collection.')
+        else:
+            setattr(self, name, group)
         
         # updating tags
         if tag in self.tags:

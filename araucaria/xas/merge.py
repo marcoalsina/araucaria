@@ -270,7 +270,7 @@ def align(group: Group, refgroup: Group, offset: float=0., window: list=[-50,50]
     return e_offset
 
 def merge(collection: Collection, taglist: List[str]=['all'], 
-          only_mu_ref: bool=False) -> Tuple[Report, Group]:
+          name: str='merge', only_mu_ref: bool=False) -> Tuple[Report, Group]:
     """Merge groups in a collection.
 
     Parameters
@@ -281,6 +281,9 @@ def merge(collection: Collection, taglist: List[str]=['all'],
         List with keys to filter groups to be merged based 
         on their ``tags`` attributes in the Collection.
         The default is ['all'].
+    name
+        Name for the merged group.
+        The default is 'merge'.
     only_mu_ref
         Indicates if only the reference scans should be merged.
         The default is False.
@@ -309,7 +312,7 @@ def merge(collection: Collection, taglist: List[str]=['all'],
     and the single group will be returned.
     
     If different scan types are being merged, the scan attribute of the merge 
-    group will be labelled ``mu``.
+    group will be labeled ``mu``.
 
     Notes
     -----
@@ -415,22 +418,24 @@ def merge(collection: Collection, taglist: List[str]=['all'],
         # calculating the average of the spectra
         mu_avg = mean(mu, axis=1)
         if all(item == mode for item in scanlist):
-            merge = Group(**{'energy':energy, mode:mu_avg, 'mu_ref':mu_ref_avg})
+            merge = Group(**{'name':name, 'energy':energy, mode:mu_avg,
+                             'mu_ref':mu_ref_avg})
             mergescan = mode
         else:
-            merge = Group(**{'energy':energy, 'mu':mu_avg, 'mu_ref':mu_ref_avg})
+            merge = Group(**{'name':name, 'energy':energy, 'mu':mu_avg, 
+                             'mu_ref':mu_ref_avg})
             mergescan = 'mu'
         
         # storing data on report
         e0 = find_e0(merge, update=False)
-        report.add_row(['','merge', mergescan, 0.0, e0])
+        report.add_row(['',name, mergescan, 0.0, e0])
         
     else:
-        merge = Group(**{'energy':energy, 'mu_ref':mu_ref_avg})
+        merge = Group(**{'name':name, 'energy':energy, 'mu_ref':mu_ref_avg})
         
         # storing data on report
         e0 = find_e0(merge, use_mu_ref=True, update=False)
-        report.add_row(['','merge', 'mu_ref', 0.0, e0])
+        report.add_row(['',name, 'mu_ref', 0.0, e0])
 
     setattr(merge, 'merged_scans', listgroups)
     return (report, merge)

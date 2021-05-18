@@ -49,18 +49,19 @@ def get_version(dependencies:bool=False) -> str:
     >>> print(get_version()) #doctest: +ELLIPSIS
     Araucaria version     : ...
     """
-    import os,sys
+    import os, sys
     import numpy as np
     import scipy as sp
     import lmfit as lm
+    import h5py  as h5
     import matplotlib as mpl
     import araucaria as ara
 
-    libr = ('Python', 'Numpy', 'Scipy', 'Lmfit', 'Matplotlib')
+    libr = ('Python', 'Numpy', 'Scipy', 'Lmfit', 'H5py', 'Matplotlib')
     verf = ''    # string container
 
     if dependencies:
-        for i, lib in enumerate((sys, np, sp, lm, mpl)):
+        for i, lib in enumerate((sys, np, sp, lm, h5, mpl)):
             if lib == sys: 
                 ver = lib.version
             else:
