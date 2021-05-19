@@ -646,7 +646,11 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     report   = Report()
     report.set_columns(field_names)
 
-    for i, key in enumerate(hdf5.keys()):
+    # number of records
+    keys  = hdf5.keys()
+    nkeys = len(keys)
+
+    for i, key in enumerate(keys):
         data    = read_hdf5(fpath, str(key))
         scanval = data.get_mode()
         extra_content = False  # aux variable for 'merged_scans'
@@ -703,8 +707,9 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
                     else:
                         field_vals.append(item)
                 report.add_row(field_vals)
-            report.add_midrule()
-    
+            if i < (nkeys - 1):
+                report.add_midrule()
+
     hdf5.close()
     return report
 

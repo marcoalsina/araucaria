@@ -530,7 +530,11 @@ class Collection(object):
         report   = Report()
         report.set_columns(field_names)
 
-        for i, name in enumerate(self.get_names(taglist=taglist)):
+        # number of records
+        names = self.get_names(taglist=taglist)
+        ncols = len(names)
+
+        for i, name in enumerate(names):
             data    = self.get_group(name)
             scanval = data.get_mode()
             tag     = self.get_tag(name)
@@ -580,7 +584,8 @@ class Collection(object):
                         else:
                             field_vals.append(item)
                     report.add_row(field_vals)
-                report.add_midrule()
+                if i < (ncols - 1):
+                    report.add_midrule()
 
         return report
 
