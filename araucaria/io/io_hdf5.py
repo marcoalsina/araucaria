@@ -27,6 +27,7 @@ manipulate data in the Hierarchical Data Format ``HDF5``:
 """
 from os.path import isfile
 from ast import literal_eval
+from re import search
 from pathlib import Path
 from typing import Optional, Union
 from numpy import ndarray, inf
@@ -203,7 +204,7 @@ def convert_bytes_hdf5(record: Dataset) -> Union[dict, list, str]:
         # int, float types were originally stored as str
         return record_str
 
-def write_hdf5(fpath: Path, group: Group, name: str='dataset1', 
+def write_hdf5(fpath: Path, group: Group, name: str=None, 
                replace: bool=False) -> None:
     """Writes a group dataset in an HDF5 file.
 
@@ -214,7 +215,9 @@ def write_hdf5(fpath: Path, group: Group, name: str='dataset1',
     group
         Group to write in the HDF5 file.
     name
-        Name for the dataset in the HDF5 file. The default is 'dataset1'.
+        Name for the dataset in the HDF5 file.
+        The default is None, which preserves the 
+        original group name.
     replace
         Replace previous dataset. The default is False.
 
@@ -263,6 +266,8 @@ def write_hdf5(fpath: Path, group: Group, name: str='dataset1',
         hdf5 = File(fpath, "w")
 
     # testing name on the dataset
+    if name is None:
+        name = group.name
     if name in hdf5:
         # dataset present in the file
             if replace:
@@ -519,7 +524,7 @@ def delete_dataset_hdf5(fpath: Path, name: str) -> None:
         raise ValueError ("%s does not exists in %s." % (name, fpath))
     return
 
-def summary_hdf5(fpath: Path, optional: Optional[list]=None, 
+def summary_hdf5(fpath: Path, regex: str=None, optional: Optional[list]=None, 
                  **pre_edge_kws:dict) -> Report:
     """Returns a summary report of datasets in an HDF5 file.
 
@@ -527,8 +532,12 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     ----------
     fpath
         Path to HDF5 file.
+    regex
+        Search string to filter results by dataset name. See Notes for details.
+        The default is None.
     optional
         List with optional parameters. See Notes for details.
+        The default is None.
     pre_edge_kws
         Dictionary with arguments for :func:`~araucaria.xas.normalize.pre_edge`.
 
@@ -545,7 +554,7 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     Notes
     -----
     Summary data includes the following:
-    
+
     1. Dataset index.
     2. Dataset name.
     3. Measurement mode.
@@ -555,9 +564,13 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     7. Merged scans, if ``optional=['merged_scans']``.
     8. Optional parameters if they exist as attributes in the dataset.
 
+    A ``regex`` value can be used to filter dataset names based
+    on a regular expression (reges). For valid regex syntax, please 
+    check the documentation of the module :mod:`re`.
+
     The number of scans and names of merged files are retrieved 
     from the ``merged_scans`` attribute of the HDF5 dataset.
-    
+
     The absorption threshold and the edge step are retrieved by 
     calling the function :func:`~araucaria.xas.normalize.pre_edge`.
 
@@ -570,7 +583,7 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     --------
     :func:`read_hdf5`
     :class:`~araucaria.main.report.Report`
-    
+
     Examples
     --------
     >>> from araucaria.testdata import get_testpath
@@ -586,9 +599,9 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     2   p65_testfile  mu    2  
     3   xmu_testfile  mu    1  
     ===========================
-    
-    >>> # printing summary with merged scans
-    >>> report = summary_hdf5(fpath, optional=['e0', 'merged_scans'])
+
+    >>> # printing summary with merged scans of Goethite groups
+    >>> report = summary_hdf5(fpath, regex='dnd', optional=['e0', 'merged_scans'])
     >>> report.show()
     ====================================================
     id  dataset       mode  n  e0     merged_scans      
@@ -596,14 +609,8 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     1   dnd_testfile  mu    3  29203  dnd_test_001.dat  
                                       dnd_test_002.dat  
                                       dnd_test_003.dat  
-    ----------------------------------------------------
-    2   p65_testfile  mu    2  18011  p65_test_001.xdi  
-                                      p65_test_002.xdi  
-    ----------------------------------------------------
-    3   xmu_testfile  mu    1  11873  None              
     ====================================================
-    
-    
+
     >>> # printing custom parameters
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.io import read_xmu, write_hdf5
@@ -648,7 +655,17 @@ def summary_hdf5(fpath: Path, optional: Optional[list]=None,
     report.set_columns(field_names)
 
     # number of records
-    keys  = hdf5.keys()
+    keys  = list(hdf5.keys())
+    if regex is None:
+        pass
+    else:
+        index = []
+        for i, key in enumerate(keys):
+            if search(regex, key) is None:
+                pass
+            else:
+                index.append(i)
+        keys = [keys[i] for i in index]
     nkeys = len(keys)
 
     for i, key in enumerate(keys):
