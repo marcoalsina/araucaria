@@ -6,8 +6,11 @@ Plot module
 .. automodule:: araucaria.plot.template
    :members:
 
-.. automodule:: araucaria.plot.fig_pre_edge
+.. automodule:: araucaria.plot.fig_merge
    :members:
 
-.. automodule:: araucaria.plot.fig_merge
+.. automodule:: araucaria.plot.fig_pre_edge
+   :members:
+   
+.. automodule:: araucaria.plot.fig_autobk
    :members:

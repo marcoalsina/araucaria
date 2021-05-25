@@ -23,7 +23,7 @@ from ..utils import index_nearest, check_objattrs, check_xrange
 def find_e0(group: Group, method: str='maxder', tol: float=1e-4,
             pre_edge_kws: dict=None, use_mu_ref: bool=False, 
             update: bool=False) -> float:
-    """Calculates the absorption threshold energy of a scan.
+    """Calculates the absorption threshold energy of a XAFS scan.
 
     Parameters
     ----------
@@ -193,7 +193,7 @@ def find_e0(group: Group, method: str='maxder', tol: float=1e-4,
 def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
              pre_range: list=[-inf,-50], post_range: list=[100,inf],
              update:bool =False) -> dict:
-    """Pre-edge substaction and normalization of a scan.
+    """Pre-edge substaction and normalization of a XAFS scan.
     
     Parameters
     ----------

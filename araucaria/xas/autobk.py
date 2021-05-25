@@ -273,6 +273,9 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
                    'init_knots_y' : spl_y,
                    'nfev'         : result.nfev,
                    'k_range'      : krange,
+                   'kweight'      : kweight,
+                   'win'          : win,
+                   'dk'           : dk,
                   }
 
     content = {'bkg'         : obkg,
