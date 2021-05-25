@@ -47,7 +47,7 @@ def get_version(dependencies:bool=False) -> str:
     --------
     >>> from araucaria.utils import get_version
     >>> print(get_version()) #doctest: +ELLIPSIS
-    Araucaria version     : ...
+    Araucaria version   : ...
     """
     import os, platform
     import numpy as np
