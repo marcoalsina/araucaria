@@ -115,6 +115,12 @@ def read_all_hdf5(fpath: Path)-> Collection:
     ------
     IOError
         If the HDF5 file does not exist in the specified path.
+
+    Warning
+    -------
+    The HDF5 file does not store the ``tags`` attribute of a Collection.
+    Therefore the returned collection will automatically assign 
+    ``tag='scan'`` to each group dataset.
     
     Example
     -------
@@ -154,7 +160,6 @@ def read_all_hdf5(fpath: Path)-> Collection:
     
     hdf5.close()
 
-    # writting collection
     return (collection)
 
 def convert_bytes_hdf5(record: Dataset) -> Union[dict, list, str]:
@@ -320,6 +325,10 @@ def write_collection_hdf5(fpath: Path, collection: Collection,
     By default the write operation will be canceled if any dataset in ``collection``
     already exists in the HDF5 file.
     Previous datasets can be overwritten with the option ``replace=True``. 
+
+    Warning
+    -------
+    The ``tags`` attribute of the ``collection`` will not be stored in the HDF5 file.
     
     Example
     --------

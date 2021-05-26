@@ -12,7 +12,7 @@ basic and advanced tasks on XAFS spectra such as linear combination fitting (LCF
 Additional functionality will be added on a regular basis.
 
 ## How to install
-The following install options are curently available for the development version of `araucaria`:
+The following install options are curently available for the alpha version of `araucaria`:
 
 ### Install with Git
 
