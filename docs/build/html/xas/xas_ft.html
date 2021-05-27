@@ -3,22 +3,28 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>XASFT module &mdash; araucaria 0.1.7c
+  <title>XASFT module &mdash; araucaria 0.1.8
  documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -28,14 +34,15 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -57,7 +64,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> araucaria
+            <a href="../index.html" class="icon icon-home"> araucaria
           
 
           
@@ -90,7 +97,7 @@
             
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
@@ -151,6 +158,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -164,7 +173,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/xas/xas_ft.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -231,8 +240,8 @@ discrete fast Fourier transforms (FFT) on a XAFS scan:</p>
 </tbody>
 </table>
 <dl class="py function">
-<dt id="araucaria.xas.xasft.ftwindow">
-<code class="sig-prename descclassname"><span class="pre">araucaria.xas.xasft.</span></code><code class="sig-name descname"><span class="pre">ftwindow</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">inf,</span> <span class="pre">inf]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hanning'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasft.ftwindow" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.xas.xasft.ftwindow">
+<span class="sig-prename descclassname"><span class="pre">araucaria.xas.xasft.</span></span><span class="sig-name descname"><span class="pre">ftwindow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">x_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">inf,</span> <span class="pre">inf]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dx2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hanning'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasft.ftwindow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a FT window.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -291,13 +300,13 @@ discrete fast Fourier transforms (FFT) on a XAFS scan:</p>
 </div>
 <p>(<a class="reference external" href="../xas/xas_ft-1.py">Source code</a>, <a class="reference external" href="../xas/xas_ft-1.png">png</a>, <a class="reference external" href="../xas/xas_ft-1.hires.png">hires.png</a>, <a class="reference external" href="../xas/xas_ft-1.pdf">pdf</a>)</p>
 <div class="figure align-default">
-<img alt="../_images/xas_ft-1.png" src="../_images/xas_ft-1.png" />
+<img alt="../_images/xas_ft-1.png" class="plot-directive" src="../_images/xas_ft-1.png" />
 </div>
 </dd></dl>
 
 <dl class="py function">
-<dt id="araucaria.xas.xasft.xftf">
-<code class="sig-prename descclassname"><span class="pre">araucaria.xas.xasft.</span></code><code class="sig-name descname"><span class="pre">xftf</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">20]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dk1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dk2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hanning'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rmax_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2048</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kstep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasft.xftf" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.xas.xasft.xftf">
+<span class="sig-prename descclassname"><span class="pre">araucaria.xas.xasft.</span></span><span class="sig-name descname"><span class="pre">xftf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">k_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">20]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dk1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dk2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hanning'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rmax_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2048</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kstep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasft.xftf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates a forward FFT of a XAFS signal.</p>
 <p>A XAFS forward FFT decomposes <span class="math notranslate nohighlight">\(\chi(k)\)</span> into <span class="math notranslate nohighlight">\(\chi(R)\)</span>.</p>
 <dl class="field-list simple">
@@ -381,13 +390,13 @@ included as attributes of <code class="docutils literal notranslate"><span class
 </div>
 <p>(<a class="reference external" href="../xas/xas_ft-2.py">Source code</a>, <a class="reference external" href="../xas/xas_ft-2.png">png</a>, <a class="reference external" href="../xas/xas_ft-2.hires.png">hires.png</a>, <a class="reference external" href="../xas/xas_ft-2.pdf">pdf</a>)</p>
 <div class="figure align-default">
-<img alt="../_images/xas_ft-2.png" src="../_images/xas_ft-2.png" />
+<img alt="../_images/xas_ft-2.png" class="plot-directive" src="../_images/xas_ft-2.png" />
 </div>
 </dd></dl>
 
 <dl class="py function">
-<dt id="araucaria.xas.xasft.xftr">
-<code class="sig-prename descclassname"><span class="pre">araucaria.xas.xasft.</span></code><code class="sig-name descname"><span class="pre">xftr</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">20]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dr1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dr2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hanning'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2048</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kstep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qmax_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasft.xftr" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.xas.xasft.xftr">
+<span class="sig-prename descclassname"><span class="pre">araucaria.xas.xasft.</span></span><span class="sig-name descname"><span class="pre">xftr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">20]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dr1</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dr2</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">win</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'hanning'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2048</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kstep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qmax_out</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">with_phase</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasft.xftr" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates a reverse FFT of a XAFS signal.</p>
 <p>A XAFS reverse FFT recovers <span class="math notranslate nohighlight">\(\chi(q)\)</span> from <span class="math notranslate nohighlight">\(\chi(R)\)</span>.</p>
 <dl class="field-list simple">
@@ -474,13 +483,13 @@ included as attributes of <code class="docutils literal notranslate"><span class
 </div>
 <p>(<a class="reference external" href="../xas/xas_ft-3.py">Source code</a>, <a class="reference external" href="../xas/xas_ft-3.png">png</a>, <a class="reference external" href="../xas/xas_ft-3.hires.png">hires.png</a>, <a class="reference external" href="../xas/xas_ft-3.pdf">pdf</a>)</p>
 <div class="figure align-default">
-<img alt="../_images/xas_ft-3.png" src="../_images/xas_ft-3.png" />
+<img alt="../_images/xas_ft-3.png" class="plot-directive" src="../_images/xas_ft-3.png" />
 </div>
 </dd></dl>
 
 <dl class="py function">
-<dt id="araucaria.xas.xasft.xftf_kwin">
-<code class="sig-prename descclassname"><span class="pre">araucaria.xas.xasft.</span></code><code class="sig-name descname"><span class="pre">xftf_kwin</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2048</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kstep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasft.xftf_kwin" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.xas.xasft.xftf_kwin">
+<span class="sig-prename descclassname"><span class="pre">araucaria.xas.xasft.</span></span><span class="sig-name descname"><span class="pre">xftf_kwin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chi</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2048</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kstep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasft.xftf_kwin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates a forward FFT of a preset XAFS signal.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -533,13 +542,13 @@ The default is 0.05.</p></li>
 </div>
 <p>(<a class="reference external" href="../xas/xas_ft-4.py">Source code</a>, <a class="reference external" href="../xas/xas_ft-4.png">png</a>, <a class="reference external" href="../xas/xas_ft-4.hires.png">hires.png</a>, <a class="reference external" href="../xas/xas_ft-4.pdf">pdf</a>)</p>
 <div class="figure align-default">
-<img alt="../_images/xas_ft-4.png" src="../_images/xas_ft-4.png" />
+<img alt="../_images/xas_ft-4.png" class="plot-directive" src="../_images/xas_ft-4.png" />
 </div>
 </dd></dl>
 
 <dl class="py function">
-<dt id="araucaria.xas.xasft.xftr_kwin">
-<code class="sig-prename descclassname"><span class="pre">araucaria.xas.xasft.</span></code><code class="sig-name descname"><span class="pre">xftr_kwin</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2048</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kstep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasft.xftr_kwin" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.xas.xasft.xftr_kwin">
+<span class="sig-prename descclassname"><span class="pre">araucaria.xas.xasft.</span></span><span class="sig-name descname"><span class="pre">xftr_kwin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">chir</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nfft</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2048</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kstep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.05</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasft.xftr_kwin" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculates a reverse FFT of a preset XAFS signal.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -592,7 +601,7 @@ The default is 0.05.</p></li>
 </div>
 <p>(<a class="reference external" href="../xas/xas_ft-5.py">Source code</a>, <a class="reference external" href="../xas/xas_ft-5.png">png</a>, <a class="reference external" href="../xas/xas_ft-5.hires.png">hires.png</a>, <a class="reference external" href="../xas/xas_ft-5.pdf">pdf</a>)</p>
 <div class="figure align-default">
-<img alt="../_images/xas_ft-5.png" src="../_images/xas_ft-5.png" />
+<img alt="../_images/xas_ft-5.png" class="plot-directive" src="../_images/xas_ft-5.png" />
 </div>
 </dd></dl>
 
@@ -603,37 +612,29 @@ The default is 0.05.</p></li>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="xas_utils.html" class="btn btn-neutral float-right" title="XASutils module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="xas_autobk.html" class="btn btn-neutral float-left" title="Autobk module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="xas_utils.html" class="btn btn-neutral float-right" title="XASutils module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="xas_autobk.html" class="btn btn-neutral float-left" title="Autobk module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020-2021, Marco A. Alsina
+        &#169; Copyright 2020-2021, Marco A. Alsina.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

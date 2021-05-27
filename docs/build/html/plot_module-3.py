@@ -1,16 +1,10 @@
 import matplotlib.pyplot as plt
-from araucaria import Collection
 from araucaria.testdata import get_testpath
 from araucaria.io import read_dnd
-from araucaria.xas import merge
-from araucaria.plot import fig_merge
-collection = Collection()
-files = ['dnd_testfile.dat' , 'dnd_testfile2.dat', 'dnd_testfile3.dat']
-for file in files:
-    fpath = get_testpath(file)
-    group_mu = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
-    collection.add_group(group_mu)         # adding group to collection
-report, merge = merge(collection)
-fig, ax = fig_merge(merge, collection)
-leg     = ax[2].legend(fontsize=8)
+from araucaria.xas import pre_edge
+from araucaria.plot import fig_pre_edge
+fpath   = get_testpath('dnd_testfile.dat')
+group   = read_dnd(fpath, scan='mu')
+pre     = pre_edge(group, update=True)
+fig, ax = fig_pre_edge(group)
 plt.show(block=False)

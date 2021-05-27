@@ -3,22 +3,28 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Collection class &mdash; araucaria 0.1.7c
+  <title>Collection class &mdash; araucaria 0.1.8
  documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -28,14 +34,15 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-        <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-        <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true, "ignoreClass": "document", "processClass": "math|output_area"}})</script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -57,7 +64,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> araucaria
+            <a href="../index.html" class="icon icon-home"> araucaria
           
 
           
@@ -90,7 +97,7 @@
             
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
@@ -148,6 +155,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -161,7 +170,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/main/main_collection.rst.txt" rel="nofollow"> View page source</a>
           
         
@@ -202,8 +211,8 @@
 <div class="section" id="collection-class">
 <h1>Collection class<a class="headerlink" href="#collection-class" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
-<dt id="araucaria.main.collection.Collection">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">araucaria.main.collection.</span></code><code class="sig-name descname"><span class="pre">Collection</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">araucaria.main.collection.</span></span><span class="sig-name descname"><span class="pre">Collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collection storage class.</p>
 <p>This class stores a collection of <a class="reference internal" href="main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a> objects.</p>
 <dl class="field-list simple">
@@ -212,8 +221,8 @@
 </dd>
 </dl>
 <dl class="py attribute">
-<dt id="araucaria.main.collection.Collection.tags">
-<code class="sig-name descname"><span class="pre">tags</span></code><a class="headerlink" href="#araucaria.main.collection.Collection.tags" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.tags">
+<span class="sig-name descname"><span class="pre">tags</span></span><a class="headerlink" href="#araucaria.main.collection.Collection.tags" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dictionary with available groups in the collection based on tag keys.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -238,8 +247,8 @@ The <code class="docutils literal notranslate"><span class="pre">tags</span></co
 </pre></div>
 </div>
 <dl class="py method">
-<dt id="araucaria.main.collection.Collection.add_group">
-<code class="sig-name descname"><span class="pre">add_group</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scan'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.add_group" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.add_group">
+<span class="sig-name descname"><span class="pre">add_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scan'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.add_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a group dataset to the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -256,7 +265,10 @@ The default is ‘scan’.</p></li>
 <dd class="field-odd"><p></p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid Group instance.</p>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid Group instance.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group.name</span></code> is already in the Collection.</p></li>
+</ul>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -283,8 +295,8 @@ The default is ‘scan’.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="araucaria.main.collection.Collection.rename_group">
-<code class="sig-name descname"><span class="pre">rename_group</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.rename_group" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.rename_group">
+<span class="sig-name descname"><span class="pre">rename_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.rename_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renames a group in the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -323,8 +335,8 @@ The default is ‘scan’.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="araucaria.main.collection.Collection.get_tag">
-<code class="sig-name descname"><span class="pre">get_tag</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_tag" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_tag">
+<span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_tag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns tag for a group in the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -357,8 +369,8 @@ The default is ‘scan’.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="araucaria.main.collection.Collection.retag">
-<code class="sig-name descname"><span class="pre">retag</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.retag" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.retag">
+<span class="sig-name descname"><span class="pre">retag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.retag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modifies tag of a group in the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -394,8 +406,8 @@ The default is ‘scan’.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="araucaria.main.collection.Collection.get_group">
-<code class="sig-name descname"><span class="pre">get_group</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_group" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_group">
+<span class="sig-name descname"><span class="pre">get_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a group dataset from the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -427,8 +439,8 @@ The default is ‘scan’.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="araucaria.main.collection.Collection.get_names">
-<code class="sig-name descname"><span class="pre">get_names</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_names" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_names">
+<span class="sig-name descname"><span class="pre">get_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns group names in the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -466,8 +478,39 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 </dd></dl>
 
 <dl class="py method">
-<dt id="araucaria.main.collection.Collection.del_group">
-<code class="sig-name descname"><span class="pre">del_group</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.del_group" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.copy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a deep copy of the collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>None</strong> – </p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#araucaria.main.collection.Collection" title="araucaria.main.collection.Collection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Collection</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Copy of the collection.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">allclose</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Collection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection1</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">content</span>     <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group&#39;</span><span class="p">,</span> <span class="s1">&#39;energy&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group</span>       <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="n">content</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection1</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection2</span> <span class="o">=</span> <span class="n">collection1</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy1</span>     <span class="o">=</span> <span class="n">collection1</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">energy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">energy2</span>     <span class="o">=</span> <span class="n">collection2</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">energy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allclose</span><span class="p">(</span><span class="n">energy1</span><span class="p">,</span> <span class="n">energy2</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.del_group">
+<span class="sig-name descname"><span class="pre">del_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.del_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes a group dataset from the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -505,15 +548,18 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 </dd></dl>
 
 <dl class="py method">
-<dt id="araucaria.main.collection.Collection.summary">
-<code class="sig-name descname"><span class="pre">summary</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">pre_edge_kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.summary" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a summary report of group datasets in the Collection.</p>
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">pre_edge_kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a summary report of groups in a Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>taglist</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List with keys to filter groups in the Collection based
 on the <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute. The default is [‘all’].</p></li>
-<li><p><strong>optional</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>]) – List with optional parameters. See Notes for details.</p></li>
+<li><p><strong>regex</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Search string to filter results by group name. See Notes for details.
+The default is None.</p></li>
+<li><p><strong>optional</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>]) – List with optional parameters. See Notes for details.
+The default is None.</p></li>
 <li><p><strong>pre_edge_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – Dictionary with arguments for <a class="reference internal" href="../xas/xas_normalize.html#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>.</p></li>
 </ul>
 </dd>
@@ -530,21 +576,24 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 <p class="rubric">Notes</p>
 <p>Summary data includes the following:</p>
 <ol class="arabic simple">
-<li><p>Dataset index.</p></li>
-<li><p>Dataset name.</p></li>
-<li><p>Dataset tag.</p></li>
+<li><p>Group index.</p></li>
+<li><p>Group name.</p></li>
+<li><p>Group tag.</p></li>
 <li><p>Measurement mode.</p></li>
 <li><p>Numbers of scans.</p></li>
 <li><p>Absorption edge step <span class="math notranslate nohighlight">\(\Delta\mu(E_0)\)</span>, if <code class="docutils literal notranslate"><span class="pre">optional=['edge_step']</span></code>.</p></li>
 <li><p>Absorption threshold energy <span class="math notranslate nohighlight">\(E_0\)</span>, if <code class="docutils literal notranslate"><span class="pre">optional=['e0']</span></code>.</p></li>
 <li><p>Merged scans, if <code class="docutils literal notranslate"><span class="pre">optional=['merged_scans']</span></code>.</p></li>
-<li><p>Optional parameters if they exist as attributes in the dataset.</p></li>
+<li><p>Optional parameters if they exist as attributes in the group.</p></li>
 </ol>
+<p>A <code class="docutils literal notranslate"><span class="pre">regex</span></code> value can be used to filter group names based
+on a regular expression (reges). For valid regex syntax, please
+check the documentation of the module <a class="reference external" href="https://docs.python.org/3/library/re.html#module-re" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">re</span></code></a>.</p>
 <p>The number of scans and names of merged files are retrieved
 from the <code class="docutils literal notranslate"><span class="pre">merged_scans</span></code> attribute of <code class="docutils literal notranslate"><span class="pre">collection</span></code>.</p>
 <p>The absorption threshold and the edge step are retrieved by
 calling the function <a class="reference internal" href="../xas/xas_normalize.html#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>.</p>
-<p>Optional parameters will be retrieved from the dataset as
+<p>Optional parameters will be retrieved from the groups as
 attributes. Currently only <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a> or
 <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> will be retrieved. Otherswise an empty character
 will be printed in the report.</p>
@@ -569,8 +618,8 @@ will be printed in the report.</p>
 <span class="go">=================================</span>
 </pre></div>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># printing summary with merged scans</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;e0&#39;</span><span class="p">,</span> <span class="s1">&#39;merged_scans&#39;</span><span class="p">])</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># printing summary of dnd file with merged scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">regex</span><span class="o">=</span><span class="s1">&#39;dnd&#39;</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;e0&#39;</span><span class="p">,</span> <span class="s1">&#39;merged_scans&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 <span class="go">==========================================================</span>
 <span class="go">id  dataset       tag   mode  n  e0     merged_scans</span>
@@ -578,11 +627,6 @@ will be printed in the report.</p>
 <span class="go">1   dnd_testfile  scan  mu    3  29203  dnd_test_001.dat</span>
 <span class="go">                                        dnd_test_002.dat</span>
 <span class="go">                                        dnd_test_003.dat</span>
-<span class="go">----------------------------------------------------------</span>
-<span class="go">2   p65_testfile  scan  mu    2  18011  p65_test_001.xdi</span>
-<span class="go">                                        p65_test_002.xdi</span>
-<span class="go">----------------------------------------------------------</span>
-<span class="go">3   xmu_testfile  scan  mu    1  11873  None</span>
 <span class="go">==========================================================</span>
 </pre></div>
 </div>
@@ -611,8 +655,8 @@ will be printed in the report.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="araucaria.main.collection.Collection.get_mcer">
-<code class="sig-name descname"><span class="pre">get_mcer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_mcer" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_mcer">
+<span class="sig-name descname"><span class="pre">get_mcer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_mcer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the minimum common energy range for the Collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -681,37 +725,29 @@ of points for the minimum common energy range.</p>
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="main_report.html" class="btn btn-neutral float-right" title="Report class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="main_group.html" class="btn btn-neutral float-left" title="Group classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="main_report.html" class="btn btn-neutral float-right" title="Report class" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="main_group.html" class="btn btn-neutral float-left" title="Group classes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020-2021, Marco A. Alsina
+        &#169; Copyright 2020-2021, Marco A. Alsina.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 

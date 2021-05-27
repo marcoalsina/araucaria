@@ -3,22 +3,28 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Part 1: Basics of data processing &mdash; araucaria 0.1.7c
+  <title>Part 1: Basics of data processing &mdash; araucaria 0.1.8
  documentation</title>
   
 
   
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
   <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
 
   
   
+
   
+  
+
   
 
   
@@ -28,19 +34,22 @@
   
     
       <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
         <script src="../_static/jquery.js"></script>
         <script src="../_static/underscore.js"></script>
         <script src="../_static/doctools.js"></script>
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Main module" href="../main_module.html" />
+    <link rel="next" title="Part 2: Normalization and background removal" href="02.background_removal.html" />
     <link rel="prev" title="Tutorials" href="../tutorials.html" /> 
 </head>
 
@@ -55,7 +64,7 @@
           
 
           
-            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> araucaria
+            <a href="../index.html" class="icon icon-home"> araucaria
           
 
           
@@ -88,16 +97,21 @@
             
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../install.html">How to install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Part 1: Basics of data processing</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#1.-Checking-versions">1. Checking versions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#2.-Retrieving-file-names">2. Retrieving file names</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#3.-Reading,-aligning-and-merging-scans">3. Reading, aligning and merging scans</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#4.-Calibrating-the-merged-scan">4. Calibrating the merged scan</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#5.-Plotting-merge-results">5. Plotting merge results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#1.-Checking-version">1. Checking version</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#2.-Retrieving-filepaths">2. Retrieving filepaths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#3.-Reading-and-aligning-scans">3. Reading and aligning scans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#4.-Merging-scans">4. Merging scans</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#5.-Calibrating-the-merged-scan">5. Calibrating the merged scan</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#6.-Plotting-merge-results">6. Plotting merge results</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#7.-Saving-datasets-in-an-HDF5-database">7. Saving datasets in an HDF5 database</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="02.background_removal.html">Part 2: Normalization and background removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03.custom_report_figure.html">Part 3: Creating custom report and figures</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04.linear_comb_fitting.html">Part 4: Linear combination fitting</a></li>
 </ul>
 </li>
 </ul>
@@ -151,6 +165,8 @@
 
 
 
+
+
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -164,7 +180,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-            
+          
             <a href="../_sources/tutorials/01.basics_data_processing.ipynb.txt" rel="nofollow"> View page source</a>
           
         
@@ -451,18 +467,18 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Part-1:-Basics-of-data-processing">
 <h1>Part 1: Basics of data processing<a class="headerlink" href="#Part-1:-Basics-of-data-processing" title="Permalink to this headline">¶</a></h1>
 <p><em>by Morgane Desmau &amp; Marco Alsina</em></p>
-<p><em>Last update: January 2021</em></p>
-<p>The following notebook explains the following basic steps required to create a database in araucaria:</p>
+<p><em>Last update: May 2021</em></p>
+<p>The following notebook explains the steps required to create a database in <code class="docutils literal notranslate"><span class="pre">araucaria</span></code>:</p>
 <ol class="arabic simple">
-<li><p>Read data into araucaria.</p></li>
-<li><p>Perform aligment of spectra.</p></li>
+<li><p>Read spectra from files.</p></li>
+<li><p>Align spectra.</p></li>
 <li><p>Merge spectra and calibrate reference channel.</p></li>
-<li><p>Create a database with the original spectra.</p></li>
+<li><p>Create a database with the processed spectra.</p></li>
 </ol>
-<div class="section" id="1.-Checking-versions">
-<h2>1. Checking versions<a class="headerlink" href="#1.-Checking-versions" title="Permalink to this headline">¶</a></h2>
-<p>It is always convenient to first check the version of <code class="docutils literal notranslate"><span class="pre">araucaria</span></code> and its dependencies, to verify that libraries are correctly loaded.</p>
-<p>As seen in the output, this tutorial was developed with version 0.1.7c. (your version could vary).</p>
+<div class="section" id="1.-Checking-version">
+<h2>1. Checking version<a class="headerlink" href="#1.-Checking-version" title="Permalink to this headline">¶</a></h2>
+<p>It is convenient to first check the version of <code class="docutils literal notranslate"><span class="pre">araucaria</span></code> and its dependencies. In this case we will use the <a class="reference internal" href="../utils_module.html#araucaria.utils.get_version"><span class="std std-ref">get_version()</span></a> function.</p>
+<p>As seen in the output, this tutorial was developed with version 0.1.8. (your version could vary).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -478,21 +494,20 @@ div.rendered_html tbody tr:hover {
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Python version        : 3.8.3 (default, May 19 2020, 18:47:26)
-[GCC 7.3.0]
-Numpy version         : 1.19.1
-Scipy version         : 1.5.2
-Lmfit version         : 1.0.1
-Matplotlib version    : 3.3.1
-Araucaria version     : 0.1.7c
-
+Python version      : 3.9.4
+Numpy version       : 1.20.3
+Scipy version       : 1.6.3
+Lmfit version       : 1.0.2
+H5py version        : 3.2.1
+Matplotlib version  : 3.4.2
+Araucaria version   : 0.1.8
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="2.-Retrieving-file-names">
-<h2>2. Retrieving file names<a class="headerlink" href="#2.-Retrieving-file-names" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">testdata</span></code> module offers routines to retrieve filepaths from different beamlines that ship with <code class="docutils literal notranslate"><span class="pre">araucaria</span></code> for testing and example purposes.</p>
-<p>In this case we will be reading and processing several scans of goethite (an iron oxyhydroxide), measured at at the Fe K-edge in the P65 beamline of DESY, Hamburg (data kindly provided by Morgane Desmau):</p>
+<div class="section" id="2.-Retrieving-filepaths">
+<h2>2. Retrieving filepaths<a class="headerlink" href="#2.-Retrieving-filepaths" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">araucaria</span></code> contains spectra from different beamlines as examples and for testing purposes. The <a class="reference internal" href="../testdata_module.html"><span class="doc">testdata</span></a> module offers routines to retrieve the respective filepaths.</p>
+<p>In this case we will read and process several scans of goethite (an iron oxyhydroxide). Spectra was measured at the Fe K-edge in the P65 beamline of DESY, Hamburg (data kindly provided by Morgane Desmau):</p>
 <ol class="arabic simple">
 <li><p>20K_GOE_Fe_K_240.00000.xdi</p></li>
 <li><p>20K_GOE_Fe_K_240.00001.xdi</p></li>
@@ -500,12 +515,13 @@ Araucaria version     : 0.1.7c
 <li><p>20K_GOE_Fe_K_240.00003.xdi</p></li>
 <li><p>20K_GOE_Fe_K_240.00004.xdi</p></li>
 </ol>
+<p>We will use the <a class="reference internal" href="../testdata_module.html#araucaria.testdata.utils.get_testpath"><span class="std std-ref">get_testpath()</span></a> function to construct a list with filepaths to the scan files.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># we first retrieve the proper filepaths to the files and store them in a list.</span>
+<span></span><span class="c1"># retrieving filepaths and storing them in a list</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
 
@@ -528,16 +544,24 @@ Araucaria version     : 0.1.7c
 True
 </pre></div></div>
 </div>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>Note</strong></p>
+<p>If you prefer to process your own spectra, just modify the list with filepaths to point to the location of your files.</p>
 </div>
-<div class="section" id="3.-Reading,-aligning-and-merging-scans">
-<h2>3. Reading, aligning and merging scans<a class="headerlink" href="#3.-Reading,-aligning-and-merging-scans" title="Permalink to this headline">¶</a></h2>
-<p>Now that we have the paths to the files we can read them with the <code class="docutils literal notranslate"><span class="pre">read_p65</span></code> function:</p>
+</div>
+<div class="section" id="3.-Reading-and-aligning-scans">
+<h2>3. Reading and aligning scans<a class="headerlink" href="#3.-Reading-and-aligning-scans" title="Permalink to this headline">¶</a></h2>
+<p>Once the filepaths have been retrieved we can use the available functions of the <a class="reference internal" href="../io/io_read.html"><span class="doc">io_read</span></a> module to read them. Since the specra was acquired at the P65 beamline we will be using the <a class="reference internal" href="../io/io_read.html#araucaria.io.io_read.read_p65"><span class="std std-ref">read_p65()</span></a> function:</p>
 <ul class="simple">
-<li><p>For convenience we will read both the transmission and reference channels of each scan file.</p></li>
-<li><p>Data will be stored together in a <code class="docutils literal notranslate"><span class="pre">Collection</span></code>.</p></li>
-<li><p>We will use a single scan (arbitrarily selected) for alignment of the remaining scans.</p></li>
-<li><p>After alignment, scans will be merged and a report printed.</p></li>
+<li><p>For convenience we will read both the transmission and reference channels of each scan file and store it as a <a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group"><span class="std std-ref">Group</span></a>.</p></li>
+<li><p>A single scan (arbitrarily selected) will be used for alignment of the remaining spectra.</p></li>
+<li><p>Aligned spectra will be stored together in a <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a> and a summary report is printed.</p></li>
 </ul>
+<p>Alignment will be performed with the <a class="reference internal" href="../xas/xas_merge.html#araucaria.xas.merge.align"><span class="std std-ref">align()</span></a> function. Note that here we explicitly establish an alignment window of -100 eV to 100 eV around the absorption threshold (<span class="math notranslate nohighlight">\(E_0\)</span>) to perform the alignment.</p>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>Note</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">araucaria</span></code> does not impose a preferred order to approach data pre-processing. Thus, you could also choose to first calibrate a single scan and then align the remaining scans before merging.</p>
+</div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -552,16 +576,15 @@ True
 
 <span class="c1"># reading a single scan</span>
 <span class="n">ref</span> <span class="o">=</span> <span class="n">read_p65</span><span class="p">(</span><span class="n">fpaths</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">ref</span><span class="p">)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s1">&#39;merge&#39;</span><span class="p">)</span>
 
 <span class="c1"># reading remaining scans and aligning them</span>
 <span class="k">for</span> <span class="n">fpath</span> <span class="ow">in</span> <span class="n">fpaths</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
     <span class="n">group</span> <span class="o">=</span> <span class="n">read_p65</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">align</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">])</span>
-    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s1">&#39;merge&#39;</span><span class="p">)</span>
 
-<span class="c1"># merging scans</span>
-<span class="n">report</span><span class="p">,</span> <span class="n">mgroup</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
+<span class="n">report</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;e_offset&#39;</span><span class="p">])</span>
 <span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -571,32 +594,68 @@ True
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-==============================================================
-id  filename                    mode  e_offset [eV]  e0 [eV]
-==============================================================
-1   20K_GOE_Fe_K_240.00000.xdi  mu    0              7126.9
-2   20K_GOE_Fe_K_240.00001.xdi  mu    0.0225         7127.2
-3   20K_GOE_Fe_K_240.00002.xdi  mu    0.026688       7127
-4   20K_GOE_Fe_K_240.00003.xdi  mu    -0.000625      7126.9
-5   20K_GOE_Fe_K_240.00004.xdi  mu    0.0064375      7127.2
---------------------------------------------------------------
-    merge                       mu    0              7126.7
-==============================================================
+===========================================================
+id  dataset                     tag    mode  n  e_offset
+===========================================================
+1   20K_GOE_Fe_K_240.00000.xdi  merge  mu    1
+2   20K_GOE_Fe_K_240.00001.xdi  merge  mu    1  0.0225
+3   20K_GOE_Fe_K_240.00002.xdi  merge  mu    1  0.026688
+4   20K_GOE_Fe_K_240.00003.xdi  merge  mu    1  -0.000625
+5   20K_GOE_Fe_K_240.00004.xdi  merge  mu    1  0.0064375
+===========================================================
 </pre></div></div>
 </div>
+<p>Note that each <a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group"><span class="std std-ref">Group</span></a> dataset is added to the <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a> with the <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection.add_group"><span class="std std-ref">add_group()</span></a> method. This method also allows specification of a <code class="docutils literal notranslate"><span class="pre">tag</span></code> attribute, which is useful to perform joint operations such as merging spectra. Note that the <code class="docutils literal notranslate"><span class="pre">tag</span></code> attributes are included in the summary report.</p>
+<p>Note also that the energy offsets after alignment are negligible, so in this case we could merge the scans without alignment.</p>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>Note</strong></p>
+<p>If no <code class="docutils literal notranslate"><span class="pre">tag</span></code> is specified during <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection.add_group"><span class="std std-ref">add_group()</span></a>, by default it will be assigned <code class="docutils literal notranslate"><span class="pre">tag='scan'</span></code>.</p>
 </div>
-<div class="section" id="4.-Calibrating-the-merged-scan">
-<h2>4. Calibrating the merged scan<a class="headerlink" href="#4.-Calibrating-the-merged-scan" title="Permalink to this headline">¶</a></h2>
-<p>As seen in the report, the energy offsets after alignment are negligible, so we could have simply alignment before merging.</p>
-<p>However, we need to verify that the energy of the merged reference channel corresponds to the absorption threshold at the Fe K-edge (7112 eV).</p>
-<p>By default <code class="docutils literal notranslate"><span class="pre">merge()</span></code> reports the merge result on the primary channel (transmission in this case). However, we can verify the energy of the merged reference channels by requesting it explicitily.</p>
+</div>
+<div class="section" id="4.-Merging-scans">
+<h2>4. Merging scans<a class="headerlink" href="#4.-Merging-scans" title="Permalink to this headline">¶</a></h2>
+<p>Merge is performed with the <a class="reference internal" href="../xas/xas_merge.html#araucaria.xas.merge.merge"><span class="std std-ref">merge()</span></a> function, which accepts a <code class="docutils literal notranslate"><span class="pre">taglist</span></code>argument to filter which datasets are considered for merging. Since all datasets have the same <code class="docutils literal notranslate"><span class="pre">tag</span></code>, all are considered for the merge.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># merging scans</span>
+<span class="n">report</span><span class="p">,</span> <span class="n">mgroup</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">taglist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;merge&#39;</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;20K_GOE_Fe_K&#39;</span><span class="p">)</span>
+<span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+============================================================
+id  filename                    mode  e_offset[eV]  e0[eV]
+============================================================
+1   20K_GOE_Fe_K_240.00000.xdi  mu    0             7126.9
+2   20K_GOE_Fe_K_240.00001.xdi  mu    0.0225        7127.2
+3   20K_GOE_Fe_K_240.00002.xdi  mu    0.026688      7127
+4   20K_GOE_Fe_K_240.00003.xdi  mu    -0.000625     7126.9
+5   20K_GOE_Fe_K_240.00004.xdi  mu    0.0064375     7127.2
+------------------------------------------------------------
+    20K_GOE_Fe_K                mu    0             7126.7
+============================================================
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="5.-Calibrating-the-merged-scan">
+<h2>5. Calibrating the merged scan<a class="headerlink" href="#5.-Calibrating-the-merged-scan" title="Permalink to this headline">¶</a></h2>
+<p>After merging we can verify that the energy of the merged reference channel corresponds to the absorption threshold at the Fe K-edge (7112 eV).</p>
+<p>By default the <a class="reference internal" href="../xas/xas_merge.html#araucaria.xas.merge.merge"><span class="std std-ref">merge()</span></a> function reports the merge result on the primary channel (transmission in this case): We can verify the energy of the merged reference channels by requesting it explicitly with the option <code class="docutils literal notranslate"><span class="pre">only_mu_ref=True</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># merging only reference scans</span>
-<span class="n">report_ref</span><span class="p">,</span> <span class="n">mgroup_ref</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">only_mu_ref</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">report_ref</span><span class="p">,</span> <span class="n">mgroup_ref</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;20K_GOE_Fe_K_ref&#39;</span><span class="p">,</span> <span class="n">only_mu_ref</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">report_ref</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -606,23 +665,23 @@ id  filename                    mode  e_offset [eV]  e0 [eV]
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-================================================================
-id  filename                    mode    e_offset [eV]  e0 [eV]
-================================================================
-1   20K_GOE_Fe_K_240.00000.xdi  mu_ref  0              7111.5
-2   20K_GOE_Fe_K_240.00001.xdi  mu_ref  0.0225         7111.4
-3   20K_GOE_Fe_K_240.00002.xdi  mu_ref  0.026688       7111.3
-4   20K_GOE_Fe_K_240.00003.xdi  mu_ref  -0.000625      7111.2
-5   20K_GOE_Fe_K_240.00004.xdi  mu_ref  0.0064375      7111.2
-----------------------------------------------------------------
-    merge                       mu_ref  0              7111.4
-================================================================
+==============================================================
+id  filename                    mode    e_offset[eV]  e0[eV]
+==============================================================
+1   20K_GOE_Fe_K_240.00000.xdi  mu_ref  0             7111.5
+2   20K_GOE_Fe_K_240.00001.xdi  mu_ref  0.0225        7111.4
+3   20K_GOE_Fe_K_240.00002.xdi  mu_ref  0.026688      7111.3
+4   20K_GOE_Fe_K_240.00003.xdi  mu_ref  -0.000625     7111.2
+5   20K_GOE_Fe_K_240.00004.xdi  mu_ref  0.0064375     7111.2
+--------------------------------------------------------------
+    20K_GOE_Fe_K_ref            mu_ref  0             7111.4
+==============================================================
 </pre></div></div>
 </div>
-<p>In this case the merge report for the reference channel returns a value of 7111.4 eV, so lets go ahead and calibrate the merged scan.</p>
-<p>After calibration we can verify final value of the absorption threshold with <code class="docutils literal notranslate"><span class="pre">find_e0</span></code>.</p>
+<p>In this case the merge report for the reference channel returns a value of 7111.4 eV, so lets go ahead and <a class="reference internal" href="../xas/xas_merge.html#araucaria.xas.merge.calibrate"><span class="std std-ref">calibrate()</span></a> the merged scan.</p>
+<p>After calibration we can verify final value of <span class="math notranslate nohighlight">\(E_0\)</span> with the <a class="reference internal" href="../xas/xas_normalize.html#araucaria.xas.normalize.find_e0"><span class="std std-ref">find_e0()</span></a> function.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -651,7 +710,7 @@ e0 of merged reference: 7112.0 eV
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="output_area docutils container">
@@ -660,23 +719,23 @@ True
 </pre></div></div>
 </div>
 </div>
-<div class="section" id="5.-Plotting-merge-results">
-<h2>5. Plotting merge results<a class="headerlink" href="#5.-Plotting-merge-results" title="Permalink to this headline">¶</a></h2>
-<p>One merge is complete, we can pass the merged group and the original collection to <code class="docutils literal notranslate"><span class="pre">plot_merge</span></code> to visualize the results.</p>
-<p><code class="docutils literal notranslate"><span class="pre">plot_merge</span></code> allows a dictionary to set the parameters for the XAFS figures (<code class="docutils literal notranslate"><span class="pre">fig_pars</span></code>) as well as a dictionary to set general figure paramemeters (<code class="docutils literal notranslate"><span class="pre">fig_kws</span></code>). You can check the documentation for further details.</p>
-<p><code class="docutils literal notranslate"><span class="pre">plot_merge</span></code> even allows dictionaries to set the normalization and background removal procedures, but please note that these parameters are for visualization purposes only, and have no effect on the merge itself.</p>
+<div class="section" id="6.-Plotting-merge-results">
+<h2>6. Plotting merge results<a class="headerlink" href="#6.-Plotting-merge-results" title="Permalink to this headline">¶</a></h2>
+<p>Once the merge is complete, we can provide the merged group and the original collection to the <a class="reference internal" href="../plot_module.html#araucaria.plot.fig_merge.fig_merge"><span class="std std-ref">fig_merge()</span></a> function in order to visualize the results. The function accepts a dictionary to set the parameters for the XAFS figures (<code class="docutils literal notranslate"><span class="pre">fig_pars</span></code>) as well as a dictionary to set general figure parameters (<code class="docutils literal notranslate"><span class="pre">fig_kws</span></code>).</p>
+<div class="admonition warning">
+<p class="admonition-title fa fa-exclamation-circle"><strong>Warning</strong></p>
+<p><a class="reference internal" href="../plot_module.html#araucaria.plot.fig_merge.fig_merge"><span class="std std-ref">fig_merge()</span></a> also accepts dictionaries to set the normalization and background removal procedures. However, note that these dictionaries are for visualization and comparison purposes only, and have no effect on the merge itself.</p>
+</div>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-
-<span class="c1"># plot figure of spectra + merge</span>
+<span></span><span class="c1"># plot figure of spectra + merge</span>
 <span class="kn">from</span> <span class="nn">araucaria.plot</span> <span class="kn">import</span> <span class="n">fig_merge</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
-<span class="c1"># dict arguments to figure</span>
+<span class="c1"># general parameters to figure</span>
 <span class="n">fig_kws</span>  <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;figsize&#39;</span>  <span class="p">:</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)}</span>
 
 <span class="c1"># figure parameters for merged reference</span>
@@ -686,7 +745,7 @@ True
            <span class="s1">&#39;k_mult&#39;</span>    <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
            <span class="p">}</span>
 
-<span class="c1"># creating and showing plot for merged reference scans</span>
+<span class="c1"># plot of merged reference scans</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span> <span class="n">fig_merge</span><span class="p">(</span><span class="n">mgroup_ref</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">fig_pars</span><span class="o">=</span><span class="n">fig_pars</span><span class="p">,</span> <span class="o">**</span><span class="n">fig_kws</span><span class="p">)</span>
 
 <span class="c1"># figure parameters for merged scan</span>
@@ -696,9 +755,9 @@ True
            <span class="s1">&#39;k_mult&#39;</span>    <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
            <span class="p">}</span>
 
-<span class="c1"># creating and showing plot for merged scans</span>
+<span class="c1"># plot of merged scans</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span> <span class="n">fig_merge</span><span class="p">(</span><span class="n">mgroup</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">fig_pars</span><span class="o">=</span><span class="n">fig_pars</span><span class="p">,</span> <span class="o">**</span><span class="n">fig_kws</span><span class="p">)</span>
-<span class="n">axes</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -707,15 +766,77 @@ True
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutorials_01.basics_data_processing_12_0.png" src="../_images/tutorials_01.basics_data_processing_12_0.png" />
+<img alt="../_images/tutorials_01.basics_data_processing_19_0.png" src="../_images/tutorials_01.basics_data_processing_19_0.png" />
 </div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutorials_01.basics_data_processing_12_1.png" src="../_images/tutorials_01.basics_data_processing_12_1.png" />
+<img alt="../_images/tutorials_01.basics_data_processing_19_1.png" src="../_images/tutorials_01.basics_data_processing_19_1.png" />
 </div>
+</div>
+</div>
+<div class="section" id="7.-Saving-datasets-in-an-HDF5-database">
+<h2>7. Saving datasets in an HDF5 database<a class="headerlink" href="#7.-Saving-datasets-in-an-HDF5-database" title="Permalink to this headline">¶</a></h2>
+<p>If we are satisfied with our results, we can save them in a binary format for later retrieval and analysis. The <a class="reference internal" href="../io/io_hdf5.html#araucaria.io.io_hdf5.write_collection_hdf5"><span class="std std-ref">write_collection_hdf5()</span></a> function allows us to directly save a <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a> in the Hierarchical Data Format <code class="docutils literal notranslate"><span class="pre">HDF5</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">write_collection_hdf5</span>
+
+<span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="p">(</span><span class="n">mgroup</span><span class="p">,</span> <span class="n">mgroup_ref</span><span class="p">):</span>
+    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+
+<span class="c1"># report for collection</span>
+<span class="n">report</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;merged_scans&#39;</span><span class="p">])</span>
+<span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+===================================================================
+id  dataset           tag   mode    n  merged_scans
+===================================================================
+1   20K_GOE_Fe_K      scan  mu      5  20K_GOE_Fe_K_240.00000.xdi
+                                       20K_GOE_Fe_K_240.00001.xdi
+                                       20K_GOE_Fe_K_240.00002.xdi
+                                       20K_GOE_Fe_K_240.00003.xdi
+                                       20K_GOE_Fe_K_240.00004.xdi
+-------------------------------------------------------------------
+2   20K_GOE_Fe_K_ref  scan  mu_ref  5  20K_GOE_Fe_K_240.00000.xdi
+                                       20K_GOE_Fe_K_240.00001.xdi
+                                       20K_GOE_Fe_K_240.00002.xdi
+                                       20K_GOE_Fe_K_240.00003.xdi
+                                       20K_GOE_Fe_K_240.00004.xdi
+===================================================================
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="c1"># writing collection to HDF5 file</span>
+<span class="n">write_collection_hdf5</span><span class="p">(</span><span class="s1">&#39;test_database.h5&#39;</span><span class="p">,</span> <span class="n">collection</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+20K_GOE_Fe_K written to test_database.h5.
+20K_GOE_Fe_K_ref written to test_database.h5.
+</pre></div></div>
 </div>
 </div>
 </div>
@@ -725,37 +846,29 @@ True
            
           </div>
           <footer>
-  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-      
-        <a href="../main_module.html" class="btn btn-neutral float-right" title="Main module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
-      
-      
-        <a href="../tutorials.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
-      
+        <a href="02.background_removal.html" class="btn btn-neutral float-right" title="Part 2: Normalization and background removal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../tutorials.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
-  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        
-        &copy; Copyright 2020-2021, Marco A. Alsina
+        &#169; Copyright 2020-2021, Marco A. Alsina.
 
     </p>
   </div>
     
     
     
-    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
-
         </div>
       </div>
 
