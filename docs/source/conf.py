@@ -44,6 +44,7 @@ extensions = ['matplotlib.sphinxext.plot_directive',
               'sphinx.ext.autodoc',
               'sphinx_autodoc_typehints',
               'sphinx.ext.intersphinx',
+              'sphinx.ext.autosectionlabel',
               'sphinx_rtd_theme',
               'nbsphinx',
               'sphinx.ext.mathjax',
@@ -65,7 +66,8 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme     = 'sphinx_rtd_theme'
+html_theme      = 'sphinx_rtd_theme'
+#add_module_names = False
 
 # style for docstring Example code
 pygments_style = 'colorful'

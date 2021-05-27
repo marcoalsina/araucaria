@@ -1,6 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from __future__ import annotations
+from copy import deepcopy
 from itertools import chain
+from re import search
 from typing import List, Optional
 from numpy import ndarray, linspace, inf
 from . import Group, Report
@@ -68,6 +71,8 @@ class Collection(object):
         ------
         TypeError
             If ``group`` is not a valid Group instance.
+        ValueError
+            If ``group.name`` is already in the Collection.
 
         Example
         -------
@@ -92,7 +97,10 @@ class Collection(object):
         if not isinstance(group, Group):
             raise TypeError('group is not a valid Group instance.')
         name = group.name
-        setattr(self, name, group)
+        if name in self.get_names():
+            raise ValueError('group name already in the Collection.')
+        else:
+            setattr(self, name, group)
         
         # updating tags
         if tag in self.tags:
@@ -344,6 +352,35 @@ class Collection(object):
         names.sort()
         return names
 
+    def copy(self) -> Collection:
+        """Returns a deep copy of the collection.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        :
+            Copy of the collection.
+
+
+        Example
+        -------
+        >>> from numpy import allclose
+        >>> from araucaria import Group, Collection
+        >>> collection1 = Collection()
+        >>> content     = {'name': 'group', 'energy': [1,2,3,4,5,6]}
+        >>> group       = Group(**content)
+        >>> collection1.add_group(group)
+        >>> collection2 = collection1.copy()
+        >>> energy1     = collection1.get_group('group').energy
+        >>> energy2     = collection2.get_group('group').energy
+        >>> allclose(energy1, energy2)
+        True
+        """
+        return deepcopy(self)
+
     def del_group(self, name) -> None:
         """Removes a group dataset from the Collection.
         
@@ -399,17 +436,21 @@ class Collection(object):
         # removing group
         delattr(self, name)
 
-    def summary(self, taglist: List[str]=['all'], optional: Optional[list]=None, 
-                **pre_edge_kws:dict) -> Report:
-        """Returns a summary report of group datasets in the Collection.
+    def summary(self, taglist: List[str]=['all'], regex: str=None,
+                optional: Optional[list]=None, **pre_edge_kws:dict) -> Report:
+        """Returns a summary report of groups in a Collection.
 
         Parameters
         ----------
         taglist
             List with keys to filter groups in the Collection based 
             on the ``tags`` attribute. The default is ['all'].
+        regex
+            Search string to filter results by group name. See Notes for details.
+            The default is None.
         optional
             List with optional parameters. See Notes for details.
+            The default is None.
         pre_edge_kws
             Dictionary with arguments for :func:`~araucaria.xas.normalize.pre_edge`.
 
@@ -427,15 +468,19 @@ class Collection(object):
         -----
         Summary data includes the following:
 
-        1. Dataset index.
-        2. Dataset name.
-        3. Dataset tag.
+        1. Group index.
+        2. Group name.
+        3. Group tag.
         4. Measurement mode.
         5. Numbers of scans.
         6. Absorption edge step :math:`\Delta\mu(E_0)`, if ``optional=['edge_step']``.
         7. Absorption threshold energy :math:`E_0`, if ``optional=['e0']``.
         8. Merged scans, if ``optional=['merged_scans']``.
-        9. Optional parameters if they exist as attributes in the dataset.
+        9. Optional parameters if they exist as attributes in the group.
+
+        A ``regex`` value can be used to filter group names based
+        on a regular expression (reges). For valid regex syntax, please 
+        check the documentation of the module :mod:`re`.
 
         The number of scans and names of merged files are retrieved 
         from the ``merged_scans`` attribute of ``collection``.
@@ -443,7 +488,7 @@ class Collection(object):
         The absorption threshold and the edge step are retrieved by 
         calling the function :func:`~araucaria.xas.normalize.pre_edge`.
 
-        Optional parameters will be retrieved from the dataset as 
+        Optional parameters will be retrieved from the groups as 
         attributes. Currently only :class:`str`, :class:`float` or
         :class:`int` will be retrieved. Otherswise an empty character
         will be printed in the report.
@@ -469,8 +514,8 @@ class Collection(object):
         3   xmu_testfile  scan  mu    1  
         =================================
     
-        >>> # printing summary with merged scans
-        >>> report = collection.summary(optional=['e0', 'merged_scans'])
+        >>> # printing summary of dnd file with merged scans
+        >>> report = collection.summary(regex='dnd', optional=['e0', 'merged_scans'])
         >>> report.show()
         ==========================================================
         id  dataset       tag   mode  n  e0     merged_scans      
@@ -478,11 +523,6 @@ class Collection(object):
         1   dnd_testfile  scan  mu    3  29203  dnd_test_001.dat  
                                                 dnd_test_002.dat  
                                                 dnd_test_003.dat  
-        ----------------------------------------------------------
-        2   p65_testfile  scan  mu    2  18011  p65_test_001.xdi  
-                                                p65_test_002.xdi  
-        ----------------------------------------------------------
-        3   xmu_testfile  scan  mu    1  11873  None              
         ==========================================================
     
         >>> # printing custom summary
@@ -525,7 +565,21 @@ class Collection(object):
         report   = Report()
         report.set_columns(field_names)
 
-        for i, name in enumerate(self.get_names(taglist=taglist)):
+        # number of records
+        names = self.get_names(taglist=taglist)
+        if regex is None:
+            pass
+        else:
+            index = []
+            for i, name in enumerate(names):
+                if search(regex, name) is None:
+                    pass
+                else:
+                    index.append(i)
+            names = [names[i] for i in index]
+        ncols = len(names)
+
+        for i, name in enumerate(names):
             data    = self.get_group(name)
             scanval = data.get_mode()
             tag     = self.get_tag(name)
@@ -575,7 +629,8 @@ class Collection(object):
                         else:
                             field_vals.append(item)
                     report.add_row(field_vals)
-                report.add_midrule()
+                if i < (ncols - 1):
+                    report.add_midrule()
 
         return report
 

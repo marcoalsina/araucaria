@@ -163,6 +163,88 @@ class Report:
             self.content = vstack((self.content, midrule))
         self.nrows += 1
 
+    def get_cols(self, names=['all']) -> array:
+        """Returns columns of the report by name.
+
+        Parameters
+        ----------
+        names
+            List with names of columns to return.
+            The default is ['all'], which returns the 
+            entire report content.
+
+        Returns
+        -------
+        :
+            Array with the requested columns.
+        
+        Raises
+        ------
+        ValueError
+            If ``names`` does not contain valid column names.
+
+        Example
+        -------
+        >>> import random
+        >>> from araucaria import Report
+        >>> random.seed(1111)
+        >>> report = Report()
+        >>> names  = ['Name', 'Value']
+        >>> report.set_columns(names)
+        >>> for i in range(1,4):
+        ...     report.add_row(['filename %s'% i, random.random()])
+        >>> col = report.get_cols(names=['Value',])
+        >>> print(col)
+        ['0.2176' '0.34438' '0.64225']
+        """
+        cindex = []
+        if names == ['all']:
+            return self.content
+        else:
+            for name in names:
+                if name not in self.names:
+                    raise ValueError('%s is not a valid column name.')
+                else:
+                    cindex.append(self.names.index(name))
+            if len(cindex) == 1:
+                cindex = cindex[0]
+        return self.content[:, cindex]
+
+    def get_rows(self, index=['all']) -> array:
+        """Returns rows of the report by index.
+
+        Parameters
+        ----------
+        names
+            List with indexes of rows to return.
+            The default is ['all'], which returns the 
+            entire report content.
+
+        Returns
+        -------
+        :
+            Array with the requested rows.
+        Example
+        -------
+        >>> import random
+        >>> from araucaria import Report
+        >>> random.seed(1111)
+        >>> report = Report()
+        >>> names  = ['Name', 'Value']
+        >>> report.set_columns(names)
+        >>> for i in range(1,4):
+        ...     report.add_row(['filename %s'% i, random.random()])
+        >>> row = report.get_rows(index=[1,])
+        >>> print(row)
+        ['filename 2' '0.34438']
+        """
+        if index == ['all']:
+            return self.content
+        else:
+            if len(index) == 1:
+                index = index[0]
+            return self.content[index,:]
+
     def show(self, header: bool=True, endrule: bool=True, 
              print_report: bool=True) -> Optional[str]:
         """Returns the formatted report.

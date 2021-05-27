@@ -9,7 +9,7 @@ from ..utils import check_objattrs, index_nearest
 def fig_pre_edge(group: Group, show_pre_edge: bool=True, 
                  show_post_edge: bool=True, fig_pars: FigPars=None, 
                  **fig_kws) -> Tuple[Figure,Axes]:
-    """Plots the results of pre-edge substraction and normalization of a scan.
+    """Plots the results of pre-edge substraction and normalization of a data group.
 
     Parameters
     ----------

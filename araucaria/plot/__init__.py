@@ -12,13 +12,18 @@ plotting XAS spectra. The following functions are currently implemented:
      - Description
    * - :func:`~araucaria.plot.template.fig_xas_template`
      - Presets a plot of XAS spectra.
-   * - :func:`~araucaria.plot.fig_pre_edge.fig_pre_edge`
-     - Plot the results of pre-edge substratction and normalization.
    * - :func:`~araucaria.plot.fig_merge.fig_merge`
      - Plot the results of a merge operation.
+   * - :func:`~araucaria.plot.fig_pre_edge.fig_pre_edge`
+     - Plot the results of pre-edge substratction and normalization.
+   * - :func:`~araucaria.plot.fig_autobk.fig_autobk`
+     - Plot the results of background removal.
+   * - :func:`~araucaria.plot.fig_lcf.fig_lcf`
+     - Plot the results of a linear combination fitting.
 """
 from .template import FigPars, fig_xas_template
-from .fig_pre_edge import fig_pre_edge
 from .fig_merge import fig_merge
+from .fig_pre_edge import fig_pre_edge
+from .fig_autobk import fig_autobk
 from .fig_lcf import fig_lcf
 from .fig_lsf import fig_lsf

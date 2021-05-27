@@ -6,3 +6,6 @@ The following tutorials for ``araucaria`` have been provided by Dr. Morgane Desm
    :maxdepth: 1
 
    tutorials/01.basics_data_processing.ipynb
+   tutorials/02.background_removal.ipynb
+   tutorials/03.custom_report_figure.ipynb
+   tutorials/04.linear_comb_fitting.ipynb

@@ -47,28 +47,29 @@ def get_version(dependencies:bool=False) -> str:
     --------
     >>> from araucaria.utils import get_version
     >>> print(get_version()) #doctest: +ELLIPSIS
-    Araucaria version     : ...
+    Araucaria version   : ...
     """
-    import os,sys
+    import os, platform
     import numpy as np
     import scipy as sp
     import lmfit as lm
+    import h5py  as h5
     import matplotlib as mpl
     import araucaria as ara
 
-    libr = ('Python', 'Numpy', 'Scipy', 'Lmfit', 'Matplotlib')
+    libr = ('Python', 'Numpy', 'Scipy', 'Lmfit', 'H5py', 'Matplotlib')
     verf = ''    # string container
 
     if dependencies:
-        for i, lib in enumerate((sys, np, sp, lm, mpl)):
-            if lib == sys: 
-                ver = lib.version
+        for i, lib in enumerate((platform, np, sp, lm, h5, mpl)):
+            if lib == platform: 
+                ver = lib.python_version()
             else:
                 ver = lib.__version__
-            verf   += '{0:22}: {1}\n'.format(libr[i]+' version',ver)
+            verf   += '{0:20}: {1}\n'.format(libr[i]+' version',ver)
 
     ver   = ara.__version__
-    verf += '{0:22}: {1}'.format('Araucaria version', ver)
+    verf += '{0:20}: {1}'.format('Araucaria version', ver)
 
     return verf
 
