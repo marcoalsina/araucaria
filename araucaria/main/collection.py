@@ -1,5 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
+from __future__ import annotations
+from copy import deepcopy
 from itertools import chain
 from re import search
 from typing import List, Optional
@@ -349,6 +351,35 @@ class Collection(object):
 
         names.sort()
         return names
+
+    def copy(self) -> Collection:
+        """Returns a deep copy of the collection.
+
+        Parameters
+        ----------
+        None
+
+        Returns
+        -------
+        :
+            Copy of the collection.
+
+
+        Example
+        -------
+        >>> from numpy import allclose
+        >>> from araucaria import Group, Collection
+        >>> collection1 = Collection()
+        >>> content     = {'name': 'group', 'energy': [1,2,3,4,5,6]}
+        >>> group       = Group(**content)
+        >>> collection1.add_group(group)
+        >>> collection2 = collection1.copy()
+        >>> energy1     = collection1.get_group('group').energy
+        >>> energy2     = collection2.get_group('group').energy
+        >>> allclose(energy1, energy2)
+        True
+        """
+        return deepcopy(self)
 
     def del_group(self, name) -> None:
         """Removes a group dataset from the Collection.
