@@ -500,9 +500,9 @@ class Collection(object):
         Examples
         --------
         >>> from araucaria.testdata import get_testpath
-        >>> from araucaria.io import read_all_hdf5
+        >>> from araucaria.io import read_collection_hdf5
         >>> fpath      = get_testpath('test_database.h5')
-        >>> collection = read_all_hdf5(fpath)
+        >>> collection = read_collection_hdf5(fpath)
         >>> # printing default summary
         >>> report = collection.summary()
         >>> report.show()

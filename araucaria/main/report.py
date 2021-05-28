@@ -163,7 +163,7 @@ class Report:
             self.content = vstack((self.content, midrule))
         self.nrows += 1
 
-    def get_cols(self, names=['all']) -> array:
+    def get_cols(self, names: list=['all']) -> array:
         """Returns columns of the report by name.
 
         Parameters
@@ -210,12 +210,12 @@ class Report:
                 cindex = cindex[0]
         return self.content[:, cindex]
 
-    def get_rows(self, index=['all']) -> array:
+    def get_rows(self, index: list=['all']) -> array:
         """Returns rows of the report by index.
 
         Parameters
         ----------
-        names
+        index
             List with indexes of rows to return.
             The default is ['all'], which returns the 
             entire report content.

@@ -70,21 +70,21 @@ def fig_lcf(group: FitGroup, offset: float=0.5,
 
     # panel 1: plotting original spectra
     for i, name in enumerate(groupnames):
-        # location of text in the x-axis
-        xloc = axes[0].set_xlim()[0] + 0.98*ptp(axes[0].set_xlim())
-
         if fig_type == 'exafs':
-            xvar    = 'k'       # plot variable in x-axis
-            yvar    = [0, 0.5, 1.5]  # vars to locate annotated text in y-axis 
+            xvar    = 'k'             # plot variable in x-axis
+            yvar    = [0, 0.25, 1.5]  # vars to locate annotated text in y-axis 
         else:
             xvar = 'energy'
             if fig_type == 'xanes':
                 yvar = [1, 0.25, 0.5]
             else:
                 yvar = [0, 0.25, 0.5]
-
-        axes[0].plot(getattr(group, xvar), i*offset + getattr(group, datnames[i]))
-        axes[0].text(xloc, yvar[0] + (yvar[1] + i)*offset, name, fontsize=fontsize, ha='right')
+        axes[0].plot(getattr(group, xvar), i*offset + getattr(group, datnames[i]),
+                     label=name)
+        
+        # location of text in the x-axis
+        xloc = axes[0].set_xlim()[0] + 0.98*ptp(axes[0].set_xlim())
+        #axes[0].text(xloc, yvar[0] + (yvar[1] + i)*offset, name, fontsize=fontsize, ha='right')
 
     # panel 2: plotting data and fitted model
     axes[1].plot(getattr(group, xvar), yvar[2]*offset+group.scan, label=group.scangroup)
@@ -95,7 +95,6 @@ def fig_lcf(group: FitGroup, offset: float=0.5,
     # increasing y-lim to include legend
     yloc = axes[1].get_ylim()
     axes[1].set_ylim(yloc[0], 1.1*yloc[1])
-    axes[1].legend(edgecolor='k', fontsize=fontsize)
     
     if annotate:
         # summary results for plot
@@ -111,7 +110,7 @@ def fig_lcf(group: FitGroup, offset: float=0.5,
         elif fig_type == 'xanes':
             yloc = yloc[0] + 0.4*ptp(yloc)
         else:
-            yloc = yloc[0] + 0.5*ptp(yloc)
+            yloc = yloc[0] + 0.4*ptp(yloc)
 
         axes[1].text(xloc, yloc, summary, ha='right', va='center', fontsize=fontsize)
 
@@ -120,6 +119,7 @@ def fig_lcf(group: FitGroup, offset: float=0.5,
     axes[1].axhline(0, **axline_kws)
     for ax in axes:
         ax.set_yticks([])
+        ax.legend(edgecolor='k', fontsize=fontsize)
         # fit range decorations
         for val in group.lcf_pars['fit_range']:
             ax.axvline(val, **axline_kws)

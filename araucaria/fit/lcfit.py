@@ -83,8 +83,7 @@ def lcf(collection: Collection, fit_region: str='xanes',
         fit_range: list=[-inf,inf], method: str='leastsq',
         scantag: str='scan', reftag: str='ref', 
         kweight: int=2, sum_one: bool=True, 
-        pre_edge_kws: dict=None, autobk_kws: dict=None,
-        update: bool=False) -> FitGroup:
+        pre_edge_kws: dict=None, autobk_kws: dict=None) -> FitGroup:
     """Performs linear combination fitting on a XAFS spectrum.
 
     Parameters
@@ -121,9 +120,6 @@ def lcf(collection: Collection, fit_region: str='xanes',
     autobk_kws
         Dictionary with parameters :func:`~araucaria.xas.autobk.autobk`.
         The default is None, indicating that this step will be skipped.
-    update
-        Indicates if the collection should be updated with the lcf dictionary.
-        The default is False.
     
     Returns
     -------
@@ -148,6 +144,12 @@ def lcf(collection: Collection, fit_region: str='xanes',
         If ``collection`` is not a valid Collection instance.
     AttributeError
         If ``collection`` has no ``tags`` attribute.
+    AttributeError
+        If groups have no ``energy`` or ``norm`` attribute.
+        Only verified if ``pre_edge_kws=None`` and ``fit_region='xanes'``.
+    AttributeError
+        If groups have no ``k`` or ``chi`` attribute.
+        Only verified if ``autobk_kws=None`` and ``fit_region='exafs'``.
     KeyError
         If ``scantag`` or ``refttag``  are not keys of the ``tags`` attribute.
     ValueError
@@ -159,12 +161,6 @@ def lcf(collection: Collection, fit_region: str='xanes',
     a warning will be raised and only the first group will be fitted.
     
     Currently only local optimization methods are supported.
-
-    Important
-    ---------
-    If ``pre_edge_kws`` or ``autobk_kws`` are specified, the option ``update=True``
-    will be automatically included in each call, in order to store values in the 
-    respective group.
 
     Notes
     -----
@@ -223,13 +219,13 @@ def lcf(collection: Collection, fit_region: str='xanes',
     fit_valid = ['dxanes', 'xanes','exafs']
     if fit_region not in fit_valid:
         raise ValueError('fit_region %s not recognized.'%fit_region)
-    
+
     # required groups
     # at least a spectrum and a single reference must be provided
     for tag in (scantag, reftag):
         if tag not in collection.tags:
             raise KeyError("'%s' is not a valid key for the collection." % tag)
-        
+
     # scan and ref tags
     scangroup = collection.tags[scantag]
     if len(scangroup) > 1:
@@ -237,33 +233,35 @@ def lcf(collection: Collection, fit_region: str='xanes',
     scangroup = scangroup[0]
     refgroups = collection.tags[reftag]
     refgroups.sort()
-    
+
     # the first element is the scan group
     groups = [scangroup] + refgroups
-    
+
     # storing report parameters
     lcf_pars = {'fit_region':fit_region, 'fit_range':fit_range, 'sum_one':sum_one}
-    if pre_edge_kws is None:
-        lcf_pars['pre_edge_kws'] = None
-    else:
-        pre_edge_kws['update']   = True
-        lcf_pars['pre_edge_kws'] = pre_edge_kws
 
     # report parameters for exafs lcf
     if fit_region == 'exafs':
         lcf_pars['kweight'] = kweight
         # storing name of x-variable (exafs)
         xvar = 'k'
+        if pre_edge_kws is None:
+            lcf_pars['pre_edge_kws'] = None
+        else:
+            lcf_pars['pre_edge_kws'] = pre_edge_kws
         if autobk_kws is None:
             lcf_pars['autobk_kws'] = None
         else:
-            autobk_kws['update']   = True
             lcf_pars['autobk_kws'] = autobk_kws
 
     # report parameters for xanes/dxanes lcf
     else:
         # storing name of x-variable (xanes/dxanes)
         xvar = 'energy'
+        if pre_edge_kws is None:
+            lcf_pars['pre_edge_kws'] = None
+        else:
+            lcf_pars['pre_edge_kws'] = pre_edge_kws
 
     # container dictionary
     content = {'scangroup': scangroup,
@@ -274,23 +272,29 @@ def lcf(collection: Collection, fit_region: str='xanes',
         dname = 'scan' if i==0 else 'ref'+str(i)
         group = collection.get_group(name)
 
-        if pre_edge_kws is None:
-            pass
-        else:
-            pre = pre_edge(group, **pre_edge_kws)
-
         if fit_region == 'exafs':
-            # prceossing exafs spectra
-            if autobk_kws is None:
+            # spectrum normalization
+            if pre_edge_kws is None:
                 pass
             else:
-                bkg = autobk(group, **autobk_kws)
-        
+                dictpars = pre_edge(group, update=True, **pre_edge_kws)
+            # background removal
+            if autobk_kws is None:
+                check_objattrs(group, Group, attrlist=['k', 'chi'], exceptions=True)
+            else:
+                dictpars = autobk(group, update=True, **autobk_kws)
+        else:
+            # fit_region == 'xanes' or 'dxanes'
+            if pre_edge_kws is None:
+                check_objattrs(group, Group, attrlist=['energy', 'norm'], exceptions=True)
+            else:
+                dictpars = pre_edge(group, update=True, **pre_edge_kws)
+
         if i == 0:
             # first value is the spectrum, so we extract the 
             # interpolation values from xvar
             xvals  = getattr(group, xvar)
-            index = index_xrange(fit_range, xvals)
+            index  = index_xrange(fit_range, xvals)
             xvals  = xvals[index]
 
             # storing the y-variable
@@ -301,15 +305,16 @@ def lcf(collection: Collection, fit_region: str='xanes',
             else:
                 # derivative lcf
                 yvals = gradient(group.norm[index])
-
         else:
             # spline interpolation of references
             if fit_region == 'exafs':
-                s = interp1d(getattr(group, xvar), getattr(group, xvar)**kweight*group.chi, kind='cubic')
+                s = interp1d(group.k, group.k**kweight*group.chi, kind='cubic')
             elif fit_region =='xanes':
-                s = interp1d(getattr(group, xvar), group.norm, kind='cubic')
+                s = interp1d(group.energy, group.norm, kind='cubic')
             else:
-                s = interp1d(getattr(group, xvar), gradient(group.norm), kind='cubic')
+                s = interp1d(group.energy, gradient(group.norm)/gradient(group.energy), kind='cubic')
+            
+            # interpolating in the fit range
             yvals = s(xvals)
         
         # saving yvals in the dictionary
@@ -340,9 +345,6 @@ def lcf(collection: Collection, fit_region: str='xanes',
     content['min_pars'] = min
     
     lcf_group = FitGroup(**content)
-    
-    if update:
-        setattr(lcf_group, lcf, content)
     return lcf_group
 
 def lcf_report(group: FitGroup) -> str:
@@ -400,8 +402,8 @@ def lcf_report(group: FitGroup) -> str:
         fit_region         = exafs
         fit_range          = [3, 10]
         sum_one            = False
-        pre_edge_kws       = None
         kweight            = 0
+        pre_edge_kws       = None
         autobk_kws         = None
     [[Groups]]
         scan               = group3
