@@ -12,8 +12,8 @@ manipulate data in the Hierarchical Data Format ``HDF5``:
      - Description
    * - :func:`read_hdf5`
      - Reads a single group dataset from an HDF5 file.
-   * - :func:`read_all_hdf5`
-     - Reads all group datasets from an HDF5 file.
+   * - :func:`read_collection_hdf5`
+     - Reads multiple group datasets from an HDF5 file.
    * - :func:`write_hdf5`
      - Writes a single group dataset in an HDF5 file.
    * - :func:`write_collection_hdf5`
@@ -98,13 +98,15 @@ def read_hdf5(fpath: Path, name: str)-> Group:
     group.name = name
     return (group)
 
-def read_all_hdf5(fpath: Path)-> Collection:
-    """Reads all group datasets from an HDF5 file.
+def read_collection_hdf5(fpath: Path, names: list=['all'])-> Collection:
+    """Reads multiple group datasets from an HDF5 file.
     
     Parameters
     ----------
     fpath
         Path to HDF5 file.
+    names
+        List with group datasets to read.
 
     Returns
     -------
@@ -115,6 +117,8 @@ def read_all_hdf5(fpath: Path)-> Collection:
     ------
     IOError
         If the HDF5 file does not exist in the specified path.
+    ValueError
+        If the requested ``names`` do not exist in the HDF5 file.
 
     Warning
     -------
@@ -127,23 +131,35 @@ def read_all_hdf5(fpath: Path)-> Collection:
     >>> from araucaria import Collection
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.utils import check_objattrs
-    >>> from araucaria.io import read_all_hdf5
+    >>> from araucaria.io import read_collection_hdf5
     >>> fpath = get_testpath('test_database.h5')
     >>> # reading database
-    >>> collection = read_all_hdf5(fpath)
+    >>> collection = read_collection_hdf5(fpath)
     >>> check_objattrs(collection, Collection)
     True
     >>> collection.get_names()
     ['dnd_testfile', 'p65_testfile', 'xmu_testfile']
+    
+    >>> # read selected group datasets
+    >>> collection = read_collection_hdf5(fpath, names=['dnd_testfile'])
+    >>> collection.get_names()
+    ['dnd_testfile']
     """    
     # verifying existence of path:
     if isfile(fpath):
         hdf5 = File(fpath, "r")
     else:
         raise IOError("file %s does not exists." % fpath)
+    
+    if names == ['all']:
+        names = [name for name in hdf5]
+    else:
+        for name in names:
+            if name not in hdf5:
+                raise ValueError("group %s does not exists in the HDF5 file." % name)
 
     collection = Collection()
-    for name in hdf5:
+    for name in names:
         data = {}
         for key, record in hdf5.get(name).items():
             if isinstance(record, Dataset):
@@ -157,7 +173,6 @@ def read_all_hdf5(fpath: Path)-> Collection:
         group = Group(**data)
         group.name = name
         collection.add_group(group)
-    
     hdf5.close()
 
     return (collection)
@@ -294,7 +309,7 @@ def write_hdf5(fpath: Path, group: Group, name: str=None,
     return
 
 def write_collection_hdf5(fpath: Path, collection: Collection, 
-                          replace: bool=False) -> None:
+                          names: list=['all'], replace: bool=False) -> None:
     """Writes a collection in an HDF5 file.
     
     Parameters
@@ -303,6 +318,8 @@ def write_collection_hdf5(fpath: Path, collection: Collection,
         Path to HDF5 file.
     collection
         Collection to write in the HDF5 file.
+    names
+        List with group dataset names to write in the HDF5 file.
     replace
         Replace previous dataset. The default is False.
 
@@ -315,14 +332,16 @@ def write_collection_hdf5(fpath: Path, collection: Collection,
     IOError
         If dataset cannot be written to the HDF5 file.
     ValueError
-        If ``name`` dataset already exists in the HDF5 file and ``replace=False``.
+        If ``names`` dataset does not exist in the colleciton.
+    ValueError
+        If ``names`` dataset already exists in the HDF5 file and ``replace=False``.
 
     Notes
     -----
     If the file specified by ``fpath`` does not exists, it will be automatically created.
     If the file already exists then the datasets in the collection will be appended.
-    
-    By default the write operation will be canceled if any dataset in ``collection``
+
+    By default the write operation will be canceled if any ``names`` dataset in ``collection``
     already exists in the HDF5 file.
     Previous datasets can be overwritten with the option ``replace=True``. 
 
@@ -333,19 +352,32 @@ def write_collection_hdf5(fpath: Path, collection: Collection,
     Example
     --------
     >>> from araucaria.testdata import get_testpath
-    >>> from araucaria.io import read_all_hdf5, write_collection_hdf5
+    >>> from araucaria.io import read_collection_hdf5, write_collection_hdf5
     >>> fpath = get_testpath('test_database.h5')
     >>> # reading database
-    >>> collection = read_all_hdf5(fpath)
+    >>> collection = read_collection_hdf5(fpath)
     >>> # saving collection in a new hdf5 file
     >>> write_collection_hdf5('database.h5', collection, replace=True)
     dnd_testfile written to database.h5.
     p65_testfile written to database.h5.
     xmu_testfile written to database.h5.
+    
+    >>> # write selected group dataset
+    >>> write_collection_hdf5('database.h5', collection, names=['xmu_testfile'], replace=True)
+    xmu_testfile written to database.h5.
     """    
     # testing that the group exists 
     if type(collection) is not Collection:
         raise TypeError('%s is not a valid Collection instance.' % collection)
+
+    # veryfying requested group names to write
+    all = collection.get_names()
+    if names == ['all']:
+        names = all
+    else:
+        for name in names:
+            if name not in all:
+                raise ValueError('%s group is not in the Collection.' % name)
     
     # verifying existence of path:
     # (a)ppend to existing file
@@ -355,9 +387,8 @@ def write_collection_hdf5(fpath: Path, collection: Collection,
     else:
         hdf5 = File(fpath, "w")
 
-    names = collection.get_names()
     for name in names:    
-        # testing name on the dataset
+        # testing name on the HDF5 file
         if name in hdf5:
             # dataset present in the file
                 if replace:
