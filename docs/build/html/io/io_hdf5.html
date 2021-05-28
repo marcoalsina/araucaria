@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>IO HDF5 module &mdash; araucaria 0.1.8
+  <title>IO HDF5 module &mdash; araucaria 0.1.8b
  documentation</title>
   
 
@@ -226,8 +226,8 @@ manipulate data in the Hierarchical Data Format <code class="docutils literal no
 <tr class="row-even"><td><p><a class="reference internal" href="#araucaria.io.io_hdf5.read_hdf5" title="araucaria.io.io_hdf5.read_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_hdf5()</span></code></a></p></td>
 <td><p>Reads a single group dataset from an HDF5 file.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.io.io_hdf5.read_all_hdf5" title="araucaria.io.io_hdf5.read_all_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_all_hdf5()</span></code></a></p></td>
-<td><p>Reads all group datasets from an HDF5 file.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.io.io_hdf5.read_collection_hdf5" title="araucaria.io.io_hdf5.read_collection_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_collection_hdf5()</span></code></a></p></td>
+<td><p>Reads multiple group datasets from an HDF5 file.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#araucaria.io.io_hdf5.write_hdf5" title="araucaria.io.io_hdf5.write_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">write_hdf5()</span></code></a></p></td>
 <td><p>Writes a single group dataset in an HDF5 file.</p></td>
@@ -285,12 +285,15 @@ manipulate data in the Hierarchical Data Format <code class="docutils literal no
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="araucaria.io.io_hdf5.read_all_hdf5">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">read_all_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.read_all_hdf5" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reads all group datasets from an HDF5 file.</p>
+<dt class="sig sig-object py" id="araucaria.io.io_hdf5.read_collection_hdf5">
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">read_collection_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.read_collection_hdf5" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads multiple group datasets from an HDF5 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to HDF5 file.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to HDF5 file.</p></li>
+<li><p><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List with group datasets to read.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection" title="araucaria.main.collection.Collection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Collection</span></code></a></p>
@@ -299,7 +302,10 @@ manipulate data in the Hierarchical Data Format <code class="docutils literal no
 <dd class="field-odd"><p>Collection containing the requested datasets.</p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If the HDF5 file does not exist in the specified path.</p>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If the HDF5 file does not exist in the specified path.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If the requested <code class="docutils literal notranslate"><span class="pre">names</span></code> do not exist in the HDF5 file.</p></li>
+</ul>
 </dd>
 </dl>
 <div class="admonition warning">
@@ -312,14 +318,20 @@ Therefore the returned collection will automatically assign
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_all_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_collection_hdf5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;test_database.h5&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># reading database</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_all_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">Collection</span><span class="p">)</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
 <span class="go">[&#39;dnd_testfile&#39;, &#39;p65_testfile&#39;, &#39;xmu_testfile&#39;]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># read selected group datasets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;dnd_testfile&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
+<span class="go">[&#39;dnd_testfile&#39;]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -401,13 +413,14 @@ The previous dataset can be overwritten with the option <code class="docutils li
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_hdf5.write_collection_hdf5">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">write_collection_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.write_collection_hdf5" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">write_collection_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.write_collection_hdf5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes a collection in an HDF5 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to HDF5 file.</p></li>
 <li><p><strong>collection</strong> (<a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection" title="araucaria.main.collection.Collection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Collection</span></code></a>) – Collection to write in the HDF5 file.</p></li>
+<li><p><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List with group dataset names to write in the HDF5 file.</p></li>
 <li><p><strong>replace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Replace previous dataset. The default is False.</p></li>
 </ul>
 </dd>
@@ -420,14 +433,15 @@ The previous dataset can be overwritten with the option <code class="docutils li
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#IOError" title="(in Python v3.9)"><strong>IOError</strong></a> – If dataset cannot be written to the HDF5 file.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> dataset already exists in the HDF5 file and <code class="docutils literal notranslate"><span class="pre">replace=False</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">names</span></code> dataset does not exist in the colleciton.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">names</span></code> dataset already exists in the HDF5 file and <code class="docutils literal notranslate"><span class="pre">replace=False</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
 <p>If the file specified by <code class="docutils literal notranslate"><span class="pre">fpath</span></code> does not exists, it will be automatically created.
 If the file already exists then the datasets in the collection will be appended.</p>
-<p>By default the write operation will be canceled if any dataset in <code class="docutils literal notranslate"><span class="pre">collection</span></code>
+<p>By default the write operation will be canceled if any <code class="docutils literal notranslate"><span class="pre">names</span></code> dataset in <code class="docutils literal notranslate"><span class="pre">collection</span></code>
 already exists in the HDF5 file.
 Previous datasets can be overwritten with the option <code class="docutils literal notranslate"><span class="pre">replace=True</span></code>.</p>
 <div class="admonition warning">
@@ -436,14 +450,19 @@ Previous datasets can be overwritten with the option <code class="docutils liter
 </div>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_all_hdf5</span><span class="p">,</span> <span class="n">write_collection_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_collection_hdf5</span><span class="p">,</span> <span class="n">write_collection_hdf5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;test_database.h5&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># reading database</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_all_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving collection in a new hdf5 file</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">write_collection_hdf5</span><span class="p">(</span><span class="s1">&#39;database.h5&#39;</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">dnd_testfile written to database.h5.</span>
 <span class="go">p65_testfile written to database.h5.</span>
+<span class="go">xmu_testfile written to database.h5.</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># write selected group dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">write_collection_hdf5</span><span class="p">(</span><span class="s1">&#39;database.h5&#39;</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;xmu_testfile&#39;</span><span class="p">],</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">xmu_testfile written to database.h5.</span>
 </pre></div>
 </div>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Collection class &mdash; araucaria 0.1.8
+  <title>Collection class &mdash; araucaria 0.1.8b
  documentation</title>
   
 
@@ -603,9 +603,9 @@ will be printed in the report.</p>
 </div>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_all_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_collection_hdf5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>      <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;test_database.h5&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_all_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># printing default summary</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">report</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
