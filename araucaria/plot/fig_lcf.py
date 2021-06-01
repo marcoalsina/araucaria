@@ -1,11 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from typing import Tuple
-from numpy import gradient, ptp
+from numpy import ptp
 from matplotlib.pyplot import Axes, Figure
 from .. import Group, FitGroup
-from ..io import read_hdf5
-from ..xas import pre_edge, autobk, xftf
 from .template import fig_xas_template, FigPars
 from ..utils import check_objattrs
 
@@ -125,3 +123,7 @@ def fig_lcf(group: FitGroup, offset: float=0.5,
             ax.axvline(val, **axline_kws)
 
     return(fig, axes)
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()

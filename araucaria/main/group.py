@@ -163,12 +163,12 @@ class Group(object):
         >>> group_mu = read_xmu(fpath, scan='mu')
         >>> group_mu.get_mode()
         'mu'
-    
+
         >>> # extracting only fluo scan
         >>> group_fluo = read_xmu(fpath, scan='fluo', ref=False)
         >>> group_fluo.get_mode()
         'fluo'
-    
+
         >>> # extracting only mu_ref scan
         >>> group_ref = read_xmu(fpath, scan=None, ref=True)
         >>> group_ref.get_mode()
@@ -255,6 +255,38 @@ class FitGroup(object):
             return '<FitGroup %s>' % self.name
         else:
             return '<FitGroup>'
+
+class DatGroup(object):
+    """Data Analysis Group storage class.
+
+    This class stores a dataset produced by analysis of XAFS spectra.
+    
+    Parameters
+    ----------
+    name
+        Name for the DaGroup. The default is None.
+    kwargs
+        Dictionary with content for the DaGroup.
+
+    Example
+    -------
+    >>> from araucaria import DatGroup
+    >>> group = DatGroup()
+    >>> type(group)
+    <class 'araucaria.main.group.DatGroup'>
+    """
+    def __init__(self, name: str=None, **kwargs:dict):
+        if name is None:
+            name  = hex(id(self))
+        self.name = name
+        for key, val in kwargs.items():
+            setattr(self, key, val)
+
+    def __repr__(self):
+        if self.name is not None:
+            return '<DatGroup %s>' % self.name
+        else:
+            return '<DatGroup>'
 
 if __name__ == '__main__':
     import doctest

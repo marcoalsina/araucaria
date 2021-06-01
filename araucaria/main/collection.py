@@ -436,6 +436,92 @@ class Collection(object):
         # removing group
         delattr(self, name)
 
+    def get_mcer(self, num: int=None, taglist: List[str]=['all']) -> ndarray:
+        """Returns the minimum common energy range for the Collection.
+
+        Parameters
+        ----------
+        num
+            Number of equally-spaced points for the energy array.
+        taglist
+            List with keys to filter groups in the Collection based 
+            on the ``tags`` attribute. The default is ['all'].
+
+        Returns
+        -------
+        :
+            Array containing the minimum common energy range
+
+        Raises
+        ------
+        AttributeError
+            If ``energy`` is not an attribute of the requested groups.
+        ValueError
+            If any item in ``taglist`` is not a key of the ``tags`` attribute.
+
+        Notes
+        -----
+        By default the returned array contains the lowest number of points
+        available in the minimum common energy range of the groups.
+        
+        Providing a value for ``num`` will return the desired number 
+        of equally-spaced points for the minimum common energy range.
+        
+        Examples
+        --------
+        >>> from numpy import linspace
+        >>> from araucaria import Collection, Group
+        >>> collection = Collection()
+        >>> g1   = Group(**{'name': 'group1', 'energy': linspace(1000, 2000, 6)})
+        >>> g2   = Group(**{'name': 'group2', 'energy': linspace(1500, 2500, 11)})
+        >>> tags = ('scan', 'ref')
+        >>> for i, group in enumerate([g1, g2]):
+        ...     collection.add_group(group, tag=tags[i])
+        >>> # mcer for tag 'scan'
+        >>> print(collection.get_mcer(taglist=['scan']))
+        [1000. 1200. 1400. 1600. 1800. 2000.]
+        >>> # mcer for tag 'ref'
+        >>> print(collection.get_mcer(taglist=['ref']))
+        [1500. 1600. 1700. 1800. 1900. 2000. 2100. 2200. 2300. 2400. 2500.]
+        
+        >>> # mcer for 'all' groups
+        >>> print(collection.get_mcer())
+        [1600. 1800. 2000.]
+        >>> # mcer for 'all' groups explicitly
+        >>> print(collection.get_mcer(taglist=['scan', 'ref']))
+        [1600. 1800. 2000.]
+
+        >>> # mcer with given number of points
+        >>> print(collection.get_mcer(num=11))
+        [1500. 1550. 1600. 1650. 1700. 1750. 1800. 1850. 1900. 1950. 2000.]
+        """
+        # retrieving list with group names
+        names = self.get_names(taglist=taglist)
+        
+        for item in names:
+            if not hasattr(getattr(self, item), 'energy'):
+                raise AttributeError('%s has no energy attribute.' % item)
+
+        # finding the maximum of minimum energy values
+        emc_min = max([getattr(self, item).energy[0] for item in names])
+        # finding the minimum of maximum energy values
+        emc_max = min([getattr(self, item).energy[-1] for item in names])
+        
+        if num is not None:
+            # returning a formatted array
+            earray = linspace(emc_min, emc_max, num)
+        else:
+            # returning an array with the least ammount of points
+            for i, item in enumerate(names):
+                energy = getattr(self, item).energy
+                energy = energy[(energy >= emc_min ) & (energy <= emc_max)]
+                if i == 0:
+                    earray = energy
+                else:
+                    if len(energy) < len(earray):
+                        earray = energy
+        return earray
+
     def summary(self, taglist: List[str]=['all'], regex: str=None,
                 optional: Optional[list]=None, **pre_edge_kws:dict) -> Report:
         """Returns a summary report of groups in a Collection.
@@ -633,92 +719,6 @@ class Collection(object):
                     report.add_midrule()
 
         return report
-
-    def get_mcer(self, num: int=None, taglist: List[str]=['all']) -> ndarray:
-        """Returns the minimum common energy range for the Collection.
-
-        Parameters
-        ----------
-        num
-            Number of data points for the energy array.
-        taglist
-            List with keys to filter groups in the Collection based 
-            on the ``tags`` attribute. The default is ['all'].
-
-        Returns
-        -------
-        :
-            Array containing the minimum common energy range
-
-        Raises
-        ------
-        AttributeError
-            If ``energy`` is not an attribute of the requested groups.
-        ValueError
-            If any item in ``taglist`` is not a key of the ``tags`` attribute.
-
-        Notes
-        -----
-        By default the returned array contains the lowest number of points
-        available in the minimum common energy range of the groups.
-        
-        Providing a value for ``num`` will return the desired number 
-        of points for the minimum common energy range.
-        
-        Examples
-        --------
-        >>> from numpy import linspace
-        >>> from araucaria import Collection, Group
-        >>> collection = Collection()
-        >>> g1   = Group(**{'name': 'group1', 'energy': linspace(1000, 2000, 6)})
-        >>> g2   = Group(**{'name': 'group2', 'energy': linspace(1500, 2500, 11)})
-        >>> tags = ('scan', 'ref')
-        >>> for i, group in enumerate([g1, g2]):
-        ...     collection.add_group(group, tag=tags[i])
-        >>> # mcer for tag 'scan'
-        >>> print(collection.get_mcer(taglist=['scan']))
-        [1000. 1200. 1400. 1600. 1800. 2000.]
-        >>> # mcer for tag 'ref'
-        >>> print(collection.get_mcer(taglist=['ref']))
-        [1500. 1600. 1700. 1800. 1900. 2000. 2100. 2200. 2300. 2400. 2500.]
-        
-        >>> # mcer for 'all' groups
-        >>> print(collection.get_mcer())
-        [1600. 1800. 2000.]
-        >>> # mcer for 'all' groups explicitly
-        >>> print(collection.get_mcer(taglist=['scan', 'ref']))
-        [1600. 1800. 2000.]
-
-        >>> # mcer with given number of points
-        >>> print(collection.get_mcer(num=11))
-        [1500. 1550. 1600. 1650. 1700. 1750. 1800. 1850. 1900. 1950. 2000.]
-        """
-        # retrieving list with group names
-        names = self.get_names(taglist=taglist)
-        
-        for item in names:
-            if not hasattr(getattr(self, item), 'energy'):
-                raise AttributeError('%s has no energy attribute.' % item)
-
-        # finding the maximum of minimum energy values
-        emc_min = max([getattr(self, item).energy[0] for item in names])
-        # finding the minimum of maximum energy values
-        emc_max = min([getattr(self, item).energy[-1] for item in names])
-        
-        if num is not None:
-            # returning a formatted array
-            earray = linspace(emc_min, emc_max, num)
-        else:
-            # returning an array with the least ammount of points
-            for i, item in enumerate(names):
-                energy = getattr(self, item).energy
-                energy = energy[(energy >= emc_min ) & (energy <= emc_max)]
-                if i == 0:
-                    earray = energy
-                else:
-                    if len(energy) < len(earray):
-                        earray = energy
-        return earray
 
 if __name__ == '__main__':
     import doctest

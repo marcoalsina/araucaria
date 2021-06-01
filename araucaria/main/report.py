@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 from typing import Optional
-from numpy import array, vstack
+from numpy import dtype, ndarray, array, vstack
 
 class Report:
     """Report class.
@@ -163,7 +163,7 @@ class Report:
             self.content = vstack((self.content, midrule))
         self.nrows += 1
 
-    def get_cols(self, names: list=['all']) -> array:
+    def get_cols(self, names: list=['all'], astype: dtype=object) -> ndarray:
         """Returns columns of the report by name.
 
         Parameters
@@ -172,6 +172,9 @@ class Report:
             List with names of columns to return.
             The default is ['all'], which returns the 
             entire report content.
+        astype
+            Data type conversion for the returned array.
+            The default is :class:`object`.
 
         Returns
         -------
@@ -196,6 +199,13 @@ class Report:
         >>> col = report.get_cols(names=['Value',])
         >>> print(col)
         ['0.2176' '0.34438' '0.64225']
+        
+        >>> # returning column as float
+        >>> col = report.get_cols(names=['Value',], astype=float)
+        >>> print(col)
+        [0.2176  0.34438 0.64225]
+        >>> print(col.dtype)
+        float64
         """
         cindex = []
         if names == ['all']:
@@ -208,9 +218,9 @@ class Report:
                     cindex.append(self.names.index(name))
             if len(cindex) == 1:
                 cindex = cindex[0]
-        return self.content[:, cindex]
+        return self.content[:, cindex].astype(astype)
 
-    def get_rows(self, index: list=['all']) -> array:
+    def get_rows(self, index: list=['all'], astype: dtype=object) -> ndarray:
         """Returns rows of the report by index.
 
         Parameters
@@ -219,6 +229,9 @@ class Report:
             List with indexes of rows to return.
             The default is ['all'], which returns the 
             entire report content.
+        astype
+            Data type conversion for the returned array.
+            The default is :class:`object`.
 
         Returns
         -------
@@ -243,7 +256,7 @@ class Report:
         else:
             if len(index) == 1:
                 index = index[0]
-            return self.content[index,:]
+            return self.content[index,:].astype(astype)
 
     def show(self, header: bool=True, endrule: bool=True, 
              print_report: bool=True) -> Optional[str]:

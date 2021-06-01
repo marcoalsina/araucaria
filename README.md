@@ -2,6 +2,10 @@
 
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-green.svg)](https://github.com/marcoalsina/araucaria/blob/master/LICENSE)
 
+![GitHub branch checks state](https://img.shields.io/github/checks-status/marcoalsina/araucaria/master)
+
+
+
 
 `araucaria` is a Python library to read, process and analyze X-ray absorption fine structure 
 (XAFS) spectra. The library is designed to be modular, transparent, and light-weight, allowing 

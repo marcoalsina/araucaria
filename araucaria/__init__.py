@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os
-from .main import Group, FitGroup, Report, Collection
+from .main import Group, DatGroup, FitGroup
+from .main import Report, Collection
 
 # reading file version
 f     = open(os.path.join(os.path.dirname(__file__), 'version'), 'r')

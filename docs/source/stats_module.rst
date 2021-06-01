@@ -8,3 +8,4 @@ Statistics module
 
    stats/stats_genesd
    stats/stats_window
+   stats/stats_eda
