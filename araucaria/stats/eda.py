@@ -11,7 +11,7 @@ functions to perform exploratory data analysis:
    * - Function
      - Description
    * - :func:`get_mapped_data`
-     - Returns mapped data for common domain in a colleciton.
+     - Returns mapped data for common domain in a collection.
    * - :func:`cluster`
      - Performs hierarchical clustering on a collection.
 """
@@ -82,8 +82,8 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
     ValueError
         If ``range`` is outside the domain of a group in ``collection``.
 
-    Warning
-    -------
+    Important
+    ---------
     If given, ``pre_edge_kws`` or ``autobk_kws`` will only be used to 
     compute the mapped array. Results from normalization and background removal 
     will not be written in ``collection``.
@@ -245,27 +245,8 @@ def cluster(collection: Collection, taglist: List[str]=['all'],
         - ``matrix``       : array with observed values for groups in ``cluster_range``.
         - ``cluster_pars`` : dictionary with cluster parameters.
 
-    Raises
-    ------
-    TypeError
-        If ``collection`` is not a valid Collection instance.
-    AttributeError
-        If ``collection`` has no ``tags`` attribute.
-    AttributeError
-        If groups have no ``energy`` or ``norm`` attribute.
-        Only verified if ``cluster_region='dxanes'`` or  ``cluster_region='xanes'``.
-    AttributeError
-        If groups have no ``k`` or ``chi`` attribute.
-        Only verified if ``cluster_region='exafs'``.
-    KeyError
-        If ``taglist`` are not keys of the ``tags`` attribute.
-    ValueError
-        If ``cluster_region`` is not recognized.
-    ValueError
-        If ``cluster_range`` is outside the domain of a group.
-
-    Warning
-    -------
+    Important
+    ---------
     If given, ``pre_edge_kws`` or ``autobk_kws`` will only be used to 
     perform clustering. Results from normalization and background removal 
     will not be written in ``collection``.

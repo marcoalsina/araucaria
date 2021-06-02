@@ -94,7 +94,8 @@ intersphinx_mapping = {'python': ('https://docs.python.org/3', None),
                         'numpy': ('http://docs.scipy.org/doc/numpy/', None),
                        'scipy': ('http://docs.scipy.org/doc/scipy/reference/', None),
                        'matplotlib': ('https://matplotlib.org/', None),
-                       'h5py' : ('https://docs.h5py.org/en/latest/', None)
+                       'h5py' : ('https://docs.h5py.org/en/latest/', None),
+                       'lmfit' : ('https://lmfit.github.io/lmfit-py/', None),
                        }
 
 #copybutton options

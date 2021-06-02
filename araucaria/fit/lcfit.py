@@ -79,11 +79,11 @@ from .. import Group, FitGroup, Collection
 from ..xas import pre_edge, autobk
 from ..utils import check_objattrs, index_xrange
 
-def lcf(collection: Collection, fit_region: str='xanes', 
-        fit_range: list=[-inf,inf], method: str='leastsq',
-        scantag: str='scan', reftag: str='ref', 
-        kweight: int=2, sum_one: bool=True, 
-        pre_edge_kws: dict=None, autobk_kws: dict=None) -> FitGroup:
+def lcf(collection: Collection, fit_region: str='xanes',
+        fit_range: list=[-inf,inf], scantag: str='scan',
+        reftag: str='ref', kweight: int=2, sum_one: bool=True,
+        method: str='leastsq', pre_edge_kws: dict=None,
+        autobk_kws: dict=None) -> FitGroup:
     """Performs linear combination fitting on a XAFS spectrum.
 
     Parameters
@@ -99,11 +99,6 @@ def lcf(collection: Collection, fit_region: str='xanes',
         for 'dxanes' or 'xanes', while wavenumber (k) units are expected 
         for 'exafs'.
         The default is [-:data:`~numpy.inf`, :data:`~numpy.inf`].
-    method
-        Fitting method. Currently only local optimization methods are supported.
-        See the `:func:`minimize()` <https://lmfit.github.io/lmfit-py/fitting.html#lmfit.minimizer.minimize>`_ 
-        documentation of ``lmfit`` for a list of valid methods.
-        The default is ``leastsq``.
     scantag
         Key to filter the scan group in the Collection based on the ``tags`` 
         attribute. The default is 'scan'.
@@ -116,6 +111,11 @@ def lcf(collection: Collection, fit_region: str='xanes',
     sum_one
         Conditional to force  sum of fractions to be one.
         The default is True.
+    method
+        Fitting method. Currently only local optimization methods are supported.
+        See the :func:`~lmfit.minimizer.minimize` function of ``lmfit`` for a list 
+        of valid methods.
+        The default is ``leastsq``.
     pre_edge_kws
         Dictionary with parameters for :func:`~araucaria.xas.normalize.pre_edge`.
         The default is None, indicating that this step will be skipped.
@@ -161,8 +161,8 @@ def lcf(collection: Collection, fit_region: str='xanes',
     ValueError
         If ``fit_range`` is outside the doamin of a reference group.
 
-    Warnings
-    --------
+    Important
+    ---------
     If more than one group in ``collection`` is tagged with ``scantag``, 
     a warning will be raised and only the first group will be fitted.
     
@@ -177,8 +177,10 @@ def lcf(collection: Collection, fit_region: str='xanes',
     
     - ``params``    : dictionary with the optimized parameters.
     - ``var_names`` : ordered list of parameter names used in optimization.
-    - ``covar``     : covariance matrix from minimization, with rows and columns corresponding to ``var_names``.
-    - ``init_vals`` : list of initial values for variable parameters using ``var_names``.
+    - ``covar``     : covariance matrix from minimization, with rows and columns 
+       corresponding to ``var_names``.
+    - ``init_vals`` : list of initial values for variable parameters using 
+      ``var_names``.
     - ``success``   : True if the fit succeeded, otherwise False.
     - ``nvarys``    : number of variables.
     - ``ndata``     : number of data points.
