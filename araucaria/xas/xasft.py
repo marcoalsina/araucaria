@@ -266,7 +266,7 @@ def xftf(group: Group, k_range: list=[0,20], kweight: int=0,
         >>> from araucaria.utils import check_objattrs
         >>> kw      = 2
         >>> k_range = [2,10]
-        >>> fpath   = get_testpath('dnd_testfile.dat')
+        >>> fpath   = get_testpath('dnd_testfile1.dat')
         >>> group   = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
         >>> pre     = pre_edge(group, update=True)
         >>> autbk   = autobk(group, update=True)
@@ -406,7 +406,7 @@ def xftr(group: Group , r_range: list=[0,20], rweight: int=0,
         >>> kw      = 2
         >>> k_range = [2,10]
         >>> r_range = [0.5, 2]
-        >>> fpath   = get_testpath('dnd_testfile.dat')
+        >>> fpath   = get_testpath('dnd_testfile1.dat')
         >>> group   = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
         >>> pre     = pre_edge(group, update=True)
         >>> autbk   = autobk(group, update=True)

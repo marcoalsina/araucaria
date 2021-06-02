@@ -81,7 +81,7 @@ def calibrate(group: Group, e0: float, update: bool=True) -> float:
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.io import read_dnd
     >>> from araucaria.xas import calibrate
-    >>> fpath = get_testpath('dnd_testfile.dat')
+    >>> fpath = get_testpath('dnd_testfile1.dat')
     >>> group_mu = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
     >>> e0       = 29200  # threshold energy for calibration
     >>> e_offset = calibrate(group_mu, e0, update=False)  # energy offset
@@ -189,7 +189,7 @@ def align(group: Group, refgroup: Group, offset: float=0., window: list=[-50,50]
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.io import read_dnd
     >>> from araucaria.xas import align
-    >>> fpath = get_testpath('dnd_testfile.dat')
+    >>> fpath = get_testpath('dnd_testfile1.dat')
     >>> # extracting mu and mu_ref scans
     >>> group_mu = read_dnd(fpath, scan='mu')
     >>> # creating a reference group with an offset
@@ -339,7 +339,7 @@ def merge(collection: Collection, taglist: List[str]=['all'],
     >>> from araucaria.io import read_dnd
     >>> from araucaria.xas import merge
     >>> collection = Collection()
-    >>> files = ['dnd_testfile.dat' , 'dnd_testfile2.dat', 'dnd_testfile3.dat']
+    >>> files = ['dnd_testfile1.dat' , 'dnd_testfile2.dat', 'dnd_testfile3.dat']
     >>> for file in files:
     ...     fpath = get_testpath(file)
     ...     group_mu = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
@@ -349,7 +349,7 @@ def merge(collection: Collection, taglist: List[str]=['all'],
     ===================================================
     id  filename           mode  e_offset[eV]  e0[eV]  
     ===================================================
-    1   dnd_testfile.dat   mu    0             29203   
+    1   dnd_testfile1.dat  mu    0             29203   
     2   dnd_testfile2.dat  mu    0             29203   
     3   dnd_testfile3.dat  mu    0             29203   
     ---------------------------------------------------

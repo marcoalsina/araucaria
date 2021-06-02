@@ -15,7 +15,7 @@ plotting XAS spectra. The following functions are currently implemented:
    * - :func:`~araucaria.plot.fig_merge.fig_merge`
      - Plot the results of a merge operation.
    * - :func:`~araucaria.plot.fig_pre_edge.fig_pre_edge`
-     - Plot the results of pre-edge substratction and normalization.
+     - Plot the results of pre-edge substraction and normalization.
    * - :func:`~araucaria.plot.fig_autobk.fig_autobk`
      - Plot the results of background removal.
    * - :func:`~araucaria.plot.fig_cluster.fig_cluster`

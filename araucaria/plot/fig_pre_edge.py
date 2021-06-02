@@ -63,7 +63,7 @@ def fig_pre_edge(group: Group, show_pre_edge: bool=True,
         >>> from araucaria.io import read_dnd
         >>> from araucaria.xas import pre_edge
         >>> from araucaria.plot import fig_pre_edge
-        >>> fpath   = get_testpath('dnd_testfile.dat')
+        >>> fpath   = get_testpath('dnd_testfile1.dat')
         >>> group   = read_dnd(fpath, scan='mu')
         >>> pre     = pre_edge(group, update=True)
         >>> fig, ax = fig_pre_edge(group)

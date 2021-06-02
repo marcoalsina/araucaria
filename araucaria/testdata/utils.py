@@ -40,7 +40,7 @@ def get_testfiles() -> list:
     ...    if 'dnd' in file:
     ...        print(file)
     dnd_glitchfile.dat
-    dnd_testfile.dat
+    dnd_testfile1.dat
     dnd_testfile2.dat
     dnd_testfile3.dat
     """
@@ -71,7 +71,7 @@ def get_testpath(filename:str) -> Path:
     -------
     >>> from pathlib import Path
     >>> from araucaria.testdata import get_testpath
-    >>> path = get_testpath('dnd_testfile.dat')
+    >>> path = get_testpath('dnd_testfile1.dat')
     >>> isinstance(path, Path)
     True
     """

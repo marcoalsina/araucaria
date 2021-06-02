@@ -523,7 +523,7 @@ class Collection(object):
         return earray
 
     def summary(self, taglist: List[str]=['all'], regex: str=None,
-                optional: Optional[list]=None, **pre_edge_kws:dict) -> Report:
+                optional: Optional[list]=None) -> Report:
         """Returns a summary report of groups in a Collection.
 
         Parameters
@@ -537,8 +537,6 @@ class Collection(object):
         optional
             List with optional parameters. See Notes for details.
             The default is None.
-        pre_edge_kws
-            Dictionary with arguments for :func:`~araucaria.xas.normalize.pre_edge`.
 
         Returns
         -------
@@ -559,10 +557,8 @@ class Collection(object):
         3. Group tag.
         4. Measurement mode.
         5. Numbers of scans.
-        6. Absorption edge step :math:`\Delta\mu(E_0)`, if ``optional=['edge_step']``.
-        7. Absorption threshold energy :math:`E_0`, if ``optional=['e0']``.
-        8. Merged scans, if ``optional=['merged_scans']``.
-        9. Optional parameters if they exist as attributes in the group.
+        6. Merged scans, if ``optional=['merged_scans']``.
+        7. Optional parameters if they exist as attributes in the group.
 
         A ``regex`` value can be used to filter group names based
         on a regular expression (reges). For valid regex syntax, please 
@@ -570,9 +566,6 @@ class Collection(object):
 
         The number of scans and names of merged files are retrieved 
         from the ``merged_scans`` attribute of ``collection``.
-
-        The absorption threshold and the edge step are retrieved by 
-        calling the function :func:`~araucaria.xas.normalize.pre_edge`.
 
         Optional parameters will be retrieved from the groups as 
         attributes. Currently only :class:`str`, :class:`float` or
@@ -601,15 +594,15 @@ class Collection(object):
         =================================
     
         >>> # printing summary of dnd file with merged scans
-        >>> report = collection.summary(regex='dnd', optional=['e0', 'merged_scans'])
+        >>> report = collection.summary(regex='dnd', optional=['merged_scans'])
         >>> report.show()
-        ==========================================================
-        id  dataset       tag   mode  n  e0     merged_scans      
-        ==========================================================
-        1   dnd_testfile  scan  mu    3  29203  dnd_test_001.dat  
-                                                dnd_test_002.dat  
-                                                dnd_test_003.dat  
-        ==========================================================
+        ===================================================
+        id  dataset       tag   mode  n  merged_scans      
+        ===================================================
+        1   dnd_testfile  scan  mu    3  dnd_test_001.dat  
+                                         dnd_test_002.dat  
+                                         dnd_test_003.dat  
+        ===================================================
     
         >>> # printing custom summary
         >>> from araucaria.testdata import get_testpath
@@ -632,15 +625,8 @@ class Collection(object):
         1   xmu_testfile.xmu  scan  mu    1  Zn      25    
         ===================================================
         """
-        from ..xas import pre_edge
-
         # list with parameter names
         field_names = ['id', 'dataset', 'tag', 'mode', 'n']
-        opt_list    = ['merged_scans', 'edge_step', 'e0']
-
-        if pre_edge_kws == {}:
-            # default values
-            pre_edge_kws={'pre_range':[-150,-50], 'nnorm':3, 'post_range':[150, inf]}
 
         # verifying optional values
         if optional is not None:
@@ -689,10 +675,6 @@ class Collection(object):
                             extra_content = True
                         except:
                             field_vals.append('None')
-
-                    elif opt_val in opt_list[1:]:
-                        out = pre_edge(data, **pre_edge_kws)
-                        field_vals.append(out[opt_val])
                     else:
                         # custom optional field
                         try:
@@ -717,7 +699,6 @@ class Collection(object):
                     report.add_row(field_vals)
                 if i < (ncols - 1):
                     report.add_midrule()
-
         return report
 
 if __name__ == '__main__':
