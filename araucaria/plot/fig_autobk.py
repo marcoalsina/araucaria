@@ -63,7 +63,7 @@ def fig_autobk(group: Group, show_window: bool=True,
         >>> group   = read_dnd(fpath, scan='mu')
         >>> pre     = pre_edge(group, update=True)
         >>> bkg     = autobk(group, update=True)
-        >>> fig, ax = fig_autobk(group)
+        >>> fig, ax = fig_autobk(group, show_window=False)
         >>> plt.show(block=False)
     """
     # checking class and attributes

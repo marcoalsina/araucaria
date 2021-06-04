@@ -23,10 +23,13 @@ The :mod:`~araucaria.utils` module offers the following utility functions:
      - Index of NaN values in an array.
    * - :func:`index_nearest`
      - Index of nearest value in an array.
+   * - :func:`interp_vals`
+     - Returns interpolated values for 1-D function. 
 """
 from typing import List, Union, TypeVar
 from numpy import (ndarray, diff, abs, argwhere, where, 
                    ravel, apply_along_axis, isnan, isinf)
+from scipy.interpolate import interp1d
 from . import Group
 
 def get_version(dependencies:bool=False) -> str:
@@ -88,7 +91,7 @@ def check_objattrs(obj: object, objtype: TypeVar, attrlist: list=None,
         List with names of attributes to check.
     exceptions
         Condition to raise exceptions if attributes 
-        are not in the object. The detault is False.
+        are not in the object. The default is False.
     
     Returns
     -------
@@ -367,7 +370,7 @@ def index_nans(data: ndarray, axis: int=0):
         aval = axis
     
     index = apply_along_axis(lambda x : any(isnan(x)), aval, data)
-    
+
     return argwhere(index)
 
 def index_nearest(data: ndarray, val: float, kind: str='nearest') -> float:
@@ -445,6 +448,45 @@ def index_nearest(data: ndarray, val: float, kind: str='nearest') -> float:
         index = min(where(data>=val)[0])
 
     return index
+
+def interp_vals(x: ndarray, y: ndarray, xnew: ndarray, 
+                kind: str='cubic') -> ndarray:
+    """Returns interpolated values for a 1-D function.
+
+    Parameters
+    -----------
+    x
+        Array with original domain.
+    y
+        Array with original values of function f(x)=y.
+    xnew
+        Array with new domain.
+    kind
+        Type of interpolation.
+        See :class:`~scipy.interpolate.interp1d` class
+        for valid types.
+        Default is 'cubic'.
+    
+    Returns
+    -------
+    :
+        Array with interpolated values.
+    
+    Example
+    -------
+    >>> from numpy import linspace
+    >>> from araucaria.utils import interp_vals
+    >>> x  = linspace(0,10)
+    >>> y  = x**2
+    >>> xp = x[0:10]
+    >>> yp = interp_vals(x,y,xp)
+    >>> print(len(yp))
+    10
+    """
+    s = interp1d(x, y, kind=kind)
+    yvals = s(xnew)
+
+    return yvals
 
 if __name__ == '__main__':
     import doctest

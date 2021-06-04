@@ -85,7 +85,7 @@ def fig_merge(merge: Group, collection: Collection,
         ...     collection.add_group(group_mu)         # adding group to collection
         >>> report, merge = merge(collection)
         >>> fig, ax = fig_merge(merge, collection)
-        >>> leg     = ax[1].legend(fontsize=8)
+        >>> leg     = ax[0].legend(fontsize=8)
         >>> plt.show(block=False)
     """
     # checking class and attributes

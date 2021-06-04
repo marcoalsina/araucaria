@@ -12,4 +12,4 @@ The following submodules are currently implemented:
 """
 from .genesd import genesd, find_ri, find_critvals
 from .window import roll_med
-from .eda import get_mapped_data, cluster
+from .eda import get_mapped_data, cluster, pca

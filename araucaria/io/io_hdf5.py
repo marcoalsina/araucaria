@@ -629,28 +629,31 @@ def summary_hdf5(fpath: Path, regex: str=None, optional: Optional[list]=None,
     --------
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.io import summary_hdf5
-    >>> fpath = get_testpath('test_database.h5')
+    >>> fpath = get_testpath('Fe_database.h5')
     >>> # printing default summary
     >>> report = summary_hdf5(fpath)
     >>> report.show()
-    ===========================
-    id  dataset       mode  n  
-    ===========================
-    1   dnd_testfile  mu    3  
-    2   p65_testfile  mu    2  
-    3   xmu_testfile  mu    1  
-    ===========================
+    =================================
+    id  dataset           mode    n  
+    =================================
+    1   FeIISO4_20K       mu      5  
+    2   Fe_Foil           mu_ref  5  
+    3   Ferrihydrite_20K  mu      5  
+    4   Goethite_20K      mu      5  
+    =================================
 
     >>> # printing summary with merged scans of Goethite groups
-    >>> report = summary_hdf5(fpath, regex='dnd', optional=['e0', 'merged_scans'])
+    >>> report = summary_hdf5(fpath, regex='Goe', optional=['merged_scans'])
     >>> report.show()
-    ====================================================
-    id  dataset       mode  n  e0     merged_scans      
-    ====================================================
-    1   dnd_testfile  mu    3  29203  dnd_test_001.dat  
-                                      dnd_test_002.dat  
-                                      dnd_test_003.dat  
-    ====================================================
+    =======================================================
+    id  dataset       mode  n  merged_scans                
+    =======================================================
+    1   Goethite_20K  mu    5  20K_GOE_Fe_K_240.00000.xdi  
+                               20K_GOE_Fe_K_240.00001.xdi  
+                               20K_GOE_Fe_K_240.00002.xdi  
+                               20K_GOE_Fe_K_240.00003.xdi  
+                               20K_GOE_Fe_K_240.00004.xdi  
+    =======================================================
 
     >>> # printing custom parameters
     >>> from araucaria.testdata import get_testpath

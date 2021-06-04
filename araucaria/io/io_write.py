@@ -24,7 +24,7 @@ from os.path import isfile, basename
 from datetime import datetime
 from pathlib import Path
 from numpy import ndarray, stack, savetxt
-from .. import Group, FitGroup
+from .. import Group, Dataset
 from ..fit import lcf_report
 from ..utils import check_objattrs
 
@@ -95,7 +95,7 @@ def write_xmu(fpath: Path, group: Group, fmt: str='%12.8g',
                      fmt=fmt, replace=replace)
     return (msg)
 
-def write_lcf(fpath: Path, group: FitGroup, fmt: str='%12.8g', 
+def write_lcf(fpath: Path, out: Dataset, fmt: str='%12.8g', 
               replace: bool=False) -> str:
     """Writes LCF data to a file.
     
@@ -103,8 +103,8 @@ def write_lcf(fpath: Path, group: FitGroup, fmt: str='%12.8g',
     ----------
     fpath
         Path to file.
-    group
-        Valid FitGroup from :func:`~araucaria.fit.lcf.lcf`.
+    out
+        Valid Dataset from :func:`~araucaria.fit.lcf.lcf`.
     fmt
         Format for numbers. The default is '%12.8g'.
     replace
@@ -118,10 +118,10 @@ def write_lcf(fpath: Path, group: FitGroup, fmt: str='%12.8g',
     Raises
     ------
     TypeError
-        If ``group`` is not a valid FitGroup instance.
+        If ``out`` is not a valid Dataset instance.
     AttributeError
         If attribute ``min_pars``, ``scangroup``,
-        or ``refgroups`` does not exist in ``group``.
+        or ``refgroups`` does not exist in ``out``.
     
     Notes
     -----
@@ -171,33 +171,33 @@ def write_lcf(fpath: Path, group: FitGroup, fmt: str='%12.8g',
     'lcf data written to new_fit.lcf.'
     """
     # checking class
-    check_objattrs(group, FitGroup, attrlist=['min_pars', 
+    check_objattrs(out, Dataset, attrlist=['min_pars', 
     'scangroup', 'refgroups'], exceptions=True)
     
     # header
     header = set_header(fpath, 'lcf',)
-    header = '\n'.join((header, lcf_report(group)))
+    header = '\n'.join((header, lcf_report(out)))
     
-    reflist = ['ref'+str(i+1) for i in range(len(group.refgroups))]
+    reflist = ['ref'+str(i+1) for i in range(len(out.refgroups))]
     # storing data according to fit_region
     data_header = '\t'.join(('fit', 'scan', *[name for name in reflist], 'residual'))
-    if group.lcf_pars['fit_region'] == 'exafs':
+    if out.lcf_pars['fit_region'] == 'exafs':
         data_header = 'k\t' + data_header
-        data = stack((group.k, group.scan, group.fit,
-                       *[getattr(group, name) for name in reflist],
-                       group.min_pars.residual), axis = 1)
+        data = stack((out.k, out.scan, out.fit,
+                       *[getattr(out, name) for name in reflist],
+                       out.min_pars.residual), axis = 1)
     else:
         data_header = 'energy\t' + data_header
-        data = stack((group.energy, group.scan, group.fit,
-                      *[getattr(group, name) for name in reflist],
-                      group.min_pars.residual), axis = 1)
+        data = stack((out.energy, out.scan, out.fit,
+                      *[getattr(out, name) for name in reflist],
+                      out.min_pars.residual), axis = 1)
     
     header = '\n'.join((header, data_header))
     msg = write_file(fpath, data, name='lcf data', fmt=fmt,
                      header=header, replace=replace)
     return (msg)
 
-def write_lcf_report(fpath: Path, group: FitGroup, 
+def write_lcf_report(fpath: Path, out: Dataset, 
                      replace: bool=False) -> str:
     """Writes a LCF report to a file.
     
@@ -205,8 +205,8 @@ def write_lcf_report(fpath: Path, group: FitGroup,
     ----------
     fpath
         Path to file.
-    group
-        Valid FitGroup from :func:`lcf`.
+    out
+        Valid Dataset from :func:`lcf`.
     replace
         Replace previous file. The detault is False.
 
@@ -218,10 +218,10 @@ def write_lcf_report(fpath: Path, group: FitGroup,
     Raises
     ------
     TypeError
-        If ``group`` is not a valid FitGroup instance.
+        If ``out`` is not a valid Dataset instance.
     AttributeError
         If attribute ``min_pars``, ``lcf_pars``, ``scangroup``,
-        or ``refgroups`` does not exist in ``group``.
+        or ``refgroups`` does not exist in ``out``.
 
     Example
     -------
@@ -253,7 +253,7 @@ def write_lcf_report(fpath: Path, group: FitGroup,
     'lcf report written to lcf_report.log.'
     """
     # checking class
-    check_objattrs(group, FitGroup, attrlist=['min_pars', 
+    check_objattrs(out, Dataset, attrlist=['min_pars', 
     'scangroup', 'refgroups'], exceptions=True)
     
     # header
@@ -263,7 +263,7 @@ def write_lcf_report(fpath: Path, group: FitGroup,
         fout = open(fpath, 'w')
     else:
         fout = open(fpath, 'x')
-    fout.write('\n'.join((header, lcf_report(group))))
+    fout.write('\n'.join((header, lcf_report(out))))
     fout.close()
     msg = 'lcf report written to %s.' % fpath
     return (msg)

@@ -75,7 +75,7 @@ from warnings import warn
 from numpy import ndarray, where, gradient, around, inf, sum
 from scipy.interpolate import interp1d
 from lmfit import Parameter, Parameters, minimize, fit_report
-from .. import Group, FitGroup, Collection
+from .. import Group, Dataset, Collection
 from ..xas import pre_edge, autobk
 from ..utils import check_objattrs, index_xrange
 
@@ -83,7 +83,7 @@ def lcf(collection: Collection, fit_region: str='xanes',
         fit_range: list=[-inf,inf], scantag: str='scan',
         reftag: str='ref', kweight: int=2, sum_one: bool=True,
         method: str='leastsq', pre_edge_kws: dict=None,
-        autobk_kws: dict=None) -> FitGroup:
+        autobk_kws: dict=None) -> Dataset:
     """Performs linear combination fitting on a XAFS spectrum.
 
     Parameters
@@ -95,7 +95,7 @@ def lcf(collection: Collection, fit_region: str='xanes',
         XAFS region to perform the LCF. Accepted values are 'dxanes',
         'xanes', or 'exafs'. The default is 'xanes'.
     fit_range
-        LCF domain range in absolute values. Energy units are expected
+        Domain range in absolute values. Energy units are expected
         for 'dxanes' or 'xanes', while wavenumber (k) units are expected 
         for 'exafs'.
         The default is [-:data:`~numpy.inf`, :data:`~numpy.inf`].
@@ -121,7 +121,7 @@ def lcf(collection: Collection, fit_region: str='xanes',
         The default is None, indicating that this step will be skipped.
     autobk_kws
         Dictionary with parameters for :func:`~araucaria.xas.autobk.autobk`.
-        Only valid for ``cluster_region='exafs'``.
+        Only valid for ``fit_region='exafs'``.
         The default is None, indicating that this step will be skipped.
     
     Returns
@@ -167,7 +167,7 @@ def lcf(collection: Collection, fit_region: str='xanes',
     a warning will be raised and only the first group will be fitted.
     
     If given, ``pre_edge_kws`` or ``autobk_kws`` will only be used to 
-    perform clustering. Results from normalization and background removal 
+    perform LCF. Results from normalization and background removal 
     will not be written in ``collection``.
 
     Notes
@@ -192,7 +192,7 @@ def lcf(collection: Collection, fit_region: str='xanes',
     -------
     >>> from numpy.random import seed, normal
     >>> from numpy import arange, sin, pi
-    >>> from araucaria import Group, FitGroup, Collection
+    >>> from araucaria import Group, Dataset, Collection
     >>> from araucaria.fit import lcf
     >>> from araucaria.utils import check_objattrs
     >>> seed(1234)  # seed of random values
@@ -213,7 +213,7 @@ def lcf(collection: Collection, fit_region: str='xanes',
     >>> # performing lcf
     >>> out = lcf(collection, fit_region='exafs', fit_range=[3,10], 
     ...           kweight=0, sum_one=False)
-    >>> check_objattrs(out, FitGroup, 
+    >>> check_objattrs(out, Dataset, 
     ... attrlist=['k', 'scangroup', 'refgroups', 
     ... 'scan', 'ref1', 'ref2', 'fit', 'min_pars', 'lcf_pars'])
     [True, True, True, True, True, True, True, True, True]
@@ -280,7 +280,7 @@ def lcf(collection: Collection, fit_region: str='xanes',
     # reading and processing spectra
     for i, name in enumerate(groups):
         dname = 'scan' if i==0 else 'ref'+str(i)
-        group = collection.get_group(name)
+        group = collection.get_group(name).copy()
 
         if fit_region == 'exafs':
             # spectrum normalization
@@ -357,16 +357,16 @@ def lcf(collection: Collection, fit_region: str='xanes',
     content['lcf_pars'] = lcf_pars
     content['min_pars'] = min
     
-    lcf_group = FitGroup(**content)
-    return lcf_group
+    out = Dataset(**content)
+    return out
 
-def lcf_report(group: FitGroup) -> str:
+def lcf_report(out: Dataset) -> str:
     """Returns a formatted LCF Report to ``sys.stdout``.
     
     Parameters
     ----------
-    group
-        Valid FitGroup from :func:`lcf`.
+    out
+        Valid Dataset from :func:`lcf`.
     
     Returns
     -------
@@ -376,7 +376,7 @@ def lcf_report(group: FitGroup) -> str:
     Raises
     ------
     TypeError
-        If ``group`` is not a valid FitGroup instance.
+        If ``out`` is not a valid Dataset instance.
     AttributeError
         If attribute ``min_pars``, ``lcf_pars``, ``scangroup``,
         or ``refgroups`` does not exist in ``group``.
@@ -435,23 +435,23 @@ def lcf_report(group: FitGroup) -> str:
         amp1:  0.40034377 +/- 0.01195335 (2.99%) (init = 0.5)
         amp2:  0.59428689 +/- 0.01199230 (2.02%) (init = 0.5)
     """
-    check_objattrs(group, FitGroup, attrlist=['min_pars', 
+    check_objattrs(out, Dataset, attrlist=['min_pars', 
     'lcf_pars', 'scangroup', 'refgroups'], exceptions=True)
     
     header = '[[Parameters]]\n'
-    for key, val in group.lcf_pars.items():
+    for key, val in out.lcf_pars.items():
         header = header + '    {0:19}= {1}\n'\
         .format(key, val)
 
     header = header+'[[Groups]]\n'
-    for i, val in enumerate(([group.scangroup] + group.refgroups)):
+    for i, val in enumerate(([out.scangroup] + out.refgroups)):
         if i == 0:
             name = 'scan'
         else:
             name = 'ref%i' % i
         header = header + '    {0:19}= {1}\n'\
         .format(name, val)
-    return (header+fit_report(group.min_pars))
+    return (header+fit_report(out.min_pars))
 
 def sum_references(pars: Parameter, data: dict) -> ndarray:
     """Returns the sum of references weighted by amplitude coefficients.

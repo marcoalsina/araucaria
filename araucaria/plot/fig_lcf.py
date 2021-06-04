@@ -3,19 +3,19 @@
 from typing import Tuple
 from numpy import ptp
 from matplotlib.pyplot import Axes, Figure
-from .. import Group, FitGroup
+from .. import Group, Dataset
 from .template import fig_xas_template, FigPars
 from ..utils import check_objattrs
 
-def fig_lcf(group: FitGroup, offset: float=0.5, 
+def fig_lcf(out: Dataset, offset: float=0.5, 
             annotate: bool=True, fontsize: float=8,
             fig_pars: FigPars=None, **fig_kws) -> Tuple[Figure,Axes]:
-    """Plots the results of linear combination fitting on a collecton.
+    """Plots the results of linear combination fit (LCF) on a collecton.
 
     Parameters
     ----------
-    group
-        Valid FitGroup from :func:`lcf`.
+    out
+        Valid Dataset from :func:`~araucaria.fit.lcfit.lcf`.
     offset
         Offset step value for plots.
         The default is 0.5.
@@ -42,16 +42,16 @@ def fig_lcf(group: FitGroup, offset: float=0.5,
     Raises
     ------
     TypeError
-        If ``group`` is not a valid FitGroup instance.
+        If ``out`` is not a valid Dataset instance.
     AttributeError
         If attribute ``min_pars``, ``lcf_pars``, ``scangroup``,
-        or ``refgroups`` does not exist in ``group``.
+        or ``refgroups`` does not exist in ``out``.
     """
-    check_objattrs(group, FitGroup, attrlist=['min_pars', 
+    check_objattrs(out, Dataset, attrlist=['min_pars', 
     'lcf_pars', 'scangroup', 'refgroups'], exceptions=True)
 
     # setting the figure type
-    fig_type = group.lcf_pars['fit_region']
+    fig_type = out.lcf_pars['fit_region']
     if fig_type == 'exafs':
         panels = 'ee'
     elif fig_type == 'xanes':
@@ -60,8 +60,8 @@ def fig_lcf(group: FitGroup, offset: float=0.5,
         panels = 'dd'
 
     # data object names
-    groupnames = [group.scangroup] + group.refgroups
-    datnames   = ['scan'] + ['ref%s' % (i+1) for i in range(len(group.refgroups))]
+    groupnames = [out.scangroup] + out.refgroups
+    datnames   = ['scan'] + ['ref%s' % (i+1) for i in range(len(out.refgroups))]
 
     # initializing figure and axes
     fig, axes = fig_xas_template(panels=panels, fig_pars=fig_pars, **fig_kws)
@@ -77,7 +77,7 @@ def fig_lcf(group: FitGroup, offset: float=0.5,
                 yvar = [1, 0.25, 0.5]
             else:
                 yvar = [0, 0.25, 0.5]
-        axes[0].plot(getattr(group, xvar), i*offset + getattr(group, datnames[i]),
+        axes[0].plot(getattr(out, xvar), i*offset + getattr(out, datnames[i]),
                      label=name)
         
         # location of text in the x-axis
@@ -85,9 +85,9 @@ def fig_lcf(group: FitGroup, offset: float=0.5,
         #axes[0].text(xloc, yvar[0] + (yvar[1] + i)*offset, name, fontsize=fontsize, ha='right')
 
     # panel 2: plotting data and fitted model
-    axes[1].plot(getattr(group, xvar), yvar[2]*offset+group.scan, label=group.scangroup)
-    axes[1].plot(getattr(group, xvar), yvar[2]*offset+group.fit , label='fit')
-    axes[1].plot(getattr(group, xvar), group.min_pars.residual, label='residual')
+    axes[1].plot(getattr(out, xvar), yvar[2]*offset+out.scan, label=out.scangroup)
+    axes[1].plot(getattr(out, xvar), yvar[2]*offset+out.fit , label='fit')
+    axes[1].plot(getattr(out, xvar), out.min_pars.residual, label='residual')
     
     
     # increasing y-lim to include legend
@@ -96,11 +96,11 @@ def fig_lcf(group: FitGroup, offset: float=0.5,
     
     if annotate:
         # summary results for plot
-        summary = r'$\chi^2$ = %1.4f' % group.min_pars.chisqr +'\n'
-        for i, var in enumerate(group.min_pars.params):
-            val = group.min_pars.params[var].value
-            err = group.min_pars.params[var].stderr
-            summary += group.refgroups[i]+r': %1.2f$\pm$%1.2f' % (val, err)
+        summary = r'$\chi^2$ = %1.4f' % out.min_pars.chisqr +'\n'
+        for i, var in enumerate(out.min_pars.params):
+            val = out.min_pars.params[var].value
+            err = out.min_pars.params[var].stderr
+            summary += out.refgroups[i]+r': %1.2f$\pm$%1.2f' % (val, err)
             summary += '\n'
 
         if fig_type == 'dxanes':
@@ -119,7 +119,7 @@ def fig_lcf(group: FitGroup, offset: float=0.5,
         ax.set_yticks([])
         ax.legend(edgecolor='k', fontsize=fontsize)
         # fit range decorations
-        for val in group.lcf_pars['fit_range']:
+        for val in out.lcf_pars['fit_range']:
             ax.axvline(val, **axline_kws)
 
     return(fig, axes)

@@ -111,25 +111,25 @@ class Collection(object):
 
     def rename_group(self, name: str, newname: str) -> None:
         """Renames a group in the Collection.
-        
+
         Parameters
         -----------
         name
             Name of group to modify.
         newname
             New name for the group.
-        
+
         Returns
         -------
         :
-        
+
         Raises
         ------
         AttributeError
             If ``name`` is not a group in the Collection.
         TypeError
             If ``newname`` is not a string.
-        
+
         Example
         -------
         >>> from araucaria import Collection, Group
@@ -150,18 +150,18 @@ class Collection(object):
             raise TypeError('newname is not a valid string.')
         else:
             self.__dict__[newname] = self.__dict__.pop(name)
-            
+
             # retrieving original tag key
             for key, val in self.tags.items():
                 if name in val:
                     tag = key
                     break
-            
+
             # replacing record name with new name
             self.tags[tag].remove(name)
             self.tags[tag].append(newname)
             self.tags[tag].sort()
-            
+
             # modifying name of group
             self.__dict__[newname].name = newname
 
@@ -182,7 +182,7 @@ class Collection(object):
         ------
         TypeError
             If ``name`` is not in a group in the Collection.
-        
+
         Example
         -------
         >>> from araucaria import Collection, Group
@@ -199,7 +199,7 @@ class Collection(object):
         """
         if not hasattr(self, name):
             raise AttributeError('collection has no %s group.' % name)
-        
+
         # retrieving original tag key
         for key, val in self.tags.items():
             if name in val:
@@ -210,23 +210,23 @@ class Collection(object):
 
     def retag(self, name: str, tag: str) -> None:
         """Modifies tag of a group in the Collection.
-        
+
         Parameters
         ----------
         name
             Name of group to modify.
         tag
             New tag for the group.
-        
+
         Returns
         -------
         :
-        
+
         Raises
         ------
         AttributeError
             If ``name`` is not a group in the Collection.
-        
+
         Example
         -------
         >>> from araucaria import Collection, Group
@@ -243,7 +243,7 @@ class Collection(object):
         """        
         # retrieving original tag key
         initag = self.get_tag(name)
-        
+
         if initag == tag:
             # nothing needs to be changed
             return
@@ -279,6 +279,11 @@ class Collection(object):
         ------
         TypeError
             If ``name`` is not in a group in the Collection.
+        
+        Important
+        ---------
+        Changes made to the group will be propagated to the Collection.
+        If you need a copy of the group use the :func:`copy` method.
 
         Example
         -------
@@ -483,7 +488,7 @@ class Collection(object):
         >>> # mcer for tag 'ref'
         >>> print(collection.get_mcer(taglist=['ref']))
         [1500. 1600. 1700. 1800. 1900. 2000. 2100. 2200. 2300. 2400. 2500.]
-        
+
         >>> # mcer for 'all' groups
         >>> print(collection.get_mcer())
         [1600. 1800. 2000.]
@@ -580,30 +585,33 @@ class Collection(object):
         --------
         >>> from araucaria.testdata import get_testpath
         >>> from araucaria.io import read_collection_hdf5
-        >>> fpath      = get_testpath('test_database.h5')
+        >>> fpath      = get_testpath('Fe_database.h5')
         >>> collection = read_collection_hdf5(fpath)
         >>> # printing default summary
         >>> report = collection.summary()
         >>> report.show()
-        =================================
-        id  dataset       tag   mode  n  
-        =================================
-        1   dnd_testfile  scan  mu    3  
-        2   p65_testfile  scan  mu    2  
-        3   xmu_testfile  scan  mu    1  
-        =================================
-    
+        =======================================
+        id  dataset           tag   mode    n  
+        =======================================
+        1   FeIISO4_20K       scan  mu      5  
+        2   Fe_Foil           scan  mu_ref  5  
+        3   Ferrihydrite_20K  scan  mu      5  
+        4   Goethite_20K      scan  mu      5  
+        =======================================
+
         >>> # printing summary of dnd file with merged scans
-        >>> report = collection.summary(regex='dnd', optional=['merged_scans'])
+        >>> report = collection.summary(regex='Goe', optional=['merged_scans'])
         >>> report.show()
-        ===================================================
-        id  dataset       tag   mode  n  merged_scans      
-        ===================================================
-        1   dnd_testfile  scan  mu    3  dnd_test_001.dat  
-                                         dnd_test_002.dat  
-                                         dnd_test_003.dat  
-        ===================================================
-    
+        =============================================================
+        id  dataset       tag   mode  n  merged_scans                
+        =============================================================
+        1   Goethite_20K  scan  mu    5  20K_GOE_Fe_K_240.00000.xdi  
+                                         20K_GOE_Fe_K_240.00001.xdi  
+                                         20K_GOE_Fe_K_240.00002.xdi  
+                                         20K_GOE_Fe_K_240.00003.xdi  
+                                         20K_GOE_Fe_K_240.00004.xdi  
+        =============================================================
+ 
         >>> # printing custom summary
         >>> from araucaria.testdata import get_testpath
         >>> from araucaria import Collection
