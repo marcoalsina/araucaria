@@ -23,7 +23,7 @@ The :mod:`~araucaria.utils` module offers the following utility functions:
      - Index of NaN values in an array.
    * - :func:`index_nearest`
      - Index of nearest value in an array.
-   * - :func:`interp_vals`
+   * - :func:`interp_yvals`
      - Returns interpolated values for 1-D function. 
 """
 from typing import List, Union, TypeVar
@@ -449,7 +449,7 @@ def index_nearest(data: ndarray, val: float, kind: str='nearest') -> float:
 
     return index
 
-def interp_vals(x: ndarray, y: ndarray, xnew: ndarray, 
+def interp_yvals(x: ndarray, y: ndarray, xnew: ndarray, 
                 kind: str='cubic') -> ndarray:
     """Returns interpolated values for a 1-D function.
 
@@ -475,11 +475,11 @@ def interp_vals(x: ndarray, y: ndarray, xnew: ndarray,
     Example
     -------
     >>> from numpy import linspace
-    >>> from araucaria.utils import interp_vals
+    >>> from araucaria.utils import interp_yvals
     >>> x  = linspace(0,10)
     >>> y  = x**2
     >>> xp = x[0:10]
-    >>> yp = interp_vals(x,y,xp)
+    >>> yp = interp_yvals(x,y,xp)
     >>> print(len(yp))
     10
     """

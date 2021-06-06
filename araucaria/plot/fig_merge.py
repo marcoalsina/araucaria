@@ -33,9 +33,9 @@ def fig_merge(merge: Group, collection: Collection,
     Returns
     -------
     figure
-        Matplolib figure object.
+        ``Matplolib`` figure object.
     axes
-        Matplotlib axes object. 
+        ``Matplotlib`` axes object. 
 
     Raises
     ------
@@ -46,7 +46,8 @@ def fig_merge(merge: Group, collection: Collection,
     AttributeError
         If attribute ``merged_scans`` does not exist in ``merge``.
     AttributeError
-        If any attribute listed ``merged_scans`` does not exist in ``collection``.
+        If attribute ``merged_scans`` does not exist in any of the 
+        groups in ``collection``.
 
     Notes
     -----

@@ -35,17 +35,17 @@ def fig_lcf(out: Dataset, offset: float=0.5,
     Returns
     -------
     figure
-        Matplolib figure object.
+        ``Matplolib`` figure object.
     axes
-        Matplotlib axes object. 
+        ``Matplotlib`` axes object. 
    
     Raises
     ------
     TypeError
         If ``out`` is not a valid Dataset instance.
     AttributeError
-        If attribute ``min_pars``, ``lcf_pars``, ``scangroup``,
-        or ``refgroups`` does not exist in ``out``.
+        If attributes from :func:`~araucaria.fit.lcfit.lcf`
+        do not exist in ``out``.
     """
     check_objattrs(out, Dataset, attrlist=['min_pars', 
     'lcf_pars', 'scangroup', 'refgroups'], exceptions=True)

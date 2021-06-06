@@ -15,7 +15,10 @@ Plot module
 .. automodule:: araucaria.plot.fig_autobk
    :members:
 
-.. automodule:: araucaria.plot.fig_eda
+.. automodule:: araucaria.plot.fig_cluster
+   :members:
+
+.. automodule:: araucaria.plot.fig_pca
    :members:
 
 .. automodule:: araucaria.plot.fig_lcf

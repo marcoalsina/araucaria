@@ -31,9 +31,9 @@ def fig_pre_edge(group: Group, show_pre_edge: bool=True,
     Returns
     -------
     figure
-        Matplolib figure object.
+        ``Matplolib`` figure object.
     axes
-        Matplotlib axes object. 
+        ``Matplotlib`` axes object. 
 
     Raises
     ------

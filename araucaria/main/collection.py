@@ -15,7 +15,7 @@ class Collection(object):
     
     Parameters
     ----------
-    name
+    name : :class:`str`
         Name for the collection. The default is None.
     
     Attributes

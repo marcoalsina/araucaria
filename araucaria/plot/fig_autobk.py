@@ -28,9 +28,9 @@ def fig_autobk(group: Group, show_window: bool=True,
     Returns
     -------
     figure
-        Matplolib figure object.
+        ``Matplolib`` figure object.
     axes
-        Matplotlib axes object. 
+        ``Matplotlib`` axes object. 
 
     Raises
     ------
