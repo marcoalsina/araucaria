@@ -47,4 +47,4 @@ name@machine:~$ pip install .
 ## Documentation
 
 The official documentation of `araucaria` is available at 
-[https://marcoalsina.github.io/araucarial](https://marcoalsina.github.io/araucaria).
+[https://marcoalsina.github.io/araucaria](https://marcoalsina.github.io/araucaria).
