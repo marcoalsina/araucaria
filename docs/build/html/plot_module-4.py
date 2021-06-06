@@ -3,9 +3,9 @@ from araucaria.testdata import get_testpath
 from araucaria.io import read_dnd
 from araucaria.xas import pre_edge, autobk
 from araucaria.plot import fig_autobk
-fpath   = get_testpath('dnd_testfile.dat')
+fpath   = get_testpath('dnd_testfile1.dat')
 group   = read_dnd(fpath, scan='mu')
 pre     = pre_edge(group, update=True)
 bkg     = autobk(group, update=True)
-fig, ax = fig_autobk(group)
+fig, ax = fig_autobk(group, show_window=False)
 plt.show(block=False)

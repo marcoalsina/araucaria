@@ -8,4 +8,5 @@ Main module
    
    main/main_group
    main/main_collection
+   main/main_dataset
    main/main_report

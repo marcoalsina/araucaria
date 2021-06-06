@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Part 4: Linear combination fitting &mdash; araucaria 0.1.8b
+  <title>Part 4: Linear combination fitting &mdash; araucaria 0.1.9
  documentation</title>
   
 
@@ -465,7 +465,7 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Part-4:-Linear-combination-fitting">
 <h1>Part 4: Linear combination fitting<a class="headerlink" href="#Part-4:-Linear-combination-fitting" title="Permalink to this headline">¶</a></h1>
 <p><em>by Morgane Desmau &amp; Marco Alsina</em></p>
-<p><em>Last update: May 2021</em></p>
+<p><em>Last update: June 2021</em></p>
 <p>The following notebook explains the following:</p>
 <ol class="arabic simple">
 <li><p>Perform linear combination fitting (LCF) on XANES spectra.</p></li>
@@ -499,7 +499,7 @@ Scipy version       : 1.6.3
 Lmfit version       : 1.0.2
 H5py version        : 3.2.1
 Matplotlib version  : 3.4.2
-Araucaria version   : 0.1.8b
+Araucaria version   : 0.1.9
 </pre></div></div>
 </div>
 <div class="section" id="1.-Accesing-the-database">
@@ -536,29 +536,28 @@ Araucaria version   : 0.1.8b
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-========================================
-id  dataset                 mode    n
-========================================
-1   FeIISO4_20K             mu      5
-2   Fe_Foil                 mu_ref  5
-3   Ferrihydrite_20K        mu      5
-4   Goethite_20K            mu      5
-5   Goethite_20K_10spectra  mu      10
-========================================
+=================================
+id  dataset           mode    n
+=================================
+1   FeIISO4_20K       mu      5
+2   Fe_Foil           mu_ref  5
+3   Ferrihydrite_20K  mu      5
+4   Goethite_20K      mu      5
+=================================
 </pre></div></div>
 </div>
 </div>
 <div class="section" id="2.-Creating-a-group-to-fit">
 <h2>2. Creating a group to fit<a class="headerlink" href="#2.-Creating-a-group-to-fit" title="Permalink to this headline">¶</a></h2>
-<p>We will create an example signal to fit, in this case a mixture of the 2 original signals from ferrihydrite and goethite minerals. The mixture will be created through the <a class="reference internal" href="../xas/xas_merge.html#araucaria.xas.merge.merge"><span class="std std-ref">merge()</span></a> function. Note that the original signals are multiplied by normalized amplitude factors to prevent proportions larger than 1 during the fit. We will store the original signals and the mixture in a
-<a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a>, and produce a summary report.</p>
+<p>We will create an example signal to fit, in this case a mixture of the 2 original signals from ferrihydrite and goethite minerals. The mixture will be created with the <a class="reference internal" href="../xas/xas_merge.html#araucaria.xas.merge.merge"><span class="std std-ref">merge()</span></a> function. Note that the original signals are multiplied by normalized amplitude factors to prevent proportions larger than 1 during the fit. We will store the original signals and the mixture in a
+<a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a>, compute normalized spectra, and produce a summary report.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_hdf5</span>
-<span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">merge</span>
+<span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">merge</span><span class="p">,</span> <span class="n">pre_edge</span><span class="p">,</span> <span class="n">autobk</span>
 <span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span>
 
 <span class="c1"># name of groups</span>
@@ -569,16 +568,24 @@ id  dataset                 mode    n
 <span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
 <span class="n">auxiliary</span>  <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
 
+<span class="c1"># reading scans and adding them to collection</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">groupnames</span><span class="p">):</span>
     <span class="n">group</span> <span class="o">=</span> <span class="n">read_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
     <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s1">&#39;ref&#39;</span><span class="p">)</span>
-
     <span class="n">group</span><span class="o">.</span><span class="n">mu</span> <span class="o">=</span> <span class="n">amp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">group</span><span class="o">.</span><span class="n">mu</span>
     <span class="n">auxiliary</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
 
+<span class="c1"># merging scans</span>
 <span class="n">report</span><span class="p">,</span> <span class="n">merge</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">auxiliary</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;sample&#39;</span><span class="p">)</span>
 <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">merge</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s1">&#39;scan&#39;</span><span class="p">)</span>
 
+<span class="c1"># normalizing spectra in collection</span>
+<span class="n">names</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">pre_edge</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># printing report</span>
 <span class="n">report</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;edge_step&#39;</span><span class="p">])</span>
 <span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -592,9 +599,9 @@ id  dataset                 mode    n
 ================================================
 id  dataset           tag   mode  n  edge_step
 ================================================
-1   Ferrihydrite_20K  ref   mu    5  0.28779
-2   Goethite_20K      ref   mu    5  0.4169
-3   sample            scan  mu    2  0.35121
+1   Ferrihydrite_20K  ref   mu    5  0.27895
+2   Goethite_20K      ref   mu    5  0.4038
+3   sample            scan  mu    2  0.34112
 ================================================
 </pre></div></div>
 </div>
@@ -609,7 +616,7 @@ id  dataset           tag   mode  n  edge_step
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="nb">sum</span>
 
-<span class="n">edge_steps</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">vals</span><span class="p">)</span> <span class="k">for</span> <span class="n">vals</span> <span class="ow">in</span> <span class="n">report</span><span class="o">.</span><span class="n">get_cols</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;edge_step&#39;</span><span class="p">])[:</span><span class="mi">2</span><span class="p">]]</span>
+<span class="n">edge_steps</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">get_cols</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;edge_step&#39;</span><span class="p">],</span> <span class="n">astype</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">)[:</span><span class="mi">2</span><span class="p">]</span>
 <span class="n">amplitudes</span> <span class="o">=</span> <span class="p">[</span><span class="n">amp</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">val</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">edge_steps</span><span class="p">)]</span>
 <span class="n">amplitudes</span> <span class="o">=</span> <span class="p">[</span><span class="n">val</span><span class="o">/</span><span class="nb">sum</span><span class="p">(</span><span class="n">amplitudes</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">amplitudes</span><span class="p">]</span>
 
@@ -623,8 +630,8 @@ id  dataset           tag   mode  n  edge_step
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Ferrihydrite_20K: 0.408
-Goethite_20K    : 0.592
+Ferrihydrite_20K: 0.409
+Goethite_20K    : 0.591
 </pre></div></div>
 </div>
 </div>

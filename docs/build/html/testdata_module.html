@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Testdata module &mdash; araucaria 0.1.8b
+  <title>Testdata module &mdash; araucaria 0.1.9
  documentation</title>
   
 
@@ -241,7 +241,7 @@ the datasets:</p>
 <span class="gp">... </span>   <span class="k">if</span> <span class="s1">&#39;dnd&#39;</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
 <span class="gp">... </span>       <span class="nb">print</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 <span class="go">dnd_glitchfile.dat</span>
-<span class="go">dnd_testfile.dat</span>
+<span class="go">dnd_testfile1.dat</span>
 <span class="go">dnd_testfile2.dat</span>
 <span class="go">dnd_testfile3.dat</span>
 </pre></div>
@@ -266,7 +266,7 @@ the datasets:</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile.dat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">path</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile1.dat&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">Path</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>

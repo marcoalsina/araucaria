@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>LCFit module &mdash; araucaria 0.1.8b
+  <title>LCFit module &mdash; araucaria 0.1.9
  documentation</title>
   
 
@@ -242,7 +242,7 @@ LCF translates into minimizing the residuals of the following equation:</p>
 <li><p><span class="math notranslate nohighlight">\(kw\)</span>         : weighting coefficient for the photoelectron wavenumber.</p></li>
 </ul>
 <p>The <code class="xref py py-mod docutils literal notranslate"><span class="pre">lcf</span></code> module offers the following functions to perform linear
-combintation fitting (LCF) on a XAFS scan:</p>
+combintation fitting (LCF):</p>
 <table class="colwidths-auto docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Function</p></th>
@@ -251,7 +251,7 @@ combintation fitting (LCF) on a XAFS scan:</p>
 </thead>
 <tbody>
 <tr class="row-even"><td><p><a class="reference internal" href="#araucaria.fit.lcfit.lcf" title="araucaria.fit.lcfit.lcf"><code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code></a></p></td>
-<td><p>Performs a LCF on a XAFS spectrum.</p></td>
+<td><p>Performs LCF on a XAFS spectrum.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.fit.lcfit.lcf_report" title="araucaria.fit.lcfit.lcf_report"><code class="xref py py-func docutils literal notranslate"><span class="pre">lcf_report()</span></code></a></p></td>
 <td><p>Returns a formatted LCF report.</p></td>
@@ -266,7 +266,7 @@ combintation fitting (LCF) on a XAFS scan:</p>
 </table>
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.fit.lcfit.lcf">
-<span class="sig-prename descclassname"><span class="pre">araucaria.fit.lcfit.</span></span><span class="sig-name descname"><span class="pre">lcf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xanes'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">inf,</span> <span class="pre">inf]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'leastsq'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scantag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scan'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reftag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ref'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum_one</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_edge_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autobk_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.fit.lcfit.lcf" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.fit.lcfit.</span></span><span class="sig-name descname"><span class="pre">lcf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xanes'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fit_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">inf,</span> <span class="pre">inf]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">scantag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scan'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reftag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'ref'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sum_one</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'leastsq'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_edge_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autobk_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.fit.lcfit.lcf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs linear combination fitting on a XAFS spectrum.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -275,31 +275,34 @@ combintation fitting (LCF) on a XAFS scan:</p>
 with the reference scans.</p></li>
 <li><p><strong>fit_region</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – XAFS region to perform the LCF. Accepted values are ‘dxanes’,
 ‘xanes’, or ‘exafs’. The default is ‘xanes’.</p></li>
-<li><p><strong>fit_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – LCF domain range in absolute values. Energy units are expected
-for ‘dxanes’ or ‘xanes’, while k units are expected for ‘exafs’.
+<li><p><strong>fit_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – Domain range in absolute values. Energy units are expected
+for ‘dxanes’ or ‘xanes’, while wavenumber (k) units are expected
+for ‘exafs’.
 The default is [-<a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>].</p></li>
-<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of the fitting method to use.
-For valid names please check the <a class="reference external" href="https://lmfit.github.io/lmfit-py/fitting.html#lmfit.minimizer.minimize">minimize()</a>
-documentation of <code class="docutils literal notranslate"><span class="pre">lmfit</span></code>.</p></li>
 <li><p><strong>scantag</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Key to filter the scan group in the Collection based on the <code class="docutils literal notranslate"><span class="pre">tags</span></code>
 attribute. The default is ‘scan’.</p></li>
 <li><p><strong>reftag</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Key to filter the reference groups in the Collection based on the <code class="docutils literal notranslate"><span class="pre">tags</span></code>
 attribute. The default is ‘scan’.</p></li>
-<li><p><strong>kweight</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Exponent for weighting chi(k) by k**kweight. Only valid for <code class="docutils literal notranslate"><span class="pre">fit_region='exafs'</span></code>.
+<li><p><strong>kweight</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Exponent for weighting chi(k) by k^kweight. Only valid for <code class="docutils literal notranslate"><span class="pre">fit_region='exafs'</span></code>.
 The default is 2.</p></li>
 <li><p><strong>sum_one</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Conditional to force  sum of fractions to be one.
 The default is True.</p></li>
+<li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Fitting method. Currently only local optimization methods are supported.
+See the <a class="reference external" href="https://lmfit.github.io/lmfit-py/fitting.html#lmfit.minimizer.minimize" title="(in lmfit v1.0.2)"><code class="xref py py-func docutils literal notranslate"><span class="pre">minimize()</span></code></a> function of <code class="docutils literal notranslate"><span class="pre">lmfit</span></code> for a list
+of valid methods.
+The default is <code class="docutils literal notranslate"><span class="pre">leastsq</span></code>.</p></li>
 <li><p><strong>pre_edge_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Dictionary with parameters for <a class="reference internal" href="../xas/xas_normalize.html#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>.
 The default is None, indicating that this step will be skipped.</p></li>
-<li><p><strong>autobk_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Dictionary with parameters <a class="reference internal" href="../xas/xas_autobk.html#araucaria.xas.autobk.autobk" title="araucaria.xas.autobk.autobk"><code class="xref py py-func docutils literal notranslate"><span class="pre">autobk()</span></code></a>.
+<li><p><strong>autobk_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Dictionary with parameters for <a class="reference internal" href="../xas/xas_autobk.html#araucaria.xas.autobk.autobk" title="araucaria.xas.autobk.autobk"><code class="xref py py-func docutils literal notranslate"><span class="pre">autobk()</span></code></a>.
+Only valid for <code class="docutils literal notranslate"><span class="pre">fit_region='exafs'</span></code>.
 The default is None, indicating that this step will be skipped.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="../main/main_group.html#araucaria.main.group.FitGroup" title="araucaria.main.group.FitGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FitGroup</span></code></a></p>
+<dd class="field-even"><p><a class="reference internal" href="../main/main_dataset.html#araucaria.main.dataset.Dataset" title="araucaria.main.dataset.Dataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><p>Dictionary with the following arguments:</p>
+<dd class="field-odd"><p><p>Fit group with the following arguments:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">energy</span></code>   : array with energy values.
 Returned only if <code class="docutils literal notranslate"><span class="pre">fit_region='xanes'</span></code> or <code class="docutils literal notranslate"><span class="pre">fit_region='dxanes'</span></code>.</p></li>
@@ -320,19 +323,23 @@ Returned only if <code class="docutils literal notranslate"><span class="pre">fi
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">collection</span></code> is not a valid Collection instance.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">collection</span></code> has no <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If groups have no <code class="docutils literal notranslate"><span class="pre">energy</span></code> or <code class="docutils literal notranslate"><span class="pre">norm</span></code> attribute.
-    Only verified if <code class="docutils literal notranslate"><span class="pre">pre_edge_kws=None</span></code> and <code class="docutils literal notranslate"><span class="pre">fit_region='xanes'</span></code>.</p></li>
+    Only verified if <code class="docutils literal notranslate"><span class="pre">pre_edge_kws=None</span></code>, and <code class="docutils literal notranslate"><span class="pre">fit_region='dxanes'</span></code>
+    or <code class="docutils literal notranslate"><span class="pre">fit_region='xanes'</span></code>.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If groups have no <code class="docutils literal notranslate"><span class="pre">k</span></code> or <code class="docutils literal notranslate"><span class="pre">chi</span></code> attribute.
     Only verified if <code class="docutils literal notranslate"><span class="pre">autobk_kws=None</span></code> and <code class="docutils literal notranslate"><span class="pre">fit_region='exafs'</span></code>.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.9)"><strong>KeyError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">scantag</span></code> or <code class="docutils literal notranslate"><span class="pre">refttag</span></code>  are not keys of the <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.9)"><strong>KeyError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">scantag</span></code> or <code class="docutils literal notranslate"><span class="pre">refttag</span></code> are not keys of the <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">fit_region</span></code> is not recognized.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">fit_range</span></code> is outside the doamin of a reference group.</p></li>
 </ul>
 </dd>
 </dl>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>If more than one group in <code class="docutils literal notranslate"><span class="pre">collection</span></code> is tagged with <code class="docutils literal notranslate"><span class="pre">scantag</span></code>,
 a warning will be raised and only the first group will be fitted.</p>
-<p>Currently only local optimization methods are supported.</p>
+<p>If given, <code class="docutils literal notranslate"><span class="pre">pre_edge_kws</span></code> or <code class="docutils literal notranslate"><span class="pre">autobk_kws</span></code> will only be used to
+perform LCF. Results from normalization and background removal
+will not be written in <code class="docutils literal notranslate"><span class="pre">collection</span></code>.</p>
 </div>
 <p class="rubric">Notes</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">min_pars</span></code> object is returned by the <code class="xref py py-func docutils literal notranslate"><span class="pre">minimize()</span></code> function of
@@ -340,8 +347,13 @@ a warning will be raised and only the first group will be fitted.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">params</span></code>    : dictionary with the optimized parameters.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">var_names</span></code> : ordered list of parameter names used in optimization.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">covar</span></code>     : covariance matrix from minimization, with rows and columns corresponding to <code class="docutils literal notranslate"><span class="pre">var_names</span></code>.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">init_vals</span></code> : list of initial values for variable parameters using <code class="docutils literal notranslate"><span class="pre">var_names</span></code>.</p></li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">covar</span></code><span class="classifier">covariance matrix from minimization, with rows and columns</span></dt><dd><p>corresponding to <code class="docutils literal notranslate"><span class="pre">var_names</span></code>.</p>
+</dd>
+</dl>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">init_vals</span></code> : list of initial values for variable parameters using
+<code class="docutils literal notranslate"><span class="pre">var_names</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">success</span></code>   : True if the fit succeeded, otherwise False.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">nvarys</span></code>    : number of variables.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">ndata</span></code>     : number of data points.</p></li>
@@ -352,7 +364,7 @@ a warning will be raised and only the first group will be fitted.</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">seed</span><span class="p">,</span> <span class="n">normal</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">arange</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">pi</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">FitGroup</span><span class="p">,</span> <span class="n">Collection</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">Collection</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.fit</span> <span class="kn">import</span> <span class="n">lcf</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span><span class="p">(</span><span class="mi">1234</span><span class="p">)</span>  <span class="c1"># seed of random values</span>
@@ -373,7 +385,7 @@ a warning will be raised and only the first group will be fitted.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># performing lcf</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">out</span> <span class="o">=</span> <span class="n">lcf</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">fit_region</span><span class="o">=</span><span class="s1">&#39;exafs&#39;</span><span class="p">,</span> <span class="n">fit_range</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span>
 <span class="gp">... </span>          <span class="n">kweight</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">sum_one</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">FitGroup</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">,</span>
 <span class="gp">... </span><span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;scangroup&#39;</span><span class="p">,</span> <span class="s1">&#39;refgroups&#39;</span><span class="p">,</span>
 <span class="gp">... </span><span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="s1">&#39;ref1&#39;</span><span class="p">,</span> <span class="s1">&#39;ref2&#39;</span><span class="p">,</span> <span class="s1">&#39;fit&#39;</span><span class="p">,</span> <span class="s1">&#39;min_pars&#39;</span><span class="p">,</span> <span class="s1">&#39;lcf_pars&#39;</span><span class="p">])</span>
 <span class="go">[True, True, True, True, True, True, True, True, True]</span>
@@ -387,11 +399,11 @@ a warning will be raised and only the first group will be fitted.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.fit.lcfit.lcf_report">
-<span class="sig-prename descclassname"><span class="pre">araucaria.fit.lcfit.</span></span><span class="sig-name descname"><span class="pre">lcf_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.fit.lcfit.lcf_report" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.fit.lcfit.</span></span><span class="sig-name descname"><span class="pre">lcf_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.fit.lcfit.lcf_report" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a formatted LCF Report to <code class="docutils literal notranslate"><span class="pre">sys.stdout</span></code>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.FitGroup" title="araucaria.main.group.FitGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FitGroup</span></code></a>) – Valid FitGroup from <a class="reference internal" href="#araucaria.fit.lcfit.lcf" title="araucaria.fit.lcfit.lcf"><code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code></a>.</p>
+<dd class="field-odd"><p><strong>out</strong> (<a class="reference internal" href="../main/main_dataset.html#araucaria.main.dataset.Dataset" title="araucaria.main.dataset.Dataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a>) – Valid Dataset from <a class="reference internal" href="#araucaria.fit.lcfit.lcf" title="araucaria.fit.lcfit.lcf"><code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code></a>.</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
@@ -401,7 +413,7 @@ a warning will be raised and only the first group will be fitted.</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid FitGroup instance.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">out</span></code> is not a valid Dataset instance.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If attribute <code class="docutils literal notranslate"><span class="pre">min_pars</span></code>, <code class="docutils literal notranslate"><span class="pre">lcf_pars</span></code>, <code class="docutils literal notranslate"><span class="pre">scangroup</span></code>,
     or <code class="docutils literal notranslate"><span class="pre">refgroups</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p></li>
 </ul>
@@ -468,7 +480,7 @@ that writes additional information on group names and calling parameters.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pars</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code>) – Parameter object from <code class="docutils literal notranslate"><span class="pre">lmfit</span></code> containing the amplitude
+<li><p><strong>pars</strong> (<a class="reference external" href="https://lmfit.github.io/lmfit-py/parameters.html#lmfit.parameter.Parameter" title="(in lmfit v1.0.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></a>) – Parameter object from <code class="docutils literal notranslate"><span class="pre">lmfit</span></code> containing the amplitude
 coefficients for each reference spectrum. At least attribute
 ‘amp1’ should exist in the object.</p></li>
 <li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – Dictionary with the reference arrays. At leasr key ‘ref1’
@@ -508,7 +520,7 @@ number of ‘ref’ keys in <code class="docutils literal notranslate"><span cla
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>pars</strong> (<code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code>) – Parameter object from <code class="docutils literal notranslate"><span class="pre">lmfit</span></code> containing the amplitude
+<li><p><strong>pars</strong> (<a class="reference external" href="https://lmfit.github.io/lmfit-py/parameters.html#lmfit.parameter.Parameter" title="(in lmfit v1.0.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Parameter</span></code></a>) – Parameter object from <code class="docutils literal notranslate"><span class="pre">lmfit</span></code> containing the amplitude
 coefficients for each reference spectrum. At least attribute
 ‘amp1’ should exist in the object.</p></li>
 <li><p><strong>data</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – Dictionary with the scan and reference arrays.

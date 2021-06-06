@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>IO HDF5 module &mdash; araucaria 0.1.8b
+  <title>IO HDF5 module &mdash; araucaria 0.1.9
  documentation</title>
   
 
@@ -275,9 +275,9 @@ manipulate data in the Hierarchical Data Format <code class="docutils literal no
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_hdf5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;test_database.h5&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting dnd_testfile</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;dnd_testfile&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;Fe_database.h5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting geothite scan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Goethite_20K&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">group_mu</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">])</span>
 <span class="go">[True, True]</span>
 </pre></div>
@@ -319,19 +319,19 @@ Therefore the returned collection will automatically assign
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_collection_hdf5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;test_database.h5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;Fe_database.h5&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># reading database</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">Collection</span><span class="p">)</span>
 <span class="go">True</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
-<span class="go">[&#39;dnd_testfile&#39;, &#39;p65_testfile&#39;, &#39;xmu_testfile&#39;]</span>
+<span class="go">[&#39;FeIISO4_20K&#39;, &#39;Fe_Foil&#39;, &#39;Ferrihydrite_20K&#39;, &#39;Goethite_20K&#39;]</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># read selected group datasets</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;dnd_testfile&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fe_Foil&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
-<span class="go">[&#39;dnd_testfile&#39;]</span>
+<span class="go">[&#39;Fe_Foil&#39;]</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -451,19 +451,20 @@ Previous datasets can be overwritten with the option <code class="docutils liter
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_collection_hdf5</span><span class="p">,</span> <span class="n">write_collection_hdf5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;test_database.h5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;Fe_database.h5&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># reading database</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># saving collection in a new hdf5 file</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">write_collection_hdf5</span><span class="p">(</span><span class="s1">&#39;database.h5&#39;</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go">dnd_testfile written to database.h5.</span>
-<span class="go">p65_testfile written to database.h5.</span>
-<span class="go">xmu_testfile written to database.h5.</span>
+<span class="go">FeIISO4_20K written to database.h5.</span>
+<span class="go">Fe_Foil written to database.h5.</span>
+<span class="go">Ferrihydrite_20K written to database.h5.</span>
+<span class="go">Goethite_20K written to database.h5.</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># write selected group dataset</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">write_collection_hdf5</span><span class="p">(</span><span class="s1">&#39;database.h5&#39;</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;xmu_testfile&#39;</span><span class="p">],</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="go">xmu_testfile written to database.h5.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">write_collection_hdf5</span><span class="p">(</span><span class="s1">&#39;database.h5&#39;</span><span class="p">,</span> <span class="n">collection</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Fe_Foil&#39;</span><span class="p">],</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">Fe_Foil written to database.h5.</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -634,29 +635,32 @@ will be printed in the report.</p>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">summary_hdf5</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;test_database.h5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;Fe_database.h5&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># printing default summary</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">report</span> <span class="o">=</span> <span class="n">summary_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="go">===========================</span>
-<span class="go">id  dataset       mode  n</span>
-<span class="go">===========================</span>
-<span class="go">1   dnd_testfile  mu    3</span>
-<span class="go">2   p65_testfile  mu    2</span>
-<span class="go">3   xmu_testfile  mu    1</span>
-<span class="go">===========================</span>
+<span class="go">=================================</span>
+<span class="go">id  dataset           mode    n</span>
+<span class="go">=================================</span>
+<span class="go">1   FeIISO4_20K       mu      5</span>
+<span class="go">2   Fe_Foil           mu_ref  5</span>
+<span class="go">3   Ferrihydrite_20K  mu      5</span>
+<span class="go">4   Goethite_20K      mu      5</span>
+<span class="go">=================================</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># printing summary with merged scans of Goethite groups</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span> <span class="o">=</span> <span class="n">summary_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="s1">&#39;dnd&#39;</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;e0&#39;</span><span class="p">,</span> <span class="s1">&#39;merged_scans&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span> <span class="o">=</span> <span class="n">summary_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">regex</span><span class="o">=</span><span class="s1">&#39;Goe&#39;</span><span class="p">,</span> <span class="n">optional</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;merged_scans&#39;</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-<span class="go">====================================================</span>
-<span class="go">id  dataset       mode  n  e0     merged_scans</span>
-<span class="go">====================================================</span>
-<span class="go">1   dnd_testfile  mu    3  29203  dnd_test_001.dat</span>
-<span class="go">                                  dnd_test_002.dat</span>
-<span class="go">                                  dnd_test_003.dat</span>
-<span class="go">====================================================</span>
+<span class="go">=======================================================</span>
+<span class="go">id  dataset       mode  n  merged_scans</span>
+<span class="go">=======================================================</span>
+<span class="go">1   Goethite_20K  mu    5  20K_GOE_Fe_K_240.00000.xdi</span>
+<span class="go">                           20K_GOE_Fe_K_240.00001.xdi</span>
+<span class="go">                           20K_GOE_Fe_K_240.00002.xdi</span>
+<span class="go">                           20K_GOE_Fe_K_240.00003.xdi</span>
+<span class="go">                           20K_GOE_Fe_K_240.00004.xdi</span>
+<span class="go">=======================================================</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># printing custom parameters</span>

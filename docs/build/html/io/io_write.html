@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>IO write module &mdash; araucaria 0.1.8b
+  <title>IO write module &mdash; araucaria 0.1.9
  documentation</title>
   
 
@@ -281,13 +281,13 @@ The previous file can be overwritten with the option <code class="docutils liter
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_write.write_lcf">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></span><span class="sig-name descname"><span class="pre">write_lcf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%12.8g'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_write.write_lcf" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></span><span class="sig-name descname"><span class="pre">write_lcf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%12.8g'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_write.write_lcf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes LCF data to a file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to file.</p></li>
-<li><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.FitGroup" title="araucaria.main.group.FitGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FitGroup</span></code></a>) – Valid FitGroup from <code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code>.</p></li>
+<li><p><strong>out</strong> (<a class="reference internal" href="../main/main_dataset.html#araucaria.main.dataset.Dataset" title="araucaria.main.dataset.Dataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a>) – Valid Dataset from <code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code>.</p></li>
 <li><p><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Format for numbers. The default is ‘%12.8g’.</p></li>
 <li><p><strong>replace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Replace previous file. The detault is False.</p></li>
 </ul>
@@ -300,9 +300,9 @@ The previous file can be overwritten with the option <code class="docutils liter
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid FitGroup instance.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">out</span></code> is not a valid Dataset instance.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If attribute <code class="docutils literal notranslate"><span class="pre">min_pars</span></code>, <code class="docutils literal notranslate"><span class="pre">scangroup</span></code>,
-    or <code class="docutils literal notranslate"><span class="pre">refgroups</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p></li>
+    or <code class="docutils literal notranslate"><span class="pre">refgroups</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">out</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -361,13 +361,13 @@ Returned only if <code class="docutils literal notranslate"><span class="pre">fi
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_write.write_lcf_report">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></span><span class="sig-name descname"><span class="pre">write_lcf_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_write.write_lcf_report" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></span><span class="sig-name descname"><span class="pre">write_lcf_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_write.write_lcf_report" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes a LCF report to a file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to file.</p></li>
-<li><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.FitGroup" title="araucaria.main.group.FitGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FitGroup</span></code></a>) – Valid FitGroup from <code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code>.</p></li>
+<li><p><strong>out</strong> (<a class="reference internal" href="../main/main_dataset.html#araucaria.main.dataset.Dataset" title="araucaria.main.dataset.Dataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a>) – Valid Dataset from <code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code>.</p></li>
 <li><p><strong>replace</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Replace previous file. The detault is False.</p></li>
 </ul>
 </dd>
@@ -379,9 +379,9 @@ Returned only if <code class="docutils literal notranslate"><span class="pre">fi
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid FitGroup instance.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">out</span></code> is not a valid Dataset instance.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If attribute <code class="docutils literal notranslate"><span class="pre">min_pars</span></code>, <code class="docutils literal notranslate"><span class="pre">lcf_pars</span></code>, <code class="docutils literal notranslate"><span class="pre">scangroup</span></code>,
-    or <code class="docutils literal notranslate"><span class="pre">refgroups</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p></li>
+    or <code class="docutils literal notranslate"><span class="pre">refgroups</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">out</span></code>.</p></li>
 </ul>
 </dd>
 </dl>

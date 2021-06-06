@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>PCA module &mdash; araucaria 0.1.9
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Utilities module" href="../utils_module.html" />
+    <link rel="prev" title="Cluster module" href="stats_cluster.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../stats_module.html">Statistics module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="stats_genesd.html">genESD module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stats_window.html">Window module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stats_cluster.html">Cluster module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">PCA module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../stats_module.html">Statistics module</a> &raquo;</li>
+        
+      <li>PCA module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/stats/stats_pca.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.stats.pca">
+<span id="pca-module"></span><h1>PCA module<a class="headerlink" href="#module-araucaria.stats.pca" title="Permalink to this headline">¶</a></h1>
+<p>Principal component analysis is an exploratory data analysis technique
+aimed at reducing the dimensionality of a dataset while preserving most of
+its variance.
+Dimensionality reduccion is achieved by changing the basis of the dataset
+in such way that the new vectors constitute an orthonormal basis.</p>
+<p>The <a class="reference internal" href="#module-araucaria.stats.pca" title="araucaria.stats.pca"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pca</span></code></a> module offers the following
+classes and functions to perform principal component analysis:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Class</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.stats.pca.PCAModel" title="araucaria.stats.pca.PCAModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCAModel</span></code></a></p></td>
+<td><p>Container of results from PCA.</p></td>
+</tr>
+</tbody>
+</table>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.stats.pca.pca" title="araucaria.stats.pca.pca"><code class="xref py py-func docutils literal notranslate"><span class="pre">pca()</span></code></a></p></td>
+<td><p>Performs principal component analysis on a collection.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">araucaria.stats.pca.</span></span><span class="sig-name descname"><span class="pre">PCAModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">matrix</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncomps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cumvar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.pca.PCAModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>PCA Model class.</p>
+<p>“This class stores the results of principal component analysis
+on an array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>matrix</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – m by n array containing m observations and n variables.</p></li>
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name for the collection. The default is None.</p></li>
+<li><p><strong>ncomps</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Number of components to preserve from the PCA.
+Default is None, which will preserve all components.</p></li>
+<li><p><strong>cumvar</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Cumulative variance to preserve from the PCA.
+Default is None, which will preserve all components.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AssertionError" title="(in Python v3.9)"><strong>AssertionError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">ncomps</span></code> is not a positive integer.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AssertionError" title="(in Python v3.9)"><strong>AssertionError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">ncomps</span></code> is larger than the number of variables in <code class="docutils literal notranslate"><span class="pre">matrix</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AssertionError" title="(in Python v3.9)"><strong>AssertionError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">cumvar</span></code> is negative or greater than 1.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.matrix">
+<span class="sig-name descname"><span class="pre">matrix</span></span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.matrix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array containing m observations in rows and n variables in columns.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.U">
+<span class="sig-name descname"><span class="pre">U</span></span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.U" title="Permalink to this definition">¶</a></dt>
+<dd><p>m by n array from the SVD.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.s">
+<span class="sig-name descname"><span class="pre">s</span></span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array with the n eigenvalues from the SVD.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.Vh">
+<span class="sig-name descname"><span class="pre">Vh</span></span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.Vh" title="Permalink to this definition">¶</a></dt>
+<dd><p>n by n array from the SVD</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.variance">
+<span class="sig-name descname"><span class="pre">variance</span></span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.variance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array with the explained variance of each component.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.components">
+<span class="sig-name descname"><span class="pre">components</span></span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.components" title="Permalink to this definition">¶</a></dt>
+<dd><p>Array with principal components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>Observations in <code class="docutils literal notranslate"><span class="pre">matrix</span></code> must be centered in order to perform PCA.</p></li>
+<li><p>Either <code class="docutils literal notranslate"><span class="pre">ncomps</span></code> or <code class="docutils literal notranslate"><span class="pre">cumvar</span></code> can be set to reduce dimensionallity
+of the dataset.
+If <code class="docutils literal notranslate"><span class="pre">ncomps</span></code> is provided, it will set precedence over <code class="docutils literal notranslate"><span class="pre">cumvar</span></code>.</p></li>
+</ul>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">randn</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">PCAModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">matrix</span> <span class="o">=</span> <span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span>  <span class="o">=</span> <span class="n">PCAModel</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<span class="go">&lt;class &#39;araucaria.stats.pca.PCAModel&#39;&gt;</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># verifying attributes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;matrix&#39;</span><span class="p">,</span> <span class="s1">&#39;components&#39;</span><span class="p">,</span> <span class="s1">&#39;variance&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">PCAModel</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+<span class="go">[True, True, True]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.inverse_transform">
+<span class="sig-name descname"><span class="pre">inverse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts principal components into observations.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Projects observations into principal components.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="araucaria.stats.pca.pca">
+<span class="sig-prename descclassname"><span class="pre">araucaria.stats.pca.</span></span><span class="sig-name descname"><span class="pre">pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xanes'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">inf,</span> <span class="pre">inf]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncomps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cumvar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_edge_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autobk_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.pca.pca" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs principal component analysis (PCA) on a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>collection</strong> (<a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection" title="araucaria.main.collection.Collection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Collection</span></code></a>) – Collection with the groups for PCA.</p></li>
+<li><p><strong>taglist</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List with keys to filter groups based on their <code class="docutils literal notranslate"><span class="pre">tags</span></code>
+attributes in the Collection.
+The default is [‘all’].</p></li>
+<li><p><strong>pca_region</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – XAFS region to perform PCA. Accepted values are ‘dxanes’,
+‘xanes’, or ‘exafs’. The default is ‘xanes’.</p></li>
+<li><p><strong>pca_range</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – Domain range in absolute values. Energy units are expected
+for ‘dxanes’ or ‘xanes’, while wavenumber (k) units are expected
+for ‘exafs’.
+The default is [-<a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>].</p></li>
+<li><p><strong>ncomps</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Number of components to preserve from the PCA.
+Default is None, which will preserve all components.</p></li>
+<li><p><strong>cumvar</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>]) – Cumulative variance to preserve from the PCA.
+Defaults is None, which will preserve all components.</p></li>
+<li><p><strong>kweight</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Exponent for weighting chi(k) by k^kweight.
+Only valid for <code class="docutils literal notranslate"><span class="pre">cluster_region='exafs'</span></code>.
+The default is 2.</p></li>
+<li><p><strong>pre_edge_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Dictionary with parameters for <a class="reference internal" href="../xas/xas_normalize.html#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>.
+The default is None, indicating that this step will be skipped.</p></li>
+<li><p><strong>autobk_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Dictionary with parameters <a class="reference internal" href="../xas/xas_autobk.html#araucaria.xas.autobk.autobk" title="araucaria.xas.autobk.autobk"><code class="xref py py-func docutils literal notranslate"><span class="pre">autobk()</span></code></a>.
+Only valid for <code class="docutils literal notranslate"><span class="pre">cluster_region='exafs'</span></code>.
+The default is None, indicating that this step will be skipped.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#araucaria.stats.pca.PCAModel" title="araucaria.stats.pca.PCAModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCAModel</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>PCA model with the following arguments:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">components</span></code>   : array with principal components.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">variance</span></code>     : array with explained variance of each component.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">groupnames</span></code>   : list with names of clustered groups.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">energy</span></code>       : array with energy values. Returned only if
+<code class="docutils literal notranslate"><span class="pre">pca_region='xanes</span></code> or <code class="docutils literal notranslate"><span class="pre">pca_region=dxanes</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">k</span></code>            : array with wavenumber values. Returned only if
+<code class="docutils literal notranslate"><span class="pre">pca_region='exafs'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">matrix</span></code>       : array with centered values for groups in <code class="docutils literal notranslate"><span class="pre">pca_range</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pca_pars</span></code> : dictionary with PCA parameters.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#araucaria.stats.pca.PCAModel" title="araucaria.stats.pca.PCAModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCAModel</span></code></a></dt><dd><p>class to store results from PCA.</p>
+</dd>
+<dt><a class="reference internal" href="../plot_module.html#araucaria.plot.fig_pca.fig_pca" title="araucaria.plot.fig_pca.fig_pca"><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_pca()</span></code></a></dt><dd><p>Plots the results of PCA.</p>
+</dd>
+</dl>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>Group datasets in <code class="docutils literal notranslate"><span class="pre">collection</span></code> will be centered before performing PCA.</p></li>
+<li><p>Either <code class="docutils literal notranslate"><span class="pre">ncomps</span></code> or <code class="docutils literal notranslate"><span class="pre">cumvar</span></code> can be set to reduce dimensionallity
+of the dataset.
+If <code class="docutils literal notranslate"><span class="pre">ncomps</span></code> is provided, it will set precedence over <code class="docutils literal notranslate"><span class="pre">cumvar</span></code>.</p></li>
+<li><p>If given, <code class="docutils literal notranslate"><span class="pre">pre_edge_kws</span></code> or <code class="docutils literal notranslate"><span class="pre">autobk_kws</span></code> will only be used to
+perform PCA. Results from normalization and background removal
+will not be written in <code class="docutils literal notranslate"><span class="pre">collection</span></code>.</p></li>
+</ul>
+</div>
+<p class="rubric">Examples</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_collection_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">PCAModel</span><span class="p">,</span> <span class="n">pca</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>      <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;Fe_database.h5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span>        <span class="o">=</span> <span class="n">pca</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">pca_region</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">,</span> <span class="n">pre_edge_kws</span><span class="o">=</span><span class="p">{})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span>      <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;matrix&#39;</span><span class="p">,</span> <span class="s1">&#39;components&#39;</span><span class="p">,</span> <span class="s1">&#39;variance&#39;</span><span class="p">,</span> <span class="s1">&#39;groupnames&#39;</span><span class="p">,</span> <span class="s1">&#39;pca_pars&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">PCAModel</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+<span class="go">[True, True, True, True, True, True]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../utils_module.html" class="btn btn-neutral float-right" title="Utilities module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="stats_cluster.html" class="btn btn-neutral float-left" title="Cluster module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

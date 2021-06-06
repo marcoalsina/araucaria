@@ -1,4 +1,4 @@
 Collection class
 ----------------
-.. autoclass:: araucaria.main.collection.Collection
+.. automodule:: araucaria.main.collection
    :members:

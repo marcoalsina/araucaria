@@ -5,7 +5,7 @@ from araucaria.xas import pre_edge, autobk, xftf
 from araucaria.utils import check_objattrs
 kw      = 2
 k_range = [2,10]
-fpath   = get_testpath('dnd_testfile.dat')
+fpath   = get_testpath('dnd_testfile1.dat')
 group   = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
 pre     = pre_edge(group, update=True)
 autbk   = autobk(group, update=True)

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Plot module &mdash; araucaria 0.1.8b
+  <title>Plot module &mdash; araucaria 0.1.9
  documentation</title>
   
 
@@ -219,13 +219,19 @@ plotting XAS spectra. The following functions are currently implemented:</p>
 <td><p>Plot the results of a merge operation.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#araucaria.plot.fig_pre_edge.fig_pre_edge" title="araucaria.plot.fig_pre_edge.fig_pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_pre_edge()</span></code></a></p></td>
-<td><p>Plot the results of pre-edge substratction and normalization.</p></td>
+<td><p>Plot the results of pre-edge substraction and normalization.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.plot.fig_autobk.fig_autobk" title="araucaria.plot.fig_autobk.fig_autobk"><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_autobk()</span></code></a></p></td>
 <td><p>Plot the results of background removal.</p></td>
 </tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.plot.fig_cluster.fig_cluster" title="araucaria.plot.fig_cluster.fig_cluster"><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_cluster()</span></code></a></p></td>
+<td><p>Plots the dendrogram of a hierarchical clustering.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.plot.fig_pca.fig_pca" title="araucaria.plot.fig_pca.fig_pca"><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_pca()</span></code></a></p></td>
+<td><p>Plots the results of principal component analysis.</p></td>
+</tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#araucaria.plot.fig_lcf.fig_lcf" title="araucaria.plot.fig_lcf.fig_lcf"><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_lcf()</span></code></a></p></td>
-<td><p>Plot the results of a linear combination fitting.</p></td>
+<td><p>Plot the results of a linear combination fit.</p></td>
 </tr>
 </tbody>
 </table>
@@ -276,11 +282,12 @@ to plot XAS spectra.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>panels</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – <p>Panels to plot. Valid arguments are as follows:</p>
 <ul>
-<li><p>’d’   : derivative of XANES spectra.</p></li>
+<li><p>’d’   : Derivative of XANES spectra.</p></li>
 <li><p>’x’   : XANES spectra.</p></li>
 <li><p>’e’   : EXAFS spectra.</p></li>
 <li><p>’r’   : FT-EXAFS spectra.</p></li>
-<li><p>’q’   : reverse FT-EXAFS spectra.</p></li>
+<li><p>’q’   : Reverse FT-EXAFS spectra.</p></li>
+<li><p>’u’   : Unassigned pannel.</p></li>
 <li><p>’/’   : Character for a new row.</p></li>
 </ul>
 <p>The characters can be concatenated to produce multiple panels and rows.
@@ -297,8 +304,8 @@ routine of <code class="docutils literal notranslate"><span class="pre">Matplotl
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">
-<li><p><em>figure</em> – Matplolib figure object.</p></li>
-<li><p><em>axes</em> – Matplotlib axes object.</p></li>
+<li><p><em>figure</em> – <code class="docutils literal notranslate"><span class="pre">Matplolib</span></code> figure object.</p></li>
+<li><p><em>axes</em> – <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> axes object.</p></li>
 </ul>
 </p>
 </dd>
@@ -348,8 +355,8 @@ routine of <code class="docutils literal notranslate"><span class="pre">Matplotl
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">
-<li><p><em>figure</em> – Matplolib figure object.</p></li>
-<li><p><em>axes</em> – Matplotlib axes object.</p></li>
+<li><p><em>figure</em> – <code class="docutils literal notranslate"><span class="pre">Matplolib</span></code> figure object.</p></li>
+<li><p><em>axes</em> – <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> axes object.</p></li>
 </ul>
 </p>
 </dd>
@@ -358,7 +365,8 @@ routine of <code class="docutils literal notranslate"><span class="pre">Matplotl
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">collection</span></code> is not a valid Collection instance.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">merge</span></code> is not a valid Group instance.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If attribute <code class="docutils literal notranslate"><span class="pre">merged_scans</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">merge</span></code>.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If any attribute listed <code class="docutils literal notranslate"><span class="pre">merged_scans</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">collection</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If attribute <code class="docutils literal notranslate"><span class="pre">merged_scans</span></code> does not exist in any of the
+    groups in <code class="docutils literal notranslate"><span class="pre">collection</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
@@ -388,14 +396,14 @@ requested for any axis (see Example).</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">merge</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.plot</span> <span class="kn">import</span> <span class="n">fig_merge</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dnd_testfile.dat&#39;</span> <span class="p">,</span> <span class="s1">&#39;dnd_testfile2.dat&#39;</span><span class="p">,</span> <span class="s1">&#39;dnd_testfile3.dat&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dnd_testfile1.dat&#39;</span> <span class="p">,</span> <span class="s1">&#39;dnd_testfile2.dat&#39;</span><span class="p">,</span> <span class="s1">&#39;dnd_testfile3.dat&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
 <span class="gp">... </span>    <span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>  <span class="c1"># extracting mu and mu_ref scans</span>
 <span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group_mu</span><span class="p">)</span>         <span class="c1"># adding group to collection</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="p">,</span> <span class="n">merge</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig_merge</span><span class="p">(</span><span class="n">merge</span><span class="p">,</span> <span class="n">collection</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">leg</span>     <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leg</span>     <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -428,8 +436,8 @@ routine of <code class="docutils literal notranslate"><span class="pre">Matplotl
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">
-<li><p><em>figure</em> – Matplolib figure object.</p></li>
-<li><p><em>axes</em> – Matplotlib axes object.</p></li>
+<li><p><em>figure</em> – <code class="docutils literal notranslate"><span class="pre">Matplolib</span></code> figure object.</p></li>
+<li><p><em>axes</em> – <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> axes object.</p></li>
 </ul>
 </p>
 </dd>
@@ -458,7 +466,7 @@ normalized and flattened <span class="math notranslate nohighlight">\(\mu(E)\)</
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_dnd</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">pre_edge</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.plot</span> <span class="kn">import</span> <span class="n">fig_pre_edge</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>   <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile.dat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>   <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile1.dat&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group</span>   <span class="o">=</span> <span class="n">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pre</span>     <span class="o">=</span> <span class="n">pre_edge</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig_pre_edge</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
@@ -492,8 +500,8 @@ routine of <code class="docutils literal notranslate"><span class="pre">Matplotl
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">
-<li><p><em>figure</em> – Matplolib figure object.</p></li>
-<li><p><em>axes</em> – Matplotlib axes object.</p></li>
+<li><p><em>figure</em> – <code class="docutils literal notranslate"><span class="pre">Matplolib</span></code> figure object.</p></li>
+<li><p><em>axes</em> – <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> axes object.</p></li>
 </ul>
 </p>
 </dd>
@@ -505,9 +513,6 @@ routine of <code class="docutils literal notranslate"><span class="pre">Matplotl
 </ul>
 </dd>
 </dl>
-<p class="rubric">Notes</p>
-<p>The returned plot contains the original <span class="math notranslate nohighlight">\(\mu(E)\)</span> and the
-background function, as well as the resulting <span class="math notranslate nohighlight">\(\chi(k)\)</span>.</p>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
@@ -515,17 +520,20 @@ background function, as well as the resulting <span class="math notranslate nohi
 </dd>
 </dl>
 </div>
+<p class="rubric">Notes</p>
+<p>The returned plot contains the original <span class="math notranslate nohighlight">\(\mu(E)\)</span> and the
+background function, as well as the resulting <span class="math notranslate nohighlight">\(\chi(k)\)</span>.</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_dnd</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">pre_edge</span><span class="p">,</span> <span class="n">autobk</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.plot</span> <span class="kn">import</span> <span class="n">fig_autobk</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>   <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile.dat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>   <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile1.dat&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group</span>   <span class="o">=</span> <span class="n">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pre</span>     <span class="o">=</span> <span class="n">pre_edge</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bkg</span>     <span class="o">=</span> <span class="n">autobk</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig_autobk</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig_autobk</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">show_window</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -535,14 +543,133 @@ background function, as well as the resulting <span class="math notranslate nohi
 </div>
 </dd></dl>
 
-<span class="target" id="module-araucaria.plot.fig_lcf"></span><dl class="py function">
-<dt class="sig sig-object py" id="araucaria.plot.fig_lcf.fig_lcf">
-<span class="sig-prename descclassname"><span class="pre">araucaria.plot.fig_lcf.</span></span><span class="sig-name descname"><span class="pre">fig_lcf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_pars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fig_kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.plot.fig_lcf.fig_lcf" title="Permalink to this definition">¶</a></dt>
-<dd><p>Plots the results of linear combination fitting on a collecton.</p>
+<span class="target" id="module-araucaria.plot.fig_cluster"></span><dl class="py function">
+<dt class="sig sig-object py" id="araucaria.plot.fig_cluster.fig_cluster">
+<span class="sig-prename descclassname"><span class="pre">araucaria.plot.fig_cluster.</span></span><span class="sig-name descname"><span class="pre">fig_cluster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fig_kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.plot.fig_cluster.fig_cluster" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the dendrogram of a hierarchical clustering.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>group</strong> (<a class="reference internal" href="main/main_group.html#araucaria.main.group.FitGroup" title="araucaria.main.group.FitGroup"><code class="xref py py-class docutils literal notranslate"><span class="pre">FitGroup</span></code></a>) – Valid FitGroup from <code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code>.</p></li>
+<li><p><strong>out</strong> (<a class="reference internal" href="main/main_dataset.html#araucaria.main.dataset.Dataset" title="araucaria.main.dataset.Dataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a>) – Valid Dataset from <a class="reference internal" href="stats/stats_cluster.html#araucaria.stats.cluster.cluster" title="araucaria.stats.cluster.cluster"><code class="xref py py-func docutils literal notranslate"><span class="pre">cluster()</span></code></a>.</p></li>
+<li><p><strong>fontsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Font size for labels.
+The default is 8.</p></li>
+<li><p><strong>fig_kws</strong> – Additional arguments to pass to the <a class="reference external" href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure.subplots" title="(in Matplotlib v3.4.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subplots()</span></code></a>
+routine of <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="(in Matplotlib v3.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>figure</em> – <code class="docutils literal notranslate"><span class="pre">Matplolib</span></code> figure object.</p></li>
+<li><p><em>axes</em> – <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> axes object.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">out</span></code> is not a valid Dataset instance.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.9)"><strong>KeyError</strong></a> – If attributes from <a class="reference internal" href="stats/stats_cluster.html#araucaria.stats.cluster.cluster" title="araucaria.stats.cluster.cluster"><code class="xref py py-func docutils literal notranslate"><span class="pre">cluster()</span></code></a>
+    do not exist in <code class="docutils literal notranslate"><span class="pre">out</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="stats/stats_cluster.html#araucaria.stats.cluster.cluster" title="araucaria.stats.cluster.cluster"><code class="xref py py-func docutils literal notranslate"><span class="pre">cluster()</span></code></a></dt><dd><p>Performs hierarchical clustering on a collection.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">cluster</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_collection_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.plot</span> <span class="kn">import</span> <span class="n">fig_cluster</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>      <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;Fe_database.h5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">datgroup</span>   <span class="o">=</span> <span class="n">cluster</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">cluster_region</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">,</span> <span class="n">pre_edge_kws</span><span class="o">=</span><span class="p">{})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>    <span class="o">=</span> <span class="n">fig_cluster</span><span class="p">(</span><span class="n">datgroup</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//plot_module-5.py">Source code</a>, <a class="reference external" href=".//plot_module-5.png">png</a>, <a class="reference external" href=".//plot_module-5.hires.png">hires.png</a>, <a class="reference external" href=".//plot_module-5.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="_images/plot_module-5.png" class="plot-directive" src="_images/plot_module-5.png" />
+</div>
+</dd></dl>
+
+<span class="target" id="module-araucaria.plot.fig_pca"></span><dl class="py function">
+<dt class="sig sig-object py" id="araucaria.plot.fig_pca.fig_pca">
+<span class="sig-prename descclassname"><span class="pre">araucaria.plot.fig_pca.</span></span><span class="sig-name descname"><span class="pre">fig_pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fig_kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.plot.fig_pca.fig_pca" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the results of principal component analysis (PCA).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out</strong> (<a class="reference internal" href="stats/stats_pca.html#araucaria.stats.pca.PCAModel" title="araucaria.stats.pca.PCAModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCAModel</span></code></a>) – Valid PCAModel from <a class="reference internal" href="stats/stats_pca.html#araucaria.stats.pca.pca" title="araucaria.stats.pca.pca"><code class="xref py py-func docutils literal notranslate"><span class="pre">pca()</span></code></a>.</p></li>
+<li><p><strong>fontsize</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Font size for labels.
+The default is 8.</p></li>
+<li><p><strong>fig_kws</strong> – Additional arguments to pass to the <a class="reference external" href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure.subplots" title="(in Matplotlib v3.4.1)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">subplots()</span></code></a>
+routine of <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Tuple</span></code></a>[<a class="reference external" href="https://matplotlib.org/api/figure_api.html#matplotlib.figure.Figure" title="(in Matplotlib v3.4.1)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Figure</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Axes</span></code>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>figure</em> – <code class="docutils literal notranslate"><span class="pre">Matplolib</span></code> figure object.</p></li>
+<li><p><em>axes</em> – <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> axes object.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">out</span></code> is not a valid PCAModel instance</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.9)"><strong>KeyError</strong></a> – If attributes from <a class="reference internal" href="stats/stats_pca.html#araucaria.stats.pca.pca" title="araucaria.stats.pca.pca"><code class="xref py py-func docutils literal notranslate"><span class="pre">pca()</span></code></a>
+    do not exist in <code class="docutils literal notranslate"><span class="pre">out</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="stats/stats_pca.html#araucaria.stats.pca.pca" title="araucaria.stats.pca.pca"><code class="xref py py-func docutils literal notranslate"><span class="pre">pca()</span></code></a></dt><dd><p>Performs principal component analysis on a collection.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">pca</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_collection_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.plot</span> <span class="kn">import</span> <span class="n">fig_pca</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>      <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;Fe_database.h5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span>        <span class="o">=</span> <span class="n">pca</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">pca_region</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                 <span class="n">pca_range</span><span class="o">=</span><span class="p">[</span><span class="mi">7050</span><span class="p">,</span> <span class="mi">7300</span><span class="p">],</span> <span class="n">pre_edge_kws</span><span class="o">=</span><span class="p">{})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">fig_pca</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href=".//plot_module-6.py">Source code</a>, <a class="reference external" href=".//plot_module-6.png">png</a>, <a class="reference external" href=".//plot_module-6.hires.png">hires.png</a>, <a class="reference external" href=".//plot_module-6.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="_images/plot_module-6.png" class="plot-directive" src="_images/plot_module-6.png" />
+</div>
+</dd></dl>
+
+<span class="target" id="module-araucaria.plot.fig_lcf"></span><dl class="py function">
+<dt class="sig sig-object py" id="araucaria.plot.fig_lcf.fig_lcf">
+<span class="sig-prename descclassname"><span class="pre">araucaria.plot.fig_lcf.</span></span><span class="sig-name descname"><span class="pre">fig_lcf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">offset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">annotate</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontsize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fig_pars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">fig_kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.plot.fig_lcf.fig_lcf" title="Permalink to this definition">¶</a></dt>
+<dd><p>Plots the results of linear combination fit (LCF) on a collecton.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>out</strong> (<a class="reference internal" href="main/main_dataset.html#araucaria.main.dataset.Dataset" title="araucaria.main.dataset.Dataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a>) – Valid Dataset from <a class="reference internal" href="fit/fit_lcf.html#araucaria.fit.lcfit.lcf" title="araucaria.fit.lcfit.lcf"><code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code></a>.</p></li>
 <li><p><strong>offset</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Offset step value for plots.
 The default is 0.5.</p></li>
 <li><p><strong>annotate</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the plot should be annotated.
@@ -560,16 +687,16 @@ routine of <code class="docutils literal notranslate"><span class="pre">Matplotl
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><ul class="simple">
-<li><p><em>figure</em> – Matplolib figure object.</p></li>
-<li><p><em>axes</em> – Matplotlib axes object.</p></li>
+<li><p><em>figure</em> – <code class="docutils literal notranslate"><span class="pre">Matplolib</span></code> figure object.</p></li>
+<li><p><em>axes</em> – <code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> axes object.</p></li>
 </ul>
 </p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid FitGroup instance.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If attribute <code class="docutils literal notranslate"><span class="pre">min_pars</span></code>, <code class="docutils literal notranslate"><span class="pre">lcf_pars</span></code>, <code class="docutils literal notranslate"><span class="pre">scangroup</span></code>,
-    or <code class="docutils literal notranslate"><span class="pre">refgroups</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">out</span></code> is not a valid Dataset instance.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If attributes from <a class="reference internal" href="fit/fit_lcf.html#araucaria.fit.lcfit.lcf" title="araucaria.fit.lcfit.lcf"><code class="xref py py-func docutils literal notranslate"><span class="pre">lcf()</span></code></a>
+    do not exist in <code class="docutils literal notranslate"><span class="pre">out</span></code>.</p></li>
 </ul>
 </dd>
 </dl>

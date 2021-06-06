@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Group classes &mdash; araucaria 0.1.8b
+  <title>Group class &mdash; araucaria 0.1.9
  documentation</title>
   
 
@@ -101,8 +101,9 @@
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../main_module.html">Main module</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Group classes</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Group class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="main_collection.html">Collection class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main_dataset.html">Dataset class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="main_report.html">Report class</a></li>
 </ul>
 </li>
@@ -163,7 +164,7 @@
         
           <li><a href="../main_module.html">Main module</a> &raquo;</li>
         
-      <li>Group classes</li>
+      <li>Group class</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -207,7 +208,7 @@
 }
 </style>
 <div class="section" id="module-araucaria.main.group">
-<span id="group-classes"></span><h1>Group classes<a class="headerlink" href="#module-araucaria.main.group" title="Permalink to this headline">¶</a></h1>
+<span id="group-class"></span><h1>Group class<a class="headerlink" href="#module-araucaria.main.group" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="araucaria.main.group.Group">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">araucaria.main.group.</span></span><span class="sig-name descname"><span class="pre">Group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.group.Group" title="Permalink to this definition">¶</a></dt>
@@ -408,28 +409,6 @@ and should adhere to the following convention:</p>
 </div>
 </dd></dl>
 
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="araucaria.main.group.FitGroup">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">araucaria.main.group.</span></span><span class="sig-name descname"><span class="pre">FitGroup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.group.FitGroup" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fit Group storage class.</p>
-<p>This class stores a fitted XAFS dataset.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Name for the FitGroup. The default is None.</p></li>
-<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>) – Dictionary with content for the FitGroup.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">FitGroup</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">group</span> <span class="o">=</span> <span class="n">FitGroup</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">type</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
-<span class="go">&lt;class &#39;araucaria.main.group.FitGroup&#39;&gt;</span>
-</pre></div>
-</div>
 </dd></dl>
 
 </div>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Normalize module &mdash; araucaria 0.1.8b
+  <title>Normalize module &mdash; araucaria 0.1.9
  documentation</title>
   
 
@@ -298,7 +298,7 @@ different values of <cite>e0</cite> by this method.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_dnd</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">find_e0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile.dat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile1.dat&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting mu and mu_ref scans</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group</span> <span class="o">=</span> <span class="n">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># find e0 of reference scan</span>
@@ -368,6 +368,13 @@ The default is False.</p></li>
 <p class="admonition-title">Warning</p>
 <p>A warning will be raised if the degree of the post-edge polynomial is larger than 3.</p>
 </div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="../plot_module.html#araucaria.plot.fig_pre_edge.fig_pre_edge" title="araucaria.plot.fig_pre_edge.fig_pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_pre_edge()</span></code></a></dt><dd><p>Plot the results of pre-edge substraction and normalization.</p>
+</dd>
+</dl>
+</div>
 <p class="rubric">Notes</p>
 <p>Pre-edge substraction and normalization is performed as follows:</p>
 <blockquote>
@@ -392,7 +399,7 @@ included as attributes of <code class="docutils literal notranslate"><span class
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_dnd</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">pre_edge</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile.dat&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;dnd_testfile1.dat&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group</span> <span class="o">=</span> <span class="n">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>  <span class="c1"># extracting mu and mu_ref scans</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;e0&#39;</span><span class="p">,</span> <span class="s1">&#39;edge_step&#39;</span><span class="p">,</span> <span class="s1">&#39;pre_edge&#39;</span><span class="p">,</span> <span class="s1">&#39;post_edge&#39;</span><span class="p">,</span> <span class="s1">&#39;norm&#39;</span><span class="p">,</span> <span class="s1">&#39;flat&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pre</span>   <span class="o">=</span> <span class="n">pre_edge</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Report class &mdash; araucaria 0.1.8b
+  <title>Report class &mdash; araucaria 0.1.9
  documentation</title>
   
 
@@ -48,7 +48,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="IO module" href="../io_module.html" />
-    <link rel="prev" title="Collection class" href="main_collection.html" /> 
+    <link rel="prev" title="Dataset class" href="main_dataset.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -101,8 +101,9 @@
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="../main_module.html">Main module</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="main_group.html">Group classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main_group.html">Group class</a></li>
 <li class="toctree-l2"><a class="reference internal" href="main_collection.html">Collection class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="main_dataset.html">Dataset class</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Report class</a></li>
 </ul>
 </li>
@@ -206,8 +207,8 @@
     text-align: unset;
 }
 </style>
-<div class="section" id="report-class">
-<h1>Report class<a class="headerlink" href="#report-class" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-araucaria.main.report">
+<span id="report-class"></span><h1>Report class<a class="headerlink" href="#module-araucaria.main.report" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="araucaria.main.report.Report">
 <em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">araucaria.main.report.</span></span><span class="sig-name descname"><span class="pre">Report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'='</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.report.Report" title="Permalink to this definition">¶</a></dt>
@@ -327,16 +328,20 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.report.Report.get_cols">
-<span class="sig-name descname"><span class="pre">get_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.report.Report.get_cols" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">names=['all'],</span> <span class="pre">astype=&lt;class</span> <span class="pre">'object'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.report.Report.get_cols" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns columns of the report by name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List with names of columns to return.
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List with names of columns to return.
 The default is [‘all’], which returns the
-entire report content.</p>
+entire report content.</p></li>
+<li><p><strong>astype</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>) – Data type conversion for the returned array.
+The default is <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a>.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Array with the requested columns.</p>
@@ -359,20 +364,32 @@ entire report content.</p>
 <span class="go">[&#39;0.2176&#39; &#39;0.34438&#39; &#39;0.64225&#39;]</span>
 </pre></div>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># returning column as float</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">col</span> <span class="o">=</span> <span class="n">report</span><span class="o">.</span><span class="n">get_cols</span><span class="p">(</span><span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Value&#39;</span><span class="p">,],</span> <span class="n">astype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+<span class="go">[0.2176  0.34438 0.64225]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">col</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
+<span class="go">float64</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.report.Report.get_rows">
-<span class="sig-name descname"><span class="pre">get_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.report.Report.get_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">index=['all'],</span> <span class="pre">astype=&lt;class</span> <span class="pre">'object'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.report.Report.get_rows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns rows of the report by index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List with indexes of rows to return.
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List with indexes of rows to return.
 The default is [‘all’], which returns the
-entire report content.</p>
+entire report content.</p></li>
+<li><p><strong>astype</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>) – Data type conversion for the returned array.
+The default is <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a>.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">array</span></code></p>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Array with the requested rows.</p>
@@ -447,7 +464,7 @@ The default is True.</p></li>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="../io_module.html" class="btn btn-neutral float-right" title="IO module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="main_collection.html" class="btn btn-neutral float-left" title="Collection class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="main_dataset.html" class="btn btn-neutral float-left" title="Dataset class" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>
