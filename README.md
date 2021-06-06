@@ -1,7 +1,6 @@
 # araucaria
 
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-green.svg)](https://github.com/marcoalsina/araucaria/blob/master/LICENSE)
-
 ![GitHub branch checks state](https://img.shields.io/github/checks-status/marcoalsina/araucaria/master)
 
 
@@ -48,4 +47,4 @@ name@machine:~$ pip install .
 ## Documentation
 
 The official documentation of `araucaria` is available at 
-[https://marcoalsina.github.io/araucaria/build/html/index.html](https://marcoalsina.github.io/araucaria/build/html/index.html).
+[https://marcoalsina.github.io/araucarial](https://marcoalsina.github.io/araucaria).
