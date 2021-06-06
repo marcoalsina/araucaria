@@ -13,12 +13,19 @@ The :mod:`~araucaria.xas.xasutils` module offers the following XAFS utility func
      - Converts photo-electron energy to wavenumber.
    * - :func:`ktoe`
      - Converts photo-electron wavenumber to energy.
+   * - :func:`get_mapped_data`
+     - Returns mapped data for common domain in a collection.
 """
-
-from numpy import ndarray
 from scipy.constants import hbar  # reduced planck constant
 from scipy.constants import m_e   # electron mass
 from scipy.constants import eV    # electron volt in joules
+
+from typing import List, Tuple
+from numpy import ndarray, array, inf
+from scipy.interpolate import interp1d
+from .. import Group, Dataset, Collection
+from ..utils import check_objattrs, index_xrange
+from araucaria import xas
 
 # constants
 # 1e10 converts from 1/meter to 1/angstrom
@@ -90,3 +97,165 @@ def ktoe(k: ndarray) -> ndarray:
     380.99821
     """
     return k**2*k2e
+
+def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
+                    region: str='xanes', range: list=[-inf,inf], 
+                    kweight: int=2, pre_edge_kws: dict=None,
+                    autobk_kws: dict=None) -> Tuple[ndarray, ndarray]:
+    """Returns mapped data for common domain in a collection.
+
+    Parameters
+    ----------
+    collection
+        Collection with group datasets.
+    taglist
+        List with keys to filter groups based on their ``tags``
+        attributes in the Collection.
+        The default is ['all'].
+    region
+        XAS region to perform mapping. Accepted values are 'dxanes',
+        'xanes', 'exafs'. The default is 'xanes'.
+    range
+        Domain range in absolute values. Energy units are expected
+        for 'dxanes' or 'xanes', while wavenumber (k) units are expected 
+        for 'exafs'.
+        The default is [-:data:`~numpy.inf`, :data:`~numpy.inf`].
+    kweight
+        Exponent for weighting chi(k) by k^kweight.
+        Only valid for ``region='exafs'``.
+        The default is 2.
+    pre_edge_kws
+        Dictionary with parameters for :func:`~araucaria.xas.normalize.pre_edge`.
+        The default is None, indicating that this step will be skipped.
+    autobk_kws
+        Dictionary with parameters :func:`~araucaria.xas.autobk.autobk`.
+        Only valid for ``region='exafs'``.
+        The default is None, indicating that this step will be skipped.    
+
+    Returns
+    -------
+    :
+        1-D array containing the domain values for mapping.
+    :
+        Array containing in each column the mapped values of groups.
+    Raises
+    ------
+    TypeError
+        If ``collection`` is not a valid Collection instance.
+    AttributeError
+        If ``collection`` has no ``tags`` attribute.
+    AttributeError
+        If groups in ``collection`` have no ``energy`` or ``norm`` attribute.
+        Only verified if ``pre_edge_kws=None``.
+    AttributeError
+        If groups in ``collection`` have no ``k`` or ``chi`` attribute.
+        Only verified if ``autobk_kws=None`` and ``region='exafs'``.
+    KeyError
+        If items in ``taglist`` are not keys of the ``tags`` attribute.
+    ValueError
+        If ``region`` is not recognized.
+    ValueError
+        If ``range`` is outside the domain of a group in ``collection``.
+
+    Important
+    ---------
+    If given, ``pre_edge_kws`` or ``autobk_kws`` will only be used to 
+    compute the mapped array. Results from normalization and background removal 
+    will not be written in ``collection``.
+
+    Notes
+    -----
+    Exploratory data analysis requires data that is mapped to a common domain range.
+    However, datasets in a Collection are often mapped to different domain ranges.
+    
+    :func:`get_mapped_data` establishes a common domain based on the specified 
+    ``region`` and ``range`` variables,  and returns an  array with the interpolated 
+    values.
+
+    Example
+    -------
+    >>> from numpy import allclose
+    >>> from araucaria.testdata import get_testpath
+    >>> from araucaria.stats import get_mapped_data
+    >>> from araucaria.io import read_collection_hdf5
+    >>> fpath      = get_testpath('Fe_database.h5')
+    >>> collection = read_collection_hdf5(fpath)
+    >>> ener, data = get_mapped_data(collection, region='xanes', pre_edge_kws={})
+    >>> allclose(ener.shape[0], data.shape[0])
+    True
+    """
+    # checking class and attributes
+    check_objattrs(collection, Collection, attrlist=['tags'], exceptions=True)
+
+   # verifying region type
+    region_valid = ['dxanes', 'xanes','exafs']
+    if region not in region_valid:
+        raise ValueError('region %s not recognized.'% region)
+
+    # list of groupnames
+    listgroups = collection.get_names(taglist=taglist)
+
+    # report parameters for exafs mapping
+    # since k-range may not have been computed, the first group is used
+    if region == 'exafs':
+        dummy = collection.get_group(listgroups[0]).copy()
+        if pre_edge_kws is None:
+            pass
+        else:
+            dictpars = xas.pre_edge(dummy, update=True, **pre_edge_kws)
+        if autobk_kws is None:
+            pass
+        else:
+            dictpars = xas.autobk(dummy, update=True, **autobk_kws)
+        xvals = dummy.k
+    # report paramters for xanes mapping
+    else:
+        xvals = collection.get_mcer(taglist=taglist)
+
+    # computing xvalues
+    index = index_xrange(range, xvals)
+    xvals = xvals[index]
+
+    # data container
+    matrix = []
+
+    # reading and processing spectra
+    for i, name in enumerate(listgroups):
+        group = collection.get_group(name).copy()
+        if region == 'exafs':
+            # spectrum normalization
+            if pre_edge_kws is None:
+                pass
+            else:
+                dictpars = xas.pre_edge(group, update=True, **pre_edge_kws)
+            # background removal
+            if autobk_kws is None:
+                check_objattrs(group, Group, attrlist=['k', 'chi'], exceptions=True)
+            else:
+                dictpars = xas.autobk(group, update=True, **autobk_kws)
+            # spline interpolation
+            s = interp1d(group.k, group.k**kweight*group.chi, kind='cubic')
+        else:
+            # region == 'xanes' or 'dxanes'
+            if pre_edge_kws is None:
+                check_objattrs(group, Group, attrlist=['energy', 'norm'], exceptions=True)
+            else:
+                dictpars = xas.pre_edge(group, update=True, **pre_edge_kws)
+            # spline interpolation
+            if region =='xanes':
+                s = interp1d(group.energy, group.norm, kind='cubic')
+            else:
+                s = interp1d(group.energy, gradient(group.norm)/gradient(group.energy), kind='cubic')
+
+        # interpolating in the fit range
+        try:
+            yvals = s(xvals)
+        except:
+            raise ValueError('range is outside the domain of group %s' % name)
+        
+        # saving yvals in data
+        matrix.append(yvals)
+
+    # converting list to array
+    matrix = array(matrix).T
+    return (xvals, matrix)

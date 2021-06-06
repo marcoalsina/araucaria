@@ -15,7 +15,7 @@ class Collection(object):
     
     Parameters
     ----------
-    name
+    name : :class:`str`
         Name for the collection. The default is None.
     
     Attributes
@@ -111,25 +111,25 @@ class Collection(object):
 
     def rename_group(self, name: str, newname: str) -> None:
         """Renames a group in the Collection.
-        
+
         Parameters
         -----------
         name
             Name of group to modify.
         newname
             New name for the group.
-        
+
         Returns
         -------
         :
-        
+
         Raises
         ------
         AttributeError
             If ``name`` is not a group in the Collection.
         TypeError
             If ``newname`` is not a string.
-        
+
         Example
         -------
         >>> from araucaria import Collection, Group
@@ -150,18 +150,18 @@ class Collection(object):
             raise TypeError('newname is not a valid string.')
         else:
             self.__dict__[newname] = self.__dict__.pop(name)
-            
+
             # retrieving original tag key
             for key, val in self.tags.items():
                 if name in val:
                     tag = key
                     break
-            
+
             # replacing record name with new name
             self.tags[tag].remove(name)
             self.tags[tag].append(newname)
             self.tags[tag].sort()
-            
+
             # modifying name of group
             self.__dict__[newname].name = newname
 
@@ -182,7 +182,7 @@ class Collection(object):
         ------
         TypeError
             If ``name`` is not in a group in the Collection.
-        
+
         Example
         -------
         >>> from araucaria import Collection, Group
@@ -199,7 +199,7 @@ class Collection(object):
         """
         if not hasattr(self, name):
             raise AttributeError('collection has no %s group.' % name)
-        
+
         # retrieving original tag key
         for key, val in self.tags.items():
             if name in val:
@@ -210,23 +210,23 @@ class Collection(object):
 
     def retag(self, name: str, tag: str) -> None:
         """Modifies tag of a group in the Collection.
-        
+
         Parameters
         ----------
         name
             Name of group to modify.
         tag
             New tag for the group.
-        
+
         Returns
         -------
         :
-        
+
         Raises
         ------
         AttributeError
             If ``name`` is not a group in the Collection.
-        
+
         Example
         -------
         >>> from araucaria import Collection, Group
@@ -243,7 +243,7 @@ class Collection(object):
         """        
         # retrieving original tag key
         initag = self.get_tag(name)
-        
+
         if initag == tag:
             # nothing needs to be changed
             return
@@ -279,6 +279,11 @@ class Collection(object):
         ------
         TypeError
             If ``name`` is not in a group in the Collection.
+        
+        Important
+        ---------
+        Changes made to the group will be propagated to the Collection.
+        If you need a copy of the group use the :func:`copy` method.
 
         Example
         -------
@@ -436,8 +441,94 @@ class Collection(object):
         # removing group
         delattr(self, name)
 
+    def get_mcer(self, num: int=None, taglist: List[str]=['all']) -> ndarray:
+        """Returns the minimum common energy range for the Collection.
+
+        Parameters
+        ----------
+        num
+            Number of equally-spaced points for the energy array.
+        taglist
+            List with keys to filter groups in the Collection based 
+            on the ``tags`` attribute. The default is ['all'].
+
+        Returns
+        -------
+        :
+            Array containing the minimum common energy range
+
+        Raises
+        ------
+        AttributeError
+            If ``energy`` is not an attribute of the requested groups.
+        ValueError
+            If any item in ``taglist`` is not a key of the ``tags`` attribute.
+
+        Notes
+        -----
+        By default the returned array contains the lowest number of points
+        available in the minimum common energy range of the groups.
+        
+        Providing a value for ``num`` will return the desired number 
+        of equally-spaced points for the minimum common energy range.
+        
+        Examples
+        --------
+        >>> from numpy import linspace
+        >>> from araucaria import Collection, Group
+        >>> collection = Collection()
+        >>> g1   = Group(**{'name': 'group1', 'energy': linspace(1000, 2000, 6)})
+        >>> g2   = Group(**{'name': 'group2', 'energy': linspace(1500, 2500, 11)})
+        >>> tags = ('scan', 'ref')
+        >>> for i, group in enumerate([g1, g2]):
+        ...     collection.add_group(group, tag=tags[i])
+        >>> # mcer for tag 'scan'
+        >>> print(collection.get_mcer(taglist=['scan']))
+        [1000. 1200. 1400. 1600. 1800. 2000.]
+        >>> # mcer for tag 'ref'
+        >>> print(collection.get_mcer(taglist=['ref']))
+        [1500. 1600. 1700. 1800. 1900. 2000. 2100. 2200. 2300. 2400. 2500.]
+
+        >>> # mcer for 'all' groups
+        >>> print(collection.get_mcer())
+        [1600. 1800. 2000.]
+        >>> # mcer for 'all' groups explicitly
+        >>> print(collection.get_mcer(taglist=['scan', 'ref']))
+        [1600. 1800. 2000.]
+
+        >>> # mcer with given number of points
+        >>> print(collection.get_mcer(num=11))
+        [1500. 1550. 1600. 1650. 1700. 1750. 1800. 1850. 1900. 1950. 2000.]
+        """
+        # retrieving list with group names
+        names = self.get_names(taglist=taglist)
+        
+        for item in names:
+            if not hasattr(getattr(self, item), 'energy'):
+                raise AttributeError('%s has no energy attribute.' % item)
+
+        # finding the maximum of minimum energy values
+        emc_min = max([getattr(self, item).energy[0] for item in names])
+        # finding the minimum of maximum energy values
+        emc_max = min([getattr(self, item).energy[-1] for item in names])
+        
+        if num is not None:
+            # returning a formatted array
+            earray = linspace(emc_min, emc_max, num)
+        else:
+            # returning an array with the least ammount of points
+            for i, item in enumerate(names):
+                energy = getattr(self, item).energy
+                energy = energy[(energy >= emc_min ) & (energy <= emc_max)]
+                if i == 0:
+                    earray = energy
+                else:
+                    if len(energy) < len(earray):
+                        earray = energy
+        return earray
+
     def summary(self, taglist: List[str]=['all'], regex: str=None,
-                optional: Optional[list]=None, **pre_edge_kws:dict) -> Report:
+                optional: Optional[list]=None) -> Report:
         """Returns a summary report of groups in a Collection.
 
         Parameters
@@ -451,8 +542,6 @@ class Collection(object):
         optional
             List with optional parameters. See Notes for details.
             The default is None.
-        pre_edge_kws
-            Dictionary with arguments for :func:`~araucaria.xas.normalize.pre_edge`.
 
         Returns
         -------
@@ -473,10 +562,8 @@ class Collection(object):
         3. Group tag.
         4. Measurement mode.
         5. Numbers of scans.
-        6. Absorption edge step :math:`\Delta\mu(E_0)`, if ``optional=['edge_step']``.
-        7. Absorption threshold energy :math:`E_0`, if ``optional=['e0']``.
-        8. Merged scans, if ``optional=['merged_scans']``.
-        9. Optional parameters if they exist as attributes in the group.
+        6. Merged scans, if ``optional=['merged_scans']``.
+        7. Optional parameters if they exist as attributes in the group.
 
         A ``regex`` value can be used to filter group names based
         on a regular expression (reges). For valid regex syntax, please 
@@ -484,9 +571,6 @@ class Collection(object):
 
         The number of scans and names of merged files are retrieved 
         from the ``merged_scans`` attribute of ``collection``.
-
-        The absorption threshold and the edge step are retrieved by 
-        calling the function :func:`~araucaria.xas.normalize.pre_edge`.
 
         Optional parameters will be retrieved from the groups as 
         attributes. Currently only :class:`str`, :class:`float` or
@@ -501,30 +585,33 @@ class Collection(object):
         --------
         >>> from araucaria.testdata import get_testpath
         >>> from araucaria.io import read_collection_hdf5
-        >>> fpath      = get_testpath('test_database.h5')
+        >>> fpath      = get_testpath('Fe_database.h5')
         >>> collection = read_collection_hdf5(fpath)
         >>> # printing default summary
         >>> report = collection.summary()
         >>> report.show()
-        =================================
-        id  dataset       tag   mode  n  
-        =================================
-        1   dnd_testfile  scan  mu    3  
-        2   p65_testfile  scan  mu    2  
-        3   xmu_testfile  scan  mu    1  
-        =================================
-    
+        =======================================
+        id  dataset           tag   mode    n  
+        =======================================
+        1   FeIISO4_20K       scan  mu      5  
+        2   Fe_Foil           scan  mu_ref  5  
+        3   Ferrihydrite_20K  scan  mu      5  
+        4   Goethite_20K      scan  mu      5  
+        =======================================
+
         >>> # printing summary of dnd file with merged scans
-        >>> report = collection.summary(regex='dnd', optional=['e0', 'merged_scans'])
+        >>> report = collection.summary(regex='Goe', optional=['merged_scans'])
         >>> report.show()
-        ==========================================================
-        id  dataset       tag   mode  n  e0     merged_scans      
-        ==========================================================
-        1   dnd_testfile  scan  mu    3  29203  dnd_test_001.dat  
-                                                dnd_test_002.dat  
-                                                dnd_test_003.dat  
-        ==========================================================
-    
+        =============================================================
+        id  dataset       tag   mode  n  merged_scans                
+        =============================================================
+        1   Goethite_20K  scan  mu    5  20K_GOE_Fe_K_240.00000.xdi  
+                                         20K_GOE_Fe_K_240.00001.xdi  
+                                         20K_GOE_Fe_K_240.00002.xdi  
+                                         20K_GOE_Fe_K_240.00003.xdi  
+                                         20K_GOE_Fe_K_240.00004.xdi  
+        =============================================================
+ 
         >>> # printing custom summary
         >>> from araucaria.testdata import get_testpath
         >>> from araucaria import Collection
@@ -546,15 +633,8 @@ class Collection(object):
         1   xmu_testfile.xmu  scan  mu    1  Zn      25    
         ===================================================
         """
-        from ..xas import pre_edge
-
         # list with parameter names
         field_names = ['id', 'dataset', 'tag', 'mode', 'n']
-        opt_list    = ['merged_scans', 'edge_step', 'e0']
-
-        if pre_edge_kws == {}:
-            # default values
-            pre_edge_kws={'pre_range':[-150,-50], 'nnorm':3, 'post_range':[150, inf]}
 
         # verifying optional values
         if optional is not None:
@@ -603,10 +683,6 @@ class Collection(object):
                             extra_content = True
                         except:
                             field_vals.append('None')
-
-                    elif opt_val in opt_list[1:]:
-                        out = pre_edge(data, **pre_edge_kws)
-                        field_vals.append(out[opt_val])
                     else:
                         # custom optional field
                         try:
@@ -631,94 +707,7 @@ class Collection(object):
                     report.add_row(field_vals)
                 if i < (ncols - 1):
                     report.add_midrule()
-
         return report
-
-    def get_mcer(self, num: int=None, taglist: List[str]=['all']) -> ndarray:
-        """Returns the minimum common energy range for the Collection.
-
-        Parameters
-        ----------
-        num
-            Number of data points for the energy array.
-        taglist
-            List with keys to filter groups in the Collection based 
-            on the ``tags`` attribute. The default is ['all'].
-
-        Returns
-        -------
-        :
-            Array containing the minimum common energy range
-
-        Raises
-        ------
-        AttributeError
-            If ``energy`` is not an attribute of the requested groups.
-        ValueError
-            If any item in ``taglist`` is not a key of the ``tags`` attribute.
-
-        Notes
-        -----
-        By default the returned array contains the lowest number of points
-        available in the minimum common energy range of the groups.
-        
-        Providing a value for ``num`` will return the desired number 
-        of points for the minimum common energy range.
-        
-        Examples
-        --------
-        >>> from numpy import linspace
-        >>> from araucaria import Collection, Group
-        >>> collection = Collection()
-        >>> g1   = Group(**{'name': 'group1', 'energy': linspace(1000, 2000, 6)})
-        >>> g2   = Group(**{'name': 'group2', 'energy': linspace(1500, 2500, 11)})
-        >>> tags = ('scan', 'ref')
-        >>> for i, group in enumerate([g1, g2]):
-        ...     collection.add_group(group, tag=tags[i])
-        >>> # mcer for tag 'scan'
-        >>> print(collection.get_mcer(taglist=['scan']))
-        [1000. 1200. 1400. 1600. 1800. 2000.]
-        >>> # mcer for tag 'ref'
-        >>> print(collection.get_mcer(taglist=['ref']))
-        [1500. 1600. 1700. 1800. 1900. 2000. 2100. 2200. 2300. 2400. 2500.]
-        
-        >>> # mcer for 'all' groups
-        >>> print(collection.get_mcer())
-        [1600. 1800. 2000.]
-        >>> # mcer for 'all' groups explicitly
-        >>> print(collection.get_mcer(taglist=['scan', 'ref']))
-        [1600. 1800. 2000.]
-
-        >>> # mcer with given number of points
-        >>> print(collection.get_mcer(num=11))
-        [1500. 1550. 1600. 1650. 1700. 1750. 1800. 1850. 1900. 1950. 2000.]
-        """
-        # retrieving list with group names
-        names = self.get_names(taglist=taglist)
-        
-        for item in names:
-            if not hasattr(getattr(self, item), 'energy'):
-                raise AttributeError('%s has no energy attribute.' % item)
-
-        # finding the maximum of minimum energy values
-        emc_min = max([getattr(self, item).energy[0] for item in names])
-        # finding the minimum of maximum energy values
-        emc_max = min([getattr(self, item).energy[-1] for item in names])
-        
-        if num is not None:
-            # returning a formatted array
-            earray = linspace(emc_min, emc_max, num)
-        else:
-            # returning an array with the least ammount of points
-            for i, item in enumerate(names):
-                energy = getattr(self, item).energy
-                energy = energy[(energy >= emc_min ) & (energy <= emc_max)]
-                if i == 0:
-                    earray = energy
-                else:
-                    if len(energy) < len(earray):
-                        earray = energy
-        return earray
 
 if __name__ == '__main__':
     import doctest

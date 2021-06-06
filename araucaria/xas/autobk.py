@@ -44,7 +44,7 @@ def residuals(pars, knots=None, order=3, irbkg=1, nfft=2048,
 
 
 def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf], 
-           kweight: int=1, win: str='hanning',  dk: float=0.1, 
+           kweight: int=2, win: str='hanning',  dk: float=0.1, 
            nfft: int=2048, kstep: float=0.05, k_std: ndarray=None, 
            chi_std: ndarray=None, nclamp: int=2, clamp_lo: int=1, 
            clamp_hi: int=1, update: bool=False) -> dict:
@@ -61,7 +61,7 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
         Wavenumber range (:math:`Å^{-1}`).The default is [0, :data:`~numpy.inf`].
     kweight
         Exponent for weighting chi(k) by k**kweight.
-        The default is 1.
+        The default is 2.
     win
         Name of the the FT window type. The default is 'hanning'.
     dk
@@ -107,6 +107,10 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
     ``rbkg`` cannot be lower than 2 x :math:`\pi`/(kstep x nfft), which 
     corresponds to the grid resolution of :math:`\chi(R)`.
 
+    See also
+    --------
+    :func:`~araucaria.plot.fig_autobk.fig_autobk`: Plot the results of background removal.
+
     Notes
     -----
     The Autobk algorithm [1]_ approximates an EXAFS bakground signal by 
@@ -147,34 +151,18 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
     
     Example
     -------
-    .. plot::
-        :context: reset
-
-        >>> from araucaria.testdata import get_testpath
-        >>> from araucaria import Group
-        >>> from araucaria.io import read_dnd
-        >>> from araucaria.xas import pre_edge, autobk
-        >>> from araucaria.utils import check_objattrs
-        >>> fpath = get_testpath('dnd_testfile.dat')
-        >>> group = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
-        >>> pre   = pre_edge(group, update=True)
-        >>> attrs = ['bkg', 'chie', 'chi', 'k', 'autobk_pars']
-        >>> autbk = autobk(group, update=True)
-        >>> check_objattrs(group, Group, attrs)
-        [True, True, True, True, True]
-
-        >>> # plotting original and background spectrum
-        >>> import matplotlib.pyplot as plt
-        >>> from araucaria.plot import fig_xas_template
-        >>> fig, ax = fig_xas_template(panels='xe')
-        >>> line = ax[0].plot(group.energy, group.mu, label='mu')
-        >>> line = ax[0].plot(group.energy, group.bkg, label='bkg', zorder=-1)
-        >>> text = ax[0].set_ylabel('Absorbance')
-        >>> leg  = ax[0].legend()
-        >>> line = ax[1].plot(group.k, group.k**2 * group.chi, label='k^2 chi')
-        >>> leg  = ax[1].legend()
-        >>> fig.tight_layout()
-        >>> plt.show(block=False)
+    >>> from araucaria.testdata import get_testpath
+    >>> from araucaria import Group
+    >>> from araucaria.io import read_dnd
+    >>> from araucaria.xas import pre_edge, autobk
+    >>> from araucaria.utils import check_objattrs
+    >>> fpath = get_testpath('dnd_testfile1.dat')
+    >>> group = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
+    >>> pre   = pre_edge(group, update=True)
+    >>> attrs = ['bkg', 'chie', 'chi', 'k', 'autobk_pars']
+    >>> autbk = autobk(group, update=True)
+    >>> check_objattrs(group, Group, attrs)
+    [True, True, True, True, True]
     """
     # checking class and attributes
     check_objattrs(group, Group, attrlist=['e0', 'edge_step'], exceptions=True)

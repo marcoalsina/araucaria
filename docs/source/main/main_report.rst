@@ -1,4 +1,4 @@
 Report class
 ------------
-.. autoclass:: araucaria.main.report.Report
+.. automodule:: araucaria.main.report
    :members:

@@ -28,9 +28,9 @@ def fig_autobk(group: Group, show_window: bool=True,
     Returns
     -------
     figure
-        Matplolib figure object.
+        ``Matplolib`` figure object.
     axes
-        Matplotlib axes object. 
+        ``Matplotlib`` axes object. 
 
     Raises
     ------
@@ -40,14 +40,14 @@ def fig_autobk(group: Group, show_window: bool=True,
         If attributes from :func:`~araucaria.xas.autobk.autobk` 
         do not exist in ``group``.
 
+    See also 
+    --------
+	:func:`~araucaria.xas.autobk.autobk`: Background removal of a scan.
+
     Notes
     -----
     The returned plot contains the original :math:`\mu(E)` and the
     background function, as well as the resulting :math:`\chi(k)`.
-
-    See also 
-    --------
-	:func:`~araucaria.xas.autobk.autobk`: Background removal of a scan.
 
     Example
     -------
@@ -59,11 +59,11 @@ def fig_autobk(group: Group, show_window: bool=True,
         >>> from araucaria.io import read_dnd
         >>> from araucaria.xas import pre_edge, autobk
         >>> from araucaria.plot import fig_autobk
-        >>> fpath   = get_testpath('dnd_testfile.dat')
+        >>> fpath   = get_testpath('dnd_testfile1.dat')
         >>> group   = read_dnd(fpath, scan='mu')
         >>> pre     = pre_edge(group, update=True)
         >>> bkg     = autobk(group, update=True)
-        >>> fig, ax = fig_autobk(group)
+        >>> fig, ax = fig_autobk(group, show_window=False)
         >>> plt.show(block=False)
     """
     # checking class and attributes
@@ -77,6 +77,10 @@ def fig_autobk(group: Group, show_window: bool=True,
 
     # get kweight from autobk pars
     kw   = group.autobk_pars['kweight']
+    if fig_pars is None:
+        fig_pars = {'kweight' : kw}
+    else:
+        fig_pars['kweight'] = kw
 
     # plot absorbance data
     fig, axes = fig_xas_template(panels='xe', fig_pars=fig_pars, **fig_kws)
@@ -84,7 +88,13 @@ def fig_autobk(group: Group, show_window: bool=True,
     axes[0].plot(group.energy, group.bkg, label='bkg', zorder=-1)
 
     # plot exafs
-    axes[1].plot(group.k, group.chi*group.k**kw, label='$k^{%s}\chi(k)$'%kw)
+    if kw == 0:
+        label = '$\chi(k)$'
+    elif kw == 1:
+        label = '$k\chi(k)$'
+    else:
+        label = '$k^{%s}\chi(k)$'%kw
+    axes[1].plot(group.k, group.k**kw*group.chi, label=label)
 
     if show_window:
         win    = group.autobk_pars['win']
@@ -95,7 +105,6 @@ def fig_autobk(group: Group, show_window: bool=True,
 
     for ax in axes:
         ax.legend()
-
     return (fig, axes)
 
 if __name__ == '__main__':

@@ -83,11 +83,12 @@ def fig_xas_template(panels: str='xx', fig_pars: FigPars=None,
     panels
         Panels to plot. Valid arguments are as follows:
 
-        - 'd'   : derivative of XANES spectra.
+        - 'd'   : Derivative of XANES spectra.
         - 'x'   : XANES spectra.
         - 'e'   : EXAFS spectra.
         - 'r'   : FT-EXAFS spectra.
-        - 'q'   : reverse FT-EXAFS spectra.
+        - 'q'   : Reverse FT-EXAFS spectra.
+        - 'u'   : Unassigned pannel.
         - '/'   : Character for a new row.
 
         The characters can be concatenated to produce multiple panels and rows.
@@ -102,9 +103,9 @@ def fig_xas_template(panels: str='xx', fig_pars: FigPars=None,
     Returns
     -------
     figure
-        Matplolib figure object.
+        ``Matplolib`` figure object.
     axes
-        Matplotlib axes object.
+        ``Matplotlib`` axes object.
 
     Raises
     ------
@@ -128,7 +129,7 @@ def fig_xas_template(panels: str='xx', fig_pars: FigPars=None,
         >>> plt.show(block=False)
     """
     # valid axis type
-    valid_panel_types = ['d', 'x', 'e', 'r', 'q']
+    valid_panel_types = ['d', 'x', 'e', 'r', 'q', 'u']
     
     # axes methods
     met = ['set_xlim', 'set_ylim' , 'set_xticks', 'set_yticks']
@@ -215,8 +216,12 @@ def fig_xas_template(panels: str='xx', fig_pars: FigPars=None,
                 ax.set_ylabel(r'$\chi(q)$')
             else:
                 ax.set_ylabel(r'$q^%i\chi(q)$ [$\AA^{%i}$]' % (k, k) )
-            keys = ['q_range', 'chi_range', 'q_ticks', 'chi_ticks']        
+            keys = ['q_range', 'chi_range', 'q_ticks', 'chi_ticks']   
         
+        # unnasigned axis
+        elif panels[i] == 'u':
+            keys = []
+
         # setting attribute values for each pannel (axes)
         for j, key in enumerate(keys):
             if key in fig_pars:

@@ -163,12 +163,12 @@ class Group(object):
         >>> group_mu = read_xmu(fpath, scan='mu')
         >>> group_mu.get_mode()
         'mu'
-    
+
         >>> # extracting only fluo scan
         >>> group_fluo = read_xmu(fpath, scan='fluo', ref=False)
         >>> group_fluo.get_mode()
         'fluo'
-    
+
         >>> # extracting only mu_ref scan
         >>> group_ref = read_xmu(fpath, scan=None, ref=True)
         >>> group_ref.get_mode()
@@ -223,38 +223,6 @@ class Group(object):
             return True
         else:
             return False
-
-class FitGroup(object):
-    """Fit Group storage class.
-
-    This class stores a fitted XAFS dataset.
-    
-    Parameters
-    ----------
-    name
-        Name for the FitGroup. The default is None.
-    kwargs
-        Dictionary with content for the FitGroup.
-
-    Example
-    -------
-    >>> from araucaria import FitGroup
-    >>> group = FitGroup()
-    >>> type(group)
-    <class 'araucaria.main.group.FitGroup'>
-    """
-    def __init__(self, name: str=None, **kwargs:dict):
-        if name is None:
-            name  = hex(id(self))
-        self.name = name
-        for key, val in kwargs.items():
-            setattr(self, key, val)
-
-    def __repr__(self):
-        if self.name is not None:
-            return '<FitGroup %s>' % self.name
-        else:
-            return '<FitGroup>'
 
 if __name__ == '__main__':
     import doctest

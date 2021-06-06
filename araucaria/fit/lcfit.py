@@ -52,7 +52,7 @@ Where
 - :math:`kw`         : weighting coefficient for the photoelectron wavenumber.
 
 The :mod:`~araucaria.fit.lcf` module offers the following functions to perform linear 
-combintation fitting (LCF) on a XAFS scan:
+combintation fitting (LCF):
 
 .. list-table::
    :widths: auto
@@ -61,7 +61,7 @@ combintation fitting (LCF) on a XAFS scan:
    * - Function
      - Description
    * - :func:`lcf`
-     - Performs a LCF on a XAFS spectrum.
+     - Performs LCF on a XAFS spectrum.
    * - :func:`lcf_report`
      - Returns a formatted LCF report.
    * - :func:`sum_references`
@@ -75,15 +75,15 @@ from warnings import warn
 from numpy import ndarray, where, gradient, around, inf, sum
 from scipy.interpolate import interp1d
 from lmfit import Parameter, Parameters, minimize, fit_report
-from .. import Group, FitGroup, Collection
+from .. import Group, Dataset, Collection
 from ..xas import pre_edge, autobk
 from ..utils import check_objattrs, index_xrange
 
-def lcf(collection: Collection, fit_region: str='xanes', 
-        fit_range: list=[-inf,inf], method: str='leastsq',
-        scantag: str='scan', reftag: str='ref', 
-        kweight: int=2, sum_one: bool=True, 
-        pre_edge_kws: dict=None, autobk_kws: dict=None) -> FitGroup:
+def lcf(collection: Collection, fit_region: str='xanes',
+        fit_range: list=[-inf,inf], scantag: str='scan',
+        reftag: str='ref', kweight: int=2, sum_one: bool=True,
+        method: str='leastsq', pre_edge_kws: dict=None,
+        autobk_kws: dict=None) -> Dataset:
     """Performs linear combination fitting on a XAFS spectrum.
 
     Parameters
@@ -95,13 +95,10 @@ def lcf(collection: Collection, fit_region: str='xanes',
         XAFS region to perform the LCF. Accepted values are 'dxanes',
         'xanes', or 'exafs'. The default is 'xanes'.
     fit_range
-        LCF domain range in absolute values. Energy units are expected
-        for 'dxanes' or 'xanes', while k units are expected for 'exafs'.
+        Domain range in absolute values. Energy units are expected
+        for 'dxanes' or 'xanes', while wavenumber (k) units are expected 
+        for 'exafs'.
         The default is [-:data:`~numpy.inf`, :data:`~numpy.inf`].
-    method
-        Name of the fitting method to use.
-        For valid names please check the `minimize() <https://lmfit.github.io/lmfit-py/fitting.html#lmfit.minimizer.minimize>`_ 
-        documentation of ``lmfit``.
     scantag
         Key to filter the scan group in the Collection based on the ``tags`` 
         attribute. The default is 'scan'.
@@ -109,23 +106,29 @@ def lcf(collection: Collection, fit_region: str='xanes',
         Key to filter the reference groups in the Collection based on the ``tags`` 
         attribute. The default is 'scan'.
     kweight
-        Exponent for weighting chi(k) by k**kweight. Only valid for ``fit_region='exafs'``. 
+        Exponent for weighting chi(k) by k^kweight. Only valid for ``fit_region='exafs'``. 
         The default is 2.
     sum_one
         Conditional to force  sum of fractions to be one.
         The default is True.
+    method
+        Fitting method. Currently only local optimization methods are supported.
+        See the :func:`~lmfit.minimizer.minimize` function of ``lmfit`` for a list 
+        of valid methods.
+        The default is ``leastsq``.
     pre_edge_kws
         Dictionary with parameters for :func:`~araucaria.xas.normalize.pre_edge`.
         The default is None, indicating that this step will be skipped.
     autobk_kws
-        Dictionary with parameters :func:`~araucaria.xas.autobk.autobk`.
+        Dictionary with parameters for :func:`~araucaria.xas.autobk.autobk`.
+        Only valid for ``fit_region='exafs'``.
         The default is None, indicating that this step will be skipped.
     
     Returns
     -------
     :
-        Dictionary with the following arguments:
-        
+        Fit group with the following arguments:
+
         - ``energy``   : array with energy values. 
           Returned only if ``fit_region='xanes'`` or ``fit_region='dxanes'``.
         - ``k``        : array with wavenumber values. 
@@ -146,21 +149,26 @@ def lcf(collection: Collection, fit_region: str='xanes',
         If ``collection`` has no ``tags`` attribute.
     AttributeError
         If groups have no ``energy`` or ``norm`` attribute.
-        Only verified if ``pre_edge_kws=None`` and ``fit_region='xanes'``.
+        Only verified if ``pre_edge_kws=None``, and ``fit_region='dxanes'``
+        or ``fit_region='xanes'``.
     AttributeError
         If groups have no ``k`` or ``chi`` attribute.
         Only verified if ``autobk_kws=None`` and ``fit_region='exafs'``.
     KeyError
-        If ``scantag`` or ``refttag``  are not keys of the ``tags`` attribute.
+        If ``scantag`` or ``refttag`` are not keys of the ``tags`` attribute.
     ValueError
         If ``fit_region`` is not recognized.
+    ValueError
+        If ``fit_range`` is outside the doamin of a reference group.
 
-    Warnings
-    --------
+    Important
+    ---------
     If more than one group in ``collection`` is tagged with ``scantag``, 
     a warning will be raised and only the first group will be fitted.
     
-    Currently only local optimization methods are supported.
+    If given, ``pre_edge_kws`` or ``autobk_kws`` will only be used to 
+    perform LCF. Results from normalization and background removal 
+    will not be written in ``collection``.
 
     Notes
     -----
@@ -169,8 +177,10 @@ def lcf(collection: Collection, fit_region: str='xanes',
     
     - ``params``    : dictionary with the optimized parameters.
     - ``var_names`` : ordered list of parameter names used in optimization.
-    - ``covar``     : covariance matrix from minimization, with rows and columns corresponding to ``var_names``.
-    - ``init_vals`` : list of initial values for variable parameters using ``var_names``.
+    - ``covar``     : covariance matrix from minimization, with rows and columns 
+       corresponding to ``var_names``.
+    - ``init_vals`` : list of initial values for variable parameters using 
+      ``var_names``.
     - ``success``   : True if the fit succeeded, otherwise False.
     - ``nvarys``    : number of variables.
     - ``ndata``     : number of data points.
@@ -182,7 +192,7 @@ def lcf(collection: Collection, fit_region: str='xanes',
     -------
     >>> from numpy.random import seed, normal
     >>> from numpy import arange, sin, pi
-    >>> from araucaria import Group, FitGroup, Collection
+    >>> from araucaria import Group, Dataset, Collection
     >>> from araucaria.fit import lcf
     >>> from araucaria.utils import check_objattrs
     >>> seed(1234)  # seed of random values
@@ -203,7 +213,7 @@ def lcf(collection: Collection, fit_region: str='xanes',
     >>> # performing lcf
     >>> out = lcf(collection, fit_region='exafs', fit_range=[3,10], 
     ...           kweight=0, sum_one=False)
-    >>> check_objattrs(out, FitGroup, 
+    >>> check_objattrs(out, Dataset, 
     ... attrlist=['k', 'scangroup', 'refgroups', 
     ... 'scan', 'ref1', 'ref2', 'fit', 'min_pars', 'lcf_pars'])
     [True, True, True, True, True, True, True, True, True]
@@ -263,14 +273,14 @@ def lcf(collection: Collection, fit_region: str='xanes',
         else:
             lcf_pars['pre_edge_kws'] = pre_edge_kws
 
-    # container dictionary
+    # content dictionary
     content = {'scangroup': scangroup,
                'refgroups': refgroups}
     
     # reading and processing spectra
     for i, name in enumerate(groups):
         dname = 'scan' if i==0 else 'ref'+str(i)
-        group = collection.get_group(name)
+        group = collection.get_group(name).copy()
 
         if fit_region == 'exafs':
             # spectrum normalization
@@ -315,7 +325,10 @@ def lcf(collection: Collection, fit_region: str='xanes',
                 s = interp1d(group.energy, gradient(group.norm)/gradient(group.energy), kind='cubic')
             
             # interpolating in the fit range
-            yvals = s(xvals)
+            try:
+                yvals = s(xvals)
+            except:
+                raise ValueError('fit_range is outside the domain of group %s' % name)
         
         # saving yvals in the dictionary
         content[dname] = yvals
@@ -344,16 +357,16 @@ def lcf(collection: Collection, fit_region: str='xanes',
     content['lcf_pars'] = lcf_pars
     content['min_pars'] = min
     
-    lcf_group = FitGroup(**content)
-    return lcf_group
+    out = Dataset(**content)
+    return out
 
-def lcf_report(group: FitGroup) -> str:
+def lcf_report(out: Dataset) -> str:
     """Returns a formatted LCF Report to ``sys.stdout``.
     
     Parameters
     ----------
-    group
-        Valid FitGroup from :func:`lcf`.
+    out
+        Valid Dataset from :func:`lcf`.
     
     Returns
     -------
@@ -363,7 +376,7 @@ def lcf_report(group: FitGroup) -> str:
     Raises
     ------
     TypeError
-        If ``group`` is not a valid FitGroup instance.
+        If ``out`` is not a valid Dataset instance.
     AttributeError
         If attribute ``min_pars``, ``lcf_pars``, ``scangroup``,
         or ``refgroups`` does not exist in ``group``.
@@ -422,23 +435,23 @@ def lcf_report(group: FitGroup) -> str:
         amp1:  0.40034377 +/- 0.01195335 (2.99%) (init = 0.5)
         amp2:  0.59428689 +/- 0.01199230 (2.02%) (init = 0.5)
     """
-    check_objattrs(group, FitGroup, attrlist=['min_pars', 
+    check_objattrs(out, Dataset, attrlist=['min_pars', 
     'lcf_pars', 'scangroup', 'refgroups'], exceptions=True)
     
     header = '[[Parameters]]\n'
-    for key, val in group.lcf_pars.items():
+    for key, val in out.lcf_pars.items():
         header = header + '    {0:19}= {1}\n'\
         .format(key, val)
 
     header = header+'[[Groups]]\n'
-    for i, val in enumerate(([group.scangroup] + group.refgroups)):
+    for i, val in enumerate(([out.scangroup] + out.refgroups)):
         if i == 0:
             name = 'scan'
         else:
             name = 'ref%i' % i
         header = header + '    {0:19}= {1}\n'\
         .format(name, val)
-    return (header+fit_report(group.min_pars))
+    return (header+fit_report(out.min_pars))
 
 def sum_references(pars: Parameter, data: dict) -> ndarray:
     """Returns the sum of references weighted by amplitude coefficients.

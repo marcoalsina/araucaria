@@ -63,9 +63,9 @@ def read_hdf5(fpath: Path, name: str)-> Group:
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.utils import check_objattrs
     >>> from araucaria.io import read_hdf5
-    >>> fpath = get_testpath('test_database.h5')
-    >>> # extracting dnd_testfile
-    >>> group_mu = read_hdf5(fpath, name='dnd_testfile')
+    >>> fpath = get_testpath('Fe_database.h5')
+    >>> # extracting geothite scan
+    >>> group_mu = read_hdf5(fpath, name='Goethite_20K')
     >>> check_objattrs(group_mu, Group, attrlist=['mu', 'mu_ref'])
     [True, True]
     """    
@@ -132,18 +132,18 @@ def read_collection_hdf5(fpath: Path, names: list=['all'])-> Collection:
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.utils import check_objattrs
     >>> from araucaria.io import read_collection_hdf5
-    >>> fpath = get_testpath('test_database.h5')
+    >>> fpath = get_testpath('Fe_database.h5')
     >>> # reading database
     >>> collection = read_collection_hdf5(fpath)
     >>> check_objattrs(collection, Collection)
     True
     >>> collection.get_names()
-    ['dnd_testfile', 'p65_testfile', 'xmu_testfile']
+    ['FeIISO4_20K', 'Fe_Foil', 'Ferrihydrite_20K', 'Goethite_20K']
     
     >>> # read selected group datasets
-    >>> collection = read_collection_hdf5(fpath, names=['dnd_testfile'])
+    >>> collection = read_collection_hdf5(fpath, names=['Fe_Foil'])
     >>> collection.get_names()
-    ['dnd_testfile']
+    ['Fe_Foil']
     """    
     # verifying existence of path:
     if isfile(fpath):
@@ -353,18 +353,19 @@ def write_collection_hdf5(fpath: Path, collection: Collection,
     --------
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.io import read_collection_hdf5, write_collection_hdf5
-    >>> fpath = get_testpath('test_database.h5')
+    >>> fpath = get_testpath('Fe_database.h5')
     >>> # reading database
     >>> collection = read_collection_hdf5(fpath)
     >>> # saving collection in a new hdf5 file
     >>> write_collection_hdf5('database.h5', collection, replace=True)
-    dnd_testfile written to database.h5.
-    p65_testfile written to database.h5.
-    xmu_testfile written to database.h5.
-    
+    FeIISO4_20K written to database.h5.
+    Fe_Foil written to database.h5.
+    Ferrihydrite_20K written to database.h5.
+    Goethite_20K written to database.h5.
+
     >>> # write selected group dataset
-    >>> write_collection_hdf5('database.h5', collection, names=['xmu_testfile'], replace=True)
-    xmu_testfile written to database.h5.
+    >>> write_collection_hdf5('database.h5', collection, names=['Fe_Foil'], replace=True)
+    Fe_Foil written to database.h5.
     """    
     # testing that the group exists 
     if type(collection) is not Collection:
@@ -628,28 +629,31 @@ def summary_hdf5(fpath: Path, regex: str=None, optional: Optional[list]=None,
     --------
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.io import summary_hdf5
-    >>> fpath = get_testpath('test_database.h5')
+    >>> fpath = get_testpath('Fe_database.h5')
     >>> # printing default summary
     >>> report = summary_hdf5(fpath)
     >>> report.show()
-    ===========================
-    id  dataset       mode  n  
-    ===========================
-    1   dnd_testfile  mu    3  
-    2   p65_testfile  mu    2  
-    3   xmu_testfile  mu    1  
-    ===========================
+    =================================
+    id  dataset           mode    n  
+    =================================
+    1   FeIISO4_20K       mu      5  
+    2   Fe_Foil           mu_ref  5  
+    3   Ferrihydrite_20K  mu      5  
+    4   Goethite_20K      mu      5  
+    =================================
 
     >>> # printing summary with merged scans of Goethite groups
-    >>> report = summary_hdf5(fpath, regex='dnd', optional=['e0', 'merged_scans'])
+    >>> report = summary_hdf5(fpath, regex='Goe', optional=['merged_scans'])
     >>> report.show()
-    ====================================================
-    id  dataset       mode  n  e0     merged_scans      
-    ====================================================
-    1   dnd_testfile  mu    3  29203  dnd_test_001.dat  
-                                      dnd_test_002.dat  
-                                      dnd_test_003.dat  
-    ====================================================
+    =======================================================
+    id  dataset       mode  n  merged_scans                
+    =======================================================
+    1   Goethite_20K  mu    5  20K_GOE_Fe_K_240.00000.xdi  
+                               20K_GOE_Fe_K_240.00001.xdi  
+                               20K_GOE_Fe_K_240.00002.xdi  
+                               20K_GOE_Fe_K_240.00003.xdi  
+                               20K_GOE_Fe_K_240.00004.xdi  
+    =======================================================
 
     >>> # printing custom parameters
     >>> from araucaria.testdata import get_testpath

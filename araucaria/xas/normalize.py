@@ -102,7 +102,7 @@ def find_e0(group: Group, method: str='maxder', tol: float=1e-4,
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.io import read_dnd
     >>> from araucaria.xas import find_e0
-    >>> fpath = get_testpath('dnd_testfile.dat')
+    >>> fpath = get_testpath('dnd_testfile1.dat')
     >>> # extracting mu and mu_ref scans
     >>> group = read_dnd(fpath, scan='mu')
     >>> # find e0 of reference scan
@@ -246,11 +246,15 @@ def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
         If ``pre_range`` contains less than two energy points.
     ValueError
         If ``post_range`` contains less than two energy points.
-    
+
     Warning
     -------
     A warning will be raised if the degree of the post-edge polynomial is larger than 3.
-    
+
+    See also
+    --------
+    :func:`~araucaria.plot.fig_pre_edge.fig_pre_edge`: Plot the results of pre-edge substraction and normalization.
+
     Notes
     -----
     Pre-edge substraction and normalization is performed as follows:
@@ -277,7 +281,7 @@ def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
     >>> from araucaria.io import read_dnd
     >>> from araucaria.xas import pre_edge
     >>> from araucaria.utils import check_objattrs
-    >>> fpath = get_testpath('dnd_testfile.dat')
+    >>> fpath = get_testpath('dnd_testfile1.dat')
     >>> group = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
     >>> attrs = ['e0', 'edge_step', 'pre_edge', 'post_edge', 'norm', 'flat']
     >>> pre   = pre_edge(group, update=True)

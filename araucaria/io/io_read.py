@@ -170,7 +170,7 @@ def read_dnd(fpath: Path, scan: str='mu', ref: bool=True, tol: float=1e-4) -> Gr
     >>> from araucaria.io import read_dnd
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.utils import check_objattrs
-    >>> fpath = get_testpath('dnd_testfile.dat')
+    >>> fpath = get_testpath('dnd_testfile1.dat')
     >>> # extracting mu and mu_ref scans
     >>> group_mu = read_dnd(fpath, scan='mu')
     >>> check_objattrs(group_mu, Group, attrlist=['mu', 'mu_ref'])
