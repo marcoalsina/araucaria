@@ -1,14 +1,96 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-Principal component analysis is an exploratory data analysis technique
-aimed at reducing the dimensionality of a dataset while preserving most of
+Principal component analysis (PCA) is an exploratory data analysis technique
+that allows to reduce the dimensionality of a dataset while preserving most of
 its variance.
-Dimensionality reduccion is achieved by changing the basis of the dataset 
+Dimensionality reduction is achieved by changing the basis of the dataset 
 in such way that the new vectors constitute an orthonormal basis.
 
+Lets consider a given m by n matrix :math:`X` with m observations and n variables.
+Mathematically, PCA computes the eigenvalues and eigenvectors of the covariance
+matrix. If observations in :math:`X` are centered, then the covariance is proportional
+to :math:`X^TX`:
+
+.. math::
+
+    eigen(covX) \\propto eigen(X^TX)
+
+Following the eigen-decomposition, we can rewrite :math:`X^TX` as follows:
+
+.. math::
+
+    X^TX = WDW^{-1}
+
+Where
+
+- :math:`W`   : matrix of eigenvectors.
+- :math:`D`   : diagonal matrix of eigenvalues.
+
+Multiplying the matrix :math:`X` by the matrix of eigenvectors :math:`W` effectively
+projects the data into an orthonormal basis: :math:`T=XW` are known as the
+**principal components**.
+
+Although PCA can be computed directly as the eigenvalues of the covariance matrix, it
+is often convenient to compute it through singular value decomposition (SVD) of :math:`X`:
+
+.. math::
+
+    X = U \\Sigma V^*
+
+Where:
+
+- :math:`U`: m by n semi-unitary matrix of left-singular vectors.
+- :math:`\\Sigma`: n by n diagonal matrix of singular values.
+- :math:`V`: n by n semi-unitary matrix of right-singular vectors.
+
+It is straightforward to observe the following relation between the eigenvalue decomposition 
+of the covariance matrix and the SVD of :math:`X`:
+
+.. math::
+
+    X^TX &= V \\Sigma^T \\Sigma V^* = V \\hat{\\Sigma}^2 V^*
+    
+    X^TX &= WDW^{-1} = V \\hat{\\Sigma}^2 V^*
+
+Where
+
+- :math:`W` : matrix of eigenvectors.
+- :math:`\\hat{\\Sigma^2} = \\Sigma^T \\Sigma`: diagonal matrix of eigenvalues.
+
+Therefore, the principal components can be computed as :math:`T=XV=U \\Sigma`.
+
+Dimensionality reduction
+------------------------
+
+A truncated matrix :math:`T_L` can be computed by retaining the L-largest 
+singular values and their corresponding singular vectors:
+
+.. math::
+
+    T_L = U_L \\Sigma_L = X V_L
+
+After reduction a new vector :math:`x` of observations can be projected into 
+the principal components:
+
+.. math::
+
+    t = U_L^T x
+
+Target transformation
+---------------------
+
+These principal components can be transformed back into the original space:
+
+.. math::
+
+    \hat{x} = U_L t = U_L U_L^T x
+
+The latter is commonly referred to as **target transformation**.
+
 The :mod:`~araucaria.stats.pca` module offers the following 
-classes and functions to perform principal component analysis:
+classes and functions to perform principal component analysis based on the SVD
+approach:
 
 .. list-table::
    :widths: auto
@@ -27,13 +109,17 @@ classes and functions to perform principal component analysis:
      - Description
    * - :func:`pca`
      - Performs principal component analysis on a collection.
+   * - :func:`target_transform`
+     - Performs target transformation on a collection.
 """
 from __future__ import annotations
 from typing import Tuple, List
-from numpy import ndarray, inf, square, diag, sqrt, dot, cumsum, searchsorted
+from numpy import (ndarray, inf, square, diag, sqrt, 
+                   dot, cumsum, sum, divide, searchsorted)
 from scipy.linalg import svd
 from .. import Collection, Dataset
 from ..xas.xasutils import get_mapped_data
+from ..utils import check_objattrs
 
 class PCAModel(Dataset):
     """PCA Model class.
@@ -47,11 +133,11 @@ class PCAModel(Dataset):
         m by n array containing m observations and n variables.
     name : :class:`str`
         Name for the collection. The default is None.
-    ncomps : :class:`str`
-        Number of components to preserve from the PCA.
+    ncomps : :class:`int`
+        Number of components to preserve.
         Default is None, which will preserve all components.
     cumvar : :class:`float`
-        Cumulative variance to preserve from the PCA.
+        Cumulative variance to preserve.
         Default is None, which will preserve all components.
 
     Raises
@@ -68,15 +154,15 @@ class PCAModel(Dataset):
     matrix : :class:`~numpy.ndarray`
         Array containing m observations in rows and n variables in columns.
     U : :class:`~numpy.ndarray`
-        m by n array from the SVD.
+        m by n array with the semi-unitary matrix of left-singular vectors.
     s : :class:`~numpy.ndarray`
-        Array with the n eigenvalues from the SVD.
+        1-D array with the n singular values.
     Vh : :class:`~numpy.ndarray`
-        n by n array from the SVD
+        n by n array with the transpose of the semi-unitary matrix of right-singular vectors.
     variance : :class:`~numpy.ndarray`
         Array with the explained variance of each component.
     components: :class:`~numpy.ndarray`
-        Array with principal components.
+        m by n array with principal components.
 
     Important
     ---------
@@ -114,8 +200,8 @@ class PCAModel(Dataset):
         self.U, self.s, self.Vh = svd(matrix, full_matrices=False)
 
         # variance
-        var = square(self.s)
-        var = var/sum(var)
+        var  = square(self.s)
+        var  = var/sum(var)
         cvar = cumsum(var)
 
         # asserting ncomps and cumvar
@@ -139,35 +225,37 @@ class PCAModel(Dataset):
         else:
             return '<PCAModel>'
 
-    def inverse_transform(self, p):
+    def inverse_transform(self, p: ndarray) -> ndarray:
         """Converts principal components into observations.
+        
+        Parameters
+        ----------
+        p
+            Array with scores on principal components.
+        
+        Returns
+        -------
+        :
+            Array with observed values.
         """
         n = self.ncomps
-        return dot( self.U[:,:n], p.T )
+        return dot( self.U[:,:n], p)
 
-    def transform(self, obs):
+    def transform(self, obs: ndarray) -> ndarray:
         """Projects observations into principal components.
+        
+        Parameters
+        ----------
+        obs
+            Array with observed values.
+
+        Returns
+        -------
+        :
+            Array with scores on principal components.
         """
         n = self.ncomps
         return dot( self.U[:, :n].T, obs )
-
-    #def vars_to_pc(self, x):
-    #    """Projects an array of variables in the principal components.
-    #    """
-    #    n = self.ncomps
-    #    return self.s[:n] * dot( self.Vh[:n], x.T ).T
-
-    #def pc_to_vars(self, p):
-    #    """Converts an array of principal components into variables.
-    #    """
-    #    n = self.ncomps
-    #    sinv = array([ 1/s if s > self.s[0] * 1e-6  else 0 for s in self.s ])
-    #    return dot(self.Vh[:n].T, (sinv[:n] * p).T ).T
-    #def obs(self, x):
-    #    return self.inverse_transform(self.vars_to_pc(x))
-
-    #def vars(self, obs):
-    #    return self.pc_to_vars(self.transform(obs))
 
 def pca(collection: Collection, taglist: List[str]=['all'],
         pca_region: str='xanes', pca_range: list=[-inf,inf],
@@ -226,8 +314,8 @@ def pca(collection: Collection, taglist: List[str]=['all'],
 
     See also
     --------
-    :class:`PCAModel` : class to store results from PCA.
-    :func:`~araucaria.plot.fig_pca.fig_pca` : Plots the results of PCA.
+    :class:`PCAModel` : Class to store results from principal component analysis.
+    :func:`~araucaria.plot.fig_pca.fig_pca` : Plots the results of principal component analysis.
 
     Important
     ---------
@@ -239,8 +327,8 @@ def pca(collection: Collection, taglist: List[str]=['all'],
       perform PCA. Results from normalization and background removal 
       will not be written in ``collection``.
 
-    Examples
-    --------
+    Example
+    -------
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.io import read_collection_hdf5
     >>> from araucaria.stats import PCAModel, pca
@@ -260,7 +348,7 @@ def pca(collection: Collection, taglist: List[str]=['all'],
     matrix = matrix - matrix.mean(axis=0)
 
     # singular value decomposition
-    pca    = PCAModel(matrix, ncomps, cumvar)
+    pca    = PCAModel(matrix, ncomps=ncomps, cumvar=cumvar)
 
     # storing pca parameters
     pca_pars = {'pca_region': pca_region, 
@@ -290,8 +378,115 @@ def pca(collection: Collection, taglist: List[str]=['all'],
     setattr(pca,xvar, xvals)
     pca.groupnames = collection.get_names(taglist=taglist)
     pca.pca_pars   = pca_pars
-
     return pca
+
+def target_transform(model: PCAModel, collection: Collection,
+                     taglist: List[str]=['all']) -> Dataset:
+    """Performs target transformation on a collection.
+    
+    Parameters
+    ----------
+    model
+        PCA model to perform the projection and inverse transformation.
+    collection
+        Collection with the groups for target transformatino.
+    taglist
+        List with keys to filter groups based on their ``tags``
+        attributes in the Collection.
+        The default is ['all'].
+
+    Returns
+    -------
+    :
+        Dataset with the following attributes.
+
+        - ``groupnames``: list with names of transformed groups.
+        - ``energy``       : array with energy values. Returned only if
+          ``pca_region='xanes`` or ``pca_region=dxanes``.
+        - ``k``            : array with wavenumber values. Returned only if
+          ``pca_region='exafs'``.
+        - ``matrix``    : original array with mapped values.
+        - ``tmatrix``   : array with target transformed groups.
+        - ``scores``    : array with scores in the principal component basis.
+        - ``chi2``      : :math:`\\chi^2` values of the target tranformed groups.
+
+    Raises
+    ------
+    TypeError
+        If ``model`` is not a valid PCAModel instance
+    KeyError
+        If attributes from :func:`~araucaria.stats.pca.pca`
+        do not exist in ``model``.
+
+    See also
+    --------
+    :func:`~araucaria.stats.pca.pca` : Performs principal component analysis on a collection.
+    :func:`~araucaria.plot.fig_pca.fig_target_transform` : Plots the results of target transformation.
+
+    Example
+    -------
+    >>> from araucaria.testdata import get_testpath
+    >>> from araucaria import Dataset
+    >>> from araucaria.io import read_collection_hdf5
+    >>> from araucaria.stats import pca, target_transform
+    >>> from araucaria.utils import check_objattrs
+    >>> fpath      = get_testpath('Fe_database.h5')
+    >>> collection = read_collection_hdf5(fpath)
+    >>> model      = pca(collection, pca_region='xanes', cumvar=0.9, pre_edge_kws={})
+    >>> data       = target_transform(model, collection)
+    >>> attrs      = ['groupnames', 'tmatrix', 'chi2', 'scores', 'energy']
+    >>> check_objattrs(data, Dataset, attrs)
+    [True, True, True, True, True]
+    """
+    check_objattrs(model, PCAModel, attrlist=['groupnames', 'matrix', 
+                   'variance', 'pca_pars'], exceptions=True)
+
+    # retrieving pca parameters
+    pca_region   = model.pca_pars['pca_region']
+    pca_range    = model.pca_pars['pca_range']
+    try:
+        pre_edge_kws = model.pca_pars['pre_edge_kws']
+    except:
+        pre_edge_kws = None
+    try:
+        autobk_kws = model.pca_pars['autobk_kws']
+    except:
+        autobk_kws = None
+
+    # setting panels based on pca region
+    region = (model.pca_pars['pca_region'])
+    if region == 'exafs':
+        xvar    = 'k'
+        kweight = model.pca_pars['kweight']
+    else:
+        xvar    = 'energy'
+        kweight = 2
+
+    # mapped data for collection
+    domain = getattr(model, xvar)
+    xvals, matrix = get_mapped_data(collection, taglist=taglist, region=pca_region, 
+                                    domain=domain, kweight=kweight, 
+                                    pre_edge_kws=pre_edge_kws, autobk_kws=autobk_kws)
+
+    # centering data
+    matrix = matrix - matrix.mean(axis=0)
+
+    # target transformation
+    scores  = model.transform(matrix)
+    tmatrix = model.inverse_transform(scores)
+    chi2    = sum(divide( (matrix-tmatrix)**2, matrix), axis=0)
+
+    # storing target transformation results
+    content = {'groupnames' : collection.get_names(taglist=taglist),
+               xvar         : domain,
+               'matrix'     : matrix,
+               'tmatrix'    : tmatrix,
+               'scores'     : scores,
+               'chi2'       : chi2}
+
+    # dataset class
+    out = Dataset(**content)
+    return out
 
 if __name__ == '__main__':
     import doctest

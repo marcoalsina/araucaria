@@ -14,4 +14,4 @@ The following submodules are currently implemented:
 from .genesd import genesd, find_ri, find_critvals
 from .window import roll_med
 from .cluster import get_mapped_data, cluster
-from .pca import PCAModel, pca
+from .pca import PCAModel, pca, target_transform

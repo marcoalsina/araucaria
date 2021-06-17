@@ -22,6 +22,8 @@ plotting XAS spectra. The following functions are currently implemented:
      - Plots the dendrogram of a hierarchical clustering.
    * - :func:`~araucaria.plot.fig_pca.fig_pca`
      - Plots the results of principal component analysis.
+   * - :func:`~araucaria.plot.fig_pca.fig_target_transform`
+     - Plots the results of target transformation.
    * - :func:`~araucaria.plot.fig_lcf.fig_lcf`
      - Plot the results of a linear combination fit.
 """
@@ -32,4 +34,4 @@ from .fig_autobk import fig_autobk
 from .fig_lcf import fig_lcf
 from .fig_lsf import fig_lsf
 from .fig_cluster import fig_cluster
-from .fig_pca import fig_pca
+from .fig_pca import fig_pca, fig_target_transform

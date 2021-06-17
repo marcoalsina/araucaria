@@ -14,7 +14,7 @@ The :mod:`~araucaria.xas.xasutils` module offers the following XAFS utility func
    * - :func:`ktoe`
      - Converts photo-electron wavenumber to energy.
    * - :func:`get_mapped_data`
-     - Returns mapped data for common domain in a collection.
+     - Returns data mapped to a common domain in a collection.
 """
 from scipy.constants import hbar  # reduced planck constant
 from scipy.constants import m_e   # electron mass
@@ -99,10 +99,10 @@ def ktoe(k: ndarray) -> ndarray:
     return k**2*k2e
 
 def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
-                    region: str='xanes', range: list=[-inf,inf], 
-                    kweight: int=2, pre_edge_kws: dict=None,
-                    autobk_kws: dict=None) -> Tuple[ndarray, ndarray]:
-    """Returns mapped data for common domain in a collection.
+                    region: str='xanes', domain: ndarray=None,
+                    range: list=[-inf,inf], kweight: int=2, pre_edge_kws: dict=None, 
+                    autobk_kws: dict=None)-> Tuple[ndarray, ndarray]:
+    """Returns data mapped to a common domain in a collection.
 
     Parameters
     ----------
@@ -115,6 +115,10 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
     region
         XAS region to perform mapping. Accepted values are 'dxanes',
         'xanes', 'exafs'. The default is 'xanes'.
+    domain
+        Domain values to perform mapping. Energy units are expected
+        for 'dxanes' or 'xanes', while wavenumber (k) units are expected 
+        for 'exafs'. It overrides the ``range`` parameter.
     range
         Domain range in absolute values. Energy units are expected
         for 'dxanes' or 'xanes', while wavenumber (k) units are expected 
@@ -155,7 +159,8 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
     ValueError
         If ``region`` is not recognized.
     ValueError
-        If ``range`` is outside the domain of a group in ``collection``.
+        If ``range`` or ``domain`` is outside the domain of a group 
+        in ``collection``.
 
     Important
     ---------
@@ -165,12 +170,15 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
 
     Notes
     -----
-    Exploratory data analysis requires data that is mapped to a common domain range.
+    Exploratory data analysis assumes that data is mapped to a common domain range.
     However, datasets in a Collection are often mapped to different domain ranges.
-    
+
     :func:`get_mapped_data` establishes a common domain based on the specified 
     ``region`` and ``range`` variables,  and returns an  array with the interpolated 
     values.
+    
+    Alternatively, if a ``domain`` array is provided, :func:`get_mapped_data` returns
+    an array with the interpolated values.
 
     Example
     -------
@@ -182,6 +190,12 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
     >>> collection = read_collection_hdf5(fpath)
     >>> ener, data = get_mapped_data(collection, region='xanes', pre_edge_kws={})
     >>> allclose(ener.shape[0], data.shape[0])
+    True
+    
+    >>> # passing a domain argument
+    >>> nener, ndata = get_mapped_data(collection, region='xanes', 
+    ...                                domain=ener, pre_edge_kws={})
+    >>> allclose(data, ndata)
     True
     """
     # checking class and attributes
@@ -195,26 +209,32 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
     # list of groupnames
     listgroups = collection.get_names(taglist=taglist)
 
-    # report parameters for exafs mapping
-    # since k-range may not have been computed, the first group is used
-    if region == 'exafs':
-        dummy = collection.get_group(listgroups[0]).copy()
-        if pre_edge_kws is None:
-            pass
+    # checking if domain was provided as argument
+    # if not, it will be constructued.
+    if domain is None:
+        # report parameters for exafs mapping
+        # since k-range may not have been computed, the first group is used
+        if region == 'exafs':
+            dummy = collection.get_group(listgroups[0]).copy()
+            if pre_edge_kws is None:
+                pass
+            else:
+                dictpars = xas.pre_edge(dummy, update=True, **pre_edge_kws)
+            if autobk_kws is None:
+                pass
+            else:
+                dictpars = xas.autobk(dummy, update=True, **autobk_kws)
+            xvals = dummy.k
+        # report paramters for xanes mapping
         else:
-            dictpars = xas.pre_edge(dummy, update=True, **pre_edge_kws)
-        if autobk_kws is None:
-            pass
-        else:
-            dictpars = xas.autobk(dummy, update=True, **autobk_kws)
-        xvals = dummy.k
-    # report paramters for xanes mapping
-    else:
-        xvals = collection.get_mcer(taglist=taglist)
+            xvals = collection.get_mcer(taglist=taglist)
 
-    # computing xvalues
-    index = index_xrange(range, xvals)
-    xvals = xvals[index]
+        # computing xvalues
+        index = index_xrange(range, xvals)
+        xvals = xvals[index]
+
+    else:
+        xvals = domain
 
     # data container
     matrix = []
@@ -251,7 +271,7 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
         try:
             yvals = s(xvals)
         except:
-            raise ValueError('range is outside the domain of group %s' % name)
+            raise ValueError('requested domain is outside the values of group %s' % name)
         
         # saving yvals in data
         matrix.append(yvals)

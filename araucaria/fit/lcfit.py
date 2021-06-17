@@ -76,7 +76,7 @@ from numpy import ndarray, where, gradient, around, inf, sum
 from scipy.interpolate import interp1d
 from lmfit import Parameter, Parameters, minimize, fit_report
 from .. import Group, Dataset, Collection
-from ..xas import pre_edge, autobk
+from ..xas import pre_edge, autobk, get_mapped_data
 from ..utils import check_objattrs, index_xrange
 
 def lcf(collection: Collection, fit_region: str='xanes',
@@ -177,8 +177,7 @@ def lcf(collection: Collection, fit_region: str='xanes',
     
     - ``params``    : dictionary with the optimized parameters.
     - ``var_names`` : ordered list of parameter names used in optimization.
-    - ``covar``     : covariance matrix from minimization, with rows and columns 
-       corresponding to ``var_names``.
+    - ``covar``     : covariance matrix from minimization.
     - ``init_vals`` : list of initial values for variable parameters using 
       ``var_names``.
     - ``success``   : True if the fit succeeded, otherwise False.

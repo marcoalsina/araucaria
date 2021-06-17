@@ -133,7 +133,13 @@ def read_p65(fpath: Path, scan: str='mu', ref: bool=True, tol: float=1e-4) -> Gr
         warnings.warn("scan mode %s not recognized. Retrieving transmission measurement ('mu')." %scan)
         scan = 'mu'
 
-    usecols  = (0, chdict['i0'], chdict['it1'], chdict['it2'], chdict['if'])
+    if scan is None:
+        usecols = (0, chdict['it1'], chdict['it2'])
+    elif scan == 'mu':
+        usecols = (0, chdict['i0'], chdict['it1'], chdict['it2'])
+    else:
+        usecols = (0, chdict['i0'], chdict['if'], chdict['it1'], chdict['it2'])
+
     group     = read_rawfile(fpath, usecols, scan, ref, tol)
     return (group)
 
@@ -286,7 +292,7 @@ def read_file(fpath: Path, usecols: tuple, scan: str, ref: bool, tol: float) -> 
         Tuple with column indexes to extract from the file.
     scan
         Assigned mu(E), either transmission ('mu'), fluorescence ('fluo'),
-        or transmission reference ('mu_ref').
+        or None.
     ref
         Indicates if the transmission reference ('mu_ref') should also be returned.
     tol
@@ -312,12 +318,12 @@ def read_file(fpath: Path, usecols: tuple, scan: str, ref: bool, tol: float) -> 
     
     1. energy.
     2. transmission/fluorescence mu(E).
-    3. transmission reference.
+    3. transmission reference, if ´´mu_ref=True´´.
     
-    In only the ``mu_ref`` scan is requested , ``usecols`` should provide
+    If only ``mu_ref`` scan is requested , ``usecols`` should provide
     column indexes in the following order:
     
-    1. energy
+    1. energy.
     2. transmission reference.
     
     Warning
@@ -370,7 +376,7 @@ def read_rawfile(fpath: Path, usecols: tuple, scan: str, ref: bool, tol: float) 
         Tuple with columns indexes to extract from the file.
     scan
         Computed mu(E), either transmission ('mu'), fluorescence ('fluo'),
-        or transmission reference ('mu_ref').
+        or None.
     ref
         Indicates if the transmission reference ('mu_ref') should also be returned.
     tol
@@ -380,7 +386,7 @@ def read_rawfile(fpath: Path, usecols: tuple, scan: str, ref: bool, tol: float) 
     -------
     :
         Group containing the requested arrays.
-        
+    
     Raises
     ------
     IOError
@@ -393,17 +399,36 @@ def read_rawfile(fpath: Path, usecols: tuple, scan: str, ref: bool, tol: float) 
     Notes
     -----
     ``usecols`` should provide column indexes in the following order:
-    
+
     1. energy.
     2. monochromator intensity (I0).
     3. transmitted intensity (IT1).
-    4. transmitted intensity (IT2).
-    5. fluorescence intensity (IF).
-        
+    4. fluorescence intensity(IF), if ``scan='fluo'``.
+    5. transmitted intensity (IT2), if ``mu_ref=True``.
+
+    If ``mu_ref`` scan is not requested, ``usecols`` should provide
+    column indexes in the following order:
+
+    1. energy
+    2. monochromator intensity (I0).
+    3. transmitted intensity (IT1)/fluorescence intensity(IF).
+
+    If only ``mu_ref`` scan is requested , ``usecols`` should provide
+    column indexes in the following order:
+    
+    1. energy.
+    2. transmitted intensity (IT1).
+    3. transmitted intensity (IT2).
+    
     Warning
     -------
     The indexing order of ``usecols`` must be respected, 
     or the computed mu(E) will be incorrect.
+
+    Important
+    ---------
+    If ``scan='fluo'`` and ``mu_ref`` is requested, all column
+    indexes must be provided.
     """
     # testing that the file exists
     if not isfile(fpath):
@@ -416,38 +441,40 @@ def read_rawfile(fpath: Path, usecols: tuple, scan: str, ref: bool, tol: float) 
     # Testing if no scan was requested
     if scan is None and ref is False:
         raise ValueError('no scan requested from file.' )
-        
+
     raw    = loadtxt(fpath, usecols=usecols)
 
     # deleting duplicate energy points
     index  = index_dups(raw[:,0],tol)
-    raw    = delete(raw,index,0)
-    
-    # convention cols {'energy', 'i0', 'it1', 'it2', 'if'}
-    mu     = -log(raw[:,2]/raw[:,1])
-    fluo   = raw[:,4]/raw[:,1]    
-    mu_ref = -log(raw[:,3]/raw[:,2])
-    
+    raw    = delete(raw,index,0)    
+
     if ref is True:
         # returning the requested scan and the reference
         if scan == 'mu':
             # transmission
-            group = Group(**{'energy':raw[:,0], scan:mu, 'mu_ref':mu_ref})
+            mu     = -log(raw[:,2]/raw[:,1])
+            mu_ref = -log(raw[:,3]/raw[:,2])
+            group  = Group(**{'energy':raw[:,0], scan:mu, 'mu_ref':mu_ref})
         elif scan == 'fluo':
             # fluorescence
-            group = Group(**{'energy':raw[:,0], scan:fluo, 'mu_ref':mu_ref})
+            fluo   = raw[:,3]/raw[:,1]
+            mu_ref = -log(raw[:,4]/raw[:,2])
+            group  = Group(**{'energy':raw[:,0], scan:fluo, 'mu_ref':mu_ref})
         else:
             # no scan requested
+            mu_ref = -log(raw[:,2]/raw[:,1])
             group = Group(**{'energy':raw[:,0], 'mu_ref':mu_ref})
-    
+
     else:
         # returning only the requested scan
         if scan == 'mu':
             # transmission
-            group = Group(**{'energy':raw[:,0], scan:mu})
+            mu     = -log(raw[:,2]/raw[:,1])
+            group  = Group(**{'energy':raw[:,0], scan:mu})
         elif scan == 'fluo':
             # fluorescence
-            group = Group(**{'energy':raw[:,0], scan:fluo})
+            fluo   = raw[:,2]/raw[:,1]
+            group  = Group(**{'energy':raw[:,0], scan:fluo})
 
     # saving filename in group
     group.name = basename(fpath)
