@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>XASutils module &mdash; araucaria 0.1.9
+  <title>XASutils module &mdash; araucaria 0.1.10
  documentation</title>
   
 
@@ -228,7 +228,7 @@
 <td><p>Converts photo-electron wavenumber to energy.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#araucaria.xas.xasutils.get_mapped_data" title="araucaria.xas.xasutils.get_mapped_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_mapped_data()</span></code></a></p></td>
-<td><p>Returns mapped data for common domain in a collection.</p></td>
+<td><p>Returns data mapped to a common domain in a collection.</p></td>
 </tr>
 </tbody>
 </table>
@@ -303,8 +303,8 @@ approximation:</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.xas.xasutils.get_mapped_data">
-<span class="sig-prename descclassname"><span class="pre">araucaria.xas.xasutils.</span></span><span class="sig-name descname"><span class="pre">get_mapped_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xanes'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">inf,</span> <span class="pre">inf]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_edge_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autobk_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasutils.get_mapped_data" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns mapped data for common domain in a collection.</p>
+<span class="sig-prename descclassname"><span class="pre">araucaria.xas.xasutils.</span></span><span class="sig-name descname"><span class="pre">get_mapped_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xanes'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">domain</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">inf,</span> <span class="pre">inf]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.xasutils.get_mapped_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns data mapped to a common domain in a collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
@@ -314,6 +314,9 @@ attributes in the Collection.
 The default is [‘all’].</p></li>
 <li><p><strong>region</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – XAS region to perform mapping. Accepted values are ‘dxanes’,
 ‘xanes’, ‘exafs’. The default is ‘xanes’.</p></li>
+<li><p><strong>domain</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>]) – Domain values to perform mapping. Energy units are expected
+for ‘dxanes’ or ‘xanes’, while wavenumber (k) units are expected
+for ‘exafs’. It overrides the <code class="docutils literal notranslate"><span class="pre">range</span></code> parameter.</p></li>
 <li><p><strong>range</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – Domain range in absolute values. Energy units are expected
 for ‘dxanes’ or ‘xanes’, while wavenumber (k) units are expected
 for ‘exafs’.
@@ -321,11 +324,6 @@ The default is [-<a class="reference external" href="https://numpy.org/doc/stabl
 <li><p><strong>kweight</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Exponent for weighting chi(k) by k^kweight.
 Only valid for <code class="docutils literal notranslate"><span class="pre">region='exafs'</span></code>.
 The default is 2.</p></li>
-<li><p><strong>pre_edge_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Dictionary with parameters for <a class="reference internal" href="xas_normalize.html#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>.
-The default is None, indicating that this step will be skipped.</p></li>
-<li><p><strong>autobk_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Dictionary with parameters <a class="reference internal" href="xas_autobk.html#araucaria.xas.autobk.autobk" title="araucaria.xas.autobk.autobk"><code class="xref py py-func docutils literal notranslate"><span class="pre">autobk()</span></code></a>.
-Only valid for <code class="docutils literal notranslate"><span class="pre">region='exafs'</span></code>.
-The default is None, indicating that this step will be skipped.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -343,36 +341,42 @@ The default is None, indicating that this step will be skipped.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">collection</span></code> is not a valid Collection instance.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">collection</span></code> has no <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If groups in <code class="docutils literal notranslate"><span class="pre">collection</span></code> have no <code class="docutils literal notranslate"><span class="pre">energy</span></code> or <code class="docutils literal notranslate"><span class="pre">norm</span></code> attribute.
-    Only verified if <code class="docutils literal notranslate"><span class="pre">pre_edge_kws=None</span></code>.</p></li>
+    Only verified if <code class="docutils literal notranslate"><span class="pre">region=dxanes</span></code> or <code class="docutils literal notranslate"><span class="pre">region=xanes</span></code>.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If groups in <code class="docutils literal notranslate"><span class="pre">collection</span></code> have no <code class="docutils literal notranslate"><span class="pre">k</span></code> or <code class="docutils literal notranslate"><span class="pre">chi</span></code> attribute.
-    Only verified if <code class="docutils literal notranslate"><span class="pre">autobk_kws=None</span></code> and <code class="docutils literal notranslate"><span class="pre">region='exafs'</span></code>.</p></li>
+    Only verified if <code class="docutils literal notranslate"><span class="pre">region='exafs'</span></code>.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.9)"><strong>KeyError</strong></a> – If items in <code class="docutils literal notranslate"><span class="pre">taglist</span></code> are not keys of the <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute.</p></li>
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">region</span></code> is not recognized.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">range</span></code> is outside the domain of a group in <code class="docutils literal notranslate"><span class="pre">collection</span></code>.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">range</span></code> or <code class="docutils literal notranslate"><span class="pre">domain</span></code> is outside the domain of a group
+    in <code class="docutils literal notranslate"><span class="pre">collection</span></code>.</p></li>
 </ul>
 </dd>
 </dl>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>If given, <code class="docutils literal notranslate"><span class="pre">pre_edge_kws</span></code> or <code class="docutils literal notranslate"><span class="pre">autobk_kws</span></code> will only be used to
-compute the mapped array. Results from normalization and background removal
-will not be written in <code class="docutils literal notranslate"><span class="pre">collection</span></code>.</p>
-</div>
 <p class="rubric">Notes</p>
-<p>Exploratory data analysis requires data that is mapped to a common domain range.
+<p>Exploratory data analysis assumes that data is mapped to a common domain range.
 However, datasets in a Collection are often mapped to different domain ranges.</p>
 <p><a class="reference internal" href="#araucaria.xas.xasutils.get_mapped_data" title="araucaria.xas.xasutils.get_mapped_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_mapped_data()</span></code></a> establishes a common domain based on the specified
 <code class="docutils literal notranslate"><span class="pre">region</span></code> and <code class="docutils literal notranslate"><span class="pre">range</span></code> variables,  and returns an  array with the interpolated
 values.</p>
+<p>Alternatively, if a <code class="docutils literal notranslate"><span class="pre">domain</span></code> array is provided, <a class="reference internal" href="#araucaria.xas.xasutils.get_mapped_data" title="araucaria.xas.xasutils.get_mapped_data"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_mapped_data()</span></code></a> returns
+an array with the interpolated values.</p>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">allclose</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">pre_edge</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">get_mapped_data</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_collection_hdf5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>      <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;Fe_database.h5&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ener</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">get_mapped_data</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">,</span> <span class="n">pre_edge_kws</span><span class="o">=</span><span class="p">{})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pre_edge</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ener</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">get_mapped_data</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">allclose</span><span class="p">(</span><span class="n">ener</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># passing a domain argument</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nener</span><span class="p">,</span> <span class="n">ndata</span> <span class="o">=</span> <span class="n">get_mapped_data</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                               <span class="n">domain</span><span class="o">=</span><span class="n">ener</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allclose</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">ndata</span><span class="p">)</span>
 <span class="go">True</span>
 </pre></div>
 </div>

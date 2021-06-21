@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Part 2: Normalization and background removal &mdash; araucaria 0.1.9
+  <title>Part 2: Normalization and background removal &mdash; araucaria 0.1.10
  documentation</title>
   
 
@@ -99,16 +99,20 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="01.basics_data_processing.html">Part 1: Basics of data processing</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Part 2: Normalization and background removal</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#1.-Retrieving-the-database-filepath">1. Retrieving the database filepath</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#2.-Summarizing-a-HDF5-database">2. Summarizing a HDF5 database</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#3.-Spectrum-normalization">3. Spectrum normalization</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#4.-Background-removal">4. Background removal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#getting-started">Getting started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorials.html#tutorial-series">Tutorial series</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="01.basics_data_processing.html">Part 1: Basics of data processing</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Part 2: Normalization and background removal</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#1.-Retrieving-the-database-filepath">1. Retrieving the database filepath</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#2.-Summarizing-a-HDF5-database">2. Summarizing a HDF5 database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#3.-Spectrum-normalization">3. Spectrum normalization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#4.-Background-removal">4. Background removal</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="03.custom_report_figure.html">Part 3: Creating custom report and figures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04.linear_comb_fitting.html">Part 4: Linear combination fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03.custom_report_figure.html">Part 3: Creating custom report and figures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="04.linear_comb_fitting.html">Part 4: Linear combination fitting</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -536,7 +540,7 @@ True
 </div>
 <div class="section" id="2.-Summarizing-a-HDF5-database">
 <h2>2. Summarizing a HDF5 database<a class="headerlink" href="#2.-Summarizing-a-HDF5-database" title="Permalink to this headline">¶</a></h2>
-<p>It is illustrative to first summarize the data contained in an <code class="docutils literal notranslate"><span class="pre">HDF5</span></code> database. Here we use the <a class="reference internal" href="../io/io_hdf5.html#araucaria.io.io_hdf5.summary_hdf5"><span class="std std-ref">summary_hdf5()</span></a> function to produce a summary <a class="reference internal" href="../main/main_report.html#araucaria.main.report.Report"><span class="std std-ref">Report</span></a>.</p>
+<p>It is illustrative to first summarize the data contained in an <code class="docutils literal notranslate"><span class="pre">HDF5</span></code> database. Here we use the <a class="reference internal" href="../io/io_hdf5.html#araucaria.io.io_hdf5.summary_hdf5"><span class="std std-ref">summary_hdf5()</span></a> function to produce a summary report.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -651,7 +655,7 @@ e0 value is 7124.723 eV
 edge step is 0.1821 a.u.
 </pre></div></div>
 </div>
-<p>Finally we can plot the normalized spectrum with the <a class="reference internal" href="../plot_module.html#araucaria.plot.fig_pre_edge.fig_pre_edge"><span class="std std-ref">fig_pre_edge()</span></a> function. The function accepts a dictionary of parameters for the figure, so in this case we specify the figure size with the <code class="docutils literal notranslate"><span class="pre">figsize</span></code> key.</p>
+<p>Finally we can plot the normalized spectrum with the <a class="reference internal" href="../plot_module.html#araucaria.plot.fig_xas.fig_pre_edge"><span class="std std-ref">fig_pre_edge()</span></a> function. The function accepts a dictionary of parameters for the figure, so in this case we specify the figure size with the <code class="docutils literal notranslate"><span class="pre">figsize</span></code> key.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
@@ -701,7 +705,7 @@ edge step is 0.1821 a.u.
 </pre></div>
 </div>
 </div>
-<p>Once we have removed the background signal, we can visualize it along with the <span class="math notranslate nohighlight">\(\chi(k)\)</span> spectrum using the <a class="reference internal" href="../plot_module.html#araucaria.plot.fig_autobk.fig_autobk"><span class="std std-ref">fig_autobk()</span></a> function. The function also accepts a dictionary of parameters for the figure, provided in this case with the <code class="docutils literal notranslate"><span class="pre">fig_kws</span></code> dictionary.</p>
+<p>Once we have removed the background signal, we can visualize it along with the <span class="math notranslate nohighlight">\(\chi(k)\)</span> spectrum using the <a class="reference internal" href="../plot_module.html#araucaria.plot.fig_xas.fig_autobk"><span class="std std-ref">fig_autobk()</span></a> function. The function also accepts a dictionary of parameters for the figure, provided in this case with the <code class="docutils literal notranslate"><span class="pre">fig_kws</span></code> dictionary.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>

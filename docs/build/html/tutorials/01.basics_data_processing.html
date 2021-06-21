@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Part 1: Basics of data processing &mdash; araucaria 0.1.9
+  <title>Part 1: Basics of data processing &mdash; araucaria 0.1.10
  documentation</title>
   
 
@@ -50,7 +50,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Part 2: Normalization and background removal" href="02.background_removal.html" />
-    <link rel="prev" title="Tutorials" href="../tutorials.html" /> 
+    <link rel="prev" title="1. Reading IXAS spectra" href="01.basic/01.reading_ixas_spectra.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -99,19 +99,23 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Part 1: Basics of data processing</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#1.-Checking-version">1. Checking version</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#2.-Retrieving-filepaths">2. Retrieving filepaths</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#3.-Reading-and-aligning-scans">3. Reading and aligning scans</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#4.-Merging-scans">4. Merging scans</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#5.-Calibrating-the-merged-scan">5. Calibrating the merged scan</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#6.-Plotting-merge-results">6. Plotting merge results</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#7.-Saving-datasets-in-an-HDF5-database">7. Saving datasets in an HDF5 database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#getting-started">Getting started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorials.html#tutorial-series">Tutorial series</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Part 1: Basics of data processing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#1.-Checking-version">1. Checking version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#2.-Retrieving-filepaths">2. Retrieving filepaths</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#3.-Reading-and-aligning-scans">3. Reading and aligning scans</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#4.-Merging-scans">4. Merging scans</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#5.-Calibrating-the-merged-scan">5. Calibrating the merged scan</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#6.-Plotting-merge-results">6. Plotting merge results</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#7.-Saving-datasets-in-an-HDF5-database">7. Saving datasets in an HDF5 database</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="02.background_removal.html">Part 2: Normalization and background removal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03.custom_report_figure.html">Part 3: Creating custom report and figures</a></li>
-<li class="toctree-l2"><a class="reference internal" href="04.linear_comb_fitting.html">Part 4: Linear combination fitting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="02.background_removal.html">Part 2: Normalization and background removal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03.custom_report_figure.html">Part 3: Creating custom report and figures</a></li>
+<li class="toctree-l3"><a class="reference internal" href="04.linear_comb_fitting.html">Part 4: Linear combination fitting</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -555,7 +559,8 @@ True
 <ul class="simple">
 <li><p>For convenience we will read both the transmission and reference channels of each scan file and store it as a <a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group"><span class="std std-ref">Group</span></a>.</p></li>
 <li><p>A single scan (arbitrarily selected) will be used for alignment of the remaining spectra.</p></li>
-<li><p>Aligned spectra will be stored together in a <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a> and a summary report is printed.</p></li>
+<li><p>Aligned spectra will be stored together in a <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a>.</p></li>
+<li><p>A <a class="reference internal" href="../main/main_report.html#araucaria.main.report.Report"><span class="std std-ref">Report</span></a> is created and its contents printed to <code class="docutils literal notranslate"><span class="pre">stdout</span></code>.</p></li>
 </ul>
 <p>Alignment will be performed with the <a class="reference internal" href="../xas/xas_merge.html#araucaria.xas.merge.align"><span class="std std-ref">align()</span></a> function. Note that here we explicitly establish an alignment window of -100 eV to 100 eV around the absorption threshold (<span class="math notranslate nohighlight">\(E_0\)</span>) to perform the alignment.</p>
 <div class="admonition note">
@@ -605,11 +610,11 @@ id  dataset                     tag    mode  n  e_offset
 ===========================================================
 </pre></div></div>
 </div>
-<p>Note that each <a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group"><span class="std std-ref">Group</span></a> dataset is added to the <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a> with the <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection.add_group"><span class="std std-ref">add_group()</span></a> method. This method also allows specification of a <code class="docutils literal notranslate"><span class="pre">tag</span></code> attribute, which is useful to perform joint operations such as merging spectra. Note that the <code class="docutils literal notranslate"><span class="pre">tag</span></code> attributes are included in the summary report.</p>
+<p>Note that each <a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group"><span class="std std-ref">Group</span></a> dataset is added to the <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a> with the <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection.add_group"><span class="std std-ref">add_group()</span></a> method. This method also allows specification of a <code class="docutils literal notranslate"><span class="pre">tag</span></code> attribute, which is useful to perform joint operations such as merging spectra. Note that <code class="docutils literal notranslate"><span class="pre">tag</span></code> attributes are included in the summary report.</p>
 <p>Note also that the energy offsets after alignment are negligible, so in this case we could merge the scans without alignment.</p>
 <div class="admonition note">
 <p class="admonition-title fa fa-exclamation-circle"><strong>Note</strong></p>
-<p>If no <code class="docutils literal notranslate"><span class="pre">tag</span></code> is specified during <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection.add_group"><span class="std std-ref">add_group()</span></a>, by default it will be assigned <code class="docutils literal notranslate"><span class="pre">tag='scan'</span></code>.</p>
+<p>If no <code class="docutils literal notranslate"><span class="pre">tag</span></code> is specified during <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection.add_group"><span class="std std-ref">add_group()</span></a>, by default the added group will be assigned with <code class="docutils literal notranslate"><span class="pre">tag='scan'</span></code>.</p>
 </div>
 </div>
 <div class="section" id="4.-Merging-scans">
@@ -721,10 +726,10 @@ True
 </div>
 <div class="section" id="6.-Plotting-merge-results">
 <h2>6. Plotting merge results<a class="headerlink" href="#6.-Plotting-merge-results" title="Permalink to this headline">¶</a></h2>
-<p>Once the merge is complete, we can provide the merged group and the original collection to the <a class="reference internal" href="../plot_module.html#araucaria.plot.fig_merge.fig_merge"><span class="std std-ref">fig_merge()</span></a> function in order to visualize the results. The function accepts a dictionary to set the parameters for the XAFS figures (<code class="docutils literal notranslate"><span class="pre">fig_pars</span></code>) as well as a dictionary to set general figure parameters (<code class="docutils literal notranslate"><span class="pre">fig_kws</span></code>).</p>
+<p>Once the merge is complete, we can provide the merged group and the original collection to the <a class="reference internal" href="../plot_module.html#araucaria.plot.fig_xas.fig_merge"><span class="std std-ref">fig_merge()</span></a> function in order to visualize the results. The function accepts a dictionary to set the parameters for the XAFS figures (<code class="docutils literal notranslate"><span class="pre">fig_pars</span></code>) as well as a dictionary to set general figure parameters (<code class="docutils literal notranslate"><span class="pre">fig_kws</span></code>).</p>
 <div class="admonition warning">
 <p class="admonition-title fa fa-exclamation-circle"><strong>Warning</strong></p>
-<p><a class="reference internal" href="../plot_module.html#araucaria.plot.fig_merge.fig_merge"><span class="std std-ref">fig_merge()</span></a> also accepts dictionaries to set the normalization and background removal procedures. However, note that these dictionaries are for visualization and comparison purposes only, and have no effect on the merge itself.</p>
+<p><a class="reference internal" href="../plot_module.html#araucaria.plot.fig_xas.fig_merge"><span class="std std-ref">fig_merge()</span></a> also accepts dictionaries to set the normalization and background removal procedures. However, note that these dictionaries are for visualization and comparison purposes only, and have no effect on the merge itself.</p>
 </div>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -848,7 +853,7 @@ id  dataset           tag   mode    n  merged_scans
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
         <a href="02.background_removal.html" class="btn btn-neutral float-right" title="Part 2: Normalization and background removal" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../tutorials.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="01.basic/01.reading_ixas_spectra.html" class="btn btn-neutral float-left" title="1. Reading IXAS spectra" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 
   <hr/>

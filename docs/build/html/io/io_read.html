@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>IO read module &mdash; araucaria 0.1.9
+  <title>IO read module &mdash; araucaria 0.1.10
  documentation</title>
   
 
@@ -465,10 +465,10 @@ The default is True.</p></li>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to file.</p></li>
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/http.client.html#http.client.HTTPResponse" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPResponse</span></code></a>]) – Path to file, or output from url open request.</p></li>
 <li><p><strong>usecols</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – Tuple with column indexes to extract from the file.</p></li>
 <li><p><strong>scan</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Assigned mu(E), either transmission (‘mu’), fluorescence (‘fluo’),
-or transmission reference (‘mu_ref’).</p></li>
+or None.</p></li>
 <li><p><strong>ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the transmission reference (‘mu_ref’) should also be returned.</p></li>
 <li><p><strong>tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Tolerance in energy units to remove duplicate values.</p></li>
 </ul>
@@ -492,12 +492,12 @@ or transmission reference (‘mu_ref’).</p></li>
 <ol class="arabic simple">
 <li><p>energy.</p></li>
 <li><p>transmission/fluorescence mu(E).</p></li>
-<li><p>transmission reference.</p></li>
+<li><p>transmission reference, if ´´mu_ref=True´´.</p></li>
 </ol>
-<p>In only the <code class="docutils literal notranslate"><span class="pre">mu_ref</span></code> scan is requested , <code class="docutils literal notranslate"><span class="pre">usecols</span></code> should provide
+<p>If only <code class="docutils literal notranslate"><span class="pre">mu_ref</span></code> scan is requested , <code class="docutils literal notranslate"><span class="pre">usecols</span></code> should provide
 column indexes in the following order:</p>
 <ol class="arabic simple">
-<li><p>energy</p></li>
+<li><p>energy.</p></li>
 <li><p>transmission reference.</p></li>
 </ol>
 <div class="admonition warning">
@@ -514,10 +514,10 @@ or the assigned mu(E) will be incorrect.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to file.</p></li>
+<li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/http.client.html#http.client.HTTPResponse" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">HTTPResponse</span></code></a>]) – Path to file, or output from url open request.</p></li>
 <li><p><strong>usecols</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">tuple</span></code></a>) – Tuple with columns indexes to extract from the file.</p></li>
 <li><p><strong>scan</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Computed mu(E), either transmission (‘mu’), fluorescence (‘fluo’),
-or transmission reference (‘mu_ref’).</p></li>
+or None.</p></li>
 <li><p><strong>ref</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the transmission reference (‘mu_ref’) should also be returned.</p></li>
 <li><p><strong>tol</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Tolerance value to remove duplicate energy values.</p></li>
 </ul>
@@ -542,13 +542,32 @@ or transmission reference (‘mu_ref’).</p></li>
 <li><p>energy.</p></li>
 <li><p>monochromator intensity (I0).</p></li>
 <li><p>transmitted intensity (IT1).</p></li>
+<li><p>fluorescence intensity(IF), if <code class="docutils literal notranslate"><span class="pre">scan='fluo'</span></code>.</p></li>
+<li><p>transmitted intensity (IT2), if <code class="docutils literal notranslate"><span class="pre">mu_ref=True</span></code>.</p></li>
+</ol>
+<p>If <code class="docutils literal notranslate"><span class="pre">mu_ref</span></code> scan is not requested, <code class="docutils literal notranslate"><span class="pre">usecols</span></code> should provide
+column indexes in the following order:</p>
+<ol class="arabic simple">
+<li><p>energy</p></li>
+<li><p>monochromator intensity (I0).</p></li>
+<li><p>transmitted intensity (IT1)/fluorescence intensity(IF).</p></li>
+</ol>
+<p>If only <code class="docutils literal notranslate"><span class="pre">mu_ref</span></code> scan is requested , <code class="docutils literal notranslate"><span class="pre">usecols</span></code> should provide
+column indexes in the following order:</p>
+<ol class="arabic simple">
+<li><p>energy.</p></li>
+<li><p>transmitted intensity (IT1).</p></li>
 <li><p>transmitted intensity (IT2).</p></li>
-<li><p>fluorescence intensity (IF).</p></li>
 </ol>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The indexing order of <code class="docutils literal notranslate"><span class="pre">usecols</span></code> must be respected,
 or the computed mu(E) will be incorrect.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">scan='fluo'</span></code> and <code class="docutils literal notranslate"><span class="pre">mu_ref</span></code> is requested, all column
+indexes must be provided.</p>
 </div>
 </dd></dl>
 

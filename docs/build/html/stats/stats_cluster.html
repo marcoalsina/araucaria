@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Cluster module &mdash; araucaria 0.1.9
+  <title>Cluster module &mdash; araucaria 0.1.10
  documentation</title>
   
 
@@ -225,7 +225,7 @@ functions to perform clustering:</p>
 </table>
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.stats.cluster.cluster">
-<span class="sig-prename descclassname"><span class="pre">araucaria.stats.cluster.</span></span><span class="sig-name descname"><span class="pre">cluster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xanes'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">inf,</span> <span class="pre">inf]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'single'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'euclidean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_edge_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autobk_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.cluster.cluster" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.stats.cluster.</span></span><span class="sig-name descname"><span class="pre">cluster</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xanes'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cluster_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">inf,</span> <span class="pre">inf]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'single'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metric</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'euclidean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.cluster.cluster" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs hierarchical clustering on a collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -241,20 +241,15 @@ for ‘dxanes’ or ‘xanes’, while wavenumber (k) units are expected
 for ‘exafs’.
 The default is [-<a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>, <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.inf" title="(in NumPy v1.20)"><code class="xref py py-data docutils literal notranslate"><span class="pre">inf</span></code></a>].</p></li>
 <li><p><strong>method</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Likage method to compute the distance between clusters.
-See the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html#scipy.cluster.hierarchy.linkage" title="(in SciPy v1.6.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">linkage()</span></code></a> function
+See the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/reference/generated/scipy.cluster.hierarchy.linkage.html#scipy.cluster.hierarchy.linkage" title="(in SciPy v1.7.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">linkage()</span></code></a> function
 of <code class="docutils literal notranslate"><span class="pre">scipy</span></code> for a list of valid method names.
 The default is ‘single’.</p></li>
-<li><p><strong>metric</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The distance metric. See the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.distance.pdist.html#scipy.spatial.distance.pdist" title="(in SciPy v1.6.3)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pdist()</span></code></a>
+<li><p><strong>metric</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The distance metric. See the <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/reference/generated/scipy.spatial.distance.pdist.html#scipy.spatial.distance.pdist" title="(in SciPy v1.7.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">pdist()</span></code></a>
 function of <code class="docutils literal notranslate"><span class="pre">scipy</span></code> for a list of valid distance metrics.
 The default is ‘euclidean’.</p></li>
 <li><p><strong>kweight</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Exponent for weighting chi(k) by k^kweight.
 Only valid for <code class="docutils literal notranslate"><span class="pre">cluster_region='exafs'</span></code>.
 The default is 2.</p></li>
-<li><p><strong>pre_edge_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Dictionary with parameters for <a class="reference internal" href="../xas/xas_normalize.html#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>.
-The default is None, indicating that this step will be skipped.</p></li>
-<li><p><strong>autobk_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Dictionary with parameters <a class="reference internal" href="../xas/xas_autobk.html#araucaria.xas.autobk.autobk" title="araucaria.xas.autobk.autobk"><code class="xref py py-func docutils literal notranslate"><span class="pre">autobk()</span></code></a>.
-Only valid for <code class="docutils literal notranslate"><span class="pre">cluster_region='exafs'</span></code>.
-The default is None, indicating that this step will be skipped.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -275,36 +270,32 @@ The default is None, indicating that this step will be skipped.</p></li>
 </p>
 </dd>
 </dl>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>If given, <code class="docutils literal notranslate"><span class="pre">pre_edge_kws</span></code> or <code class="docutils literal notranslate"><span class="pre">autobk_kws</span></code> will only be used to
-perform clustering. Results from normalization and background removal
-will not be written in <code class="docutils literal notranslate"><span class="pre">collection</span></code>.</p>
-</div>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="../plot_module.html#araucaria.plot.fig_cluster.fig_cluster" title="araucaria.plot.fig_cluster.fig_cluster"><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_cluster()</span></code></a></dt><dd><p>Plots the dendrogram of a hierarchical clustering.</p>
+<dt><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_cluster()</span></code></dt><dd><p>Plots the dendrogram of a hierarchical clustering.</p>
 </dd>
 </dl>
 </div>
 <p class="rubric">Examples</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">pre_edge</span><span class="p">,</span> <span class="n">autobk</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">cluster</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_collection_hdf5</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>      <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;Fe_database.h5&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span>         <span class="o">=</span> <span class="n">cluster</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">cluster_region</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">,</span> <span class="n">pre_edge_kws</span><span class="o">=</span><span class="p">{})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pre_edge</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span>        <span class="o">=</span> <span class="n">cluster</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">cluster_region</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span>      <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;groupnames&#39;</span><span class="p">,</span> <span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;matrix&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;cluster_pars&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
 <span class="go">[True, True, True, True, True]</span>
 </pre></div>
 </div>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># exafs clustering</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span>   <span class="o">=</span> <span class="n">cluster</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">cluster_region</span><span class="o">=</span><span class="s1">&#39;exafs&#39;</span><span class="p">,</span> <span class="n">cluster_range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">],</span>
-<span class="gp">... </span>                <span class="n">pre_edge_kws</span><span class="o">=</span><span class="p">{},</span> <span class="n">autobk_kws</span><span class="o">=</span><span class="p">{})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">autobk</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span>   <span class="o">=</span> <span class="n">cluster</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">cluster_region</span><span class="o">=</span><span class="s1">&#39;exafs&#39;</span><span class="p">,</span> <span class="n">cluster_range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;groupnames&#39;</span><span class="p">,</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;matrix&#39;</span><span class="p">,</span> <span class="s1">&#39;Z&#39;</span><span class="p">,</span> <span class="s1">&#39;cluster_pars&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
 <span class="go">[True, True, True, True, True]</span>

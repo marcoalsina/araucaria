@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>PCA module &mdash; araucaria 0.1.9
+  <title>PCA module &mdash; araucaria 0.1.10
  documentation</title>
   
 
@@ -41,6 +41,8 @@
         <script src="../_static/clipboard.min.js"></script>
         <script src="../_static/copybutton.js"></script>
         <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
     
     <script type="text/javascript" src="../_static/js/theme.js"></script>
 
@@ -109,7 +111,11 @@
 <li class="toctree-l2"><a class="reference internal" href="stats_genesd.html">genESD module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stats_window.html">Window module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stats_cluster.html">Cluster module</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">PCA module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">PCA module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dimensionality-reduction">Dimensionality reduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#target-transformation">Target transformation</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../utils_module.html">Utilities module</a></li>
@@ -209,13 +215,68 @@
 </style>
 <div class="section" id="module-araucaria.stats.pca">
 <span id="pca-module"></span><h1>PCA module<a class="headerlink" href="#module-araucaria.stats.pca" title="Permalink to this headline">¶</a></h1>
-<p>Principal component analysis is an exploratory data analysis technique
-aimed at reducing the dimensionality of a dataset while preserving most of
+<p>Principal component analysis (PCA) is an exploratory data analysis technique
+that allows to reduce the dimensionality of a dataset while preserving most of
 its variance.
-Dimensionality reduccion is achieved by changing the basis of the dataset
+Dimensionality reduction is achieved by changing the basis of the dataset
 in such way that the new vectors constitute an orthonormal basis.</p>
+<p>Lets consider a given m by n matrix <span class="math notranslate nohighlight">\(X\)</span> with m observations and n variables.
+Mathematically, PCA computes the eigenvalues and eigenvectors of the covariance
+matrix. If observations in <span class="math notranslate nohighlight">\(X\)</span> are centered, then the covariance is proportional
+to <span class="math notranslate nohighlight">\(X^TX\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[eigen(covX) \propto eigen(X^TX)\]</div>
+<p>Following the eigen-decomposition, we can rewrite <span class="math notranslate nohighlight">\(X^TX\)</span> as follows:</p>
+<div class="math notranslate nohighlight">
+\[X^TX = WDW^{-1}\]</div>
+<p>Where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W\)</span>   : matrix of eigenvectors.</p></li>
+<li><p><span class="math notranslate nohighlight">\(D\)</span>   : diagonal matrix of eigenvalues.</p></li>
+</ul>
+<p>Multiplying the matrix <span class="math notranslate nohighlight">\(X\)</span> by the matrix of eigenvectors <span class="math notranslate nohighlight">\(W\)</span> effectively
+projects the data into an orthonormal basis: <span class="math notranslate nohighlight">\(T=XW\)</span> are known as the
+<strong>principal components</strong>.</p>
+<p>Although PCA can be computed directly as the eigenvalues of the covariance matrix, it
+is often convenient to compute it through singular value decomposition (SVD) of <span class="math notranslate nohighlight">\(X\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[X = U \Sigma V^*\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(U\)</span>: m by n semi-unitary matrix of left-singular vectors.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\Sigma\)</span>: n by n diagonal matrix of singular values.</p></li>
+<li><p><span class="math notranslate nohighlight">\(V\)</span>: n by n semi-unitary matrix of right-singular vectors.</p></li>
+</ul>
+<p>It is straightforward to observe the following relation between the eigenvalue decomposition
+of the covariance matrix and the SVD of <span class="math notranslate nohighlight">\(X\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}X^TX &amp;= V \Sigma^T \Sigma V^* = V \hat{\Sigma}^2 V^*\\X^TX &amp;= WDW^{-1} = V \hat{\Sigma}^2 V^*\end{aligned}\end{align} \]</div>
+<p>Where</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(W\)</span> : matrix of eigenvectors.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\hat{\Sigma^2} = \Sigma^T \Sigma\)</span>: diagonal matrix of eigenvalues.</p></li>
+</ul>
+<p>Therefore, the principal components can be computed as <span class="math notranslate nohighlight">\(T=XV=U \Sigma\)</span>.</p>
+<div class="section" id="dimensionality-reduction">
+<h2>Dimensionality reduction<a class="headerlink" href="#dimensionality-reduction" title="Permalink to this headline">¶</a></h2>
+<p>A truncated matrix <span class="math notranslate nohighlight">\(T_L\)</span> can be computed by retaining the L-largest
+singular values and their corresponding singular vectors:</p>
+<div class="math notranslate nohighlight">
+\[T_L = U_L \Sigma_L = X V_L\]</div>
+<p>After reduction a new vector <span class="math notranslate nohighlight">\(x\)</span> of observations can be projected into
+the principal components:</p>
+<div class="math notranslate nohighlight">
+\[t = U_L^T x\]</div>
+</div>
+<div class="section" id="target-transformation">
+<h2>Target transformation<a class="headerlink" href="#target-transformation" title="Permalink to this headline">¶</a></h2>
+<p>These principal components can be transformed back into the original space:</p>
+<div class="math notranslate nohighlight">
+\[\hat{x} = U_L t = U_L U_L^T x\]</div>
+<p>The latter is commonly referred to as <strong>target transformation</strong>.</p>
 <p>The <a class="reference internal" href="#module-araucaria.stats.pca" title="araucaria.stats.pca"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pca</span></code></a> module offers the following
-classes and functions to perform principal component analysis:</p>
+classes and functions to perform principal component analysis based on the SVD
+approach:</p>
 <table class="colwidths-auto docutils align-default">
 <thead>
 <tr class="row-odd"><th class="head"><p>Class</p></th>
@@ -238,6 +299,9 @@ classes and functions to perform principal component analysis:</p>
 <tr class="row-even"><td><p><a class="reference internal" href="#araucaria.stats.pca.pca" title="araucaria.stats.pca.pca"><code class="xref py py-func docutils literal notranslate"><span class="pre">pca()</span></code></a></p></td>
 <td><p>Performs principal component analysis on a collection.</p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.stats.pca.target_transform" title="araucaria.stats.pca.target_transform"><code class="xref py py-func docutils literal notranslate"><span class="pre">target_transform()</span></code></a></p></td>
+<td><p>Performs target transformation on a collection.</p></td>
+</tr>
 </tbody>
 </table>
 <dl class="py class">
@@ -251,9 +315,9 @@ on an array.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>matrix</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – m by n array containing m observations and n variables.</p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name for the collection. The default is None.</p></li>
-<li><p><strong>ncomps</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Number of components to preserve from the PCA.
+<li><p><strong>ncomps</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of components to preserve.
 Default is None, which will preserve all components.</p></li>
-<li><p><strong>cumvar</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Cumulative variance to preserve from the PCA.
+<li><p><strong>cumvar</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Cumulative variance to preserve.
 Default is None, which will preserve all components.</p></li>
 </ul>
 </dd>
@@ -279,7 +343,7 @@ Default is None, which will preserve all components.</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.U">
 <span class="sig-name descname"><span class="pre">U</span></span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.U" title="Permalink to this definition">¶</a></dt>
-<dd><p>m by n array from the SVD.</p>
+<dd><p>m by n array with the semi-unitary matrix of left-singular vectors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
@@ -290,7 +354,7 @@ Default is None, which will preserve all components.</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.s">
 <span class="sig-name descname"><span class="pre">s</span></span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.s" title="Permalink to this definition">¶</a></dt>
-<dd><p>Array with the n eigenvalues from the SVD.</p>
+<dd><p>1-D array with the n singular values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
@@ -301,7 +365,7 @@ Default is None, which will preserve all components.</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.Vh">
 <span class="sig-name descname"><span class="pre">Vh</span></span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.Vh" title="Permalink to this definition">¶</a></dt>
-<dd><p>n by n array from the SVD</p>
+<dd><p>n by n array with the transpose of the semi-unitary matrix of right-singular vectors.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
@@ -323,7 +387,7 @@ Default is None, which will preserve all components.</p></li>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.components">
 <span class="sig-name descname"><span class="pre">components</span></span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.components" title="Permalink to this definition">¶</a></dt>
-<dd><p>Array with principal components.</p>
+<dd><p>m by n array with principal components.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
 <dd class="field-odd"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
@@ -331,6 +395,23 @@ Default is None, which will preserve all components.</p></li>
 </dl>
 </dd></dl>
 
+<p class="rubric">Notes</p>
+<p>The following methods are currently implemented:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.stats.pca.PCAModel.transform" title="araucaria.stats.pca.PCAModel.transform"><code class="xref py py-func docutils literal notranslate"><span class="pre">transform()</span></code></a></p></td>
+<td><p>Projects observations into principal components.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.stats.pca.PCAModel.inverse_transform" title="araucaria.stats.pca.PCAModel.inverse_transform"><code class="xref py py-func docutils literal notranslate"><span class="pre">inverse_transform()</span></code></a></p></td>
+<td><p>Converts principal component values into observations.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
 <ul class="simple">
@@ -357,22 +438,44 @@ If <code class="docutils literal notranslate"><span class="pre">ncomps</span></c
 </pre></div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.inverse_transform">
-<span class="sig-name descname"><span class="pre">inverse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.inverse_transform" title="Permalink to this definition">¶</a></dt>
-<dd><p>Converts principal components into observations.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.transform">
 <span class="sig-name descname"><span class="pre">transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">obs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.transform" title="Permalink to this definition">¶</a></dt>
 <dd><p>Projects observations into principal components.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>obs</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array with observed values.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Array with scores on principal components.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="araucaria.stats.pca.PCAModel.inverse_transform">
+<span class="sig-name descname"><span class="pre">inverse_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.pca.PCAModel.inverse_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts principal components into observations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array with scores on principal components.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Array with observed values.</p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.stats.pca.pca">
-<span class="sig-prename descclassname"><span class="pre">araucaria.stats.pca.</span></span><span class="sig-name descname"><span class="pre">pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xanes'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">inf,</span> <span class="pre">inf]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncomps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cumvar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pre_edge_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">autobk_kws</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.pca.pca" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.stats.pca.</span></span><span class="sig-name descname"><span class="pre">pca</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_region</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xanes'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pca_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">inf,</span> <span class="pre">inf]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ncomps</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cumvar</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kweight</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.pca.pca" title="Permalink to this definition">¶</a></dt>
 <dd><p>Performs principal component analysis (PCA) on a collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -394,11 +497,6 @@ Defaults is None, which will preserve all components.</p></li>
 <li><p><strong>kweight</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Exponent for weighting chi(k) by k^kweight.
 Only valid for <code class="docutils literal notranslate"><span class="pre">cluster_region='exafs'</span></code>.
 The default is 2.</p></li>
-<li><p><strong>pre_edge_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Dictionary with parameters for <a class="reference internal" href="../xas/xas_normalize.html#araucaria.xas.normalize.pre_edge" title="araucaria.xas.normalize.pre_edge"><code class="xref py py-func docutils literal notranslate"><span class="pre">pre_edge()</span></code></a>.
-The default is None, indicating that this step will be skipped.</p></li>
-<li><p><strong>autobk_kws</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>]) – Dictionary with parameters <a class="reference internal" href="../xas/xas_autobk.html#araucaria.xas.autobk.autobk" title="araucaria.xas.autobk.autobk"><code class="xref py py-func docutils literal notranslate"><span class="pre">autobk()</span></code></a>.
-Only valid for <code class="docutils literal notranslate"><span class="pre">cluster_region='exafs'</span></code>.
-The default is None, indicating that this step will be skipped.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -423,9 +521,9 @@ The default is None, indicating that this step will be skipped.</p></li>
 <div class="admonition seealso">
 <p class="admonition-title">See also</p>
 <dl class="simple">
-<dt><a class="reference internal" href="#araucaria.stats.pca.PCAModel" title="araucaria.stats.pca.PCAModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCAModel</span></code></a></dt><dd><p>class to store results from PCA.</p>
+<dt><a class="reference internal" href="#araucaria.stats.pca.PCAModel" title="araucaria.stats.pca.PCAModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCAModel</span></code></a></dt><dd><p>Class to store results from principal component analysis.</p>
 </dd>
-<dt><a class="reference internal" href="../plot_module.html#araucaria.plot.fig_pca.fig_pca" title="araucaria.plot.fig_pca.fig_pca"><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_pca()</span></code></a></dt><dd><p>Plots the results of PCA.</p>
+<dt><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_pca()</span></code></dt><dd><p>Plots the results of principal component analysis.</p>
 </dd>
 </dl>
 </div>
@@ -436,19 +534,18 @@ The default is None, indicating that this step will be skipped.</p></li>
 <li><p>Either <code class="docutils literal notranslate"><span class="pre">ncomps</span></code> or <code class="docutils literal notranslate"><span class="pre">cumvar</span></code> can be set to reduce dimensionallity
 of the dataset.
 If <code class="docutils literal notranslate"><span class="pre">ncomps</span></code> is provided, it will set precedence over <code class="docutils literal notranslate"><span class="pre">cumvar</span></code>.</p></li>
-<li><p>If given, <code class="docutils literal notranslate"><span class="pre">pre_edge_kws</span></code> or <code class="docutils literal notranslate"><span class="pre">autobk_kws</span></code> will only be used to
-perform PCA. Results from normalization and background removal
-will not be written in <code class="docutils literal notranslate"><span class="pre">collection</span></code>.</p></li>
 </ul>
 </div>
-<p class="rubric">Examples</p>
+<p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_collection_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">pre_edge</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">PCAModel</span><span class="p">,</span> <span class="n">pca</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>      <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;Fe_database.h5&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span>        <span class="o">=</span> <span class="n">pca</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">pca_region</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">,</span> <span class="n">pre_edge_kws</span><span class="o">=</span><span class="p">{})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pre_edge</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">out</span>        <span class="o">=</span> <span class="n">pca</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">pca_region</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span>      <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;matrix&#39;</span><span class="p">,</span> <span class="s1">&#39;components&#39;</span><span class="p">,</span> <span class="s1">&#39;variance&#39;</span><span class="p">,</span> <span class="s1">&#39;groupnames&#39;</span><span class="p">,</span> <span class="s1">&#39;pca_pars&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">PCAModel</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
 <span class="go">[True, True, True, True, True, True]</span>
@@ -456,6 +553,75 @@ will not be written in <code class="docutils literal notranslate"><span class="p
 </div>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="araucaria.stats.pca.target_transform">
+<span class="sig-prename descclassname"><span class="pre">araucaria.stats.pca.</span></span><span class="sig-name descname"><span class="pre">target_transform</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.pca.target_transform" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs target transformation on a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<a class="reference internal" href="#araucaria.stats.pca.PCAModel" title="araucaria.stats.pca.PCAModel"><code class="xref py py-class docutils literal notranslate"><span class="pre">PCAModel</span></code></a>) – PCA model to perform the projection and inverse transformation.</p></li>
+<li><p><strong>collection</strong> (<a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection" title="araucaria.main.collection.Collection"><code class="xref py py-class docutils literal notranslate"><span class="pre">Collection</span></code></a>) – Collection with the groups for target transformatino.</p></li>
+<li><p><strong>taglist</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List with keys to filter groups based on their <code class="docutils literal notranslate"><span class="pre">tags</span></code>
+attributes in the Collection.
+The default is [‘all’].</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="../main/main_dataset.html#araucaria.main.dataset.Dataset" title="araucaria.main.dataset.Dataset"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>Dataset with the following attributes.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">groupnames</span></code>: list with names of transformed groups.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">energy</span></code>       : array with energy values. Returned only if
+<code class="docutils literal notranslate"><span class="pre">pca_region='xanes</span></code> or <code class="docutils literal notranslate"><span class="pre">pca_region=dxanes</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">k</span></code>            : array with wavenumber values. Returned only if
+<code class="docutils literal notranslate"><span class="pre">pca_region='exafs'</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">matrix</span></code>    : original array with mapped values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tmatrix</span></code>   : array with target transformed groups.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">scores</span></code>    : array with scores in the principal component basis.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chi2</span></code>      : <span class="math notranslate nohighlight">\(\chi^2\)</span> values of the target tranformed groups.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">model</span></code> is not a valid PCAModel instance</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#KeyError" title="(in Python v3.9)"><strong>KeyError</strong></a> – If attributes from <a class="reference internal" href="#araucaria.stats.pca.pca" title="araucaria.stats.pca.pca"><code class="xref py py-func docutils literal notranslate"><span class="pre">pca()</span></code></a>
+    do not exist in <code class="docutils literal notranslate"><span class="pre">model</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#araucaria.stats.pca.pca" title="araucaria.stats.pca.pca"><code class="xref py py-func docutils literal notranslate"><span class="pre">pca()</span></code></a></dt><dd><p>Performs principal component analysis on a collection.</p>
+</dd>
+<dt><code class="xref py py-func docutils literal notranslate"><span class="pre">fig_target_transform()</span></code></dt><dd><p>Plots the results of target transformation.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Dataset</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_collection_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">pre_edge</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">pca</span><span class="p">,</span> <span class="n">target_transform</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>      <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;Fe_database.h5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pre_edge</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span>      <span class="o">=</span> <span class="n">pca</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">pca_region</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">,</span> <span class="n">cumvar</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span>       <span class="o">=</span> <span class="n">target_transform</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">collection</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span>      <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;groupnames&#39;</span><span class="p">,</span> <span class="s1">&#39;tmatrix&#39;</span><span class="p">,</span> <span class="s1">&#39;chi2&#39;</span><span class="p">,</span> <span class="s1">&#39;scores&#39;</span><span class="p">,</span> <span class="s1">&#39;energy&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+<span class="go">[True, True, True, True, True]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
 </div>
 
 

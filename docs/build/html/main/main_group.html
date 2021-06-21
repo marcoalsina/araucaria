@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Group class &mdash; araucaria 0.1.9
+  <title>Group class &mdash; araucaria 0.1.10
  documentation</title>
   
 
@@ -222,6 +222,32 @@
 </ul>
 </dd>
 </dl>
+<p class="rubric">Notes</p>
+<p>The following methods are currently implemented:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.main.group.Group.add_content" title="araucaria.main.group.Group.add_content"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_content()</span></code></a></p></td>
+<td><p>Adds content to the group.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.main.group.Group.copy" title="araucaria.main.group.Group.copy"><code class="xref py py-func docutils literal notranslate"><span class="pre">copy()</span></code></a></p></td>
+<td><p>Returns a copy of the group.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.main.group.Group.get_mode" title="araucaria.main.group.Group.get_mode"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_mode()</span></code></a></p></td>
+<td><p>Returns the scan mode of the group.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.main.group.Group.has_ref" title="araucaria.main.group.Group.has_ref"><code class="xref py py-func docutils literal notranslate"><span class="pre">has_ref()</span></code></a></p></td>
+<td><p>Tests if the group has a reference scan.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.main.group.Group.rename" title="araucaria.main.group.Group.rename"><code class="xref py py-func docutils literal notranslate"><span class="pre">rename()</span></code></a></p></td>
+<td><p>Renames the group.</p></td>
+</tr>
+</tbody>
+</table>
 <p class="rubric">Example</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group</span> <span class="o">=</span> <span class="n">Group</span><span class="p">()</span>
@@ -255,37 +281,6 @@
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group</span><span class="o">.</span><span class="n">add_content</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;var&#39;</span><span class="p">])</span>
 <span class="go">[True, True]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="araucaria.main.group.Group.rename">
-<span class="sig-name descname"><span class="pre">rename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.group.Group.rename" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renames the group.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>newname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – New name for the group.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">newname</span></code> is not a string.</p>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">content</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group1&#39;</span><span class="p">}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">group</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;group1&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<span class="go">group1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">group</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;group2&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<span class="go">group2</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -405,6 +400,37 @@ and should adhere to the following convention:</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group_ref</span> <span class="o">=</span> <span class="n">read_xmu</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">group_ref</span><span class="o">.</span><span class="n">has_ref</span><span class="p">()</span>
 <span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="araucaria.main.group.Group.rename">
+<span class="sig-name descname"><span class="pre">rename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.group.Group.rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renames the group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>newname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – New name for the group.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">newname</span></code> is not a string.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">content</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group1&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;group1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="go">group1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s1">&#39;group2&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="go">group2</span>
 </pre></div>
 </div>
 </dd></dl>

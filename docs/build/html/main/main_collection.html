@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Collection class &mdash; araucaria 0.1.9
+  <title>Collection class &mdash; araucaria 0.1.10
  documentation</title>
   
 
@@ -234,6 +234,49 @@
 <p>Each group will be stored as an attribute of the collection.
 The <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute classifies group names based on a
 <code class="docutils literal notranslate"><span class="pre">tag</span></code> key, which is useful for joint manipulation of groups.</p>
+<p>The following methods are currently implemented:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Method</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.main.collection.Collection.add_group" title="araucaria.main.collection.Collection.add_group"><code class="xref py py-func docutils literal notranslate"><span class="pre">add_group()</span></code></a></p></td>
+<td><p>Adds a group to the collection.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.main.collection.Collection.apply" title="araucaria.main.collection.Collection.apply"><code class="xref py py-func docutils literal notranslate"><span class="pre">apply()</span></code></a></p></td>
+<td><p>Applies a function to groups in the collection.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.main.collection.Collection.copy" title="araucaria.main.collection.Collection.copy"><code class="xref py py-func docutils literal notranslate"><span class="pre">copy()</span></code></a></p></td>
+<td><p>Returns a copy of the collection.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.main.collection.Collection.del_group" title="araucaria.main.collection.Collection.del_group"><code class="xref py py-func docutils literal notranslate"><span class="pre">del_group()</span></code></a></p></td>
+<td><p>Deletes a group from the collection.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.main.collection.Collection.get_group" title="araucaria.main.collection.Collection.get_group"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_group()</span></code></a></p></td>
+<td><p>Returns a group in the collection.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.main.collection.Collection.get_mcer" title="araucaria.main.collection.Collection.get_mcer"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_mcer()</span></code></a></p></td>
+<td><p>Returns the minimum common energy range for the collection.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.main.collection.Collection.get_names" title="araucaria.main.collection.Collection.get_names"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_names()</span></code></a></p></td>
+<td><p>Return group names in the collection.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.main.collection.Collection.get_tag" title="araucaria.main.collection.Collection.get_tag"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_tag()</span></code></a></p></td>
+<td><p>Returns tag of a group in the collection.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.main.collection.Collection.rename_group" title="araucaria.main.collection.Collection.rename_group"><code class="xref py py-func docutils literal notranslate"><span class="pre">rename_group()</span></code></a></p></td>
+<td><p>Renames a group in the collection.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.main.collection.Collection.retag" title="araucaria.main.collection.Collection.retag"><code class="xref py py-func docutils literal notranslate"><span class="pre">retag()</span></code></a></p></td>
+<td><p>Modifies tag of a group in the collection.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.main.collection.Collection.summary" title="araucaria.main.collection.Collection.summary"><code class="xref py py-func docutils literal notranslate"><span class="pre">summary()</span></code></a></p></td>
+<td><p>Returns a summary report of the collection.</p></td>
+</tr>
+</tbody>
+</table>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>Each group can only have a single <code class="docutils literal notranslate"><span class="pre">tag</span></code> key.</p>
@@ -248,12 +291,12 @@ The <code class="docutils literal notranslate"><span class="pre">tags</span></co
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection.add_group">
 <span class="sig-name descname"><span class="pre">add_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scan'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.add_group" title="Permalink to this definition">¶</a></dt>
-<dd><p>Adds a group dataset to the Collection.</p>
+<dd><p>Adds a group dataset to the collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>group</strong> (<a class="reference internal" href="main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>) – The data group to add to the Collection.</p></li>
-<li><p><strong>tag</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Key for the <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute of the Collection.
+<li><p><strong>group</strong> (<a class="reference internal" href="main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>) – The data group to add to the collection.</p></li>
+<li><p><strong>tag</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Key for the <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute of the collection.
 The default is ‘scan’.</p></li>
 </ul>
 </dd>
@@ -266,7 +309,7 @@ The default is ‘scan’.</p></li>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><ul class="simple">
 <li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid Group instance.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group.name</span></code> is already in the Collection.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group.name</span></code> is already in the collection.</p></li>
 </ul>
 </dd>
 </dl>
@@ -294,14 +337,18 @@ The default is ‘scan’.</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="araucaria.main.collection.Collection.rename_group">
-<span class="sig-name descname"><span class="pre">rename_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.rename_group" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renames a group in the Collection.</p>
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.apply">
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>Applies a function to groups in a collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of group to modify.</p></li>
-<li><p><strong>newname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – New name for the group.</p></li>
+<li><p><strong>func</strong> – Function to apply to the collection.
+Must accept <code class="docutils literal notranslate"><span class="pre">update=True</span></code> as an argument.</p></li>
+<li><p><strong>taglist</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List with keys to filter groups in the collection based
+on the <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute. The default is [‘all’].</p></li>
+<li><p><strong>**kwargs</strong> – Additional keyword arguments to pass to <code class="docutils literal notranslate"><span class="pre">func</span></code>.</p></li>
+<li><p><strong>kwargs</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a>) – </p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -309,174 +356,28 @@ The default is ‘scan’.</p></li>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p></p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><ul class="simple">
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> is not a group in the Collection.</p></li>
-<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">newname</span></code> is not a string.</p></li>
-</ul>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Group</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group1&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group2&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">]):</span>
-<span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">rename_group</span><span class="p">(</span><span class="s1">&#39;group1&#39;</span><span class="p">,</span> <span class="s1">&#39;group3&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">())</span>
-<span class="go">[&#39;group2&#39;, &#39;group3&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">group3</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<span class="go">group3</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_tag">
-<span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_tag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns tag for a group in the Collection.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>name</strong> – Name of group to retrieve tag.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Tag of the group.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> is not in a group in the Collection.</p>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Group</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group1&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group2&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tags</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">]):</span>
-<span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tags</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">get_tag</span><span class="p">(</span><span class="s1">&#39;group1&#39;</span><span class="p">))</span>
-<span class="go">scan</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">get_tag</span><span class="p">(</span><span class="s1">&#39;group2&#39;</span><span class="p">))</span>
-<span class="go">ref</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="araucaria.main.collection.Collection.retag">
-<span class="sig-name descname"><span class="pre">retag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.retag" title="Permalink to this definition">¶</a></dt>
-<dd><p>Modifies tag of a group in the Collection.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of group to modify.</p></li>
-<li><p><strong>tag</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – New tag for the group.</p></li>
-</ul>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p></p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> is not a group in the Collection.</p>
-</dd>
-</dl>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Group</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group1&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group2&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tags</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">]):</span>
-<span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tags</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">retag</span><span class="p">(</span><span class="s1">&#39;group1&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">collection</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-<span class="go">ref [&#39;group1&#39;, &#39;group2&#39;]</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_group">
-<span class="sig-name descname"><span class="pre">get_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_group" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a group dataset from the Collection.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>name</strong> – Name of group to retrieve.</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference internal" href="main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a></p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>Requested group.</p>
-</dd>
-<dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> is not in a group in the Collection.</p>
-</dd>
-</dl>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Changes made to the group will be propagated to the Collection.
-If you need a copy of the group use the <a class="reference internal" href="#araucaria.main.collection.Collection.copy" title="araucaria.main.collection.Collection.copy"><code class="xref py py-func docutils literal notranslate"><span class="pre">copy()</span></code></a> method.</p>
-</div>
-<p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Group</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span>    <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group1&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">gcopy</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s1">&#39;group1&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">gcopy</span><span class="p">,</span> <span class="n">Group</span><span class="p">)</span>
-<span class="go">True</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">gcopy</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<span class="go">group1</span>
-</pre></div>
-</div>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_names">
-<span class="sig-name descname"><span class="pre">get_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_names" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns group names in the Collection.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>taglist</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List with keys to filter groups in the Collection based
-on the <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute. The default is [‘all’].</p>
-</dd>
-<dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
-</dd>
-<dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>List with names in the Collection.</p>
 </dd>
 <dt class="field-even">Raises</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If any item in <code class="docutils literal notranslate"><span class="pre">taglist</span></code> is not a key of the <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Group</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group1&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group2&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g3</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group3&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g4</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group4&#39;</span><span class="p">})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tags</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">g3</span><span class="p">,</span> <span class="n">g4</span><span class="p">]):</span>
-<span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tags</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
-<span class="go">[&#39;group1&#39;, &#39;group2&#39;, &#39;group3&#39;, &#39;group4&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">(</span><span class="n">taglist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;scan&#39;</span><span class="p">])</span>
-<span class="go">[&#39;group1&#39;, &#39;group4&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">(</span><span class="n">taglist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ref&#39;</span><span class="p">])</span>
-<span class="go">[&#39;group2&#39;, &#39;group3&#39;]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_collection_hdf5</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">pre_edge</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span>      <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;Fe_database.h5&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pre_edge</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span>     <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;e0&#39;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="go">===============================================</span>
+<span class="go">id  dataset           tag   mode    n  e0</span>
+<span class="go">===============================================</span>
+<span class="go">1   FeIISO4_20K       scan  mu      5  7124.7</span>
+<span class="go">2   Fe_Foil           scan  mu_ref  5  7112</span>
+<span class="go">3   Ferrihydrite_20K  scan  mu      5  7127.4</span>
+<span class="go">4   Goethite_20K      scan  mu      5  7127.3</span>
+<span class="go">===============================================</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -515,7 +416,7 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection.del_group">
 <span class="sig-name descname"><span class="pre">del_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.del_group" title="Permalink to this definition">¶</a></dt>
-<dd><p>Removes a group dataset from the Collection.</p>
+<dd><p>Removes a group dataset from the collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>name</strong> – Name of group to remove.</p>
@@ -527,7 +428,7 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 <dd class="field-odd"><p></p>
 </dd>
 <dt class="field-even">Raises</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> is not in a group in the Collection.</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> is not in a group in the collection.</p>
 </dd>
 </dl>
 <p class="rubric">Example</p>
@@ -552,14 +453,52 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_group">
+<span class="sig-name descname"><span class="pre">get_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a group dataset from the collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of group to retrieve.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Requested group.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> is not in a group in the collection.</p>
+</dd>
+</dl>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Changes made to the group will be propagated to the collection.
+If you need a copy of the group use the <a class="reference internal" href="#araucaria.main.collection.Collection.copy" title="araucaria.main.collection.Collection.copy"><code class="xref py py-func docutils literal notranslate"><span class="pre">copy()</span></code></a> method.</p>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span>    <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group1&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">g1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gcopy</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="s1">&#39;group1&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">gcopy</span><span class="p">,</span> <span class="n">Group</span><span class="p">)</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">gcopy</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="go">group1</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_mcer">
 <span class="sig-name descname"><span class="pre">get_mcer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_mcer" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the minimum common energy range for the Collection.</p>
+<dd><p>Returns the minimum common energy range for the collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>num</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>]) – Number of equally-spaced points for the energy array.</p></li>
-<li><p><strong>taglist</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List with keys to filter groups in the Collection based
+<li><p><strong>taglist</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List with keys to filter groups in the collection based
 on the <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute. The default is [‘all’].</p></li>
 </ul>
 </dd>
@@ -614,13 +553,163 @@ of equally-spaced points for the minimum common energy range.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="araucaria.main.collection.Collection.summary">
-<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.summary" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a summary report of groups in a Collection.</p>
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_names">
+<span class="sig-name descname"><span class="pre">get_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns group names in the collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>taglist</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List with keys to filter groups in the collection based
+on the <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute. The default is [‘all’].</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>List with group names in the collection.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If any item in <code class="docutils literal notranslate"><span class="pre">taglist</span></code> is not a key of the <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group1&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group2&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g3</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group3&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g4</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group4&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tags</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">g3</span><span class="p">,</span> <span class="n">g4</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tags</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
+<span class="go">[&#39;group1&#39;, &#39;group2&#39;, &#39;group3&#39;, &#39;group4&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">(</span><span class="n">taglist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;scan&#39;</span><span class="p">])</span>
+<span class="go">[&#39;group1&#39;, &#39;group4&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">(</span><span class="n">taglist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ref&#39;</span><span class="p">])</span>
+<span class="go">[&#39;group2&#39;, &#39;group3&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_tag">
+<span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_tag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns tag of a group in the collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – Name of group to retrieve tag.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Tag of the group.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> is not in a group in the collection.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group1&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group2&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tags</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tags</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">get_tag</span><span class="p">(</span><span class="s1">&#39;group1&#39;</span><span class="p">))</span>
+<span class="go">scan</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">get_tag</span><span class="p">(</span><span class="s1">&#39;group2&#39;</span><span class="p">))</span>
+<span class="go">ref</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.rename_group">
+<span class="sig-name descname"><span class="pre">rename_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.rename_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renames a group in the collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>taglist</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List with keys to filter groups in the Collection based
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of group to modify.</p></li>
+<li><p><strong>newname</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – New name for the group.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> is not a group in the collection.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">newname</span></code> is not a string.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group1&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group2&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">rename_group</span><span class="p">(</span><span class="s1">&#39;group1&#39;</span><span class="p">,</span> <span class="s1">&#39;group3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">())</span>
+<span class="go">[&#39;group2&#39;, &#39;group3&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">collection</span><span class="o">.</span><span class="n">group3</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="go">group3</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.retag">
+<span class="sig-name descname"><span class="pre">retag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.retag" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modifies tag of a group in the collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of group to modify.</p></li>
+<li><p><strong>tag</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – New tag for the group.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">name</span></code> is not a group in the collection.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group1&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span>   <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;group2&#39;</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tags</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">]):</span>
+<span class="gp">... </span>    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="n">tags</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">collection</span><span class="o">.</span><span class="n">retag</span><span class="p">(</span><span class="s1">&#39;group1&#39;</span><span class="p">,</span> <span class="s1">&#39;ref&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">collection</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<span class="go">ref [&#39;group1&#39;, &#39;group2&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="araucaria.main.collection.Collection.summary">
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.summary" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a summary report of groups in a collection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>taglist</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – List with keys to filter groups in the collection based
 on the <code class="docutils literal notranslate"><span class="pre">tags</span></code> attribute. The default is [‘all’].</p></li>
 <li><p><strong>regex</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]) – Search string to filter results by group name. See Notes for details.
 The default is None.</p></li>

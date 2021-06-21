@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Part 4: Linear combination fitting &mdash; araucaria 0.1.9
+  <title>Part 4: Linear combination fitting &mdash; araucaria 0.1.10
  documentation</title>
   
 
@@ -99,15 +99,19 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="01.basics_data_processing.html">Part 1: Basics of data processing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="02.background_removal.html">Part 2: Normalization and background removal</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03.custom_report_figure.html">Part 3: Creating custom report and figures</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Part 4: Linear combination fitting</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#1.-Accesing-the-database">1. Accesing the database</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#2.-Creating-a-group-to-fit">2. Creating a group to fit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#3.-Computing-expected-amplitudes-from-the-LCF">3. Computing expected amplitudes from the LCF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#4.-Performing-XANES-LCF">4. Performing XANES LCF</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#5.-Performing-EXAFS-LCF">5. Performing EXAFS LCF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials.html#getting-started">Getting started</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../tutorials.html#tutorial-series">Tutorial series</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="01.basics_data_processing.html">Part 1: Basics of data processing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="02.background_removal.html">Part 2: Normalization and background removal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="03.custom_report_figure.html">Part 3: Creating custom report and figures</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Part 4: Linear combination fitting</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#1.-Accesing-the-database">1. Accesing the database</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#2.-Creating-a-group-to-fit">2. Creating a group to fit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#3.-Computing-expected-amplitudes-from-the-LCF">3. Computing expected amplitudes from the LCF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#4.-Performing-XANES-LCF">4. Performing XANES LCF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#5.-Performing-EXAFS-LCF">5. Performing EXAFS LCF</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -499,7 +503,7 @@ Scipy version       : 1.6.3
 Lmfit version       : 1.0.2
 H5py version        : 3.2.1
 Matplotlib version  : 3.4.2
-Araucaria version   : 0.1.9
+Araucaria version   : 0.1.10
 </pre></div></div>
 </div>
 <div class="section" id="1.-Accesing-the-database">
@@ -518,11 +522,11 @@ Araucaria version   : 0.1.9
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
-<span></span><span class="c1"># retrieving filepath</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
 <span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">summary_hdf5</span>
 
+<span class="c1"># retrieving filepath</span>
 <span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;Fe_database.h5&#39;</span><span class="p">)</span>
 
 <span class="c1"># summarizing database</span>
@@ -549,8 +553,9 @@ id  dataset           mode    n
 </div>
 <div class="section" id="2.-Creating-a-group-to-fit">
 <h2>2. Creating a group to fit<a class="headerlink" href="#2.-Creating-a-group-to-fit" title="Permalink to this headline">¶</a></h2>
-<p>We will create an example signal to fit, in this case a mixture of the 2 original signals from ferrihydrite and goethite minerals. The mixture will be created with the <a class="reference internal" href="../xas/xas_merge.html#araucaria.xas.merge.merge"><span class="std std-ref">merge()</span></a> function. Note that the original signals are multiplied by normalized amplitude factors to prevent proportions larger than 1 during the fit. We will store the original signals and the mixture in a
-<a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a>, compute normalized spectra, and produce a summary report.</p>
+<p>We will use the <a class="reference internal" href="../xas/xas_merge.html#araucaria.xas.merge.merge"><span class="std std-ref">merge()</span></a> function to create an example signal to fit, in this case a mixture of the 2 original signals from ferrihydrite and goethite minerals.</p>
+<p>Note that the original signals are multiplied by normalized amplitude factors to prevent proportions larger than 1 during the fit.</p>
+<p>We will store the original signals and the mixture in a <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a>, compute normalized spectra through the <a class="reference internal" href="../main/main_collection.html#araucaria.main.collection.Collection.apply"><span class="std std-ref">apply()</span></a> method, and produce a summary report.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -580,10 +585,7 @@ id  dataset           mode    n
 <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">merge</span><span class="p">,</span> <span class="n">tag</span><span class="o">=</span><span class="s1">&#39;scan&#39;</span><span class="p">)</span>
 
 <span class="c1"># normalizing spectra in collection</span>
-<span class="n">names</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
-<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
-    <span class="n">group</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
-    <span class="n">pre_edge</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pre_edge</span><span class="p">)</span>
 
 <span class="c1"># printing report</span>
 <span class="n">report</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">summary</span><span class="p">(</span><span class="n">optional</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;edge_step&#39;</span><span class="p">])</span>
@@ -637,7 +639,7 @@ Goethite_20K    : 0.591
 </div>
 <div class="section" id="4.-Performing-XANES-LCF">
 <h2>4. Performing XANES LCF<a class="headerlink" href="#4.-Performing-XANES-LCF" title="Permalink to this headline">¶</a></h2>
-<p>Lets assess the estimated proportions for the mixture by linear combination fitting (LCF). We can perform LCF with the <a class="reference internal" href="../fit/fit_lcf.html#araucaria.fit.lcfit.lcf"><span class="std std-ref">lcf()</span></a> function. For clarity we use dictionaries to specify the normalization and lcf parameters for the fit. Note that we specify <code class="docutils literal notranslate"><span class="pre">fit_region='xanes'</span></code> and a <code class="docutils literal notranslate"><span class="pre">fit_range</span></code> with respect to a fixed absorption threshold in energy units.</p>
+<p>We can perform LCF with the <a class="reference internal" href="../fit/fit_lcf.html#araucaria.fit.lcfit.lcf"><span class="std std-ref">lcf()</span></a> function. For clarity we use dictionaries to specify the normalization and lcf parameters for the fit. Note that we specify <code class="docutils literal notranslate"><span class="pre">fit_region='xanes'</span></code> and a <code class="docutils literal notranslate"><span class="pre">fit_range</span></code> with respect to a fixed absorption threshold in energy units.</p>
 <p>Once the LCF is finished we can print a summary with the <a class="reference internal" href="../fit/fit_lcf.html#araucaria.fit.lcfit.lcf_report"><span class="std std-ref">lcf_report()</span></a> function.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -657,7 +659,8 @@ Goethite_20K    : 0.591
                 <span class="s1">&#39;sum_one&#39;</span>   <span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
                 <span class="s1">&#39;fit_range&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="n">k_edge</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span><span class="n">k_edge</span><span class="o">+</span><span class="mi">70</span><span class="p">]}</span>
 
-<span class="n">out</span> <span class="o">=</span> <span class="n">lcf</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">pre_edge_kws</span><span class="o">=</span><span class="n">pre_edge_kws</span><span class="p">,</span> <span class="o">**</span><span class="n">lcf_kws</span><span class="p">)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pre_edge</span><span class="p">,</span> <span class="o">**</span><span class="n">pre_edge_kws</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">lcf</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="o">**</span><span class="n">lcf_kws</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">lcf_report</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -671,7 +674,6 @@ Goethite_20K    : 0.591
     fit_region         = xanes
     fit_range          = [7092, 7182]
     sum_one            = False
-    pre_edge_kws       = {&#39;pre_range&#39;: [-160, -40], &#39;post_range&#39;: [140, 950], &#39;nvict&#39;: 0, &#39;e0&#39;: 7112}
 [[Groups]]
     scan               = sample
     ref1               = Ferrihydrite_20K
@@ -738,10 +740,6 @@ Goethite_20K    : 0.591
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="c1"># parameters for normalization, background removal and lcf</span>
 <span class="n">k_edge</span> <span class="o">=</span> <span class="mi">7112</span>
-<span class="n">pre_edge_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;pre_range&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mi">160</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">],</span>
-                <span class="s1">&#39;post_range&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">140</span><span class="p">,</span> <span class="mi">950</span><span class="p">],</span>
-                <span class="s1">&#39;nvict&#39;</span>     <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s1">&#39;e0&#39;</span>        <span class="p">:</span> <span class="n">k_edge</span><span class="p">}</span>
 
 <span class="n">autobk_kws</span>   <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;k_range&#39;</span>   <span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">],</span>
                 <span class="s1">&#39;kweight&#39;</span>   <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
@@ -754,7 +752,8 @@ Goethite_20K    : 0.591
                 <span class="s1">&#39;sum_one&#39;</span>   <span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
                 <span class="s1">&#39;fit_range&#39;</span>  <span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">12</span><span class="p">]}</span>
 
-<span class="n">out</span> <span class="o">=</span> <span class="n">lcf</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">pre_edge_kws</span><span class="o">=</span><span class="n">pre_edge_kws</span><span class="p">,</span> <span class="n">autobk_kws</span><span class="o">=</span><span class="n">autobk_kws</span><span class="p">,</span> <span class="o">**</span><span class="n">lcf_kws</span><span class="p">)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">autobk</span><span class="p">,</span> <span class="o">**</span><span class="n">autobk_kws</span><span class="p">)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">lcf</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="o">**</span><span class="n">lcf_kws</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">lcf_report</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
 </pre></div>
 </div>
@@ -769,8 +768,6 @@ Goethite_20K    : 0.591
     fit_range          = [2, 12]
     sum_one            = False
     kweight            = 2
-    pre_edge_kws       = {&#39;pre_range&#39;: [-160, -40], &#39;post_range&#39;: [140, 950], &#39;nvict&#39;: 0, &#39;e0&#39;: 7112}
-    autobk_kws         = {&#39;k_range&#39;: [0, 15], &#39;kweight&#39;: 2, &#39;rbkg&#39;: 1, &#39;win&#39;: &#39;hanning&#39;, &#39;dk&#39;: 0.1, &#39;clamp_hi&#39;: 35}
 [[Groups]]
     scan               = sample
     ref1               = Ferrihydrite_20K
@@ -786,7 +783,7 @@ Goethite_20K    : 0.591
     Bayesian info crit = -1707.28145
 [[Variables]]
     amp1:  0.40386852 +/- 0.00361482 (0.90%) (init = 0.5)
-    amp2:  0.59444930 +/- 0.00300275 (0.51%) (init = 0.5)
+    amp2:  0.59444931 +/- 0.00300275 (0.51%) (init = 0.5)
 [[Correlations]] (unreported correlations are &lt; 0.100)
     C(amp1, amp2) = -0.923
 </pre></div></div>

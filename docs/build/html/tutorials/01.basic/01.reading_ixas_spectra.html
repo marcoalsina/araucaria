@@ -1,0 +1,764 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>1. Reading IXAS spectra &mdash; araucaria 0.1.10
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Part 1: Basics of data processing" href="../01.basics_data_processing.html" />
+    <link rel="prev" title="Tutorials" href="../../tutorials.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../tutorials.html#getting-started">Getting started</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">1. Reading IXAS spectra</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#2.-Reading-spectra-directly-from-a-URL">1.1. 2. Reading spectra directly from a URL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#3.-Create-a-collection-with-the-spectra">1.2. 3. Create a collection with the spectra</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#4.-Plot-processed-spectra">1.3. 4. Plot processed spectra</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials.html#tutorial-series">Tutorial series</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../tutorials.html">Tutorials</a> &raquo;</li>
+        
+      <li><span class="section-number">1. </span>Reading IXAS spectra</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tutorials/01.basic/01.reading_ixas_spectra.ipynb.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="Reading-IXAS-spectra">
+<h1><span class="section-number">1. </span>Reading IXAS spectra<a class="headerlink" href="#Reading-IXAS-spectra" title="Permalink to this headline">¶</a></h1>
+<p><em>Last update: June 2021</em></p>
+<p>The International X-ray Absorption Society (<a class="reference external" href="https://xrayabsorption.org">IXAS</a>) maintains a <a class="reference external" href="https://xaslib.xrayabsorption.org/elem/">data library of XAFS spectra</a> for several compounds and absorption edges. In this tutorial we will be accesing this library to retrieve spectra and perform basic operation and visualizaion tasks in <code class="docutils literal notranslate"><span class="pre">araucaria</span></code>.</p>
+<p>This notebook explains the the following steps:</p>
+<ol class="arabic simple">
+<li><p>Read spectra from a uniform resource locator (URL).</p></li>
+<li><p>Create a collection with the spectra.</p></li>
+<li><p>Plot processed spectra.</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">get_version</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">get_version</span><span class="p">(</span><span class="n">dependencies</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Python version      : 3.9.4
+Numpy version       : 1.20.3
+Scipy version       : 1.6.3
+Lmfit version       : 1.0.2
+H5py version        : 3.2.1
+Matplotlib version  : 3.4.2
+Araucaria version   : 0.1.10
+</pre></div></div>
+</div>
+<div class="section" id="2.-Reading-spectra-directly-from-a-URL">
+<h2><span class="section-number">1.1. </span>2. Reading spectra directly from a URL<a class="headerlink" href="#2.-Reading-spectra-directly-from-a-URL" title="Permalink to this headline">¶</a></h2>
+<p>The IXAS data library offers a <a class="reference external" href="https://xaslib.xrayabsorption.org/elem/">website frontend</a> to download data in your local machine. However, we will be reading it directly with assistance of the <a class="reference external" href="https://docs.python.org/3/library/urllib.html">urllib</a> module of Python.</p>
+<p>Here we will retrieve the following spectra acquired at the Se K-edge in the Advanced Photon Source synchrotron:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 82%" />
+<col style="width: 18%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>ID</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Se_CoSe_rt_01</p></td>
+<td><p>185</p></td>
+</tr>
+<tr class="row-odd"><td><p>Se_Cu2Se_rt_01</p></td>
+<td><p>187</p></td>
+</tr>
+<tr class="row-even"><td><p>Se_CuSe_rt_01</p></td>
+<td><p>189</p></td>
+</tr>
+</tbody>
+</table>
+<p>For convenience we will first create a dictionary with the names and ID of spectra. We will then use this dictionary to construct a list with the URLs:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span>
+
+<span class="c1"># dictionary with names and IDs</span>
+<span class="n">dvals</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;names&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Se_&#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;_rt_01.xdi&#39;</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;CoSe&#39;</span><span class="p">,</span> <span class="s1">&#39;Cu2Se&#39;</span><span class="p">,</span> <span class="s1">&#39;CuSe&#39;</span><span class="p">]</span> <span class="p">],</span>
+         <span class="s1">&#39;id&#39;</span>   <span class="p">:</span> <span class="p">[</span><span class="s1">&#39;185&#39;</span> <span class="p">,</span> <span class="s1">&#39;187&#39;</span><span class="p">,</span> <span class="s1">&#39;189&#39;</span><span class="p">]}</span>
+
+<span class="c1"># constructing urls</span>
+<span class="n">urls</span>   <span class="o">=</span> <span class="p">[]</span>
+<span class="n">static</span> <span class="o">=</span> <span class="s1">&#39;https://xaslib.xrayabsorption.org/rawfile/&#39;</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dvals</span><span class="p">[</span><span class="s1">&#39;names&#39;</span><span class="p">]):</span>
+    <span class="n">urls</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">static</span> <span class="o">+</span> <span class="n">dvals</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;/&#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+
+<span class="c1"># printing urls</span>
+<span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">urls</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+https://xaslib.xrayabsorption.org/rawfile/185/Se_CoSe_rt_01.xdi
+https://xaslib.xrayabsorption.org/rawfile/187/Se_Cu2Se_rt_01.xdi
+https://xaslib.xrayabsorption.org/rawfile/189/Se_CuSe_rt_01.xdi
+</pre></div></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title fa fa-exclamation-circle"><strong>Note</strong></p>
+<p>If you want to access diferent spectra, just modify the dictionary with the names and ID of the desired spectra. Such values are available at the IXAS data library website.</p>
+</div>
+<p>Before reading the data we need to know the file format. For this we will be printing the header of the last file with the <a class="reference external" href="https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen">urlopen()</a> function of urllib:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">30</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">response</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0 b&#39;#XDI/1.1  GSE/1.0&#39;
+1 b&#39;# Column.1: energy eV&#39;
+2 b&#39;# Column.2: itrans&#39;
+3 b&#39;# Column.3: i0&#39;
+4 b&#39;# Scan.end_time: 2008-04-10 19:35:01&#39;
+5 b&#39;# Scan.start_time: 2008-04-10 19:17:19&#39;
+6 b&#39;# Element.symbol:  Se&#39;
+7 b&#39;# Element.edge:  K&#39;
+8 b&#39;# Mono.d_spacing:  3.13555&#39;
+9 b&#39;# Mono.name: Si 111&#39;
+10 b&#39;# Sample.temperature: room temperature&#39;
+11 b&#39;# Sample.formula: CuSe&#39;
+12 b&#39;# Sample.name: copper selenide, klockmannite&#39;
+13 b&#39;# Sample.prep: powder on tape, many layers&#39;
+14 b&#39;# Facility.Name:  APS&#39;
+15 b&#39;# Beamline.Name:  13-BM-D&#39;
+16 b&#39;# Beamline.xray_source:  bending magnet&#39;
+17 b&#39;# Beamline.Storage_Ring_Current: 101.873&#39;
+18 b&#39;# Beamline.I0: N2, 5 nA/V&#39;
+19 b&#39;# Beamline.I1: N2, 20 nA/V&#39;
+20 b&#39;# ScanParameters.E0: 12658.0&#39;
+21 b&#39;# ScanParameters.Legend: Start       Stop       Step       Npts       Time   Kspace?&#39;
+22 b&#39;# ScanParameters.Region1: -150.00    -10.000     5.0000     29.000     2.0000   0&#39;
+23 b&#39;# ScanParameters.Region2: -10.000     30.000    0.25000     161.00     2.0000   0&#39;
+24 b&#39;# ScanParameters.Region3: 2.8061     14.000   0.039978     281.00     2.0000   1&#39;
+25 b&#39;#-------------------------&#39;
+26 b&#39;#  energy  itrans  i0&#39;
+27 b&#39;12508.000   493738.40    120177.40&#39;
+28 b&#39;12513.000   490898.40    119360.40&#39;
+29 b&#39;12518.000   489640.40    118973.40&#39;
+</pre></div></div>
+</div>
+<p>As seen from the output (line 26), the file contains columns for the energy, transmitted intensity (itrans), and reference itensity (i0), in that order.</p>
+</div>
+<div class="section" id="3.-Create-a-collection-with-the-spectra">
+<h2><span class="section-number">1.2. </span>3. Create a collection with the spectra<a class="headerlink" href="#3.-Create-a-collection-with-the-spectra" title="Permalink to this headline">¶</a></h2>
+<p>We will use the <a class="reference internal" href="../../io/io_read.html#araucaria.io.io_read.read_rawfile"><span class="std std-ref">read_rawfile()</span></a> function to read the files and include them in a <a class="reference internal" href="../../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a>:</p>
+<ul class="simple">
+<li><p>We create an empty <a class="reference internal" href="../../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a> to contain our group datasets.</p></li>
+<li><p>Contents of the remote file are accesed with the <a class="reference external" href="https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen">urlopen()</a> funcion.</p></li>
+<li><p>The contents are directly passed to the <a class="reference internal" href="../../io/io_read.html#araucaria.io.io_read.read_rawfile"><span class="std std-ref">read_rawfile()</span></a> function, and a group dataset is returned.</p></li>
+<li><p>The group is then added to the collection with the <a class="reference internal" href="../../main/main_collection.html#araucaria.main.collection.Collection.add_group"><span class="std std-ref">add_group()</span></a> method.</p></li>
+<li><p>Once the collection has been populated we produce a summary report with the <a class="reference internal" href="../../main/main_collection.html#araucaria.main.collection.Collection.summary"><span class="std std-ref">sumary()</span></a> method.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Collection</span>
+<span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_rawfile</span>
+
+<span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">url</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">urls</span><span class="p">):</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">group</span>   <span class="o">=</span> <span class="n">read_rawfile</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">ref</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tol</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span>
+    <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+
+<span class="n">report</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="n">report</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=======================================
+id  dataset             tag   mode  n
+=======================================
+1   Se_CoSe_rt_01.xdi   scan  mu    1
+2   Se_Cu2Se_rt_01.xdi  scan  mu    1
+3   Se_CuSe_rt_01.xdi   scan  mu    1
+=======================================
+</pre></div></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title fa fa-exclamation-circle"><strong>Warning</strong></p>
+<p>URLs or file formats in databases may change over time or between files. Therefore, it is your responsibility to check the validty of the URL or the file format before reading and processing spectra.</p>
+</div>
+</div>
+<div class="section" id="4.-Plot-processed-spectra">
+<h2><span class="section-number">1.3. </span>4. Plot processed spectra<a class="headerlink" href="#4.-Plot-processed-spectra" title="Permalink to this headline">¶</a></h2>
+<p>Prior to plotting we need to compute the normalized spectra and the extended x-ray fine strucure (EXAFS). For this we can use the <a class="reference internal" href="../../main/main_collection.html#araucaria.main.collection.Collection.apply"><span class="std std-ref">apply()</span></a> method of the collection.</p>
+<p>We then use the <a class="reference internal" href="../../plot_module.html#araucaria.plot.template.fig_xas_template"><span class="std std-ref">fig_xas_template()</span></a> function to create a <code class="docutils literal notranslate"><span class="pre">Figure</span></code> and <code class="docutils literal notranslate"><span class="pre">axes</span></code> objects with the following attributes:</p>
+<ul class="simple">
+<li><p>2 pre-defined panels for XANES and EXAFS spectra.</p></li>
+<li><p>A dictionary to specify figure decorators (figpars).</p></li>
+</ul>
+<p>Once the figure template has been created we use a loop to populate the axes with the respective spectra.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">pre_edge</span><span class="p">,</span> <span class="n">autobk</span>
+<span class="kn">from</span> <span class="nn">araucaria.plot</span> <span class="kn">import</span> <span class="n">fig_xas_template</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># normalizing spectra and extracting exafs</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pre_edge</span><span class="p">)</span>
+<span class="n">collection</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">autobk</span><span class="p">)</span>
+
+<span class="c1"># figure decorators</span>
+<span class="n">kweight</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">offset</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">]</span>
+<span class="n">figpars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;e_range&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="mi">12600</span><span class="p">,</span> <span class="mi">12750</span><span class="p">),</span>
+           <span class="s1">&#39;k_range&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
+           <span class="s1">&#39;kweight&#39;</span> <span class="p">:</span> <span class="n">kweight</span><span class="p">}</span>
+
+<span class="c1"># declaring figure and populating axes</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig_xas_template</span><span class="p">(</span><span class="n">panels</span><span class="o">=</span><span class="s1">&#39;xe&#39;</span><span class="p">,</span> <span class="n">fig_pars</span><span class="o">=</span><span class="n">figpars</span><span class="p">)</span>
+<span class="n">names</span>   <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">norm</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="n">offset</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">k</span><span class="o">**</span><span class="n">kweight</span><span class="o">*</span><span class="n">group</span><span class="o">.</span><span class="n">chi</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="n">offset</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">,</span> <span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_01.basic_01.reading_ixas_spectra_12_0.png" src="../../_images/tutorials_01.basic_01.reading_ixas_spectra_12_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../01.basics_data_processing.html" class="btn btn-neutral float-right" title="Part 1: Basics of data processing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../../tutorials.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
