@@ -6,19 +6,10 @@ Plot module
 .. automodule:: araucaria.plot.template
    :members:
 
-.. automodule:: araucaria.plot.fig_merge
+.. automodule:: araucaria.plot.fig_xas
    :members:
 
-.. automodule:: araucaria.plot.fig_pre_edge
-   :members:
-   
-.. automodule:: araucaria.plot.fig_autobk
-   :members:
-
-.. automodule:: araucaria.plot.fig_cluster
-   :members:
-
-.. automodule:: araucaria.plot.fig_pca
+.. automodule:: araucaria.plot.fig_stats
    :members:
 
 .. automodule:: araucaria.plot.fig_lcf

@@ -30,7 +30,6 @@ from typing import List, Union, TypeVar
 from numpy import (ndarray, diff, abs, argwhere, where, 
                    ravel, apply_along_axis, isnan, isinf)
 from scipy.interpolate import interp1d
-from . import Group
 
 def get_version(dependencies:bool=False) -> str:
     """Returns installed version of araucaria.
