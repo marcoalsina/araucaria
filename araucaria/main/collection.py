@@ -28,7 +28,38 @@ class Collection(object):
     Each group will be stored as an attribute of the collection.
     The ``tags`` attribute classifies group names based on a 
     ``tag`` key, which is useful for joint manipulation of groups.
-    
+
+    The following methods are currently implemented:
+
+    .. list-table::
+       :widths: auto
+       :header-rows: 1
+
+       * - Method
+         - Description
+       * - :func:`add_group`
+         - Adds a group to the collection.
+       * - :func:`apply`
+         - Applies a function to groups in the collection.
+       * - :func:`copy`
+         - Returns a copy of the collection.
+       * - :func:`del_group`
+         - Deletes a group from the collection.
+       * - :func:`get_group`
+         - Returns a group in the collection.
+       * - :func:`get_mcer`
+         - Returns the minimum common energy range for the collection.
+       * - :func:`get_names`
+         - Return group names in the collection.
+       * - :func:`get_tag`
+         - Returns tag of a group in the collection.
+       * - :func:`rename_group`
+         - Renames a group in the collection.
+       * - :func:`retag`
+         - Modifies tag of a group in the collection.
+       * - :func:`summary`
+         - Returns a summary report of the collection.
+
     Warning
     -------
     Each group can only have a single ``tag`` key. 
@@ -53,14 +84,14 @@ class Collection(object):
             return '<Collection>'
     
     def add_group(self, group: Group, tag: str='scan') -> None:
-        """Adds a group dataset to the Collection.
+        """Adds a group dataset to the collection.
         
         Parameters
         ----------
         group
-            The data group to add to the Collection.
+            The data group to add to the collection.
         tag
-            Key for the ``tags`` attribute of the Collection.
+            Key for the ``tags`` attribute of the collection.
             The default is 'scan'.
         
         Returns
@@ -72,7 +103,7 @@ class Collection(object):
         TypeError
             If ``group`` is not a valid Group instance.
         ValueError
-            If ``group.name`` is already in the Collection.
+            If ``group.name`` is already in the collection.
 
         Example
         -------
@@ -109,253 +140,56 @@ class Collection(object):
         else:
             self.tags[tag] = [name]
 
-    def rename_group(self, name: str, newname: str) -> None:
-        """Renames a group in the Collection.
-
-        Parameters
-        -----------
-        name
-            Name of group to modify.
-        newname
-            New name for the group.
-
-        Returns
-        -------
-        :
-
-        Raises
-        ------
-        AttributeError
-            If ``name`` is not a group in the Collection.
-        TypeError
-            If ``newname`` is not a string.
-
-        Example
-        -------
-        >>> from araucaria import Collection, Group
-        >>> collection = Collection()
-        >>> g1   = Group(**{'name': 'group1'})
-        >>> g2   = Group(**{'name': 'group2'})
-        >>> for i, group in enumerate([g1, g2]):
-        ...     collection.add_group(group)
-        >>> collection.rename_group('group1', 'group3')
-        >>> print(collection.get_names())
-        ['group2', 'group3']
-        >>> print(collection.group3.name)
-        group3
+    def apply(self, func, taglist: List[str]=['all'], **kwargs: dict) -> None:
         """
-        if not hasattr(self, name):
-            raise AttributeError('collection has no %s group.' % name)
-        elif not isinstance(newname, str):
-            raise TypeError('newname is not a valid string.')
-        else:
-            self.__dict__[newname] = self.__dict__.pop(name)
-
-            # retrieving original tag key
-            for key, val in self.tags.items():
-                if name in val:
-                    tag = key
-                    break
-
-            # replacing record name with new name
-            self.tags[tag].remove(name)
-            self.tags[tag].append(newname)
-            self.tags[tag].sort()
-
-            # modifying name of group
-            self.__dict__[newname].name = newname
-
-    def get_tag(self, name) -> str:
-        """Returns tag for a group in the Collection.
-
-        Parameters
-        ----------
-        name
-            Name of group to retrieve tag.
-
-        Returns
-        -------
-        :
-            Tag of the group.
-
-        Raises
-        ------
-        TypeError
-            If ``name`` is not in a group in the Collection.
-
-        Example
-        -------
-        >>> from araucaria import Collection, Group
-        >>> collection = Collection()
-        >>> g1   = Group(**{'name': 'group1'})
-        >>> g2   = Group(**{'name': 'group2'})
-        >>> tags = ('scan', 'ref')
-        >>> for i, group in enumerate([g1, g2]):
-        ...     collection.add_group(group, tag=tags[i])
-        >>> print(collection.get_tag('group1'))
-        scan
-        >>> print(collection.get_tag('group2'))
-        ref
-        """
-        if not hasattr(self, name):
-            raise AttributeError('collection has no %s group.' % name)
-
-        # retrieving original tag key
-        for key, val in self.tags.items():
-            if name in val:
-                tag = key
-                break
-
-        return tag
-
-    def retag(self, name: str, tag: str) -> None:
-        """Modifies tag of a group in the Collection.
-
-        Parameters
-        ----------
-        name
-            Name of group to modify.
-        tag
-            New tag for the group.
-
-        Returns
-        -------
-        :
-
-        Raises
-        ------
-        AttributeError
-            If ``name`` is not a group in the Collection.
-
-        Example
-        -------
-        >>> from araucaria import Collection, Group
-        >>> collection = Collection()
-        >>> g1   = Group(**{'name': 'group1'})
-        >>> g2   = Group(**{'name': 'group2'})
-        >>> tags = ('scan', 'ref')
-        >>> for i, group in enumerate([g1, g2]):
-        ...     collection.add_group(group, tag=tags[i])
-        >>> collection.retag('group1', 'ref')
-        >>> for key, value in collection.tags.items():
-        ...     print(key, value)
-        ref ['group1', 'group2']
-        """        
-        # retrieving original tag key
-        initag = self.get_tag(name)
-
-        if initag == tag:
-            # nothing needs to be changed
-            return
-        else:
-            # removing groupname from original tag
-            self.tags[initag].remove(name)
-            
-            # removing entire key if group list is empty
-            if not self.tags[initag]:
-                del self.tags[initag]
-
-            # reassigning groupname to new tag
-            if tag in self.tags:
-                self.tags[tag].append(name)
-                self.tags[tag].sort()
-            else:
-                self.tags[tag] = name
-
-    def get_group(self, name) -> Group:
-        """Returns a group dataset from the Collection.
+        Applies a function to groups in a collection.
         
         Parameters
         ----------
-        name
-            Name of group to retrieve.
-        
-        Returns
-        -------
-        :
-            Requested group.
-        
-        Raises
-        ------
-        TypeError
-            If ``name`` is not in a group in the Collection.
-        
-        Important
-        ---------
-        Changes made to the group will be propagated to the Collection.
-        If you need a copy of the group use the :func:`copy` method.
-
-        Example
-        -------
-        >>> from araucaria import Collection, Group
-        >>> from araucaria.utils import check_objattrs
-        >>> collection = Collection()
-        >>> g1    = Group(**{'name': 'group1'})
-        >>> collection.add_group(g1)
-        >>> gcopy = collection.get_group('group1')
-        >>> check_objattrs(gcopy, Group)
-        True
-        >>> print(gcopy.name)
-        group1
-        """
-        if not hasattr(self, name):
-            raise AttributeError('collection has no %s group.' % name)
-        
-        return getattr(self, name)
-
-    def get_names(self, taglist: List[str]=['all']) -> List[str]:
-        """Returns group names in the Collection.
-        
-        Parameters
-        ----------
-         taglist
-            List with keys to filter groups in the Collection based 
+        func
+            Function to apply to the collection. 
+            Must accept ``update=True`` as an argument.
+        taglist
+            List with keys to filter groups in the collection based 
             on the ``tags`` attribute. The default is ['all'].
+        **kwargs
+            Additional keyword arguments to pass to ``func``.
 
         Returns
         -------
         :
-            List with names in the Collection.
 
         Raises
         ------
         ValueError
             If any item in ``taglist`` is not a key of the ``tags`` attribute.
-        
+
         Example
         -------
-        >>> from araucaria import Collection, Group
-        >>> collection = Collection()
-        >>> g1   = Group(**{'name': 'group1'})
-        >>> g2   = Group(**{'name': 'group2'})
-        >>> g3   = Group(**{'name': 'group3'})
-        >>> g4   = Group(**{'name': 'group4'})
-        >>> tags = ('scan', 'ref', 'ref', 'scan')
-        >>> for i, group in enumerate([g1, g2, g3, g4]):
-        ...     collection.add_group(group, tag=tags[i])
-        >>> collection.get_names()
-        ['group1', 'group2', 'group3', 'group4']
-        >>> collection.get_names(taglist=['scan'])
-        ['group1', 'group4']
-        >>> collection.get_names(taglist=['ref'])
-        ['group2', 'group3']
+        >>> from araucaria.testdata import get_testpath
+        >>> from araucaria.io import read_collection_hdf5
+        >>> from araucaria.xas import pre_edge
+        >>> fpath      = get_testpath('Fe_database.h5')
+        >>> collection = read_collection_hdf5(fpath)
+        >>> collection.apply(pre_edge)
+        >>> report     = collection.summary(optional=['e0'])
+        >>> report.show()
+        ===============================================
+        id  dataset           tag   mode    n  e0      
+        ===============================================
+        1   FeIISO4_20K       scan  mu      5  7124.7  
+        2   Fe_Foil           scan  mu_ref  5  7112    
+        3   Ferrihydrite_20K  scan  mu      5  7127.4  
+        4   Goethite_20K      scan  mu      5  7127.3  
+        ===============================================
         """
-        names = []
-        iterchain  = False
-        for tag in taglist:
-            if tag == 'all':
-                # retrieving all groups
-                names = self.tags.values()
-                names = [item for sublist in names for item in sublist]
-                break
-            elif tag not in self.tags:
-                raise ValueError('%s is not a valid key for the collection.')
-            else:
-                # retrieving selected tag
-                names = names + self.tags[tag]
+        # retrieving list with group names
+        names = self.get_names(taglist=taglist)
 
-        names.sort()
-        return names
+        for name in names:
+            group = self.get_group(name=name)
+            func(group, update=True, **kwargs)
+        return
 
     def copy(self) -> Collection:
         """Returns a deep copy of the collection.
@@ -387,7 +221,7 @@ class Collection(object):
         return deepcopy(self)
 
     def del_group(self, name) -> None:
-        """Removes a group dataset from the Collection.
+        """Removes a group dataset from the collection.
         
         Parameters
         ----------
@@ -401,7 +235,7 @@ class Collection(object):
         Raises
         ------
         TypeError
-            If ``name`` is not in a group in the Collection.
+            If ``name`` is not in a group in the collection.
 
         Example
         -------
@@ -441,15 +275,56 @@ class Collection(object):
         # removing group
         delattr(self, name)
 
+    def get_group(self, name) -> Group:
+        """Returns a group dataset from the collection.
+        
+        Parameters
+        ----------
+        name
+            Name of group to retrieve.
+        
+        Returns
+        -------
+        :
+            Requested group.
+        
+        Raises
+        ------
+        TypeError
+            If ``name`` is not in a group in the collection.
+        
+        Important
+        ---------
+        Changes made to the group will be propagated to the collection.
+        If you need a copy of the group use the :func:`copy` method.
+
+        Example
+        -------
+        >>> from araucaria import Collection, Group
+        >>> from araucaria.utils import check_objattrs
+        >>> collection = Collection()
+        >>> g1    = Group(**{'name': 'group1'})
+        >>> collection.add_group(g1)
+        >>> gcopy = collection.get_group('group1')
+        >>> check_objattrs(gcopy, Group)
+        True
+        >>> print(gcopy.name)
+        group1
+        """
+        if not hasattr(self, name):
+            raise AttributeError('collection has no %s group.' % name)
+        
+        return getattr(self, name)
+
     def get_mcer(self, num: int=None, taglist: List[str]=['all']) -> ndarray:
-        """Returns the minimum common energy range for the Collection.
+        """Returns the minimum common energy range for the collection.
 
         Parameters
         ----------
         num
             Number of equally-spaced points for the energy array.
         taglist
-            List with keys to filter groups in the Collection based 
+            List with keys to filter groups in the collection based 
             on the ``tags`` attribute. The default is ['all'].
 
         Returns
@@ -527,14 +402,221 @@ class Collection(object):
                         earray = energy
         return earray
 
+    def get_names(self, taglist: List[str]=['all']) -> List[str]:
+        """Returns group names in the collection.
+        
+        Parameters
+        ----------
+         taglist
+            List with keys to filter groups in the collection based 
+            on the ``tags`` attribute. The default is ['all'].
+
+        Returns
+        -------
+        :
+            List with group names in the collection.
+
+        Raises
+        ------
+        ValueError
+            If any item in ``taglist`` is not a key of the ``tags`` attribute.
+        
+        Example
+        -------
+        >>> from araucaria import Collection, Group
+        >>> collection = Collection()
+        >>> g1   = Group(**{'name': 'group1'})
+        >>> g2   = Group(**{'name': 'group2'})
+        >>> g3   = Group(**{'name': 'group3'})
+        >>> g4   = Group(**{'name': 'group4'})
+        >>> tags = ('scan', 'ref', 'ref', 'scan')
+        >>> for i, group in enumerate([g1, g2, g3, g4]):
+        ...     collection.add_group(group, tag=tags[i])
+        >>> collection.get_names()
+        ['group1', 'group2', 'group3', 'group4']
+        >>> collection.get_names(taglist=['scan'])
+        ['group1', 'group4']
+        >>> collection.get_names(taglist=['ref'])
+        ['group2', 'group3']
+        """
+        names = []
+        iterchain  = False
+        for tag in taglist:
+            if tag == 'all':
+                # retrieving all groups
+                names = self.tags.values()
+                names = [item for sublist in names for item in sublist]
+                break
+            elif tag not in self.tags:
+                raise ValueError('%s is not a valid key for the collection.')
+            else:
+                # retrieving selected tag
+                names = names + self.tags[tag]
+
+        names.sort()
+        return names
+
+    def get_tag(self, name) -> str:
+        """Returns tag of a group in the collection.
+
+        Parameters
+        ----------
+        name
+            Name of group to retrieve tag.
+
+        Returns
+        -------
+        :
+            Tag of the group.
+
+        Raises
+        ------
+        AttributeError
+            If ``name`` is not in a group in the collection.
+
+        Example
+        -------
+        >>> from araucaria import Collection, Group
+        >>> collection = Collection()
+        >>> g1   = Group(**{'name': 'group1'})
+        >>> g2   = Group(**{'name': 'group2'})
+        >>> tags = ('scan', 'ref')
+        >>> for i, group in enumerate([g1, g2]):
+        ...     collection.add_group(group, tag=tags[i])
+        >>> print(collection.get_tag('group1'))
+        scan
+        >>> print(collection.get_tag('group2'))
+        ref
+        """
+        if not hasattr(self, name):
+            raise AttributeError('collection has no %s group.' % name)
+
+        # retrieving original tag key
+        for key, val in self.tags.items():
+            if name in val:
+                tag = key
+                break
+
+        return tag
+
+    def rename_group(self, name: str, newname: str) -> None:
+        """Renames a group in the collection.
+
+        Parameters
+        -----------
+        name
+            Name of group to modify.
+        newname
+            New name for the group.
+
+        Returns
+        -------
+        :
+
+        Raises
+        ------
+        AttributeError
+            If ``name`` is not a group in the collection.
+        TypeError
+            If ``newname`` is not a string.
+
+        Example
+        -------
+        >>> from araucaria import Collection, Group
+        >>> collection = Collection()
+        >>> g1   = Group(**{'name': 'group1'})
+        >>> g2   = Group(**{'name': 'group2'})
+        >>> for i, group in enumerate([g1, g2]):
+        ...     collection.add_group(group)
+        >>> collection.rename_group('group1', 'group3')
+        >>> print(collection.get_names())
+        ['group2', 'group3']
+        >>> print(collection.group3.name)
+        group3
+        """
+        if not hasattr(self, name):
+            raise AttributeError('collection has no %s group.' % name)
+        elif not isinstance(newname, str):
+            raise TypeError('newname is not a valid string.')
+        else:
+            self.__dict__[newname] = self.__dict__.pop(name)
+
+            # retrieving original tag key
+            for key, val in self.tags.items():
+                if name in val:
+                    tag = key
+                    break
+
+            # replacing record name with new name
+            self.tags[tag].remove(name)
+            self.tags[tag].append(newname)
+            self.tags[tag].sort()
+
+            # modifying name of group
+            self.__dict__[newname].name = newname
+
+    def retag(self, name: str, tag: str) -> None:
+        """Modifies tag of a group in the collection.
+
+        Parameters
+        ----------
+        name
+            Name of group to modify.
+        tag
+            New tag for the group.
+
+        Returns
+        -------
+        :
+
+        Raises
+        ------
+        AttributeError
+            If ``name`` is not a group in the collection.
+
+        Example
+        -------
+        >>> from araucaria import Collection, Group
+        >>> collection = Collection()
+        >>> g1   = Group(**{'name': 'group1'})
+        >>> g2   = Group(**{'name': 'group2'})
+        >>> tags = ('scan', 'ref')
+        >>> for i, group in enumerate([g1, g2]):
+        ...     collection.add_group(group, tag=tags[i])
+        >>> collection.retag('group1', 'ref')
+        >>> for key, value in collection.tags.items():
+        ...     print(key, value)
+        ref ['group1', 'group2']
+        """        
+        # retrieving original tag key
+        initag = self.get_tag(name)
+
+        if initag == tag:
+            # nothing needs to be changed
+            return
+        else:
+            # removing groupname from original tag
+            self.tags[initag].remove(name)
+            
+            # removing entire key if group list is empty
+            if not self.tags[initag]:
+                del self.tags[initag]
+
+            # reassigning groupname to new tag
+            if tag in self.tags:
+                self.tags[tag].append(name)
+                self.tags[tag].sort()
+            else:
+                self.tags[tag] = name
+
     def summary(self, taglist: List[str]=['all'], regex: str=None,
                 optional: Optional[list]=None) -> Report:
-        """Returns a summary report of groups in a Collection.
+        """Returns a summary report of groups in a collection.
 
         Parameters
         ----------
         taglist
-            List with keys to filter groups in the Collection based 
+            List with keys to filter groups in the collection based 
             on the ``tags`` attribute. The default is ['all'].
         regex
             Search string to filter results by group name. See Notes for details.

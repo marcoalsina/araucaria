@@ -23,9 +23,8 @@ from scipy.constants import eV    # electron volt in joules
 from typing import List, Tuple
 from numpy import ndarray, array, inf
 from scipy.interpolate import interp1d
-from .. import Group, Dataset, Collection
+from .. import Group, Collection
 from ..utils import check_objattrs, index_xrange
-from araucaria import xas
 
 # constants
 # 1e10 converts from 1/meter to 1/angstrom
@@ -100,8 +99,7 @@ def ktoe(k: ndarray) -> ndarray:
 
 def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
                     region: str='xanes', domain: ndarray=None,
-                    range: list=[-inf,inf], kweight: int=2, pre_edge_kws: dict=None, 
-                    autobk_kws: dict=None)-> Tuple[ndarray, ndarray]:
+                    range: list=[-inf,inf], kweight: int=2)-> Tuple[ndarray, ndarray]:
     """Returns data mapped to a common domain in a collection.
 
     Parameters
@@ -127,14 +125,7 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
     kweight
         Exponent for weighting chi(k) by k^kweight.
         Only valid for ``region='exafs'``.
-        The default is 2.
-    pre_edge_kws
-        Dictionary with parameters for :func:`~araucaria.xas.normalize.pre_edge`.
-        The default is None, indicating that this step will be skipped.
-    autobk_kws
-        Dictionary with parameters :func:`~araucaria.xas.autobk.autobk`.
-        Only valid for ``region='exafs'``.
-        The default is None, indicating that this step will be skipped.    
+        The default is 2.  
 
     Returns
     -------
@@ -150,10 +141,10 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
         If ``collection`` has no ``tags`` attribute.
     AttributeError
         If groups in ``collection`` have no ``energy`` or ``norm`` attribute.
-        Only verified if ``pre_edge_kws=None``.
+        Only verified if ``region=dxanes`` or ``region=xanes``.
     AttributeError
         If groups in ``collection`` have no ``k`` or ``chi`` attribute.
-        Only verified if ``autobk_kws=None`` and ``region='exafs'``.
+        Only verified if ``region='exafs'``.
     KeyError
         If items in ``taglist`` are not keys of the ``tags`` attribute.
     ValueError
@@ -161,12 +152,6 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
     ValueError
         If ``range`` or ``domain`` is outside the domain of a group 
         in ``collection``.
-
-    Important
-    ---------
-    If given, ``pre_edge_kws`` or ``autobk_kws`` will only be used to 
-    compute the mapped array. Results from normalization and background removal 
-    will not be written in ``collection``.
 
     Notes
     -----
@@ -184,17 +169,19 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
     -------
     >>> from numpy import allclose
     >>> from araucaria.testdata import get_testpath
+    >>> from araucaria.xas import pre_edge
     >>> from araucaria.stats import get_mapped_data
     >>> from araucaria.io import read_collection_hdf5
     >>> fpath      = get_testpath('Fe_database.h5')
     >>> collection = read_collection_hdf5(fpath)
-    >>> ener, data = get_mapped_data(collection, region='xanes', pre_edge_kws={})
+    >>> collection.apply(pre_edge)
+    >>> ener, data = get_mapped_data(collection, region='xanes')
     >>> allclose(ener.shape[0], data.shape[0])
     True
     
     >>> # passing a domain argument
     >>> nener, ndata = get_mapped_data(collection, region='xanes', 
-    ...                                domain=ener, pre_edge_kws={})
+    ...                                domain=ener)
     >>> allclose(data, ndata)
     True
     """
@@ -216,14 +203,7 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
         # since k-range may not have been computed, the first group is used
         if region == 'exafs':
             dummy = collection.get_group(listgroups[0]).copy()
-            if pre_edge_kws is None:
-                pass
-            else:
-                dictpars = xas.pre_edge(dummy, update=True, **pre_edge_kws)
-            if autobk_kws is None:
-                pass
-            else:
-                dictpars = xas.autobk(dummy, update=True, **autobk_kws)
+            check_objattrs(dummy, Group, attrlist=['k', 'chi'], exceptions=True)
             xvals = dummy.k
         # report paramters for xanes mapping
         else:
@@ -243,24 +223,11 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
     for i, name in enumerate(listgroups):
         group = collection.get_group(name).copy()
         if region == 'exafs':
-            # spectrum normalization
-            if pre_edge_kws is None:
-                pass
-            else:
-                dictpars = xas.pre_edge(group, update=True, **pre_edge_kws)
-            # background removal
-            if autobk_kws is None:
-                check_objattrs(group, Group, attrlist=['k', 'chi'], exceptions=True)
-            else:
-                dictpars = xas.autobk(group, update=True, **autobk_kws)
-            # spline interpolation
+            check_objattrs(group, Group, attrlist=['k', 'chi'], exceptions=True)
             s = interp1d(group.k, group.k**kweight*group.chi, kind='cubic')
         else:
             # region == 'xanes' or 'dxanes'
-            if pre_edge_kws is None:
-                check_objattrs(group, Group, attrlist=['energy', 'norm'], exceptions=True)
-            else:
-                dictpars = xas.pre_edge(group, update=True, **pre_edge_kws)
+            check_objattrs(group, Group, attrlist=['energy', 'norm'], exceptions=True)
             # spline interpolation
             if region =='xanes':
                 s = interp1d(group.energy, group.norm, kind='cubic')

@@ -164,6 +164,21 @@ class PCAModel(Dataset):
     components: :class:`~numpy.ndarray`
         m by n array with principal components.
 
+    Notes
+    -----
+    The following methods are currently implemented:
+
+    .. list-table::
+       :widths: auto
+       :header-rows: 1
+
+       * - Method
+         - Description
+       * - :func:`transform`
+         - Projects observations into principal components.
+       * - :func:`inverse_transform`
+         - Converts principal component values into observations.
+
     Important
     ---------
     - Observations in ``matrix`` must be centered in order to perform PCA.
@@ -225,22 +240,6 @@ class PCAModel(Dataset):
         else:
             return '<PCAModel>'
 
-    def inverse_transform(self, p: ndarray) -> ndarray:
-        """Converts principal components into observations.
-        
-        Parameters
-        ----------
-        p
-            Array with scores on principal components.
-        
-        Returns
-        -------
-        :
-            Array with observed values.
-        """
-        n = self.ncomps
-        return dot( self.U[:,:n], p)
-
     def transform(self, obs: ndarray) -> ndarray:
         """Projects observations into principal components.
         
@@ -257,10 +256,27 @@ class PCAModel(Dataset):
         n = self.ncomps
         return dot( self.U[:, :n].T, obs )
 
+    def inverse_transform(self, p: ndarray) -> ndarray:
+        """Converts principal components into observations.
+        
+        Parameters
+        ----------
+        p
+            Array with scores on principal components.
+        
+        Returns
+        -------
+        :
+            Array with observed values.
+        """
+        n = self.ncomps
+        return dot( self.U[:,:n], p)
+
+
 def pca(collection: Collection, taglist: List[str]=['all'],
         pca_region: str='xanes', pca_range: list=[-inf,inf],
-        ncomps: int=None, cumvar: float=None, kweight: int=2, 
-        pre_edge_kws: dict=None, autobk_kws: dict=None) -> PCAModel:
+        ncomps: int=None, cumvar: float=None, 
+        kweight: int=2) -> PCAModel:
     """Performs principal component analysis (PCA) on a collection.
 
     Parameters
@@ -289,13 +305,6 @@ def pca(collection: Collection, taglist: List[str]=['all'],
         Exponent for weighting chi(k) by k^kweight.
         Only valid for ``cluster_region='exafs'``.
         The default is 2.
-    pre_edge_kws
-        Dictionary with parameters for :func:`~araucaria.xas.normalize.pre_edge`.
-        The default is None, indicating that this step will be skipped.
-    autobk_kws
-        Dictionary with parameters :func:`~araucaria.xas.autobk.autobk`.
-        Only valid for ``cluster_region='exafs'``.
-        The default is None, indicating that this step will be skipped.
 
     Returns
     -------
@@ -323,27 +332,25 @@ def pca(collection: Collection, taglist: List[str]=['all'],
     - Either ``ncomps`` or ``cumvar`` can be set to reduce dimensionallity
       of the dataset.
       If ``ncomps`` is provided, it will set precedence over ``cumvar``.
-    - If given, ``pre_edge_kws`` or ``autobk_kws`` will only be used to 
-      perform PCA. Results from normalization and background removal 
-      will not be written in ``collection``.
 
     Example
     -------
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria.io import read_collection_hdf5
+    >>> from araucaria.xas import pre_edge
     >>> from araucaria.stats import PCAModel, pca
     >>> from araucaria.utils import check_objattrs
     >>> fpath      = get_testpath('Fe_database.h5')
     >>> collection = read_collection_hdf5(fpath)
-    >>> out        = pca(collection, pca_region='xanes', pre_edge_kws={})
+    >>> collection.apply(pre_edge)
+    >>> out        = pca(collection, pca_region='xanes')
     >>> attrs      = ['energy', 'matrix', 'components', 'variance', 'groupnames', 'pca_pars']
     >>> check_objattrs(out, PCAModel, attrs)
     [True, True, True, True, True, True]
     """
     # mapped data
     xvals, matrix = get_mapped_data(collection, taglist=taglist, region=pca_region, 
-                                    range=pca_range, kweight=kweight,
-                                    pre_edge_kws=pre_edge_kws, autobk_kws=autobk_kws)
+                                    range=pca_range, kweight=kweight)
     # centering data
     matrix = matrix - matrix.mean(axis=0)
 
@@ -358,21 +365,9 @@ def pca(collection: Collection, taglist: List[str]=['all'],
     if pca_region == 'exafs':
         xvar  = 'k'    # x-variable
         pca_pars['kweight'] = kweight
-        if pre_edge_kws is None:
-            pca_pars['pre_edge_kws'] = None
-        else:
-            pca_pars['pre_edge_kws'] = pre_edge_kws
-        if autobk_kws is None:
-            pca_pars['autobk_kws'] = None
-        else:
-            pca_pars['autobk_kws'] = autobk_kws
     # xanes/dxanes pca
     else:
         xvar  = 'energy'    # x-variable
-        if pre_edge_kws is None:
-            pca_pars['pre_edge_kws'] = None
-        else:
-            pca_pars['pre_edge_kws'] = pre_edge_kws
 
     # storing pca results
     setattr(pca,xvar, xvals)
@@ -428,11 +423,13 @@ def target_transform(model: PCAModel, collection: Collection,
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria import Dataset
     >>> from araucaria.io import read_collection_hdf5
+    >>> from araucaria.xas import pre_edge
     >>> from araucaria.stats import pca, target_transform
     >>> from araucaria.utils import check_objattrs
     >>> fpath      = get_testpath('Fe_database.h5')
     >>> collection = read_collection_hdf5(fpath)
-    >>> model      = pca(collection, pca_region='xanes', cumvar=0.9, pre_edge_kws={})
+    >>> collection.apply(pre_edge)
+    >>> model      = pca(collection, pca_region='xanes', cumvar=0.9)
     >>> data       = target_transform(model, collection)
     >>> attrs      = ['groupnames', 'tmatrix', 'chi2', 'scores', 'energy']
     >>> check_objattrs(data, Dataset, attrs)
@@ -444,14 +441,6 @@ def target_transform(model: PCAModel, collection: Collection,
     # retrieving pca parameters
     pca_region   = model.pca_pars['pca_region']
     pca_range    = model.pca_pars['pca_range']
-    try:
-        pre_edge_kws = model.pca_pars['pre_edge_kws']
-    except:
-        pre_edge_kws = None
-    try:
-        autobk_kws = model.pca_pars['autobk_kws']
-    except:
-        autobk_kws = None
 
     # setting panels based on pca region
     region = (model.pca_pars['pca_region'])
@@ -465,8 +454,7 @@ def target_transform(model: PCAModel, collection: Collection,
     # mapped data for collection
     domain = getattr(model, xvar)
     xvals, matrix = get_mapped_data(collection, taglist=taglist, region=pca_region, 
-                                    domain=domain, kweight=kweight, 
-                                    pre_edge_kws=pre_edge_kws, autobk_kws=autobk_kws)
+                                    domain=domain, kweight=kweight)
 
     # centering data
     matrix = matrix - matrix.mean(axis=0)

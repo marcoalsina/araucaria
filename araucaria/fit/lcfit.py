@@ -76,14 +76,12 @@ from numpy import ndarray, where, gradient, around, inf, sum
 from scipy.interpolate import interp1d
 from lmfit import Parameter, Parameters, minimize, fit_report
 from .. import Group, Dataset, Collection
-from ..xas import pre_edge, autobk, get_mapped_data
 from ..utils import check_objattrs, index_xrange
 
 def lcf(collection: Collection, fit_region: str='xanes',
         fit_range: list=[-inf,inf], scantag: str='scan',
         reftag: str='ref', kweight: int=2, sum_one: bool=True,
-        method: str='leastsq', pre_edge_kws: dict=None,
-        autobk_kws: dict=None) -> Dataset:
+        method: str='leastsq') -> Dataset:
     """Performs linear combination fitting on a XAFS spectrum.
 
     Parameters
@@ -100,10 +98,10 @@ def lcf(collection: Collection, fit_region: str='xanes',
         for 'exafs'.
         The default is [-:data:`~numpy.inf`, :data:`~numpy.inf`].
     scantag
-        Key to filter the scan group in the Collection based on the ``tags`` 
+        Key to filter the scan group in the collection based on the ``tags`` 
         attribute. The default is 'scan'.
     reftag
-        Key to filter the reference groups in the Collection based on the ``tags`` 
+        Key to filter the reference groups in the collection based on the ``tags`` 
         attribute. The default is 'scan'.
     kweight
         Exponent for weighting chi(k) by k^kweight. Only valid for ``fit_region='exafs'``. 
@@ -116,13 +114,6 @@ def lcf(collection: Collection, fit_region: str='xanes',
         See the :func:`~lmfit.minimizer.minimize` function of ``lmfit`` for a list 
         of valid methods.
         The default is ``leastsq``.
-    pre_edge_kws
-        Dictionary with parameters for :func:`~araucaria.xas.normalize.pre_edge`.
-        The default is None, indicating that this step will be skipped.
-    autobk_kws
-        Dictionary with parameters for :func:`~araucaria.xas.autobk.autobk`.
-        Only valid for ``fit_region='exafs'``.
-        The default is None, indicating that this step will be skipped.
     
     Returns
     -------
@@ -149,11 +140,10 @@ def lcf(collection: Collection, fit_region: str='xanes',
         If ``collection`` has no ``tags`` attribute.
     AttributeError
         If groups have no ``energy`` or ``norm`` attribute.
-        Only verified if ``pre_edge_kws=None``, and ``fit_region='dxanes'``
-        or ``fit_region='xanes'``.
+        Only verified if ``fit_region='dxanes'`` or ``fit_region='xanes'``.
     AttributeError
         If groups have no ``k`` or ``chi`` attribute.
-        Only verified if ``autobk_kws=None`` and ``fit_region='exafs'``.
+        Only verified if and ``fit_region='exafs'``.
     KeyError
         If ``scantag`` or ``refttag`` are not keys of the ``tags`` attribute.
     ValueError
@@ -165,10 +155,6 @@ def lcf(collection: Collection, fit_region: str='xanes',
     ---------
     If more than one group in ``collection`` is tagged with ``scantag``, 
     a warning will be raised and only the first group will be fitted.
-    
-    If given, ``pre_edge_kws`` or ``autobk_kws`` will only be used to 
-    perform LCF. Results from normalization and background removal 
-    will not be written in ``collection``.
 
     Notes
     -----
@@ -207,7 +193,7 @@ def lcf(collection: Collection, fit_region: str='xanes',
     ...                   'chi' : amp1 * group1.chi + amp2 * group2.chi + eps})
     >>> collection = Collection()
     >>> tags = ['ref', 'ref', 'scan']
-    >>> for i,group in enumerate((group1,group2, group3)):
+    >>> for i, group in enumerate((group1,group2, group3)):
     ...     collection.add_group(group, tag=tags[i])
     >>> # performing lcf
     >>> out = lcf(collection, fit_region='exafs', fit_range=[3,10], 
@@ -254,23 +240,10 @@ def lcf(collection: Collection, fit_region: str='xanes',
         lcf_pars['kweight'] = kweight
         # storing name of x-variable (exafs)
         xvar = 'k'
-        if pre_edge_kws is None:
-            lcf_pars['pre_edge_kws'] = None
-        else:
-            lcf_pars['pre_edge_kws'] = pre_edge_kws
-        if autobk_kws is None:
-            lcf_pars['autobk_kws'] = None
-        else:
-            lcf_pars['autobk_kws'] = autobk_kws
-
     # report parameters for xanes/dxanes lcf
     else:
         # storing name of x-variable (xanes/dxanes)
         xvar = 'energy'
-        if pre_edge_kws is None:
-            lcf_pars['pre_edge_kws'] = None
-        else:
-            lcf_pars['pre_edge_kws'] = pre_edge_kws
 
     # content dictionary
     content = {'scangroup': scangroup,
@@ -282,22 +255,10 @@ def lcf(collection: Collection, fit_region: str='xanes',
         group = collection.get_group(name).copy()
 
         if fit_region == 'exafs':
-            # spectrum normalization
-            if pre_edge_kws is None:
-                pass
-            else:
-                dictpars = pre_edge(group, update=True, **pre_edge_kws)
-            # background removal
-            if autobk_kws is None:
-                check_objattrs(group, Group, attrlist=['k', 'chi'], exceptions=True)
-            else:
-                dictpars = autobk(group, update=True, **autobk_kws)
+            check_objattrs(group, Group, attrlist=['k', 'chi'], exceptions=True)
         else:
             # fit_region == 'xanes' or 'dxanes'
-            if pre_edge_kws is None:
-                check_objattrs(group, Group, attrlist=['energy', 'norm'], exceptions=True)
-            else:
-                dictpars = pre_edge(group, update=True, **pre_edge_kws)
+            check_objattrs(group, Group, attrlist=['energy', 'norm'], exceptions=True)
 
         if i == 0:
             # first value is the spectrum, so we extract the 
@@ -313,7 +274,7 @@ def lcf(collection: Collection, fit_region: str='xanes',
                 yvals = group.norm[index]
             else:
                 # derivative lcf
-                yvals = gradient(group.norm[index])
+                yvals = gradient(group.norm[index]) / gradient(group.energy[index])
         else:
             # spline interpolation of references
             if fit_region == 'exafs':
@@ -415,8 +376,6 @@ def lcf_report(out: Dataset) -> str:
         fit_range          = [3, 10]
         sum_one            = False
         kweight            = 0
-        pre_edge_kws       = None
-        autobk_kws         = None
     [[Groups]]
         scan               = group3
         ref1               = group1

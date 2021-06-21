@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from typing import Tuple
 from numpy import cumsum, ptp, ceil, sqrt, ravel, argsort
+from scipy.cluster import hierarchy
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import Axes, Figure
 from .. import Dataset
@@ -9,7 +10,71 @@ from .template import fig_xas_template
 from ..stats import PCAModel
 from ..utils import check_objattrs
 
-def fig_pca(model: PCAModel, fontsize: float=8, **fig_kws) -> Tuple[Figure,Axes]:
+def fig_cluster(out: Dataset, fontsize: float=8, 
+                **fig_kws: dict) -> Tuple[Figure,Axes]:
+    """Plots the dendrogram of a hierarchical clustering.
+
+    Parameters
+    ----------
+    out
+        Valid Dataset from :func:`~araucaria.stats.cluster.cluster`.
+    fontsize
+        Font size for labels.
+        The default is 8.
+    fig_kws
+        Additional arguments to pass to the :meth:`~matplotlib.figure.Figure.subplots` 
+        routine of ``Matplotlib``.
+
+    Returns
+    -------
+    figure
+        ``Matplolib`` figure object.
+    axes
+        ``Matplotlib`` axes object. 
+   
+    Raises
+    ------
+    TypeError
+        If ``out`` is not a valid Dataset instance.
+    KeyError
+        If attributes from :func:`~araucaria.stats.cluster.cluster` 
+        do not exist in ``out``.
+
+    See also
+    --------
+    :func:`~araucaria.stats.cluster.cluster` : Performs hierarchical clustering on a collection.
+
+    Example
+    -------
+    .. plot::
+        :context: reset
+
+        >>> import matplotlib.pyplot as plt
+        >>> from araucaria.testdata import get_testpath
+        >>> from araucaria.xas import pre_edge
+        >>> from araucaria.stats import cluster
+        >>> from araucaria.io import read_collection_hdf5
+        >>> from araucaria.plot import fig_cluster
+        >>> fpath      = get_testpath('Fe_database.h5')
+        >>> collection = read_collection_hdf5(fpath)
+        >>> collection.apply(pre_edge)
+        >>> datgroup   = cluster(collection, cluster_region='xanes')
+        >>> fig, ax    = fig_cluster(datgroup)
+        >>> fig.tight_layout()
+        >>> plt.show(block=False)
+    """
+    check_objattrs(out, Dataset, attrlist=['groupnames', 'Z', 'cluster_pars'], 
+    exceptions=True)
+
+    # plotting the results
+    fig, ax = plt.subplots(1,1, **fig_kws)
+    hierarchy.set_link_color_palette(['c', 'm', 'y', 'k'])
+    dn = hierarchy.dendrogram(out.Z, ax=ax, orientation='right', leaf_font_size= fontsize,
+                    above_threshold_color='gray', labels=out.groupnames)
+    ax.set_title(out.cluster_pars['cluster_region'].upper()+' dendrogram')
+    return (fig, ax)
+
+def fig_pca(model: PCAModel, fontsize: float=8, **fig_kws: dict) -> Tuple[Figure,Axes]:
     """Plots the results of principal component analysis (PCA) on a collection.
 
     Parameters
@@ -49,13 +114,15 @@ def fig_pca(model: PCAModel, fontsize: float=8, **fig_kws) -> Tuple[Figure,Axes]
 
         >>> import matplotlib.pyplot as plt
         >>> from araucaria.testdata import get_testpath
+        >>> from araucaria.xas import pre_edge
         >>> from araucaria.stats import pca
         >>> from araucaria.io import read_collection_hdf5
         >>> from araucaria.plot import fig_pca
         >>> fpath      = get_testpath('Fe_database.h5')
         >>> collection = read_collection_hdf5(fpath)
+        >>> collection.apply(pre_edge)
         >>> model      = pca(collection, pca_region='xanes', 
-        ...                  pca_range=[7050, 7300], pre_edge_kws={})
+        ...                  pca_range=[7050, 7300])
         >>> fig, axes = fig_pca(model, fontsize=8)
         >>> fig.tight_layout()
         >>> plt.show(block=False)
@@ -144,7 +211,7 @@ def fig_pca(model: PCAModel, fontsize: float=8, **fig_kws) -> Tuple[Figure,Axes]
     return (fig, axes)
 
 def fig_target_transform(out: Dataset, model: PCAModel, sorted: bool=True,
-                         fontsize: float=8, **fig_kws) -> Tuple[Figure,Axes]:
+                         fontsize: float=8, **fig_kws: dict) -> Tuple[Figure,Axes]:
     """Plots the results of target transformation on a collection.
 
     Parameters
@@ -198,12 +265,14 @@ def fig_target_transform(out: Dataset, model: PCAModel, sorted: bool=True,
         >>> from araucaria.testdata import get_testpath
         >>> from araucaria import Dataset
         >>> from araucaria.io import read_collection_hdf5
+        >>> from araucaria.xas import pre_edge
         >>> from araucaria.stats import pca, target_transform
         >>> from araucaria.plot import fig_target_transform
         >>> fpath      = get_testpath('Fe_database.h5')
         >>> collection = read_collection_hdf5(fpath)
+        >>> collection.apply(pre_edge)
         >>> model      = pca(collection, pca_region='xanes', ncomps=3,
-        ...                  pca_range=[7050,7300], pre_edge_kws={})
+        ...                  pca_range=[7050,7300])
         >>> data       = target_transform(model, collection)
         >>> fig, axes  = fig_target_transform(data, model)
         >>> legend     = axes[0,0].legend(loc='upper right', edgecolor='k')

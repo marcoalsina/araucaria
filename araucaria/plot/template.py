@@ -72,7 +72,7 @@ class FigPars(dict):
     q_ticks    : List[float]
 
 def fig_xas_template(panels: str='xx', fig_pars: FigPars=None, 
-                     **fig_kws:dict) -> Tuple[Figure,Axes]:
+                     **fig_kws: dict) -> Tuple[Figure,Axes]:
     """Returns a preset ``Matplotlib`` figure and axes object 
     to plot XAS spectra.
 

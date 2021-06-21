@@ -15,6 +15,27 @@ class Group(object):
     kwargs
         Dictionary with content for the group.
 
+    Notes
+    -----
+    The following methods are currently implemented:
+
+    .. list-table::
+       :widths: auto
+       :header-rows: 1
+
+       * - Method
+         - Description
+       * - :func:`add_content`
+         - Adds content to the group.
+       * - :func:`copy`
+         - Returns a copy of the group.
+       * - :func:`get_mode`
+         - Returns the scan mode of the group.
+       * - :func:`has_ref`
+         - Tests if the group has a reference scan.
+       * - :func:`rename`
+         - Renames the group.
+
     Example
     -------
     >>> from araucaria import Group
@@ -67,40 +88,6 @@ class Group(object):
         else:
             for key, val in content.items():
                 setattr(self, key, val)
-
-    def rename(self, newname: str) -> None:
-        """Renames the group.
-        
-        Parameters
-        ----------
-        newname
-            New name for the group.
-        
-        Returns
-        -------
-        :
-        
-        Raises
-        ------
-        TypeError
-            If ``newname`` is not a string.
-
-        Example
-        -------
-        >>> from araucaria import Group
-        >>> content = {'name': 'group1'}
-        >>> group   = Group(name = 'group1')
-        >>> print(group.name)
-        group1
-        >>> group.rename('group2')
-        >>> print(group.name)
-        group2
-        """
-        if not isinstance(newname, str):
-            raise TypeError('newname is not a valid string.')
-        else:
-            self.name = newname
-        
 
     def copy(self) -> Group:
         """Returns a deep copy of the group.
@@ -223,6 +210,39 @@ class Group(object):
             return True
         else:
             return False
+
+    def rename(self, newname: str) -> None:
+        """Renames the group.
+        
+        Parameters
+        ----------
+        newname
+            New name for the group.
+        
+        Returns
+        -------
+        :
+        
+        Raises
+        ------
+        TypeError
+            If ``newname`` is not a string.
+
+        Example
+        -------
+        >>> from araucaria import Group
+        >>> content = {'name': 'group1'}
+        >>> group   = Group(name = 'group1')
+        >>> print(group.name)
+        group1
+        >>> group.rename('group2')
+        >>> print(group.name)
+        group2
+        """
+        if not isinstance(newname, str):
+            raise TypeError('newname is not a valid string.')
+        else:
+            self.name = newname
 
 if __name__ == '__main__':
     import doctest

@@ -9,7 +9,7 @@ from ..utils import check_objattrs
 
 def fig_lcf(out: Dataset, offset: float=0.5, 
             annotate: bool=True, fontsize: float=8,
-            fig_pars: FigPars=None, **fig_kws) -> Tuple[Figure,Axes]:
+            fig_pars: FigPars=None, **fig_kws: dict) -> Tuple[Figure,Axes]:
     """Plots the results of linear combination fit (LCF) on a collecton.
 
     Parameters

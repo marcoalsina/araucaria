@@ -21,8 +21,8 @@ from ..xas.xasutils import get_mapped_data
 
 def cluster(collection: Collection, taglist: List[str]=['all'],
             cluster_region: str='xanes', cluster_range: list=[-inf,inf], 
-            method: str='single', metric: str='euclidean',  kweight: int=2,
-            pre_edge_kws: dict=None, autobk_kws: dict=None) -> Dataset:
+            method: str='single', metric: str='euclidean',
+            kweight: int=2) -> Dataset:
     """Performs hierarchical clustering on a collection.
 
     Parameters
@@ -54,13 +54,6 @@ def cluster(collection: Collection, taglist: List[str]=['all'],
         Exponent for weighting chi(k) by k^kweight.
         Only valid for ``cluster_region='exafs'``.
         The default is 2.
-    pre_edge_kws
-        Dictionary with parameters for :func:`~araucaria.xas.normalize.pre_edge`.
-        The default is None, indicating that this step will be skipped.
-    autobk_kws
-        Dictionary with parameters :func:`~araucaria.xas.autobk.autobk`.
-        Only valid for ``cluster_region='exafs'``.
-        The default is None, indicating that this step will be skipped.
 
     Returns
     -------
@@ -76,12 +69,6 @@ def cluster(collection: Collection, taglist: List[str]=['all'],
         - ``matrix``       : array with observed values for groups in ``cluster_range``.
         - ``cluster_pars`` : dictionary with cluster parameters.
 
-    Important
-    ---------
-    If given, ``pre_edge_kws`` or ``autobk_kws`` will only be used to 
-    perform clustering. Results from normalization and background removal 
-    will not be written in ``collection``.
-
     See also
     --------
     :func:`~araucaria.plot.fig_cluster.fig_cluster` : Plots the dendrogram of a hierarchical clustering.
@@ -90,26 +77,27 @@ def cluster(collection: Collection, taglist: List[str]=['all'],
     --------
     >>> from araucaria.testdata import get_testpath
     >>> from araucaria import Dataset
+    >>> from araucaria.xas import pre_edge, autobk
     >>> from araucaria.stats import cluster
     >>> from araucaria.io import read_collection_hdf5
     >>> from araucaria.utils import check_objattrs
     >>> fpath      = get_testpath('Fe_database.h5')
     >>> collection = read_collection_hdf5(fpath)
-    >>> out         = cluster(collection, cluster_region='xanes', pre_edge_kws={})
+    >>> collection.apply(pre_edge)
+    >>> out        = cluster(collection, cluster_region='xanes')
     >>> attrs      = ['groupnames', 'energy', 'matrix', 'Z', 'cluster_pars']
     >>> check_objattrs(out, Dataset, attrs)
     [True, True, True, True, True]
 
     >>> # exafs clustering
-    >>> out   = cluster(collection, cluster_region='exafs', cluster_range=[0,10],
-    ...                 pre_edge_kws={}, autobk_kws={})
+    >>> collection.apply(autobk)
+    >>> out   = cluster(collection, cluster_region='exafs', cluster_range=[0,10])
     >>> attrs = ['groupnames', 'k', 'matrix', 'Z', 'cluster_pars']
     >>> check_objattrs(out, Dataset, attrs)
     [True, True, True, True, True]
     """
     xvals, matrix = get_mapped_data(collection, taglist=taglist, region=cluster_region, 
-                                    range=cluster_range, kweight=kweight,
-                                    pre_edge_kws=pre_edge_kws, autobk_kws=autobk_kws)
+                                    range=cluster_range, kweight=kweight)
 
     # linkage matrix
     # matrix is transposed to follow the m by n convention with m observation vectors
@@ -125,21 +113,9 @@ def cluster(collection: Collection, taglist: List[str]=['all'],
     if cluster_region == 'exafs':
         xvar  = 'k'    # x-variable
         cluster_pars['kweight'] = kweight
-        if pre_edge_kws is None:
-            cluster_pars['pre_edge_kws'] = None
-        else:
-            cluster_pars['pre_edge_kws'] = pre_edge_kws
-        if autobk_kws is None:
-            cluster_pars['autobk_kws'] = None
-        else:
-            cluster_pars['autobk_kws'] = autobk_kws
-    # xanes/dxanes clustering
     else:
+        # xanes/dxanes clustering
         xvar  = 'energy'    # x-variable
-        if pre_edge_kws is None:
-            cluster_pars['pre_edge_kws'] = None
-        else:
-            cluster_pars['pre_edge_kws'] = pre_edge_kws
 
     # storing cluster results
     content = {'groupnames'   : collection.get_names(taglist=taglist),
