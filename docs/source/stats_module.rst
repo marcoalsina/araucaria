@@ -7,6 +7,5 @@ Statistics module
    :hidden:
 
    stats/stats_genesd
-   stats/stats_window
    stats/stats_cluster
    stats/stats_pca

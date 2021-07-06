@@ -20,6 +20,7 @@ Additional functionality will be added on a regular basis.
 
    install
    tutorials
+   changelog
 
 .. toctree::
    :maxdepth: 2
@@ -28,6 +29,8 @@ Additional functionality will be added on a regular basis.
    main_module
    io_module
    xas_module
+   xrdb_module
+   linalg_module
    fit_module
    plot_module
    stats_module

@@ -320,7 +320,7 @@ def read_file(fpath: Union[Path, HTTPResponse], usecols: tuple,
     
     1. energy.
     2. transmission/fluorescence mu(E).
-    3. transmission reference, if ´´mu_ref=True´´.
+    3. transmission reference, if ``mu_ref=True``.
     
     If only ``mu_ref`` scan is requested , ``usecols`` should provide
     column indexes in the following order:

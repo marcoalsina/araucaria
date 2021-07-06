@@ -24,12 +24,18 @@ The :mod:`~araucaria.utils` module offers the following utility functions:
    * - :func:`index_nearest`
      - Index of nearest value in an array.
    * - :func:`interp_yvals`
-     - Returns interpolated values for 1-D function. 
+     - Returns interpolated values for 1-D function.
+   * - :func:`read_fdicts`
+     - Reads file with multiple dictionaries.
 """
 from typing import List, Union, TypeVar
+from pathlib import Path
+from re import findall
+from ast import literal_eval
 from numpy import (ndarray, diff, abs, argwhere, where, 
                    ravel, apply_along_axis, isnan, isinf)
 from scipy.interpolate import interp1d
+
 
 def get_version(dependencies:bool=False) -> str:
     """Returns installed version of araucaria.
@@ -486,6 +492,48 @@ def interp_yvals(x: ndarray, y: ndarray, xnew: ndarray,
     yvals = s(xnew)
 
     return yvals
+
+def read_fdicts(fpath: Path) -> List[dict]:
+    """Reads file with multiple dictionaries
+
+    Parameters
+    ----------
+    fpath
+        File path.
+
+    Returns
+    -------
+    :
+        List with dictionaries.
+
+    Example
+    -------
+    >>> from os import remove
+    >>> from araucaria.utils import read_fdicts
+    >>> fpath ='file.txt'
+    >>> data  = "{'ener': [1,2,3], 'mu': [1,2,3]}"
+    >>> # create file with dictionary data
+    >>> with open(fpath, 'w') as f:
+    ...     fw = f.write(data)
+    >>> # reading file with dictionary
+    >>> dicts = read_fdicts(fpath)
+    >>> remove(fpath)
+    >>> for d in dicts:
+    ...     print(type(d), d)
+    <class 'dict'> {'ener': [1, 2, 3], 'mu': [1, 2, 3]}
+    """
+    # regex search for dictionaries
+    regex = '''(\{[\w\s:.,+\-'"\[\]\(\)]+\})'''
+
+    # reading file
+    with open(fpath) as f:
+        rawdata = f.read()
+
+    # searching file and creating dictionaries with list comprehension
+    data = findall(regex, rawdata)
+    data = [literal_eval(raw) for raw in data]
+
+    return data
 
 if __name__ == '__main__':
     import doctest

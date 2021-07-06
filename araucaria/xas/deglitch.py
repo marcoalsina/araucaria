@@ -7,8 +7,8 @@ from scipy.signal import savgol_filter
 from .. import Group
 from ..utils import check_objattrs
 from ..xas.normalize import find_e0
+from ..xas.xasutils import roll_med
 from ..stats.genesd import genesd
-from ..stats.window import roll_med
 
 def deglitch(group: Group, e_window: Union[str,list]='xas', sg_window_length: int=9, 
              sg_polyorder:int =3, alpha: float=.025, 
@@ -85,9 +85,9 @@ def deglitch(group: Group, e_window: Union[str,list]='xas', sg_window_length: in
     
     References
     ----------
-    .. [1] Wallace, S. M., Alsina, M. A., & Gaillard, J. F. (2020) 
+    .. [1] Wallace, S. M., Alsina, M. A., & Gaillard, J. F. (2021) 
        "An algorithm for the automatic deglitching of x-ray absorption 
-       spectroscopy data". arXiv preprint arXiv:2011.14467.
+       spectroscopy data". J. Synchrotron Rad. 28, https://doi.org/10.1107/S1600577521003611
     
     Example
     -------
