@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Collection class &mdash; araucaria 0.1.10
+  <title>Collection class &mdash; araucaria 0.1.11
  documentation</title>
   
 
@@ -97,6 +97,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
@@ -109,6 +110,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../io_module.html">IO module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linalg_module.html">LinAlg module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stats_module.html">Statistics module</a></li>
@@ -211,7 +214,7 @@
 <span id="collection-class"></span><h1>Collection class<a class="headerlink" href="#module-araucaria.main.collection" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">araucaria.main.collection.</span></span><span class="sig-name descname"><span class="pre">Collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">araucaria.main.collection.</span></span><span class="sig-name descname"><span class="pre">Collection</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/collection.html#Collection"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.collection.Collection" title="Permalink to this definition">¶</a></dt>
 <dd><p>Collection storage class.</p>
 <p>This class stores a collection of <a class="reference internal" href="main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a> objects.</p>
 <dl class="field-list simple">
@@ -290,7 +293,7 @@ The <code class="docutils literal notranslate"><span class="pre">tags</span></co
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection.add_group">
-<span class="sig-name descname"><span class="pre">add_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scan'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.add_group" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">add_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'scan'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/collection.html#Collection.add_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.collection.Collection.add_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a group dataset to the collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -338,7 +341,7 @@ The default is ‘scan’.</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection.apply">
-<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.apply" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">apply</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/collection.html#Collection.apply"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.collection.Collection.apply" title="Permalink to this definition">¶</a></dt>
 <dd><p>Applies a function to groups in a collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -384,7 +387,7 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection.copy">
-<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.copy" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/collection.html#Collection.copy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.collection.Collection.copy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a deep copy of the collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -415,7 +418,7 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection.del_group">
-<span class="sig-name descname"><span class="pre">del_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.del_group" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">del_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/collection.html#Collection.del_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.collection.Collection.del_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes a group dataset from the collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -454,7 +457,7 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_group">
-<span class="sig-name descname"><span class="pre">get_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_group" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/collection.html#Collection.get_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.collection.Collection.get_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a group dataset from the collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -492,7 +495,7 @@ If you need a copy of the group use the <a class="reference internal" href="#ara
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_mcer">
-<span class="sig-name descname"><span class="pre">get_mcer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_mcer" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_mcer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/collection.html#Collection.get_mcer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.collection.Collection.get_mcer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the minimum common energy range for the collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -503,7 +506,7 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Array containing the minimum common energy range</p>
@@ -554,7 +557,7 @@ of equally-spaced points for the minimum common energy range.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_names">
-<span class="sig-name descname"><span class="pre">get_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_names" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_names</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/collection.html#Collection.get_names"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.collection.Collection.get_names" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns group names in the collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -593,7 +596,7 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection.get_tag">
-<span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.get_tag" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_tag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/collection.html#Collection.get_tag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.collection.Collection.get_tag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns tag of a group in the collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -627,7 +630,7 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection.rename_group">
-<span class="sig-name descname"><span class="pre">rename_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.rename_group" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">rename_group</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/collection.html#Collection.rename_group"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.collection.Collection.rename_group" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renames a group in the collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -667,7 +670,7 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection.retag">
-<span class="sig-name descname"><span class="pre">retag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.retag" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">retag</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tag</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/collection.html#Collection.retag"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.collection.Collection.retag" title="Permalink to this definition">¶</a></dt>
 <dd><p>Modifies tag of a group in the collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -704,7 +707,7 @@ on the <code class="docutils literal notranslate"><span class="pre">tags</span><
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.collection.Collection.summary">
-<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.collection.Collection.summary" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">summary</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">taglist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/collection.html#Collection.summary"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.collection.Collection.summary" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a summary report of groups in a collection.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

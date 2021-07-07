@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>IO write module &mdash; araucaria 0.1.10
+  <title>IO write module &mdash; araucaria 0.1.11
  documentation</title>
   
 
@@ -97,6 +97,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
@@ -108,6 +109,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linalg_module.html">LinAlg module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stats_module.html">Statistics module</a></li>
@@ -235,7 +238,7 @@
 </table>
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_write.write_xmu">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></span><span class="sig-name descname"><span class="pre">write_xmu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%12.8g'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_write.write_xmu" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></span><span class="sig-name descname"><span class="pre">write_xmu</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%12.8g'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/io/io_write.html#write_xmu"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.io.io_write.write_xmu" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes a file in xmu format.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -281,7 +284,7 @@ The previous file can be overwritten with the option <code class="docutils liter
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_write.write_lcf">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></span><span class="sig-name descname"><span class="pre">write_lcf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%12.8g'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_write.write_lcf" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></span><span class="sig-name descname"><span class="pre">write_lcf</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%12.8g'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/io/io_write.html#write_lcf"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.io.io_write.write_lcf" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes LCF data to a file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -361,7 +364,7 @@ Returned only if <code class="docutils literal notranslate"><span class="pre">fi
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_write.write_lcf_report">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></span><span class="sig-name descname"><span class="pre">write_lcf_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_write.write_lcf_report" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></span><span class="sig-name descname"><span class="pre">write_lcf_report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/io/io_write.html#write_lcf_report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.io.io_write.write_lcf_report" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes a LCF report to a file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -418,13 +421,13 @@ Returned only if <code class="docutils literal notranslate"><span class="pre">fi
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_write.write_file">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></span><span class="sig-name descname"><span class="pre">write_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%12.8g'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_write.write_file" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></span><span class="sig-name descname"><span class="pre">write_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%12.8g'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/io/io_write.html#write_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.io.io_write.write_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Utility function to write a data array to a file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>fpath</strong> (<a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>) – Path to file.</p></li>
-<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – array to write in file.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – array to write in file.</p></li>
 <li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Name of object to write.</p></li>
 <li><p><strong>fmt</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Format for numbers. The default is ‘%12.8g’.</p></li>
 <li><p><strong>header</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Header for the file.</p></li>
@@ -445,7 +448,7 @@ Returned only if <code class="docutils literal notranslate"><span class="pre">fi
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_write.set_header">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></span><span class="sig-name descname"><span class="pre">set_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_type</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_write.set_header" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_write.</span></span><span class="sig-name descname"><span class="pre">set_header</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_type</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/io/io_write.html#set_header"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.io.io_write.set_header" title="Permalink to this definition">¶</a></dt>
 <dd><p>Utility function for write a file header.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

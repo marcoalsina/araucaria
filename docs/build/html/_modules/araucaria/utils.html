@@ -1,0 +1,763 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.utils &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.utils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.utils</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The :mod:`~araucaria.utils` module offers the following utility functions:</span>
+
+<span class="sd">.. list-table::</span>
+<span class="sd">   :widths: auto</span>
+<span class="sd">   :header-rows: 1</span>
+
+<span class="sd">   * - Function</span>
+<span class="sd">     - Description</span>
+<span class="sd">   * - :func:`get_version`</span>
+<span class="sd">     - Returns version of araucaria.</span>
+<span class="sd">   * - :func:`check_objattrs`</span>
+<span class="sd">     - Check type and attributes of an object.</span>
+<span class="sd">   * - :func:`check_xrange`</span>
+<span class="sd">     - Range values for an array.</span>
+<span class="sd">   * - :func:`index_xrange`</span>
+<span class="sd">     - Index of values in given range for an array.</span>
+<span class="sd">   * - :func:`index_dups`</span>
+<span class="sd">     - Index of duplicate values in an array.</span>
+<span class="sd">   * - :func:`index_nans`</span>
+<span class="sd">     - Index of NaN values in an array.</span>
+<span class="sd">   * - :func:`index_nearest`</span>
+<span class="sd">     - Index of nearest value in an array.</span>
+<span class="sd">   * - :func:`interp_yvals`</span>
+<span class="sd">     - Returns interpolated values for 1-D function.</span>
+<span class="sd">   * - :func:`read_fdicts`</span>
+<span class="sd">     - Reads file with multiple dictionaries.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">TypeVar</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="n">findall</span>
+<span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">literal_eval</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="p">(</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="nb">abs</span><span class="p">,</span> <span class="n">argwhere</span><span class="p">,</span> <span class="n">where</span><span class="p">,</span> 
+                   <span class="n">ravel</span><span class="p">,</span> <span class="n">apply_along_axis</span><span class="p">,</span> <span class="n">isnan</span><span class="p">,</span> <span class="n">isinf</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp1d</span>
+
+
+<div class="viewcode-block" id="get_version"><a class="viewcode-back" href="../../utils_module.html#araucaria.utils.get_version">[docs]</a><span class="k">def</span> <span class="nf">get_version</span><span class="p">(</span><span class="n">dependencies</span><span class="p">:</span><span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns installed version of araucaria.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dependencies</span>
+<span class="sd">        Condition to additionally get version of</span>
+<span class="sd">        dependencies. The default is False.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Printable string with version of araucaria.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import get_version</span>
+<span class="sd">    &gt;&gt;&gt; print(get_version()) #doctest: +ELLIPSIS</span>
+<span class="sd">    Araucaria version   : ...</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">platform</span>
+    <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+    <span class="kn">import</span> <span class="nn">scipy</span> <span class="k">as</span> <span class="nn">sp</span>
+    <span class="kn">import</span> <span class="nn">lmfit</span> <span class="k">as</span> <span class="nn">lm</span>
+    <span class="kn">import</span> <span class="nn">h5py</span>  <span class="k">as</span> <span class="nn">h5</span>
+    <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+    <span class="kn">import</span> <span class="nn">araucaria</span> <span class="k">as</span> <span class="nn">ara</span>
+
+    <span class="n">libr</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Python&#39;</span><span class="p">,</span> <span class="s1">&#39;Numpy&#39;</span><span class="p">,</span> <span class="s1">&#39;Scipy&#39;</span><span class="p">,</span> <span class="s1">&#39;Lmfit&#39;</span><span class="p">,</span> <span class="s1">&#39;H5py&#39;</span><span class="p">,</span> <span class="s1">&#39;Matplotlib&#39;</span><span class="p">)</span>
+    <span class="n">verf</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>    <span class="c1"># string container</span>
+
+    <span class="k">if</span> <span class="n">dependencies</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">lib</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">((</span><span class="n">platform</span><span class="p">,</span> <span class="n">np</span><span class="p">,</span> <span class="n">sp</span><span class="p">,</span> <span class="n">lm</span><span class="p">,</span> <span class="n">h5</span><span class="p">,</span> <span class="n">mpl</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">lib</span> <span class="o">==</span> <span class="n">platform</span><span class="p">:</span> 
+                <span class="n">ver</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ver</span> <span class="o">=</span> <span class="n">lib</span><span class="o">.</span><span class="n">__version__</span>
+            <span class="n">verf</span>   <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">{0:20}</span><span class="s1">: </span><span class="si">{1}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">libr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39; version&#39;</span><span class="p">,</span><span class="n">ver</span><span class="p">)</span>
+
+    <span class="n">ver</span>   <span class="o">=</span> <span class="n">ara</span><span class="o">.</span><span class="n">__version__</span>
+    <span class="n">verf</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">{0:20}</span><span class="s1">: </span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Araucaria version&#39;</span><span class="p">,</span> <span class="n">ver</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">verf</span></div>
+
+
+<div class="viewcode-block" id="check_objattrs"><a class="viewcode-back" href="../../utils_module.html#araucaria.utils.check_objattrs">[docs]</a><span class="k">def</span> <span class="nf">check_objattrs</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="nb">object</span><span class="p">,</span> <span class="n">objtype</span><span class="p">:</span> <span class="n">TypeVar</span><span class="p">,</span> <span class="n">attrlist</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                   <span class="n">exceptions</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Check type and attributes of an object.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    obj</span>
+<span class="sd">        Object to check.</span>
+<span class="sd">    objtype</span>
+<span class="sd">        Type for the object.</span>
+<span class="sd">    attrlist</span>
+<span class="sd">        List with names of attributes to check.</span>
+<span class="sd">    exceptions</span>
+<span class="sd">        Condition to raise exceptions if attributes </span>
+<span class="sd">        are not in the object. The default is False.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        List with booleans for each attribute of the object.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``obj`` is not an instance of ``objtype``.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">    &gt;&gt;&gt; group   = Group(**{&#39;energy&#39;: [1,2,3,4], &#39;mu&#39;: [2,2,3,1]})</span>
+<span class="sd">    &gt;&gt;&gt; # checking class type</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(group, Group)</span>
+<span class="sd">    True</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; # checking class type and attributes</span>
+<span class="sd">    &gt;&gt;&gt; alist   = [&#39;energy&#39;, &#39;mu&#39;, &#39;mu_ref&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(group, Group, attrlist = alist)</span>
+<span class="sd">    [True, True, False]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">objtype</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;object is not a valid </span><span class="si">%s</span><span class="s1"> instance.&#39;</span> <span class="o">%</span> <span class="n">objtype</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">attrlist</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="n">boolist</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">attr</span> <span class="ow">in</span> <span class="n">attrlist</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">exceptions</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> instance has no &#39;</span><span class="si">%s</span><span class="s2">&#39; attribute.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">objtype</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">boolist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">boolist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">boolist</span></div>
+
+<div class="viewcode-block" id="check_xrange"><a class="viewcode-back" href="../../utils_module.html#araucaria.utils.check_xrange">[docs]</a><span class="k">def</span> <span class="nf">check_xrange</span><span class="p">(</span><span class="n">x_range</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">refval</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns range values inside an array.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x_range</span>
+<span class="sd">        List with min and max values.</span>
+<span class="sd">        Supports :data:`~numpy.inf` values.</span>
+<span class="sd">    x</span>
+<span class="sd">        Array with values.</span>
+<span class="sd">    refval</span>
+<span class="sd">        If given, x_range is assumed to contain values relative to refval.</span>
+<span class="sd">        If None, x_range is assumed to contain absolute values.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        New range values inside the array.</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import inf, linspace</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_xrange</span>
+<span class="sd">    &gt;&gt;&gt; k_range = [-inf,inf]</span>
+<span class="sd">    &gt;&gt;&gt; k       = linspace(0,15)</span>
+<span class="sd">    &gt;&gt;&gt; krange = check_xrange(k_range, k)</span>
+<span class="sd">    &gt;&gt;&gt; print(krange)</span>
+<span class="sd">    [0.0, 15.0]</span>
+
+<span class="sd">    &gt;&gt;&gt; # using a reference value</span>
+<span class="sd">    &gt;&gt;&gt; e_range = [-inf, -50]</span>
+<span class="sd">    &gt;&gt;&gt; energy  = linspace(8900, 9100)</span>
+<span class="sd">    &gt;&gt;&gt; e0      = 8979</span>
+<span class="sd">    &gt;&gt;&gt; erange  = check_xrange(e_range, energy, refval=e0)</span>
+<span class="sd">    &gt;&gt;&gt; print(erange)</span>
+<span class="sd">    [-79.0, -50]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x_range</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">x_range</span><span class="p">)</span>
+    <span class="n">x_range</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    
+    <span class="n">x_min</span> <span class="o">=</span> <span class="n">x_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">x_max</span> <span class="o">=</span> <span class="n">x_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="n">refval</span><span class="p">:</span>
+        <span class="c1"># min and max values are computed with respect</span>
+        <span class="c1"># to refval</span>
+        <span class="n">xmin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">refval</span>
+        <span class="n">xmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">refval</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">xmin</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">xmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">isinf</span><span class="p">(</span><span class="n">x_min</span><span class="p">)</span> <span class="ow">or</span> <span class="n">x_min</span> <span class="o">&lt;</span> <span class="n">xmin</span><span class="p">):</span>
+        <span class="n">x_min</span> <span class="o">=</span> <span class="n">xmin</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">isinf</span><span class="p">(</span><span class="n">x_max</span><span class="p">)</span> <span class="ow">or</span> <span class="n">x_max</span> <span class="o">&gt;</span> <span class="n">xmax</span><span class="p">):</span>
+        <span class="n">x_max</span> <span class="o">=</span> <span class="n">xmax</span>
+
+    <span class="k">return</span> <span class="p">[</span><span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="index_xrange"><a class="viewcode-back" href="../../utils_module.html#araucaria.utils.index_xrange">[docs]</a><span class="k">def</span> <span class="nf">index_xrange</span><span class="p">(</span><span class="n">x_range</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">refval</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns indexes of range values inside an array.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x_range</span>
+<span class="sd">        List with real min and max values.</span>
+<span class="sd">    x</span>
+<span class="sd">        Array with values.</span>
+<span class="sd">    refval</span>
+<span class="sd">        If given, x_range is assumed to contain values relative to refval.</span>
+<span class="sd">        If None, x_range is assumed to contain absolute values.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Array with indexes of range values inside the array.</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import arange, inf</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import index_xrange</span>
+<span class="sd">    &gt;&gt;&gt; k_range = [4, 8]</span>
+<span class="sd">    &gt;&gt;&gt; k       = arange(0,16)</span>
+<span class="sd">    &gt;&gt;&gt; index   = index_xrange(k_range, k)</span>
+<span class="sd">    &gt;&gt;&gt; k[index]</span>
+<span class="sd">    array([4, 5, 6, 7, 8])</span>
+
+<span class="sd">    &gt;&gt;&gt; # using a reference value</span>
+<span class="sd">    &gt;&gt;&gt; e_range = [-inf, -50]</span>
+<span class="sd">    &gt;&gt;&gt; energy  = arange(8900, 9100)</span>
+<span class="sd">    &gt;&gt;&gt; e0      = 8979</span>
+<span class="sd">    &gt;&gt;&gt; index   = index_xrange(e_range, energy, refval=e0)</span>
+<span class="sd">    &gt;&gt;&gt; energy[index][0], energy[index][-1]</span>
+<span class="sd">    (8900, 8929)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">x_range</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">x_range</span><span class="p">)</span>
+    <span class="n">x_range</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+    <span class="n">x_min</span> <span class="o">=</span> <span class="n">x_range</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">x_max</span> <span class="o">=</span> <span class="n">x_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">refval</span><span class="p">:</span>
+        <span class="c1"># min and max values are computed with respect</span>
+        <span class="c1"># to refval</span>
+        <span class="n">x_min</span> <span class="o">=</span> <span class="n">x_min</span> <span class="o">+</span> <span class="n">refval</span>
+        <span class="n">x_max</span> <span class="o">=</span> <span class="n">x_max</span> <span class="o">+</span> <span class="n">refval</span>
+    
+    <span class="n">index</span> <span class="o">=</span> <span class="n">where</span><span class="p">((</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="n">x_min</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">x_max</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">index</span></div>
+
+<div class="viewcode-block" id="index_dups"><a class="viewcode-back" href="../../utils_module.html#araucaria.utils.index_dups">[docs]</a><span class="k">def</span> <span class="nf">index_dups</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Index of duplicate values.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data</span>
+<span class="sd">        Array to search for duplicates.</span>
+<span class="sd">        </span>
+<span class="sd">    tol</span>
+<span class="sd">        Tolerance value (the detault is 1e-4).</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Index array with the location of duplicates.</span>
+<span class="sd">        </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    A value in ``data`` is considered a duplicate if the</span>
+<span class="sd">    difference with respect to the previous value is strictly</span>
+<span class="sd">    lower than the given ``tol`` value.</span>
+
+<span class="sd">    If the dimension of ``data`` is larger than 1 the array will be </span>
+<span class="sd">    flattened by indexing the elements in row-major (i.e. C-style).</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------    </span>
+<span class="sd">    :func:`index_dups` is useful to remove duplicates and ensure monotonicity of a 1-D array.</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; from numpy import array, delete</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import index_dups</span>
+<span class="sd">    &gt;&gt;&gt; energy = array([9000, 9000.1, 9005, 9005.1, 9008])</span>
+<span class="sd">    &gt;&gt;&gt; index  = index_dups(energy, tol=0.5)</span>
+<span class="sd">    &gt;&gt;&gt; print(index)</span>
+<span class="sd">    [1 3]</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; # duplicactes</span>
+<span class="sd">    &gt;&gt;&gt; print(energy[index])</span>
+<span class="sd">    [9000.1 9005.1]</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; # removing duplicates</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import delete</span>
+<span class="sd">    &gt;&gt;&gt; new_energy = delete(energy,index,0)</span>
+<span class="sd">    &gt;&gt;&gt; print(new_energy)</span>
+<span class="sd">    [9000. 9005. 9008.]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">ravel</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+    <span class="n">dif</span>   <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">argwhere</span><span class="p">(</span><span class="n">dif</span> <span class="o">&lt;</span> <span class="n">tol</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">ravel</span><span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="index_nans"><a class="viewcode-back" href="../../utils_module.html#araucaria.utils.index_nans">[docs]</a><span class="k">def</span> <span class="nf">index_nans</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">axis</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Index of NaN values in an array.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data</span>
+<span class="sd">        Array to search for NaN values.</span>
+<span class="sd">    axis</span>
+<span class="sd">        Axis along which NaN values will be searched.</span>
+<span class="sd">        The detault is 0.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Index array with NaN values in the given axis.</span>
+<span class="sd">        </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    IndexError</span>
+<span class="sd">        If ``axis`` is greater than the dimension of ``data``.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    :func:`index_nans` is useful to remove NaN values from arrays.</span>
+
+<span class="sd">    &gt;&gt;&gt; from numpy import arange, nan, delete</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import index_nans</span>
+<span class="sd">    &gt;&gt;&gt; data      = arange(20, dtype=float).reshape(5,4)</span>
+<span class="sd">    &gt;&gt;&gt; data[1,2] = nan; data[3,1] = nan</span>
+<span class="sd">    &gt;&gt;&gt; print(data)</span>
+<span class="sd">    [[ 0.  1.  2.  3.]</span>
+<span class="sd">     [ 4.  5. nan  7.]</span>
+<span class="sd">     [ 8.  9. 10. 11.]</span>
+<span class="sd">     [12. nan 14. 15.]</span>
+<span class="sd">     [16. 17. 18. 19.]]</span>
+
+<span class="sd">    &gt;&gt;&gt; # removing NaN values from rows</span>
+<span class="sd">    &gt;&gt;&gt; rindex = index_nans(data, 0)</span>
+<span class="sd">    &gt;&gt;&gt; print(rindex)</span>
+<span class="sd">    [[1]</span>
+<span class="sd">     [3]]</span>
+<span class="sd">    &gt;&gt;&gt; print(delete(data, rindex, 0))</span>
+<span class="sd">    [[ 0.  1.  2.  3.]</span>
+<span class="sd">     [ 8.  9. 10. 11.]</span>
+<span class="sd">     [16. 17. 18. 19.]]</span>
+
+<span class="sd">    &gt;&gt;&gt; # removing NaN values from columns</span>
+<span class="sd">    &gt;&gt;&gt; cindex = index_nans(data, 1)</span>
+<span class="sd">    &gt;&gt;&gt; print(cindex)</span>
+<span class="sd">    [[1]</span>
+<span class="sd">     [2]]</span>
+<span class="sd">    &gt;&gt;&gt; print(delete(data, cindex, 1))</span>
+<span class="sd">    [[ 0.  3.]</span>
+<span class="sd">     [ 4.  7.]</span>
+<span class="sd">     [ 8. 11.]</span>
+<span class="sd">     [12. 15.]</span>
+<span class="sd">     [16. 19.]]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">axis</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">IndexError</span><span class="p">(</span><span class="s1">&#39;axis is larger than the dimensions of the array.&#39;</span><span class="p">)</span>
+    
+    <span class="c1"># values are inverted since there seems to be an inconsistency in</span>
+    <span class="c1"># apply_along_axis </span>
+    <span class="k">if</span> <span class="n">axis</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">aval</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">axis</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">aval</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">aval</span> <span class="o">=</span> <span class="n">axis</span>
+    
+    <span class="n">index</span> <span class="o">=</span> <span class="n">apply_along_axis</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="nb">any</span><span class="p">(</span><span class="n">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span> <span class="n">aval</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">argwhere</span><span class="p">(</span><span class="n">index</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="index_nearest"><a class="viewcode-back" href="../../utils_module.html#araucaria.utils.index_nearest">[docs]</a><span class="k">def</span> <span class="nf">index_nearest</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Index of nearest value in an array.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data</span>
+<span class="sd">        Array to search for nearest value.</span>
+
+<span class="sd">    val</span>
+<span class="sd">        Search value. It supports :data:`~numpy.inf`.</span>
+<span class="sd">    kind</span>
+<span class="sd">        Either &#39;lower&#39;, &#39;nearest&#39; or &#39;higher&#39;. </span>
+<span class="sd">        The default is &#39;nearest&#39;. See Notes for details. </span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Index of nearest value in the array.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``kind`` is not recognized.</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The ``kind`` parameter controls the returned index:</span>
+<span class="sd">    </span>
+<span class="sd">    - If ``kind=&#39;lower&#39;`` the returned index will be of a value</span>
+<span class="sd">      strictly lower than ``val``, or 0 if ``val`` if lower than the</span>
+<span class="sd">      minimum value of ``data``.</span>
+<span class="sd">    - If ``kind=&#39;nearest&#39;`` the returned index will be of the nearest</span>
+<span class="sd">      value with respect to ``val``.</span>
+<span class="sd">    - If ``kind=&#39;higher&#39;`` the returned index will be of a value</span>
+<span class="sd">      strictly higher than ``val``, or -1 if ``val`` is higher than the</span>
+<span class="sd">      maximum value of ``data``.</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import linspace</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import index_nearest</span>
+<span class="sd">    &gt;&gt;&gt; energy = linspace(8900, 9000, 6)</span>
+<span class="sd">    &gt;&gt;&gt; val    = 8965</span>
+<span class="sd">    &gt;&gt;&gt; # find nearest value</span>
+<span class="sd">    &gt;&gt;&gt; index  = index_nearest(energy, val)</span>
+<span class="sd">    &gt;&gt;&gt; print(index, energy[index], val)</span>
+<span class="sd">    3 8960.0 8965</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; # find strictly lower nearest value</span>
+<span class="sd">    &gt;&gt;&gt; index  = index_nearest(energy, val, kind=&#39;lower&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; print(index, energy[index], val)</span>
+<span class="sd">    3 8960.0 8965</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; # find strictly higher nearest value</span>
+<span class="sd">    &gt;&gt;&gt; index  = index_nearest(energy, val, kind=&#39;higher&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; print(index, energy[index], val)</span>
+<span class="sd">    4 8980.0 8965</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">kinds</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="s1">&#39;higher&#39;</span><span class="p">]</span>
+    
+    <span class="k">if</span> <span class="n">kind</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kinds</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;kind </span><span class="si">%s</span><span class="s1"> not recognized.&#39;</span> <span class="o">%</span> <span class="n">kind</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;=</span> <span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">elif</span> <span class="n">val</span> <span class="o">&gt;=</span> <span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># index starts from cero.</span>
+    <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;nearest&#39;</span><span class="p">:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">data</span><span class="o">-</span><span class="n">val</span><span class="p">)</span><span class="o">.</span><span class="n">argmin</span><span class="p">()</span>
+    <span class="k">elif</span> <span class="n">kind</span> <span class="o">==</span> <span class="s1">&#39;lower&#39;</span><span class="p">:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="o">&lt;=</span><span class="n">val</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># kind higher</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">where</span><span class="p">(</span><span class="n">data</span><span class="o">&gt;=</span><span class="n">val</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">index</span></div>
+
+<div class="viewcode-block" id="interp_yvals"><a class="viewcode-back" href="../../utils_module.html#araucaria.utils.interp_yvals">[docs]</a><span class="k">def</span> <span class="nf">interp_yvals</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">xnew</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">,</span> 
+                <span class="n">kind</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns interpolated values for a 1-D function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    -----------</span>
+<span class="sd">    x</span>
+<span class="sd">        Array with original domain.</span>
+<span class="sd">    y</span>
+<span class="sd">        Array with original values of function f(x)=y.</span>
+<span class="sd">    xnew</span>
+<span class="sd">        Array with new domain.</span>
+<span class="sd">    kind</span>
+<span class="sd">        Type of interpolation.</span>
+<span class="sd">        See :class:`~scipy.interpolate.interp1d` class</span>
+<span class="sd">        for valid types.</span>
+<span class="sd">        Default is &#39;cubic&#39;.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Array with interpolated values.</span>
+<span class="sd">    </span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import linspace</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import interp_yvals</span>
+<span class="sd">    &gt;&gt;&gt; x  = linspace(0,10)</span>
+<span class="sd">    &gt;&gt;&gt; y  = x**2</span>
+<span class="sd">    &gt;&gt;&gt; xp = x[0:10]</span>
+<span class="sd">    &gt;&gt;&gt; yp = interp_yvals(x,y,xp)</span>
+<span class="sd">    &gt;&gt;&gt; print(len(yp))</span>
+<span class="sd">    10</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="n">kind</span><span class="p">)</span>
+    <span class="n">yvals</span> <span class="o">=</span> <span class="n">s</span><span class="p">(</span><span class="n">xnew</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">yvals</span></div>
+
+<div class="viewcode-block" id="read_fdicts"><a class="viewcode-back" href="../../utils_module.html#araucaria.utils.read_fdicts">[docs]</a><span class="k">def</span> <span class="nf">read_fdicts</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Reads file with multiple dictionaries</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        File path.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        List with dictionaries.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from os import remove</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import read_fdicts</span>
+<span class="sd">    &gt;&gt;&gt; fpath =&#39;file.txt&#39;</span>
+<span class="sd">    &gt;&gt;&gt; data  = &quot;{&#39;ener&#39;: [1,2,3], &#39;mu&#39;: [1,2,3]}&quot;</span>
+<span class="sd">    &gt;&gt;&gt; # create file with dictionary data</span>
+<span class="sd">    &gt;&gt;&gt; with open(fpath, &#39;w&#39;) as f:</span>
+<span class="sd">    ...     fw = f.write(data)</span>
+<span class="sd">    &gt;&gt;&gt; # reading file with dictionary</span>
+<span class="sd">    &gt;&gt;&gt; dicts = read_fdicts(fpath)</span>
+<span class="sd">    &gt;&gt;&gt; remove(fpath)</span>
+<span class="sd">    &gt;&gt;&gt; for d in dicts:</span>
+<span class="sd">    ...     print(type(d), d)</span>
+<span class="sd">    &lt;class &#39;dict&#39;&gt; {&#39;ener&#39;: [1, 2, 3], &#39;mu&#39;: [1, 2, 3]}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># regex search for dictionaries</span>
+    <span class="n">regex</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;(\{[\w\s:.,+\-&#39;&quot;\[\]\(\)]+\})&#39;&#39;&#39;</span>
+
+    <span class="c1"># reading file</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">rawdata</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+    <span class="c1"># searching file and creating dictionaries with list comprehension</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">findall</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">rawdata</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="n">literal_eval</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span> <span class="k">for</span> <span class="n">raw</span> <span class="ow">in</span> <span class="n">data</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">data</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

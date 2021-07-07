@@ -1,0 +1,719 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.fit.lcfit &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.fit.lcfit</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.fit.lcfit</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Linear combination fitting (LCF) refers to the interpretation of an unknown XAFS signal as a</span>
+<span class="sd">summation of known XAFS reference signals.</span>
+
+<span class="sd">For the case of the XANES region of an unknown spectrum :math:`\mu_s(E)`, LCF translates into </span>
+<span class="sd">obtaining the amplitude coefficients :math:`\\alpha_i` that minimize the residuals of the following equation:</span>
+
+<span class="sd">.. math::</span>
+<span class="sd">    </span>
+<span class="sd">    \mu_s(E) = \sum_{i=1}^n \\alpha_i \mu_i(E) + \epsilon(E), \quad i \in \{1,\dots,n \}</span>
+
+<span class="sd">Considering the following set of constraints:</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">        0 \leq &amp;\\alpha_i \leq 1, \quad i \in \{1,\dots,n \}</span>
+
+<span class="sd">        \sum_{i=1}^n &amp;\\alpha_i = 1 \quad\\textrm{(optional)}</span>
+
+<span class="sd">Where</span>
+
+<span class="sd">- :math:`E`          : photoelectron energy.</span>
+<span class="sd">- :math:`\mu_s(E)`   : normalized absorption of the fitted spectrum.</span>
+<span class="sd">- :math:`\mu_i(E)`   : normalized absorption of  reference spectrum &quot;i&quot;.</span>
+<span class="sd">- :math:`\\alpha_i`  : amplitude coefficient for reference spectrum &quot;i&quot;.</span>
+<span class="sd">- :math:`\epsilon(E)`: residuals.</span>
+<span class="sd">- :math:`n`          : number of reference spectra.</span>
+
+<span class="sd">Analogously, for the case of the EXAFS region of an unknown spectrum :math:`\chi(k)`, </span>
+<span class="sd">LCF translates into minimizing the residuals of the following equation:</span>
+
+<span class="sd">.. math::</span>
+<span class="sd">    </span>
+<span class="sd">    k^{kw}\chi_s(k) = \sum_{i=1}^n \\alpha_i k^{kw}\chi_i(k) + \epsilon(k), \quad i \in \{1,\dots,n \}</span>
+
+<span class="sd">Considering the following set of constraints:</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">        0 \leq &amp;\\alpha_i \leq 1, \quad i \in \{1,\dots,n \}</span>
+
+<span class="sd">        \sum_{i=1}^n &amp;\\alpha_i = 1 \quad\\textrm{(optional)}</span>
+
+<span class="sd">Where</span>
+
+<span class="sd">- :math:`k`          : photoelectron wavenumber.</span>
+<span class="sd">- :math:`\chi_s(k)`  : EXAFS modulation of the fitted spectrum.</span>
+<span class="sd">- :math:`\chi_i(E)`  : EXAFS modulation of the reference spectrum &quot;i&quot;.</span>
+<span class="sd">- :math:`\epsilon(k)`: residuals.</span>
+<span class="sd">- :math:`kw`         : weighting coefficient for the photoelectron wavenumber.</span>
+
+<span class="sd">The :mod:`~araucaria.fit.lcf` module offers the following functions to perform linear </span>
+<span class="sd">combintation fitting (LCF):</span>
+
+<span class="sd">.. list-table::</span>
+<span class="sd">   :widths: auto</span>
+<span class="sd">   :header-rows: 1</span>
+
+<span class="sd">   * - Function</span>
+<span class="sd">     - Description</span>
+<span class="sd">   * - :func:`lcf`</span>
+<span class="sd">     - Performs LCF on a XAFS spectrum.</span>
+<span class="sd">   * - :func:`lcf_report`</span>
+<span class="sd">     - Returns a formatted LCF report.</span>
+<span class="sd">   * - :func:`sum_references`</span>
+<span class="sd">     - Sum of weighted references.</span>
+<span class="sd">   * - :func:`residuals`</span>
+<span class="sd">     - Calculates residuals for LCF.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">where</span><span class="p">,</span> <span class="n">gradient</span><span class="p">,</span> <span class="n">around</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="nb">sum</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp1d</span>
+<span class="kn">from</span> <span class="nn">lmfit</span> <span class="kn">import</span> <span class="n">Parameter</span><span class="p">,</span> <span class="n">Parameters</span><span class="p">,</span> <span class="n">minimize</span><span class="p">,</span> <span class="n">fit_report</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">Collection</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span><span class="p">,</span> <span class="n">index_xrange</span>
+
+<div class="viewcode-block" id="lcf"><a class="viewcode-back" href="../../../fit/fit_lcf.html#araucaria.fit.lcfit.lcf">[docs]</a><span class="k">def</span> <span class="nf">lcf</span><span class="p">(</span><span class="n">collection</span><span class="p">:</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">fit_region</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">,</span>
+        <span class="n">fit_range</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">inf</span><span class="p">,</span><span class="n">inf</span><span class="p">],</span> <span class="n">scantag</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;scan&#39;</span><span class="p">,</span>
+        <span class="n">reftag</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;ref&#39;</span><span class="p">,</span> <span class="n">kweight</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">sum_one</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">method</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;leastsq&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Performs linear combination fitting on a XAFS spectrum.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    collection</span>
+<span class="sd">        Collection containing the group for LCF analysis and the groups</span>
+<span class="sd">        with the reference scans.</span>
+<span class="sd">    fit_region</span>
+<span class="sd">        XAFS region to perform the LCF. Accepted values are &#39;dxanes&#39;,</span>
+<span class="sd">        &#39;xanes&#39;, or &#39;exafs&#39;. The default is &#39;xanes&#39;.</span>
+<span class="sd">    fit_range</span>
+<span class="sd">        Domain range in absolute values. Energy units are expected</span>
+<span class="sd">        for &#39;dxanes&#39; or &#39;xanes&#39;, while wavenumber (k) units are expected </span>
+<span class="sd">        for &#39;exafs&#39;.</span>
+<span class="sd">        The default is [-:data:`~numpy.inf`, :data:`~numpy.inf`].</span>
+<span class="sd">    scantag</span>
+<span class="sd">        Key to filter the scan group in the collection based on the ``tags`` </span>
+<span class="sd">        attribute. The default is &#39;scan&#39;.</span>
+<span class="sd">    reftag</span>
+<span class="sd">        Key to filter the reference groups in the collection based on the ``tags`` </span>
+<span class="sd">        attribute. The default is &#39;scan&#39;.</span>
+<span class="sd">    kweight</span>
+<span class="sd">        Exponent for weighting chi(k) by k^kweight. Only valid for ``fit_region=&#39;exafs&#39;``. </span>
+<span class="sd">        The default is 2.</span>
+<span class="sd">    sum_one</span>
+<span class="sd">        Conditional to force  sum of fractions to be one.</span>
+<span class="sd">        The default is True.</span>
+<span class="sd">    method</span>
+<span class="sd">        Fitting method. Currently only local optimization methods are supported.</span>
+<span class="sd">        See the :func:`~lmfit.minimizer.minimize` function of ``lmfit`` for a list </span>
+<span class="sd">        of valid methods.</span>
+<span class="sd">        The default is ``leastsq``.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Fit group with the following arguments:</span>
+
+<span class="sd">        - ``energy``   : array with energy values. </span>
+<span class="sd">          Returned only if ``fit_region=&#39;xanes&#39;`` or ``fit_region=&#39;dxanes&#39;``.</span>
+<span class="sd">        - ``k``        : array with wavenumber values. </span>
+<span class="sd">          Returned only if ``fit_region=&#39;exafs&#39;``.</span>
+<span class="sd">        - ``scangroup``: name of the group containing the fitted spectrum.</span>
+<span class="sd">        - ``refgroups``: list with names of groups containing reference spectra. </span>
+<span class="sd">        - ``scan``     : array with values of the fitted spectrum.</span>
+<span class="sd">        - ``ref``      : array with interpolated values for each reference spectrum.</span>
+<span class="sd">        - ``fit``      : array with fit result.</span>
+<span class="sd">        - ``min_pars`` : object with the optimized parameters and goodness-of-fit statistics.</span>
+<span class="sd">        - ``lcf_pars`` : dictionary with lcf parameters.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``collection`` is not a valid Collection instance.</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If ``collection`` has no ``tags`` attribute.</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If groups have no ``energy`` or ``norm`` attribute.</span>
+<span class="sd">        Only verified if ``fit_region=&#39;dxanes&#39;`` or ``fit_region=&#39;xanes&#39;``.</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If groups have no ``k`` or ``chi`` attribute.</span>
+<span class="sd">        Only verified if and ``fit_region=&#39;exafs&#39;``.</span>
+<span class="sd">    KeyError</span>
+<span class="sd">        If ``scantag`` or ``refttag`` are not keys of the ``tags`` attribute.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``fit_region`` is not recognized.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``fit_range`` is outside the doamin of a reference group.</span>
+
+<span class="sd">    Important</span>
+<span class="sd">    ---------</span>
+<span class="sd">    If more than one group in ``collection`` is tagged with ``scantag``, </span>
+<span class="sd">    a warning will be raised and only the first group will be fitted.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The ``min_pars`` object is returned by the :func:`minimize` function of </span>
+<span class="sd">    ``lmfit``, and contains the following attributes (non-exhaustive list):</span>
+<span class="sd">    </span>
+<span class="sd">    - ``params``    : dictionary with the optimized parameters.</span>
+<span class="sd">    - ``var_names`` : ordered list of parameter names used in optimization.</span>
+<span class="sd">    - ``covar``     : covariance matrix from minimization.</span>
+<span class="sd">    - ``init_vals`` : list of initial values for variable parameters using </span>
+<span class="sd">      ``var_names``.</span>
+<span class="sd">    - ``success``   : True if the fit succeeded, otherwise False.</span>
+<span class="sd">    - ``nvarys``    : number of variables.</span>
+<span class="sd">    - ``ndata``     : number of data points.</span>
+<span class="sd">    - ``chisqr``    : chi-square.</span>
+<span class="sd">    - ``redchi``    : reduced chi-square.</span>
+<span class="sd">    - ``residual``  : array with fit residuals.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy.random import seed, normal</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import arange, sin, pi</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Group, Dataset, Collection</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.fit import lcf</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">    &gt;&gt;&gt; seed(1234)  # seed of random values</span>
+<span class="sd">    &gt;&gt;&gt; k    = arange(0,  12,   0.05)</span>
+<span class="sd">    &gt;&gt;&gt; eps  = normal(0, 0.1, len(k))</span>
+<span class="sd">    &gt;&gt;&gt; f1   = 1.2  # freq 1</span>
+<span class="sd">    &gt;&gt;&gt; f2   = 2.6  # freq 2</span>
+<span class="sd">    &gt;&gt;&gt; amp1 = 0.4  # amp 1</span>
+<span class="sd">    &gt;&gt;&gt; amp2 = 0.6  # amp 2</span>
+<span class="sd">    &gt;&gt;&gt; group1 = Group(**{&#39;name&#39;: &#39;group1&#39;, &#39;k&#39;: k, &#39;chi&#39;: sin(2*pi*f1*k)})</span>
+<span class="sd">    &gt;&gt;&gt; group2 = Group(**{&#39;name&#39;: &#39;group2&#39;, &#39;k&#39;: k, &#39;chi&#39;: sin(2*pi*f2*k)})</span>
+<span class="sd">    &gt;&gt;&gt; group3 = Group(**{&#39;name&#39;: &#39;group3&#39;, &#39;k&#39;: k,</span>
+<span class="sd">    ...                   &#39;chi&#39; : amp1 * group1.chi + amp2 * group2.chi + eps})</span>
+<span class="sd">    &gt;&gt;&gt; collection = Collection()</span>
+<span class="sd">    &gt;&gt;&gt; tags = [&#39;ref&#39;, &#39;ref&#39;, &#39;scan&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; for i, group in enumerate((group1,group2, group3)):</span>
+<span class="sd">    ...     collection.add_group(group, tag=tags[i])</span>
+<span class="sd">    &gt;&gt;&gt; # performing lcf</span>
+<span class="sd">    &gt;&gt;&gt; out = lcf(collection, fit_region=&#39;exafs&#39;, fit_range=[3,10], </span>
+<span class="sd">    ...           kweight=0, sum_one=False)</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(out, Dataset, </span>
+<span class="sd">    ... attrlist=[&#39;k&#39;, &#39;scangroup&#39;, &#39;refgroups&#39;, </span>
+<span class="sd">    ... &#39;scan&#39;, &#39;ref1&#39;, &#39;ref2&#39;, &#39;fit&#39;, &#39;min_pars&#39;, &#39;lcf_pars&#39;])</span>
+<span class="sd">    [True, True, True, True, True, True, True, True, True]</span>
+<span class="sd">    &gt;&gt;&gt; for key, val in out.min_pars.params.items():</span>
+<span class="sd">    ...     print(&#39;%1.4f +/- %1.4f&#39; % (val.value, val.stderr))</span>
+<span class="sd">    0.4003 +/- 0.0120</span>
+<span class="sd">    0.5943 +/- 0.0120</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="c1"># checking class and attributes</span>
+    <span class="n">check_objattrs</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># verifying fit type</span>
+    <span class="n">fit_valid</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dxanes&#39;</span><span class="p">,</span> <span class="s1">&#39;xanes&#39;</span><span class="p">,</span><span class="s1">&#39;exafs&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">fit_region</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fit_valid</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;fit_region </span><span class="si">%s</span><span class="s1"> not recognized.&#39;</span><span class="o">%</span><span class="n">fit_region</span><span class="p">)</span>
+
+    <span class="c1"># required groups</span>
+    <span class="c1"># at least a spectrum and a single reference must be provided</span>
+    <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="p">(</span><span class="n">scantag</span><span class="p">,</span> <span class="n">reftag</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">collection</span><span class="o">.</span><span class="n">tags</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="si">%s</span><span class="s2">&#39; is not a valid key for the collection.&quot;</span> <span class="o">%</span> <span class="n">tag</span><span class="p">)</span>
+
+    <span class="c1"># scan and ref tags</span>
+    <span class="n">scangroup</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">scantag</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">scangroup</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="n">warn</span><span class="p">(</span><span class="s2">&quot;More than one group is tagged as scan. Only the first group will be considered.&quot;</span><span class="p">)</span>
+    <span class="n">scangroup</span> <span class="o">=</span> <span class="n">scangroup</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">refgroups</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">reftag</span><span class="p">]</span>
+    <span class="n">refgroups</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+    <span class="c1"># the first element is the scan group</span>
+    <span class="n">groups</span> <span class="o">=</span> <span class="p">[</span><span class="n">scangroup</span><span class="p">]</span> <span class="o">+</span> <span class="n">refgroups</span>
+
+    <span class="c1"># storing report parameters</span>
+    <span class="n">lcf_pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fit_region&#39;</span><span class="p">:</span><span class="n">fit_region</span><span class="p">,</span> <span class="s1">&#39;fit_range&#39;</span><span class="p">:</span><span class="n">fit_range</span><span class="p">,</span> <span class="s1">&#39;sum_one&#39;</span><span class="p">:</span><span class="n">sum_one</span><span class="p">}</span>
+
+    <span class="c1"># report parameters for exafs lcf</span>
+    <span class="k">if</span> <span class="n">fit_region</span> <span class="o">==</span> <span class="s1">&#39;exafs&#39;</span><span class="p">:</span>
+        <span class="n">lcf_pars</span><span class="p">[</span><span class="s1">&#39;kweight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kweight</span>
+        <span class="c1"># storing name of x-variable (exafs)</span>
+        <span class="n">xvar</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span>
+    <span class="c1"># report parameters for xanes/dxanes lcf</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># storing name of x-variable (xanes/dxanes)</span>
+        <span class="n">xvar</span> <span class="o">=</span> <span class="s1">&#39;energy&#39;</span>
+
+    <span class="c1"># content dictionary</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;scangroup&#39;</span><span class="p">:</span> <span class="n">scangroup</span><span class="p">,</span>
+               <span class="s1">&#39;refgroups&#39;</span><span class="p">:</span> <span class="n">refgroups</span><span class="p">}</span>
+    
+    <span class="c1"># reading and processing spectra</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">groups</span><span class="p">):</span>
+        <span class="n">dname</span> <span class="o">=</span> <span class="s1">&#39;scan&#39;</span> <span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;ref&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">fit_region</span> <span class="o">==</span> <span class="s1">&#39;exafs&#39;</span><span class="p">:</span>
+            <span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;chi&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># fit_region == &#39;xanes&#39; or &#39;dxanes&#39;</span>
+            <span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;norm&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># first value is the spectrum, so we extract the </span>
+            <span class="c1"># interpolation values from xvar</span>
+            <span class="n">xvals</span>  <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">xvar</span><span class="p">)</span>
+            <span class="n">index</span>  <span class="o">=</span> <span class="n">index_xrange</span><span class="p">(</span><span class="n">fit_range</span><span class="p">,</span> <span class="n">xvals</span><span class="p">)</span>
+            <span class="n">xvals</span>  <span class="o">=</span> <span class="n">xvals</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+            <span class="c1"># storing the y-variable</span>
+            <span class="k">if</span> <span class="n">fit_region</span> <span class="o">==</span> <span class="s1">&#39;exafs&#39;</span><span class="p">:</span>
+                <span class="n">yvals</span> <span class="o">=</span> <span class="n">xvals</span><span class="o">**</span><span class="n">kweight</span><span class="o">*</span><span class="n">group</span><span class="o">.</span><span class="n">chi</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">fit_region</span> <span class="o">==</span> <span class="s1">&#39;xanes&#39;</span><span class="p">:</span>
+                <span class="n">yvals</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">norm</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># derivative lcf</span>
+                <span class="n">yvals</span> <span class="o">=</span> <span class="n">gradient</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">norm</span><span class="p">[</span><span class="n">index</span><span class="p">])</span> <span class="o">/</span> <span class="n">gradient</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">energy</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># spline interpolation of references</span>
+            <span class="k">if</span> <span class="n">fit_region</span> <span class="o">==</span> <span class="s1">&#39;exafs&#39;</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">k</span><span class="o">**</span><span class="n">kweight</span><span class="o">*</span><span class="n">group</span><span class="o">.</span><span class="n">chi</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">fit_region</span> <span class="o">==</span><span class="s1">&#39;xanes&#39;</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">norm</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="n">gradient</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">norm</span><span class="p">)</span><span class="o">/</span><span class="n">gradient</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">energy</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span>
+            
+            <span class="c1"># interpolating in the fit range</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">yvals</span> <span class="o">=</span> <span class="n">s</span><span class="p">(</span><span class="n">xvals</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;fit_range is outside the domain of group </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        
+        <span class="c1"># saving yvals in the dictionary</span>
+        <span class="n">content</span><span class="p">[</span><span class="n">dname</span><span class="p">]</span> <span class="o">=</span> <span class="n">yvals</span>
+
+    <span class="c1"># setting xvar as an attribute of datgroup</span>
+    <span class="n">content</span><span class="p">[</span><span class="n">xvar</span><span class="p">]</span> <span class="o">=</span> <span class="n">xvals</span>
+    
+    <span class="c1"># setting initial values and parameters for fit model</span>
+    <span class="n">initval</span> <span class="o">=</span> <span class="n">around</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">params</span>  <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+    <span class="n">expr</span>    <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">parname</span> <span class="o">=</span> <span class="s1">&#39;amp&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">sum_one</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="p">):</span>
+            <span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">parname</span><span class="p">,</span> <span class="n">expr</span><span class="o">=</span><span class="n">expr</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">parname</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">initval</span><span class="p">,</span> <span class="nb">min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nb">max</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">vary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">expr</span> <span class="o">+=</span> <span class="s1">&#39; - amp&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1"># perform fit</span>
+    <span class="nb">min</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">content</span><span class="p">,))</span>
+    
+    <span class="c1"># storing fit data, parameters, and results</span>
+    <span class="n">content</span><span class="p">[</span><span class="s1">&#39;fit&#39;</span><span class="p">]</span>      <span class="o">=</span> <span class="n">sum_references</span><span class="p">(</span><span class="nb">min</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+    <span class="n">content</span><span class="p">[</span><span class="s1">&#39;lcf_pars&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lcf_pars</span>
+    <span class="n">content</span><span class="p">[</span><span class="s1">&#39;min_pars&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span>
+    
+    <span class="n">out</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="o">**</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+
+<div class="viewcode-block" id="lcf_report"><a class="viewcode-back" href="../../../fit/fit_lcf.html#araucaria.fit.lcfit.lcf_report">[docs]</a><span class="k">def</span> <span class="nf">lcf_report</span><span class="p">(</span><span class="n">out</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns a formatted LCF Report to ``sys.stdout``.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    out</span>
+<span class="sd">        Valid Dataset from :func:`lcf`.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        LCF report.</span>
+<span class="sd">        </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``out`` is not a valid Dataset instance.</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If attribute ``min_pars``, ``lcf_pars``, ``scangroup``,</span>
+<span class="sd">        or ``refgroups`` does not exist in ``group``.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    :func:`lcf_report` is a wrapper for :func:`fit_report` of ``lmfit``,</span>
+<span class="sd">    that writes additional information on group names and calling parameters.</span>
+<span class="sd">    </span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy.random import seed, normal</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import arange, sin, pi</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Group, Collection</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.fit import lcf, lcf_report</span>
+<span class="sd">    &gt;&gt;&gt; seed(1234)  # seed of random values</span>
+<span class="sd">    &gt;&gt;&gt; k    = arange(0,  12,   0.05)</span>
+<span class="sd">    &gt;&gt;&gt; eps  = normal(0, 0.1, len(k))</span>
+<span class="sd">    &gt;&gt;&gt; f1   = 1.2  # freq 1</span>
+<span class="sd">    &gt;&gt;&gt; f2   = 2.6  # freq 2</span>
+<span class="sd">    &gt;&gt;&gt; amp1 = 0.4  # amp 1</span>
+<span class="sd">    &gt;&gt;&gt; amp2 = 0.6  # amp 2</span>
+<span class="sd">    &gt;&gt;&gt; group1 = Group(**{&#39;name&#39;: &#39;group1&#39;, &#39;k&#39;: k, &#39;chi&#39;: sin(2*pi*f1*k)})</span>
+<span class="sd">    &gt;&gt;&gt; group2 = Group(**{&#39;name&#39;: &#39;group2&#39;, &#39;k&#39;: k, &#39;chi&#39;: sin(2*pi*f2*k)})</span>
+<span class="sd">    &gt;&gt;&gt; group3 = Group(**{&#39;name&#39;: &#39;group3&#39;, &#39;k&#39;: k,</span>
+<span class="sd">    ...                   &#39;chi&#39; : amp1 * group1.chi + amp2 * group2.chi + eps})</span>
+<span class="sd">    &gt;&gt;&gt; collection = Collection()</span>
+<span class="sd">    &gt;&gt;&gt; tags = [&#39;ref&#39;, &#39;ref&#39;, &#39;scan&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; for i,group in enumerate((group1,group2, group3)):</span>
+<span class="sd">    ...     collection.add_group(group, tag=tags[i])</span>
+<span class="sd">    &gt;&gt;&gt; # performing lcf</span>
+<span class="sd">    &gt;&gt;&gt; out = lcf(collection, fit_region=&#39;exafs&#39;, fit_range=[3,10], </span>
+<span class="sd">    ...           kweight=0, sum_one=False)</span>
+<span class="sd">    &gt;&gt;&gt; print(lcf_report(out))</span>
+<span class="sd">    [[Parameters]]</span>
+<span class="sd">        fit_region         = exafs</span>
+<span class="sd">        fit_range          = [3, 10]</span>
+<span class="sd">        sum_one            = False</span>
+<span class="sd">        kweight            = 0</span>
+<span class="sd">    [[Groups]]</span>
+<span class="sd">        scan               = group3</span>
+<span class="sd">        ref1               = group1</span>
+<span class="sd">        ref2               = group2</span>
+<span class="sd">    [[Fit Statistics]]</span>
+<span class="sd">        # fitting method   = leastsq</span>
+<span class="sd">        # function evals   = 10</span>
+<span class="sd">        # data points      = 141</span>
+<span class="sd">        # variables        = 2</span>
+<span class="sd">        chi-square         = 1.40551323</span>
+<span class="sd">        reduced chi-square = 0.01011161</span>
+<span class="sd">        Akaike info crit   = -645.778389</span>
+<span class="sd">        Bayesian info crit = -639.880869</span>
+<span class="sd">    [[Variables]]</span>
+<span class="sd">        amp1:  0.40034377 +/- 0.01195335 (2.99%) (init = 0.5)</span>
+<span class="sd">        amp2:  0.59428689 +/- 0.01199230 (2.02%) (init = 0.5)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">check_objattrs</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;min_pars&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;lcf_pars&#39;</span><span class="p">,</span> <span class="s1">&#39;scangroup&#39;</span><span class="p">,</span> <span class="s1">&#39;refgroups&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="n">header</span> <span class="o">=</span> <span class="s1">&#39;[[Parameters]]</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">lcf_pars</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">header</span> <span class="o">+</span> <span class="s1">&#39;    </span><span class="si">{0:19}</span><span class="s1">= </span><span class="si">{1}</span><span class="se">\n</span><span class="s1">&#39;</span>\
+        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+
+    <span class="n">header</span> <span class="o">=</span> <span class="n">header</span><span class="o">+</span><span class="s1">&#39;[[Groups]]</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(([</span><span class="n">out</span><span class="o">.</span><span class="n">scangroup</span><span class="p">]</span> <span class="o">+</span> <span class="n">out</span><span class="o">.</span><span class="n">refgroups</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;scan&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;ref</span><span class="si">%i</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">i</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="n">header</span> <span class="o">+</span> <span class="s1">&#39;    </span><span class="si">{0:19}</span><span class="s1">= </span><span class="si">{1}</span><span class="se">\n</span><span class="s1">&#39;</span>\
+        <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">header</span><span class="o">+</span><span class="n">fit_report</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">min_pars</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="sum_references"><a class="viewcode-back" href="../../../fit/fit_lcf.html#araucaria.fit.lcfit.sum_references">[docs]</a><span class="k">def</span> <span class="nf">sum_references</span><span class="p">(</span><span class="n">pars</span><span class="p">:</span> <span class="n">Parameter</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns the sum of references weighted by amplitude coefficients.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pars</span>
+<span class="sd">        Parameter object from ``lmfit`` containing the amplitude</span>
+<span class="sd">        coefficients for each reference spectrum. At least attribute</span>
+<span class="sd">        &#39;amp1&#39; should exist in the object.</span>
+<span class="sd">    data</span>
+<span class="sd">        Dictionary with the reference arrays. At leasr key &#39;ref1&#39;</span>
+<span class="sd">        should exist in the dictionary.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Sum of references weighted by amplitude coefficients.</span>
+<span class="sd">        </span>
+<span class="sd">    Important</span>
+<span class="sd">    -----</span>
+<span class="sd">    The number of &#39;amp&#39; attributes in ``pars`` should match the </span>
+<span class="sd">    number of &#39;ref&#39; keys in ``data``.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import allclose</span>
+<span class="sd">    &gt;&gt;&gt; from lmfit import Parameters</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.fit import sum_references</span>
+<span class="sd">    &gt;&gt;&gt; pars = Parameters()</span>
+<span class="sd">    &gt;&gt;&gt; pars.add(&#39;amp1&#39;, value=0.4)</span>
+<span class="sd">    &gt;&gt;&gt; pars.add(&#39;amp2&#39;, value=0.7)</span>
+<span class="sd">    &gt;&gt;&gt; data = {&#39;ref1&#39;: 1.0, &#39;ref2&#39;: 2.0}</span>
+<span class="sd">    &gt;&gt;&gt; allclose(sum_references(pars, data), 1.8)</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">sum</span><span class="p">([</span><span class="n">pars</span><span class="p">[</span><span class="s1">&#39;amp&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span><span class="o">*</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;ref&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)]</span> 
+                   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">pars</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="residuals"><a class="viewcode-back" href="../../../fit/fit_lcf.html#araucaria.fit.lcfit.residuals">[docs]</a><span class="k">def</span> <span class="nf">residuals</span><span class="p">(</span><span class="n">pars</span><span class="p">:</span> <span class="n">Parameter</span> <span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Residuals between a spectrum and a linear combination of references.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    pars</span>
+<span class="sd">        Parameter object from ``lmfit`` containing the amplitude</span>
+<span class="sd">        coefficients for each reference spectrum. At least attribute</span>
+<span class="sd">        &#39;amp1&#39; should exist in the object.</span>
+<span class="sd">    data</span>
+<span class="sd">        Dictionary with the scan and reference arrays.</span>
+<span class="sd">        At least keys &#39;scan&#39; and &#39;ref1&#39; should exist in</span>
+<span class="sd">        the dictionary.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Array with residuals.</span>
+
+<span class="sd">    Important</span>
+<span class="sd">    -----</span>
+<span class="sd">    The number of &#39;amp&#39; attributes in ``pars`` should match the </span>
+<span class="sd">    number of &#39;ref&#39; keys in ``data``.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import allclose</span>
+<span class="sd">    &gt;&gt;&gt; from lmfit import Parameters</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.fit import residuals</span>
+<span class="sd">    &gt;&gt;&gt; pars = Parameters()</span>
+<span class="sd">    &gt;&gt;&gt; pars.add(&#39;amp1&#39;, value=0.4)</span>
+<span class="sd">    &gt;&gt;&gt; pars.add(&#39;amp2&#39;, value=0.7)</span>
+<span class="sd">    &gt;&gt;&gt; data = {&#39;scan&#39;: 2, &#39;ref1&#39;: 1.0, &#39;ref2&#39;: 2.0}</span>
+<span class="sd">    &gt;&gt;&gt; allclose(residuals(pars, data), 0.2)</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; data[&#39;scan&#39;] = 1.6</span>
+<span class="sd">    &gt;&gt;&gt; allclose(residuals(pars, data), -0.2)</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">eps</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;scan&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">sum_references</span><span class="p">(</span><span class="n">pars</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span><span class="o">/</span><span class="n">eps</span></div>
+    
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

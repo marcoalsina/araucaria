@@ -1,0 +1,598 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.linalg.la &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.linalg.la</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.linalg.la</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">inf</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">cond</span>
+<span class="kn">from</span> <span class="nn">scipy.linalg.interpolative</span> <span class="kn">import</span> <span class="n">estimate_rank</span><span class="p">,</span> <span class="n">interp_decomp</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">Collection</span>
+<span class="kn">from</span> <span class="nn">..xas.xasutils</span> <span class="kn">import</span> <span class="n">get_mapped_data</span>
+
+<div class="viewcode-block" id="cond_num"><a class="viewcode-back" href="../../../linalg_module.html#araucaria.linalg.la.cond_num">[docs]</a><span class="k">def</span> <span class="nf">cond_num</span><span class="p">(</span><span class="n">collection</span><span class="p">:</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">taglist</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">],</span>
+             <span class="n">region</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">inf</span><span class="p">,</span><span class="n">inf</span><span class="p">],</span> 
+             <span class="nb">ord</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kweight</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Computes the condition number of a collection.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    collection</span>
+<span class="sd">        Collection with the groups to compute the condition number.</span>
+<span class="sd">    taglist</span>
+<span class="sd">        List with keys to filter groups based on their ``tags``</span>
+<span class="sd">        attributes in the Collection.</span>
+<span class="sd">        The default is [&#39;all&#39;].</span>
+<span class="sd">    region</span>
+<span class="sd">        XAFS region to compute the condition number. Accepted values are &#39;dxanes&#39;,</span>
+<span class="sd">        &#39;xanes&#39;, or &#39;exafs&#39;. The default is &#39;xanes&#39;.</span>
+<span class="sd">    range</span>
+<span class="sd">        Domain range in absolute values. Energy units are expected</span>
+<span class="sd">        for &#39;dxanes&#39; or &#39;xanes&#39;, while wavenumber (k) units are expected </span>
+<span class="sd">        for &#39;exafs&#39;.</span>
+<span class="sd">        The default is [-:data:`~numpy.inf`, :data:`~numpy.inf`].</span>
+<span class="sd">    ord</span>
+<span class="sd">        Order of the norm. See :func:`~numpy.linalg.cond` for details.</span>
+<span class="sd">        The default is None, which equals to 2-norm.</span>
+<span class="sd">    kweight</span>
+<span class="sd">        Exponent for weighting chi(k) by k^kweight.</span>
+<span class="sd">        Only valid for ``region=&#39;exafs&#39;``.</span>
+<span class="sd">        The default is 2.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Dataset with the following arguments:</span>
+
+<span class="sd">        - ``cn``           : condition number.</span>
+<span class="sd">        - ``groupnames``   : list with names of groups.</span>
+<span class="sd">        - ``energy``       : array with energy values. Returned only if</span>
+<span class="sd">          ``region=&#39;xanes`` or ``region=dxanes``.</span>
+<span class="sd">        - ``k``            : array with wavenumber values. Returned only if</span>
+<span class="sd">          ``region=&#39;exafs&#39;``.</span>
+<span class="sd">        - ``matrix``       : array with observed values for groups in ``range``.</span>
+<span class="sd">        - ``cond_pars``    : dictionary with parameters of calculation.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The condition number measures the amplification of the output </span>
+<span class="sd">    as a function of a small change in the input parameters. </span>
+<span class="sd">    For a linear system :math:`Ax=b`, the condition number :math:`\kappa(A)` </span>
+<span class="sd">    is formally defined as:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        \kappa(A) = ||A^{-1}|| \\text{ } ||A||</span>
+
+<span class="sd">    The interpretation of the condition number can be established with the </span>
+<span class="sd">    following inequality [1]_:</span>
+
+<span class="sd">    .. math::</span>
+<span class="sd">        </span>
+<span class="sd">        \\frac{|| \delta x ||}{||x||} \le \kappa(A) \\frac{|| \delta b||}{||b||}</span>
+
+<span class="sd">    Therefore, if :math:`\kappa(A) = 10^k` then one expects to lose </span>
+<span class="sd">    :math:`k` digits of precision in :math:`x` when solving the linear system.</span>
+<span class="sd">    Linear systems with large :math:`\kappa(A)` are said to be **ill-conditioned**,</span>
+<span class="sd">    and the obtained results can exhibit large errors.</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] Cheney, W. and Kincaid, D. (2008) &quot;Numerical Mathematics and Computing&quot;,</span>
+<span class="sd">       6th Edition, pp. 321.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Dataset</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xas import pre_edge, autobk</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.linalg import cond_num</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_collection_hdf5</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">    &gt;&gt;&gt; fpath      = get_testpath(&#39;Fe_database.h5&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; collection = read_collection_hdf5(fpath)</span>
+<span class="sd">    &gt;&gt;&gt; collection.apply(pre_edge)</span>
+<span class="sd">    &gt;&gt;&gt; out        = cond_num(collection, region=&#39;xanes&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; attrs      = [&#39;groupnames&#39;, &#39;energy&#39;, &#39;matrix&#39;, &#39;cond&#39;, &#39;cond_pars&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(out, Dataset, attrs)</span>
+<span class="sd">    [True, True, True, True, True]</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;%1.3f&#39; % out.cond)</span>
+<span class="sd">    241.808</span>
+
+<span class="sd">    &gt;&gt;&gt; # condition number of exafs</span>
+<span class="sd">    &gt;&gt;&gt; collection.apply(autobk)</span>
+<span class="sd">    &gt;&gt;&gt; out   = cond_num(collection, region=&#39;exafs&#39;, range=[0,10])</span>
+<span class="sd">    &gt;&gt;&gt; attrs = [&#39;groupnames&#39;, &#39;k&#39;, &#39;matrix&#39;, &#39;cond&#39;, &#39;cond_pars&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(out, Dataset, attrs)</span>
+<span class="sd">    [True, True, True, True, True]</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;%1.3f&#39; % out.cond)</span>
+<span class="sd">    7.019</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xvals</span><span class="p">,</span> <span class="n">matrix</span> <span class="o">=</span> <span class="n">get_mapped_data</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="n">region</span><span class="p">,</span> 
+                                    <span class="nb">range</span><span class="o">=</span><span class="nb">range</span><span class="p">,</span> <span class="n">kweight</span><span class="o">=</span><span class="n">kweight</span><span class="p">)</span>
+
+    <span class="c1"># condtion number</span>
+    <span class="n">cn</span> <span class="o">=</span> <span class="n">cond</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="nb">ord</span><span class="p">)</span>
+
+    <span class="c1"># storing parameters</span>
+    <span class="n">cond_pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;region&#39;</span> <span class="p">:</span> <span class="n">region</span><span class="p">,</span> 
+                 <span class="s1">&#39;range&#39;</span>  <span class="p">:</span> <span class="nb">range</span><span class="p">,</span>
+                 <span class="s1">&#39;ord&#39;</span>    <span class="p">:</span> <span class="nb">ord</span><span class="p">,}</span>
+
+    <span class="c1"># additional parameters</span>
+    <span class="k">if</span> <span class="n">region</span> <span class="o">==</span> <span class="s1">&#39;exafs&#39;</span><span class="p">:</span>
+        <span class="n">xvar</span>  <span class="o">=</span> <span class="s1">&#39;k&#39;</span>    <span class="c1"># x-variable</span>
+        <span class="n">cond_pars</span><span class="p">[</span><span class="s1">&#39;kweight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kweight</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># xanes/dxanes clustering</span>
+        <span class="n">xvar</span>  <span class="o">=</span> <span class="s1">&#39;energy&#39;</span>    <span class="c1"># x-variable</span>
+
+    <span class="c1"># storing cluster results</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;groupnames&#39;</span>   <span class="p">:</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">(</span><span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">),</span>
+               <span class="n">xvar</span>           <span class="p">:</span> <span class="n">xvals</span><span class="p">,</span>
+               <span class="s1">&#39;matrix&#39;</span>       <span class="p">:</span> <span class="n">matrix</span><span class="p">,</span>
+               <span class="s1">&#39;cond&#39;</span>         <span class="p">:</span> <span class="n">cn</span><span class="p">,</span>
+               <span class="s1">&#39;cond_pars&#39;</span>    <span class="p">:</span> <span class="n">cond_pars</span><span class="p">,}</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="o">**</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+
+<div class="viewcode-block" id="imd"><a class="viewcode-back" href="../../../linalg_module.html#araucaria.linalg.la.imd">[docs]</a><span class="k">def</span> <span class="nf">imd</span><span class="p">(</span><span class="n">collection</span><span class="p">:</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">taglist</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">],</span>
+                <span class="n">region</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">inf</span><span class="p">,</span><span class="n">inf</span><span class="p">],</span> 
+                <span class="n">eps</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">kweight</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Computes the interpolative matrix decomposition for a collection.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    collection</span>
+<span class="sd">        Collection with the groups to compute the rank.</span>
+<span class="sd">    taglist</span>
+<span class="sd">        List with keys to filter groups based on their ``tags``</span>
+<span class="sd">        attributes in the Collection.</span>
+<span class="sd">        The default is [&#39;all&#39;].</span>
+<span class="sd">    region</span>
+<span class="sd">        XAFS region to compute the rank. Accepted values are &#39;dxanes&#39;,</span>
+<span class="sd">        &#39;xanes&#39;, or &#39;exafs&#39;. The default is &#39;xanes&#39;.</span>
+<span class="sd">    range</span>
+<span class="sd">        Domain range in absolute values. Energy units are expected</span>
+<span class="sd">        for &#39;dxanes&#39; or &#39;xanes&#39;, while wavenumber (k) units are expected </span>
+<span class="sd">        for &#39;exafs&#39;.</span>
+<span class="sd">        The default is [-:data:`~numpy.inf`, :data:`~numpy.inf`].</span>
+<span class="sd">    eps</span>
+<span class="sd">        Relative error of approximation.</span>
+<span class="sd">        The default is 1e-4.</span>
+<span class="sd">    kweight</span>
+<span class="sd">        Exponent for weighting chi(k) by k^kweight.</span>
+<span class="sd">        Only valid for ``region=&#39;exafs&#39;``.</span>
+<span class="sd">        The default is 2.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Dataset with the following arguments:</span>
+
+<span class="sd">        - ``rank``         : matrix rank.</span>
+<span class="sd">        - ``idx``          : column index array.</span>
+<span class="sd">        - ``proj``         : interpolation coefficients.</span>
+<span class="sd">        - ``groupnames``   : list with names of groups.</span>
+<span class="sd">        - ``energy``       : array with energy values. Returned only if</span>
+<span class="sd">          ``region=&#39;xanes`` or ``region=dxanes``.</span>
+<span class="sd">        - ``k``            : array with wavenumber values. Returned only if</span>
+<span class="sd">          ``region=&#39;exafs&#39;``.</span>
+<span class="sd">        - ``matrix``       : array with observed values for groups in ``range``.</span>
+<span class="sd">        - ``id_pars``      : dictionary with parameters of calculation.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The interpolative decomposition (ID) of a :math:`m` by :math:`n` </span>
+<span class="sd">    matrix :math:`A` of rank :math:`k &lt; min\{m,n\}` is a factorization </span>
+<span class="sd">    of the following form,</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">       A\Pi = [A\Pi_1 \quad A\Pi_2 ] = A \Pi_1 [I \quad T]</span>
+<span class="sd">    </span>
+<span class="sd">    where :math:`\Pi = [\Pi_1 \quad \Pi_2]` is a permutation matrix, </span>
+<span class="sd">    with :math:`\Pi_1` being a :math:`k` by :math:`n` matrix.</span>
+<span class="sd">    </span>
+<span class="sd">    The latter can be equivalently written as :math:`A = BP`, where :math:`B`</span>
+<span class="sd">    is known as the *skeleton matrix*, while :math:`P` is known as the </span>
+<span class="sd">    *interpolation matrix*.</span>
+
+<span class="sd">    Therefore, the original matrix can be factorized into an skeleton matrix that</span>
+<span class="sd">    preserves the original matrix rank, while the rest of the original matrix can </span>
+<span class="sd">    be reconstructed through the interpolation matrix.</span>
+
+<span class="sd">    Computation of the interpolative decompsition method is performed with the</span>
+<span class="sd">    :func:`~scipy.linalg.interpolative.interp_decomp` function of ``scipy``, which is</span>
+<span class="sd">    based on the ID software package [2]_. Therefore, the *skeleton matrix* can be </span>
+<span class="sd">    computed as follows::</span>
+<span class="sd">    </span>
+<span class="sd">        B = A[:,idx[:rank]]</span>
+
+<span class="sd">    while the *interpolation matrix* can be computed as follows::</span>
+<span class="sd">    </span>
+<span class="sd">        P = numpy.hstack([numpy.eye(rank), proj])[:, np.argsort(idx)]</span>
+
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">     .. [2] P.G. Martinsson, V. Rokhlin, Y. Shkolnisky, M. Tygert. </span>
+<span class="sd">        “ID: a software package for low-rank approximation of matrices via interpolative </span>
+<span class="sd">        decompositions, version 0.2.” http://tygert.com/id_doc.4.pdf.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Dataset</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xas import pre_edge, autobk</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.linalg import imd</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_collection_hdf5</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">    &gt;&gt;&gt; fpath      = get_testpath(&#39;Fe_database.h5&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; collection = read_collection_hdf5(fpath)</span>
+<span class="sd">    &gt;&gt;&gt; collection.apply(pre_edge)</span>
+<span class="sd">    &gt;&gt;&gt; out        = imd(collection, region=&#39;xanes&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; attrs      = [&#39;groupnames&#39;, &#39;energy&#39;, &#39;matrix&#39;, &#39;rank&#39;, &#39;idx&#39;, &#39;proj&#39;, &#39;id_pars&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(out, Dataset, attrs)</span>
+<span class="sd">    [True, True, True, True, True, True, True]</span>
+<span class="sd">    &gt;&gt;&gt; print(out.idx)</span>
+<span class="sd">    [0 1 3 2]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xvals</span><span class="p">,</span> <span class="n">matrix</span> <span class="o">=</span> <span class="n">get_mapped_data</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="n">region</span><span class="p">,</span> 
+                                    <span class="nb">range</span><span class="o">=</span><span class="nb">range</span><span class="p">,</span> <span class="n">kweight</span><span class="o">=</span><span class="n">kweight</span><span class="p">)</span>
+
+    <span class="c1"># condtion number</span>
+    <span class="n">rnk</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">proj</span> <span class="o">=</span> <span class="n">interp_decomp</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">eps_or_k</span><span class="o">=</span><span class="n">eps</span><span class="p">)</span>
+
+    <span class="c1"># storing parameters</span>
+    <span class="n">id_pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;region&#39;</span> <span class="p">:</span> <span class="n">region</span><span class="p">,</span> 
+               <span class="s1">&#39;range&#39;</span>  <span class="p">:</span> <span class="nb">range</span><span class="p">,</span>
+               <span class="s1">&#39;eps&#39;</span>    <span class="p">:</span> <span class="n">eps</span><span class="p">,}</span>
+
+    <span class="c1"># additional parameters</span>
+    <span class="k">if</span> <span class="n">region</span> <span class="o">==</span> <span class="s1">&#39;exafs&#39;</span><span class="p">:</span>
+        <span class="n">xvar</span>  <span class="o">=</span> <span class="s1">&#39;k&#39;</span>    <span class="c1"># x-variable</span>
+        <span class="n">rank_pars</span><span class="p">[</span><span class="s1">&#39;kweight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kweight</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># xanes/dxanes clustering</span>
+        <span class="n">xvar</span>  <span class="o">=</span> <span class="s1">&#39;energy&#39;</span>    <span class="c1"># x-variable</span>
+
+    <span class="c1"># storing cluster results</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;groupnames&#39;</span> <span class="p">:</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">(</span><span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">),</span>
+               <span class="n">xvar</span>         <span class="p">:</span> <span class="n">xvals</span><span class="p">,</span>
+               <span class="s1">&#39;matrix&#39;</span>     <span class="p">:</span> <span class="n">matrix</span><span class="p">,</span>
+               <span class="s1">&#39;rank&#39;</span>       <span class="p">:</span> <span class="n">rnk</span><span class="p">,</span>
+               <span class="s1">&#39;idx&#39;</span>        <span class="p">:</span> <span class="n">idx</span><span class="p">,</span>
+               <span class="s1">&#39;proj&#39;</span>       <span class="p">:</span> <span class="n">proj</span><span class="p">,</span>
+               <span class="s1">&#39;id_pars&#39;</span>    <span class="p">:</span> <span class="n">id_pars</span><span class="p">,}</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="o">**</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+
+<div class="viewcode-block" id="matrix_rank"><a class="viewcode-back" href="../../../linalg_module.html#araucaria.linalg.la.matrix_rank">[docs]</a><span class="k">def</span> <span class="nf">matrix_rank</span><span class="p">(</span><span class="n">collection</span><span class="p">:</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">taglist</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">],</span>
+                <span class="n">region</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">inf</span><span class="p">,</span><span class="n">inf</span><span class="p">],</span> 
+                <span class="n">eps</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">,</span> <span class="n">kweight</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Computes the matrix rank of a collection.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    collection</span>
+<span class="sd">        Collection with the groups to compute the rank.</span>
+<span class="sd">    taglist</span>
+<span class="sd">        List with keys to filter groups based on their ``tags``</span>
+<span class="sd">        attributes in the Collection.</span>
+<span class="sd">        The default is [&#39;all&#39;].</span>
+<span class="sd">    region</span>
+<span class="sd">        XAFS region to compute the rank. Accepted values are &#39;dxanes&#39;,</span>
+<span class="sd">        &#39;xanes&#39;, or &#39;exafs&#39;. The default is &#39;xanes&#39;.</span>
+<span class="sd">    range</span>
+<span class="sd">        Domain range in absolute values. Energy units are expected</span>
+<span class="sd">        for &#39;dxanes&#39; or &#39;xanes&#39;, while wavenumber (k) units are expected </span>
+<span class="sd">        for &#39;exafs&#39;.</span>
+<span class="sd">        The default is [-:data:`~numpy.inf`, :data:`~numpy.inf`].</span>
+<span class="sd">    eps</span>
+<span class="sd">        Relative error for computation of rank.</span>
+<span class="sd">        The default is 1e-4.</span>
+<span class="sd">    kweight</span>
+<span class="sd">        Exponent for weighting chi(k) by k^kweight.</span>
+<span class="sd">        Only valid for ``region=&#39;exafs&#39;``.</span>
+<span class="sd">        The default is 2.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Dataset with the following arguments:</span>
+
+<span class="sd">        - ``rank``         : matrix rank.</span>
+<span class="sd">        - ``groupnames``   : list with names of groups.</span>
+<span class="sd">        - ``energy``       : array with energy values. Returned only if</span>
+<span class="sd">          ``region=&#39;xanes`` or ``region=dxanes``.</span>
+<span class="sd">        - ``k``            : array with wavenumber values. Returned only if</span>
+<span class="sd">          ``region=&#39;exafs&#39;``.</span>
+<span class="sd">        - ``matrix``       : array with observed values for groups in ``range``.</span>
+<span class="sd">        - ``rank_pars``    : dictionary with parameters of calculation.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Computation of matrix rank is based on the interpolative decompsition method.</span>
+<span class="sd">    See :func:`~scipy.linalg.interpolative.estimate_rank` for further details.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Dataset</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xas import pre_edge, autobk</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.linalg import matrix_rank</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_collection_hdf5</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">    &gt;&gt;&gt; fpath      = get_testpath(&#39;Fe_database.h5&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; collection = read_collection_hdf5(fpath)</span>
+<span class="sd">    &gt;&gt;&gt; collection.apply(pre_edge)</span>
+<span class="sd">    &gt;&gt;&gt; out        = matrix_rank(collection, region=&#39;xanes&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; attrs      = [&#39;groupnames&#39;, &#39;energy&#39;, &#39;matrix&#39;, &#39;rank&#39;, &#39;rank_pars&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(out, Dataset, attrs)</span>
+<span class="sd">    [True, True, True, True, True]</span>
+<span class="sd">    &gt;&gt;&gt; print(out.rank)</span>
+<span class="sd">    4</span>
+
+<span class="sd">    &gt;&gt;&gt; # rank of exafs matrix</span>
+<span class="sd">    &gt;&gt;&gt; collection.apply(autobk)</span>
+<span class="sd">    &gt;&gt;&gt; out   = matrix_rank(collection, region=&#39;exafs&#39;, range=[0,10])</span>
+<span class="sd">    &gt;&gt;&gt; attrs = [&#39;groupnames&#39;, &#39;k&#39;, &#39;matrix&#39;, &#39;rank&#39;, &#39;rank_pars&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(out, Dataset, attrs)</span>
+<span class="sd">    [True, True, True, True, True]</span>
+<span class="sd">    &gt;&gt;&gt; print(out.rank)</span>
+<span class="sd">    4</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">xvals</span><span class="p">,</span> <span class="n">matrix</span> <span class="o">=</span> <span class="n">get_mapped_data</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="n">region</span><span class="p">,</span> 
+                                    <span class="nb">range</span><span class="o">=</span><span class="nb">range</span><span class="p">,</span> <span class="n">kweight</span><span class="o">=</span><span class="n">kweight</span><span class="p">)</span>
+
+    <span class="c1"># condtion number</span>
+    <span class="n">rnk</span> <span class="o">=</span> <span class="n">estimate_rank</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="n">eps</span><span class="p">)</span>
+
+    <span class="c1"># storing parameters</span>
+    <span class="n">rank_pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;region&#39;</span> <span class="p">:</span> <span class="n">region</span><span class="p">,</span> 
+                 <span class="s1">&#39;range&#39;</span>  <span class="p">:</span> <span class="nb">range</span><span class="p">,</span>
+                 <span class="s1">&#39;eps&#39;</span>    <span class="p">:</span> <span class="n">eps</span><span class="p">,}</span>
+
+    <span class="c1"># additional parameters</span>
+    <span class="k">if</span> <span class="n">region</span> <span class="o">==</span> <span class="s1">&#39;exafs&#39;</span><span class="p">:</span>
+        <span class="n">xvar</span>  <span class="o">=</span> <span class="s1">&#39;k&#39;</span>    <span class="c1"># x-variable</span>
+        <span class="n">rank_pars</span><span class="p">[</span><span class="s1">&#39;kweight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kweight</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># xanes/dxanes clustering</span>
+        <span class="n">xvar</span>  <span class="o">=</span> <span class="s1">&#39;energy&#39;</span>    <span class="c1"># x-variable</span>
+
+    <span class="c1"># storing cluster results</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;groupnames&#39;</span>   <span class="p">:</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">(</span><span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">),</span>
+               <span class="n">xvar</span>           <span class="p">:</span> <span class="n">xvals</span><span class="p">,</span>
+               <span class="s1">&#39;matrix&#39;</span>       <span class="p">:</span> <span class="n">matrix</span><span class="p">,</span>
+               <span class="s1">&#39;rank&#39;</span>         <span class="p">:</span> <span class="n">rnk</span><span class="p">,</span>
+               <span class="s1">&#39;rank_pars&#39;</span>    <span class="p">:</span> <span class="n">rank_pars</span><span class="p">,}</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="o">**</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+    
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

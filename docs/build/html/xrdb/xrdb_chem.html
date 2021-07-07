@@ -1,0 +1,459 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Chem module &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="X-ray module" href="xrdb_xray.html" />
+    <link rel="prev" title="XRDB module" href="../xrdb_module.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xas_module.html">XAS module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../xrdb_module.html">XRDB module</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Chem module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="xrdb_xray.html">X-ray module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../xrdb_module.html">XRDB module</a> &raquo;</li>
+        
+      <li>Chem module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/xrdb/xrdb_chem.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.xrdb.chem">
+<span id="chem-module"></span><h1>Chem module<a class="headerlink" href="#module-araucaria.xrdb.chem" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-araucaria.xrdb.chem" title="araucaria.xrdb.chem"><code class="xref py py-mod docutils literal notranslate"><span class="pre">chem</span></code></a> module offers the following
+routines to access chemical data:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.xrdb.chem.ztosym" title="araucaria.xrdb.chem.ztosym"><code class="xref py py-func docutils literal notranslate"><span class="pre">ztosym()</span></code></a></p></td>
+<td><p>Returns atomic symbol.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.xrdb.chem.symtoz" title="araucaria.xrdb.chem.symtoz"><code class="xref py py-func docutils literal notranslate"><span class="pre">symtoz()</span></code></a></p></td>
+<td><p>Returns atomic number.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.xrdb.chem.at_weight" title="araucaria.xrdb.chem.at_weight"><code class="xref py py-func docutils literal notranslate"><span class="pre">at_weight()</span></code></a></p></td>
+<td><p>Returns atomic weight.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.xrdb.chem.formula_parser" title="araucaria.xrdb.chem.formula_parser"><code class="xref py py-func docutils literal notranslate"><span class="pre">formula_parser()</span></code></a></p></td>
+<td><p>Returns a parsed chemical formula.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.xrdb.chem.formula_weight" title="araucaria.xrdb.chem.formula_weight"><code class="xref py py-func docutils literal notranslate"><span class="pre">formula_weight()</span></code></a></p></td>
+<td><p>Returns formula weight.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<ul class="simple">
+<li><p>W.T. Elam, B.D. Ravel, J.R. Sieber (2002)
+“A new atomic database for X-ray spectroscopic calculations”,
+Radiation Physics and Chemistry 63(2): pp 121-128,
+<a class="reference external" href="https://doi.org/10.1016/S0969-806X(01)00227-4">DOI:10.1016/S0969-806X(01)00227-4</a>.</p></li>
+</ul>
+<dl class="py function">
+<dt class="sig sig-object py" id="araucaria.xrdb.chem.ztosym">
+<span class="sig-prename descclassname"><span class="pre">araucaria.xrdb.chem.</span></span><span class="sig-name descname"><span class="pre">ztosym</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">z</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/xrdb/chem.html#ztosym"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.xrdb.chem.ztosym" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns atomic symbol.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>z</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Atomic number.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Atomic symbol.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.9)"><strong>NameError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">z</span></code> is not available.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xrdb</span> <span class="kn">import</span> <span class="n">ztosym</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span>    <span class="o">=</span> <span class="p">[</span><span class="mi">26</span><span class="p">,</span> <span class="mi">29</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">33</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">syms</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">z</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">syms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ztosym</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">syms</span><span class="p">)</span>
+<span class="go">[&#39;Fe&#39;, &#39;Cu&#39;, &#39;Zn&#39;, &#39;As&#39;]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="araucaria.xrdb.chem.symtoz">
+<span class="sig-prename descclassname"><span class="pre">araucaria.xrdb.chem.</span></span><span class="sig-name descname"><span class="pre">symtoz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sym</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/xrdb/chem.html#symtoz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.xrdb.chem.symtoz" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns atomic number.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sym</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Atomic symbol.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Atomic number.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.9)"><strong>NameError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">sym</span></code> is not available.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xrdb</span> <span class="kn">import</span> <span class="n">symtoz</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">syms</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fe&#39;</span><span class="p">,</span> <span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Zn&#39;</span><span class="p">,</span> <span class="s1">&#39;As&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span>    <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">syms</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">z</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">symtoz</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+<span class="go">[26, 29, 30, 33]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="araucaria.xrdb.chem.at_weight">
+<span class="sig-prename descclassname"><span class="pre">araucaria.xrdb.chem.</span></span><span class="sig-name descname"><span class="pre">at_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sym</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/xrdb/chem.html#at_weight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.xrdb.chem.at_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns atomic weight.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>sym</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Atomic symbol.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Atomic weight (grams/mole).</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.9)"><strong>NameError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">sym</span></code> is not available.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xrdb</span> <span class="kn">import</span> <span class="n">at_weight</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">syms</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Fe&#39;</span><span class="p">,</span> <span class="s1">&#39;Cu&#39;</span><span class="p">,</span> <span class="s1">&#39;Zn&#39;</span><span class="p">,</span> <span class="s1">&#39;As&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">atw</span>  <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">syms</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">atw</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">at_weight</span><span class="p">(</span><span class="n">item</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">atw</span><span class="p">)</span>
+<span class="go">[55.847, 63.546, 65.38, 74.9216]</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="araucaria.xrdb.chem.formula_parser">
+<span class="sig-prename descclassname"><span class="pre">araucaria.xrdb.chem.</span></span><span class="sig-name descname"><span class="pre">formula_parser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mult</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/xrdb/chem.html#formula_parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.xrdb.chem.formula_parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a dictionary with parsed formula.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>formula</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Chemical formula to parse.</p></li>
+<li><p><strong>mult</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Multiplier for chemical formula.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Dictionary with parsed formula.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#NameError" title="(in Python v3.9)"><strong>NameError</strong></a> – If parentheses in <code class="docutils literal notranslate"><span class="pre">formula</span></code> are not balanced.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xrdb</span> <span class="kn">import</span> <span class="n">formula_parser</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;As2O3&#39;</span><span class="p">,</span> <span class="s1">&#39;Fe(OH)3&#39;</span><span class="p">,</span> <span class="s1">&#39;CuCO3Cu(OH)2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">formulas</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="n">formula_parser</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+<span class="go">{&#39;As&#39;: 2.0, &#39;O&#39;: 3.0}</span>
+<span class="go">{&#39;Fe&#39;: 1.0, &#39;H&#39;: 3.0, &#39;O&#39;: 3.0}</span>
+<span class="go">{&#39;C&#39;: 1.0, &#39;Cu&#39;: 2.0, &#39;H&#39;: 2.0, &#39;O&#39;: 5.0}</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="araucaria.xrdb.chem.formula_weight">
+<span class="sig-prename descclassname"><span class="pre">araucaria.xrdb.chem.</span></span><span class="sig-name descname"><span class="pre">formula_weight</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">formula</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mult</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/xrdb/chem.html#formula_weight"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.xrdb.chem.formula_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns formula weight.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>formula</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Chemical formula to parse.</p></li>
+<li><p><strong>mult</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Multiplier for chemical formula.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Formula weight (gr/mole).</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#araucaria.xrdb.chem.formula_parser" title="araucaria.xrdb.chem.formula_parser"><code class="xref py py-func docutils literal notranslate"><span class="pre">formula_parser()</span></code></a></dt><dd><p>Returns a parsed chemical formula.</p>
+</dd>
+<dt><a class="reference internal" href="#araucaria.xrdb.chem.at_weight" title="araucaria.xrdb.chem.at_weight"><code class="xref py py-func docutils literal notranslate"><span class="pre">at_weight()</span></code></a></dt><dd><p>Returns atomic weight.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xrdb</span> <span class="kn">import</span> <span class="n">formula_weight</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">formulas</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;As2O3&#39;</span><span class="p">,</span> <span class="s1">&#39;Fe(OH)3&#39;</span><span class="p">,</span> <span class="s1">&#39;CuCO3Cu(OH)2&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">formulas</span><span class="p">:</span>
+<span class="gp">... </span>    <span class="n">fweight</span> <span class="o">=</span> <span class="n">formula_weight</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0:12}</span><span class="s1"> : </span><span class="si">{1:1.3f}</span><span class="s1"> gr/mole&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">fweight</span><span class="p">))</span>
+<span class="go">As2O3        : 197.841 gr/mole</span>
+<span class="go">Fe(OH)3      : 106.869 gr/mole</span>
+<span class="go">CuCO3Cu(OH)2 : 221.116 gr/mole</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="xrdb_xray.html" class="btn btn-neutral float-right" title="X-ray module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../xrdb_module.html" class="btn btn-neutral float-left" title="XRDB module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

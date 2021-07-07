@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>1. Reading IXAS spectra &mdash; araucaria 0.1.10
+  <title>1. Reading IXAS spectra &mdash; araucaria 0.1.11
  documentation</title>
   
 
@@ -49,7 +49,7 @@
     
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Part 1: Basics of data processing" href="../01.basics_data_processing.html" />
+    <link rel="next" title="1. Interactive Tkinter dialog to plot spectra" href="../02.advanced/01.interactive_tkinter_widget.html" />
     <link rel="prev" title="Tutorials" href="../../tutorials.html" /> 
 </head>
 
@@ -101,22 +101,26 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../../tutorials.html">Tutorials</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../tutorials.html#getting-started">Getting started</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">1. Reading IXAS spectra</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#2.-Reading-spectra-directly-from-a-URL">1.1. 2. Reading spectra directly from a URL</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#3.-Create-a-collection-with-the-spectra">1.2. 3. Create a collection with the spectra</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#4.-Plot-processed-spectra">1.3. 4. Plot processed spectra</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Reading-spectra-directly-from-a-URL">1.1. Reading spectra directly from a URL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Create-a-collection-with-the-spectra">1.2. Create a collection with the spectra</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Plot-processed-spectra">1.3. Plot processed spectra</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../../tutorials.html#advanced-tutorials">Advanced tutorials</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../tutorials.html#tutorial-series">Tutorial series</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../main_module.html">Main module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../io_module.html">IO module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../linalg_module.html">LinAlg module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../fit_module.html">Fit module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../plot_module.html">Plot module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../stats_module.html">Statistics module</a></li>
@@ -464,7 +468,7 @@ div.rendered_html tbody tr:hover {
 <div class="section" id="Reading-IXAS-spectra">
 <h1><span class="section-number">1. </span>Reading IXAS spectra<a class="headerlink" href="#Reading-IXAS-spectra" title="Permalink to this headline">¶</a></h1>
 <p><em>Last update: June 2021</em></p>
-<p>The International X-ray Absorption Society (<a class="reference external" href="https://xrayabsorption.org">IXAS</a>) maintains a <a class="reference external" href="https://xaslib.xrayabsorption.org/elem/">data library of XAFS spectra</a> for several compounds and absorption edges. In this tutorial we will be accesing this library to retrieve spectra and perform basic operation and visualizaion tasks in <code class="docutils literal notranslate"><span class="pre">araucaria</span></code>.</p>
+<p>The International X-ray Absorption Society (<a class="reference external" href="https://xrayabsorption.org">IXAS</a>) maintains a <a class="reference external" href="https://xaslib.xrayabsorption.org/elem/">data library of XAFS spectra</a> for several compounds and absorption edges. In this tutorial we will be accesing the library to retrieve, process and visualize spectra in <code class="docutils literal notranslate"><span class="pre">araucaria</span></code>.</p>
 <p>This notebook explains the the following steps:</p>
 <ol class="arabic simple">
 <li><p>Read spectra from a uniform resource locator (URL).</p></li>
@@ -495,10 +499,10 @@ Matplotlib version  : 3.4.2
 Araucaria version   : 0.1.10
 </pre></div></div>
 </div>
-<div class="section" id="2.-Reading-spectra-directly-from-a-URL">
-<h2><span class="section-number">1.1. </span>2. Reading spectra directly from a URL<a class="headerlink" href="#2.-Reading-spectra-directly-from-a-URL" title="Permalink to this headline">¶</a></h2>
-<p>The IXAS data library offers a <a class="reference external" href="https://xaslib.xrayabsorption.org/elem/">website frontend</a> to download data in your local machine. However, we will be reading it directly with assistance of the <a class="reference external" href="https://docs.python.org/3/library/urllib.html">urllib</a> module of Python.</p>
-<p>Here we will retrieve the following spectra acquired at the Se K-edge in the Advanced Photon Source synchrotron:</p>
+<div class="section" id="Reading-spectra-directly-from-a-URL">
+<h2><span class="section-number">1.1. </span>Reading spectra directly from a URL<a class="headerlink" href="#Reading-spectra-directly-from-a-URL" title="Permalink to this headline">¶</a></h2>
+<p>The IXAS data library offers a <a class="reference external" href="https://xaslib.xrayabsorption.org/elem/">website frontend</a> to download data. However, we will be reading it directly with assistance of the <a class="reference external" href="https://docs.python.org/3/library/urllib.html">urllib</a> module of Python.</p>
+<p>We will be retrieving the following spectra acquired at the Se K-edge in the Advanced Photon Source synchrotron:</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 82%" />
@@ -521,7 +525,7 @@ Araucaria version   : 0.1.10
 </tr>
 </tbody>
 </table>
-<p>For convenience we will first create a dictionary with the names and ID of spectra. We will then use this dictionary to construct a list with the URLs:</p>
+<p>For convenience we will first create a dictionary with the names and ID of spectra. This dictionary will then be used to construct a list with the URLs:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -559,7 +563,7 @@ https://xaslib.xrayabsorption.org/rawfile/189/Se_CuSe_rt_01.xdi
 <p class="admonition-title fa fa-exclamation-circle"><strong>Note</strong></p>
 <p>If you want to access diferent spectra, just modify the dictionary with the names and ID of the desired spectra. Such values are available at the IXAS data library website.</p>
 </div>
-<p>Before reading the data we need to know the file format. For this we will be printing the header of the last file with the <a class="reference external" href="https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen">urlopen()</a> function of urllib:</p>
+<p>Before reading the data we need to assess the file format: For this we will print the header of the last file with the <a class="reference external" href="https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen">urlopen()</a> function of urllib:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -612,15 +616,15 @@ https://xaslib.xrayabsorption.org/rawfile/189/Se_CuSe_rt_01.xdi
 </div>
 <p>As seen from the output (line 26), the file contains columns for the energy, transmitted intensity (itrans), and reference itensity (i0), in that order.</p>
 </div>
-<div class="section" id="3.-Create-a-collection-with-the-spectra">
-<h2><span class="section-number">1.2. </span>3. Create a collection with the spectra<a class="headerlink" href="#3.-Create-a-collection-with-the-spectra" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Create-a-collection-with-the-spectra">
+<h2><span class="section-number">1.2. </span>Create a collection with the spectra<a class="headerlink" href="#Create-a-collection-with-the-spectra" title="Permalink to this headline">¶</a></h2>
 <p>We will use the <a class="reference internal" href="../../io/io_read.html#araucaria.io.io_read.read_rawfile"><span class="std std-ref">read_rawfile()</span></a> function to read the files and include them in a <a class="reference internal" href="../../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a>:</p>
 <ul class="simple">
-<li><p>We create an empty <a class="reference internal" href="../../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a> to contain our group datasets.</p></li>
-<li><p>Contents of the remote file are accesed with the <a class="reference external" href="https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen">urlopen()</a> funcion.</p></li>
-<li><p>The contents are directly passed to the <a class="reference internal" href="../../io/io_read.html#araucaria.io.io_read.read_rawfile"><span class="std std-ref">read_rawfile()</span></a> function, and a group dataset is returned.</p></li>
+<li><p>We first create an empty <a class="reference internal" href="../../main/main_collection.html#araucaria.main.collection.Collection"><span class="std std-ref">Collection</span></a> to contain our group datasets.</p></li>
+<li><p>Contents of the remote file are accessed with the <a class="reference external" href="https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen">urlopen()</a> funcion.</p></li>
+<li><p>Contents are directly passed to the <a class="reference internal" href="../../io/io_read.html#araucaria.io.io_read.read_rawfile"><span class="std std-ref">read_rawfile()</span></a> function, and a <a class="reference internal" href="../../main/main_group.html#araucaria.main.group.Group"><span class="std std-ref">Group</span></a> dataset is returned.</p></li>
 <li><p>The group is then added to the collection with the <a class="reference internal" href="../../main/main_collection.html#araucaria.main.collection.Collection.add_group"><span class="std std-ref">add_group()</span></a> method.</p></li>
-<li><p>Once the collection has been populated we produce a summary report with the <a class="reference internal" href="../../main/main_collection.html#araucaria.main.collection.Collection.summary"><span class="std std-ref">sumary()</span></a> method.</p></li>
+<li><p>Once the collection has been populated, a summary report is requested with the <a class="reference internal" href="../../main/main_collection.html#araucaria.main.collection.Collection.summary"><span class="std std-ref">sumary()</span></a> method.</p></li>
 </ul>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -657,20 +661,21 @@ id  dataset             tag   mode  n
 </div>
 <div class="admonition warning">
 <p class="admonition-title fa fa-exclamation-circle"><strong>Warning</strong></p>
-<p>URLs or file formats in databases may change over time or between files. Therefore, it is your responsibility to check the validty of the URL or the file format before reading and processing spectra.</p>
+<p>URLs or file formats in databases may change over time or between files. It is your responsibility to check the validty of the URL or the file format before reading and processing spectra.</p>
 </div>
 </div>
-<div class="section" id="4.-Plot-processed-spectra">
-<h2><span class="section-number">1.3. </span>4. Plot processed spectra<a class="headerlink" href="#4.-Plot-processed-spectra" title="Permalink to this headline">¶</a></h2>
-<p>Prior to plotting we need to compute the normalized spectra and the extended x-ray fine strucure (EXAFS). For this we can use the <a class="reference internal" href="../../main/main_collection.html#araucaria.main.collection.Collection.apply"><span class="std std-ref">apply()</span></a> method of the collection.</p>
+<div class="section" id="Plot-processed-spectra">
+<h2><span class="section-number">1.3. </span>Plot processed spectra<a class="headerlink" href="#Plot-processed-spectra" title="Permalink to this headline">¶</a></h2>
+<p>Prior to plotting we need to compute the normalized spectra and the extended x-ray fine strucure (EXAFS) spetra. For this we use the <a class="reference internal" href="../../main/main_collection.html#araucaria.main.collection.Collection.apply"><span class="std std-ref">apply()</span></a> method to process spectra in the collection.</p>
 <p>We then use the <a class="reference internal" href="../../plot_module.html#araucaria.plot.template.fig_xas_template"><span class="std std-ref">fig_xas_template()</span></a> function to create a <code class="docutils literal notranslate"><span class="pre">Figure</span></code> and <code class="docutils literal notranslate"><span class="pre">axes</span></code> objects with the following attributes:</p>
 <ul class="simple">
 <li><p>2 pre-defined panels for XANES and EXAFS spectra.</p></li>
 <li><p>A dictionary to specify figure decorators (figpars).</p></li>
+<li><p>A dictionary to specify additional parameters of the <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> figure (fig_kws).</p></li>
 </ul>
-<p>Once the figure template has been created we use a loop to populate the axes with the respective spectra.</p>
+<p>Once the figure template has been created, we use a loop to populate the axes with the respective plot artists.</p>
 <div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
@@ -688,9 +693,10 @@ id  dataset             tag   mode  n
 <span class="n">figpars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;e_range&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="mi">12600</span><span class="p">,</span> <span class="mi">12750</span><span class="p">),</span>
            <span class="s1">&#39;k_range&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span>
            <span class="s1">&#39;kweight&#39;</span> <span class="p">:</span> <span class="n">kweight</span><span class="p">}</span>
+<span class="n">fig_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;figsize&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="mf">7.5</span><span class="p">,</span><span class="mi">5</span><span class="p">)}</span>
 
 <span class="c1"># declaring figure and populating axes</span>
-<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig_xas_template</span><span class="p">(</span><span class="n">panels</span><span class="o">=</span><span class="s1">&#39;xe&#39;</span><span class="p">,</span> <span class="n">fig_pars</span><span class="o">=</span><span class="n">figpars</span><span class="p">)</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig_xas_template</span><span class="p">(</span><span class="n">panels</span><span class="o">=</span><span class="s1">&#39;xe&#39;</span><span class="p">,</span> <span class="n">fig_pars</span><span class="o">=</span><span class="n">figpars</span><span class="p">,</span> <span class="o">**</span><span class="n">fig_kws</span><span class="p">)</span>
 <span class="n">names</span>   <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
     <span class="n">group</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -719,7 +725,7 @@ id  dataset             tag   mode  n
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="../01.basics_data_processing.html" class="btn btn-neutral float-right" title="Part 1: Basics of data processing" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../02.advanced/01.interactive_tkinter_widget.html" class="btn btn-neutral float-right" title="1. Interactive Tkinter dialog to plot spectra" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="../../tutorials.html" class="btn btn-neutral float-left" title="Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

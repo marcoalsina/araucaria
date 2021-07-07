@@ -1,0 +1,472 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.main.group &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.main.group</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.main.group</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+
+<div class="viewcode-block" id="Group"><a class="viewcode-back" href="../../../main/main_group.html#araucaria.main.group.Group">[docs]</a><span class="k">class</span> <span class="nc">Group</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Group storage class.</span>
+
+<span class="sd">    This class stores a single XAFS dataset.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name</span>
+<span class="sd">        Name for the group. The default is None.</span>
+<span class="sd">    kwargs</span>
+<span class="sd">        Dictionary with content for the group.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The following methods are currently implemented:</span>
+
+<span class="sd">    .. list-table::</span>
+<span class="sd">       :widths: auto</span>
+<span class="sd">       :header-rows: 1</span>
+
+<span class="sd">       * - Method</span>
+<span class="sd">         - Description</span>
+<span class="sd">       * - :func:`add_content`</span>
+<span class="sd">         - Adds content to the group.</span>
+<span class="sd">       * - :func:`copy`</span>
+<span class="sd">         - Returns a copy of the group.</span>
+<span class="sd">       * - :func:`get_mode`</span>
+<span class="sd">         - Returns the scan mode of the group.</span>
+<span class="sd">       * - :func:`has_ref`</span>
+<span class="sd">         - Tests if the group has a reference scan.</span>
+<span class="sd">       * - :func:`rename`</span>
+<span class="sd">         - Renames the group.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">    &gt;&gt;&gt; group = Group()</span>
+<span class="sd">    &gt;&gt;&gt; type(group)</span>
+<span class="sd">    &lt;class &#39;araucaria.main.group.Group&#39;&gt;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span><span class="nb">dict</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span>  <span class="o">=</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&lt;Group </span><span class="si">%s</span><span class="s1">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&lt;Group&gt;&#39;</span>
+
+<div class="viewcode-block" id="Group.add_content"><a class="viewcode-back" href="../../../main/main_group.html#araucaria.main.group.Group.add_content">[docs]</a>    <span class="k">def</span> <span class="nf">add_content</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">content</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Adds content to the group.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        content</span>
+<span class="sd">            Dictionary with content for the group.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If ``content`` is not a dictionary.</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">        &gt;&gt;&gt; content = {&#39;var&#39;: &#39;xas&#39;}</span>
+<span class="sd">        &gt;&gt;&gt; group   = Group()</span>
+<span class="sd">        &gt;&gt;&gt; group.add_content(content)</span>
+<span class="sd">        &gt;&gt;&gt; check_objattrs(group, Group, attrlist=[&#39;name&#39;, &#39;var&#39;])</span>
+<span class="sd">        [True, True]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;content is not a valid dictionary.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">content</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Group.copy"><a class="viewcode-back" href="../../../main/main_group.html#araucaria.main.group.Group.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Group</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns a deep copy of the group.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">            Copy of the group.</span>
+
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from numpy import allclose</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">        &gt;&gt;&gt; content = {&#39;energy&#39;: [1,2,3,4,5,6]}</span>
+<span class="sd">        &gt;&gt;&gt; group1  = Group()</span>
+<span class="sd">        &gt;&gt;&gt; group1.add_content(content)</span>
+<span class="sd">        &gt;&gt;&gt; group2 = group1.copy()</span>
+<span class="sd">        &gt;&gt;&gt; allclose(group1.energy, group2.energy)</span>
+<span class="sd">        True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Group.get_mode"><a class="viewcode-back" href="../../../main/main_group.html#araucaria.main.group.Group.get_mode">[docs]</a>    <span class="k">def</span> <span class="nf">get_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns scan mode of mu(E) for the group.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">            Scan mode of mu(E). Either &#39;fluo&#39;, &#39;mu&#39;, or &#39;mu_ref&#39;.</span>
+<span class="sd">    </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If the scan mode is unavailable or not recognized.</span>
+<span class="sd">    </span>
+<span class="sd">        Important</span>
+<span class="sd">        ---------</span>
+<span class="sd">        The scan mode of mu(E) is assigned during reading of a file, </span>
+<span class="sd">        and should adhere to the following convention:</span>
+<span class="sd">        </span>
+<span class="sd">        - ``mu`` corresponds to a transmision mode scan.</span>
+<span class="sd">        - ``fluo`` corresponds to a fluorescence mode scan.</span>
+<span class="sd">        - ``mu_ref`` corresponds to a reference scan.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.io import read_xmu</span>
+<span class="sd">        &gt;&gt;&gt; fpath = get_testpath(&#39;xmu_testfile.xmu&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; # extracting mu and mu_ref scans</span>
+<span class="sd">        &gt;&gt;&gt; group_mu = read_xmu(fpath, scan=&#39;mu&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; group_mu.get_mode()</span>
+<span class="sd">        &#39;mu&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; # extracting only fluo scan</span>
+<span class="sd">        &gt;&gt;&gt; group_fluo = read_xmu(fpath, scan=&#39;fluo&#39;, ref=False)</span>
+<span class="sd">        &gt;&gt;&gt; group_fluo.get_mode()</span>
+<span class="sd">        &#39;fluo&#39;</span>
+
+<span class="sd">        &gt;&gt;&gt; # extracting only mu_ref scan</span>
+<span class="sd">        &gt;&gt;&gt; group_ref = read_xmu(fpath, scan=None, ref=True)</span>
+<span class="sd">        &gt;&gt;&gt; group_ref.get_mode()</span>
+<span class="sd">        &#39;mu_ref&#39;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">scanlist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="s1">&#39;fluo&#39;</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">]</span>
+        <span class="n">scan</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">for</span> <span class="n">scantype</span> <span class="ow">in</span> <span class="n">scanlist</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">scantype</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+                <span class="n">scan</span> <span class="o">=</span> <span class="n">scantype</span>
+                <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">scan</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;scan type unavailable or not recognized.&#39;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">scan</span></div>
+
+<div class="viewcode-block" id="Group.has_ref"><a class="viewcode-back" href="../../../main/main_group.html#araucaria.main.group.Group.has_ref">[docs]</a>    <span class="k">def</span> <span class="nf">has_ref</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Tests if the group contains a reference scan for mu(E).</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">            True if attribute ``mu_ref`` exists in the group. False otherwise.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.io import read_xmu</span>
+<span class="sd">        &gt;&gt;&gt; fpath = get_testpath(&#39;xmu_testfile.xmu&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; # extracting mu and mu_ref scans</span>
+<span class="sd">        &gt;&gt;&gt; group_mu = read_xmu(fpath, scan=&#39;mu&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; group_mu.has_ref()</span>
+<span class="sd">        True</span>
+<span class="sd">    </span>
+<span class="sd">        &gt;&gt;&gt; # extracting only fluo scan</span>
+<span class="sd">        &gt;&gt;&gt; group_fluo = read_xmu(fpath, scan=&#39;fluo&#39;, ref=False)</span>
+<span class="sd">        &gt;&gt;&gt; group_fluo.has_ref()</span>
+<span class="sd">        False</span>
+<span class="sd">    </span>
+<span class="sd">        &gt;&gt;&gt; # extracting only mu_ref scan</span>
+<span class="sd">        &gt;&gt;&gt; group_ref = read_xmu(fpath, scan=None, ref=True)</span>
+<span class="sd">        &gt;&gt;&gt; group_ref.has_ref()</span>
+<span class="sd">        True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="s1">&#39;mu_ref&#39;</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Group.rename"><a class="viewcode-back" href="../../../main/main_group.html#araucaria.main.group.Group.rename">[docs]</a>    <span class="k">def</span> <span class="nf">rename</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">newname</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Renames the group.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        newname</span>
+<span class="sd">            New name for the group.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If ``newname`` is not a string.</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">        &gt;&gt;&gt; content = {&#39;name&#39;: &#39;group1&#39;}</span>
+<span class="sd">        &gt;&gt;&gt; group   = Group(name = &#39;group1&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; print(group.name)</span>
+<span class="sd">        group1</span>
+<span class="sd">        &gt;&gt;&gt; group.rename(&#39;group2&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; print(group.name)</span>
+<span class="sd">        group2</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">newname</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;newname is not a valid string.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">newname</span></div></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

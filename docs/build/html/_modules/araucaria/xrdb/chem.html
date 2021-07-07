@@ -1,0 +1,602 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.xrdb.chem &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.xrdb.chem</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.xrdb.chem</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The :mod:`~araucaria.xrdb.chem` module offers the following </span>
+<span class="sd">routines to access chemical data:</span>
+
+<span class="sd">.. list-table::</span>
+<span class="sd">   :widths: auto</span>
+<span class="sd">   :header-rows: 1</span>
+
+<span class="sd">   * - Function</span>
+<span class="sd">     - Description</span>
+<span class="sd">   * - :func:`~araucaria.xrdb.chem.ztosym`</span>
+<span class="sd">     - Returns atomic symbol.</span>
+<span class="sd">   * - :func:`~araucaria.xrdb.chem.symtoz`</span>
+<span class="sd">     - Returns atomic number.</span>
+<span class="sd">   * - :func:`~araucaria.xrdb.chem.at_weight`</span>
+<span class="sd">     - Returns atomic weight.</span>
+<span class="sd">   * - :func:`~araucaria.xrdb.chem.formula_parser`</span>
+<span class="sd">     - Returns a parsed chemical formula.</span>
+<span class="sd">   * - :func:`~araucaria.xrdb.chem.formula_weight`</span>
+<span class="sd">     - Returns formula weight.</span>
+
+<span class="sd">References</span>
+<span class="sd">---------</span>
+<span class="sd">- W.T. Elam, B.D. Ravel, J.R. Sieber (2002)</span>
+<span class="sd">  &quot;A new atomic database for X-ray spectroscopic calculations&quot;,</span>
+<span class="sd">  Radiation Physics and Chemistry 63(2): pp 121-128, </span>
+<span class="sd">  `DOI:10.1016/S0969-806X(01)00227-4 &lt;https://doi.org/10.1016/S0969-806X(01)00227-4&gt;`_.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">pardir</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">join</span><span class="p">,</span> <span class="n">dirname</span>
+<span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="n">search</span><span class="p">,</span> <span class="n">findall</span>
+<span class="kn">from</span> <span class="nn">sqlite3</span> <span class="kn">import</span> <span class="n">connect</span>
+
+<span class="c1"># FILE PATH FOR ELAM DATABASE</span>
+<span class="c1"># ---------------------------</span>
+<span class="n">dbpath</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="s1">&#39;elam.db&#39;</span><span class="p">)</span> 
+
+<div class="viewcode-block" id="ztosym"><a class="viewcode-back" href="../../../xrdb/xrdb_chem.html#araucaria.xrdb.chem.ztosym">[docs]</a><span class="k">def</span> <span class="nf">ztosym</span><span class="p">(</span><span class="n">z</span><span class="p">:</span><span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns atomic symbol.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    z</span>
+<span class="sd">        Atomic number.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Atomic symbol.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    NameError</span>
+<span class="sd">        If ``z`` is not available.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xrdb import ztosym</span>
+<span class="sd">    &gt;&gt;&gt; z    = [26, 29, 30, 33]</span>
+<span class="sd">    &gt;&gt;&gt; syms = []</span>
+<span class="sd">    &gt;&gt;&gt; for val in z:</span>
+<span class="sd">    ...     syms.append(ztosym(val))</span>
+<span class="sd">    &gt;&gt;&gt; print(syms)</span>
+<span class="sd">    [&#39;Fe&#39;, &#39;Cu&#39;, &#39;Zn&#39;, &#39;As&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># connecting to database</span>
+    <span class="n">conn</span>   <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="n">dbpath</span><span class="p">)</span>
+    <span class="n">cur</span>    <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="c1"># executing search</span>
+    <span class="n">exe_str</span><span class="o">=</span> <span class="s2">&quot;SELECT symbol FROM chem WHERE atnumber==?&quot;</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">exe_str</span><span class="p">,</span> <span class="p">[</span><span class="n">z</span><span class="p">])</span>
+
+    <span class="c1"># saving search result</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s1">&#39;z: </span><span class="si">%s</span><span class="s1"> not available.&#39;</span> <span class="o">%</span> <span class="n">z</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># closing database and returning value</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="symtoz"><a class="viewcode-back" href="../../../xrdb/xrdb_chem.html#araucaria.xrdb.chem.symtoz">[docs]</a><span class="k">def</span> <span class="nf">symtoz</span><span class="p">(</span><span class="n">sym</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns atomic number.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    sym</span>
+<span class="sd">        Atomic symbol.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Atomic number.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    NameError</span>
+<span class="sd">        If ``sym`` is not available.    </span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xrdb import symtoz</span>
+<span class="sd">    &gt;&gt;&gt; syms = [&#39;Fe&#39;, &#39;Cu&#39;, &#39;Zn&#39;, &#39;As&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; z    = []</span>
+<span class="sd">    &gt;&gt;&gt; for item in syms:</span>
+<span class="sd">    ...     z.append(symtoz(item))</span>
+<span class="sd">    &gt;&gt;&gt; print(z)</span>
+<span class="sd">    [26, 29, 30, 33]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># connecting to database</span>
+    <span class="n">conn</span>   <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="n">dbpath</span><span class="p">)</span>
+    <span class="n">cur</span>    <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+
+    <span class="c1"># executing search</span>
+    <span class="n">exe_str</span><span class="o">=</span> <span class="s2">&quot;SELECT atnumber FROM chem WHERE symbol==?&quot;</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">exe_str</span><span class="p">,</span> <span class="p">[</span><span class="n">sym</span><span class="p">])</span>
+
+    <span class="c1"># saving search result</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s1">&#39;symbol: </span><span class="si">%s</span><span class="s1"> not available.&#39;</span> <span class="o">%</span> <span class="n">sym</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>    
+
+    <span class="c1"># closing database and returning value</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="at_weight"><a class="viewcode-back" href="../../../xrdb/xrdb_chem.html#araucaria.xrdb.chem.at_weight">[docs]</a><span class="k">def</span> <span class="nf">at_weight</span><span class="p">(</span><span class="n">sym</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns atomic weight.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    sym</span>
+<span class="sd">        Atomic symbol.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Atomic weight (grams/mole).</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    NameError</span>
+<span class="sd">        If ``sym`` is not available.  </span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xrdb import at_weight</span>
+<span class="sd">    &gt;&gt;&gt; syms = [&#39;Fe&#39;, &#39;Cu&#39;, &#39;Zn&#39;, &#39;As&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; atw  = []</span>
+<span class="sd">    &gt;&gt;&gt; for item in syms:</span>
+<span class="sd">    ...     atw.append(at_weight(item))</span>
+<span class="sd">    &gt;&gt;&gt; print(atw)</span>
+<span class="sd">    [55.847, 63.546, 65.38, 74.9216]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># connecting to database</span>
+    <span class="n">conn</span>   <span class="o">=</span> <span class="n">connect</span><span class="p">(</span><span class="n">dbpath</span><span class="p">)</span>
+    <span class="n">cur</span>    <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+    
+    <span class="c1"># executing search</span>
+    <span class="n">exe_str</span><span class="o">=</span> <span class="s2">&quot;SELECT atweight FROM chem WHERE symbol ==?&quot;</span>
+    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">exe_str</span><span class="p">,</span> <span class="p">[</span><span class="n">sym</span><span class="p">])</span>
+
+    <span class="c1"># saving search result</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchone</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s1">&#39;symbol: </span><span class="si">%s</span><span class="s1"> not available.&#39;</span> <span class="o">%</span> <span class="n">sym</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>    
+
+    <span class="c1"># closing database and returning value</span>
+    <span class="n">conn</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">result</span></div>
+
+<span class="k">def</span> <span class="nf">_parser</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mult</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Utility parser for chemical formulas.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    formula</span>
+<span class="sd">        Chemical formula to parse.</span>
+<span class="sd">    mult</span>
+<span class="sd">        Multiplier for chemical formula.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        List with parsed formula</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    NameError</span>
+<span class="sd">        If parentheses in ``formula`` are not balanced.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The returned list requires formatting.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">isp</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>                     <span class="c1"># index start parenthesis</span>
+    <span class="n">iep</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>                     <span class="c1"># index end parenthesis</span>
+    <span class="n">icp</span> <span class="o">=</span>  <span class="mi">0</span>                     <span class="c1"># current index parenthesis</span>
+    <span class="n">lstr</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">formula</span><span class="p">)</span>
+
+    <span class="c1"># finding the first parenthesis</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">lstr</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">formula</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;(&#39;</span><span class="p">:</span>
+            <span class="n">icp</span> <span class="o">+=</span> <span class="mi">1</span>   <span class="c1"># update counter</span>
+            <span class="n">isp</span> <span class="o">=</span>  <span class="n">i</span>
+            <span class="k">break</span>
+
+    <span class="c1"># finding the last parenthesis (if first parenthesis exists)</span>
+    <span class="k">if</span> <span class="n">icp</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">lstr</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">formula</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;(&#39;</span><span class="p">:</span>
+                <span class="n">icp</span> <span class="o">+=</span> <span class="mi">1</span>   <span class="c1"># update counter</span>
+            <span class="k">elif</span> <span class="n">formula</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;)&#39;</span><span class="p">:</span>
+                <span class="n">icp</span> <span class="o">-=</span> <span class="mi">1</span>   <span class="c1"># update counter</span>
+                <span class="k">if</span> <span class="n">icp</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">iep</span> <span class="o">=</span> <span class="n">j</span>
+                    <span class="k">break</span>
+    <span class="k">if</span> <span class="n">icp</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">NameError</span><span class="p">(</span><span class="s1">&#39;parenthesis are not balanced.&#39;</span><span class="p">)</span>
+
+    <span class="c1"># no parenthesis found, provide exit</span>
+    <span class="k">if</span> <span class="n">isp</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="n">cregex</span> <span class="o">=</span> <span class="s1">&#39;[A-Z][a-z]?\d*[.]?\d*&#39;</span>
+        <span class="n">elreg</span>  <span class="o">=</span> <span class="s1">&#39;[A-Z][a-z]?&#39;</span>
+        <span class="n">nureg</span>  <span class="o">=</span> <span class="s1">&#39;\d*\.?\d+|\d+&#39;</span>
+        <span class="n">cseq</span>   <span class="o">=</span> <span class="n">findall</span><span class="p">(</span><span class="n">cregex</span><span class="p">,</span> <span class="n">formula</span><span class="p">)</span>
+        <span class="n">vals</span>   <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">cseq</span><span class="p">:</span>
+            <span class="n">reg</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span><span class="n">elreg</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">num</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span><span class="n">nureg</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">vals</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">reg</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="n">num</span><span class="p">)</span><span class="o">*</span><span class="n">mult</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">vals</span>
+
+    <span class="c1"># parenthesis found, recursive call</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">f_regex</span> <span class="o">=</span> <span class="s1">&#39;^\d*[.]?\d+&#39;</span> <span class="c1"># float regex</span>
+        <span class="n">seq</span>     <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">isp</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># string before parenthesis</span>
+            <span class="n">seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">formula</span><span class="p">[:</span><span class="n">isp</span><span class="p">],</span> <span class="n">mult</span><span class="p">)</span> <span class="p">)</span>
+
+        <span class="c1"># major parenthesis</span>
+        <span class="n">num</span> <span class="o">=</span> <span class="n">search</span><span class="p">(</span><span class="n">f_regex</span><span class="p">,</span> <span class="n">formula</span><span class="p">[</span><span class="n">iep</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">num</span><span class="p">:</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="n">end</span><span class="p">()</span>
+            <span class="n">num</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="n">group</span><span class="p">()</span>
+        <span class="n">seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">formula</span><span class="p">[</span><span class="n">isp</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span> <span class="n">iep</span><span class="p">],</span> <span class="nb">float</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">*</span> <span class="n">mult</span><span class="p">)</span> <span class="p">)</span>
+
+        <span class="c1"># string after parenthesis</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">iep</span> <span class="o">+</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">lstr</span><span class="p">:</span>
+            <span class="n">seq</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">formula</span><span class="p">[</span><span class="n">iep</span> <span class="o">+</span> <span class="n">end</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:],</span> <span class="n">mult</span><span class="p">)</span> <span class="p">)</span>
+
+        <span class="k">return</span> <span class="p">[</span><span class="n">_parser</span><span class="p">(</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">]</span>
+
+
+<span class="k">def</span> <span class="nf">_format_parser</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Utility parser formatter.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x</span>
+<span class="sd">        Unformated parsed list.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Formatted parsed list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">x</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">_format_parser</span><span class="p">(</span><span class="n">item</span><span class="p">)]</span>
+
+<div class="viewcode-block" id="formula_parser"><a class="viewcode-back" href="../../../xrdb/xrdb_chem.html#araucaria.xrdb.chem.formula_parser">[docs]</a><span class="k">def</span> <span class="nf">formula_parser</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mult</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns a dictionary with parsed formula.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ---------</span>
+<span class="sd">    formula</span>
+<span class="sd">        Chemical formula to parse.</span>
+<span class="sd">    mult</span>
+<span class="sd">        Multiplier for chemical formula.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Dictionary with parsed formula.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    NameError</span>
+<span class="sd">        If parentheses in ``formula`` are not balanced.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xrdb import formula_parser</span>
+<span class="sd">    &gt;&gt;&gt; formulas = [&#39;As2O3&#39;, &#39;Fe(OH)3&#39;, &#39;CuCO3Cu(OH)2&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; for f in formulas:</span>
+<span class="sd">    ...     print(formula_parser(f))</span>
+<span class="sd">    {&#39;As&#39;: 2.0, &#39;O&#39;: 3.0}</span>
+<span class="sd">    {&#39;Fe&#39;: 1.0, &#39;H&#39;: 3.0, &#39;O&#39;: 3.0}</span>
+<span class="sd">    {&#39;C&#39;: 1.0, &#39;Cu&#39;: 2.0, &#39;H&#39;: 2.0, &#39;O&#39;: 5.0}</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">_parser</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">mult</span><span class="o">=</span><span class="n">mult</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">_format_parser</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+    
+    <span class="c1"># unique elements</span>
+    <span class="n">unique</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">out</span><span class="p">])</span>
+
+    <span class="c1"># dict container</span>
+    <span class="n">fdict</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">unique</span><span class="p">):</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">pars</span> <span class="ow">in</span> <span class="n">out</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">pars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">item</span><span class="p">:</span>
+                <span class="n">val</span> <span class="o">+=</span> <span class="n">pars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">fdict</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+    <span class="k">return</span> <span class="n">fdict</span></div>
+
+<div class="viewcode-block" id="formula_weight"><a class="viewcode-back" href="../../../xrdb/xrdb_chem.html#araucaria.xrdb.chem.formula_weight">[docs]</a><span class="k">def</span> <span class="nf">formula_weight</span><span class="p">(</span><span class="n">formula</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">mult</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns formula weight.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ---------</span>
+<span class="sd">    formula</span>
+<span class="sd">        Chemical formula to parse.</span>
+<span class="sd">    mult</span>
+<span class="sd">        Multiplier for chemical formula.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Formula weight (gr/mole).</span>
+
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :func:`formula_parser`</span>
+<span class="sd">        Returns a parsed chemical formula.</span>
+<span class="sd">    :func:`at_weight`</span>
+<span class="sd">        Returns atomic weight.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xrdb import formula_weight</span>
+<span class="sd">    &gt;&gt;&gt; formulas = [&#39;As2O3&#39;, &#39;Fe(OH)3&#39;, &#39;CuCO3Cu(OH)2&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; for f in formulas:</span>
+<span class="sd">    ...     fweight = formula_weight(f)</span>
+<span class="sd">    ...     print(&#39;{0:12} : {1:1.3f} gr/mole&#39;.format(f, fweight))</span>
+<span class="sd">    As2O3        : 197.841 gr/mole</span>
+<span class="sd">    Fe(OH)3      : 106.869 gr/mole</span>
+<span class="sd">    CuCO3Cu(OH)2 : 221.116 gr/mole</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fdict</span> <span class="o">=</span> <span class="n">formula_parser</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">mult</span><span class="o">=</span><span class="n">mult</span><span class="p">)</span>
+
+    <span class="c1"># formula weight</span>
+    <span class="n">fweight</span> <span class="o">=</span> <span class="mf">0.0</span>    
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">fdict</span><span class="p">:</span>
+        <span class="n">fweight</span> <span class="o">+=</span> <span class="n">at_weight</span><span class="p">(</span><span class="n">key</span><span class="p">)</span> <span class="o">*</span> <span class="n">fdict</span><span class="p">[</span><span class="n">key</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">fweight</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

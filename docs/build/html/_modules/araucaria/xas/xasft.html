@@ -1,0 +1,817 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.xas.xasft &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.xas.xasft</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.xas.xasft</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The :mod:`~araucaria.xas.xasft` module offers the following functions to perform </span>
+<span class="sd">discrete fast Fourier transforms (FFT) on a XAFS scan:</span>
+
+<span class="sd">.. list-table::</span>
+<span class="sd">   :widths: auto</span>
+<span class="sd">   :header-rows: 1</span>
+
+<span class="sd">   * - Function</span>
+<span class="sd">     - Description</span>
+<span class="sd">   * - :func:`ftwindow`</span>
+<span class="sd">     - Returns a FT window.</span>
+<span class="sd">   * - :func:`xftf`</span>
+<span class="sd">     - Calculates a forward FFT of a XAFS signal.</span>
+<span class="sd">   * - :func:`xftr`</span>
+<span class="sd">     - Calculates a reverse FFT of a XAFS signal.</span>
+<span class="sd">   * - :func:`xftf_kwin`</span>
+<span class="sd">     - Calculates a forward FFT of a preset XAFS signal.</span>
+<span class="sd">   * - :func:`xftr_kwin`</span>
+<span class="sd">     - Calculates a reverse FFT of a preset XAFS signal.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="p">(</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">where</span><span class="p">,</span> <span class="n">pi</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">exp</span><span class="p">,</span> <span class="n">arange</span><span class="p">,</span> 
+                   <span class="n">linspace</span><span class="p">,</span> <span class="n">ceil</span><span class="p">,</span> <span class="n">zeros</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">cos</span><span class="p">,</span> <span class="n">dtype</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">scipy.special</span> <span class="kn">import</span> <span class="n">i0</span> <span class="k">as</span> <span class="n">bessel_i0</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp1d</span>
+<span class="kn">from</span> <span class="nn">scipy.fftpack</span> <span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">ifft</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span><span class="p">,</span> <span class="n">check_xrange</span>
+
+<span class="k">def</span> <span class="nf">complex_phase</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="c1">#return phase, modulo 2pi jumps</span>
+    <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">arctan2</span><span class="p">,</span> <span class="n">diff</span><span class="p">,</span> <span class="nb">round</span><span class="p">,</span> <span class="n">sign</span><span class="p">,</span> <span class="n">pi</span>
+    
+    <span class="n">phase</span>    <span class="o">=</span> <span class="n">arctan2</span><span class="p">(</span><span class="n">arr</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="n">arr</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
+    <span class="n">d</span>        <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">phase</span><span class="p">)</span><span class="o">/</span><span class="n">pi</span>
+    <span class="n">out</span>      <span class="o">=</span> <span class="mf">1.0</span><span class="o">*</span><span class="n">phase</span><span class="p">[:]</span>
+    <span class="n">out</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="o">-=</span> <span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="o">*</span><span class="n">sign</span><span class="p">(</span><span class="n">d</span><span class="p">))</span><span class="o">.</span><span class="n">cumsum</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">out</span>
+
+<div class="viewcode-block" id="ftwindow"><a class="viewcode-back" href="../../../xas/xas_ft.html#araucaria.xas.xasft.ftwindow">[docs]</a><span class="k">def</span> <span class="nf">ftwindow</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">x_range</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">inf</span><span class="p">,</span><span class="n">inf</span><span class="p">],</span> 
+             <span class="n">dx1</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dx2</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">win</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;hanning&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns a FT window.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x</span>
+<span class="sd">        Array for the FT window.</span>
+<span class="sd">    x_range</span>
+<span class="sd">        Range for the FT window. The default is [-:data:`~numpy.inf`, :data:`~numpy.inf`].</span>
+<span class="sd">    dx1</span>
+<span class="sd">        First tapering parameter for FT window. The defaut is 1.</span>
+<span class="sd">    dx2</span>
+<span class="sd">        Second tapering parameter for FT window. If None it will use the same value as dx1.</span>
+<span class="sd">    win</span>
+<span class="sd">        Name of the window type.  The default is &#39;hanning&#39;. See Notes for valid names.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        1-d array with the FT window.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``window`` name is not recognized.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Valid window names:</span>
+<span class="sd">    </span>
+<span class="sd">    - &#39;hanning&#39;  : cosine-squared function window.</span>
+<span class="sd">    - &#39;parzen&#39;   : linear function window.</span>
+<span class="sd">    - &#39;welch&#39;    : quadratic function window.</span>
+<span class="sd">    - &#39;gaussian&#39; : Gaussian (normal) function window.</span>
+<span class="sd">    - &#39;sine&#39;     : sine function window.</span>
+<span class="sd">    - &#39;kaiser&#39;   : Kaiser-Bessel function-derived window.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    --------</span>
+<span class="sd">    .. plot::</span>
+<span class="sd">        :context: reset</span>
+
+<span class="sd">        &gt;&gt;&gt; from numpy import arange</span>
+<span class="sd">        &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.xas import ftwindow</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.plot import fig_xas_template</span>
+<span class="sd">        &gt;&gt;&gt; k       = arange(0, 10.1, 0.05)</span>
+<span class="sd">        &gt;&gt;&gt; k_range = [2,8]</span>
+<span class="sd">        &gt;&gt;&gt; windows = [&#39;hanning&#39;, &#39;parzen&#39;, &#39;welch&#39;, </span>
+<span class="sd">        ...            &#39;gaussian&#39;, &#39;sine&#39;, &#39;kaiser&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; dk      = 1.0</span>
+<span class="sd">        &gt;&gt;&gt; fig_kws = {&#39;sharex&#39; : True}</span>
+<span class="sd">        &gt;&gt;&gt; fig, axes = fig_xas_template(panels=&#39;ee/ee/ee&#39;, **fig_kws)</span>
+<span class="sd">        &gt;&gt;&gt; for i, ax in enumerate(axes.flatten()):</span>
+<span class="sd">        ...     win  = ftwindow(k, k_range, dk, win= windows[i])</span>
+<span class="sd">        ...     line = ax.plot(k, win, label=windows[i])</span>
+<span class="sd">        ...     for val in k_range:</span>
+<span class="sd">        ...         line = ax.axvline(val - dk/2, color=&#39;gray&#39;, ls=&#39;:&#39;)</span>
+<span class="sd">        ...         line = ax.axvline(val + dk/2, color=&#39;gray&#39;, ls=&#39;:&#39;)</span>
+<span class="sd">        ...     leg  = ax.legend()</span>
+<span class="sd">        ...     text = ax.set_ylabel(&#39;&#39;)</span>
+<span class="sd">        ...     text = ax.set_xlabel(&#39;&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; fig.tight_layout()</span>
+<span class="sd">        &gt;&gt;&gt; plt.show(block=False)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># available windows</span>
+    <span class="n">windows</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;han&#39;</span><span class="p">,</span> <span class="s1">&#39;fha&#39;</span><span class="p">,</span> <span class="s1">&#39;gau&#39;</span><span class="p">,</span> <span class="s1">&#39;kai&#39;</span><span class="p">,</span> <span class="s1">&#39;par&#39;</span><span class="p">,</span> <span class="s1">&#39;wel&#39;</span><span class="p">,</span> <span class="s1">&#39;sin&#39;</span><span class="p">,</span> <span class="s1">&#39;bes&#39;</span><span class="p">]</span>
+    <span class="n">name</span>    <span class="o">=</span> <span class="n">win</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()[:</span><span class="mi">3</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">windows</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;window name </span><span class="si">%s</span><span class="s2"> not recognized.&quot;</span> <span class="o">%</span> <span class="n">win</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">dx2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">dx2</span> <span class="o">=</span> <span class="n">dx1</span>
+
+    <span class="c1"># asigning values inside the x array</span>
+    <span class="n">xrange</span> <span class="o">=</span> <span class="n">check_xrange</span><span class="p">(</span><span class="n">x_range</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">xstep</span>  <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> <span class="p">)</span>
+    <span class="n">xeps</span>   <span class="o">=</span> <span class="mf">1.e-4</span> <span class="o">*</span> <span class="n">xstep</span>
+    
+    <span class="n">x1</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">xrange</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">dx1</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="n">xrange</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">dx1</span><span class="o">/</span><span class="mf">2.0</span>  <span class="o">+</span> <span class="n">xeps</span>
+    <span class="n">x3</span> <span class="o">=</span> <span class="n">xrange</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">dx2</span><span class="o">/</span><span class="mf">2.0</span>  <span class="o">-</span> <span class="n">xeps</span>
+    <span class="n">x4</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">xrange</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dx2</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;fha&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">dx1</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">dx1</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">dx2</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span> <span class="n">dx2</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">x2</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">xeps</span> <span class="o">+</span> <span class="n">dx1</span><span class="o">*</span><span class="p">(</span><span class="n">xrange</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xrange</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span>
+        <span class="n">x3</span> <span class="o">=</span> <span class="n">x4</span> <span class="o">-</span> <span class="n">xeps</span> <span class="o">-</span> <span class="n">dx2</span><span class="o">*</span><span class="p">(</span><span class="n">xrange</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">xrange</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">/</span> <span class="mf">2.0</span>
+    
+    <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;gau&#39;</span><span class="p">:</span>
+        <span class="n">dx1</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">dx1</span><span class="p">,</span> <span class="n">xeps</span><span class="p">)</span>
+
+    <span class="c1"># return values as integer for indices</span>
+    <span class="k">def</span> <span class="nf">asint</span><span class="p">(</span><span class="n">val</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">((</span><span class="n">val</span><span class="o">+</span><span class="n">xeps</span><span class="p">)</span><span class="o">/</span><span class="n">xstep</span><span class="p">)</span>
+    
+    <span class="n">i1</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">asint</span><span class="p">(</span><span class="n">x1</span><span class="p">))</span>
+    <span class="n">i2</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">asint</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
+    <span class="n">i3</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">asint</span><span class="p">(</span><span class="n">x3</span><span class="p">))</span>
+    <span class="n">i4</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">asint</span><span class="p">(</span><span class="n">x4</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">i2</span> <span class="o">==</span> <span class="n">i1</span><span class="p">:</span>
+        <span class="n">i1</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">i2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i4</span> <span class="o">==</span> <span class="n">i3</span><span class="p">:</span>
+        <span class="n">i3</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">i2</span><span class="p">,</span> <span class="n">i4</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">x1</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">x3</span><span class="p">,</span> <span class="n">x4</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i1</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">i2</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">i3</span><span class="p">],</span> <span class="n">x</span><span class="p">[</span><span class="n">i4</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">x1</span> <span class="o">==</span> <span class="n">x2</span><span class="p">:</span> <span class="n">x2</span> <span class="o">=</span> <span class="n">x2</span> <span class="o">+</span> <span class="n">xeps</span>
+    <span class="k">if</span> <span class="n">x3</span> <span class="o">==</span> <span class="n">x4</span><span class="p">:</span> <span class="n">x4</span> <span class="o">=</span> <span class="n">x4</span> <span class="o">+</span> <span class="n">xeps</span>
+    
+    <span class="c1"># initial window</span>
+    <span class="n">fwin</span> <span class="o">=</span>  <span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">i3</span> <span class="o">&gt;</span> <span class="n">i2</span><span class="p">:</span>
+        <span class="n">fwin</span><span class="p">[</span><span class="n">i2</span><span class="p">:</span><span class="n">i3</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="c1"># final window</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;han&#39;</span><span class="p">,</span> <span class="s1">&#39;fha&#39;</span><span class="p">):</span>
+        <span class="n">fwin</span><span class="p">[</span><span class="n">i1</span><span class="p">:</span><span class="n">i2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sin</span><span class="p">((</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i1</span><span class="p">:</span><span class="n">i2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">fwin</span><span class="p">[</span><span class="n">i3</span><span class="p">:</span><span class="n">i4</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">cos</span><span class="p">((</span><span class="n">pi</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i3</span><span class="p">:</span><span class="n">i4</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x3</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x4</span> <span class="o">-</span> <span class="n">x3</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+    
+    <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;par&#39;</span><span class="p">:</span>
+        <span class="n">fwin</span><span class="p">[</span><span class="n">i1</span><span class="p">:</span><span class="n">i2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span>     <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i1</span><span class="p">:</span><span class="n">i2</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span>
+        <span class="n">fwin</span><span class="p">[</span><span class="n">i3</span><span class="p">:</span><span class="n">i4</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">i3</span><span class="p">:</span><span class="n">i4</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x3</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x4</span> <span class="o">-</span> <span class="n">x3</span><span class="p">)</span>
+    
+    <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;wel&#39;</span><span class="p">:</span>
+        <span class="n">fwin</span><span class="p">[</span><span class="n">i1</span><span class="p">:</span><span class="n">i2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">((</span><span class="n">x</span><span class="p">[</span><span class="n">i1</span><span class="p">:</span><span class="n">i2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+        <span class="n">fwin</span><span class="p">[</span><span class="n">i3</span><span class="p">:</span><span class="n">i4</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">((</span><span class="n">x</span><span class="p">[</span><span class="n">i3</span><span class="p">:</span><span class="n">i4</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">x3</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">x4</span> <span class="o">-</span> <span class="n">x3</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
+    
+    <span class="k">elif</span> <span class="n">name</span>  <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;kai&#39;</span><span class="p">,</span> <span class="s1">&#39;bes&#39;</span><span class="p">):</span>
+        <span class="n">cen</span>  <span class="o">=</span> <span class="p">(</span><span class="n">x4</span> <span class="o">+</span> <span class="n">x1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">wid</span>  <span class="o">=</span> <span class="p">(</span><span class="n">x4</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">arg</span>  <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">cen</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="n">wid</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        
+        <span class="n">arg</span><span class="p">[</span><span class="n">where</span><span class="p">(</span><span class="n">arg</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;bes&#39;</span><span class="p">:</span> <span class="c1"># &#39;bes&#39; : ifeffit 1.0 implementation of kaiser-bessel</span>
+            <span class="n">fwin</span> <span class="o">=</span> <span class="n">bessel_i0</span><span class="p">(</span><span class="n">dx1</span><span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span> <span class="o">/</span> <span class="n">bessel_i0</span><span class="p">(</span><span class="n">dx1</span><span class="p">)</span>
+            <span class="n">fwin</span><span class="p">[</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&lt;=</span> <span class="n">x1</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">fwin</span><span class="p">[</span><span class="n">where</span><span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="n">x4</span><span class="p">)]</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1"># better version</span>
+            <span class="n">scale</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">1.e-10</span><span class="p">,</span> <span class="n">bessel_i0</span><span class="p">(</span><span class="n">dx1</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">fwin</span> <span class="o">=</span> <span class="p">(</span><span class="n">bessel_i0</span><span class="p">(</span><span class="n">dx1</span> <span class="o">*</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">arg</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="n">scale</span>
+    <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;sin&#39;</span><span class="p">:</span>
+        <span class="n">fwin</span><span class="p">[</span><span class="n">i1</span><span class="p">:</span><span class="n">i4</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">x4</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">i1</span><span class="p">:</span><span class="n">i4</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="p">(</span><span class="n">x4</span> <span class="o">-</span> <span class="n">x1</span><span class="p">))</span>
+
+    <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;gau&#39;</span><span class="p">:</span>
+        <span class="n">cen</span>  <span class="o">=</span> <span class="p">(</span><span class="n">x4</span> <span class="o">+</span> <span class="n">x1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">fwin</span> <span class="o">=</span>  <span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(((</span><span class="n">x</span> <span class="o">-</span> <span class="n">cen</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">dx1</span><span class="o">**</span><span class="mi">2</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">fwin</span></div>
+
+<div class="viewcode-block" id="xftf"><a class="viewcode-back" href="../../../xas/xas_ft.html#araucaria.xas.xasft.xftf">[docs]</a><span class="k">def</span> <span class="nf">xftf</span><span class="p">(</span><span class="n">group</span><span class="p">:</span> <span class="n">Group</span><span class="p">,</span> <span class="n">k_range</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span> <span class="n">kweight</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+    <span class="n">dk1</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dk2</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">win</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span><span class="s1">&#39;hanning&#39;</span><span class="p">,</span> 
+    <span class="n">rmax_out</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">nfft</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">kstep</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> 
+    <span class="n">with_phase</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">update</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates a forward FFT of a XAFS signal.</span>
+
+<span class="sd">    A XAFS forward FFT decomposes :math:`\chi(k)` into :math:`\chi(R)`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    group</span>
+<span class="sd">        Group containing chi(k) for the forward FT.</span>
+<span class="sd">    k_range</span>
+<span class="sd">        Photoelectron wavenumber range for the FT (:math:`Å^{-1}`).</span>
+<span class="sd">        The default is [0, 20].</span>
+<span class="sd">    kweight</span>
+<span class="sd">        Exponent for weighting chi(k) by k**kweight.</span>
+<span class="sd">        The default is 0.</span>
+<span class="sd">    dk1</span>
+<span class="sd">        First tapering parameter for the FT window.</span>
+<span class="sd">        The detault is 1.</span>
+<span class="sd">    dk2</span>
+<span class="sd">        Second tapering parameter for FT window.</span>
+<span class="sd">        If None it will take the value of dk1.</span>
+<span class="sd">    win</span>
+<span class="sd">        Name of the FT window type. The default is &#39;hanning&#39;.</span>
+<span class="sd">    rmax_out</span>
+<span class="sd">        Highest R value for :math:`\chi(R)` (Å). The default is 10.</span>
+<span class="sd">    nfft</span>
+<span class="sd">        Array size for the FT.  The default is 2048.</span>
+<span class="sd">    kstep</span>
+<span class="sd">        Wavenumber step size for the FT (:math:`Å^{-1}`).  The default is 0.05.</span>
+<span class="sd">    with_phase</span>
+<span class="sd">        Return the phase as well as magnitude, real, and imaginary parts.</span>
+<span class="sd">        The default is False.</span>
+<span class="sd">    update</span>
+<span class="sd">        Indicates if the group should be updated with the ftkf attributes.</span>
+<span class="sd">        The default is False.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Dictionary with the following arguments:</span>
+
+<span class="sd">        - ``kwin``     : array with the FT window.</span>
+<span class="sd">        - ``r``        : array with R values (Å).</span>
+<span class="sd">        - ``chir``     : array with :math:`\chi(R)`.</span>
+<span class="sd">        - ``chir_mag`` : array with magnitude of :math:`\chi(R)`.</span>
+<span class="sd">        - ``chir_re``  : array with real part of :math:`\chi(R)`.</span>
+<span class="sd">        - ``chir_im``  : array with imaginary part of :math:`\chi(R)`.</span>
+<span class="sd">        - ``chir_pha`` : array with phase of :math:`\chi(R)`. Returned if ``with_phase=True``.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``group`` is not a valid Group instance.</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If attribute ``k`` or ``chi`` does not exist in ``group``.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    If ``update=True`` the contents of the returned dictionary will be</span>
+<span class="sd">    included as attributes of ``group``.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    .. plot::</span>
+<span class="sd">        :context: reset</span>
+
+<span class="sd">        &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.io import read_dnd</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.xas import pre_edge, autobk, xftf</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">        &gt;&gt;&gt; kw      = 2</span>
+<span class="sd">        &gt;&gt;&gt; k_range = [2,10]</span>
+<span class="sd">        &gt;&gt;&gt; fpath   = get_testpath(&#39;dnd_testfile1.dat&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; group   = read_dnd(fpath, scan=&#39;mu&#39;)  # extracting mu and mu_ref scans</span>
+<span class="sd">        &gt;&gt;&gt; pre     = pre_edge(group, update=True)</span>
+<span class="sd">        &gt;&gt;&gt; autbk   = autobk(group, update=True)</span>
+<span class="sd">        &gt;&gt;&gt; fft     = xftf(group, k_range=k_range, kweight=kw, update=True)</span>
+<span class="sd">        &gt;&gt;&gt; attrs = [&#39;kwin&#39;, &#39;r&#39;, &#39;chir&#39;, &#39;chir_mag&#39;, &#39;chir_re&#39;, &#39;chir_im&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; check_objattrs(group, Group, attrs)</span>
+<span class="sd">        [True, True, True, True, True, True]</span>
+
+<span class="sd">        &gt;&gt;&gt; # plotting forward FFT signal</span>
+<span class="sd">        &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.plot import fig_xas_template</span>
+<span class="sd">        &gt;&gt;&gt; fig, ax = fig_xas_template(panels=&#39;er&#39;, fig_pars={&#39;kweight&#39;:kw})</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[0].plot(group.k, group.k**kw*group.chi)</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[0].plot(group.k, group.kwin, color=&#39;firebrick&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; xlim = ax[0].set_xlim(0,12)</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[1].plot(group.r, group.chir_mag)</span>
+<span class="sd">        &gt;&gt;&gt; xlim = ax[1].set_xlim(0,6)</span>
+<span class="sd">        &gt;&gt;&gt; fig.tight_layout()</span>
+<span class="sd">        &gt;&gt;&gt; plt.show(block=False)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># checking class and attributes</span>
+    <span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;chi&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># extracting k and chi</span>
+    <span class="n">k</span>   <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">k</span>
+    <span class="n">chi</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">chi</span>
+
+    <span class="c1"># number of points</span>
+    <span class="k">if</span> <span class="n">dk2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">dk2</span> <span class="o">=</span> <span class="n">dk1</span>
+    <span class="n">k_range</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">kmax</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">k</span><span class="p">),</span> <span class="n">k_range</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">dk2</span><span class="p">)</span>
+    <span class="n">kpts</span>  <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ceil</span><span class="p">(</span><span class="n">kmax</span><span class="p">)</span><span class="o">/</span><span class="n">kstep</span><span class="p">)</span>
+
+    <span class="c1"># calculating window and weighted chik</span>
+    <span class="n">k_</span>    <span class="o">=</span> <span class="n">kstep</span> <span class="o">*</span> <span class="n">arange</span><span class="p">(</span><span class="n">kpts</span><span class="p">)</span>
+    <span class="n">chi_</span>  <span class="o">=</span> <span class="p">(</span><span class="n">interp1d</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">chi</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="s1">&#39;extrapolate&#39;</span><span class="p">))(</span><span class="n">k_</span><span class="p">)</span>
+    <span class="n">win</span>   <span class="o">=</span> <span class="n">ftwindow</span><span class="p">(</span><span class="n">k_</span><span class="p">,</span> <span class="n">x_range</span><span class="o">=</span><span class="n">k_range</span><span class="p">,</span> <span class="n">dx1</span><span class="o">=</span><span class="n">dk1</span><span class="p">,</span> <span class="n">win</span><span class="o">=</span><span class="n">win</span><span class="p">)[:</span><span class="n">kpts</span><span class="p">]</span>
+    <span class="n">cchi</span>  <span class="o">=</span> <span class="n">chi_</span><span class="p">[:</span><span class="n">kpts</span><span class="p">]</span> <span class="o">*</span> <span class="n">k_</span><span class="p">[:</span><span class="n">kpts</span><span class="p">]</span><span class="o">**</span><span class="n">kweight</span>
+
+    <span class="c1"># calculating xftf</span>
+    <span class="n">out</span>   <span class="o">=</span> <span class="n">xftf_kwin</span><span class="p">(</span><span class="n">win</span><span class="o">*</span><span class="n">cchi</span><span class="p">,</span> <span class="n">kstep</span><span class="o">=</span><span class="n">kstep</span><span class="p">,</span> <span class="n">nfft</span><span class="o">=</span><span class="n">nfft</span><span class="p">)</span>
+    <span class="n">rstep</span> <span class="o">=</span> <span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">kstep</span><span class="o">*</span><span class="n">nfft</span><span class="p">)</span>
+    <span class="n">rpts</span>  <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">nfft</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">ceil</span><span class="p">(</span><span class="n">rmax_out</span><span class="o">/</span><span class="n">rstep</span><span class="p">)))</span>
+    <span class="n">r</span>     <span class="o">=</span> <span class="n">rstep</span> <span class="o">*</span> <span class="n">arange</span><span class="p">(</span><span class="n">rpts</span><span class="p">)</span>
+    <span class="n">mag</span>   <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">real</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">out</span><span class="o">.</span><span class="n">imag</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># output dictionary</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;kwin&#39;</span>     <span class="p">:</span> <span class="n">win</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">chi</span><span class="p">)],</span>
+               <span class="s1">&#39;r&#39;</span>        <span class="p">:</span> <span class="n">r</span><span class="p">[:</span><span class="n">rpts</span><span class="p">],</span>
+               <span class="s1">&#39;chir&#39;</span>     <span class="p">:</span> <span class="n">out</span><span class="p">[:</span><span class="n">rpts</span><span class="p">],</span>
+               <span class="s1">&#39;chir_mag&#39;</span> <span class="p">:</span> <span class="n">mag</span><span class="p">[:</span><span class="n">rpts</span><span class="p">],</span>
+               <span class="s1">&#39;chir_re&#39;</span>  <span class="p">:</span> <span class="n">out</span><span class="o">.</span><span class="n">real</span><span class="p">[:</span><span class="n">rpts</span><span class="p">],</span>
+               <span class="s1">&#39;chir_im&#39;</span>  <span class="p">:</span> <span class="n">out</span><span class="o">.</span><span class="n">imag</span><span class="p">[:</span><span class="n">rpts</span><span class="p">]</span>
+               <span class="p">}</span>
+    <span class="k">if</span> <span class="n">with_phase</span><span class="p">:</span>
+        <span class="n">content</span><span class="p">[</span><span class="s1">&#39;chir_pha&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">complex_phase</span><span class="p">(</span><span class="n">out</span><span class="p">[:</span><span class="n">rpts</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">update</span><span class="p">:</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">add_content</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">content</span></div>
+
+<div class="viewcode-block" id="xftr"><a class="viewcode-back" href="../../../xas/xas_ft.html#araucaria.xas.xasft.xftr">[docs]</a><span class="k">def</span> <span class="nf">xftr</span><span class="p">(</span><span class="n">group</span><span class="p">:</span> <span class="n">Group</span> <span class="p">,</span> <span class="n">r_range</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">20</span><span class="p">],</span> <span class="n">rweight</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> 
+         <span class="n">dr1</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">dr2</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">win</span><span class="o">=</span><span class="s1">&#39;hanning&#39;</span><span class="p">,</span> 
+         <span class="n">nfft</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">kstep</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">qmax_out</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> 
+         <span class="n">with_phase</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">update</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates a reverse FFT of a XAFS signal.</span>
+
+<span class="sd">    A XAFS reverse FFT recovers :math:`\chi(q)` from :math:`\chi(R)`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    group</span>
+<span class="sd">        Group containing chi(k) for the forward FT.</span>
+<span class="sd">    r_range</span>
+<span class="sd">        R range for the reverse FT (Å).</span>
+<span class="sd">        The default is [0, 20].</span>
+<span class="sd">    rweight</span>
+<span class="sd">        Exponent for weighting chi(R) by R**rweight.</span>
+<span class="sd">        The default is 0.</span>
+<span class="sd">    dr1</span>
+<span class="sd">        First tapering parameter for the reverse FT window.</span>
+<span class="sd">        The default is 1.</span>
+<span class="sd">    dr2</span>
+<span class="sd">        Second tapering parameter for reverse FT window.</span>
+<span class="sd">        If None it will take the value of dr1.</span>
+<span class="sd">    win</span>
+<span class="sd">        Name of the FT window type. The default is &#39;hanning&#39;.</span>
+<span class="sd">    qmax_out</span>
+<span class="sd">        Highest q value for :math:`\chi(R)` ((:math:`Å^{-1}`)). The default is 20.</span>
+<span class="sd">    nfft</span>
+<span class="sd">        Array size for the reverse FT.  The default is 2048.</span>
+<span class="sd">    kstep</span>
+<span class="sd">        Wavenumber step size for the reverse FT (:math:`Å^{-1}`).  The default is 0.05.</span>
+<span class="sd">    with_phase</span>
+<span class="sd">        Return the phase as well as magnitude, real, and imaginary parts.</span>
+<span class="sd">        The default is False.</span>
+<span class="sd">    update</span>
+<span class="sd">        Indicates if the group should be updated with the ftkf attributes.</span>
+<span class="sd">        The default is False.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Dictionary with the following arguments:</span>
+
+<span class="sd">        - ``rwin``     : array with the reverse FT window.</span>
+<span class="sd">        - ``q``        : array with q values (Å).</span>
+<span class="sd">        - ``chiq``     : array with :math:`\chi(R)`.</span>
+<span class="sd">        - ``chiq_mag`` : array with magnitude of :math:`\chi(q)`.</span>
+<span class="sd">        - ``chiq_re``  : array with real part of :math:`\chi(q)`.</span>
+<span class="sd">        - ``chiq_im``  : array with imaginary part of :math:`\chi(q)`.</span>
+<span class="sd">        - ``chiq_pha`` : array with phase of :math:`\chi(q)`. Returned if ``with_phase=True``.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``group`` is not a valid Group instance.</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If attribute ``q`` or ``chir`` does not exist in ``group``.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    If ``update=True`` the contents of the returned dictionary will be</span>
+<span class="sd">    included as attributes of ``group``.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    .. plot::</span>
+<span class="sd">        :context: reset</span>
+
+<span class="sd">        &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.io import read_dnd</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.xas import pre_edge, autobk, xftf, xftr</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">        &gt;&gt;&gt; kw      = 2</span>
+<span class="sd">        &gt;&gt;&gt; k_range = [2,10]</span>
+<span class="sd">        &gt;&gt;&gt; r_range = [0.5, 2]</span>
+<span class="sd">        &gt;&gt;&gt; fpath   = get_testpath(&#39;dnd_testfile1.dat&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; group   = read_dnd(fpath, scan=&#39;mu&#39;)  # extracting mu and mu_ref scans</span>
+<span class="sd">        &gt;&gt;&gt; pre     = pre_edge(group, update=True)</span>
+<span class="sd">        &gt;&gt;&gt; autbk   = autobk(group, update=True)</span>
+<span class="sd">        &gt;&gt;&gt; fft     = xftf(group, k_range=k_range, kweight=kw, update=True)</span>
+<span class="sd">        &gt;&gt;&gt; rft     = xftr(group, r_range=r_range, update=True)</span>
+<span class="sd">        &gt;&gt;&gt; attrs = [&#39;rwin&#39;, &#39;q&#39;, &#39;chiq&#39;, &#39;chiq_mag&#39;, &#39;chiq_re&#39;, &#39;chiq_im&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; check_objattrs(group, Group, attrs)</span>
+<span class="sd">        [True, True, True, True, True, True]</span>
+
+<span class="sd">        &gt;&gt;&gt; # plotting forward FFT signal</span>
+<span class="sd">        &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.plot import fig_xas_template</span>
+<span class="sd">        &gt;&gt;&gt; fig, ax = fig_xas_template(panels=&#39;rq&#39;, fig_pars={&#39;kweight&#39;: kw})</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[0].plot(group.r, group.chir_mag)</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[0].plot(group.r, group.rwin, color=&#39;firebrick&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; xlim = ax[0].set_xlim(0,6)</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[1].plot(group.k, group.k**kw*group.chi)</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[1].plot(group.q, group.chiq_re)</span>
+<span class="sd">        &gt;&gt;&gt; xlim = ax[1].set_xlim(0,12)</span>
+<span class="sd">        &gt;&gt;&gt; fig.tight_layout()</span>
+<span class="sd">        &gt;&gt;&gt; plt.show(block=False)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># checking class and attributes</span>
+    <span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="s1">&#39;chir&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># extracting r and chir</span>
+    <span class="n">r</span>     <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">r</span>
+    <span class="n">chir</span>  <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">chir</span>
+    
+    <span class="c1"># calculating rstep and kstep</span>
+    <span class="n">rstep</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">r_</span>    <span class="o">=</span> <span class="n">rstep</span> <span class="o">*</span> <span class="n">arange</span><span class="p">(</span><span class="n">nfft</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+    <span class="n">kstep</span> <span class="o">=</span> <span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="n">rstep</span><span class="o">*</span><span class="n">nfft</span><span class="p">)</span>
+    
+    <span class="c1"># setting scale for output</span>
+    <span class="k">if</span> <span class="n">chir</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="n">dtype</span><span class="p">(</span><span class="s1">&#39;complex128&#39;</span><span class="p">):</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="mf">0.5</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="c1"># calculating window and weighted chir</span>
+    <span class="k">if</span> <span class="n">dr2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">dr2</span> <span class="o">=</span> <span class="n">dr1</span>
+    <span class="n">r_range</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+    <span class="n">win</span>   <span class="o">=</span> <span class="n">ftwindow</span><span class="p">(</span><span class="n">r_</span><span class="p">,</span> <span class="n">x_range</span><span class="o">=</span><span class="n">r_range</span><span class="p">,</span> <span class="n">dx1</span><span class="o">=</span><span class="n">dr1</span><span class="p">,</span> <span class="n">dx2</span><span class="o">=</span><span class="n">dr2</span><span class="p">,</span> <span class="n">win</span><span class="o">=</span><span class="n">win</span><span class="p">)</span>
+    <span class="n">cchir</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">nfft</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;complex128&#39;</span><span class="p">)</span>
+    <span class="n">cchir</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">chir</span><span class="p">)]</span> <span class="o">=</span> <span class="n">chir</span> <span class="o">*</span> <span class="n">r_</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">chir</span><span class="p">)]</span><span class="o">**</span><span class="n">rweight</span>
+    
+    <span class="c1"># calculating xftr</span>
+    <span class="n">out</span>   <span class="o">=</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">xftr_kwin</span><span class="p">(</span> <span class="n">cchir</span><span class="o">*</span><span class="n">win</span><span class="p">,</span> <span class="n">kstep</span><span class="o">=</span><span class="n">kstep</span><span class="p">,</span> <span class="n">nfft</span><span class="o">=</span><span class="n">nfft</span><span class="p">)</span>
+    <span class="n">q</span>     <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">qmax_out</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">ceil</span><span class="p">(</span><span class="n">qmax_out</span><span class="o">/</span><span class="n">kstep</span><span class="p">)))</span>
+    <span class="n">iqmax</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+    <span class="n">mag</span>   <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">real</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">out</span><span class="o">.</span><span class="n">imag</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="c1"># output dictionary</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;rwin&#39;</span>     <span class="p">:</span> <span class="n">win</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">chir</span><span class="p">)],</span>
+               <span class="s1">&#39;q&#39;</span>        <span class="p">:</span> <span class="n">q</span><span class="p">,</span>
+               <span class="s1">&#39;chiq&#39;</span>     <span class="p">:</span> <span class="n">out</span><span class="p">[:</span><span class="n">iqmax</span><span class="p">],</span>
+               <span class="s1">&#39;chiq_mag&#39;</span> <span class="p">:</span> <span class="n">mag</span><span class="p">[:</span><span class="n">iqmax</span><span class="p">],</span>
+               <span class="s1">&#39;chiq_re&#39;</span>  <span class="p">:</span> <span class="n">out</span><span class="o">.</span><span class="n">real</span><span class="p">[:</span><span class="n">iqmax</span><span class="p">],</span>
+               <span class="s1">&#39;chiq_im&#39;</span>  <span class="p">:</span> <span class="n">out</span><span class="o">.</span><span class="n">imag</span><span class="p">[:</span><span class="n">iqmax</span><span class="p">],</span>
+              <span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">with_phase</span><span class="p">:</span>
+        <span class="n">content</span><span class="p">[</span><span class="s1">&#39;chiq_pha&#39;</span><span class="p">]</span> <span class="o">=</span>  <span class="n">complex_phase</span><span class="p">(</span><span class="n">out</span><span class="p">[:</span><span class="n">npts</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">update</span><span class="p">:</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">add_content</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">content</span></div>
+
+<div class="viewcode-block" id="xftf_kwin"><a class="viewcode-back" href="../../../xas/xas_ft.html#araucaria.xas.xasft.xftf_kwin">[docs]</a><span class="k">def</span> <span class="nf">xftf_kwin</span><span class="p">(</span><span class="n">chi</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">nfft</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">kstep</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates a forward FFT of a preset XAFS signal.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    chi</span>
+<span class="sd">        Array of :math:`\chi(k)` on a uniform grid. </span>
+<span class="sd">        Window and k-weighting are assumed to have been </span>
+<span class="sd">        already applied to the signal.</span>
+<span class="sd">    nfft</span>
+<span class="sd">        Array size for the FFT. The default is 2048.</span>
+<span class="sd">    kstep</span>
+<span class="sd">        Photoelectron wavenumber step size for the FFT (:math:`Å^{-1}`).</span>
+<span class="sd">        The default is 0.05.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Complex array of :math:`\chi(R)`.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    .. plot::</span>
+<span class="sd">        :context: reset</span>
+
+<span class="sd">        &gt;&gt;&gt; from numpy import arange, sin, pi</span>
+<span class="sd">        &gt;&gt;&gt; from scipy.fftpack import fftfreq</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.xas import ftwindow, xftf_kwin</span>
+<span class="sd">        &gt;&gt;&gt; nfft = 2048  # number of points for FFT</span>
+<span class="sd">        &gt;&gt;&gt; ks   = 0.05  # delta k (angstrom^-1)</span>
+<span class="sd">        &gt;&gt;&gt; f1   = 0.5   # freq1 (angstrom)</span>
+<span class="sd">        &gt;&gt;&gt; f2   = 1.2   # freq2 (angstrom)</span>
+<span class="sd">        &gt;&gt;&gt; k    = arange(0, 10, ks)</span>
+<span class="sd">        &gt;&gt;&gt; win  = ftwindow(k, x_range=(0,10), dx1=0.5, win=&#39;sine&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; chi  = 0.5*sin(2*pi*k*f1) + 0.1*sin(2*pi*k*f2)</span>
+<span class="sd">        &gt;&gt;&gt; chir = xftf_kwin(win*chi, nfft=nfft, kstep=ks)</span>
+<span class="sd">        &gt;&gt;&gt; freq = fftfreq(nfft, ks)</span>
+<span class="sd">        &gt;&gt;&gt; print(chir.dtype)</span>
+<span class="sd">        complex128</span>
+
+<span class="sd">        &gt;&gt;&gt; # plotting forward FFT signal</span>
+<span class="sd">        &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.plot import fig_xas_template</span>
+<span class="sd">        &gt;&gt;&gt; fig, ax = fig_xas_template(panels=&#39;er&#39;, fig_pars={&#39;kweight&#39;:0})</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[0].plot(k, win*chi)</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[1].plot(freq[:int(nfft/2)], abs(chir[:int(nfft/2)]))</span>
+<span class="sd">        &gt;&gt;&gt; xlim = ax[1].set_xlim(0,2)</span>
+<span class="sd">        &gt;&gt;&gt; xlab = ax[1].set_xlabel(&#39;$R/\pi$ [$\AA$]&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; for f in (f1,f2):</span>
+<span class="sd">        ...     line = ax[1].axvline(f, color=&#39;gray&#39;, ls=&#39;:&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; fig.tight_layout()</span>
+<span class="sd">        &gt;&gt;&gt; plt.show(block=False)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cchi</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">nfft</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;complex128&#39;</span><span class="p">)</span>
+    <span class="n">cchi</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">chi</span><span class="p">)]</span> <span class="o">=</span> <span class="n">chi</span>
+    <span class="n">chir</span> <span class="o">=</span> <span class="p">(</span><span class="n">kstep</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">pi</span><span class="p">))</span> <span class="o">*</span> <span class="n">fft</span><span class="p">(</span><span class="n">cchi</span><span class="p">)[:</span><span class="nb">int</span><span class="p">(</span><span class="n">nfft</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">chir</span></div>
+
+<div class="viewcode-block" id="xftr_kwin"><a class="viewcode-back" href="../../../xas/xas_ft.html#araucaria.xas.xasft.xftr_kwin">[docs]</a><span class="k">def</span> <span class="nf">xftr_kwin</span><span class="p">(</span><span class="n">chir</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">nfft</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">kstep</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Calculates a reverse FFT of a preset XAFS signal.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    chir</span>
+<span class="sd">        Array of :math:`\chi(R)` on a uniform grid.</span>
+<span class="sd">        Window and k-weighting are assumed to have been </span>
+<span class="sd">        already applied to the signal.</span>
+<span class="sd">    nfft</span>
+<span class="sd">        Array size  for the FFT.  The default is 2048.</span>
+<span class="sd">    kstep</span>
+<span class="sd">        Photoelectron wavenumber step size for the FFT (:math:`Å^{-1}`).</span>
+<span class="sd">        The default is 0.05.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Complex array for :math:`\chi(q)`.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    .. plot::</span>
+<span class="sd">        :context: reset    </span>
+<span class="sd">    </span>
+<span class="sd">        &gt;&gt;&gt; from numpy import arange, sin, pi</span>
+<span class="sd">        &gt;&gt;&gt; from scipy.fftpack import fftfreq</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.xas import ftwindow, xftf_kwin, xftr_kwin</span>
+<span class="sd">        &gt;&gt;&gt; nfft = 2048  # number of points for FFT</span>
+<span class="sd">        &gt;&gt;&gt; ks   = 0.05  # delta k (angstrom^-1)</span>
+<span class="sd">        &gt;&gt;&gt; f1   = 0.5   # freq1 (angstrom)</span>
+<span class="sd">        &gt;&gt;&gt; k    = arange(0, 10, ks)</span>
+<span class="sd">        &gt;&gt;&gt; wink = ftwindow(k, x_range=(0,10), dx1=0.5, win=&#39;sine&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; chi  = 0.5*sin(2*pi*k*f1)</span>
+<span class="sd">        &gt;&gt;&gt; chir = xftf_kwin(wink*chi, nfft=nfft, kstep=ks)</span>
+<span class="sd">        &gt;&gt;&gt; freq = fftfreq(nfft, ks)[:nfft//2]</span>
+<span class="sd">        &gt;&gt;&gt; chiq = xftr_kwin(chir, nfft=nfft, kstep=ks)[:len(k)]</span>
+<span class="sd">        &gt;&gt;&gt; print(chiq.dtype)</span>
+<span class="sd">        complex128</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; # plotting reverse FFT signal</span>
+<span class="sd">        &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.plot import fig_xas_template</span>
+<span class="sd">        &gt;&gt;&gt; fig, ax = fig_xas_template(panels=&#39;re&#39;, fig_pars={&#39;kweight&#39;:0})</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[0].plot(freq, abs(chir))</span>
+<span class="sd">        &gt;&gt;&gt; xlim = ax[0].set_xlim(0,2)</span>
+<span class="sd">        &gt;&gt;&gt; xlab = ax[0].set_xlabel(&#39;$R/\pi$ [$\AA$]&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[1].plot(k, chiq)</span>
+<span class="sd">        &gt;&gt;&gt; text = ax[1].set_xlabel(r&#39;$q(\AA^{-1})$&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; text = ax[1].set_ylabel(r&#39;$\chi(q)$&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; fig.tight_layout()</span>
+<span class="sd">        &gt;&gt;&gt; plt.show(block=False)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">cchi</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">nfft</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;complex128&#39;</span><span class="p">)</span>
+    <span class="n">cchi</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">chir</span><span class="p">)]</span> <span class="o">=</span> <span class="n">chir</span>
+    <span class="n">chiq</span> <span class="o">=</span> <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pi</span><span class="p">)</span><span class="o">/</span><span class="n">kstep</span><span class="p">)</span> <span class="o">*</span> <span class="n">ifft</span><span class="p">(</span><span class="n">cchi</span><span class="p">)[:</span><span class="nb">int</span><span class="p">(</span><span class="n">nfft</span><span class="o">/</span><span class="mi">2</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="n">chiq</span></div>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

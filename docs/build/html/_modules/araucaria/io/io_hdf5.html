@@ -1,0 +1,1009 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.io.io_hdf5 &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.io.io_hdf5</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.io.io_hdf5</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The :mod:`~araucaria.io.io_hdf5` submodule offers the following functions to read, write and </span>
+<span class="sd">manipulate data in the Hierarchical Data Format ``HDF5``:</span>
+
+<span class="sd">.. list-table::</span>
+<span class="sd">   :widths: 25 50</span>
+<span class="sd">   :header-rows: 1</span>
+
+<span class="sd">   * - Function</span>
+<span class="sd">     - Description</span>
+<span class="sd">   * - :func:`read_hdf5`</span>
+<span class="sd">     - Reads a single group dataset from an HDF5 file.</span>
+<span class="sd">   * - :func:`read_collection_hdf5`</span>
+<span class="sd">     - Reads multiple group datasets from an HDF5 file.</span>
+<span class="sd">   * - :func:`write_hdf5`</span>
+<span class="sd">     - Writes a single group dataset in an HDF5 file.</span>
+<span class="sd">   * - :func:`write_collection_hdf5`</span>
+<span class="sd">     - Writes a collection in an HDF5 file.</span>
+<span class="sd">   * - :func:`rename_dataset_hdf5`</span>
+<span class="sd">     - Renames a group dataset in an HDF5 file.</span>
+<span class="sd">   * - :func:`delete_dataset_hdf5`</span>
+<span class="sd">     - Deletes a group dataset in an HDF5 file.</span>
+<span class="sd">   * - :func:`summary_hdf5`</span>
+<span class="sd">     - Returns a summary of datasets in an HDF5 file.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span>
+<span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">literal_eval</span>
+<span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="n">search</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">inf</span>
+<span class="kn">from</span> <span class="nn">h5py</span> <span class="kn">import</span> <span class="n">File</span><span class="p">,</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Report</span><span class="p">,</span> <span class="n">Collection</span>
+<span class="kn">from</span> <span class="nn">..xas</span> <span class="kn">import</span> <span class="n">pre_edge</span>
+
+<div class="viewcode-block" id="read_hdf5"><a class="viewcode-back" href="../../../io/io_hdf5.html#araucaria.io.io_hdf5.read_hdf5">[docs]</a><span class="k">def</span> <span class="nf">read_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span><span class="o">-&gt;</span> <span class="n">Group</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Reads a single group dataset from an HDF5 file.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to HDF5 file.</span>
+<span class="sd">    name</span>
+<span class="sd">        Dataset name to retrieve from the HDF5 file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Group containing the requested dataset.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    IOError</span>
+<span class="sd">        If the HDF5 file does not exist in the specified path.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``name`` does not exist in the HDF5 file.</span>
+<span class="sd">    </span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_hdf5</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;Fe_database.h5&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # extracting geothite scan</span>
+<span class="sd">    &gt;&gt;&gt; group_mu = read_hdf5(fpath, name=&#39;Goethite_20K&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(group_mu, Group, attrlist=[&#39;mu&#39;, &#39;mu_ref&#39;])</span>
+<span class="sd">    [True, True]</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="c1"># verifying existence of path:</span>
+    <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+        <span class="n">hdf5</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;file </span><span class="si">%s</span><span class="s2"> does not exists.&quot;</span> <span class="o">%</span> <span class="n">fpath</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">hdf5</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">hdf5</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">):</span>
+                <span class="c1"># verifying strings saved as bytes</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">record</span><span class="p">[()],</span> <span class="nb">bytes</span><span class="p">):</span>
+                    <span class="c1"># converting bytes record to proper type</span>
+                    <span class="n">eval_record</span> <span class="o">=</span> <span class="n">convert_bytes_hdf5</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+                    <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">eval_record</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">=</span><span class="n">record</span><span class="p">[()]</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> does not exists in </span><span class="si">%s</span><span class="s2">!&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fpath</span><span class="p">))</span>
+
+    <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># writting group and saving name</span>
+    <span class="n">group</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">group</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="read_collection_hdf5"><a class="viewcode-back" href="../../../io/io_hdf5.html#araucaria.io.io_hdf5.read_collection_hdf5">[docs]</a><span class="k">def</span> <span class="nf">read_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">names</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">])</span><span class="o">-&gt;</span> <span class="n">Collection</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Reads multiple group datasets from an HDF5 file.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to HDF5 file.</span>
+<span class="sd">    names</span>
+<span class="sd">        List with group datasets to read.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Collection containing the requested datasets.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    IOError</span>
+<span class="sd">        If the HDF5 file does not exist in the specified path.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If the requested ``names`` do not exist in the HDF5 file.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    The HDF5 file does not store the ``tags`` attribute of a Collection.</span>
+<span class="sd">    Therefore the returned collection will automatically assign </span>
+<span class="sd">    ``tag=&#39;scan&#39;`` to each group dataset.</span>
+<span class="sd">    </span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Collection</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_collection_hdf5</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;Fe_database.h5&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # reading database</span>
+<span class="sd">    &gt;&gt;&gt; collection = read_collection_hdf5(fpath)</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(collection, Collection)</span>
+<span class="sd">    True</span>
+<span class="sd">    &gt;&gt;&gt; collection.get_names()</span>
+<span class="sd">    [&#39;FeIISO4_20K&#39;, &#39;Fe_Foil&#39;, &#39;Ferrihydrite_20K&#39;, &#39;Goethite_20K&#39;]</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; # read selected group datasets</span>
+<span class="sd">    &gt;&gt;&gt; collection = read_collection_hdf5(fpath, names=[&#39;Fe_Foil&#39;])</span>
+<span class="sd">    &gt;&gt;&gt; collection.get_names()</span>
+<span class="sd">    [&#39;Fe_Foil&#39;]</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="c1"># verifying existence of path:</span>
+    <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+        <span class="n">hdf5</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;file </span><span class="si">%s</span><span class="s2"> does not exists.&quot;</span> <span class="o">%</span> <span class="n">fpath</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">names</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">]:</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">hdf5</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">hdf5</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;group </span><span class="si">%s</span><span class="s2"> does not exists in the HDF5 file.&quot;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+
+    <span class="n">collection</span> <span class="o">=</span> <span class="n">Collection</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">hdf5</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">):</span>
+                <span class="c1"># verifying strings saved as bytes</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">record</span><span class="p">[()],</span> <span class="nb">bytes</span><span class="p">):</span>
+                    <span class="c1"># converting bytes record to proper type</span>
+                    <span class="n">eval_record</span> <span class="o">=</span> <span class="n">convert_bytes_hdf5</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+                    <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">eval_record</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">data</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">=</span><span class="n">record</span><span class="p">[()]</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="n">collection</span><span class="o">.</span><span class="n">add_group</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+    <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">collection</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="convert_bytes_hdf5"><a class="viewcode-back" href="../../../io/io_hdf5.html#araucaria.io.io_hdf5.convert_bytes_hdf5">[docs]</a><span class="k">def</span> <span class="nf">convert_bytes_hdf5</span><span class="p">(</span><span class="n">record</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Utility function to convert a :class:`bytes` record from an HDF5 file.</span>
+<span class="sd">    </span>
+<span class="sd">    Returned value will be either a :class:`dict`, :class:`list`, </span>
+<span class="sd">    or :class:`str`.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    record : </span>
+<span class="sd">        HDF5 dataset record.        </span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Converted record.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError:</span>
+<span class="sd">        If  value stored inside ``record`` is not of type </span>
+<span class="sd">        :class:`bytes`.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    ``araucaria`` stores :class:`dict` or :class:`list` records </span>
+<span class="sd">    as :class:`bytes` in the HDF5 file.</span>
+<span class="sd">    Such records  need to be converted back to their original </span>
+<span class="sd">    types during reading.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">record</span><span class="p">[()],</span> <span class="nb">bytes</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span> <span class="p">(</span><span class="s1">&#39;record </span><span class="si">%s</span><span class="s1"> is not of type bytes.&#39;</span> <span class="o">%</span> <span class="n">record</span><span class="p">)</span>
+    
+    <span class="n">conv_types</span> <span class="o">=</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+    <span class="n">opt_types</span>  <span class="o">=</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+    <span class="n">record_str</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">asstr</span><span class="p">()[()]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">eval_record</span> <span class="o">=</span> <span class="n">literal_eval</span><span class="p">(</span> <span class="n">record_str</span> <span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">eval_record</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">asstr</span><span class="p">()[()]</span>
+     
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">eval_record</span><span class="p">,</span> <span class="n">conv_types</span><span class="p">):</span>
+        <span class="c1"># return either dict or list</span>
+        <span class="k">return</span> <span class="n">eval_record</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">eval_record</span><span class="p">,</span> <span class="n">opt_types</span><span class="p">):</span>
+        <span class="c1"># int, float types were originally stored as str</span>
+        <span class="k">return</span> <span class="n">record_str</span></div>
+
+<div class="viewcode-block" id="write_hdf5"><a class="viewcode-back" href="../../../io/io_hdf5.html#araucaria.io.io_hdf5.write_hdf5">[docs]</a><span class="k">def</span> <span class="nf">write_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">Group</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+               <span class="n">replace</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Writes a group dataset in an HDF5 file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to HDF5 file.</span>
+<span class="sd">    group</span>
+<span class="sd">        Group to write in the HDF5 file.</span>
+<span class="sd">    name</span>
+<span class="sd">        Name for the dataset in the HDF5 file.</span>
+<span class="sd">        The default is None, which preserves the </span>
+<span class="sd">        original group name.</span>
+<span class="sd">    replace</span>
+<span class="sd">        Replace previous dataset. The default is False.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    IOError</span>
+<span class="sd">        If dataset cannot be written to the HDF5 file.</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``group`` is not a valid Group instance.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``name`` dataset already exists in the HDF5 file and ``replace=False``.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    If the file specified by ``fpath`` does not exists, it will be automatically created.</span>
+<span class="sd">    If the file already exists then the dataset will be appended.</span>
+
+<span class="sd">    By default the write operation will be canceled if ``name`` already exists in the HDF5 file.</span>
+<span class="sd">    The previous dataset can be overwritten with the option ``replace=True``. </span>
+
+<span class="sd">    Example</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_xmu, write_hdf5</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;xmu_testfile.xmu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # extracting mu and mu_ref scans</span>
+<span class="sd">    &gt;&gt;&gt; group_mu = read_xmu(fpath, scan=&#39;mu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # saving a new hdf5 file</span>
+<span class="sd">    &gt;&gt;&gt; write_hdf5(&#39;database.h5&#39;, group_mu, name=&#39;xmu_testfile&#39;, replace=True)</span>
+<span class="sd">    xmu_testfile written to database.h5.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="c1"># testing that the group exists </span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">group</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Group</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is not a valid Group instance.&#39;</span> <span class="o">%</span> <span class="n">group</span><span class="p">)</span>
+
+    <span class="c1"># verifying existence of path:</span>
+    <span class="c1"># (a)ppend to existing file</span>
+    <span class="c1"># (w)rite to new file.</span>
+    <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+        <span class="n">hdf5</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">hdf5</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+
+    <span class="c1"># testing name on the dataset</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">name</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">hdf5</span><span class="p">:</span>
+        <span class="c1"># dataset present in the file</span>
+            <span class="k">if</span> <span class="n">replace</span><span class="p">:</span>
+                <span class="n">hdf5</span><span class="o">.</span><span class="fm">__delitem__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> already exists in </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fpath</span><span class="p">))</span>
+
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">hdf5</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">write_recursive_hdf5</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> written to </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fpath</span><span class="p">))</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">hdf5</span><span class="o">.</span><span class="fm">__delitem__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> couldn&#39;t be written to </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fpath</span><span class="p">))</span>
+
+    <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span></div>
+
+<div class="viewcode-block" id="write_collection_hdf5"><a class="viewcode-back" href="../../../io/io_hdf5.html#araucaria.io.io_hdf5.write_collection_hdf5">[docs]</a><span class="k">def</span> <span class="nf">write_collection_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">collection</span><span class="p">:</span> <span class="n">Collection</span><span class="p">,</span> 
+                          <span class="n">names</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">],</span> <span class="n">replace</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Writes a collection in an HDF5 file.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to HDF5 file.</span>
+<span class="sd">    collection</span>
+<span class="sd">        Collection to write in the HDF5 file.</span>
+<span class="sd">    names</span>
+<span class="sd">        List with group dataset names to write in the HDF5 file.</span>
+<span class="sd">    replace</span>
+<span class="sd">        Replace previous dataset. The default is False.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    IOError</span>
+<span class="sd">        If dataset cannot be written to the HDF5 file.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``names`` dataset does not exist in the colleciton.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``names`` dataset already exists in the HDF5 file and ``replace=False``.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    If the file specified by ``fpath`` does not exists, it will be automatically created.</span>
+<span class="sd">    If the file already exists then the datasets in the collection will be appended.</span>
+
+<span class="sd">    By default the write operation will be canceled if any ``names`` dataset in ``collection``</span>
+<span class="sd">    already exists in the HDF5 file.</span>
+<span class="sd">    Previous datasets can be overwritten with the option ``replace=True``. </span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    The ``tags`` attribute of the ``collection`` will not be stored in the HDF5 file.</span>
+<span class="sd">    </span>
+<span class="sd">    Example</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_collection_hdf5, write_collection_hdf5</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;Fe_database.h5&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # reading database</span>
+<span class="sd">    &gt;&gt;&gt; collection = read_collection_hdf5(fpath)</span>
+<span class="sd">    &gt;&gt;&gt; # saving collection in a new hdf5 file</span>
+<span class="sd">    &gt;&gt;&gt; write_collection_hdf5(&#39;database.h5&#39;, collection, replace=True)</span>
+<span class="sd">    FeIISO4_20K written to database.h5.</span>
+<span class="sd">    Fe_Foil written to database.h5.</span>
+<span class="sd">    Ferrihydrite_20K written to database.h5.</span>
+<span class="sd">    Goethite_20K written to database.h5.</span>
+
+<span class="sd">    &gt;&gt;&gt; # write selected group dataset</span>
+<span class="sd">    &gt;&gt;&gt; write_collection_hdf5(&#39;database.h5&#39;, collection, names=[&#39;Fe_Foil&#39;], replace=True)</span>
+<span class="sd">    Fe_Foil written to database.h5.</span>
+<span class="sd">    &quot;&quot;&quot;</span>    
+    <span class="c1"># testing that the group exists </span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">collection</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">Collection</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is not a valid Collection instance.&#39;</span> <span class="o">%</span> <span class="n">collection</span><span class="p">)</span>
+
+    <span class="c1"># veryfying requested group names to write</span>
+    <span class="nb">all</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">names</span> <span class="o">==</span> <span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">]:</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="nb">all</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">all</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> group is not in the Collection.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+    
+    <span class="c1"># verifying existence of path:</span>
+    <span class="c1"># (a)ppend to existing file</span>
+    <span class="c1"># (w)rite to new file.</span>
+    <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+        <span class="n">hdf5</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">hdf5</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>    
+        <span class="c1"># testing name on the HDF5 file</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">hdf5</span><span class="p">:</span>
+            <span class="c1"># dataset present in the file</span>
+                <span class="k">if</span> <span class="n">replace</span><span class="p">:</span>
+                    <span class="n">hdf5</span><span class="o">.</span><span class="fm">__delitem__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> already exists in </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fpath</span><span class="p">))</span>
+    
+        <span class="n">dataset</span> <span class="o">=</span> <span class="n">hdf5</span><span class="o">.</span><span class="n">create_group</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">group</span>   <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">write_recursive_hdf5</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> written to </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fpath</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">hdf5</span><span class="o">.</span><span class="fm">__delitem__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> couldn&#39;t be written to </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fpath</span><span class="p">))</span>
+
+    <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span></div>
+
+<div class="viewcode-block" id="write_recursive_hdf5"><a class="viewcode-back" href="../../../io/io_hdf5.html#araucaria.io.io_hdf5.write_recursive_hdf5">[docs]</a><span class="k">def</span> <span class="nf">write_recursive_hdf5</span><span class="p">(</span><span class="n">dataset</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">Group</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Utility function to write a Group recursively in an HDF5 file.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    dataset</span>
+<span class="sd">        Dataset in the HDF5 file.</span>
+<span class="sd">    group</span>
+<span class="sd">        Group to write in the HDF5 file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">    </span>
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    Only :class:`str`, :class:`float`, :class:`int` and :class:`~numpy.ndarray` </span>
+<span class="sd">    types are currently supported for recursive writting in an HDF5 :class:`~h5py.Dataset`.</span>
+<span class="sd">    </span>
+<span class="sd">    :class:`dict` and :class:`list` types will be convertet to :class:`str`, which is in</span>
+<span class="sd">    turn saved as :class:`bytes` in the HDF5 database.</span>
+<span class="sd">    If read with :func:`read_hdf5`, such records will be automatically converted to their</span>
+<span class="sd">    original type in the group.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># accepted type variables for recursive writting</span>
+    <span class="n">accepted_types</span>  <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">ndarray</span><span class="p">)</span>
+    <span class="n">converted_types</span> <span class="o">=</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span>
+    
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+        <span class="k">if</span> <span class="s1">&#39;__&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">key</span><span class="p">:</span>
+            <span class="n">record</span> <span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="n">key</span><span class="p">)</span>
+            <span class="c1">#vtype = type(record).__name__</span>
+        
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="n">accepted_types</span><span class="p">):</span>
+                <span class="n">dataset</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">record</span><span class="p">)</span>
+            
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="n">converted_types</span><span class="p">):</span>
+                <span class="n">dataset</span><span class="o">.</span><span class="n">create_dataset</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">record</span><span class="p">))</span>
+    <span class="k">return</span></div>
+
+<div class="viewcode-block" id="rename_dataset_hdf5"><a class="viewcode-back" href="../../../io/io_hdf5.html#araucaria.io.io_hdf5.rename_dataset_hdf5">[docs]</a><span class="k">def</span> <span class="nf">rename_dataset_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">newname</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Renames a dataset in an HDF5 file.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to HDF5 file.</span>
+<span class="sd">    name</span>
+<span class="sd">        Name of Group dataset.</span>
+<span class="sd">    newname</span>
+<span class="sd">        New name for Group dataset.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    IOError</span>
+<span class="sd">        If the HDF5 file does not exist in the specified path.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``name`` dataset does not exist in the HDF5 file.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``newname`` dataset already exists in the HDF5 file.</span>
+<span class="sd">    </span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_xmu, write_hdf5, rename_dataset_hdf5</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;xmu_testfile.xmu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # extracting mu and mu_ref scans</span>
+<span class="sd">    &gt;&gt;&gt; group_mu = read_xmu(fpath, scan=&#39;mu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # saving a new hdf5 file</span>
+<span class="sd">    &gt;&gt;&gt; write_hdf5(&#39;database.h5&#39;, group_mu, name=&#39;xmu_testfile&#39;, replace=True)</span>
+<span class="sd">    xmu_testfile written to database.h5.</span>
+<span class="sd">    &gt;&gt;&gt; # renaming dataset</span>
+<span class="sd">    &gt;&gt;&gt; rename_dataset_hdf5(&#39;database.h5&#39;, &#39;xmu_testfile&#39;, &#39;xmu_renamed&#39;)</span>
+<span class="sd">    xmu_testfile renamed to xmu_renamed in database.h5.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># verifying existence of path:</span>
+    <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+        <span class="n">hdf5</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;file </span><span class="si">%s</span><span class="s2"> does not exists.&quot;</span> <span class="o">%</span> <span class="n">fpath</span><span class="p">)</span>
+    
+    <span class="k">if</span> <span class="n">newname</span> <span class="ow">in</span> <span class="n">hdf5</span><span class="p">:</span>
+        <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> already exists in </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">newname</span><span class="p">,</span> <span class="n">fpath</span><span class="p">))</span>
+    
+    <span class="c1"># verifying existence of datagroup</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">hdf5</span><span class="p">:</span>
+        <span class="n">hdf5</span><span class="p">[</span><span class="n">newname</span><span class="p">]</span> <span class="o">=</span> <span class="n">hdf5</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> does not exists in </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fpath</span><span class="p">))</span>
+       
+    <span class="n">hdf5</span><span class="o">.</span><span class="fm">__delitem__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+    <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> renamed to </span><span class="si">%s</span><span class="s2"> in </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">newname</span><span class="p">,</span> <span class="n">fpath</span><span class="p">))</span>
+    <span class="k">return</span></div>
+    
+<div class="viewcode-block" id="delete_dataset_hdf5"><a class="viewcode-back" href="../../../io/io_hdf5.html#araucaria.io.io_hdf5.delete_dataset_hdf5">[docs]</a><span class="k">def</span> <span class="nf">delete_dataset_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Deletes a dataset from an HDF5 file.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to HDF5 file.</span>
+<span class="sd">    name</span>
+<span class="sd">        Name of dataset to delete.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    IOError</span>
+<span class="sd">        If the HDF5 file does not exist in the specified path.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``name`` dataset does not exist in the HDF5 file.</span>
+<span class="sd">    </span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_xmu, write_hdf5, rename_dataset_hdf5</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;xmu_testfile.xmu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # extracting mu and mu_ref scans</span>
+<span class="sd">    &gt;&gt;&gt; group_mu = read_xmu(fpath, scan=&#39;mu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # saving a new hdf5 file</span>
+<span class="sd">    &gt;&gt;&gt; write_hdf5(&#39;database.h5&#39;, group_mu, name=&#39;xmu_testfile&#39;, replace=True)</span>
+<span class="sd">    xmu_testfile written to database.h5.</span>
+<span class="sd">    &gt;&gt;&gt; # deleting dataset</span>
+<span class="sd">    &gt;&gt;&gt; delete_dataset_hdf5(&#39;database.h5&#39;, &#39;xmu_testfile&#39;)</span>
+<span class="sd">    xmu_testfile deleted from database.h5.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># verifying existence of path:</span>
+    <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+        <span class="n">hdf5</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;File </span><span class="si">%s</span><span class="s2"> does not exists.&quot;</span> <span class="o">%</span> <span class="n">fpath</span><span class="p">)</span>
+        
+    <span class="c1"># verifying existence of datagroup</span>
+    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">hdf5</span><span class="p">:</span>
+        <span class="n">hdf5</span><span class="o">.</span><span class="fm">__delitem__</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> deleted from </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fpath</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span> <span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> does not exists in </span><span class="si">%s</span><span class="s2">.&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fpath</span><span class="p">))</span>
+    <span class="k">return</span></div>
+
+<div class="viewcode-block" id="summary_hdf5"><a class="viewcode-back" href="../../../io/io_hdf5.html#araucaria.io.io_hdf5.summary_hdf5">[docs]</a><span class="k">def</span> <span class="nf">summary_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">regex</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">optional</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+                 <span class="o">**</span><span class="n">pre_edge_kws</span><span class="p">:</span><span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Report</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns a summary report of datasets in an HDF5 file.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to HDF5 file.</span>
+<span class="sd">    regex</span>
+<span class="sd">        Search string to filter results by dataset name. See Notes for details.</span>
+<span class="sd">        The default is None.</span>
+<span class="sd">    optional</span>
+<span class="sd">        List with optional parameters. See Notes for details.</span>
+<span class="sd">        The default is None.</span>
+<span class="sd">    pre_edge_kws</span>
+<span class="sd">        Dictionary with arguments for :func:`~araucaria.xas.normalize.pre_edge`.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Report for datasets in the HDF5 file.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    IOError</span>
+<span class="sd">        If the HDF5 file does not exist in the specified path.      </span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Summary data includes the following:</span>
+
+<span class="sd">    1. Dataset index.</span>
+<span class="sd">    2. Dataset name.</span>
+<span class="sd">    3. Measurement mode.</span>
+<span class="sd">    4. Numbers of scans.</span>
+<span class="sd">    5. Absorption edge step :math:`\Delta\mu(E_0)`, if ``optional=[&#39;edge_step&#39;]``.</span>
+<span class="sd">    6. Absorption threshold energy :math:`E_0`, if ``optional=[&#39;e0&#39;]``.</span>
+<span class="sd">    7. Merged scans, if ``optional=[&#39;merged_scans&#39;]``.</span>
+<span class="sd">    8. Optional parameters if they exist as attributes in the dataset.</span>
+
+<span class="sd">    A ``regex`` value can be used to filter dataset names based</span>
+<span class="sd">    on a regular expression (reges). For valid regex syntax, please </span>
+<span class="sd">    check the documentation of the module :mod:`re`.</span>
+
+<span class="sd">    The number of scans and names of merged files are retrieved </span>
+<span class="sd">    from the ``merged_scans`` attribute of the HDF5 dataset.</span>
+
+<span class="sd">    The absorption threshold and the edge step are retrieved by </span>
+<span class="sd">    calling the function :func:`~araucaria.xas.normalize.pre_edge`.</span>
+
+<span class="sd">    Optional parameters will be retrieved from the dataset as </span>
+<span class="sd">    attributes. Currently only :class:`str`, :class:`float` or</span>
+<span class="sd">    :class:`int` will be retrieved. Otherswise an empty character</span>
+<span class="sd">    will be printed in the report.</span>
+
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :func:`read_hdf5`</span>
+<span class="sd">    :class:`~araucaria.main.report.Report`</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import summary_hdf5</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;Fe_database.h5&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # printing default summary</span>
+<span class="sd">    &gt;&gt;&gt; report = summary_hdf5(fpath)</span>
+<span class="sd">    &gt;&gt;&gt; report.show()</span>
+<span class="sd">    =================================</span>
+<span class="sd">    id  dataset           mode    n  </span>
+<span class="sd">    =================================</span>
+<span class="sd">    1   FeIISO4_20K       mu      5  </span>
+<span class="sd">    2   Fe_Foil           mu_ref  5  </span>
+<span class="sd">    3   Ferrihydrite_20K  mu      5  </span>
+<span class="sd">    4   Goethite_20K      mu      5  </span>
+<span class="sd">    =================================</span>
+
+<span class="sd">    &gt;&gt;&gt; # printing summary with merged scans of Goethite groups</span>
+<span class="sd">    &gt;&gt;&gt; report = summary_hdf5(fpath, regex=&#39;Goe&#39;, optional=[&#39;merged_scans&#39;])</span>
+<span class="sd">    &gt;&gt;&gt; report.show()</span>
+<span class="sd">    =======================================================</span>
+<span class="sd">    id  dataset       mode  n  merged_scans                </span>
+<span class="sd">    =======================================================</span>
+<span class="sd">    1   Goethite_20K  mu    5  20K_GOE_Fe_K_240.00000.xdi  </span>
+<span class="sd">                               20K_GOE_Fe_K_240.00001.xdi  </span>
+<span class="sd">                               20K_GOE_Fe_K_240.00002.xdi  </span>
+<span class="sd">                               20K_GOE_Fe_K_240.00003.xdi  </span>
+<span class="sd">                               20K_GOE_Fe_K_240.00004.xdi  </span>
+<span class="sd">    =======================================================</span>
+
+<span class="sd">    &gt;&gt;&gt; # printing custom parameters</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_xmu, write_hdf5</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;xmu_testfile.xmu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # extracting mu and mu_ref scans</span>
+<span class="sd">    &gt;&gt;&gt; group_mu = read_xmu(fpath, scan=&#39;mu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # adding additional attributes</span>
+<span class="sd">    &gt;&gt;&gt; group_mu.symbol = &#39;Zn&#39;</span>
+<span class="sd">    &gt;&gt;&gt; group_mu.temp   = 25.0</span>
+<span class="sd">    &gt;&gt;&gt; # saving a new hdf5 file</span>
+<span class="sd">    &gt;&gt;&gt; write_hdf5(&#39;database2.h5&#39;, group_mu, name=&#39;xmu_testfile&#39;, replace=True)</span>
+<span class="sd">    xmu_testfile written to database2.h5.</span>
+<span class="sd">    &gt;&gt;&gt; report = summary_hdf5(&#39;database2.h5&#39;, optional=[&#39;symbol&#39;,&#39;temp&#39;])</span>
+<span class="sd">    &gt;&gt;&gt; report.show()</span>
+<span class="sd">    =========================================</span>
+<span class="sd">    id  dataset       mode  n  symbol  temp  </span>
+<span class="sd">    =========================================</span>
+<span class="sd">    1   xmu_testfile  mu    1  Zn      25    </span>
+<span class="sd">    =========================================</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># verifying existence of path:</span>
+    <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+        <span class="n">hdf5</span> <span class="o">=</span> <span class="n">File</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s2">&quot;file </span><span class="si">%s</span><span class="s2"> does not exists.&quot;</span> <span class="o">%</span> <span class="n">fpath</span><span class="p">)</span>
+
+    <span class="c1"># list with parameter names</span>
+    <span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;dataset&#39;</span><span class="p">,</span> <span class="s1">&#39;mode&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">]</span>
+    <span class="n">opt_list</span>    <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;merged_scans&#39;</span><span class="p">,</span> <span class="s1">&#39;edge_step&#39;</span><span class="p">,</span> <span class="s1">&#39;e0&#39;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">pre_edge_kws</span> <span class="o">==</span> <span class="p">{}:</span>
+        <span class="c1"># default values</span>
+        <span class="n">pre_edge_kws</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;pre_range&#39;</span><span class="p">:[</span><span class="o">-</span><span class="mi">150</span><span class="p">,</span><span class="o">-</span><span class="mi">50</span><span class="p">],</span> <span class="s1">&#39;nnorm&#39;</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s1">&#39;post_range&#39;</span><span class="p">:[</span><span class="mi">150</span><span class="p">,</span> <span class="n">inf</span><span class="p">]}</span>
+
+    <span class="c1"># verifying optional values</span>
+    <span class="k">if</span> <span class="n">optional</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">opt_val</span> <span class="ow">in</span> <span class="n">optional</span><span class="p">:</span>
+            <span class="n">field_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">opt_val</span><span class="p">)</span>
+
+    <span class="c1"># instanciating report class</span>
+    <span class="n">report</span>   <span class="o">=</span> <span class="n">Report</span><span class="p">()</span>
+    <span class="n">report</span><span class="o">.</span><span class="n">set_columns</span><span class="p">(</span><span class="n">field_names</span><span class="p">)</span>
+
+    <span class="c1"># number of records</span>
+    <span class="n">keys</span>  <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">hdf5</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">regex</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">keys</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">search</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">keys</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">index</span><span class="p">]</span>
+    <span class="n">nkeys</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">keys</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">key</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">keys</span><span class="p">):</span>
+        <span class="n">data</span>    <span class="o">=</span> <span class="n">read_hdf5</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">key</span><span class="p">))</span>
+        <span class="n">scanval</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get_mode</span><span class="p">()</span>
+        <span class="n">extra_content</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># aux variable for &#39;merged_scans&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># merged_scans is saved as string, so we count the number of commas</span>
+            <span class="n">nscans</span> <span class="o">=</span> <span class="n">hdf5</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;merged_scans&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">asstr</span><span class="p">()[()]</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">nscans</span> <span class="o">=</span> <span class="mi">1</span>
+
+        <span class="n">field_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">scanval</span><span class="p">,</span> <span class="n">nscans</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">optional</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">opt_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">optional</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">opt_val</span> <span class="o">==</span> <span class="s1">&#39;merged_scans&#39;</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="c1"># storing the col merge_index</span>
+                        <span class="n">merge_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">field_vals</span><span class="p">)</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">list_scans</span> <span class="o">=</span> <span class="n">literal_eval</span><span class="p">(</span><span class="n">hdf5</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s1">&#39;merged_scans&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">asstr</span><span class="p">()[()]</span> <span class="p">)</span>
+                        <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">list_scans</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                        <span class="n">extra_content</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;None&#39;</span><span class="p">)</span>
+
+                <span class="k">elif</span> <span class="n">opt_val</span> <span class="ow">in</span> <span class="n">opt_list</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                    <span class="n">out</span> <span class="o">=</span> <span class="n">pre_edge</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="n">pre_edge_kws</span><span class="p">)</span>
+                    <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="n">opt_val</span><span class="p">])</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># custom optional field</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">val</span> <span class="o">=</span> <span class="n">hdf5</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="n">opt_val</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">[()],</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+                            <span class="c1"># if val is int or float print it</span>
+                            <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">[()])</span>
+                        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">[()],</span> <span class="nb">bytes</span><span class="p">):</span>
+                            <span class="c1"># if val is bytes we convert it and check</span>
+                            <span class="n">val</span> <span class="o">=</span> <span class="n">convert_bytes_hdf5</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                                <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+        <span class="n">report</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">field_vals</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">extra_content</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_scans</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="n">field_vals</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">field_names</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span>  <span class="n">merge_index</span><span class="p">:</span>
+                        <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                <span class="n">report</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">field_vals</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">nkeys</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">report</span><span class="o">.</span><span class="n">add_midrule</span><span class="p">()</span>
+
+    <span class="n">hdf5</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">report</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+
+    <span class="c1"># removing temp files    </span>
+    <span class="k">for</span> <span class="n">fpath</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;database.h5&#39;</span><span class="p">,</span> <span class="s1">&#39;database2.h5&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Deglitch module &mdash; araucaria 0.1.10
+  <title>Deglitch module &mdash; araucaria 0.1.11
  documentation</title>
   
 
@@ -99,6 +99,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
@@ -113,6 +114,8 @@
 <li class="toctree-l2"><a class="reference internal" href="xas_utils.html">XASutils module</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linalg_module.html">LinAlg module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stats_module.html">Statistics module</a></li>
@@ -215,7 +218,7 @@
 <span id="deglitch-module"></span><h1>Deglitch module<a class="headerlink" href="#module-araucaria.xas.deglitch" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.xas.deglitch.deglitch">
-<span class="sig-prename descclassname"><span class="pre">araucaria.xas.deglitch.</span></span><span class="sig-name descname"><span class="pre">deglitch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xas'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sg_window_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sg_polyorder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.025</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_glitches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_glitch_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.xas.deglitch.deglitch" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.xas.deglitch.</span></span><span class="sig-name descname"><span class="pre">deglitch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_window</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'xas'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sg_window_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">9</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sg_polyorder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.025</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_glitches</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'default'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_glitch_length</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/xas/deglitch.html#deglitch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.xas.deglitch.deglitch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Algorithm to deglitch a XAFS spectrum.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -283,9 +286,9 @@ end of the energy array</p></li>
 <p class="rubric">References</p>
 <dl class="footnote brackets">
 <dt class="label" id="id2"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
-<dd><p>Wallace, S. M., Alsina, M. A., &amp; Gaillard, J. F. (2020)
+<dd><p>Wallace, S. M., Alsina, M. A., &amp; Gaillard, J. F. (2021)
 “An algorithm for the automatic deglitching of x-ray absorption
-spectroscopy data”. arXiv preprint arXiv:2011.14467.</p>
+spectroscopy data”. J. Synchrotron Rad. 28, <a class="reference external" href="https://doi.org/10.1107/S1600577521003611">https://doi.org/10.1107/S1600577521003611</a></p>
 </dd>
 </dl>
 <p class="rubric">Example</p>

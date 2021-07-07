@@ -1,0 +1,506 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.xas.autobk &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.xas.autobk</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.xas.autobk</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">warnings</span> <span class="kn">import</span> <span class="n">warn</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="n">sign</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">ceil</span><span class="p">,</span> <span class="n">copy</span><span class="p">,</span>
+                   <span class="n">ptp</span><span class="p">,</span> <span class="n">arange</span><span class="p">,</span> <span class="n">zeros</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> 
+                   <span class="n">ndarray</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">concatenate</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp1d</span><span class="p">,</span> <span class="n">splrep</span><span class="p">,</span> <span class="n">splev</span>
+<span class="kn">from</span> <span class="nn">lmfit</span> <span class="kn">import</span> <span class="n">Parameters</span><span class="p">,</span> <span class="n">minimize</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="kn">from</span> <span class="nn">.normalize</span> <span class="kn">import</span> <span class="n">pre_edge</span>
+<span class="kn">from</span> <span class="nn">.xasft</span> <span class="kn">import</span> <span class="n">ftwindow</span><span class="p">,</span> <span class="n">xftf_kwin</span>
+<span class="kn">from</span> <span class="nn">.xasutils</span> <span class="kn">import</span> <span class="n">etok</span><span class="p">,</span> <span class="n">ktoe</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">index_nearest</span><span class="p">,</span> <span class="n">check_objattrs</span><span class="p">,</span> <span class="n">check_xrange</span>
+
+<span class="n">fmt_coef</span> <span class="o">=</span> <span class="s1">&#39;coef_</span><span class="si">%2.2i</span><span class="s1">&#39;</span>  <span class="c1"># formated coefficient</span>
+
+<span class="k">def</span> <span class="nf">realimag</span><span class="p">(</span><span class="n">arr</span><span class="p">):</span>
+    <span class="c1">#return real array of real/imag pairs from complex array</span>
+    <span class="k">return</span> <span class="n">array</span><span class="p">([(</span><span class="n">i</span><span class="o">.</span><span class="n">real</span><span class="p">,</span> <span class="n">i</span><span class="o">.</span><span class="n">imag</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arr</span><span class="p">])</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">spline_eval</span><span class="p">(</span><span class="n">kraw</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">knots</span><span class="p">,</span> <span class="n">coefs</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">kout</span><span class="p">):</span>
+    <span class="c1">#eval bkg(kraw) and chi(k) for knots, coefs, order</span>
+    <span class="n">bkg</span> <span class="o">=</span> <span class="n">splev</span><span class="p">(</span><span class="n">kraw</span><span class="p">,</span> <span class="p">[</span><span class="n">knots</span><span class="p">,</span> <span class="n">coefs</span><span class="p">,</span> <span class="n">order</span><span class="p">])</span>
+    <span class="n">chi</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">kraw</span><span class="p">,</span> <span class="p">(</span><span class="n">mu</span><span class="o">-</span><span class="n">bkg</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)(</span><span class="n">kout</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">bkg</span><span class="p">,</span> <span class="n">chi</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">residuals</span><span class="p">(</span><span class="n">pars</span><span class="p">,</span> <span class="n">knots</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">irbkg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nfft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span>
+            <span class="n">kraw</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mu</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">kout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ftwin</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">kweight</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+            <span class="n">chi_std</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nclamp</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">clamp_lo</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">clamp_hi</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="c1"># residuals function</span>
+    <span class="n">coefs</span>    <span class="o">=</span> <span class="p">[</span><span class="n">pars</span><span class="p">[</span><span class="n">fmt_coef</span> <span class="o">%</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">pars</span><span class="o">.</span><span class="n">keys</span><span class="p">()))]</span>
+    <span class="n">bkg</span><span class="p">,</span> <span class="n">chi</span> <span class="o">=</span> <span class="n">spline_eval</span><span class="p">(</span><span class="n">kraw</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">knots</span><span class="p">,</span> <span class="n">coefs</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">kout</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">chi_std</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">chi</span> <span class="o">=</span> <span class="n">chi</span> <span class="o">-</span> <span class="n">chi_std</span>
+    <span class="n">out</span> <span class="o">=</span>  <span class="n">realimag</span><span class="p">(</span><span class="n">xftf_kwin</span><span class="p">(</span><span class="n">chi</span><span class="o">*</span><span class="n">ftwin</span><span class="p">,</span> <span class="n">nfft</span><span class="o">=</span><span class="n">nfft</span><span class="p">)[:</span><span class="n">irbkg</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">nclamp</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">out</span>
+    <span class="c1"># spline clamps</span>
+    <span class="n">scale</span>       <span class="o">=</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="mi">100</span><span class="o">*</span><span class="p">(</span><span class="n">out</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="p">)</span><span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="p">)</span><span class="o">*</span><span class="n">nclamp</span><span class="p">)</span>
+    <span class="n">scaled_chik</span> <span class="o">=</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">kout</span><span class="o">**</span><span class="n">kweight</span> <span class="o">*</span> <span class="n">chi</span>
+    <span class="k">return</span> <span class="n">concatenate</span><span class="p">((</span><span class="n">out</span><span class="p">,</span>
+                        <span class="nb">abs</span><span class="p">(</span><span class="n">clamp_lo</span><span class="p">)</span><span class="o">*</span><span class="n">scaled_chik</span><span class="p">[:</span><span class="n">nclamp</span><span class="p">],</span>
+                        <span class="nb">abs</span><span class="p">(</span><span class="n">clamp_hi</span><span class="p">)</span><span class="o">*</span><span class="n">scaled_chik</span><span class="p">[</span><span class="o">-</span><span class="n">nclamp</span><span class="p">:]))</span>
+
+
+<div class="viewcode-block" id="autobk"><a class="viewcode-back" href="../../../xas/xas_autobk.html#araucaria.xas.autobk.autobk">[docs]</a><span class="k">def</span> <span class="nf">autobk</span><span class="p">(</span><span class="n">group</span><span class="p">:</span> <span class="n">Group</span><span class="p">,</span> <span class="n">rbkg</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">k_range</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="n">inf</span><span class="p">],</span> 
+           <span class="n">kweight</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">win</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;hanning&#39;</span><span class="p">,</span>  <span class="n">dk</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> 
+           <span class="n">nfft</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">kstep</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">k_std</span><span class="p">:</span> <span class="n">ndarray</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+           <span class="n">chi_std</span><span class="p">:</span> <span class="n">ndarray</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">nclamp</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">clamp_lo</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> 
+           <span class="n">clamp_hi</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">update</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Autobk algorithm to remove background of a XAFS scan.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    group</span>
+<span class="sd">        Group containing the spectrum for background removal.</span>
+<span class="sd">    rbkg</span>
+<span class="sd">        Distance (Å) for :math:`\chi(R)` above which the signal is ignored.</span>
+<span class="sd">        The default is 1.0.</span>
+<span class="sd">    k_range</span>
+<span class="sd">        Wavenumber range (:math:`Å^{-1}`).The default is [0, :data:`~numpy.inf`].</span>
+<span class="sd">    kweight</span>
+<span class="sd">        Exponent for weighting chi(k) by k**kweight.</span>
+<span class="sd">        The default is 2.</span>
+<span class="sd">    win</span>
+<span class="sd">        Name of the the FT window type. The default is &#39;hanning&#39;.</span>
+<span class="sd">    dk</span>
+<span class="sd">        Tapering parameter for the FT window. The default is 0.1.</span>
+<span class="sd">    nfft</span>
+<span class="sd">        Array size for the FT.  The default is 2048.</span>
+<span class="sd">    kstep</span>
+<span class="sd">        Wavenumber step size for the FT (:math:`Å^{-1}`).  The default is 0.05.</span>
+<span class="sd">    k_std</span>
+<span class="sd">        Optional k array for standard :math:`\chi(k)`.</span>
+<span class="sd">    chi_std</span>
+<span class="sd">        Optional array for standard :math:`\chi(k)`.</span>
+<span class="sd">    nclamp</span>
+<span class="sd">        Number of energy end-points for clamp. The default is 2.</span>
+<span class="sd">    clamp_lo</span>
+<span class="sd">        Weight of low-energy clamp. The default is 1.</span>
+<span class="sd">    clamp_hi</span>
+<span class="sd">        Weight of high-energy clamp. The default is 1.</span>
+<span class="sd">    update</span>
+<span class="sd">        Indicates if the group should be updated with the autobk attributes.</span>
+<span class="sd">        The default is False.</span>
+<span class="sd">      </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Dictionary with the following arguments:</span>
+
+<span class="sd">        - ``bkg``         : array with background signal :math:`\mu_0(E)`.</span>
+<span class="sd">        - ``chie``        : array with :math:`\chi(E)`.</span>
+<span class="sd">        - ``chi``         : array with :math:`\chi(k)`.</span>
+<span class="sd">        - ``k``           : array with wavenumbers.</span>
+<span class="sd">        - ``autobk_pars`` : dictionary with autobk parameters.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``group`` is not a valid Group instance.</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If attribute ``e0`` or ``edge_step`` does not exist in ``group``.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    ``rbkg`` cannot be lower than 2 x :math:`\pi`/(kstep x nfft), which </span>
+<span class="sd">    corresponds to the grid resolution of :math:`\chi(R)`.</span>
+
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :func:`~araucaria.plot.fig_autobk.fig_autobk`: Plot the results of background removal.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The Autobk algorithm [1]_ approximates an EXAFS bakground signal by </span>
+<span class="sd">    fitting a cubic B-spline to the :math:`\chi(R)` signal below</span>
+<span class="sd">    a ``rbkg`` value.</span>
+
+<span class="sd">    The background removal is performed as follows:</span>
+
+<span class="sd">    1. The B-spline is constructed considering approximately equally </span>
+<span class="sd">       distant knots in ``krange``. The number of knots is calculated as</span>
+<span class="sd">       the integer value of 2 * ``rbkg`` * ``krange`` /:math:`\pi` + 2, with </span>
+<span class="sd">       a minimum value of 5 and a maximum value of 64.</span>
+
+<span class="sd">    2. The initial coefficients (:math:`c_i`) for the B-spline at each </span>
+<span class="sd">       knot are calculated with a weighted average window:</span>
+<span class="sd">    </span>
+<span class="sd">    .. math::</span>
+
+<span class="sd">            c_i = \\frac{\mu_{i-5} + 2 \cdot \mu_i + \mu_{i+5}}{4}</span>
+
+<span class="sd">    3. The coefficients of the B-spline are then optimized in order to</span>
+<span class="sd">       fit :math:`\chi(R)` below the ``rbkg`` value.</span>
+<span class="sd">    4. If ``nclamp`` is provided, the given number of points at the </span>
+<span class="sd">       extremes of the weighted :math:`\chi(k)` signal are also included </span>
+<span class="sd">       in the minimize function, in order to fit such points considering</span>
+<span class="sd">       the ``clamp_lo`` and ``clamp_hi`` weights.</span>
+<span class="sd">    5. The fitted B-spline is removed from :math:`\mu(E)` in order to </span>
+<span class="sd">       compute :math:`\chi(k)`.</span>
+
+<span class="sd">    If ``update=True`` the contents of the returned dictionary </span>
+<span class="sd">    will be included as attributes of ``group``.</span>
+<span class="sd">    </span>
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1]  Newville, M., Livins, P., Yacoby, Y., Rehr, J. J.,  &amp; Stern, E. A. (1993) </span>
+<span class="sd">       &quot;Near-edge x-ray-absorption fine structure of Pb: A comparison of theory </span>
+<span class="sd">       and experiment&quot;. Physical Review B, 47(21), pp. 14126–14131.</span>
+<span class="sd">    </span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_dnd</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xas import pre_edge, autobk</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;dnd_testfile1.dat&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; group = read_dnd(fpath, scan=&#39;mu&#39;)  # extracting mu and mu_ref scans</span>
+<span class="sd">    &gt;&gt;&gt; pre   = pre_edge(group, update=True)</span>
+<span class="sd">    &gt;&gt;&gt; attrs = [&#39;bkg&#39;, &#39;chie&#39;, &#39;chi&#39;, &#39;k&#39;, &#39;autobk_pars&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; autbk = autobk(group, update=True)</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(group, Group, attrs)</span>
+<span class="sd">    [True, True, True, True, True]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># checking class and attributes</span>
+    <span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;e0&#39;</span><span class="p">,</span> <span class="s1">&#39;edge_step&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># extracting data and mu as independent arrays</span>
+    <span class="n">energy</span>    <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">energy</span>
+    <span class="n">mu</span>        <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">get_mode</span><span class="p">())</span>
+    <span class="n">e0</span>        <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">e0</span>
+    <span class="n">edge_step</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">edge_step</span>
+
+    <span class="c1"># index for e0 (ie0)</span>
+    <span class="n">ie0</span>   <span class="o">=</span> <span class="n">index_nearest</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">e0</span><span class="p">)</span>
+    <span class="n">e0</span>    <span class="o">=</span> <span class="n">energy</span><span class="p">[</span><span class="n">ie0</span><span class="p">]</span>
+
+    <span class="c1"># index for rbkg (irbkg)</span>
+    <span class="n">rgrid</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">/</span> <span class="p">(</span><span class="n">kstep</span> <span class="o">*</span> <span class="n">nfft</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">rbkg</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">*</span><span class="n">rgrid</span><span class="p">:</span>
+        <span class="n">warn</span><span class="p">(</span><span class="s1">&#39;rbkg is lower than 2 x grid resolution of chi(R). Resetting tbkg to this limit.&#39;</span><span class="p">)</span>
+        <span class="n">rbkg</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">rgrid</span>
+    <span class="n">irbkg</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ceil</span><span class="p">(</span><span class="n">rbkg</span><span class="o">/</span><span class="n">rgrid</span><span class="p">))</span>
+
+    <span class="c1"># ungridded k (kraw)</span>
+    <span class="n">enrel</span> <span class="o">=</span> <span class="n">energy</span><span class="p">[</span><span class="n">ie0</span><span class="p">:]</span> <span class="o">-</span> <span class="n">e0</span>
+    <span class="n">kraw</span>  <span class="o">=</span> <span class="n">sign</span><span class="p">(</span><span class="n">enrel</span><span class="p">)</span> <span class="o">*</span> <span class="n">etok</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">enrel</span><span class="p">))</span>
+
+    <span class="c1"># grided k (kout)</span>
+    <span class="n">krange</span> <span class="o">=</span> <span class="n">check_xrange</span><span class="p">(</span><span class="n">k_range</span><span class="p">,</span> <span class="n">kraw</span><span class="p">)</span>
+    <span class="n">kout</span>   <span class="o">=</span> <span class="n">kstep</span> <span class="o">*</span> <span class="n">arange</span><span class="p">(</span><span class="n">ceil</span><span class="p">(</span><span class="n">krange</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="n">kstep</span><span class="p">)</span> <span class="p">)</span>
+
+    <span class="c1"># index for max energy</span>
+    <span class="n">iemax</span>  <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">energy</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">index_nearest</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">e0</span> <span class="o">+</span> <span class="n">ktoe</span><span class="p">(</span><span class="n">krange</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span> <span class="p">)</span>
+
+    <span class="c1"># interpolate provided chi(k) onto the kout grid</span>
+    <span class="k">if</span> <span class="n">chi_std</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">k_std</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">chi_std</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">kout</span><span class="p">,</span> <span class="n">k_std</span><span class="p">,</span> <span class="n">chi_std</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)(</span><span class="n">kout</span><span class="p">)</span>
+        
+    <span class="c1"># FT window (*k**kweight)</span>
+    <span class="n">ftwin</span> <span class="o">=</span> <span class="n">kout</span><span class="o">**</span><span class="n">kweight</span> <span class="o">*</span> <span class="n">ftwindow</span><span class="p">(</span><span class="n">kout</span><span class="p">,</span> <span class="n">x_range</span><span class="o">=</span><span class="n">krange</span><span class="p">,</span> <span class="n">win</span><span class="o">=</span><span class="n">win</span><span class="p">,</span> <span class="n">dx1</span><span class="o">=</span><span class="n">dk</span><span class="p">)</span>
+
+    <span class="c1"># calc k-value and initial guess for y-values of spline params</span>
+    <span class="c1"># a minimum of 5 knots and a maximum of 64 knots are considered for the spline.</span>
+    <span class="n">nspl</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mi">64</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">rbkg</span><span class="o">*</span><span class="n">ptp</span><span class="p">(</span><span class="n">krange</span><span class="p">)</span><span class="o">/</span><span class="n">pi</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">))</span>
+    <span class="n">spl_y</span><span class="p">,</span> <span class="n">spl_k</span><span class="p">,</span> <span class="n">spl_e</span>  <span class="o">=</span> <span class="p">[],</span> <span class="p">[],</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspl</span><span class="p">):</span>
+        <span class="c1"># looping through the spline points</span>
+        <span class="c1"># spline window in kraw is [ik - 5, ik + 5], except at the extremes of the array</span>
+        <span class="c1"># a weighted average for mu is calculated in the extremes and center of this window.</span>
+        <span class="n">q</span>   <span class="o">=</span> <span class="n">krange</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="n">ptp</span><span class="p">(</span><span class="n">krange</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">nspl</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">ik</span>  <span class="o">=</span> <span class="n">index_nearest</span><span class="p">(</span><span class="n">kraw</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+        <span class="n">i1</span>  <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">kraw</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">ik</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="n">i2</span>  <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">ik</span> <span class="o">-</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="n">spl_k</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">kraw</span><span class="p">[</span><span class="n">ik</span><span class="p">])</span>
+        <span class="n">spl_e</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">energy</span><span class="p">[</span><span class="n">ik</span><span class="o">+</span><span class="n">ie0</span><span class="p">])</span>
+        <span class="n">spl_y</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">mu</span><span class="p">[</span><span class="n">i1</span><span class="o">+</span><span class="n">ie0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">mu</span><span class="p">[</span><span class="n">ik</span><span class="o">+</span><span class="n">ie0</span><span class="p">]</span>  <span class="o">+</span> <span class="n">mu</span><span class="p">[</span><span class="n">i2</span><span class="o">+</span><span class="n">ie0</span><span class="p">])</span> <span class="o">/</span> <span class="mf">4.0</span> <span class="p">)</span>
+
+    <span class="c1"># get B-spline represention: knots, coefs, order=3</span>
+    <span class="c1"># coefs will be fitted</span>
+    <span class="n">knots</span><span class="p">,</span> <span class="n">coefs</span><span class="p">,</span> <span class="n">order</span> <span class="o">=</span> <span class="n">splrep</span><span class="p">(</span><span class="n">spl_k</span><span class="p">,</span> <span class="n">spl_y</span> <span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># set fit parameters from initial coefficients</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">Parameters</span><span class="p">()</span>
+    <span class="n">tol</span>    <span class="o">=</span> <span class="mf">1.e-5</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coefs</span><span class="p">)):</span>
+        <span class="n">params</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="n">fmt_coef</span> <span class="o">%</span> <span class="n">i</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">vary</span><span class="o">=</span><span class="n">i</span><span class="o">&lt;</span><span class="nb">len</span><span class="p">(</span><span class="n">spl_y</span><span class="p">))</span>
+
+    <span class="n">initbkg</span><span class="p">,</span> <span class="n">initchi</span> <span class="o">=</span> <span class="n">spline_eval</span><span class="p">(</span><span class="n">kraw</span><span class="p">[:</span><span class="n">iemax</span><span class="o">-</span><span class="n">ie0</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">mu</span><span class="p">[</span><span class="n">ie0</span><span class="p">:</span><span class="n">iemax</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+                                   <span class="n">knots</span><span class="p">,</span> <span class="n">coefs</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">kout</span><span class="p">)</span>
+
+    <span class="n">result</span> <span class="o">=</span> <span class="n">minimize</span><span class="p">(</span><span class="n">residuals</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;leastsq&#39;</span><span class="p">,</span>
+                      <span class="n">gtol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">ftol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">xtol</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span> <span class="n">epsfcn</span><span class="o">=</span><span class="n">tol</span><span class="p">,</span>
+                      <span class="n">kws</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">chi_std</span> <span class="o">=</span><span class="n">chi_std</span><span class="p">,</span>
+                                 <span class="n">knots</span><span class="o">=</span><span class="n">knots</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
+                                 <span class="n">kraw</span><span class="o">=</span><span class="n">kraw</span><span class="p">[:</span><span class="n">iemax</span><span class="o">-</span><span class="n">ie0</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+                                 <span class="n">mu</span><span class="o">=</span><span class="n">mu</span><span class="p">[</span><span class="n">ie0</span><span class="p">:</span><span class="n">iemax</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">irbkg</span><span class="o">=</span><span class="n">irbkg</span><span class="p">,</span> 
+                                 <span class="n">kout</span><span class="o">=</span><span class="n">kout</span><span class="p">,</span> <span class="n">ftwin</span><span class="o">=</span><span class="n">ftwin</span><span class="p">,</span> 
+                                 <span class="n">kweight</span><span class="o">=</span><span class="n">kweight</span><span class="p">,</span> <span class="n">nfft</span><span class="o">=</span><span class="n">nfft</span><span class="p">,</span> 
+                                 <span class="n">nclamp</span><span class="o">=</span><span class="n">nclamp</span><span class="p">,</span> <span class="n">clamp_lo</span><span class="o">=</span><span class="n">clamp_lo</span><span class="p">,</span> 
+                                 <span class="n">clamp_hi</span><span class="o">=</span><span class="n">clamp_hi</span><span class="p">))</span>
+
+    <span class="c1"># optimized coefficients</span>
+    <span class="n">coefs</span>    <span class="o">=</span> <span class="p">[</span><span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="n">fmt_coef</span> <span class="o">%</span> <span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coefs</span><span class="p">))]</span>
+    <span class="n">bkg</span><span class="p">,</span> <span class="n">chi</span> <span class="o">=</span> <span class="n">spline_eval</span><span class="p">(</span><span class="n">kraw</span><span class="p">[:</span><span class="n">iemax</span><span class="o">-</span><span class="n">ie0</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span> <span class="n">mu</span><span class="p">[</span><span class="n">ie0</span><span class="p">:</span><span class="n">iemax</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span>
+                           <span class="n">knots</span><span class="p">,</span> <span class="n">coefs</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">kout</span><span class="p">)</span>
+    <span class="n">obkg</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+    <span class="n">obkg</span><span class="p">[</span><span class="n">ie0</span><span class="p">:</span><span class="n">ie0</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">bkg</span><span class="p">)]</span> <span class="o">=</span> <span class="n">bkg</span>
+
+    <span class="c1"># output dictionaries</span>
+    <span class="n">init_bkg</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+    <span class="n">init_bkg</span><span class="p">[</span><span class="n">ie0</span><span class="p">:</span><span class="n">ie0</span><span class="o">+</span><span class="nb">len</span><span class="p">(</span><span class="n">bkg</span><span class="p">)]</span> <span class="o">=</span> <span class="n">initbkg</span>
+    
+    <span class="n">autobk_pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;init_bkg&#39;</span>     <span class="p">:</span> <span class="n">init_bkg</span><span class="p">,</span>
+                   <span class="s1">&#39;init_chi&#39;</span>     <span class="p">:</span> <span class="n">initchi</span><span class="o">/</span><span class="n">edge_step</span><span class="p">,</span>
+                   <span class="s1">&#39;knots_e&#39;</span>      <span class="p">:</span> <span class="n">spl_e</span><span class="p">,</span>
+                   <span class="s1">&#39;knots_y&#39;</span>      <span class="p">:</span> <span class="p">[</span><span class="n">coefs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nspl</span><span class="p">)],</span>
+                   <span class="s1">&#39;init_knots_y&#39;</span> <span class="p">:</span> <span class="n">spl_y</span><span class="p">,</span>
+                   <span class="s1">&#39;nfev&#39;</span>         <span class="p">:</span> <span class="n">result</span><span class="o">.</span><span class="n">nfev</span><span class="p">,</span>
+                   <span class="s1">&#39;k_range&#39;</span>      <span class="p">:</span> <span class="n">krange</span><span class="p">,</span>
+                   <span class="s1">&#39;kweight&#39;</span>      <span class="p">:</span> <span class="n">kweight</span><span class="p">,</span>
+                   <span class="s1">&#39;win&#39;</span>          <span class="p">:</span> <span class="n">win</span><span class="p">,</span>
+                   <span class="s1">&#39;dk&#39;</span>           <span class="p">:</span> <span class="n">dk</span><span class="p">,</span>
+                  <span class="p">}</span>
+
+    <span class="n">content</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;bkg&#39;</span>         <span class="p">:</span> <span class="n">obkg</span><span class="p">,</span>
+               <span class="s1">&#39;chie&#39;</span>        <span class="p">:</span> <span class="p">(</span><span class="n">mu</span><span class="o">-</span><span class="n">obkg</span><span class="p">)</span><span class="o">/</span><span class="n">edge_step</span><span class="p">,</span>
+               <span class="s1">&#39;k&#39;</span>           <span class="p">:</span> <span class="n">kout</span><span class="p">,</span>
+               <span class="s1">&#39;chi&#39;</span>         <span class="p">:</span> <span class="n">chi</span><span class="o">/</span><span class="n">edge_step</span><span class="p">,</span>
+               <span class="s1">&#39;edge_step&#39;</span>   <span class="p">:</span> <span class="n">edge_step</span><span class="p">,</span>
+               <span class="s1">&#39;e0&#39;</span>          <span class="p">:</span> <span class="n">e0</span><span class="p">,</span>
+               <span class="s1">&#39;autobk_pars&#39;</span> <span class="p">:</span> <span class="n">autobk_pars</span>
+              <span class="p">}</span>
+    <span class="k">if</span> <span class="n">update</span><span class="p">:</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">add_content</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">content</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>genESD module &mdash; araucaria 0.1.10
+  <title>genESD module &mdash; araucaria 0.1.11
  documentation</title>
   
 
@@ -49,7 +49,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Window module" href="stats_window.html" />
+    <link rel="next" title="Cluster module" href="stats_cluster.html" />
     <link rel="prev" title="Statistics module" href="../stats_module.html" /> 
 </head>
 
@@ -99,19 +99,22 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../main_module.html">Main module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../io_module.html">IO module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linalg_module.html">LinAlg module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../stats_module.html">Statistics module</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">genESD module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="stats_window.html">Window module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stats_cluster.html">Cluster module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="stats_pca.html">PCA module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stats_signal.html">Signal module</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../utils_module.html">Utilities module</a></li>
@@ -234,7 +237,7 @@ generalized extreme Studentized deviate test:</p>
 </table>
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.stats.genesd.genesd">
-<span class="sig-prename descclassname"><span class="pre">araucaria.stats.genesd.</span></span><span class="sig-name descname"><span class="pre">genesd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.genesd.genesd" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.stats.genesd.</span></span><span class="sig-name descname"><span class="pre">genesd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/stats/genesd.html#genesd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.stats.genesd.genesd" title="Permalink to this definition">¶</a></dt>
 <dd><p>Identifes outliers in a data array.</p>
 <p>This function uses the generalized extreme Studentized
 deviate (ESD) test to detect one or more outliers
@@ -242,7 +245,7 @@ in univariate data <a class="footnote-reference brackets" href="#id2" id="id1">1
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array to identify outliers.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array to identify outliers.</p></li>
 <li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Maximum number of outliers.</p></li>
 <li><p><strong>alpha</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Significance level for the statistical test.</p></li>
 </ul>
@@ -314,13 +317,13 @@ Many-Outlier Procedure”, Technometrics, 25(2), pp. 165-172.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.stats.genesd.find_ri">
-<span class="sig-prename descclassname"><span class="pre">araucaria.stats.genesd.</span></span><span class="sig-name descname"><span class="pre">find_ri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.genesd.find_ri" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.stats.genesd.</span></span><span class="sig-name descname"><span class="pre">find_ri</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/stats/genesd.html#find_ri"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.stats.genesd.find_ri" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes the <span class="math notranslate nohighlight">\(R_i\)</span> test statistics for the
 generalized extreme Studentized deviate (ESD) test.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array to compute test statistic.</p></li>
+<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array to compute test statistic.</p></li>
 <li><p><strong>r</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Maximum number of outliers.</p></li>
 </ul>
 </dd>
@@ -373,7 +376,7 @@ from the array.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.stats.genesd.find_critvals">
-<span class="sig-prename descclassname"><span class="pre">araucaria.stats.genesd.</span></span><span class="sig-name descname"><span class="pre">find_critvals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.stats.genesd.find_critvals" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.stats.genesd.</span></span><span class="sig-name descname"><span class="pre">find_critvals</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/stats/genesd.html#find_critvals"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.stats.genesd.find_critvals" title="Permalink to this definition">¶</a></dt>
 <dd><p>Computes critical values <span class="math notranslate nohighlight">\(\lambda_i\)</span> for the
 generalized extreme Studentized deviate (ESD) test.</p>
 <dl class="field-list simple">
@@ -431,7 +434,7 @@ at <span class="math notranslate nohighlight">\(p\)</span> value and <span class
           </div>
           <footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="stats_window.html" class="btn btn-neutral float-right" title="Window module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="stats_cluster.html" class="btn btn-neutral float-right" title="Cluster module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
         <a href="../stats_module.html" class="btn btn-neutral float-left" title="Statistics module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
     </div>
 

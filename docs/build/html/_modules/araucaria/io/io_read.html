@@ -1,0 +1,879 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.io.io_read &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.io.io_read</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.io.io_read</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The :mod:`~araucaria.io.io_read` submodule offers functions to perform the following tasks:</span>
+
+<span class="sd">1. Read XAFS files in common formats;</span>
+<span class="sd">2. Read data from report files of Linear Combination Fitting (LCF) analysis.</span>
+
+<span class="sd">Read XAFS files</span>
+<span class="sd">***************</span>
+
+<span class="sd">The following functions are currently implemented to read XAFS files:</span>
+
+<span class="sd">.. list-table::</span>
+<span class="sd">   :widths: auto</span>
+<span class="sd">   :header-rows: 1</span>
+
+<span class="sd">   * - Function</span>
+<span class="sd">     - Description</span>
+<span class="sd">   * - :func:`read_p65`</span>
+<span class="sd">     - Reads a XAFS file from the P65 beamline (PETRA III).</span>
+<span class="sd">   * - :func:`read_dnd`</span>
+<span class="sd">     - Reads a XAFS file fom the DND-CAT beamline (APS).</span>
+<span class="sd">   * - :func:`read_xmu`</span>
+<span class="sd">     - Reads a XAFS file based on specified columns.</span>
+<span class="sd">   * - :func:`read_file`</span>
+<span class="sd">     - Utility function to read a XAFS file based on specified columns.</span>
+<span class="sd">   * - :func:`read_rawfile`</span>
+<span class="sd">     - Utility function to read a XAFS file based on specified count columns.</span>
+
+<span class="sd">By convention these read functions will return a ``group`` class with the following attributes:</span>
+
+<span class="sd">- ``group.energy``: the energy array.</span>
+<span class="sd">- ``group.mu``: the transmission mu(E) array. Returned if ``scan=&#39;mu&#39;``.</span>
+<span class="sd">- ``group.fluo`` : the fluorescence mu(E) array. Returned if ``scan=&#39;fluo&#39;``.</span>
+<span class="sd">- ``group.mu_ref``: the transmission reference array. Returned if ``ref=True``.</span>
+
+<span class="sd">The attribute ``mu_ref`` is also returned by default when ``scan`` is either &#39;mu&#39; or &#39;fluo&#39;.</span>
+<span class="sd"> </span>
+<span class="sd">Choose ``scan = None`` and ``ref=True`` to return only the transmission reference.</span>
+<span class="sd">        </span>
+<span class="sd">Tip</span>
+<span class="sd">---</span>
+<span class="sd">The ``group`` returned by any read method will contain either a ``mu`` </span>
+<span class="sd">or a ``fluo`` ìnstance, but not both. If both instances are required, create an </span>
+<span class="sd">additional ``group`` by calling the read method with a different ``scan`` value.</span>
+
+
+<span class="sd">Read LCF files</span>
+<span class="sd">**************</span>
+<span class="sd">The following functions can be used to extract batch information from </span>
+<span class="sd">linear combination fit (LCF) report files:</span>
+
+<span class="sd">.. list-table::</span>
+<span class="sd">   :widths: auto</span>
+<span class="sd">   :header-rows: 1</span>
+
+<span class="sd">   * - Function</span>
+<span class="sd">     - Description</span>
+<span class="sd">   * - :func:`read_lcf_coefs`</span>
+<span class="sd">     - Returns amplitude coefficients for a given reference.</span>
+<span class="sd">   * - :func:`read_lcf_chisqr`</span>
+<span class="sd">     - Returns chi-square statistics.</span>
+
+<span class="sd">Important</span>
+<span class="sd">---------</span>
+<span class="sd">The previous functions expect valid LCF report files</span>
+<span class="sd">generated by :func:`~araucaria.io.io_write.write_lcf_report`.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">basename</span>
+<span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPResponse</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">loadtxt</span><span class="p">,</span> <span class="n">delete</span><span class="p">,</span> <span class="n">log</span><span class="p">,</span> <span class="n">append</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">ndarray</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">index_dups</span>
+
+<div class="viewcode-block" id="read_p65"><a class="viewcode-back" href="../../../io/io_read.html#araucaria.io.io_read.read_p65">[docs]</a><span class="k">def</span> <span class="nf">read_p65</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">scan</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">ref</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Group</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Reads a XAFS file from the P65 beamline.</span>
+<span class="sd"> </span>
+<span class="sd">    P65 is located in the PETRA III storage ring (DESY, Hamburg, Germany).</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to file.</span>
+<span class="sd">    scan</span>
+<span class="sd">        Requested mu(E). Accepted values are transmission (&#39;mu&#39;), fluorescence (&#39;fluo&#39;),</span>
+<span class="sd">        or None. The default is &#39;mu&#39;.</span>
+<span class="sd">    ref</span>
+<span class="sd">        Indicates if the transmission reference (&#39;mu_ref&#39;) should also be returned.</span>
+<span class="sd">        The default is True.</span>
+<span class="sd">    tol</span>
+<span class="sd">        Tolerance in energy units to remove duplicate values. The default is 1e-4,</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Group containing the requested arrays.</span>
+
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+<span class="sd">    read_rawfile: Reads a XAFS file based on specified count columns.</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_p65</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;p65_testfile.xdi&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # extracting mu and mu_ref scans</span>
+<span class="sd">    &gt;&gt;&gt; group_mu = read_p65(fpath, scan=&#39;mu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(group_mu, Group, attrlist=[&#39;mu&#39;, &#39;mu_ref&#39;])</span>
+<span class="sd">    [True, True]</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; # extracting only fluo scan</span>
+<span class="sd">    &gt;&gt;&gt; group_fluo = read_p65(fpath, scan=&#39;fluo&#39;, ref=False)</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(group_fluo, Group, attrlist=[&#39;fluo&#39;])</span>
+<span class="sd">    [True]</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; # extracting only mu_ref scan</span>
+<span class="sd">    &gt;&gt;&gt; group_ref = read_p65(fpath, scan=None, ref=True)</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(group_ref, Group, attrlist=[&#39;mu_ref&#39;])</span>
+<span class="sd">    [True]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># default modes and channels</span>
+    <span class="n">scandict</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="s1">&#39;fluo&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">chdict</span>   <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;i0&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;it1&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;it2&#39;</span><span class="p">:</span><span class="mi">12</span><span class="p">,</span> <span class="s1">&#39;if&#39;</span><span class="p">:</span><span class="mi">13</span><span class="p">}</span>
+    
+    <span class="c1"># testing that scan exists in the current dictionary </span>
+    <span class="k">if</span> <span class="n">scan</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">scandict</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;scan mode </span><span class="si">%s</span><span class="s2"> not recognized. Retrieving transmission measurement (&#39;mu&#39;).&quot;</span> <span class="o">%</span><span class="n">scan</span><span class="p">)</span>
+        <span class="n">scan</span> <span class="o">=</span> <span class="s1">&#39;mu&#39;</span>
+
+    <span class="k">if</span> <span class="n">scan</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">usecols</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">chdict</span><span class="p">[</span><span class="s1">&#39;it1&#39;</span><span class="p">],</span> <span class="n">chdict</span><span class="p">[</span><span class="s1">&#39;it2&#39;</span><span class="p">])</span>
+    <span class="k">elif</span> <span class="n">scan</span> <span class="o">==</span> <span class="s1">&#39;mu&#39;</span><span class="p">:</span>
+        <span class="n">usecols</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">chdict</span><span class="p">[</span><span class="s1">&#39;i0&#39;</span><span class="p">],</span> <span class="n">chdict</span><span class="p">[</span><span class="s1">&#39;it1&#39;</span><span class="p">],</span> <span class="n">chdict</span><span class="p">[</span><span class="s1">&#39;it2&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">usecols</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">chdict</span><span class="p">[</span><span class="s1">&#39;i0&#39;</span><span class="p">],</span> <span class="n">chdict</span><span class="p">[</span><span class="s1">&#39;if&#39;</span><span class="p">],</span> <span class="n">chdict</span><span class="p">[</span><span class="s1">&#39;it1&#39;</span><span class="p">],</span> <span class="n">chdict</span><span class="p">[</span><span class="s1">&#39;it2&#39;</span><span class="p">])</span>
+
+    <span class="n">group</span>     <span class="o">=</span> <span class="n">read_rawfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">usecols</span><span class="p">,</span> <span class="n">scan</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">group</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="read_dnd"><a class="viewcode-back" href="../../../io/io_read.html#araucaria.io.io_read.read_dnd">[docs]</a><span class="k">def</span> <span class="nf">read_dnd</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">scan</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">ref</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Group</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Reads a XAFS file from the DND-CAT beamline (5-BMD).</span>
+<span class="sd"> </span>
+<span class="sd">    DND-CAT is located in the Advanced Photon Source (APS, Argonne, USA).</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to file.</span>
+<span class="sd">    scan</span>
+<span class="sd">        Requested mu(E). Accepted values are transmission (&#39;mu&#39;), fluorescence (&#39;fluo&#39;),</span>
+<span class="sd">        or None. The default is &#39;mu&#39;.</span>
+<span class="sd">    ref</span>
+<span class="sd">        Indicates if the transmission reference (&#39;mu_ref&#39;) should also be returned.</span>
+<span class="sd">        The default is True.</span>
+<span class="sd">    tol</span>
+<span class="sd">        Tolerance in energy units to remove duplicate values.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Group containing the requested arrays.</span>
+<span class="sd">        </span>
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+<span class="sd">    read_file: Reads a XAFS file based on specified columns.</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_dnd</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;dnd_testfile1.dat&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # extracting mu and mu_ref scans</span>
+<span class="sd">    &gt;&gt;&gt; group_mu = read_dnd(fpath, scan=&#39;mu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(group_mu, Group, attrlist=[&#39;mu&#39;, &#39;mu_ref&#39;])</span>
+<span class="sd">    [True, True]</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; # extracting only fluo scan</span>
+<span class="sd">    &gt;&gt;&gt; group_fluo = read_dnd(fpath, scan=&#39;fluo&#39;, ref=False)</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(group_fluo, Group, attrlist=[&#39;fluo&#39;])</span>
+<span class="sd">    [True]</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; # extracting only mu_ref scan</span>
+<span class="sd">    &gt;&gt;&gt; group_ref = read_dnd(fpath, scan=None, ref=True)</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(group_ref, Group, attrlist=[&#39;mu_ref&#39;])</span>
+<span class="sd">    [True]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># default modes and channels    </span>
+    <span class="n">scandict</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="s1">&#39;fluo&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">coldict</span>  <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fluo&#39;</span><span class="p">:</span><span class="mi">16</span><span class="p">,</span> <span class="s1">&#39;mu&#39;</span><span class="p">:</span><span class="mi">17</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">:</span><span class="mi">18</span><span class="p">}</span>
+    
+    <span class="c1"># testing that scan exits in the current dictionary </span>
+    <span class="k">if</span> <span class="n">scan</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">scandict</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;scan mode </span><span class="si">%s</span><span class="s2"> not recognized. Retrieving transmission measurement (&#39;mu&#39;).&quot;</span> <span class="o">%</span><span class="n">scan</span><span class="p">)</span>
+        <span class="n">scan</span> <span class="o">=</span> <span class="s1">&#39;mu&#39;</span>
+
+    <span class="k">if</span> <span class="n">scan</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">usecols</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">coldict</span><span class="p">[</span><span class="s1">&#39;mu_ref&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">usecols</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">coldict</span><span class="p">[</span><span class="n">scan</span><span class="p">],</span> <span class="n">coldict</span><span class="p">[</span><span class="s1">&#39;mu_ref&#39;</span><span class="p">])</span>
+
+    <span class="n">group</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">usecols</span><span class="p">,</span> <span class="n">scan</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">group</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="read_xmu"><a class="viewcode-back" href="../../../io/io_read.html#araucaria.io.io_read.read_xmu">[docs]</a><span class="k">def</span> <span class="nf">read_xmu</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">scan</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="n">ref</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Group</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Reads a generic XAFS file in plain format.</span>
+<span class="sd"> </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to file.</span>
+<span class="sd">    scan</span>
+<span class="sd">        Requested mu(E). Accepted values are transmission (&#39;mu&#39;), fluorescence (&#39;fluo&#39;),</span>
+<span class="sd">        or None. The default is &#39;mu&#39;.</span>
+<span class="sd">    ref</span>
+<span class="sd">        Indicates if the transmission reference (&#39;mu_ref&#39;) should also be returned.</span>
+<span class="sd">        The default is True.</span>
+<span class="sd">    tol</span>
+<span class="sd">        Tolerance in energy units to remove duplicate values.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Group containing the requested arrays.</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    :func:`read_xmu` assumes the following column order in the file:</span>
+<span class="sd">    </span>
+<span class="sd">    1. energy.</span>
+<span class="sd">    2. transmission/fluorescence mu(E).</span>
+<span class="sd">    3. transmission reference.</span>
+<span class="sd">    </span>
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+<span class="sd">    read_file : Reads a XAFS file based on specified columns.</span>
+<span class="sd">    </span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_xmu</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;xmu_testfile.xmu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # extracting mu and mu_ref scans</span>
+<span class="sd">    &gt;&gt;&gt; group_mu = read_xmu(fpath, scan=&#39;mu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(group_mu, Group, attrlist=[&#39;mu&#39;, &#39;mu_ref&#39;])</span>
+<span class="sd">    [True, True]</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; # extracting only fluo scan</span>
+<span class="sd">    &gt;&gt;&gt; group_fluo = read_xmu(fpath, scan=&#39;fluo&#39;, ref=False)</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(group_fluo, Group, attrlist=[&#39;fluo&#39;])</span>
+<span class="sd">    [True]</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; # extracting only mu_ref scan</span>
+<span class="sd">    &gt;&gt;&gt; group_ref = read_xmu(fpath, scan=None, ref=True)</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(group_ref, Group, attrlist=[&#39;mu_ref&#39;])</span>
+<span class="sd">    [True]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># default modes and channels</span>
+    <span class="n">scandict</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="s1">&#39;fluo&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">coldict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;fluo&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;mu&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">}</span>
+    
+    <span class="c1"># testing that scan exists in the current dictionary </span>
+    <span class="k">if</span> <span class="n">scan</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">scandict</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;scan mode </span><span class="si">%s</span><span class="s2"> not recognized. Retrieving transmission measurement (&#39;mu&#39;).&quot;</span> <span class="o">%</span><span class="n">scan</span><span class="p">)</span>
+        <span class="n">scan</span> <span class="o">=</span> <span class="s1">&#39;mu&#39;</span>
+
+    <span class="k">if</span> <span class="n">scan</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">usecols</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">coldict</span><span class="p">[</span><span class="s1">&#39;mu_ref&#39;</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">usecols</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">coldict</span><span class="p">[</span><span class="n">scan</span><span class="p">],</span> <span class="n">coldict</span><span class="p">[</span><span class="s1">&#39;mu_ref&#39;</span><span class="p">])</span>
+
+    <span class="n">group</span> <span class="o">=</span> <span class="n">read_file</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">usecols</span><span class="p">,</span> <span class="n">scan</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">tol</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">group</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="read_file"><a class="viewcode-back" href="../../../io/io_read.html#araucaria.io.io_read.read_file">[docs]</a><span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">HTTPResponse</span><span class="p">],</span> <span class="n">usecols</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> 
+              <span class="n">scan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ref</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Group</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Utility function to read a XAFS file based on specified columns.</span>
+<span class="sd">        </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to file, or output from url open request.</span>
+<span class="sd">    usecols</span>
+<span class="sd">        Tuple with column indexes to extract from the file.</span>
+<span class="sd">    scan</span>
+<span class="sd">        Assigned mu(E), either transmission (&#39;mu&#39;), fluorescence (&#39;fluo&#39;),</span>
+<span class="sd">        or None.</span>
+<span class="sd">    ref</span>
+<span class="sd">        Indicates if the transmission reference (&#39;mu_ref&#39;) should also be returned.</span>
+<span class="sd">    tol</span>
+<span class="sd">        Tolerance in energy units to remove duplicate values.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Group containing the requested arrays.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    IOError</span>
+<span class="sd">        If the file does not exist in the specified path.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If no mu(E) or transmission reference are requested.</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``ref`` is not a valid boolean.</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    ``usecols`` should provide column indexes in the following order:</span>
+<span class="sd">    </span>
+<span class="sd">    1. energy.</span>
+<span class="sd">    2. transmission/fluorescence mu(E).</span>
+<span class="sd">    3. transmission reference, if ``mu_ref=True``.</span>
+<span class="sd">    </span>
+<span class="sd">    If only ``mu_ref`` scan is requested , ``usecols`` should provide</span>
+<span class="sd">    column indexes in the following order:</span>
+<span class="sd">    </span>
+<span class="sd">    1. energy.</span>
+<span class="sd">    2. transmission reference.</span>
+<span class="sd">    </span>
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    The indexing order of ``usecols`` must be respected, </span>
+<span class="sd">    or the assigned mu(E) will be incorrect.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># testing if fpath is http response</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span> <span class="ow">is</span> <span class="n">HTTPResponse</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="c1"># testing if file exists</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">isfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s1">&#39;file </span><span class="si">%s</span><span class="s1"> does not exists.&#39;</span> <span class="o">%</span> <span class="n">fpath</span><span class="p">)</span>
+    
+    <span class="c1"># testing if mu_ref is valid boolean</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;ref: </span><span class="si">%s</span><span class="s1"> is not a valid boolean.&#39;</span> <span class="o">%</span> <span class="n">ref</span><span class="p">)</span>
+    
+    <span class="c1"># Testing if no scan was requested</span>
+    <span class="k">if</span> <span class="n">scan</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ref</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;no scan requested from file.&#39;</span> <span class="p">)</span>
+        
+    <span class="n">raw</span>    <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="n">usecols</span><span class="p">)</span>
+
+    <span class="c1"># deleting duplicate energy points</span>
+    <span class="n">index</span>  <span class="o">=</span> <span class="n">index_dups</span><span class="p">(</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">tol</span><span class="p">)</span>
+    <span class="n">raw</span>    <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span><span class="n">index</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ref</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># returning the requested scan and the reference</span>
+        <span class="k">if</span> <span class="n">scan</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span><span class="s1">&#39;fluo&#39;</span><span class="p">]:</span>
+            <span class="c1"># transmission or fluorescence</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;energy&#39;</span><span class="p">:</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">scan</span><span class="p">:</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">:</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;energy&#39;</span><span class="p">:</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">:</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]})</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># returning only the requested scan</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;energy&#39;</span><span class="p">:</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">scan</span><span class="p">:</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]})</span>
+
+    <span class="c1"># saving filename in group</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span> <span class="ow">is</span> <span class="n">HTTPResponse</span><span class="p">:</span>
+        <span class="n">fpath</span> <span class="o">=</span> <span class="n">fpath</span><span class="o">.</span><span class="n">url</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">group</span><span class="p">)</span></div>
+    
+<div class="viewcode-block" id="read_rawfile"><a class="viewcode-back" href="../../../io/io_read.html#araucaria.io.io_read.read_rawfile">[docs]</a><span class="k">def</span> <span class="nf">read_rawfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Path</span><span class="p">,</span> <span class="n">HTTPResponse</span><span class="p">],</span> <span class="n">usecols</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">,</span> 
+                 <span class="n">scan</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ref</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">tol</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Group</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Utility function to read a XAFS file based on specified count columns.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to file, or output from url open request.</span>
+<span class="sd">    usecols</span>
+<span class="sd">        Tuple with columns indexes to extract from the file.</span>
+<span class="sd">    scan</span>
+<span class="sd">        Computed mu(E), either transmission (&#39;mu&#39;), fluorescence (&#39;fluo&#39;),</span>
+<span class="sd">        or None.</span>
+<span class="sd">    ref</span>
+<span class="sd">        Indicates if the transmission reference (&#39;mu_ref&#39;) should also be returned.</span>
+<span class="sd">    tol</span>
+<span class="sd">        Tolerance value to remove duplicate energy values.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Group containing the requested arrays.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    IOError</span>
+<span class="sd">        If the file does not exist in the specified path.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If no mu(E) or transmission reference are requested.</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``ref`` is not a valid boolean.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    ``usecols`` should provide column indexes in the following order:</span>
+
+<span class="sd">    1. energy.</span>
+<span class="sd">    2. monochromator intensity (I0).</span>
+<span class="sd">    3. transmitted intensity (IT1).</span>
+<span class="sd">    4. fluorescence intensity(IF), if ``scan=&#39;fluo&#39;``.</span>
+<span class="sd">    5. transmitted intensity (IT2), if ``mu_ref=True``.</span>
+
+<span class="sd">    If ``mu_ref`` scan is not requested, ``usecols`` should provide</span>
+<span class="sd">    column indexes in the following order:</span>
+
+<span class="sd">    1. energy</span>
+<span class="sd">    2. monochromator intensity (I0).</span>
+<span class="sd">    3. transmitted intensity (IT1)/fluorescence intensity(IF).</span>
+
+<span class="sd">    If only ``mu_ref`` scan is requested , ``usecols`` should provide</span>
+<span class="sd">    column indexes in the following order:</span>
+<span class="sd">    </span>
+<span class="sd">    1. energy.</span>
+<span class="sd">    2. transmitted intensity (IT1).</span>
+<span class="sd">    3. transmitted intensity (IT2).</span>
+<span class="sd">    </span>
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    The indexing order of ``usecols`` must be respected, </span>
+<span class="sd">    or the computed mu(E) will be incorrect.</span>
+
+<span class="sd">    Important</span>
+<span class="sd">    ---------</span>
+<span class="sd">    If ``scan=&#39;fluo&#39;`` and ``mu_ref`` is requested, all column</span>
+<span class="sd">    indexes must be provided.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># testing if fpath is http response</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span> <span class="ow">is</span> <span class="n">HTTPResponse</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="c1"># testing if file exists</span>
+    <span class="k">elif</span> <span class="ow">not</span> <span class="n">isfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s1">&#39;file </span><span class="si">%s</span><span class="s1"> does not exists.&#39;</span> <span class="o">%</span> <span class="n">fpath</span><span class="p">)</span>
+        
+    <span class="c1"># testing if mu_ref is valid boolean</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;ref: </span><span class="si">%s</span><span class="s1"> is not a valid boolean.&#39;</span> <span class="o">%</span> <span class="n">ref</span><span class="p">)</span>
+    
+    <span class="c1"># Testing if no scan was requested</span>
+    <span class="k">if</span> <span class="n">scan</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ref</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;no scan requested from file.&#39;</span> <span class="p">)</span>
+
+    <span class="n">raw</span>    <span class="o">=</span> <span class="n">loadtxt</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">usecols</span><span class="o">=</span><span class="n">usecols</span><span class="p">)</span>
+
+    <span class="c1"># deleting duplicate energy points</span>
+    <span class="n">index</span>  <span class="o">=</span> <span class="n">index_dups</span><span class="p">(</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">tol</span><span class="p">)</span>
+    <span class="n">raw</span>    <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">raw</span><span class="p">,</span><span class="n">index</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>    
+
+    <span class="k">if</span> <span class="n">ref</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># returning the requested scan and the reference</span>
+        <span class="k">if</span> <span class="n">scan</span> <span class="o">==</span> <span class="s1">&#39;mu&#39;</span><span class="p">:</span>
+            <span class="c1"># transmission</span>
+            <span class="n">mu</span>     <span class="o">=</span> <span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">mu_ref</span> <span class="o">=</span> <span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]</span><span class="o">/</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">group</span>  <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;energy&#39;</span><span class="p">:</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">scan</span><span class="p">:</span><span class="n">mu</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">:</span><span class="n">mu_ref</span><span class="p">})</span>
+        <span class="k">elif</span> <span class="n">scan</span> <span class="o">==</span> <span class="s1">&#39;fluo&#39;</span><span class="p">:</span>
+            <span class="c1"># fluorescence</span>
+            <span class="n">fluo</span>   <span class="o">=</span> <span class="n">raw</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]</span><span class="o">/</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">mu_ref</span> <span class="o">=</span> <span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">4</span><span class="p">]</span><span class="o">/</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">group</span>  <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;energy&#39;</span><span class="p">:</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">scan</span><span class="p">:</span><span class="n">fluo</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">:</span><span class="n">mu_ref</span><span class="p">})</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># no scan requested</span>
+            <span class="n">mu_ref</span> <span class="o">=</span> <span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;energy&#39;</span><span class="p">:</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">:</span><span class="n">mu_ref</span><span class="p">})</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># returning only the requested scan</span>
+        <span class="k">if</span> <span class="n">scan</span> <span class="o">==</span> <span class="s1">&#39;mu&#39;</span><span class="p">:</span>
+            <span class="c1"># transmission</span>
+            <span class="n">mu</span>     <span class="o">=</span> <span class="o">-</span><span class="n">log</span><span class="p">(</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">group</span>  <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;energy&#39;</span><span class="p">:</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">scan</span><span class="p">:</span><span class="n">mu</span><span class="p">})</span>
+        <span class="k">elif</span> <span class="n">scan</span> <span class="o">==</span> <span class="s1">&#39;fluo&#39;</span><span class="p">:</span>
+            <span class="c1"># fluorescence</span>
+            <span class="n">fluo</span>   <span class="o">=</span> <span class="n">raw</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">group</span>  <span class="o">=</span> <span class="n">Group</span><span class="p">(</span><span class="o">**</span><span class="p">{</span><span class="s1">&#39;energy&#39;</span><span class="p">:</span><span class="n">raw</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">scan</span><span class="p">:</span><span class="n">fluo</span><span class="p">})</span>
+
+    <span class="c1"># saving filename in group</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span> <span class="ow">is</span> <span class="n">HTTPResponse</span><span class="p">:</span>
+        <span class="n">fpath</span> <span class="o">=</span> <span class="n">fpath</span><span class="o">.</span><span class="n">url</span>
+    <span class="n">group</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">basename</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">group</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="read_lcf_coefs"><a class="viewcode-back" href="../../../io/io_read.html#araucaria.io.io_read.read_lcf_coefs">[docs]</a><span class="k">def</span> <span class="nf">read_lcf_coefs</span><span class="p">(</span><span class="n">fpaths</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span> <span class="n">refgroup</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+                   <span class="n">error</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">],</span> <span class="nb">list</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Returns amplitude coefficients for a given LCF reference.</span>
+<span class="sd">    </span>
+<span class="sd">    Amplitude coefficients are read directly from a list of paths </span>
+<span class="sd">    to LCF report files generated by :func:`~araucaria.io.io_write.write_lcf_report`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpaths</span>
+<span class="sd">        List of paths to valid LCF report files.</span>
+<span class="sd">    refgroup</span>
+<span class="sd">        Name of the reference group.</span>
+<span class="sd">    error</span>
+<span class="sd">        If True the error of the fit will also be returned.</span>
+<span class="sd">        The default is True.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Amplitude coefficients and error for the reference in the LCF.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    IOError</span>
+<span class="sd">        If a file does not exist in the specified path.</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If a file is not a valid LCF report.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``refgroup`` was fitted during the LCF analysis (i.e. not a reference).</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_lcf_coefs</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;test_lcf_report.log&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; read_lcf_coefs([fpath], &#39;group1&#39;)</span>
+<span class="sd">    ([0.40034377], [0.01195335])</span>
+<span class="sd">    &gt;&gt;&gt; read_lcf_coefs([fpath], &#39;group2&#39;, error=False)</span>
+<span class="sd">    [0.59428689]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+   <span class="c1"># testing that the file exists</span>
+    <span class="k">for</span> <span class="n">fpath</span> <span class="ow">in</span> <span class="n">fpaths</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">isfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s1">&#39;file </span><span class="si">%s</span><span class="s1"> does not exists.&#39;</span> <span class="o">%</span> <span class="n">fpath</span><span class="p">)</span>
+    
+    <span class="n">vallist</span> <span class="o">=</span> <span class="p">[]</span>    <span class="c1"># container for values</span>
+    <span class="n">errlist</span> <span class="o">=</span> <span class="p">[]</span>    <span class="c1"># container for errors</span>
+    <span class="k">for</span> <span class="n">fpath</span> <span class="ow">in</span> <span class="n">fpaths</span><span class="p">:</span>
+        <span class="n">getref</span> <span class="o">=</span> <span class="kc">True</span>   <span class="c1"># reference is always searched</span>
+        <span class="n">getval</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># value is retrieved only if reference was used during the lcf</span>
+        
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">fline</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s1">&#39;lcf report&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fline</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is not a valid LCF report file.&#39;</span> <span class="o">%</span> <span class="n">fpath</span><span class="p">)</span>
+        
+        <span class="k">while</span> <span class="n">getref</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">refgroup</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="c1"># reference found in line</span>
+                <span class="k">if</span> <span class="s1">&#39;scan&#39;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> was fitted in </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">refgroup</span><span class="p">,</span> <span class="n">fpath</span><span class="p">))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="c1"># we extract the standard index</span>
+                    <span class="n">index</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="n">stdval</span> <span class="o">=</span> <span class="s2">&quot;amp&quot;</span><span class="o">+</span><span class="n">index</span>
+                    <span class="n">getref</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="n">getval</span> <span class="o">=</span> <span class="kc">True</span>
+
+            <span class="k">elif</span> <span class="s2">&quot;[[Fit Statistics]]&quot;</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="c1"># This line indicates that we already passed the [[Group]] section</span>
+                <span class="c1"># There is nothing else to search so return zeroes instead</span>
+                <span class="n">vallist</span> <span class="o">=</span> <span class="n">append</span><span class="p">(</span><span class="n">vallist</span><span class="p">,</span><span class="mf">0.00</span><span class="p">)</span>
+                <span class="n">errlist</span> <span class="o">=</span> <span class="n">append</span><span class="p">(</span><span class="n">errlist</span><span class="p">,</span><span class="mf">0.00</span><span class="p">)</span>
+                <span class="n">getref</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">break</span>
+
+        <span class="k">while</span> <span class="n">getval</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">stdval</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">err</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">3</span><span class="p">])</span>
+                <span class="n">vallist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                <span class="n">errlist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+                <span class="n">getval</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">error</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">vallist</span><span class="p">,</span> <span class="n">errlist</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">vallist</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="read_lcf_chisqr"><a class="viewcode-back" href="../../../io/io_read.html#araucaria.io.io_read.read_lcf_chisqr">[docs]</a><span class="k">def</span> <span class="nf">read_lcf_chisqr</span><span class="p">(</span><span class="n">fpaths</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Path</span><span class="p">],</span> <span class="n">redchi</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Returns chi square statistic for LCF reports.</span>
+<span class="sd">    </span>
+<span class="sd">    Chi square values are read directly from a list of paths </span>
+<span class="sd">    to LCF report files generated by :func:`~araucaria.io.io_write.write_lcf_report`.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpaths</span>
+<span class="sd">        List of paths to valid LCF report files.</span>
+<span class="sd">    </span>
+<span class="sd">    redchi</span>
+<span class="sd">        Indicates if the reduced chi square statistic should be returned</span>
+<span class="sd">        instead.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Chi square values. Reduced chi square values are optionally</span>
+<span class="sd">        returned if ``redchi=True``.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    IOError</span>
+<span class="sd">        If a file does not exist in the specified path.</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If a file is not a valid LCF report.</span>
+
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_lcf_chisqr</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;test_lcf_report.log&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; read_lcf_chisqr([fpath])</span>
+<span class="sd">    [1.40551323]</span>
+<span class="sd">    &gt;&gt;&gt; read_lcf_chisqr([fpath], redchi=True)</span>
+<span class="sd">    [0.01011161]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># testing that the file exists</span>
+    <span class="k">for</span> <span class="n">fpath</span> <span class="ow">in</span> <span class="n">fpaths</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">isfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s1">&#39;file </span><span class="si">%s</span><span class="s1"> does not exists.&#39;</span> <span class="o">%</span> <span class="n">fpath</span><span class="p">)</span>   
+
+    <span class="k">if</span> <span class="n">redchi</span><span class="p">:</span>
+        <span class="n">reference</span> <span class="o">=</span> <span class="s2">&quot; reduced chi-square&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">reference</span> <span class="o">=</span> <span class="s2">&quot;    chi-square&quot;</span>
+
+    <span class="n">vallist</span> <span class="o">=</span> <span class="p">[]</span>    <span class="c1"># container for values</span>
+    <span class="k">for</span> <span class="n">fpath</span> <span class="ow">in</span> <span class="n">fpaths</span><span class="p">:</span>
+        <span class="n">getval</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">fline</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+        <span class="k">if</span> <span class="s1">&#39;lcf report&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fline</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is not a valid LCF report file.&#39;</span> <span class="o">%</span> <span class="n">fpath</span><span class="p">)</span>
+        
+        <span class="k">while</span> <span class="n">getval</span><span class="p">:</span>
+            <span class="n">line</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">reference</span> <span class="ow">in</span> <span class="n">line</span><span class="p">:</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;=&quot;</span><span class="p">)[</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">vallist</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                <span class="n">getval</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">vallist</span><span class="p">)</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

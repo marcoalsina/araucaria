@@ -1,0 +1,1019 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.main.collection &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.main.collection</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.main.collection</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
+<span class="kn">from</span> <span class="nn">re</span> <span class="kn">import</span> <span class="n">search</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">linspace</span><span class="p">,</span> <span class="n">inf</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Report</span>
+
+<div class="viewcode-block" id="Collection"><a class="viewcode-back" href="../../../main/main_collection.html#araucaria.main.collection.Collection">[docs]</a><span class="k">class</span> <span class="nc">Collection</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Collection storage class.</span>
+<span class="sd">    </span>
+<span class="sd">    This class stores a collection of :class:`~araucaria.main.group.Group` objects.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    name : :class:`str`</span>
+<span class="sd">        Name for the collection. The default is None.</span>
+<span class="sd">    </span>
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    tags : :class:`dict`</span>
+<span class="sd">        Dictionary with available groups in the collection based on tag keys.</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Each group will be stored as an attribute of the collection.</span>
+<span class="sd">    The ``tags`` attribute classifies group names based on a </span>
+<span class="sd">    ``tag`` key, which is useful for joint manipulation of groups.</span>
+
+<span class="sd">    The following methods are currently implemented:</span>
+
+<span class="sd">    .. list-table::</span>
+<span class="sd">       :widths: auto</span>
+<span class="sd">       :header-rows: 1</span>
+
+<span class="sd">       * - Method</span>
+<span class="sd">         - Description</span>
+<span class="sd">       * - :func:`add_group`</span>
+<span class="sd">         - Adds a group to the collection.</span>
+<span class="sd">       * - :func:`apply`</span>
+<span class="sd">         - Applies a function to groups in the collection.</span>
+<span class="sd">       * - :func:`copy`</span>
+<span class="sd">         - Returns a copy of the collection.</span>
+<span class="sd">       * - :func:`del_group`</span>
+<span class="sd">         - Deletes a group from the collection.</span>
+<span class="sd">       * - :func:`get_group`</span>
+<span class="sd">         - Returns a group in the collection.</span>
+<span class="sd">       * - :func:`get_mcer`</span>
+<span class="sd">         - Returns the minimum common energy range for the collection.</span>
+<span class="sd">       * - :func:`get_names`</span>
+<span class="sd">         - Return group names in the collection.</span>
+<span class="sd">       * - :func:`get_tag`</span>
+<span class="sd">         - Returns tag of a group in the collection.</span>
+<span class="sd">       * - :func:`rename_group`</span>
+<span class="sd">         - Renames a group in the collection.</span>
+<span class="sd">       * - :func:`retag`</span>
+<span class="sd">         - Modifies tag of a group in the collection.</span>
+<span class="sd">       * - :func:`summary`</span>
+<span class="sd">         - Returns a summary report of the collection.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    Each group can only have a single ``tag`` key. </span>
+<span class="sd">    </span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Collection</span>
+<span class="sd">    &gt;&gt;&gt; collection = Collection()</span>
+<span class="sd">    &gt;&gt;&gt; type(collection)</span>
+<span class="sd">    &lt;class &#39;araucaria.main.collection.Collection&#39;&gt;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span>  <span class="o">=</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&lt;Collection </span><span class="si">%s</span><span class="s1">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&lt;Collection&gt;&#39;</span>
+    
+<div class="viewcode-block" id="Collection.add_group"><a class="viewcode-back" href="../../../main/main_collection.html#araucaria.main.collection.Collection.add_group">[docs]</a>    <span class="k">def</span> <span class="nf">add_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">Group</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;scan&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Adds a group dataset to the collection.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        group</span>
+<span class="sd">            The data group to add to the collection.</span>
+<span class="sd">        tag</span>
+<span class="sd">            Key for the ``tags`` attribute of the collection.</span>
+<span class="sd">            The default is &#39;scan&#39;.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If ``group`` is not a valid Group instance.</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If ``group.name`` is already in the collection.</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Collection, Group</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">        &gt;&gt;&gt; collection = Collection()</span>
+<span class="sd">        &gt;&gt;&gt; g1 = Group(**{&#39;name&#39;: &#39;group1&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; g2 = Group(**{&#39;name&#39;: &#39;group2&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; for group in (g1, g2):</span>
+<span class="sd">        ...     collection.add_group(group)</span>
+<span class="sd">        &gt;&gt;&gt; check_objattrs(collection, Collection, attrlist=[&#39;group1&#39;,&#39;group2&#39;])</span>
+<span class="sd">        [True, True]</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; # using tags</span>
+<span class="sd">        &gt;&gt;&gt; g3 = Group(**{&#39;name&#39;: &#39;group3&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; collection.add_group(g3, tag=&#39;ref&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; for key, value in collection.tags.items():</span>
+<span class="sd">        ...     print(key, value, type(value))</span>
+<span class="sd">        scan [&#39;group1&#39;, &#39;group2&#39;] &lt;class &#39;list&#39;&gt;</span>
+<span class="sd">        ref [&#39;group3&#39;] &lt;class &#39;list&#39;&gt;</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;group is not a valid Group instance.&#39;</span><span class="p">)</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_names</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;group name already in the Collection.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">group</span><span class="p">)</span>
+        
+        <span class="c1"># updating tags</span>
+        <span class="k">if</span> <span class="n">tag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Collection.apply"><a class="viewcode-back" href="../../../main/main_collection.html#araucaria.main.collection.Collection.apply">[docs]</a>    <span class="k">def</span> <span class="nf">apply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">func</span><span class="p">,</span> <span class="n">taglist</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Applies a function to groups in a collection.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        func</span>
+<span class="sd">            Function to apply to the collection. </span>
+<span class="sd">            Must accept ``update=True`` as an argument.</span>
+<span class="sd">        taglist</span>
+<span class="sd">            List with keys to filter groups in the collection based </span>
+<span class="sd">            on the ``tags`` attribute. The default is [&#39;all&#39;].</span>
+<span class="sd">        **kwargs</span>
+<span class="sd">            Additional keyword arguments to pass to ``func``.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If any item in ``taglist`` is not a key of the ``tags`` attribute.</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.io import read_collection_hdf5</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.xas import pre_edge</span>
+<span class="sd">        &gt;&gt;&gt; fpath      = get_testpath(&#39;Fe_database.h5&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; collection = read_collection_hdf5(fpath)</span>
+<span class="sd">        &gt;&gt;&gt; collection.apply(pre_edge)</span>
+<span class="sd">        &gt;&gt;&gt; report     = collection.summary(optional=[&#39;e0&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; report.show()</span>
+<span class="sd">        ===============================================</span>
+<span class="sd">        id  dataset           tag   mode    n  e0      </span>
+<span class="sd">        ===============================================</span>
+<span class="sd">        1   FeIISO4_20K       scan  mu      5  7124.7  </span>
+<span class="sd">        2   Fe_Foil           scan  mu_ref  5  7112    </span>
+<span class="sd">        3   Ferrihydrite_20K  scan  mu      5  7127.4  </span>
+<span class="sd">        4   Goethite_20K      scan  mu      5  7127.3  </span>
+<span class="sd">        ===============================================</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># retrieving list with group names</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_names</span><span class="p">(</span><span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="n">group</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">func</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span></div>
+
+<div class="viewcode-block" id="Collection.copy"><a class="viewcode-back" href="../../../main/main_collection.html#araucaria.main.collection.Collection.copy">[docs]</a>    <span class="k">def</span> <span class="nf">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Collection</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns a deep copy of the collection.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        None</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">            Copy of the collection.</span>
+
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from numpy import allclose</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Group, Collection</span>
+<span class="sd">        &gt;&gt;&gt; collection1 = Collection()</span>
+<span class="sd">        &gt;&gt;&gt; content     = {&#39;name&#39;: &#39;group&#39;, &#39;energy&#39;: [1,2,3,4,5,6]}</span>
+<span class="sd">        &gt;&gt;&gt; group       = Group(**content)</span>
+<span class="sd">        &gt;&gt;&gt; collection1.add_group(group)</span>
+<span class="sd">        &gt;&gt;&gt; collection2 = collection1.copy()</span>
+<span class="sd">        &gt;&gt;&gt; energy1     = collection1.get_group(&#39;group&#39;).energy</span>
+<span class="sd">        &gt;&gt;&gt; energy2     = collection2.get_group(&#39;group&#39;).energy</span>
+<span class="sd">        &gt;&gt;&gt; allclose(energy1, energy2)</span>
+<span class="sd">        True</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Collection.del_group"><a class="viewcode-back" href="../../../main/main_collection.html#araucaria.main.collection.Collection.del_group">[docs]</a>    <span class="k">def</span> <span class="nf">del_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Removes a group dataset from the collection.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name</span>
+<span class="sd">            Name of group to remove.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If ``name`` is not in a group in the collection.</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Collection, Group</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">        &gt;&gt;&gt; collection = Collection()</span>
+<span class="sd">        &gt;&gt;&gt; g1 = Group(**{&#39;name&#39;: &#39;group1&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; g2 = Group(**{&#39;name&#39;: &#39;group2&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; for group in (g1, g2):</span>
+<span class="sd">        ...     collection.add_group(group)</span>
+<span class="sd">        &gt;&gt;&gt; check_objattrs(collection, Collection, attrlist=[&#39;group1&#39;,&#39;group2&#39;])</span>
+<span class="sd">        [True, True]</span>
+<span class="sd">        &gt;&gt;&gt; collection.del_group(&#39;group2&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; check_objattrs(collection, Collection, attrlist=[&#39;group1&#39;,&#39;group2&#39;])</span>
+<span class="sd">        [True, False]</span>
+<span class="sd">        &gt;&gt;&gt; # verifying that the deleted group has no tag</span>
+<span class="sd">        &gt;&gt;&gt; for key, value in collection.tags.items():</span>
+<span class="sd">        ...     print(key, value)</span>
+<span class="sd">        scan [&#39;group1&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;collection has no </span><span class="si">%s</span><span class="s1"> group.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+
+        <span class="c1"># retrieving original tag key</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">val</span><span class="p">:</span>
+                <span class="n">initag</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="k">break</span>
+
+        <span class="c1"># removing groupname from original tag</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">initag</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="c1"># removing entire key if group list is empty</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">initag</span><span class="p">]:</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">initag</span><span class="p">]</span>
+
+        <span class="c1"># removing group</span>
+        <span class="nb">delattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Collection.get_group"><a class="viewcode-back" href="../../../main/main_collection.html#araucaria.main.collection.Collection.get_group">[docs]</a>    <span class="k">def</span> <span class="nf">get_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Group</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns a group dataset from the collection.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name</span>
+<span class="sd">            Name of group to retrieve.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">            Requested group.</span>
+<span class="sd">        </span>
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If ``name`` is not in a group in the collection.</span>
+<span class="sd">        </span>
+<span class="sd">        Important</span>
+<span class="sd">        ---------</span>
+<span class="sd">        Changes made to the group will be propagated to the collection.</span>
+<span class="sd">        If you need a copy of the group use the :func:`copy` method.</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Collection, Group</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">        &gt;&gt;&gt; collection = Collection()</span>
+<span class="sd">        &gt;&gt;&gt; g1    = Group(**{&#39;name&#39;: &#39;group1&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; collection.add_group(g1)</span>
+<span class="sd">        &gt;&gt;&gt; gcopy = collection.get_group(&#39;group1&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; check_objattrs(gcopy, Group)</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; print(gcopy.name)</span>
+<span class="sd">        group1</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;collection has no </span><span class="si">%s</span><span class="s1"> group.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Collection.get_mcer"><a class="viewcode-back" href="../../../main/main_collection.html#araucaria.main.collection.Collection.get_mcer">[docs]</a>    <span class="k">def</span> <span class="nf">get_mcer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">taglist</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns the minimum common energy range for the collection.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        num</span>
+<span class="sd">            Number of equally-spaced points for the energy array.</span>
+<span class="sd">        taglist</span>
+<span class="sd">            List with keys to filter groups in the collection based </span>
+<span class="sd">            on the ``tags`` attribute. The default is [&#39;all&#39;].</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">            Array containing the minimum common energy range</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        AttributeError</span>
+<span class="sd">            If ``energy`` is not an attribute of the requested groups.</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If any item in ``taglist`` is not a key of the ``tags`` attribute.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        By default the returned array contains the lowest number of points</span>
+<span class="sd">        available in the minimum common energy range of the groups.</span>
+<span class="sd">        </span>
+<span class="sd">        Providing a value for ``num`` will return the desired number </span>
+<span class="sd">        of equally-spaced points for the minimum common energy range.</span>
+<span class="sd">        </span>
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from numpy import linspace</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Collection, Group</span>
+<span class="sd">        &gt;&gt;&gt; collection = Collection()</span>
+<span class="sd">        &gt;&gt;&gt; g1   = Group(**{&#39;name&#39;: &#39;group1&#39;, &#39;energy&#39;: linspace(1000, 2000, 6)})</span>
+<span class="sd">        &gt;&gt;&gt; g2   = Group(**{&#39;name&#39;: &#39;group2&#39;, &#39;energy&#39;: linspace(1500, 2500, 11)})</span>
+<span class="sd">        &gt;&gt;&gt; tags = (&#39;scan&#39;, &#39;ref&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; for i, group in enumerate([g1, g2]):</span>
+<span class="sd">        ...     collection.add_group(group, tag=tags[i])</span>
+<span class="sd">        &gt;&gt;&gt; # mcer for tag &#39;scan&#39;</span>
+<span class="sd">        &gt;&gt;&gt; print(collection.get_mcer(taglist=[&#39;scan&#39;]))</span>
+<span class="sd">        [1000. 1200. 1400. 1600. 1800. 2000.]</span>
+<span class="sd">        &gt;&gt;&gt; # mcer for tag &#39;ref&#39;</span>
+<span class="sd">        &gt;&gt;&gt; print(collection.get_mcer(taglist=[&#39;ref&#39;]))</span>
+<span class="sd">        [1500. 1600. 1700. 1800. 1900. 2000. 2100. 2200. 2300. 2400. 2500.]</span>
+
+<span class="sd">        &gt;&gt;&gt; # mcer for &#39;all&#39; groups</span>
+<span class="sd">        &gt;&gt;&gt; print(collection.get_mcer())</span>
+<span class="sd">        [1600. 1800. 2000.]</span>
+<span class="sd">        &gt;&gt;&gt; # mcer for &#39;all&#39; groups explicitly</span>
+<span class="sd">        &gt;&gt;&gt; print(collection.get_mcer(taglist=[&#39;scan&#39;, &#39;ref&#39;]))</span>
+<span class="sd">        [1600. 1800. 2000.]</span>
+
+<span class="sd">        &gt;&gt;&gt; # mcer with given number of points</span>
+<span class="sd">        &gt;&gt;&gt; print(collection.get_mcer(num=11))</span>
+<span class="sd">        [1500. 1550. 1600. 1650. 1700. 1750. 1800. 1850. 1900. 1950. 2000.]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># retrieving list with group names</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_names</span><span class="p">(</span><span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">),</span> <span class="s1">&#39;energy&#39;</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> has no energy attribute.&#39;</span> <span class="o">%</span> <span class="n">item</span><span class="p">)</span>
+
+        <span class="c1"># finding the maximum of minimum energy values</span>
+        <span class="n">emc_min</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">energy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">names</span><span class="p">])</span>
+        <span class="c1"># finding the minimum of maximum energy values</span>
+        <span class="n">emc_max</span> <span class="o">=</span> <span class="nb">min</span><span class="p">([</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">energy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">names</span><span class="p">])</span>
+        
+        <span class="k">if</span> <span class="n">num</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># returning a formatted array</span>
+            <span class="n">earray</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="n">emc_min</span><span class="p">,</span> <span class="n">emc_max</span><span class="p">,</span> <span class="n">num</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># returning an array with the least ammount of points</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
+                <span class="n">energy</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span><span class="o">.</span><span class="n">energy</span>
+                <span class="n">energy</span> <span class="o">=</span> <span class="n">energy</span><span class="p">[(</span><span class="n">energy</span> <span class="o">&gt;=</span> <span class="n">emc_min</span> <span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">energy</span> <span class="o">&lt;=</span> <span class="n">emc_max</span><span class="p">)]</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">earray</span> <span class="o">=</span> <span class="n">energy</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">energy</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">earray</span><span class="p">):</span>
+                        <span class="n">earray</span> <span class="o">=</span> <span class="n">energy</span>
+        <span class="k">return</span> <span class="n">earray</span></div>
+
+<div class="viewcode-block" id="Collection.get_names"><a class="viewcode-back" href="../../../main/main_collection.html#araucaria.main.collection.Collection.get_names">[docs]</a>    <span class="k">def</span> <span class="nf">get_names</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taglist</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Returns group names in the collection.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">         taglist</span>
+<span class="sd">            List with keys to filter groups in the collection based </span>
+<span class="sd">            on the ``tags`` attribute. The default is [&#39;all&#39;].</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">            List with group names in the collection.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If any item in ``taglist`` is not a key of the ``tags`` attribute.</span>
+<span class="sd">        </span>
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Collection, Group</span>
+<span class="sd">        &gt;&gt;&gt; collection = Collection()</span>
+<span class="sd">        &gt;&gt;&gt; g1   = Group(**{&#39;name&#39;: &#39;group1&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; g2   = Group(**{&#39;name&#39;: &#39;group2&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; g3   = Group(**{&#39;name&#39;: &#39;group3&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; g4   = Group(**{&#39;name&#39;: &#39;group4&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; tags = (&#39;scan&#39;, &#39;ref&#39;, &#39;ref&#39;, &#39;scan&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; for i, group in enumerate([g1, g2, g3, g4]):</span>
+<span class="sd">        ...     collection.add_group(group, tag=tags[i])</span>
+<span class="sd">        &gt;&gt;&gt; collection.get_names()</span>
+<span class="sd">        [&#39;group1&#39;, &#39;group2&#39;, &#39;group3&#39;, &#39;group4&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; collection.get_names(taglist=[&#39;scan&#39;])</span>
+<span class="sd">        [&#39;group1&#39;, &#39;group4&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; collection.get_names(taglist=[&#39;ref&#39;])</span>
+<span class="sd">        [&#39;group2&#39;, &#39;group3&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">iterchain</span>  <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">taglist</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="s1">&#39;all&#39;</span><span class="p">:</span>
+                <span class="c1"># retrieving all groups</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span> <span class="k">for</span> <span class="n">sublist</span> <span class="ow">in</span> <span class="n">names</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sublist</span><span class="p">]</span>
+                <span class="k">break</span>
+            <span class="k">elif</span> <span class="n">tag</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> is not a valid key for the collection.&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># retrieving selected tag</span>
+                <span class="n">names</span> <span class="o">=</span> <span class="n">names</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span>
+
+        <span class="n">names</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">names</span></div>
+
+<div class="viewcode-block" id="Collection.get_tag"><a class="viewcode-back" href="../../../main/main_collection.html#araucaria.main.collection.Collection.get_tag">[docs]</a>    <span class="k">def</span> <span class="nf">get_tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns tag of a group in the collection.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name</span>
+<span class="sd">            Name of group to retrieve tag.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">            Tag of the group.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        AttributeError</span>
+<span class="sd">            If ``name`` is not in a group in the collection.</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Collection, Group</span>
+<span class="sd">        &gt;&gt;&gt; collection = Collection()</span>
+<span class="sd">        &gt;&gt;&gt; g1   = Group(**{&#39;name&#39;: &#39;group1&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; g2   = Group(**{&#39;name&#39;: &#39;group2&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; tags = (&#39;scan&#39;, &#39;ref&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; for i, group in enumerate([g1, g2]):</span>
+<span class="sd">        ...     collection.add_group(group, tag=tags[i])</span>
+<span class="sd">        &gt;&gt;&gt; print(collection.get_tag(&#39;group1&#39;))</span>
+<span class="sd">        scan</span>
+<span class="sd">        &gt;&gt;&gt; print(collection.get_tag(&#39;group2&#39;))</span>
+<span class="sd">        ref</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;collection has no </span><span class="si">%s</span><span class="s1"> group.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+
+        <span class="c1"># retrieving original tag key</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">val</span><span class="p">:</span>
+                <span class="n">tag</span> <span class="o">=</span> <span class="n">key</span>
+                <span class="k">break</span>
+
+        <span class="k">return</span> <span class="n">tag</span></div>
+
+<div class="viewcode-block" id="Collection.rename_group"><a class="viewcode-back" href="../../../main/main_collection.html#araucaria.main.collection.Collection.rename_group">[docs]</a>    <span class="k">def</span> <span class="nf">rename_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">newname</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Renames a group in the collection.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        -----------</span>
+<span class="sd">        name</span>
+<span class="sd">            Name of group to modify.</span>
+<span class="sd">        newname</span>
+<span class="sd">            New name for the group.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        AttributeError</span>
+<span class="sd">            If ``name`` is not a group in the collection.</span>
+<span class="sd">        TypeError</span>
+<span class="sd">            If ``newname`` is not a string.</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Collection, Group</span>
+<span class="sd">        &gt;&gt;&gt; collection = Collection()</span>
+<span class="sd">        &gt;&gt;&gt; g1   = Group(**{&#39;name&#39;: &#39;group1&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; g2   = Group(**{&#39;name&#39;: &#39;group2&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; for i, group in enumerate([g1, g2]):</span>
+<span class="sd">        ...     collection.add_group(group)</span>
+<span class="sd">        &gt;&gt;&gt; collection.rename_group(&#39;group1&#39;, &#39;group3&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; print(collection.get_names())</span>
+<span class="sd">        [&#39;group2&#39;, &#39;group3&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; print(collection.group3.name)</span>
+<span class="sd">        group3</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s1">&#39;collection has no </span><span class="si">%s</span><span class="s1"> group.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">newname</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;newname is not a valid string.&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">newname</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+            <span class="c1"># retrieving original tag key</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">val</span><span class="p">:</span>
+                    <span class="n">tag</span> <span class="o">=</span> <span class="n">key</span>
+                    <span class="k">break</span>
+
+            <span class="c1"># replacing record name with new name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">newname</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+
+            <span class="c1"># modifying name of group</span>
+            <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">newname</span><span class="p">]</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">newname</span></div>
+
+<div class="viewcode-block" id="Collection.retag"><a class="viewcode-back" href="../../../main/main_collection.html#araucaria.main.collection.Collection.retag">[docs]</a>    <span class="k">def</span> <span class="nf">retag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Modifies tag of a group in the collection.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        name</span>
+<span class="sd">            Name of group to modify.</span>
+<span class="sd">        tag</span>
+<span class="sd">            New tag for the group.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        AttributeError</span>
+<span class="sd">            If ``name`` is not a group in the collection.</span>
+
+<span class="sd">        Example</span>
+<span class="sd">        -------</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Collection, Group</span>
+<span class="sd">        &gt;&gt;&gt; collection = Collection()</span>
+<span class="sd">        &gt;&gt;&gt; g1   = Group(**{&#39;name&#39;: &#39;group1&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; g2   = Group(**{&#39;name&#39;: &#39;group2&#39;})</span>
+<span class="sd">        &gt;&gt;&gt; tags = (&#39;scan&#39;, &#39;ref&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; for i, group in enumerate([g1, g2]):</span>
+<span class="sd">        ...     collection.add_group(group, tag=tags[i])</span>
+<span class="sd">        &gt;&gt;&gt; collection.retag(&#39;group1&#39;, &#39;ref&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; for key, value in collection.tags.items():</span>
+<span class="sd">        ...     print(key, value)</span>
+<span class="sd">        ref [&#39;group1&#39;, &#39;group2&#39;]</span>
+<span class="sd">        &quot;&quot;&quot;</span>        
+        <span class="c1"># retrieving original tag key</span>
+        <span class="n">initag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tag</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">initag</span> <span class="o">==</span> <span class="n">tag</span><span class="p">:</span>
+            <span class="c1"># nothing needs to be changed</span>
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># removing groupname from original tag</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">initag</span><span class="p">]</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            
+            <span class="c1"># removing entire key if group list is empty</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">initag</span><span class="p">]:</span>
+                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">initag</span><span class="p">]</span>
+
+            <span class="c1"># reassigning groupname to new tag</span>
+            <span class="k">if</span> <span class="n">tag</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tags</span><span class="p">[</span><span class="n">tag</span><span class="p">]</span> <span class="o">=</span> <span class="n">name</span></div>
+
+<div class="viewcode-block" id="Collection.summary"><a class="viewcode-back" href="../../../main/main_collection.html#araucaria.main.collection.Collection.summary">[docs]</a>    <span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taglist</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">],</span> <span class="n">regex</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">optional</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Report</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns a summary report of groups in a collection.</span>
+
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        taglist</span>
+<span class="sd">            List with keys to filter groups in the collection based </span>
+<span class="sd">            on the ``tags`` attribute. The default is [&#39;all&#39;].</span>
+<span class="sd">        regex</span>
+<span class="sd">            Search string to filter results by group name. See Notes for details.</span>
+<span class="sd">            The default is None.</span>
+<span class="sd">        optional</span>
+<span class="sd">            List with optional parameters. See Notes for details.</span>
+<span class="sd">            The default is None.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">            Report for datasets in the HDF5 file.</span>
+
+<span class="sd">        Raises</span>
+<span class="sd">        ------</span>
+<span class="sd">        ValueError</span>
+<span class="sd">            If any item in ``taglist`` is not a key of the ``tags`` attribute.</span>
+
+<span class="sd">        Notes</span>
+<span class="sd">        -----</span>
+<span class="sd">        Summary data includes the following:</span>
+
+<span class="sd">        1. Group index.</span>
+<span class="sd">        2. Group name.</span>
+<span class="sd">        3. Group tag.</span>
+<span class="sd">        4. Measurement mode.</span>
+<span class="sd">        5. Numbers of scans.</span>
+<span class="sd">        6. Merged scans, if ``optional=[&#39;merged_scans&#39;]``.</span>
+<span class="sd">        7. Optional parameters if they exist as attributes in the group.</span>
+
+<span class="sd">        A ``regex`` value can be used to filter group names based</span>
+<span class="sd">        on a regular expression (reges). For valid regex syntax, please </span>
+<span class="sd">        check the documentation of the module :mod:`re`.</span>
+
+<span class="sd">        The number of scans and names of merged files are retrieved </span>
+<span class="sd">        from the ``merged_scans`` attribute of ``collection``.</span>
+
+<span class="sd">        Optional parameters will be retrieved from the groups as </span>
+<span class="sd">        attributes. Currently only :class:`str`, :class:`float` or</span>
+<span class="sd">        :class:`int` will be retrieved. Otherswise an empty character</span>
+<span class="sd">        will be printed in the report.</span>
+
+<span class="sd">        See also</span>
+<span class="sd">        --------</span>
+<span class="sd">        :class:`~araucaria.main.report.Report`</span>
+
+<span class="sd">        Examples</span>
+<span class="sd">        --------</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.io import read_collection_hdf5</span>
+<span class="sd">        &gt;&gt;&gt; fpath      = get_testpath(&#39;Fe_database.h5&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; collection = read_collection_hdf5(fpath)</span>
+<span class="sd">        &gt;&gt;&gt; # printing default summary</span>
+<span class="sd">        &gt;&gt;&gt; report = collection.summary()</span>
+<span class="sd">        &gt;&gt;&gt; report.show()</span>
+<span class="sd">        =======================================</span>
+<span class="sd">        id  dataset           tag   mode    n  </span>
+<span class="sd">        =======================================</span>
+<span class="sd">        1   FeIISO4_20K       scan  mu      5  </span>
+<span class="sd">        2   Fe_Foil           scan  mu_ref  5  </span>
+<span class="sd">        3   Ferrihydrite_20K  scan  mu      5  </span>
+<span class="sd">        4   Goethite_20K      scan  mu      5  </span>
+<span class="sd">        =======================================</span>
+
+<span class="sd">        &gt;&gt;&gt; # printing summary of dnd file with merged scans</span>
+<span class="sd">        &gt;&gt;&gt; report = collection.summary(regex=&#39;Goe&#39;, optional=[&#39;merged_scans&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; report.show()</span>
+<span class="sd">        =============================================================</span>
+<span class="sd">        id  dataset       tag   mode  n  merged_scans                </span>
+<span class="sd">        =============================================================</span>
+<span class="sd">        1   Goethite_20K  scan  mu    5  20K_GOE_Fe_K_240.00000.xdi  </span>
+<span class="sd">                                         20K_GOE_Fe_K_240.00001.xdi  </span>
+<span class="sd">                                         20K_GOE_Fe_K_240.00002.xdi  </span>
+<span class="sd">                                         20K_GOE_Fe_K_240.00003.xdi  </span>
+<span class="sd">                                         20K_GOE_Fe_K_240.00004.xdi  </span>
+<span class="sd">        =============================================================</span>
+<span class="sd"> </span>
+<span class="sd">        &gt;&gt;&gt; # printing custom summary</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Collection</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.io import read_xmu</span>
+<span class="sd">        &gt;&gt;&gt; fpath = get_testpath(&#39;xmu_testfile.xmu&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; # extracting mu and mu_ref scans</span>
+<span class="sd">        &gt;&gt;&gt; group_mu = read_xmu(fpath, scan=&#39;mu&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; # adding additional attributes</span>
+<span class="sd">        &gt;&gt;&gt; group_mu.symbol = &#39;Zn&#39;</span>
+<span class="sd">        &gt;&gt;&gt; group_mu.temp   = 25.0</span>
+<span class="sd">        &gt;&gt;&gt; # saving in a collection</span>
+<span class="sd">        &gt;&gt;&gt; collection = Collection()</span>
+<span class="sd">        &gt;&gt;&gt; collection.add_group(group_mu)</span>
+<span class="sd">        &gt;&gt;&gt; report = collection.summary(optional=[&#39;symbol&#39;,&#39;temp&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; report.show()</span>
+<span class="sd">        ===================================================</span>
+<span class="sd">        id  dataset           tag   mode  n  symbol  temp  </span>
+<span class="sd">        ===================================================</span>
+<span class="sd">        1   xmu_testfile.xmu  scan  mu    1  Zn      25    </span>
+<span class="sd">        ===================================================</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># list with parameter names</span>
+        <span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;dataset&#39;</span><span class="p">,</span> <span class="s1">&#39;tag&#39;</span><span class="p">,</span> <span class="s1">&#39;mode&#39;</span><span class="p">,</span> <span class="s1">&#39;n&#39;</span><span class="p">]</span>
+
+        <span class="c1"># verifying optional values</span>
+        <span class="k">if</span> <span class="n">optional</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">opt_val</span> <span class="ow">in</span> <span class="n">optional</span><span class="p">:</span>
+                <span class="n">field_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">opt_val</span><span class="p">)</span>
+
+        <span class="c1"># instanciating report class</span>
+        <span class="n">report</span>   <span class="o">=</span> <span class="n">Report</span><span class="p">()</span>
+        <span class="n">report</span><span class="o">.</span><span class="n">set_columns</span><span class="p">(</span><span class="n">field_names</span><span class="p">)</span>
+
+        <span class="c1"># number of records</span>
+        <span class="n">names</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_names</span><span class="p">(</span><span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">regex</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
+                <span class="k">if</span> <span class="n">search</span><span class="p">(</span><span class="n">regex</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">index</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">names</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">index</span><span class="p">]</span>
+        <span class="n">ncols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">names</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
+            <span class="n">data</span>    <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">scanval</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get_mode</span><span class="p">()</span>
+            <span class="n">tag</span>     <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tag</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">extra_content</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># aux variable for &#39;merged_scans&#39;</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># number of merged_scans</span>
+                <span class="n">nscans</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">merged_scans</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">nscans</span> <span class="o">=</span> <span class="mi">1</span>
+
+            <span class="n">field_vals</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">scanval</span><span class="p">,</span> <span class="n">nscans</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">optional</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">j</span><span class="p">,</span> <span class="n">opt_val</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">optional</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">opt_val</span> <span class="o">==</span> <span class="s1">&#39;merged_scans&#39;</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="c1"># storing the col merge_index</span>
+                            <span class="n">merge_index</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">field_vals</span><span class="p">)</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">list_scans</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">merged_scans</span>
+                            <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">merged_scans</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                            <span class="n">extra_content</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="k">except</span><span class="p">:</span>
+                            <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;None&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># custom optional field</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">val</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">opt_val</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+                                <span class="c1"># if val is int or float print it</span>
+                                <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                        <span class="k">except</span><span class="p">:</span>
+                            <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+            <span class="n">report</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">field_vals</span><span class="p">)</span>
+        
+            <span class="k">if</span> <span class="n">extra_content</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">list_scans</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                    <span class="n">field_vals</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">index</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">field_names</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">j</span> <span class="o">!=</span>  <span class="n">merge_index</span><span class="p">:</span>
+                            <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">field_vals</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">add_row</span><span class="p">(</span><span class="n">field_vals</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">ncols</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+                    <span class="n">report</span><span class="o">.</span><span class="n">add_midrule</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">report</span></div></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

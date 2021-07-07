@@ -1,0 +1,620 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.stats.signal &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.stats.signal</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.stats.signal</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The :mod:`~araucaria.stats.signal` module offers the following </span>
+<span class="sd">functions to filter and analyze univariate data:</span>
+
+<span class="sd">.. list-table::</span>
+<span class="sd">   :widths: auto</span>
+<span class="sd">   :header-rows: 1</span>
+
+<span class="sd">   * - Function</span>
+<span class="sd">     - Description</span>
+<span class="sd">   * - :func:`compute_bins`</span>
+<span class="sd">     - Computes bin sequence for an energy array.</span>
+<span class="sd">   * - :func:`rebin`</span>
+<span class="sd">     - Rebins XAFS spectra in a group.</span>
+<span class="sd">   * - :func:`roll_med`</span>
+<span class="sd">     - Rolling median of a 1-D array.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="p">(</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">arange</span><span class="p">,</span> <span class="n">nan</span><span class="p">,</span> <span class="n">isnan</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">append</span><span class="p">,</span> <span class="n">concatenate</span><span class="p">,</span> 
+                   <span class="n">delete</span><span class="p">,</span> <span class="n">count_nonzero</span><span class="p">,</span> <span class="n">nanmedian</span><span class="p">,</span> <span class="n">ediff1d</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binned_statistic</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="kn">from</span> <span class="nn">..xas.xasutils</span> <span class="kn">import</span> <span class="n">ktoe</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
+
+<div class="viewcode-block" id="compute_bins"><a class="viewcode-back" href="../../../stats/stats_signal.html#araucaria.stats.signal.compute_bins">[docs]</a><span class="k">def</span> <span class="nf">compute_bins</span><span class="p">(</span><span class="n">ref_energy</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">e_step</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">bkg_pars</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">300</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> 
+                 <span class="n">exafs_pars</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">],</span> <span class="n">ndigits</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Computes bin sequence for an energy array.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    ref_energy:</span>
+<span class="sd">        Reference energy for computing bins (eV). Both background range</span>
+<span class="sd">        and exafs range are computed with respect to this value.</span>
+<span class="sd">    e_step:</span>
+<span class="sd">        Energy increment step for XANES bins (eV).</span>
+<span class="sd">        The default is 0.5.</span>
+<span class="sd">    bkg_pars:</span>
+<span class="sd">        Parameters for background bins (eV). Should include</span>
+<span class="sd">        initial energy value, final energy value, and energy increment step.</span>
+<span class="sd">        The detault is [-300, -20, 5]</span>
+<span class="sd">    exafs_pars:</span>
+<span class="sd">        Parameters for EXAFS bins (inverse angstrom). Should include</span>
+<span class="sd">        initial k value, final k value, and k increment step.</span>
+<span class="sd">        The default is [3, 15, 0.05].</span>
+<span class="sd">    ndigits:</span>
+<span class="sd">        Number of decimal places to round bins.</span>
+<span class="sd">        The default is 4.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Array with bin edges.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If len of ``bkg_pars`` or ``exafs_pars`` is smaller than 3.</span>
+
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :func:`rebin`: Rebins spectra in a group.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Computation of bins is performed considering 3 regions:</span>
+
+<span class="sd">    - background region: defined by ``bkg_pars``.</span>
+<span class="sd">    - XANES region: defined between ``bkg_pars``, ``exafs_pars``, and ``e_step``.</span>
+<span class="sd">    - EXAFS region: defined by ``exafs_pars``</span>
+
+<span class="sd">    Bin sizes are adjusted between regions in order to follow the</span>
+<span class="sd">    energy limits established by ``bkg_pars`` and ``exafs_ pars``.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import around, allclose</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.stats import compute_bins</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xas import ktoe</span>
+<span class="sd">    &gt;&gt;&gt; ndigits    = 4</span>
+<span class="sd">    &gt;&gt;&gt; edge       = 7112</span>
+<span class="sd">    &gt;&gt;&gt; bkg_pars   = [-300, -50, 10]</span>
+<span class="sd">    &gt;&gt;&gt; exafs_pars = [2, 10, 0.05]</span>
+<span class="sd">    &gt;&gt;&gt; bin_edges  = compute_bins(ref_energy=edge, bkg_pars=bkg_pars, </span>
+<span class="sd">    ...                           exafs_pars=exafs_pars, ndigits=ndigits)</span>
+<span class="sd">    &gt;&gt;&gt; # verifying bin edges </span>
+<span class="sd">    &gt;&gt;&gt; minval = edge + bkg_pars[0] - bkg_pars[2]/2           # minimum bin edge value</span>
+<span class="sd">    &gt;&gt;&gt; maxval = edge + ktoe(exafs_pars[1] + exafs_pars[2]/2) # maximum bin edge value</span>
+<span class="sd">    &gt;&gt;&gt; vals   = around((minval, maxval), ndigits)            # rounding to ndigits</span>
+<span class="sd">    &gt;&gt;&gt; allclose((bin_edges[0], bin_edges[-1]), vals)</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">bkg_pars</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;bkg_pars&#39; should provide at least 3 values.&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">exafs_pars</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&#39;exafs_pars should provide at least 3 values.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># computing bin edges for background region</span>
+    <span class="n">ival</span>      <span class="o">=</span> <span class="n">ref_energy</span> <span class="o">+</span> <span class="n">bkg_pars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">bkg_pars</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">fval</span>      <span class="o">=</span> <span class="n">ref_energy</span> <span class="o">+</span> <span class="n">bkg_pars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">bkg_pars</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">bkg_edges</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="n">ival</span><span class="p">,</span> <span class="n">fval</span><span class="p">,</span> <span class="n">bkg_pars</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">bkg_edges</span> <span class="o">=</span> <span class="n">bkg_edges</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">ndigits</span><span class="p">)</span>
+
+    <span class="c1"># computing bin edges at the edge    </span>
+    <span class="n">ival</span>      <span class="o">=</span> <span class="n">bkg_pars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">e_step</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">ref_energy</span>
+    <span class="n">fval</span>      <span class="o">=</span> <span class="n">ktoe</span><span class="p">(</span><span class="n">exafs_pars</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">ref_energy</span> <span class="o">+</span> <span class="n">e_step</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">ene_edges</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="n">ival</span><span class="p">,</span> <span class="n">fval</span><span class="p">,</span> <span class="n">e_step</span><span class="p">)</span>
+    <span class="n">ene_edges</span> <span class="o">=</span> <span class="n">ene_edges</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">ndigits</span><span class="p">)</span>
+
+    <span class="c1"># computing bind esges for exafs region</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">exafs_pars</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">ival</span> <span class="o">=</span> <span class="n">exafs_pars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">step</span><span class="o">/</span><span class="mi">2</span>
+    <span class="n">fval</span> <span class="o">=</span> <span class="n">exafs_pars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">step</span>
+    <span class="n">exafs_edges</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">kval</span> <span class="ow">in</span> <span class="n">arange</span><span class="p">(</span><span class="n">ival</span><span class="p">,</span> <span class="n">fval</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+        <span class="n">exafs_edges</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">ktoe</span><span class="p">(</span><span class="n">kval</span><span class="p">)</span> <span class="o">+</span> <span class="n">ref_energy</span> <span class="p">)</span>
+    <span class="n">exafs_edges</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">exafs_edges</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">ndigits</span><span class="p">)</span>
+
+    <span class="c1"># concatenating bin edges</span>
+    <span class="n">bin_edges</span> <span class="o">=</span> <span class="n">concatenate</span><span class="p">((</span><span class="n">bkg_edges</span><span class="p">,</span> <span class="n">ene_edges</span><span class="p">,</span> <span class="n">exafs_edges</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">bin_edges</span></div>
+
+<div class="viewcode-block" id="rebin"><a class="viewcode-back" href="../../../stats/stats_signal.html#araucaria.stats.signal.rebin">[docs]</a><span class="k">def</span> <span class="nf">rebin</span><span class="p">(</span><span class="n">group</span><span class="p">:</span> <span class="n">Group</span><span class="p">,</span> <span class="n">statistic</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span>
+          <span class="n">bins</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">]</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">remove_nans</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+          <span class="n">update</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Rebins XAFS spectra in a group.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    group:</span>
+<span class="sd">         Group containing the spectrum to rebin.</span>
+<span class="sd">    statistic:</span>
+<span class="sd">        The statistic to compute for rebinning. See</span>
+<span class="sd">        :func:`~scipy.stats.binned_statistic` for valid names.</span>
+<span class="sd">        The default is &#39;mean&#39;.</span>
+<span class="sd">    bins:</span>
+<span class="sd">        If :class:`int`, it defines the number of equal-width bins in the </span>
+<span class="sd">        given range. If a sequence, it defines the bin edges, including </span>
+<span class="sd">        the rightmost edge, allowing for non-uniform bin widths.</span>
+<span class="sd">        The default is 10.</span>
+<span class="sd">    remove_nans:</span>
+<span class="sd">        Indicates if bins with :data:`~numpy.nan` values should be removed.</span>
+<span class="sd">        The default is True.</span>
+<span class="sd">    update:</span>
+<span class="sd">         Indicates if the group should be updated with the rebin attributes.</span>
+<span class="sd">         The default is False.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Dictionary with the following parameters:</span>
+<span class="sd">        </span>
+<span class="sd">        - ``energy``     : rebinned energy values.</span>
+<span class="sd">        - ``mu``         : rebinned transmission :math:`\mu(E)`, </span>
+<span class="sd">          if ``mu`` attribute exists in the group.</span>
+<span class="sd">        - ``fluo``       : rebinned fluorescence :math:`\mu(E)`, </span>
+<span class="sd">          if ``fluo`` attribute exists in the group.</span>
+<span class="sd">        - ``mu_ref``     : rebinned reference :math:`\mu(E)`, </span>
+<span class="sd">          if ``mu_ref`` attribute exists in the group.</span>
+<span class="sd">        - ``rebin_stats``: additional rebin statistics. </span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``group`` is not a valid Group instance.</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If attribute ``energy`` does not exist in ``group``.</span>
+
+<span class="sd">    Important</span>
+<span class="sd">    ---------</span>
+<span class="sd">    Bins with no data are removed by default to prevent</span>
+<span class="sd">    :data:`~numpy.nan` values in the rebinned group arrays.</span>
+<span class="sd">    As a consecuence , the total number of bins might be </span>
+<span class="sd">    smaller than originally specified, and bins will exhibit </span>
+<span class="sd">    varying width.</span>
+<span class="sd">    </span>
+<span class="sd">    You can override this default behavior by specifying ``remove_nans=False``.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    .. plot::</span>
+<span class="sd">        :context: reset</span>
+
+<span class="sd">        &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.io import read_xmu</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.stats import rebin</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">        &gt;&gt;&gt; fpath = get_testpath(&#39;xmu_testfile.xmu&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; # extracting mu and mu_ref scans</span>
+<span class="sd">        &gt;&gt;&gt; group_mu = read_xmu(fpath, scan=&#39;mu&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; bins    = 600             # number of bins</span>
+<span class="sd">        &gt;&gt;&gt; regroup = group_mu.copy() # rebinning copy of group</span>
+<span class="sd">        &gt;&gt;&gt; rebin   = rebin(regroup, bins=bins, update=True)</span>
+<span class="sd">        &gt;&gt;&gt; attrs   = [&#39;energy&#39;, &#39;mu&#39;, &#39;mu_ref&#39;, &#39;rebin_stats&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; check_objattrs(regroup, Group, attrs)</span>
+<span class="sd">        [True, True, True, True]</span>
+
+<span class="sd">        &gt;&gt;&gt; # plotting rebinned spectrum</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.plot import fig_xas_template</span>
+<span class="sd">        &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">        &gt;&gt;&gt; figpars = {&#39;e_range&#39; : (11850, 11900)}   # energy range</span>
+<span class="sd">        &gt;&gt;&gt; fig, ax = fig_xas_template(panels=&#39;x&#39;, fig_pars=figpars)</span>
+<span class="sd">        &gt;&gt;&gt; stdev = regroup.rebin_stats[&#39;mu_std&#39;]    # std of rebinned mu</span>
+<span class="sd">        &gt;&gt;&gt; line  = ax.plot(group_mu.energy, group_mu.mu, label=&#39;original&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; line  = ax.errorbar(regroup.energy, regroup.mu, yerr=stdev, marker=&#39;o&#39;,</span>
+<span class="sd">        ...                     capsize=3.0, label=&#39;rebinned&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; leg   = ax.legend(edgecolor=&#39;k&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; lab   = ax.set_ylabel(&#39;abs [a.u]&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; plt.show(block=False)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># checking class and attributes</span>
+    <span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># storing energy and mu as indepedent arrays</span>
+    <span class="n">energy</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">energy</span>
+    <span class="n">mode</span>   <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get_mode</span><span class="p">()</span>
+    <span class="n">mu</span>     <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+
+    <span class="c1"># rebining mu</span>
+    <span class="n">rebin_mu</span><span class="p">,</span> <span class="n">bin_edges</span><span class="p">,</span> <span class="n">binnumber</span> <span class="o">=</span> <span class="n">binned_statistic</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">statistic</span><span class="o">=</span><span class="n">statistic</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+    <span class="n">rebin_energy</span> <span class="o">=</span> <span class="n">ediff1d</span><span class="p">(</span><span class="n">bin_edges</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="n">bin_edges</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="c1"># computing std</span>
+    <span class="n">stdev</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rebin_mu</span><span class="p">)):</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">binnumber</span> <span class="o">==</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+            <span class="c1"># testing if all indexes are false</span>
+            <span class="n">stdev</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nan</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">stdev</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">std</span><span class="p">(</span> <span class="n">mu</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span>
+    <span class="n">stdev</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">stdev</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">remove_nans</span><span class="p">:</span>
+        <span class="c1"># removing nans</span>
+        <span class="n">nindex</span>       <span class="o">=</span> <span class="n">isnan</span><span class="p">(</span><span class="n">rebin_mu</span><span class="p">)</span>
+        <span class="n">edges_nindex</span> <span class="o">=</span> <span class="n">append</span><span class="p">(</span><span class="n">nindex</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">rebin_mu</span>     <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">rebin_mu</span><span class="p">,</span> <span class="n">nindex</span><span class="p">)</span>
+        <span class="n">bin_edges</span>    <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">bin_edges</span><span class="p">,</span> <span class="n">edges_nindex</span><span class="p">)</span>
+        <span class="n">rebin_energy</span> <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">rebin_energy</span><span class="p">,</span> <span class="n">nindex</span><span class="p">)</span>
+        <span class="n">stdev</span>        <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">stdev</span><span class="p">,</span><span class="n">nindex</span><span class="p">)</span>
+
+    <span class="c1"># storing results</span>
+    <span class="n">bin_std</span>     <span class="o">=</span> <span class="n">mode</span> <span class="o">+</span> <span class="s1">&#39;_std&#39;</span>
+    <span class="n">rebin_stats</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;energy_edges&#39;</span><span class="p">:</span> <span class="n">bin_edges</span><span class="p">,</span>
+                   <span class="s1">&#39;binnumber&#39;</span>   <span class="p">:</span> <span class="n">binnumber</span><span class="p">,</span>
+                   <span class="n">bin_std</span>       <span class="p">:</span> <span class="n">stdev</span><span class="p">}</span>
+    <span class="n">content</span>     <span class="o">=</span> <span class="p">{</span><span class="n">mode</span>          <span class="p">:</span> <span class="n">rebin_mu</span><span class="p">,</span>
+                   <span class="s1">&#39;energy&#39;</span>      <span class="p">:</span> <span class="n">rebin_energy</span><span class="p">}</span>
+
+    <span class="k">if</span> <span class="n">group</span><span class="o">.</span><span class="n">has_ref</span> <span class="ow">and</span> <span class="n">mode</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="s1">&#39;fluo&#39;</span><span class="p">):</span>
+        <span class="c1"># rebinning mu_ref (if exists)</span>
+        <span class="n">mu_ref</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">mu_ref</span>
+        <span class="n">rebin_mu_ref</span><span class="p">,</span> <span class="n">bin_edges</span><span class="p">,</span> <span class="n">binnumber</span> <span class="o">=</span> \
+        <span class="n">binned_statistic</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">mu_ref</span><span class="p">,</span> <span class="n">statistic</span><span class="o">=</span><span class="n">statistic</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">)</span>
+
+        <span class="c1"># computing ref_std</span>
+        <span class="n">stdev</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rebin_mu_ref</span><span class="p">)):</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">binnumber</span> <span class="o">==</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">any</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
+                <span class="n">stdev</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">nan</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">stdev</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="n">std</span><span class="p">(</span> <span class="n">mu_ref</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span>
+        <span class="n">stdev</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">stdev</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">remove_nans</span><span class="p">:</span>
+            <span class="c1"># removing nans</span>
+            <span class="n">nindex</span>       <span class="o">=</span> <span class="n">isnan</span><span class="p">(</span><span class="n">rebin_mu_ref</span><span class="p">)</span>
+            <span class="n">rebin_mu_ref</span> <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">rebin_mu_ref</span><span class="p">,</span> <span class="n">nindex</span><span class="p">)</span>
+            <span class="n">stdev</span>        <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">stdev</span><span class="p">,</span><span class="n">nindex</span><span class="p">)</span>
+
+        <span class="c1"># storing mu_ref results</span>
+        <span class="n">content</span><span class="p">[</span><span class="s1">&#39;mu_ref&#39;</span><span class="p">]</span>               <span class="o">=</span> <span class="n">rebin_mu_ref</span>
+        <span class="n">rebin_stats</span><span class="p">[</span><span class="s1">&#39;mu_ref_std&#39;</span><span class="p">]</span>       <span class="o">=</span> <span class="n">stdev</span>
+
+    <span class="c1"># storing rebin statistics</span>
+    <span class="n">content</span><span class="p">[</span><span class="s1">&#39;rebin_stats&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rebin_stats</span>
+
+    <span class="c1"># updating group</span>
+    <span class="k">if</span> <span class="n">update</span><span class="p">:</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">add_content</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">content</span></div>
+
+<div class="viewcode-block" id="roll_med"><a class="viewcode-back" href="../../../stats/stats_signal.html#araucaria.stats.signal.roll_med">[docs]</a><span class="k">def</span> <span class="nf">roll_med</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">window</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">min_samples</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> 
+             <span class="n">edgemethod</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;nan&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Computes the rolling median of a 1-D array.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    data:</span>
+<span class="sd">        Array to compute the rolling median.</span>
+<span class="sd">    window:</span>
+<span class="sd">        Size of the rolling window for analysis.</span>
+<span class="sd">    min_samples:</span>
+<span class="sd">        Minimum sample points to calculate the median in each window.</span>
+<span class="sd">        The default is 2.</span>
+<span class="sd">    edgemethod :</span>
+<span class="sd">        Dictates how medians are calculated at the edges of the array.</span>
+<span class="sd">        Options are &#39;nan&#39;, &#39;calc&#39; and &#39;extend&#39;. See the Notes for further details.</span>
+<span class="sd">        The default is &#39;nan&#39;.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Rolling median of the array.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``window`` is not an odd value.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``window`` is smaller or equal than 3.</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``window`` is not an integer.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``edgemethod`` is not recognized.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function calculates the median of a moving window. Results are returned in the </span>
+<span class="sd">    index corresponding to the center of the window. The function ignores :data:`~numpy.nan` </span>
+<span class="sd">    values in the array.</span>
+
+<span class="sd">    - ``edgemethod=&#39;nan&#39;`` uses :data:`~numpy.nan` values for missing values at the edges. </span>
+<span class="sd">    - ``edgemethod=&#39;calc&#39;`` uses an abbreviated window at the edges </span>
+<span class="sd">      (e.g. the first sample will have (window/2)+1 points in the calculation).</span>
+<span class="sd">    - ``edgemethod=&#39;extend&#39;`` uses the nearest calculated value for missing values at the edges.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    If ``window`` is less than ``min_samples``, :data:`~numpy.nan` is given as the median.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    .. plot::</span>
+<span class="sd">        :context: reset</span>
+
+<span class="sd">        &gt;&gt;&gt; from numpy import pi, sin, linspace</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.stats import roll_med</span>
+<span class="sd">        &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">        &gt;&gt;&gt; # generating a signal and its rolling median</span>
+<span class="sd">        &gt;&gt;&gt; f1   = 0.2 # frequency</span>
+<span class="sd">        &gt;&gt;&gt; t    = linspace(0,10)</span>
+<span class="sd">        &gt;&gt;&gt; y    = sin(2*pi*f1*t)</span>
+<span class="sd">        &gt;&gt;&gt; line = plt.plot(t,y, label=&#39;signal&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; for method in [&#39;calc&#39;, &#39;extend&#39;, &#39;nan&#39;]:</span>
+<span class="sd">        ...    fy   = roll_med(y, window=25, edgemethod=method)</span>
+<span class="sd">        ...    line = plt.plot(t, fy, marker=&#39;o&#39;, label=method)</span>
+<span class="sd">        &gt;&gt;&gt; lab = plt.xlabel(&#39;t&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; lab =plt.ylabel(&#39;y&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; leg = plt.legend()</span>
+<span class="sd">        &gt;&gt;&gt; plt.show(block=False)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">window</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;window length must be an odd value.&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">window</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">window</span><span class="p">)</span><span class="o">!=</span><span class="nb">int</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;window length must be larger than 3.&#39;</span><span class="p">)</span>
+
+    <span class="n">validEdgeMethods</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;nan&#39;</span><span class="p">,</span> <span class="s1">&#39;extend&#39;</span><span class="p">,</span> <span class="s1">&#39;calc&#39;</span><span class="p">]</span>     
+    <span class="k">if</span> <span class="n">edgemethod</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">validEdgeMethods</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;please choose a valid edgemethod.&#39;</span><span class="p">)</span>
+
+    <span class="c1"># calculating points on either side of the point of interest in the window</span>
+    <span class="n">movement</span>  <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">window</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> 
+    <span class="n">med_array</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="n">nan</span> <span class="k">for</span> <span class="n">point</span> <span class="ow">in</span> <span class="n">data</span><span class="p">])</span>
+    
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">[</span> <span class="p">:</span> <span class="o">-</span><span class="n">movement</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">i</span><span class="o">&gt;=</span><span class="n">movement</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">count_nonzero</span><span class="p">(</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">movement</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">movement</span><span class="p">])</span> <span class="o">==</span> <span class="kc">False</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">min_samples</span><span class="p">:</span>
+                <span class="n">med_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nanmedian</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="n">movement</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">movement</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="n">edgemethod</span> <span class="o">==</span> <span class="s1">&#39;nan&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">med_array</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">[</span> <span class="p">:</span> <span class="n">movement</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">edgemethod</span> <span class="o">==</span> <span class="s1">&#39;calc&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">count_nonzero</span><span class="p">(</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">movement</span><span class="p">])</span> <span class="o">==</span> <span class="kc">False</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">min_samples</span><span class="p">:</span>
+                <span class="n">med_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nanmedian</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">movement</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">edgemethod</span> <span class="o">==</span> <span class="s1">&#39;extend&#39;</span><span class="p">:</span>
+            <span class="n">med_array</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">med_array</span><span class="p">[</span><span class="n">movement</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="o">-</span><span class="n">movement</span> <span class="p">:</span> <span class="p">]):</span>
+        <span class="k">if</span> <span class="n">edgemethod</span> <span class="o">==</span> <span class="s1">&#39;calc&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">count_nonzero</span><span class="p">(</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">[(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">movement</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span> <span class="p">:</span> <span class="p">])</span> <span class="o">==</span> <span class="kc">False</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">min_samples</span><span class="p">:</span>
+                <span class="n">med_array</span><span class="p">[</span><span class="o">-</span><span class="n">movement</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nanmedian</span><span class="p">(</span><span class="n">data</span><span class="p">[(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">movement</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span> <span class="p">:</span> <span class="p">])</span>
+        <span class="k">elif</span> <span class="n">edgemethod</span> <span class="o">==</span> <span class="s1">&#39;extend&#39;</span><span class="p">:</span>
+            <span class="n">med_array</span><span class="p">[</span><span class="o">-</span><span class="n">movement</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">med_array</span><span class="p">[</span><span class="o">-</span><span class="n">movement</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">med_array</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

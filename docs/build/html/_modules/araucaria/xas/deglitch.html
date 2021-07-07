@@ -1,0 +1,476 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.xas.deglitch &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.xas.deglitch</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.xas.deglitch</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">array</span><span class="p">,</span> <span class="n">append</span><span class="p">,</span> <span class="n">where</span><span class="p">,</span> <span class="n">copy</span><span class="p">,</span> <span class="n">delete</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp1d</span>
+<span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">savgol_filter</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
+<span class="kn">from</span> <span class="nn">..xas.normalize</span> <span class="kn">import</span> <span class="n">find_e0</span>
+<span class="c1">#from ..xas.xasutils import roll_med</span>
+<span class="kn">from</span> <span class="nn">..stats.signal</span> <span class="kn">import</span> <span class="n">roll_med</span>
+<span class="kn">from</span> <span class="nn">..stats.genesd</span> <span class="kn">import</span> <span class="n">genesd</span>
+
+<div class="viewcode-block" id="deglitch"><a class="viewcode-back" href="../../../xas/xas_deglitch.html#araucaria.xas.deglitch.deglitch">[docs]</a><span class="k">def</span> <span class="nf">deglitch</span><span class="p">(</span><span class="n">group</span><span class="p">:</span> <span class="n">Group</span><span class="p">,</span> <span class="n">e_window</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span><span class="nb">list</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;xas&#39;</span><span class="p">,</span> <span class="n">sg_window_length</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> 
+             <span class="n">sg_polyorder</span><span class="p">:</span><span class="nb">int</span> <span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">.025</span><span class="p">,</span> 
+             <span class="n">max_glitches</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="n">max_glitch_length</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+             <span class="n">update</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Algorithm to deglitch a XAFS spectrum.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    group</span>
+<span class="sd">        Group containing the spectrum to deglitch.</span>
+<span class="sd">    e_window</span>
+<span class="sd">        Energy window to seach for outliers.</span>
+<span class="sd">        Oprions are &#39;xas&#39;, &#39;xanes&#39; and &#39;exafs&#39;.</span>
+<span class="sd">        Alternatively a list with 2 floats can be provided for</span>
+<span class="sd">        the start and end energy for the search.</span>
+<span class="sd">        See the Notes for further details. The default is &#39;xas&#39;.</span>
+<span class="sd">    sg_window_length</span>
+<span class="sd">        Windows length for the Savitzky-Golay filter on the normalized spectrum.</span>
+<span class="sd">        Must be an odd value. The default is 7.</span>
+<span class="sd">    sg_polyorder</span>
+<span class="sd">        Polynomial order for the Savitzky-Golay filter on the normalized spectrum.</span>
+<span class="sd">        The default is 3.</span>
+<span class="sd">    alpha</span>
+<span class="sd">        Significance level for generalized ESD test for outliers.</span>
+<span class="sd">        The default is 0.025.</span>
+<span class="sd">    max_glitches</span>
+<span class="sd">         Maximum number of outliers to remove.</span>
+<span class="sd">         The default is the floor division of the array length by 10.</span>
+<span class="sd">    max_glitch_length</span>
+<span class="sd">        Maximum length of glitch in energy points. The default is 4.</span>
+<span class="sd">    update</span>
+<span class="sd">        Indicates if the group should be updated with the autobk attributes.</span>
+<span class="sd">        The default is False.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Dictionary with the following arguments:</span>
+
+<span class="sd">        - ``index_glitches`` : indices of glitches in the original energy array.</span>
+<span class="sd">        - ``energy_glitches``: glitches in the original energy array.</span>
+<span class="sd">        - ``energy``         : deglitched energy array.</span>
+<span class="sd">        - ``mu``             : deglitched array. Returned if ``group.get_mode() = &#39;mu&#39;``.</span>
+<span class="sd">        - ``fluo``           : deglitched array. Returned if ``group.get_mode() = &#39;fluo&#39;``.</span>
+<span class="sd">        - ``mu_ref``         : deglitched array. Returned if ``group.get_mode() = &#39;mu_ref&#39;``.</span>
+<span class="sd">        - ``deglitch_pars``  : dictionary with deglitch parameters.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``group`` is not a valid Group instance.</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If attribute ``energy`` does not exist in ``group``.</span>
+
+<span class="sd">    Warning</span>
+<span class="sd">    -------</span>
+<span class="sd">    Running :func:`~araucaria.xas.deglitch.deglitch` with ``update=True`` will overwrite</span>
+<span class="sd">    the ``energy`` and the absorption attribute of ``group``.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function deglitches a XAFS spectrum through a </span>
+<span class="sd">    two-step fitting with Savitzky-Golay filter and outlier </span>
+<span class="sd">    identification with a generalized extreme Studentized deviate (ESD) </span>
+<span class="sd">    test [1]_.</span>
+<span class="sd">    </span>
+<span class="sd">    - ``e_window=&#39;xas&#39;`` considers the full spectrum for deglitching.</span>
+<span class="sd">    - ``e_window=&#39;xanes&#39;`` considers the beginning of the energy array </span>
+<span class="sd">      up to 150 eV above :math:`E_0`.</span>
+<span class="sd">    - ``e_window=&#39;exafs&#39;`` considers from 150eV above :math:`E_0` to the </span>
+<span class="sd">      end of the energy array</span>
+<span class="sd">    - ``e_window=[float,float]`` provides start and end energies in eV.</span>
+<span class="sd">    </span>
+<span class="sd">    References</span>
+<span class="sd">    ----------</span>
+<span class="sd">    .. [1] Wallace, S. M., Alsina, M. A., &amp; Gaillard, J. F. (2021) </span>
+<span class="sd">       &quot;An algorithm for the automatic deglitching of x-ray absorption </span>
+<span class="sd">       spectroscopy data&quot;. J. Synchrotron Rad. 28, https://doi.org/10.1107/S1600577521003611</span>
+<span class="sd">    </span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    .. plot::</span>
+<span class="sd">        :context: reset</span>
+<span class="sd">        </span>
+<span class="sd">        &gt;&gt;&gt; from numpy import allclose</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.io import read_dnd</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.xas import deglitch, pre_edge, autobk</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">        &gt;&gt;&gt; fpath  = get_testpath(&#39;dnd_glitchfile.dat&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; group  = read_dnd(fpath, scan=&#39;fluo&#39;)  # extracting fluo and mu_ref scans</span>
+<span class="sd">        &gt;&gt;&gt; cgroup = group.copy()</span>
+<span class="sd">        &gt;&gt;&gt; degli  = deglitch(cgroup, update=True)</span>
+<span class="sd">        &gt;&gt;&gt; attrs  = [&#39;index_glitches&#39;, &#39;energy_glitches&#39;, &#39;deglitch_pars&#39;]</span>
+<span class="sd">        &gt;&gt;&gt; check_objattrs(cgroup, Group, attrs)</span>
+<span class="sd">        [True, True, True]</span>
+<span class="sd">        &gt;&gt;&gt; allclose(cgroup.energy_glitches, group.energy[cgroup.index_glitches])</span>
+<span class="sd">        True</span>
+<span class="sd">        &gt;&gt;&gt; print(cgroup.energy_glitches)</span>
+<span class="sd">        [7552.2789 7548.1747 7390.512  7387.2613]</span>
+
+<span class="sd">        &gt;&gt;&gt; # plotting original and deglitched spectrum</span>
+<span class="sd">        &gt;&gt;&gt; from araucaria.plot import fig_xas_template</span>
+<span class="sd">        &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">        &gt;&gt;&gt; for g in [group, cgroup]:</span>
+<span class="sd">        ...     pre   = pre_edge(g, update=True)</span>
+<span class="sd">        ...     autbk = autobk(g, update=True)</span>
+<span class="sd">        &gt;&gt;&gt; fig, ax = fig_xas_template(panels=&#39;xe&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[0].plot(group.energy,  group.norm,  label=&#39;original&#39;, color=&#39;tab:red&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[0].plot(cgroup.energy, cgroup.norm, label =&#39;degliched&#39;, color=&#39;k&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[1].plot(group.k, group.k**2 * group.chi, color=&#39;tab:red&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; line = ax[1].plot(cgroup.k, cgroup.k**2 * cgroup.chi, color=&#39;k&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; leg  = ax[0].legend()</span>
+<span class="sd">        &gt;&gt;&gt; fig.tight_layout()</span>
+<span class="sd">        &gt;&gt;&gt; plt.show(block=False)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># checking class and attributes</span>
+    <span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># extracting data and mu as independent arrays</span>
+    <span class="n">energy</span>  <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">energy</span>
+    <span class="n">mode</span>    <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get_mode</span><span class="p">()</span>
+    <span class="n">mu</span>      <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+
+    <span class="c1"># computing the energy window to perform the deglitch:</span>
+    <span class="n">e_lim</span>     <span class="o">=</span> <span class="mi">150</span> <span class="c1"># energy limit to separates xanes from exafs</span>
+    <span class="n">e_windows</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;xas&#39;</span><span class="p">,</span> <span class="s1">&#39;xanes&#39;</span><span class="p">,</span> <span class="s1">&#39;exafs&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">e_window</span> <span class="ow">in</span> <span class="n">e_windows</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">e_window</span> <span class="o">==</span><span class="s1">&#39;xas&#39;</span><span class="p">:</span>
+            <span class="n">e_window</span> <span class="o">=</span> <span class="p">[</span><span class="n">energy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">energy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="s1">&#39;e0&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">group</span><span class="p">):</span>
+                <span class="n">e0</span> <span class="o">=</span> <span class="n">find_e0</span><span class="p">(</span><span class="n">group</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">e0</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="s1">&#39;e0&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">e_window</span> <span class="o">==</span><span class="s1">&#39;xanes&#39;</span><span class="p">:</span>
+                <span class="n">e_window</span>  <span class="o">=</span> <span class="p">[</span><span class="n">energy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">e0</span> <span class="o">+</span> <span class="n">e_lim</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span> <span class="c1"># exafs</span>
+                <span class="n">e_window</span>  <span class="o">=</span> <span class="p">[</span><span class="n">e0</span> <span class="o">+</span> <span class="n">e_lim</span><span class="p">,</span> <span class="n">energy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+    
+    <span class="c1"># energy indexes to perform deglitch</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">where</span><span class="p">((</span><span class="n">energy</span> <span class="o">&gt;=</span> <span class="n">e_window</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">energy</span> <span class="o">&lt;=</span> <span class="n">e_window</span><span class="p">[</span><span class="mi">1</span><span class="p">]))[</span><span class="mi">0</span><span class="p">]</span>
+    
+    <span class="c1"># savitzky-golay filter applied to entire mu array</span>
+    <span class="n">sg_init</span> <span class="o">=</span> <span class="n">savgol_filter</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sg_window_length</span><span class="p">,</span> <span class="n">sg_polyorder</span><span class="p">)</span> 
+
+    <span class="c1"># computing difference between normalized spectrum and savitzky-golay</span>
+    <span class="n">res1</span>      <span class="o">=</span> <span class="n">mu</span> <span class="o">-</span> <span class="n">sg_init</span>
+    
+    <span class="c1"># computing window size and rolling median</span>
+    <span class="n">win_size</span>   <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">sg_window_length</span> <span class="o">+</span> <span class="p">(</span><span class="n">max_glitch_length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="n">roll_mad1</span> <span class="o">=</span> <span class="n">roll_med</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">res1</span><span class="p">),</span> <span class="n">window</span> <span class="o">=</span> <span class="n">win_size</span><span class="p">,</span> <span class="n">edgemethod</span><span class="o">=</span><span class="s1">&#39;calc&#39;</span><span class="p">)</span>
+    <span class="n">res_norm</span>  <span class="o">=</span> <span class="n">res1</span> <span class="o">/</span> <span class="n">roll_mad1</span>
+    
+    <span class="c1"># if max_glitches is not set to an int, it will be set to the default</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">max_glitches</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span> <span class="ow">or</span> <span class="n">max_glitches</span> <span class="o">==</span> <span class="s1">&#39;default&#39;</span><span class="p">:</span>
+        <span class="n">max_glitches</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">res1</span><span class="p">)</span><span class="o">//</span><span class="mi">10</span>
+
+    <span class="c1"># finds outliers in residuals between data and savitzky-golay filter</span>
+    <span class="n">report</span><span class="p">,</span> <span class="n">out1</span> <span class="o">=</span> <span class="n">genesd</span><span class="p">(</span><span class="n">res_norm</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">max_glitches</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+    
+    <span class="c1"># compensating for nonzero starting index in e_window</span>
+    <span class="k">if</span> <span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span> 
+        <span class="n">out1</span> <span class="o">=</span> <span class="n">out1</span> <span class="o">+</span> <span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        
+    <span class="c1"># deglitching ends here if no outliers are found in this first stage</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">index_glitches</span>  <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">energy_glitches</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># creating additional copy of mu</span>
+        <span class="n">mu_copy</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">mu</span><span class="p">)</span>
+        
+        <span class="c1"># removes points that are poorly fitted by the S-G filter</span>
+        <span class="n">e2</span> <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">out1</span><span class="p">)</span> 
+        <span class="n">n2</span> <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">out1</span><span class="p">)</span>
+        
+        <span class="c1">#interpolates mu at the removed energy points</span>
+        <span class="n">f</span>          <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">e2</span><span class="p">,</span> <span class="n">n2</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span> 
+        <span class="n">interp_pts</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">energy</span><span class="p">[</span><span class="n">out1</span><span class="p">])</span> 
+    
+        <span class="c1"># inserts interpolated points into normalized data</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">point</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">out1</span><span class="p">):</span>
+            <span class="n">mu_copy</span><span class="p">[</span><span class="n">point</span><span class="p">]</span> <span class="o">=</span> <span class="n">interp_pts</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> 
+    
+        <span class="c1"># fits mu with the interpolated points</span>
+        <span class="n">sg_final</span>  <span class="o">=</span> <span class="n">savgol_filter</span><span class="p">(</span><span class="n">mu_copy</span><span class="p">,</span> <span class="n">sg_window_length</span><span class="p">,</span> <span class="n">sg_polyorder</span><span class="p">)</span> 
+        <span class="n">res2</span>      <span class="o">=</span> <span class="n">mu</span> <span class="o">-</span> <span class="n">sg_final</span>
+        <span class="n">win_size</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">max_glitch_length</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="n">roll_mad2</span> <span class="o">=</span> <span class="n">roll_med</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">res2</span><span class="p">),</span> <span class="n">window</span> <span class="o">=</span> <span class="n">win_size</span><span class="p">,</span> <span class="n">edgemethod</span><span class="o">=</span><span class="s1">&#39;calc&#39;</span><span class="p">)</span>
+        <span class="n">res_norm2</span> <span class="o">=</span> <span class="n">res2</span> <span class="o">/</span> <span class="n">roll_mad2</span>
+
+        <span class="c1"># normalizing the standard deviation to the same window as the savitzky-golay filter</span>
+        <span class="c1"># allows to tackle the full spectrum, accounting for the data noise.</span>
+        <span class="n">report</span><span class="p">,</span> <span class="n">glitches_init</span> <span class="o">=</span> <span class="n">genesd</span><span class="p">(</span><span class="n">res_norm2</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">max_glitches</span><span class="p">,</span> <span class="n">alpha</span><span class="p">)</span>
+
+        <span class="c1"># compensating for nonzero starting index in e_window</span>
+        <span class="k">if</span> <span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">glitches_init</span> <span class="o">=</span> <span class="n">glitches_init</span> <span class="o">+</span> <span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        
+        <span class="n">glitches</span> <span class="o">=</span> <span class="n">array</span><span class="p">([])</span>
+        <span class="k">for</span> <span class="n">glitch</span> <span class="ow">in</span> <span class="n">glitches_init</span><span class="p">:</span>
+            <span class="k">if</span> <span class="kc">True</span> <span class="ow">in</span> <span class="n">where</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">glitch</span><span class="o">-</span><span class="n">out1</span><span class="p">)</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">sg_window_length</span><span class="o">//</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">):</span>
+                <span class="n">glitches</span> <span class="o">=</span> <span class="n">append</span><span class="p">(</span><span class="n">glitches</span><span class="p">,</span> <span class="n">glitch</span><span class="p">)</span>
+        <span class="n">glitches</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">index_glitches</span>  <span class="o">=</span> <span class="n">glitches</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">energy_glitches</span> <span class="o">=</span> <span class="n">energy</span><span class="p">[</span><span class="n">index_glitches</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">glitches</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">index_glitches</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">energy_glitches</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># deglitching arrays</span>
+            <span class="n">energy</span> <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">energy</span><span class="p">,</span> <span class="n">index_glitches</span><span class="p">)</span>
+            <span class="n">mu</span>     <span class="o">=</span> <span class="n">delete</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">index_glitches</span><span class="p">)</span>
+
+    <span class="n">deglitch_pars</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;e_window&#39;</span>          <span class="p">:</span> <span class="n">e_window</span><span class="p">,</span>
+                      <span class="s1">&#39;sg_window_length&#39;</span>  <span class="p">:</span> <span class="n">sg_window_length</span><span class="p">,</span> 
+                      <span class="s1">&#39;sg_polyorder&#39;</span>      <span class="p">:</span> <span class="n">sg_polyorder</span><span class="p">,</span>
+                      <span class="s1">&#39;alpha&#39;</span>             <span class="p">:</span> <span class="n">alpha</span><span class="p">,</span>
+                      <span class="s1">&#39;max_glitches&#39;</span>      <span class="p">:</span> <span class="n">max_glitches</span><span class="p">,</span>
+                      <span class="s1">&#39;max_glitch_length&#39;</span> <span class="p">:</span> <span class="n">max_glitch_length</span>
+                    <span class="p">}</span>
+    
+    <span class="n">content</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;index_glitches&#39;</span> <span class="p">:</span> <span class="n">index_glitches</span><span class="p">,</span>
+                <span class="s1">&#39;energy_glitches&#39;</span><span class="p">:</span> <span class="n">energy_glitches</span><span class="p">,</span>
+                <span class="s1">&#39;energy&#39;</span>         <span class="p">:</span> <span class="n">energy</span><span class="p">,</span>
+                 <span class="n">mode</span>            <span class="p">:</span> <span class="n">mu</span><span class="p">,</span>
+                <span class="s1">&#39;deglitch_pars&#39;</span>  <span class="p">:</span> <span class="n">deglitch_pars</span><span class="p">,</span>
+              <span class="p">}</span>
+    
+    <span class="k">if</span> <span class="n">update</span><span class="p">:</span>
+        <span class="n">group</span><span class="o">.</span><span class="n">add_content</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">content</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

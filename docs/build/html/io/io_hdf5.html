@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>IO HDF5 module &mdash; araucaria 0.1.10
+  <title>IO HDF5 module &mdash; araucaria 0.1.11
  documentation</title>
   
 
@@ -99,6 +99,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
@@ -110,6 +111,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linalg_module.html">LinAlg module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stats_module.html">Statistics module</a></li>
@@ -248,7 +251,7 @@ manipulate data in the Hierarchical Data Format <code class="docutils literal no
 </table>
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_hdf5.read_hdf5">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">read_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.read_hdf5" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">read_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/io/io_hdf5.html#read_hdf5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.io.io_hdf5.read_hdf5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads a single group dataset from an HDF5 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -286,7 +289,7 @@ manipulate data in the Hierarchical Data Format <code class="docutils literal no
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_hdf5.read_collection_hdf5">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">read_collection_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.read_collection_hdf5" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">read_collection_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/io/io_hdf5.html#read_collection_hdf5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.io.io_hdf5.read_collection_hdf5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reads multiple group datasets from an HDF5 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -338,7 +341,7 @@ Therefore the returned collection will automatically assign
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_hdf5.convert_bytes_hdf5">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">convert_bytes_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.convert_bytes_hdf5" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">convert_bytes_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/io/io_hdf5.html#convert_bytes_hdf5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.io.io_hdf5.convert_bytes_hdf5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Utility function to convert a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> record from an HDF5 file.</p>
 <p>Returned value will be either a <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>,
 or <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>.</p>
@@ -366,7 +369,7 @@ types during reading.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_hdf5.write_hdf5">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">write_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.write_hdf5" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">write_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/io/io_hdf5.html#write_hdf5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.io.io_hdf5.write_hdf5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes a group dataset in an HDF5 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -413,7 +416,7 @@ The previous dataset can be overwritten with the option <code class="docutils li
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_hdf5.write_collection_hdf5">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">write_collection_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.write_collection_hdf5" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">write_collection_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">collection</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['all']</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/io/io_hdf5.html#write_collection_hdf5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.io.io_hdf5.write_collection_hdf5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes a collection in an HDF5 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -471,7 +474,7 @@ Previous datasets can be overwritten with the option <code class="docutils liter
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_hdf5.write_recursive_hdf5">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">write_recursive_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.write_recursive_hdf5" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">write_recursive_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dataset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/io/io_hdf5.html#write_recursive_hdf5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.io.io_hdf5.write_recursive_hdf5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Utility function to write a Group recursively in an HDF5 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -489,8 +492,8 @@ Previous datasets can be overwritten with the option <code class="docutils liter
 </dl>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Only <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>
-types are currently supported for recursive writting in an HDF5 <a class="reference external" href="https://docs.h5py.org/en/latest/high/dataset.html#h5py.Dataset" title="(in h5py v3.2)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a>.</p>
+<p>Only <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a> and <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>
+types are currently supported for recursive writting in an HDF5 <a class="reference external" href="https://docs.h5py.org/en/latest/high/dataset.html#h5py.Dataset" title="(in h5py v3.3)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dataset</span></code></a>.</p>
 <p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a> and <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a> types will be convertet to <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, which is in
 turn saved as <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#bytes" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bytes</span></code></a> in the HDF5 database.
 If read with <a class="reference internal" href="#araucaria.io.io_hdf5.read_hdf5" title="araucaria.io.io_hdf5.read_hdf5"><code class="xref py py-func docutils literal notranslate"><span class="pre">read_hdf5()</span></code></a>, such records will be automatically converted to their
@@ -500,7 +503,7 @@ original type in the group.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_hdf5.rename_dataset_hdf5">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">rename_dataset_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.rename_dataset_hdf5" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">rename_dataset_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newname</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/io/io_hdf5.html#rename_dataset_hdf5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.io.io_hdf5.rename_dataset_hdf5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Renames a dataset in an HDF5 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -542,7 +545,7 @@ original type in the group.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_hdf5.delete_dataset_hdf5">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">delete_dataset_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.delete_dataset_hdf5" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">delete_dataset_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/io/io_hdf5.html#delete_dataset_hdf5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.io.io_hdf5.delete_dataset_hdf5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deletes a dataset from an HDF5 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -582,7 +585,7 @@ original type in the group.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="araucaria.io.io_hdf5.summary_hdf5">
-<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">summary_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">pre_edge_kws</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.io.io_hdf5.summary_hdf5" title="Permalink to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">araucaria.io.io_hdf5.</span></span><span class="sig-name descname"><span class="pre">summary_hdf5</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fpath</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">regex</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">optional</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">pre_edge_kws</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/io/io_hdf5.html#summary_hdf5"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.io.io_hdf5.summary_hdf5" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a summary report of datasets in an HDF5 file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>

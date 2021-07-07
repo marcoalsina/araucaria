@@ -1,0 +1,475 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.xas.xasutils &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.xas.xasutils</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.xas.xasutils</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The :mod:`~araucaria.xas.xasutils` module offers the following XAFS utility functions :</span>
+
+<span class="sd">.. list-table::</span>
+<span class="sd">   :widths: auto</span>
+<span class="sd">   :header-rows: 1</span>
+
+<span class="sd">   * - Function</span>
+<span class="sd">     - Description</span>
+<span class="sd">   * - :func:`etok`</span>
+<span class="sd">     - Converts photo-electron energy to wavenumber.</span>
+<span class="sd">   * - :func:`ktoe`</span>
+<span class="sd">     - Converts photo-electron wavenumber to energy.</span>
+<span class="sd">   * - :func:`get_mapped_data`</span>
+<span class="sd">     - Returns data mapped to a common domain in a collection.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">hbar</span>  <span class="c1"># reduced planck constant</span>
+<span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">m_e</span>   <span class="c1"># electron mass</span>
+<span class="kn">from</span> <span class="nn">scipy.constants</span> <span class="kn">import</span> <span class="n">eV</span>    <span class="c1"># electron volt in joules</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">array</span><span class="p">,</span> <span class="n">std</span><span class="p">,</span> <span class="n">gradient</span><span class="p">,</span> <span class="n">inf</span>
+<span class="kn">from</span> <span class="nn">scipy.interpolate</span> <span class="kn">import</span> <span class="n">interp1d</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Collection</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span><span class="p">,</span> <span class="n">index_xrange</span>
+
+<span class="c1"># constants</span>
+<span class="c1"># 1e10 converts from 1/meter to 1/angstrom</span>
+<span class="n">k2e</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1e10</span> <span class="o">*</span> <span class="n">hbar</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">m_e</span> <span class="o">*</span> <span class="n">eV</span><span class="p">)</span>
+
+<div class="viewcode-block" id="etok"><a class="viewcode-back" href="../../../xas/xas_utils.html#araucaria.xas.xasutils.etok">[docs]</a><span class="k">def</span> <span class="nf">etok</span><span class="p">(</span><span class="n">energy</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Converts photo-electron energy to wavenumber.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    energy</span>
+<span class="sd">        Array of photo-electron energies (eV).</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Array of photo-electron wavenumbers (:math:`Å^{-1}`).</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Conversion is performed considering the non-relativistic</span>
+<span class="sd">    approximation:</span>
+
+<span class="sd">    .. math::</span>
+
+<span class="sd">        k = \\frac{\sqrt{2mE}}{\hbar}  </span>
+
+<span class="sd">    Where</span>
+
+<span class="sd">    - :math:`k`: photo-electron wavenumber.</span>
+<span class="sd">    - :math:`E`: kinetic energy of the photo-electron.</span>
+<span class="sd">    - :math:`m`: electron mass.</span>
+<span class="sd">    - :math:`\hbar`: reduced Planck constant.</span>
+<span class="sd">    </span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xas import etok</span>
+<span class="sd">    &gt;&gt;&gt; e = 400      # eV</span>
+<span class="sd">    &gt;&gt;&gt; k = etok(e)  # A^{-1}</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;%1.5f&#39; % k)</span>
+<span class="sd">    10.24633</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">sqrt</span>
+    <span class="k">return</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">energy</span><span class="o">/</span><span class="n">k2e</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ktoe"><a class="viewcode-back" href="../../../xas/xas_utils.html#araucaria.xas.xasutils.ktoe">[docs]</a><span class="k">def</span> <span class="nf">ktoe</span><span class="p">(</span><span class="n">k</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Converts photo-electron wavenumber to energy.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    k</span>
+<span class="sd">        Array with photo-electron wavenumbers (:math:`Å^{-1}`).</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Array with photo-electron energies (eV).</span>
+
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+<span class="sd">    etok : Converts photo-electron energy to wavenumber.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xas import ktoe</span>
+<span class="sd">    &gt;&gt;&gt; k = 10      # A^{-1}</span>
+<span class="sd">    &gt;&gt;&gt; e = ktoe(k)  # eV</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;%1.5f&#39; % e)</span>
+<span class="sd">    380.99821</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">k</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">k2e</span></div>
+
+<div class="viewcode-block" id="get_mapped_data"><a class="viewcode-back" href="../../../xas/xas_utils.html#araucaria.xas.xasutils.get_mapped_data">[docs]</a><span class="k">def</span> <span class="nf">get_mapped_data</span><span class="p">(</span><span class="n">collection</span><span class="p">:</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">taglist</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">],</span>
+                    <span class="n">region</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">,</span> <span class="n">domain</span><span class="p">:</span> <span class="n">ndarray</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="nb">range</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">inf</span><span class="p">,</span><span class="n">inf</span><span class="p">],</span> <span class="n">kweight</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">ndarray</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Returns data mapped to a common domain in a collection.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    collection</span>
+<span class="sd">        Collection with group datasets.</span>
+<span class="sd">    taglist</span>
+<span class="sd">        List with keys to filter groups based on their ``tags``</span>
+<span class="sd">        attributes in the Collection.</span>
+<span class="sd">        The default is [&#39;all&#39;].</span>
+<span class="sd">    region</span>
+<span class="sd">        XAS region to perform mapping. Accepted values are &#39;dxanes&#39;,</span>
+<span class="sd">        &#39;xanes&#39;, &#39;exafs&#39;. The default is &#39;xanes&#39;.</span>
+<span class="sd">    domain</span>
+<span class="sd">        Domain values to perform mapping. Energy units are expected</span>
+<span class="sd">        for &#39;dxanes&#39; or &#39;xanes&#39;, while wavenumber (k) units are expected </span>
+<span class="sd">        for &#39;exafs&#39;. It overrides the ``range`` parameter.</span>
+<span class="sd">    range</span>
+<span class="sd">        Domain range in absolute values. Energy units are expected</span>
+<span class="sd">        for &#39;dxanes&#39; or &#39;xanes&#39;, while wavenumber (k) units are expected </span>
+<span class="sd">        for &#39;exafs&#39;.</span>
+<span class="sd">        The default is [-:data:`~numpy.inf`, :data:`~numpy.inf`].</span>
+<span class="sd">    kweight</span>
+<span class="sd">        Exponent for weighting chi(k) by k^kweight.</span>
+<span class="sd">        Only valid for ``region=&#39;exafs&#39;``.</span>
+<span class="sd">        The default is 2.  </span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        1-D array containing the domain values for mapping.</span>
+<span class="sd">    :</span>
+<span class="sd">        Array containing in each column the mapped values of groups.</span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``collection`` is not a valid Collection instance.</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If ``collection`` has no ``tags`` attribute.</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If groups in ``collection`` have no ``energy`` or ``norm`` attribute.</span>
+<span class="sd">        Only verified if ``region=dxanes`` or ``region=xanes``.</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If groups in ``collection`` have no ``k`` or ``chi`` attribute.</span>
+<span class="sd">        Only verified if ``region=&#39;exafs&#39;``.</span>
+<span class="sd">    KeyError</span>
+<span class="sd">        If items in ``taglist`` are not keys of the ``tags`` attribute.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``region`` is not recognized.</span>
+<span class="sd">    ValueError</span>
+<span class="sd">        If ``range`` or ``domain`` is outside the domain of a group </span>
+<span class="sd">        in ``collection``.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    Exploratory data analysis assumes that data is mapped to a common domain range.</span>
+<span class="sd">    However, datasets in a Collection are often mapped to different domain ranges.</span>
+
+<span class="sd">    :func:`get_mapped_data` establishes a common domain based on the specified </span>
+<span class="sd">    ``region`` and ``range`` variables,  and returns an  array with the interpolated </span>
+<span class="sd">    values.</span>
+<span class="sd">    </span>
+<span class="sd">    Alternatively, if a ``domain`` array is provided, :func:`get_mapped_data` returns</span>
+<span class="sd">    an array with the interpolated values.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import allclose</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xas import pre_edge</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.stats import get_mapped_data</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_collection_hdf5</span>
+<span class="sd">    &gt;&gt;&gt; fpath      = get_testpath(&#39;Fe_database.h5&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; collection = read_collection_hdf5(fpath)</span>
+<span class="sd">    &gt;&gt;&gt; collection.apply(pre_edge)</span>
+<span class="sd">    &gt;&gt;&gt; ener, data = get_mapped_data(collection, region=&#39;xanes&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; allclose(ener.shape[0], data.shape[0])</span>
+<span class="sd">    True</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; # passing a domain argument</span>
+<span class="sd">    &gt;&gt;&gt; nener, ndata = get_mapped_data(collection, region=&#39;xanes&#39;, </span>
+<span class="sd">    ...                                domain=ener)</span>
+<span class="sd">    &gt;&gt;&gt; allclose(data, ndata)</span>
+<span class="sd">    True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># checking class and attributes</span>
+    <span class="n">check_objattrs</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;tags&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+   <span class="c1"># verifying region type</span>
+    <span class="n">region_valid</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;dxanes&#39;</span><span class="p">,</span> <span class="s1">&#39;xanes&#39;</span><span class="p">,</span><span class="s1">&#39;exafs&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">region</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">region_valid</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;region </span><span class="si">%s</span><span class="s1"> not recognized.&#39;</span><span class="o">%</span> <span class="n">region</span><span class="p">)</span>
+
+    <span class="c1"># list of groupnames</span>
+    <span class="n">listgroups</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">(</span><span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">)</span>
+
+    <span class="c1"># checking if domain was provided as argument</span>
+    <span class="c1"># if not, it will be constructued.</span>
+    <span class="k">if</span> <span class="n">domain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># report parameters for exafs mapping</span>
+        <span class="c1"># since k-range may not have been computed, the first group is used</span>
+        <span class="k">if</span> <span class="n">region</span> <span class="o">==</span> <span class="s1">&#39;exafs&#39;</span><span class="p">:</span>
+            <span class="n">dummy</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="n">listgroups</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">check_objattrs</span><span class="p">(</span><span class="n">dummy</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;chi&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">xvals</span> <span class="o">=</span> <span class="n">dummy</span><span class="o">.</span><span class="n">k</span>
+        <span class="c1"># report paramters for xanes mapping</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">xvals</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_mcer</span><span class="p">(</span><span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">)</span>
+
+        <span class="c1"># computing xvalues</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">index_xrange</span><span class="p">(</span><span class="nb">range</span><span class="p">,</span> <span class="n">xvals</span><span class="p">)</span>
+        <span class="n">xvals</span> <span class="o">=</span> <span class="n">xvals</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">xvals</span> <span class="o">=</span> <span class="n">domain</span>
+
+    <span class="c1"># data container</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># reading and processing spectra</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">listgroups</span><span class="p">):</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_group</span><span class="p">(</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">region</span> <span class="o">==</span> <span class="s1">&#39;exafs&#39;</span><span class="p">:</span>
+            <span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="s1">&#39;chi&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">k</span><span class="o">**</span><span class="n">kweight</span><span class="o">*</span><span class="n">group</span><span class="o">.</span><span class="n">chi</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># region == &#39;xanes&#39; or &#39;dxanes&#39;</span>
+            <span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;norm&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="c1"># spline interpolation</span>
+            <span class="k">if</span> <span class="n">region</span> <span class="o">==</span><span class="s1">&#39;xanes&#39;</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="n">group</span><span class="o">.</span><span class="n">norm</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="n">interp1d</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="n">gradient</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">norm</span><span class="p">)</span><span class="o">/</span><span class="n">gradient</span><span class="p">(</span><span class="n">group</span><span class="o">.</span><span class="n">energy</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;cubic&#39;</span><span class="p">)</span>
+
+        <span class="c1"># interpolating in the fit range</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">yvals</span> <span class="o">=</span> <span class="n">s</span><span class="p">(</span><span class="n">xvals</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;requested domain is outside the values of group </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+        
+        <span class="c1"># saving yvals in data</span>
+        <span class="n">matrix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">yvals</span><span class="p">)</span>
+
+    <span class="c1"># converting list to array</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">array</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">xvals</span><span class="p">,</span> <span class="n">matrix</span><span class="p">)</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

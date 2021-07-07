@@ -1,0 +1,704 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.stats.pca &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.stats.pca</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.stats.pca</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Principal component analysis (PCA) is an exploratory data analysis technique</span>
+<span class="sd">that allows to reduce the dimensionality of a dataset while preserving most of</span>
+<span class="sd">its variance.</span>
+<span class="sd">Dimensionality reduction is achieved by changing the basis of the dataset </span>
+<span class="sd">in such way that the new vectors constitute an orthonormal basis.</span>
+
+<span class="sd">Lets consider a m by n matrix :math:`X`  (m observations and n variables).</span>
+<span class="sd">Mathematically, PCA computes the eigenvalues and eigenvectors of the covariance</span>
+<span class="sd">matrix. If observations in :math:`X` are centered, then the covariance is proportional</span>
+<span class="sd">to :math:`X^TX`:</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    eigen(covX) \\propto eigen(X^TX)</span>
+
+<span class="sd">Following the eigen-decomposition, we can rewrite :math:`X^TX` as follows:</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    X^TX = WDW^{-1}</span>
+
+<span class="sd">Where</span>
+
+<span class="sd">- :math:`W`   : matrix of eigenvectors.</span>
+<span class="sd">- :math:`D`   : diagonal matrix of eigenvalues.</span>
+
+<span class="sd">Multiplying the matrix :math:`X` by the matrix of eigenvectors :math:`W` effectively</span>
+<span class="sd">projects the data into an orthonormal basis: :math:`T=XW` are known as the</span>
+<span class="sd">**principal components**.</span>
+
+<span class="sd">Although PCA can be computed directly as the eigenvalues of the covariance matrix, it</span>
+<span class="sd">is often convenient to compute it through singular value decomposition (SVD) of :math:`X`:</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    X = U \\Sigma V^*</span>
+
+<span class="sd">Where:</span>
+
+<span class="sd">- :math:`U`: m by n semi-unitary matrix of left-singular vectors.</span>
+<span class="sd">- :math:`\\Sigma`: n by n diagonal matrix of singular values.</span>
+<span class="sd">- :math:`V`: n by n semi-unitary matrix of right-singular vectors.</span>
+
+<span class="sd">It is straightforward to observe the following relation between the eigenvalue decomposition </span>
+<span class="sd">of the covariance matrix and the SVD of :math:`X`:</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    X^TX &amp;= V \\Sigma^T \\Sigma V^* = V \\hat{\\Sigma}^2 V^*</span>
+<span class="sd">    </span>
+<span class="sd">    X^TX &amp;= WDW^{-1} = V \\hat{\\Sigma}^2 V^*</span>
+
+<span class="sd">Where</span>
+
+<span class="sd">- :math:`W` : matrix of eigenvectors.</span>
+<span class="sd">- :math:`\\hat{\\Sigma^2} = \\Sigma^T \\Sigma`: diagonal matrix of eigenvalues.</span>
+
+<span class="sd">Therefore, the principal components can be computed as :math:`T=XV=U \\Sigma`.</span>
+
+<span class="sd">Dimensionality reduction</span>
+<span class="sd">------------------------</span>
+
+<span class="sd">A truncated matrix :math:`T_L` can be computed by retaining the L-largest </span>
+<span class="sd">singular values and their corresponding singular vectors:</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    T_L = U_L \\Sigma_L = X V_L</span>
+
+<span class="sd">After reduction a new vector :math:`x` of observations can be projected into </span>
+<span class="sd">the principal components:</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    t = U_L^T x</span>
+
+<span class="sd">Target transformation</span>
+<span class="sd">---------------------</span>
+
+<span class="sd">These principal components can be transformed back into the original space:</span>
+
+<span class="sd">.. math::</span>
+
+<span class="sd">    \hat{x} = U_L t = U_L U_L^T x</span>
+
+<span class="sd">The latter is commonly referred to as **target transformation**.</span>
+
+<span class="sd">The :mod:`~araucaria.stats.pca` module offers the following </span>
+<span class="sd">classes and functions to perform principal component analysis based on the SVD</span>
+<span class="sd">approach:</span>
+
+<span class="sd">.. list-table::</span>
+<span class="sd">   :widths: auto</span>
+<span class="sd">   :header-rows: 1</span>
+
+<span class="sd">   * - Class</span>
+<span class="sd">     - Description</span>
+<span class="sd">   * - :class:`PCAModel`</span>
+<span class="sd">     - Container of results from PCA.</span>
+
+<span class="sd">.. list-table::</span>
+<span class="sd">   :widths: auto</span>
+<span class="sd">   :header-rows: 1</span>
+
+<span class="sd">   * - Function</span>
+<span class="sd">     - Description</span>
+<span class="sd">   * - :func:`pca`</span>
+<span class="sd">     - Performs principal component analysis on a collection.</span>
+<span class="sd">   * - :func:`target_transform`</span>
+<span class="sd">     - Performs target transformation on a collection.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="p">(</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">inf</span><span class="p">,</span> <span class="n">square</span><span class="p">,</span> <span class="n">diag</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">,</span> 
+                   <span class="n">dot</span><span class="p">,</span> <span class="n">cumsum</span><span class="p">,</span> <span class="nb">sum</span><span class="p">,</span> <span class="n">divide</span><span class="p">,</span> <span class="n">searchsorted</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">scipy.linalg</span> <span class="kn">import</span> <span class="n">svd</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">..xas.xasutils</span> <span class="kn">import</span> <span class="n">get_mapped_data</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
+
+<div class="viewcode-block" id="PCAModel"><a class="viewcode-back" href="../../../stats/stats_pca.html#araucaria.stats.pca.PCAModel">[docs]</a><span class="k">class</span> <span class="nc">PCAModel</span><span class="p">(</span><span class="n">Dataset</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;PCA Model class.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;This class stores the results of principal component analysis</span>
+<span class="sd">    on an array.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    matrix : :class:`~numpy.ndarray`</span>
+<span class="sd">        m by n array containing m observations and n variables.</span>
+<span class="sd">    name : :class:`str`</span>
+<span class="sd">        Name for the collection. The default is None.</span>
+<span class="sd">    ncomps : :class:`int`</span>
+<span class="sd">        Number of components to preserve.</span>
+<span class="sd">        Default is None, which will preserve all components.</span>
+<span class="sd">    cumvar : :class:`float`</span>
+<span class="sd">        Cumulative variance to preserve.</span>
+<span class="sd">        Default is None, which will preserve all components.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    AssertionError</span>
+<span class="sd">        If ``ncomps`` is not a positive integer.</span>
+<span class="sd">    AssertionError</span>
+<span class="sd">        If ``ncomps`` is larger than the number of variables in ``matrix``.</span>
+<span class="sd">    AssertionError</span>
+<span class="sd">        If ``cumvar`` is negative or greater than 1.</span>
+
+<span class="sd">    Attributes</span>
+<span class="sd">    ----------</span>
+<span class="sd">    matrix : :class:`~numpy.ndarray`</span>
+<span class="sd">        Array containing m observations in rows and n variables in columns.</span>
+<span class="sd">    U : :class:`~numpy.ndarray`</span>
+<span class="sd">        m by n array with the semi-unitary matrix of left-singular vectors.</span>
+<span class="sd">    s : :class:`~numpy.ndarray`</span>
+<span class="sd">        1-D array with the n singular values.</span>
+<span class="sd">    Vh : :class:`~numpy.ndarray`</span>
+<span class="sd">        n by n array with the transpose of the semi-unitary matrix of right-singular vectors.</span>
+<span class="sd">    variance : :class:`~numpy.ndarray`</span>
+<span class="sd">        Array with the explained variance of each component.</span>
+<span class="sd">    components: :class:`~numpy.ndarray`</span>
+<span class="sd">        m by n array with principal components.</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The following methods are currently implemented:</span>
+
+<span class="sd">    .. list-table::</span>
+<span class="sd">       :widths: auto</span>
+<span class="sd">       :header-rows: 1</span>
+
+<span class="sd">       * - Method</span>
+<span class="sd">         - Description</span>
+<span class="sd">       * - :func:`transform`</span>
+<span class="sd">         - Projects observations into principal components.</span>
+<span class="sd">       * - :func:`inverse_transform`</span>
+<span class="sd">         - Converts principal component values into observations.</span>
+
+<span class="sd">    Important</span>
+<span class="sd">    ---------</span>
+<span class="sd">    - Observations in ``matrix`` must be centered in order to perform PCA.</span>
+<span class="sd">    - Either ``ncomps`` or ``cumvar`` can be set to reduce dimensionallity</span>
+<span class="sd">      of the dataset.</span>
+<span class="sd">      If ``ncomps`` is provided, it will set precedence over ``cumvar``.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy.random import randn</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.stats import PCAModel</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">    &gt;&gt;&gt; matrix = randn(10,10)</span>
+<span class="sd">    &gt;&gt;&gt; model  = PCAModel(matrix)</span>
+<span class="sd">    &gt;&gt;&gt; type(model)</span>
+<span class="sd">    &lt;class &#39;araucaria.stats.pca.PCAModel&#39;&gt;</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; # verifying attributes</span>
+<span class="sd">    &gt;&gt;&gt; attrs = [&#39;matrix&#39;, &#39;components&#39;, &#39;variance&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(model, PCAModel, attrs)</span>
+<span class="sd">    [True, True, True]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matrix</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">ncomps</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cumvar</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span>  <span class="o">=</span> <span class="nb">hex</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span>   <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">matrix</span> <span class="o">=</span> <span class="n">matrix</span>
+
+        <span class="c1"># number of rows and cols</span>
+        <span class="n">m</span><span class="p">,</span> <span class="n">n</span> <span class="o">=</span> <span class="n">matrix</span><span class="o">.</span><span class="n">shape</span>
+
+        <span class="c1"># singular value decomposition</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">U</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">Vh</span> <span class="o">=</span> <span class="n">svd</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">full_matrices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+        <span class="c1"># variance</span>
+        <span class="n">var</span>  <span class="o">=</span> <span class="n">square</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">var</span>  <span class="o">=</span> <span class="n">var</span><span class="o">/</span><span class="nb">sum</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+        <span class="n">cvar</span> <span class="o">=</span> <span class="n">cumsum</span><span class="p">(</span><span class="n">var</span><span class="p">)</span>
+
+        <span class="c1"># asserting ncomps and cumvar</span>
+        <span class="k">if</span> <span class="n">ncomps</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ncomps</span><span class="p">,</span> <span class="nb">int</span><span class="p">),</span> <span class="s2">&quot;ncomps must be an integer value.&quot;</span>
+            <span class="k">assert</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">ncomps</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">,</span> <span class="s2">&quot;comps cannot be larger than the number of variables or smaller than 1.&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ncomps</span> <span class="o">=</span> <span class="n">ncomps</span>
+        <span class="k">elif</span> <span class="n">cumvar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">assert</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">cumvar</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;cumvar must be larger than 0 and smaller than 1.&quot;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ncomps</span> <span class="o">=</span> <span class="n">searchsorted</span><span class="p">(</span><span class="n">cvar</span><span class="p">,</span> <span class="n">cumvar</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ncomps</span> <span class="o">=</span> <span class="n">n</span>
+
+        <span class="c1"># variance and principal components</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">variance</span>   <span class="o">=</span> <span class="n">var</span><span class="p">[:</span><span class="n">ncomps</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">components</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">U</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span><span class="p">)[:,</span> <span class="p">:</span><span class="n">ncomps</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&lt;PCAModel </span><span class="si">%s</span><span class="s1">&gt;&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&lt;PCAModel&gt;&#39;</span>
+
+<div class="viewcode-block" id="PCAModel.transform"><a class="viewcode-back" href="../../../stats/stats_pca.html#araucaria.stats.pca.PCAModel.transform">[docs]</a>    <span class="k">def</span> <span class="nf">transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obs</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Projects observations into principal components.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        obs</span>
+<span class="sd">            Array with observed values.</span>
+
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">            Array with scores on principal components.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncomps</span>
+        <span class="k">return</span> <span class="n">dot</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">U</span><span class="p">[:,</span> <span class="p">:</span><span class="n">n</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">obs</span> <span class="p">)</span></div>
+
+<div class="viewcode-block" id="PCAModel.inverse_transform"><a class="viewcode-back" href="../../../stats/stats_pca.html#araucaria.stats.pca.PCAModel.inverse_transform">[docs]</a>    <span class="k">def</span> <span class="nf">inverse_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ndarray</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Converts principal components into observations.</span>
+<span class="sd">        </span>
+<span class="sd">        Parameters</span>
+<span class="sd">        ----------</span>
+<span class="sd">        p</span>
+<span class="sd">            Array with scores on principal components.</span>
+<span class="sd">        </span>
+<span class="sd">        Returns</span>
+<span class="sd">        -------</span>
+<span class="sd">        :</span>
+<span class="sd">            Array with observed values.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ncomps</span>
+        <span class="k">return</span> <span class="n">dot</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">U</span><span class="p">[:,:</span><span class="n">n</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="pca"><a class="viewcode-back" href="../../../stats/stats_pca.html#araucaria.stats.pca.pca">[docs]</a><span class="k">def</span> <span class="nf">pca</span><span class="p">(</span><span class="n">collection</span><span class="p">:</span> <span class="n">Collection</span><span class="p">,</span> <span class="n">taglist</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">],</span>
+        <span class="n">pca_region</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;xanes&#39;</span><span class="p">,</span> <span class="n">pca_range</span><span class="p">:</span> <span class="nb">list</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="n">inf</span><span class="p">,</span><span class="n">inf</span><span class="p">],</span>
+        <span class="n">ncomps</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cumvar</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+        <span class="n">kweight</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PCAModel</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Performs principal component analysis (PCA) on a collection.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    collection</span>
+<span class="sd">        Collection with the groups for PCA.</span>
+<span class="sd">    taglist</span>
+<span class="sd">        List with keys to filter groups based on their ``tags``</span>
+<span class="sd">        attributes in the Collection.</span>
+<span class="sd">        The default is [&#39;all&#39;].</span>
+<span class="sd">    pca_region</span>
+<span class="sd">        XAFS region to perform PCA. Accepted values are &#39;dxanes&#39;,</span>
+<span class="sd">        &#39;xanes&#39;, or &#39;exafs&#39;. The default is &#39;xanes&#39;.</span>
+<span class="sd">    pca_range</span>
+<span class="sd">        Domain range in absolute values. Energy units are expected</span>
+<span class="sd">        for &#39;dxanes&#39; or &#39;xanes&#39;, while wavenumber (k) units are expected </span>
+<span class="sd">        for &#39;exafs&#39;.</span>
+<span class="sd">        The default is [-:data:`~numpy.inf`, :data:`~numpy.inf`].</span>
+<span class="sd">    ncomps</span>
+<span class="sd">        Number of components to preserve from the PCA.</span>
+<span class="sd">        Default is None, which will preserve all components.</span>
+<span class="sd">    cumvar</span>
+<span class="sd">        Cumulative variance to preserve from the PCA.</span>
+<span class="sd">        Defaults is None, which will preserve all components.</span>
+<span class="sd">    kweight</span>
+<span class="sd">        Exponent for weighting chi(k) by k^kweight.</span>
+<span class="sd">        Only valid for ``cluster_region=&#39;exafs&#39;``.</span>
+<span class="sd">        The default is 2.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        PCA model with the following arguments:</span>
+
+<span class="sd">        - ``components``   : array with principal components.</span>
+<span class="sd">        - ``variance``     : array with explained variance of each component.</span>
+<span class="sd">        - ``groupnames``   : list with names of clustered groups.</span>
+<span class="sd">        - ``energy``       : array with energy values. Returned only if</span>
+<span class="sd">          ``pca_region=&#39;xanes`` or ``pca_region=dxanes``.</span>
+<span class="sd">        - ``k``            : array with wavenumber values. Returned only if</span>
+<span class="sd">          ``pca_region=&#39;exafs&#39;``.</span>
+<span class="sd">        - ``matrix``       : array with centered values for groups in ``pca_range``.</span>
+<span class="sd">        - ``pca_pars`` : dictionary with PCA parameters.</span>
+
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :class:`PCAModel` : Class to store results from principal component analysis.</span>
+<span class="sd">    :func:`~araucaria.plot.fig_pca.fig_pca` : Plots the results of principal component analysis.</span>
+
+<span class="sd">    Important</span>
+<span class="sd">    ---------</span>
+<span class="sd">    - Group datasets in ``collection`` will be centered before performing PCA.</span>
+<span class="sd">    - Either ``ncomps`` or ``cumvar`` can be set to reduce dimensionallity</span>
+<span class="sd">      of the dataset.</span>
+<span class="sd">      If ``ncomps`` is provided, it will set precedence over ``cumvar``.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_collection_hdf5</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xas import pre_edge</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.stats import PCAModel, pca</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">    &gt;&gt;&gt; fpath      = get_testpath(&#39;Fe_database.h5&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; collection = read_collection_hdf5(fpath)</span>
+<span class="sd">    &gt;&gt;&gt; collection.apply(pre_edge)</span>
+<span class="sd">    &gt;&gt;&gt; out        = pca(collection, pca_region=&#39;xanes&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; attrs      = [&#39;energy&#39;, &#39;matrix&#39;, &#39;components&#39;, &#39;variance&#39;, &#39;groupnames&#39;, &#39;pca_pars&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(out, PCAModel, attrs)</span>
+<span class="sd">    [True, True, True, True, True, True]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># mapped data</span>
+    <span class="n">xvals</span><span class="p">,</span> <span class="n">matrix</span> <span class="o">=</span> <span class="n">get_mapped_data</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="n">pca_region</span><span class="p">,</span> 
+                                    <span class="nb">range</span><span class="o">=</span><span class="n">pca_range</span><span class="p">,</span> <span class="n">kweight</span><span class="o">=</span><span class="n">kweight</span><span class="p">)</span>
+    <span class="c1"># centering data</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">matrix</span> <span class="o">-</span> <span class="n">matrix</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># singular value decomposition</span>
+    <span class="n">pca</span>    <span class="o">=</span> <span class="n">PCAModel</span><span class="p">(</span><span class="n">matrix</span><span class="p">,</span> <span class="n">ncomps</span><span class="o">=</span><span class="n">ncomps</span><span class="p">,</span> <span class="n">cumvar</span><span class="o">=</span><span class="n">cumvar</span><span class="p">)</span>
+
+    <span class="c1"># storing pca parameters</span>
+    <span class="n">pca_pars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;pca_region&#39;</span><span class="p">:</span> <span class="n">pca_region</span><span class="p">,</span> 
+                <span class="s1">&#39;pca_range&#39;</span> <span class="p">:</span> <span class="n">pca_range</span><span class="p">,}</span>
+
+    <span class="c1"># additional pca parameters</span>
+    <span class="k">if</span> <span class="n">pca_region</span> <span class="o">==</span> <span class="s1">&#39;exafs&#39;</span><span class="p">:</span>
+        <span class="n">xvar</span>  <span class="o">=</span> <span class="s1">&#39;k&#39;</span>    <span class="c1"># x-variable</span>
+        <span class="n">pca_pars</span><span class="p">[</span><span class="s1">&#39;kweight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kweight</span>
+    <span class="c1"># xanes/dxanes pca</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">xvar</span>  <span class="o">=</span> <span class="s1">&#39;energy&#39;</span>    <span class="c1"># x-variable</span>
+
+    <span class="c1"># storing pca results</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">pca</span><span class="p">,</span><span class="n">xvar</span><span class="p">,</span> <span class="n">xvals</span><span class="p">)</span>
+    <span class="n">pca</span><span class="o">.</span><span class="n">groupnames</span> <span class="o">=</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">(</span><span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">)</span>
+    <span class="n">pca</span><span class="o">.</span><span class="n">pca_pars</span>   <span class="o">=</span> <span class="n">pca_pars</span>
+    <span class="k">return</span> <span class="n">pca</span></div>
+
+<div class="viewcode-block" id="target_transform"><a class="viewcode-back" href="../../../stats/stats_pca.html#araucaria.stats.pca.target_transform">[docs]</a><span class="k">def</span> <span class="nf">target_transform</span><span class="p">(</span><span class="n">model</span><span class="p">:</span> <span class="n">PCAModel</span><span class="p">,</span> <span class="n">collection</span><span class="p">:</span> <span class="n">Collection</span><span class="p">,</span>
+                     <span class="n">taglist</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;all&#39;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dataset</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Performs target transformation on a collection.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    model</span>
+<span class="sd">        PCA model to perform the projection and inverse transformation.</span>
+<span class="sd">    collection</span>
+<span class="sd">        Collection with the groups for target transformatino.</span>
+<span class="sd">    taglist</span>
+<span class="sd">        List with keys to filter groups based on their ``tags``</span>
+<span class="sd">        attributes in the Collection.</span>
+<span class="sd">        The default is [&#39;all&#39;].</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Dataset with the following attributes.</span>
+
+<span class="sd">        - ``groupnames``: list with names of transformed groups.</span>
+<span class="sd">        - ``energy``       : array with energy values. Returned only if</span>
+<span class="sd">          ``pca_region=&#39;xanes`` or ``pca_region=dxanes``.</span>
+<span class="sd">        - ``k``            : array with wavenumber values. Returned only if</span>
+<span class="sd">          ``pca_region=&#39;exafs&#39;``.</span>
+<span class="sd">        - ``matrix``    : original array with mapped values.</span>
+<span class="sd">        - ``tmatrix``   : array with target transformed groups.</span>
+<span class="sd">        - ``scores``    : array with scores in the principal component basis.</span>
+<span class="sd">        - ``chi2``      : :math:`\\chi^2` values of the target tranformed groups.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``model`` is not a valid PCAModel instance</span>
+<span class="sd">    KeyError</span>
+<span class="sd">        If attributes from :func:`~araucaria.stats.pca.pca`</span>
+<span class="sd">        do not exist in ``model``.</span>
+
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :func:`~araucaria.stats.pca.pca` : Performs principal component analysis on a collection.</span>
+<span class="sd">    :func:`~araucaria.plot.fig_pca.fig_target_transform` : Plots the results of target transformation.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Dataset</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_collection_hdf5</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.xas import pre_edge</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.stats import pca, target_transform</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.utils import check_objattrs</span>
+<span class="sd">    &gt;&gt;&gt; fpath      = get_testpath(&#39;Fe_database.h5&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; collection = read_collection_hdf5(fpath)</span>
+<span class="sd">    &gt;&gt;&gt; collection.apply(pre_edge)</span>
+<span class="sd">    &gt;&gt;&gt; model      = pca(collection, pca_region=&#39;xanes&#39;, cumvar=0.9)</span>
+<span class="sd">    &gt;&gt;&gt; data       = target_transform(model, collection)</span>
+<span class="sd">    &gt;&gt;&gt; attrs      = [&#39;groupnames&#39;, &#39;tmatrix&#39;, &#39;chi2&#39;, &#39;scores&#39;, &#39;energy&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; check_objattrs(data, Dataset, attrs)</span>
+<span class="sd">    [True, True, True, True, True]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">check_objattrs</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">PCAModel</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;groupnames&#39;</span><span class="p">,</span> <span class="s1">&#39;matrix&#39;</span><span class="p">,</span> 
+                   <span class="s1">&#39;variance&#39;</span><span class="p">,</span> <span class="s1">&#39;pca_pars&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># retrieving pca parameters</span>
+    <span class="n">pca_region</span>   <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">pca_pars</span><span class="p">[</span><span class="s1">&#39;pca_region&#39;</span><span class="p">]</span>
+    <span class="n">pca_range</span>    <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">pca_pars</span><span class="p">[</span><span class="s1">&#39;pca_range&#39;</span><span class="p">]</span>
+
+    <span class="c1"># setting panels based on pca region</span>
+    <span class="n">region</span> <span class="o">=</span> <span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">pca_pars</span><span class="p">[</span><span class="s1">&#39;pca_region&#39;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">region</span> <span class="o">==</span> <span class="s1">&#39;exafs&#39;</span><span class="p">:</span>
+        <span class="n">xvar</span>    <span class="o">=</span> <span class="s1">&#39;k&#39;</span>
+        <span class="n">kweight</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">pca_pars</span><span class="p">[</span><span class="s1">&#39;kweight&#39;</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">xvar</span>    <span class="o">=</span> <span class="s1">&#39;energy&#39;</span>
+        <span class="n">kweight</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="c1"># mapped data for collection</span>
+    <span class="n">domain</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">xvar</span><span class="p">)</span>
+    <span class="n">xvals</span><span class="p">,</span> <span class="n">matrix</span> <span class="o">=</span> <span class="n">get_mapped_data</span><span class="p">(</span><span class="n">collection</span><span class="p">,</span> <span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">,</span> <span class="n">region</span><span class="o">=</span><span class="n">pca_region</span><span class="p">,</span> 
+                                    <span class="n">domain</span><span class="o">=</span><span class="n">domain</span><span class="p">,</span> <span class="n">kweight</span><span class="o">=</span><span class="n">kweight</span><span class="p">)</span>
+
+    <span class="c1"># centering data</span>
+    <span class="n">matrix</span> <span class="o">=</span> <span class="n">matrix</span> <span class="o">-</span> <span class="n">matrix</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># target transformation</span>
+    <span class="n">scores</span>  <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+    <span class="n">tmatrix</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+    <span class="n">chi2</span>    <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">divide</span><span class="p">(</span> <span class="p">(</span><span class="n">matrix</span><span class="o">-</span><span class="n">tmatrix</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">matrix</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="c1"># storing target transformation results</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;groupnames&#39;</span> <span class="p">:</span> <span class="n">collection</span><span class="o">.</span><span class="n">get_names</span><span class="p">(</span><span class="n">taglist</span><span class="o">=</span><span class="n">taglist</span><span class="p">),</span>
+               <span class="n">xvar</span>         <span class="p">:</span> <span class="n">domain</span><span class="p">,</span>
+               <span class="s1">&#39;matrix&#39;</span>     <span class="p">:</span> <span class="n">matrix</span><span class="p">,</span>
+               <span class="s1">&#39;tmatrix&#39;</span>    <span class="p">:</span> <span class="n">tmatrix</span><span class="p">,</span>
+               <span class="s1">&#39;scores&#39;</span>     <span class="p">:</span> <span class="n">scores</span><span class="p">,</span>
+               <span class="s1">&#39;chi2&#39;</span>       <span class="p">:</span> <span class="n">chi2</span><span class="p">}</span>
+
+    <span class="c1"># dataset class</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="o">**</span><span class="n">content</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">out</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

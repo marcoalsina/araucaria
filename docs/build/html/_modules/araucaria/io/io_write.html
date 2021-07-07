@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>araucaria.io.io_write &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/clipboard.min.js"></script>
+        <script src="../../../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../plot_module.html">Plot module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../stats_module.html">Statistics module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+        
+      <li>araucaria.io.io_write</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for araucaria.io.io_write</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">The :mod:`~araucaria.io.io_write` submodule offers the following functions to write files:</span>
+
+<span class="sd">.. list-table::</span>
+<span class="sd">   :widths: auto</span>
+<span class="sd">   :header-rows: 1</span>
+
+<span class="sd">   * - Function</span>
+<span class="sd">     - Description</span>
+<span class="sd">   * - :func:`write_xmu`</span>
+<span class="sd">     - Writes a XAFS group in xmu format.</span>
+<span class="sd">   * - :func:`write_lcf`</span>
+<span class="sd">     - Writes LCF data to a file.</span>
+<span class="sd">   * - :func:`write_lcf_report`</span>
+<span class="sd">     - Writes a LCF report to a file.</span>
+<span class="sd">   * - :func:`write_file`</span>
+<span class="sd">     - Utility function to write an array to a file.</span>
+<span class="sd">   * - :func:`set_header`</span>
+<span class="sd">     - Utility function to write a file header.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">isfile</span><span class="p">,</span> <span class="n">basename</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">stack</span><span class="p">,</span> <span class="n">savetxt</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">Group</span><span class="p">,</span> <span class="n">Dataset</span>
+<span class="kn">from</span> <span class="nn">..fit</span> <span class="kn">import</span> <span class="n">lcf_report</span>
+<span class="kn">from</span> <span class="nn">..utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
+
+<div class="viewcode-block" id="write_xmu"><a class="viewcode-back" href="../../../io/io_write.html#araucaria.io.io_write.write_xmu">[docs]</a><span class="k">def</span> <span class="nf">write_xmu</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">Group</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%12.8g</span><span class="s1">&#39;</span><span class="p">,</span> 
+              <span class="n">replace</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Writes a file in xmu format.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to file.</span>
+<span class="sd">    group</span>
+<span class="sd">        Group dataset to write in file.</span>
+<span class="sd">    fmt</span>
+<span class="sd">        Format for numbers. The default is &#39;%12.8g&#39;.</span>
+<span class="sd">    replace</span>
+<span class="sd">        Indicates if a previous file should be replaced. The detault is False.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Confirmation message.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``group`` is not a valid Group instance.</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    By default the operation will be cancelled if the file already exists. </span>
+<span class="sd">    The previous file can be overwritten with the option ``replace=True``.</span>
+<span class="sd">    </span>
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+<span class="sd">    write_file : Writes an array to a file.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    --------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.testdata import get_testpath</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import read_xmu, write_xmu</span>
+<span class="sd">    &gt;&gt;&gt; fpath = get_testpath(&#39;xmu_testfile.xmu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # extracting mu and mu_ref scans</span>
+<span class="sd">    &gt;&gt;&gt; group_mu = read_xmu(fpath, scan=&#39;mu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; # saving a new xmu file</span>
+<span class="sd">    &gt;&gt;&gt; write_xmu(&#39;new_file.xmu&#39;, group_mu)</span>
+<span class="sd">    &#39;xmu_testfile.xmu written to new_file.xmu.&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># checking class</span>
+    <span class="n">check_objattrs</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">Group</span><span class="p">)</span>
+    
+    <span class="c1"># testing that the requested attributes exist</span>
+    <span class="n">scan</span> <span class="o">=</span> <span class="n">group</span><span class="o">.</span><span class="n">get_mode</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">group</span><span class="o">.</span><span class="n">has_ref</span><span class="p">()</span> <span class="ow">and</span> <span class="n">scan</span> <span class="o">!=</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">:</span>
+        <span class="c1"># either mu or fluo + ref scan</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">stack</span><span class="p">((</span><span class="n">group</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="n">scan</span><span class="p">),</span> <span class="n">group</span><span class="o">.</span><span class="n">mu_ref</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="s1">&#39;energy</span><span class="se">\t</span><span class="si">%s</span><span class="se">\t</span><span class="s1">mu_ref&#39;</span> <span class="o">%</span> <span class="n">scan</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># single scan available</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">stack</span><span class="p">((</span><span class="n">group</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">group</span><span class="p">,</span><span class="n">scan</span><span class="p">)),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">cols</span> <span class="o">=</span> <span class="s1">&#39;energy</span><span class="se">\t</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">scan</span>
+    
+    <span class="c1"># header</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">set_header</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s1">&#39;xmu&#39;</span><span class="p">)</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">header</span><span class="p">,</span> <span class="n">cols</span><span class="p">))</span>
+
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">write_file</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> 
+                     <span class="n">fmt</span><span class="o">=</span><span class="n">fmt</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="write_lcf"><a class="viewcode-back" href="../../../io/io_write.html#araucaria.io.io_write.write_lcf">[docs]</a><span class="k">def</span> <span class="nf">write_lcf</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">out</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%12.8g</span><span class="s1">&#39;</span><span class="p">,</span> 
+              <span class="n">replace</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Writes LCF data to a file.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to file.</span>
+<span class="sd">    out</span>
+<span class="sd">        Valid Dataset from :func:`~araucaria.fit.lcf.lcf`.</span>
+<span class="sd">    fmt</span>
+<span class="sd">        Format for numbers. The default is &#39;%12.8g&#39;.</span>
+<span class="sd">    replace</span>
+<span class="sd">        Replace previous file. The detault is False.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Confirmation message.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``out`` is not a valid Dataset instance.</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If attribute ``min_pars``, ``scangroup``,</span>
+<span class="sd">        or ``refgroups`` does not exist in ``out``.</span>
+<span class="sd">    </span>
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    The returned file will contain in the header the output from</span>
+<span class="sd">    :func:`lcf_report`, in addition to the following columns:</span>
+<span class="sd">    </span>
+<span class="sd">        - ``energy``   : array with energy values. </span>
+<span class="sd">          Returned only if ``fit_region=&#39;xanes&#39;`` or ``fit_region=&#39;dxanes&#39;``.</span>
+<span class="sd">        - ``k``        : array with wavenumber values. </span>
+<span class="sd">          Returned only if ``fit_region=&#39;exafs&#39;``.</span>
+<span class="sd">        - ``scan``     : array with values of the fitted spectrum.</span>
+<span class="sd">        - ``ref``      : array with interpolated values for each reference spectrum.</span>
+<span class="sd">        - ``fit``      : array with fit result.</span>
+<span class="sd">        - ``residual`` : fit residuals.</span>
+
+<span class="sd">    See also</span>
+<span class="sd">    --------</span>
+<span class="sd">    :func:`~araucaria.io.io_write.write_file` : Writes an array to a file.</span>
+<span class="sd">    </span>
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy.random import seed, normal</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import arange, sin, pi</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Group, Collection</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.fit import lcf</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import write_lcf</span>
+<span class="sd">    &gt;&gt;&gt; seed(1234)  # seed of random values</span>
+<span class="sd">    &gt;&gt;&gt; k    = arange(0,  12,   0.05)</span>
+<span class="sd">    &gt;&gt;&gt; eps  = normal(0, 0.1, len(k))</span>
+<span class="sd">    &gt;&gt;&gt; f1   = 1.2  # freq 1</span>
+<span class="sd">    &gt;&gt;&gt; f2   = 2.6  # freq 2</span>
+<span class="sd">    &gt;&gt;&gt; amp1 = 0.4  # amp 1</span>
+<span class="sd">    &gt;&gt;&gt; amp2 = 0.6  # amp 2</span>
+<span class="sd">    &gt;&gt;&gt; group1 = Group(**{&#39;name&#39;: &#39;group1&#39;, &#39;k&#39;: k, &#39;chi&#39;: sin(2*pi*f1*k)})</span>
+<span class="sd">    &gt;&gt;&gt; group2 = Group(**{&#39;name&#39;: &#39;group2&#39;, &#39;k&#39;: k, &#39;chi&#39;: sin(2*pi*f2*k)})</span>
+<span class="sd">    &gt;&gt;&gt; group3 = Group(**{&#39;name&#39;: &#39;group3&#39;, &#39;k&#39;: k,</span>
+<span class="sd">    ...                   &#39;chi&#39; : amp1 * group1.chi + amp2 * group2.chi + eps})</span>
+<span class="sd">    &gt;&gt;&gt; collection = Collection()</span>
+<span class="sd">    &gt;&gt;&gt; tags = [&#39;ref&#39;, &#39;ref&#39;, &#39;scan&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; for i,group in enumerate((group1,group2, group3)):</span>
+<span class="sd">    ...     collection.add_group(group, tag=tags[i])</span>
+<span class="sd">    &gt;&gt;&gt; # performing lcf</span>
+<span class="sd">    &gt;&gt;&gt; out = lcf(collection, fit_region=&#39;exafs&#39;, fit_range=[3,10], </span>
+<span class="sd">    ...           kweight=0, sum_one=False)</span>
+<span class="sd">    &gt;&gt;&gt; # saving lcf to a file</span>
+<span class="sd">    &gt;&gt;&gt; write_lcf(&#39;new_fit.lcf&#39;, out)</span>
+<span class="sd">    &#39;lcf data written to new_fit.lcf.&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># checking class</span>
+    <span class="n">check_objattrs</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;min_pars&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;scangroup&#39;</span><span class="p">,</span> <span class="s1">&#39;refgroups&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># header</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">set_header</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s1">&#39;lcf&#39;</span><span class="p">,)</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">header</span><span class="p">,</span> <span class="n">lcf_report</span><span class="p">(</span><span class="n">out</span><span class="p">)))</span>
+    
+    <span class="n">reflist</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ref&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">refgroups</span><span class="p">))]</span>
+    <span class="c1"># storing data according to fit_region</span>
+    <span class="n">data_header</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="s1">&#39;fit&#39;</span><span class="p">,</span> <span class="s1">&#39;scan&#39;</span><span class="p">,</span> <span class="o">*</span><span class="p">[</span><span class="n">name</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">reflist</span><span class="p">],</span> <span class="s1">&#39;residual&#39;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">out</span><span class="o">.</span><span class="n">lcf_pars</span><span class="p">[</span><span class="s1">&#39;fit_region&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;exafs&#39;</span><span class="p">:</span>
+        <span class="n">data_header</span> <span class="o">=</span> <span class="s1">&#39;k</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">data_header</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">stack</span><span class="p">((</span><span class="n">out</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">scan</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">fit</span><span class="p">,</span>
+                       <span class="o">*</span><span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">reflist</span><span class="p">],</span>
+                       <span class="n">out</span><span class="o">.</span><span class="n">min_pars</span><span class="o">.</span><span class="n">residual</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">data_header</span> <span class="o">=</span> <span class="s1">&#39;energy</span><span class="se">\t</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="n">data_header</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">stack</span><span class="p">((</span><span class="n">out</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">scan</span><span class="p">,</span> <span class="n">out</span><span class="o">.</span><span class="n">fit</span><span class="p">,</span>
+                      <span class="o">*</span><span class="p">[</span><span class="nb">getattr</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">reflist</span><span class="p">],</span>
+                      <span class="n">out</span><span class="o">.</span><span class="n">min_pars</span><span class="o">.</span><span class="n">residual</span><span class="p">),</span> <span class="n">axis</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+    
+    <span class="n">header</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">header</span><span class="p">,</span> <span class="n">data_header</span><span class="p">))</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="n">write_file</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;lcf data&#39;</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">fmt</span><span class="p">,</span>
+                     <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="n">replace</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="write_lcf_report"><a class="viewcode-back" href="../../../io/io_write.html#araucaria.io.io_write.write_lcf_report">[docs]</a><span class="k">def</span> <span class="nf">write_lcf_report</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">out</span><span class="p">:</span> <span class="n">Dataset</span><span class="p">,</span> 
+                     <span class="n">replace</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Writes a LCF report to a file.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to file.</span>
+<span class="sd">    out</span>
+<span class="sd">        Valid Dataset from :func:`lcf`.</span>
+<span class="sd">    replace</span>
+<span class="sd">        Replace previous file. The detault is False.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Confirmation message.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    TypeError</span>
+<span class="sd">        If ``out`` is not a valid Dataset instance.</span>
+<span class="sd">    AttributeError</span>
+<span class="sd">        If attribute ``min_pars``, ``lcf_pars``, ``scangroup``,</span>
+<span class="sd">        or ``refgroups`` does not exist in ``out``.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from numpy.random import seed, normal</span>
+<span class="sd">    &gt;&gt;&gt; from numpy import arange, sin, pi</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Group, Collection</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.fit import lcf</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import write_lcf_report</span>
+<span class="sd">    &gt;&gt;&gt; seed(1234)  # seed of random values</span>
+<span class="sd">    &gt;&gt;&gt; k    = arange(0,  12,   0.05)</span>
+<span class="sd">    &gt;&gt;&gt; eps  = normal(0, 0.1, len(k))</span>
+<span class="sd">    &gt;&gt;&gt; f1   = 1.2  # freq 1</span>
+<span class="sd">    &gt;&gt;&gt; f2   = 2.6  # freq 2</span>
+<span class="sd">    &gt;&gt;&gt; amp1 = 0.4  # amp 1</span>
+<span class="sd">    &gt;&gt;&gt; amp2 = 0.6  # amp 2</span>
+<span class="sd">    &gt;&gt;&gt; group1 = Group(**{&#39;name&#39;: &#39;group1&#39;, &#39;k&#39;: k, &#39;chi&#39;: sin(2*pi*f1*k)})</span>
+<span class="sd">    &gt;&gt;&gt; group2 = Group(**{&#39;name&#39;: &#39;group2&#39;, &#39;k&#39;: k, &#39;chi&#39;: sin(2*pi*f2*k)})</span>
+<span class="sd">    &gt;&gt;&gt; group3 = Group(**{&#39;name&#39;: &#39;group3&#39;, &#39;k&#39;: k,</span>
+<span class="sd">    ...                   &#39;chi&#39; : amp1 * group1.chi + amp2 * group2.chi + eps})</span>
+<span class="sd">    &gt;&gt;&gt; collection = Collection()</span>
+<span class="sd">    &gt;&gt;&gt; tags = [&#39;ref&#39;, &#39;ref&#39;, &#39;scan&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; for i,group in enumerate((group1,group2, group3)):</span>
+<span class="sd">    ...     collection.add_group(group, tag=tags[i])</span>
+<span class="sd">    &gt;&gt;&gt; # performing lcf</span>
+<span class="sd">    &gt;&gt;&gt; out = lcf(collection, fit_region=&#39;exafs&#39;, fit_range=[3,10], </span>
+<span class="sd">    ...           kweight=0, sum_one=False)</span>
+<span class="sd">    &gt;&gt;&gt; # saving lcf report to a file</span>
+<span class="sd">    &gt;&gt;&gt; write_lcf_report(&#39;lcf_report.log&#39;, out)</span>
+<span class="sd">    &#39;lcf report written to lcf_report.log.&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># checking class</span>
+    <span class="n">check_objattrs</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">Dataset</span><span class="p">,</span> <span class="n">attrlist</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;min_pars&#39;</span><span class="p">,</span> 
+    <span class="s1">&#39;scangroup&#39;</span><span class="p">,</span> <span class="s1">&#39;refgroups&#39;</span><span class="p">],</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    <span class="c1"># header</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">set_header</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s1">&#39;lcf report&#39;</span><span class="p">,)</span>
+    
+    <span class="k">if</span> <span class="n">replace</span><span class="p">:</span>
+        <span class="n">fout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">fout</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">)</span>
+    <span class="n">fout</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="n">header</span><span class="p">,</span> <span class="n">lcf_report</span><span class="p">(</span><span class="n">out</span><span class="p">))))</span>
+    <span class="n">fout</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;lcf report written to </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="n">fpath</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="write_file"><a class="viewcode-back" href="../../../io/io_write.html#araucaria.io.io_write.write_file">[docs]</a><span class="k">def</span> <span class="nf">write_file</span><span class="p">(</span><span class="n">fpath</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">ndarray</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%12.8g</span><span class="s1">&#39;</span><span class="p">,</span>
+               <span class="n">header</span><span class="p">:</span> <span class="nb">str</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">replace</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Utility function to write a data array to a file.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to file.</span>
+<span class="sd">    data</span>
+<span class="sd">        array to write in file.</span>
+<span class="sd">    name</span>
+<span class="sd">        Name of object to write.</span>
+<span class="sd">    fmt</span>
+<span class="sd">        Format for numbers. The default is &#39;%12.8g&#39;.</span>
+<span class="sd">    header</span>
+<span class="sd">        Header for the file.</span>
+<span class="sd">    replace</span>
+<span class="sd">        Replace previous file. The detault is False.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Confirmation message.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    IOError</span>
+<span class="sd">        If the file already exists and ``replace=False``.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">isfile</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span> <span class="ow">and</span> <span class="n">replace</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">IOError</span><span class="p">(</span><span class="s1">&#39;file </span><span class="si">%s</span><span class="s1"> already exists.&#39;</span> <span class="o">%</span> <span class="n">fpath</span><span class="p">)</span>
+    <span class="n">savetxt</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="n">fmt</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="n">header</span><span class="p">)</span>
+    
+    <span class="n">msg</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> written to </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">fpath</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">msg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="set_header"><a class="viewcode-back" href="../../../io/io_write.html#araucaria.io.io_write.set_header">[docs]</a><span class="k">def</span> <span class="nf">set_header</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">file_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Utility function for write a file header.</span>
+<span class="sd">    </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    fpath</span>
+<span class="sd">        Path to file.</span>
+<span class="sd">    file_type</span>
+<span class="sd">        Short descriptor for type of file.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    :</span>
+<span class="sd">        Header for file.</span>
+
+<span class="sd">    Example</span>
+<span class="sd">    -------</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria.io import set_header</span>
+<span class="sd">    &gt;&gt;&gt; from araucaria import Group</span>
+<span class="sd">    &gt;&gt;&gt; header = set_header(&#39;testdata.xmu&#39;, &#39;xmu&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; header.splitlines()[0]</span>
+<span class="sd">    &#39;xmu file created by araucaria&#39;</span>
+<span class="sd">    &gt;&gt;&gt; header.splitlines()[2]</span>
+<span class="sd">    &#39;name: testdata.xmu&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># header info</span>
+    <span class="nb">type</span>   <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> file created by araucaria&#39;</span> <span class="o">%</span> <span class="n">file_type</span>
+    <span class="n">date</span>   <span class="o">=</span> <span class="s1">&#39;date: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&quot;</span><span class="p">)</span>
+    <span class="n">name</span>   <span class="o">=</span> <span class="s1">&#39;name: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">basename</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">((</span><span class="nb">type</span><span class="p">,</span> <span class="n">date</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">header</span><span class="p">)</span></div>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="kn">import</span> <span class="nn">doctest</span>
+    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>
+
+    <span class="c1"># removing test files    </span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;new_file.xmu&#39;</span><span class="p">,</span> <span class="s1">&#39;new_fit.lcf&#39;</span><span class="p">,</span> <span class="s1">&#39;lcf_report.log&#39;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">file</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

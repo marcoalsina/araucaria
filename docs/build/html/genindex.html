@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Index &mdash; araucaria 0.1.10
+  <title>Index &mdash; araucaria 0.1.11
  documentation</title>
   
 
@@ -95,12 +95,15 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="main_module.html">Main module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="io_module.html">IO module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="linalg_module.html">LinAlg module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fit_module.html">Fit module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="plot_module.html">Plot module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="stats_module.html">Statistics module</a></li>
@@ -186,6 +189,7 @@
  | <a href="#K"><strong>K</strong></a>
  | <a href="#L"><strong>L</strong></a>
  | <a href="#M"><strong>M</strong></a>
+ | <a href="#N"><strong>N</strong></a>
  | <a href="#P"><strong>P</strong></a>
  | <a href="#R"><strong>R</strong></a>
  | <a href="#S"><strong>S</strong></a>
@@ -194,6 +198,7 @@
  | <a href="#V"><strong>V</strong></a>
  | <a href="#W"><strong>W</strong></a>
  | <a href="#X"><strong>X</strong></a>
+ | <a href="#Z"><strong>Z</strong></a>
  
 </div>
 <h2 id="A">A</h2>
@@ -254,6 +259,20 @@
 </li>
       </ul></li>
       <li>
+    araucaria.linalg
+
+      <ul>
+        <li><a href="linalg_module.html#module-araucaria.linalg">module</a>
+</li>
+      </ul></li>
+      <li>
+    araucaria.linalg.la
+
+      <ul>
+        <li><a href="linalg_module.html#module-araucaria.linalg.la">module</a>
+</li>
+      </ul></li>
+      <li>
     araucaria.main
 
       <ul>
@@ -309,8 +328,6 @@
         <li><a href="plot_module.html#module-araucaria.plot.fig_stats">module</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     araucaria.plot.fig_xas
 
@@ -318,6 +335,8 @@
         <li><a href="plot_module.html#module-araucaria.plot.fig_xas">module</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     araucaria.plot.template
 
@@ -354,10 +373,10 @@
 </li>
       </ul></li>
       <li>
-    araucaria.stats.window
+    araucaria.stats.signal
 
       <ul>
-        <li><a href="stats/stats_window.html#module-araucaria.stats.window">module</a>
+        <li><a href="stats/stats_signal.html#module-araucaria.stats.signal">module</a>
 </li>
       </ul></li>
       <li>
@@ -430,6 +449,29 @@
         <li><a href="xas/xas_utils.html#module-araucaria.xas.xasutils">module</a>
 </li>
       </ul></li>
+      <li>
+    araucaria.xrdb
+
+      <ul>
+        <li><a href="xrdb_module.html#module-araucaria.xrdb">module</a>
+</li>
+      </ul></li>
+      <li>
+    araucaria.xrdb.chem
+
+      <ul>
+        <li><a href="xrdb/xrdb_chem.html#module-araucaria.xrdb.chem">module</a>
+</li>
+      </ul></li>
+      <li>
+    araucaria.xrdb.xray
+
+      <ul>
+        <li><a href="xrdb/xrdb_xray.html#module-araucaria.xrdb.xray">module</a>
+</li>
+      </ul></li>
+      <li><a href="xrdb/xrdb_chem.html#araucaria.xrdb.chem.at_weight">at_weight() (in module araucaria.xrdb.chem)</a>
+</li>
       <li><a href="xas/xas_autobk.html#araucaria.xas.autobk.autobk">autobk() (in module araucaria.xas.autobk)</a>
 </li>
   </ul></td>
@@ -446,11 +488,15 @@
 </li>
       <li><a href="stats/stats_cluster.html#araucaria.stats.cluster.cluster">cluster() (in module araucaria.stats.cluster)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="main/main_collection.html#araucaria.main.collection.Collection">Collection (class in araucaria.main.collection)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="stats/stats_pca.html#araucaria.stats.pca.PCAModel.components">components (araucaria.stats.pca.PCAModel attribute)</a>
+</li>
+      <li><a href="stats/stats_signal.html#araucaria.stats.signal.compute_bins">compute_bins() (in module araucaria.stats.signal)</a>
+</li>
+      <li><a href="linalg_module.html#araucaria.linalg.la.cond_num">cond_num() (in module araucaria.linalg.la)</a>
 </li>
       <li><a href="io/io_hdf5.html#araucaria.io.io_hdf5.convert_bytes_hdf5">convert_bytes_hdf5() (in module araucaria.io.io_hdf5)</a>
 </li>
@@ -482,6 +528,10 @@
 <h2 id="E">E</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="xrdb/xrdb_xray.html#araucaria.xrdb.xray.edge_energy">edge_energy() (in module araucaria.xrdb.xray)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="xas/xas_utils.html#araucaria.xas.xasutils.etok">etok() (in module araucaria.xas.xasutils)</a>
 </li>
   </ul></td>
@@ -502,10 +552,10 @@
 </li>
       <li><a href="plot_module.html#araucaria.plot.fig_xas.fig_pre_edge">fig_pre_edge() (in module araucaria.plot.fig_xas)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="plot_module.html#araucaria.plot.fig_stats.fig_target_transform">fig_target_transform() (in module araucaria.plot.fig_stats)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="plot_module.html#araucaria.plot.template.fig_xas_template">fig_xas_template() (in module araucaria.plot.template)</a>
 </li>
       <li><a href="plot_module.html#araucaria.plot.template.FigPars">FigPars (class in araucaria.plot.template)</a>
@@ -515,6 +565,10 @@
       <li><a href="xas/xas_normalize.html#araucaria.xas.normalize.find_e0">find_e0() (in module araucaria.xas.normalize)</a>
 </li>
       <li><a href="stats/stats_genesd.html#araucaria.stats.genesd.find_ri">find_ri() (in module araucaria.stats.genesd)</a>
+</li>
+      <li><a href="xrdb/xrdb_chem.html#araucaria.xrdb.chem.formula_parser">formula_parser() (in module araucaria.xrdb.chem)</a>
+</li>
+      <li><a href="xrdb/xrdb_chem.html#araucaria.xrdb.chem.formula_weight">formula_weight() (in module araucaria.xrdb.chem)</a>
 </li>
       <li><a href="xas/xas_ft.html#araucaria.xas.xasft.ftwindow">ftwindow() (in module araucaria.xas.xasft)</a>
 </li>
@@ -536,10 +590,10 @@
 </li>
       <li><a href="main/main_group.html#araucaria.main.group.Group.get_mode">get_mode() (araucaria.main.group.Group method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="main/main_collection.html#araucaria.main.collection.Collection.get_names">get_names() (araucaria.main.collection.Collection method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="main/main_report.html#araucaria.main.report.Report.get_rows">get_rows() (araucaria.main.report.Report method)</a>
 </li>
       <li><a href="main/main_collection.html#araucaria.main.collection.Collection.get_tag">get_tag() (araucaria.main.collection.Collection method)</a>
@@ -551,6 +605,8 @@
       <li><a href="utils_module.html#araucaria.utils.get_version">get_version() (in module araucaria.utils)</a>
 </li>
       <li><a href="main/main_group.html#araucaria.main.group.Group">Group (class in araucaria.main.group)</a>
+</li>
+      <li><a href="xas/xas_normalize.html#araucaria.xas.normalize.guess_edge">guess_edge() (in module araucaria.xas.normalize)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -566,14 +622,16 @@
 <h2 id="I">I</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="linalg_module.html#araucaria.linalg.la.imd">imd() (in module araucaria.linalg.la)</a>
+</li>
       <li><a href="utils_module.html#araucaria.utils.index_dups">index_dups() (in module araucaria.utils)</a>
 </li>
       <li><a href="utils_module.html#araucaria.utils.index_nans">index_nans() (in module araucaria.utils)</a>
 </li>
-      <li><a href="utils_module.html#araucaria.utils.index_nearest">index_nearest() (in module araucaria.utils)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="utils_module.html#araucaria.utils.index_nearest">index_nearest() (in module araucaria.utils)</a>
+</li>
       <li><a href="utils_module.html#araucaria.utils.index_xrange">index_xrange() (in module araucaria.utils)</a>
 </li>
       <li><a href="utils_module.html#araucaria.utils.interp_yvals">interp_yvals() (in module araucaria.utils)</a>
@@ -608,6 +666,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="stats/stats_pca.html#araucaria.stats.pca.PCAModel.matrix">matrix (araucaria.stats.pca.PCAModel attribute)</a>
 </li>
+      <li><a href="linalg_module.html#araucaria.linalg.la.matrix_rank">matrix_rank() (in module araucaria.linalg.la)</a>
+</li>
       <li><a href="xas/xas_merge.html#araucaria.xas.merge.merge">merge() (in module araucaria.xas.merge)</a>
 </li>
       <li>
@@ -625,6 +685,10 @@
         <li><a href="io/io_read.html#module-araucaria.io.io_read">araucaria.io.io_read</a>
 </li>
         <li><a href="io/io_write.html#module-araucaria.io.io_write">araucaria.io.io_write</a>
+</li>
+        <li><a href="linalg_module.html#module-araucaria.linalg">araucaria.linalg</a>
+</li>
+        <li><a href="linalg_module.html#module-araucaria.linalg.la">araucaria.linalg.la</a>
 </li>
         <li><a href="main_module.html#module-araucaria.main">araucaria.main</a>
 </li>
@@ -654,7 +718,7 @@
 </li>
         <li><a href="stats/stats_pca.html#module-araucaria.stats.pca">araucaria.stats.pca</a>
 </li>
-        <li><a href="stats/stats_window.html#module-araucaria.stats.window">araucaria.stats.window</a>
+        <li><a href="stats/stats_signal.html#module-araucaria.stats.signal">araucaria.stats.signal</a>
 </li>
         <li><a href="testdata_module.html#module-araucaria.testdata">araucaria.testdata</a>
 </li>
@@ -676,7 +740,21 @@
 </li>
         <li><a href="xas/xas_utils.html#module-araucaria.xas.xasutils">araucaria.xas.xasutils</a>
 </li>
+        <li><a href="xrdb_module.html#module-araucaria.xrdb">araucaria.xrdb</a>
+</li>
+        <li><a href="xrdb/xrdb_chem.html#module-araucaria.xrdb.chem">araucaria.xrdb.chem</a>
+</li>
+        <li><a href="xrdb/xrdb_xray.html#module-araucaria.xrdb.xray">araucaria.xrdb.xray</a>
+</li>
       </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="N">N</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="xrdb/xrdb_xray.html#araucaria.xrdb.xray.nearest_edge">nearest_edge() (in module araucaria.xrdb.xray)</a>
+</li>
   </ul></td>
 </tr></table>
 
@@ -701,6 +779,8 @@
 </li>
       <li><a href="io/io_read.html#araucaria.io.io_read.read_dnd">read_dnd() (in module araucaria.io.io_read)</a>
 </li>
+      <li><a href="utils_module.html#araucaria.utils.read_fdicts">read_fdicts() (in module araucaria.utils)</a>
+</li>
       <li><a href="io/io_read.html#araucaria.io.io_read.read_file">read_file() (in module araucaria.io.io_read)</a>
 </li>
       <li><a href="io/io_hdf5.html#araucaria.io.io_hdf5.read_hdf5">read_hdf5() (in module araucaria.io.io_hdf5)</a>
@@ -717,6 +797,8 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="io/io_read.html#araucaria.io.io_read.read_xmu">read_xmu() (in module araucaria.io.io_read)</a>
 </li>
+      <li><a href="stats/stats_signal.html#araucaria.stats.signal.rebin">rebin() (in module araucaria.stats.signal)</a>
+</li>
       <li><a href="main/main_group.html#araucaria.main.group.Group.rename">rename() (araucaria.main.group.Group method)</a>
 </li>
       <li><a href="io/io_hdf5.html#araucaria.io.io_hdf5.rename_dataset_hdf5">rename_dataset_hdf5() (in module araucaria.io.io_hdf5)</a>
@@ -729,7 +811,7 @@
 </li>
       <li><a href="main/main_collection.html#araucaria.main.collection.Collection.retag">retag() (araucaria.main.collection.Collection method)</a>
 </li>
-      <li><a href="stats/stats_window.html#araucaria.stats.window.roll_med">roll_med() (in module araucaria.stats.window)</a>
+      <li><a href="stats/stats_signal.html#araucaria.stats.signal.roll_med">roll_med() (in module araucaria.stats.signal)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -743,15 +825,17 @@
 </li>
       <li><a href="io/io_write.html#araucaria.io.io_write.set_header">set_header() (in module araucaria.io.io_write)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="main/main_report.html#araucaria.main.report.Report.show">show() (araucaria.main.report.Report method)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="fit/fit_lcf.html#araucaria.fit.lcfit.sum_references">sum_references() (in module araucaria.fit.lcfit)</a>
 </li>
       <li><a href="main/main_collection.html#araucaria.main.collection.Collection.summary">summary() (araucaria.main.collection.Collection method)</a>
 </li>
       <li><a href="io/io_hdf5.html#araucaria.io.io_hdf5.summary_hdf5">summary_hdf5() (in module araucaria.io.io_hdf5)</a>
+</li>
+      <li><a href="xrdb/xrdb_chem.html#araucaria.xrdb.chem.symtoz">symtoz() (in module araucaria.xrdb.chem)</a>
 </li>
   </ul></td>
 </tr></table>
@@ -824,6 +908,14 @@
       <li><a href="xas/xas_ft.html#araucaria.xas.xasft.xftr">xftr() (in module araucaria.xas.xasft)</a>
 </li>
       <li><a href="xas/xas_ft.html#araucaria.xas.xasft.xftr_kwin">xftr_kwin() (in module araucaria.xas.xasft)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="Z">Z</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="xrdb/xrdb_chem.html#araucaria.xrdb.chem.ztosym">ztosym() (in module araucaria.xrdb.chem)</a>
 </li>
   </ul></td>
 </tr></table>

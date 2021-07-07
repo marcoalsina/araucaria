@@ -1,0 +1,514 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Signal module &mdash; araucaria 0.1.11
+ documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/plot_directive.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+        <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "document", "processHtmlClass": "math|output_area"}}</script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Utilities module" href="../utils_module.html" />
+    <link rel="prev" title="PCA module" href="stats_pca.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> araucaria
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Modules</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../main_module.html">Main module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../io_module.html">IO module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linalg_module.html">LinAlg module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../stats_module.html">Statistics module</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="stats_genesd.html">genESD module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stats_cluster.html">Cluster module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stats_pca.html">PCA module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Signal module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../utils_module.html">Utilities module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testdata_module.html">Testdata module</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">araucaria</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="../stats_module.html">Statistics module</a> &raquo;</li>
+        
+      <li>Signal module</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/stats/stats_signal.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<div class="section" id="module-araucaria.stats.signal">
+<span id="signal-module"></span><h1>Signal module<a class="headerlink" href="#module-araucaria.stats.signal" title="Permalink to this headline">¶</a></h1>
+<p>The <a class="reference internal" href="#module-araucaria.stats.signal" title="araucaria.stats.signal"><code class="xref py py-mod docutils literal notranslate"><span class="pre">signal</span></code></a> module offers the following
+functions to filter and analyze univariate data:</p>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Function</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.stats.signal.compute_bins" title="araucaria.stats.signal.compute_bins"><code class="xref py py-func docutils literal notranslate"><span class="pre">compute_bins()</span></code></a></p></td>
+<td><p>Computes bin sequence for an energy array.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#araucaria.stats.signal.rebin" title="araucaria.stats.signal.rebin"><code class="xref py py-func docutils literal notranslate"><span class="pre">rebin()</span></code></a></p></td>
+<td><p>Rebins XAFS spectra in a group.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#araucaria.stats.signal.roll_med" title="araucaria.stats.signal.roll_med"><code class="xref py py-func docutils literal notranslate"><span class="pre">roll_med()</span></code></a></p></td>
+<td><p>Rolling median of a 1-D array.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py function">
+<dt class="sig sig-object py" id="araucaria.stats.signal.compute_bins">
+<span class="sig-prename descclassname"><span class="pre">araucaria.stats.signal.</span></span><span class="sig-name descname"><span class="pre">compute_bins</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ref_energy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_step</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bkg_pars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[-</span> <span class="pre">300,</span> <span class="pre">-</span> <span class="pre">20,</span> <span class="pre">5]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exafs_pars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[3,</span> <span class="pre">15,</span> <span class="pre">0.05]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/stats/signal.html#compute_bins"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.stats.signal.compute_bins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes bin sequence for an energy array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ref_energy</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Reference energy for computing bins (eV). Both background range
+and exafs range are computed with respect to this value.</p></li>
+<li><p><strong>e_step</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>) – Energy increment step for XANES bins (eV).
+The default is 0.5.</p></li>
+<li><p><strong>bkg_pars</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – Parameters for background bins (eV). Should include
+initial energy value, final energy value, and energy increment step.
+The detault is [-300, -20, 5]</p></li>
+<li><p><strong>exafs_pars</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – Parameters for EXAFS bins (inverse angstrom). Should include
+initial k value, final k value, and k increment step.
+The default is [3, 15, 0.05].</p></li>
+<li><p><strong>ndigits</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Number of decimal places to round bins.
+The default is 4.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Array with bin edges.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If len of <code class="docutils literal notranslate"><span class="pre">bkg_pars</span></code> or <code class="docutils literal notranslate"><span class="pre">exafs_pars</span></code> is smaller than 3.</p>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<dl class="simple">
+<dt><a class="reference internal" href="#araucaria.stats.signal.rebin" title="araucaria.stats.signal.rebin"><code class="xref py py-func docutils literal notranslate"><span class="pre">rebin()</span></code></a></dt><dd><p>Rebins spectra in a group.</p>
+</dd>
+</dl>
+</div>
+<p class="rubric">Notes</p>
+<p>Computation of bins is performed considering 3 regions:</p>
+<ul class="simple">
+<li><p>background region: defined by <code class="docutils literal notranslate"><span class="pre">bkg_pars</span></code>.</p></li>
+<li><p>XANES region: defined between <code class="docutils literal notranslate"><span class="pre">bkg_pars</span></code>, <code class="docutils literal notranslate"><span class="pre">exafs_pars</span></code>, and <code class="docutils literal notranslate"><span class="pre">e_step</span></code>.</p></li>
+<li><p>EXAFS region: defined by <code class="docutils literal notranslate"><span class="pre">exafs_pars</span></code></p></li>
+</ul>
+<p>Bin sizes are adjusted between regions in order to follow the
+energy limits established by <code class="docutils literal notranslate"><span class="pre">bkg_pars</span></code> and <code class="docutils literal notranslate"><span class="pre">exafs_</span> <span class="pre">pars</span></code>.</p>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">around</span><span class="p">,</span> <span class="n">allclose</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">compute_bins</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.xas</span> <span class="kn">import</span> <span class="n">ktoe</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ndigits</span>    <span class="o">=</span> <span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">edge</span>       <span class="o">=</span> <span class="mi">7112</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bkg_pars</span>   <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">300</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">exafs_pars</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bin_edges</span>  <span class="o">=</span> <span class="n">compute_bins</span><span class="p">(</span><span class="n">ref_energy</span><span class="o">=</span><span class="n">edge</span><span class="p">,</span> <span class="n">bkg_pars</span><span class="o">=</span><span class="n">bkg_pars</span><span class="p">,</span>
+<span class="gp">... </span>                          <span class="n">exafs_pars</span><span class="o">=</span><span class="n">exafs_pars</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># verifying bin edges</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">minval</span> <span class="o">=</span> <span class="n">edge</span> <span class="o">+</span> <span class="n">bkg_pars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">bkg_pars</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span>           <span class="c1"># minimum bin edge value</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">maxval</span> <span class="o">=</span> <span class="n">edge</span> <span class="o">+</span> <span class="n">ktoe</span><span class="p">(</span><span class="n">exafs_pars</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">exafs_pars</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># maximum bin edge value</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vals</span>   <span class="o">=</span> <span class="n">around</span><span class="p">((</span><span class="n">minval</span><span class="p">,</span> <span class="n">maxval</span><span class="p">),</span> <span class="n">ndigits</span><span class="p">)</span>            <span class="c1"># rounding to ndigits</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">allclose</span><span class="p">((</span><span class="n">bin_edges</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">bin_edges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">vals</span><span class="p">)</span>
+<span class="go">True</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="araucaria.stats.signal.rebin">
+<span class="sig-prename descclassname"><span class="pre">araucaria.stats.signal.</span></span><span class="sig-name descname"><span class="pre">rebin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">statistic</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'mean'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bins</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_nans</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">update</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/stats/signal.html#rebin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.stats.signal.rebin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rebins XAFS spectra in a group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<a class="reference internal" href="../main/main_group.html#araucaria.main.group.Group" title="araucaria.main.group.Group"><code class="xref py py-class docutils literal notranslate"><span class="pre">Group</span></code></a>) – Group containing the spectrum to rebin.</p></li>
+<li><p><strong>statistic</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The statistic to compute for rebinning. See
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/reference/generated/scipy.stats.binned_statistic.html#scipy.stats.binned_statistic" title="(in SciPy v1.7.0)"><code class="xref py py-func docutils literal notranslate"><span class="pre">binned_statistic()</span></code></a> for valid names.
+The default is ‘mean’.</p></li>
+<li><p><strong>bins</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>]) – If <a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, it defines the number of equal-width bins in the
+given range. If a sequence, it defines the bin edges, including
+the rightmost edge, allowing for non-uniform bin widths.
+The default is 10.</p></li>
+<li><p><strong>remove_nans</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if bins with <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v1.21)"><code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code></a> values should be removed.
+The default is True.</p></li>
+<li><p><strong>update</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Indicates if the group should be updated with the rebin attributes.
+The default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>Dictionary with the following parameters:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">energy</span></code>     : rebinned energy values.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mu</span></code>         : rebinned transmission <span class="math notranslate nohighlight">\(\mu(E)\)</span>,
+if <code class="docutils literal notranslate"><span class="pre">mu</span></code> attribute exists in the group.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fluo</span></code>       : rebinned fluorescence <span class="math notranslate nohighlight">\(\mu(E)\)</span>,
+if <code class="docutils literal notranslate"><span class="pre">fluo</span></code> attribute exists in the group.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mu_ref</span></code>     : rebinned reference <span class="math notranslate nohighlight">\(\mu(E)\)</span>,
+if <code class="docutils literal notranslate"><span class="pre">mu_ref</span></code> attribute exists in the group.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rebin_stats</span></code>: additional rebin statistics.</p></li>
+</ul>
+</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">group</span></code> is not a valid Group instance.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#AttributeError" title="(in Python v3.9)"><strong>AttributeError</strong></a> – If attribute <code class="docutils literal notranslate"><span class="pre">energy</span></code> does not exist in <code class="docutils literal notranslate"><span class="pre">group</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Bins with no data are removed by default to prevent
+<a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v1.21)"><code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code></a> values in the rebinned group arrays.
+As a consecuence , the total number of bins might be
+smaller than originally specified, and bins will exhibit
+varying width.</p>
+<p>You can override this default behavior by specifying <code class="docutils literal notranslate"><span class="pre">remove_nans=False</span></code>.</p>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.testdata</span> <span class="kn">import</span> <span class="n">get_testpath</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.io</span> <span class="kn">import</span> <span class="n">read_xmu</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">rebin</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.utils</span> <span class="kn">import</span> <span class="n">check_objattrs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fpath</span> <span class="o">=</span> <span class="n">get_testpath</span><span class="p">(</span><span class="s1">&#39;xmu_testfile.xmu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># extracting mu and mu_ref scans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">group_mu</span> <span class="o">=</span> <span class="n">read_xmu</span><span class="p">(</span><span class="n">fpath</span><span class="p">,</span> <span class="n">scan</span><span class="o">=</span><span class="s1">&#39;mu&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bins</span>    <span class="o">=</span> <span class="mi">600</span>             <span class="c1"># number of bins</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">regroup</span> <span class="o">=</span> <span class="n">group_mu</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="c1"># rebinning copy of group</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rebin</span>   <span class="o">=</span> <span class="n">rebin</span><span class="p">(</span><span class="n">regroup</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">attrs</span>   <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">,</span> <span class="s1">&#39;mu&#39;</span><span class="p">,</span> <span class="s1">&#39;mu_ref&#39;</span><span class="p">,</span> <span class="s1">&#39;rebin_stats&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">check_objattrs</span><span class="p">(</span><span class="n">regroup</span><span class="p">,</span> <span class="n">Group</span><span class="p">,</span> <span class="n">attrs</span><span class="p">)</span>
+<span class="go">[True, True, True, True]</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># plotting rebinned spectrum</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.plot</span> <span class="kn">import</span> <span class="n">fig_xas_template</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">figpars</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;e_range&#39;</span> <span class="p">:</span> <span class="p">(</span><span class="mi">11850</span><span class="p">,</span> <span class="mi">11900</span><span class="p">)}</span>   <span class="c1"># energy range</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">fig_xas_template</span><span class="p">(</span><span class="n">panels</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">fig_pars</span><span class="o">=</span><span class="n">figpars</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stdev</span> <span class="o">=</span> <span class="n">regroup</span><span class="o">.</span><span class="n">rebin_stats</span><span class="p">[</span><span class="s1">&#39;mu_std&#39;</span><span class="p">]</span>    <span class="c1"># std of rebinned mu</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span>  <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">group_mu</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="n">group_mu</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;original&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span>  <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">regroup</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="n">regroup</span><span class="o">.</span><span class="n">mu</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">stdev</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                    <span class="n">capsize</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;rebinned&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leg</span>   <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">edgecolor</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lab</span>   <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;abs [a.u]&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../stats/stats_signal-1.py">Source code</a>, <a class="reference external" href="../stats/stats_signal-1.png">png</a>, <a class="reference external" href="../stats/stats_signal-1.hires.png">hires.png</a>, <a class="reference external" href="../stats/stats_signal-1.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/stats_signal-1.png" class="plot-directive" src="../_images/stats_signal-1.png" />
+</div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="araucaria.stats.signal.roll_med">
+<span class="sig-prename descclassname"><span class="pre">araucaria.stats.signal.</span></span><span class="sig-name descname"><span class="pre">roll_med</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">window</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edgemethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'nan'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/stats/signal.html#roll_med"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.stats.signal.roll_med" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the rolling median of a 1-D array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a>) – Array to compute the rolling median.</p></li>
+<li><p><strong>window</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Size of the rolling window for analysis.</p></li>
+<li><p><strong>min_samples</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>) – Minimum sample points to calculate the median in each window.
+The default is 2.</p></li>
+<li><p><strong>edgemethod</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – Dictates how medians are calculated at the edges of the array.
+Options are ‘nan’, ‘calc’ and ‘extend’. See the Notes for further details.
+The default is ‘nan’.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Rolling median of the array.</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">window</span></code> is not an odd value.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">window</span></code> is smaller or equal than 3.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#TypeError" title="(in Python v3.9)"><strong>TypeError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">window</span></code> is not an integer.</p></li>
+<li><p><a class="reference external" href="https://docs.python.org/3/library/exceptions.html#ValueError" title="(in Python v3.9)"><strong>ValueError</strong></a> – If <code class="docutils literal notranslate"><span class="pre">edgemethod</span></code> is not recognized.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This function calculates the median of a moving window. Results are returned in the
+index corresponding to the center of the window. The function ignores <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v1.21)"><code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code></a>
+values in the array.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">edgemethod='nan'</span></code> uses <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v1.21)"><code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code></a> values for missing values at the edges.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edgemethod='calc'</span></code> uses an abbreviated window at the edges
+(e.g. the first sample will have (window/2)+1 points in the calculation).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">edgemethod='extend'</span></code> uses the nearest calculated value for missing values at the edges.</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">window</span></code> is less than <code class="docutils literal notranslate"><span class="pre">min_samples</span></code>, <a class="reference external" href="https://numpy.org/doc/stable/reference/constants.html#numpy.nan" title="(in NumPy v1.21)"><code class="xref py py-data docutils literal notranslate"><span class="pre">nan</span></code></a> is given as the median.</p>
+</div>
+<p class="rubric">Example</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="n">sin</span><span class="p">,</span> <span class="n">linspace</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">araucaria.stats</span> <span class="kn">import</span> <span class="n">roll_med</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># generating a signal and its rolling median</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f1</span>   <span class="o">=</span> <span class="mf">0.2</span> <span class="c1"># frequency</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>    <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span>    <span class="o">=</span> <span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">f1</span><span class="o">*</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">line</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;signal&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;calc&#39;</span><span class="p">,</span> <span class="s1">&#39;extend&#39;</span><span class="p">,</span> <span class="s1">&#39;nan&#39;</span><span class="p">]:</span>
+<span class="gp">... </span>   <span class="n">fy</span>   <span class="o">=</span> <span class="n">roll_med</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">edgemethod</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+<span class="gp">... </span>   <span class="n">line</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">fy</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lab</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;t&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lab</span> <span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">block</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../stats/stats_signal-2.py">Source code</a>, <a class="reference external" href="../stats/stats_signal-2.png">png</a>, <a class="reference external" href="../stats/stats_signal-2.hires.png">hires.png</a>, <a class="reference external" href="../stats/stats_signal-2.pdf">pdf</a>)</p>
+<div class="figure align-default">
+<img alt="../_images/stats_signal-2.png" class="plot-directive" src="../_images/stats_signal-2.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+        <a href="../utils_module.html" class="btn btn-neutral float-right" title="Utilities module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="stats_pca.html" class="btn btn-neutral float-left" title="PCA module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2020-2021, Marco A. Alsina.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

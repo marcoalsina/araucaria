@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>Report class &mdash; araucaria 0.1.10
+  <title>Report class &mdash; araucaria 0.1.11
  documentation</title>
   
 
@@ -97,6 +97,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changelog</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Modules</span></p>
 <ul class="current">
@@ -109,6 +110,8 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../io_module.html">IO module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../xas_module.html">XAS module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../xrdb_module.html">XRDB module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../linalg_module.html">LinAlg module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../fit_module.html">Fit module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../plot_module.html">Plot module</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../stats_module.html">Statistics module</a></li>
@@ -211,7 +214,7 @@
 <span id="report-class"></span><h1>Report class<a class="headerlink" href="#module-araucaria.main.report" title="Permalink to this headline">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="araucaria.main.report.Report">
-<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">araucaria.main.report.</span></span><span class="sig-name descname"><span class="pre">Report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'='</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.report.Report" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">araucaria.main.report.</span></span><span class="sig-name descname"><span class="pre">Report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sep</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sdigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">marker</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'='</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/report.html#Report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.report.Report" title="Permalink to this definition">¶</a></dt>
 <dd><p>Report class.</p>
 <p>Stores user-defined information for print to <code class="docutils literal notranslate"><span class="pre">sys.stdout</span></code>.</p>
 <dl class="field-list simple">
@@ -239,7 +242,7 @@
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.report.Report.set_columns">
-<span class="sig-name descname"><span class="pre">set_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.report.Report.set_columns" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">set_columns</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">names</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/report.html#Report.set_columns"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.report.Report.set_columns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets parameters for each printed column.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -265,7 +268,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.report.Report.add_row">
-<span class="sig-name descname"><span class="pre">add_row</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.report.Report.add_row" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">add_row</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/report.html#Report.add_row"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.report.Report.add_row" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a row of content to the report.</p>
 <p>Content can be accesed through the <code class="docutils literal notranslate"><span class="pre">self.content</span></code> attribute.</p>
 <dl class="field-list simple">
@@ -301,7 +304,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.report.Report.add_midrule">
-<span class="sig-name descname"><span class="pre">add_midrule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">marker</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'-'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.report.Report.add_midrule" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">add_midrule</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">marker</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'-'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/report.html#Report.add_midrule"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.report.Report.add_midrule" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adds a midrule to the report.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -328,7 +331,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.report.Report.get_cols">
-<span class="sig-name descname"><span class="pre">get_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">names=['all'],</span> <span class="pre">astype=&lt;class</span> <span class="pre">'object'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.report.Report.get_cols" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_cols</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">names=['all'],</span> <span class="pre">astype=&lt;class</span> <span class="pre">'object'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/report.html#Report.get_cols"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.report.Report.get_cols" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns columns of the report by name.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -336,12 +339,12 @@
 <li><p><strong>names</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List with names of columns to return.
 The default is [‘all’], which returns the
 entire report content.</p></li>
-<li><p><strong>astype</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>) – Data type conversion for the returned array.
+<li><p><strong>astype</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>) – Data type conversion for the returned array.
 The default is <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Array with the requested columns.</p>
@@ -376,7 +379,7 @@ The default is <a class="reference external" href="https://docs.python.org/3/lib
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.report.Report.get_rows">
-<span class="sig-name descname"><span class="pre">get_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">index=['all'],</span> <span class="pre">astype=&lt;class</span> <span class="pre">'object'&gt;</span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.report.Report.get_rows" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">get_rows</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">index=['all'],</span> <span class="pre">astype=&lt;class</span> <span class="pre">'object'&gt;</span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/report.html#Report.get_rows"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.report.Report.get_rows" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns rows of the report by index.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -384,12 +387,12 @@ The default is <a class="reference external" href="https://docs.python.org/3/lib
 <li><p><strong>index</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#list" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code></a>) – List with indexes of rows to return.
 The default is [‘all’], which returns the
 entire report content.</p></li>
-<li><p><strong>astype</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>) – Data type conversion for the returned array.
+<li><p><strong>astype</strong> (<a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.dtype.html#numpy.dtype" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dtype</span></code></a>) – Data type conversion for the returned array.
 The default is <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.20)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="(in NumPy v1.21)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ndarray</span></code></a></p>
 </dd>
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p>Array with the requested rows.</p>
@@ -413,7 +416,7 @@ The default is <a class="reference external" href="https://docs.python.org/3/lib
 
 <dl class="py method">
 <dt class="sig sig-object py" id="araucaria.main.report.Report.show">
-<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endrule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_report</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#araucaria.main.report.Report.show" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">header</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">endrule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_report</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/araucaria/main/report.html#Report.show"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#araucaria.main.report.Report.show" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the formatted report.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
