@@ -15,7 +15,7 @@ The following submodules are currently implemented:
 
 from .merge import calibrate, align, merge
 from .deglitch import deglitch
-from .normalize import find_e0, pre_edge
+from .normalize import find_e0, guess_edge, pre_edge
 from .autobk import autobk
 from .xasft import ftwindow, xftf, xftr, xftf_kwin, xftr_kwin
 from .xasutils import etok, ktoe, get_mapped_data

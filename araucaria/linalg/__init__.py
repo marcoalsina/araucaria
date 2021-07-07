@@ -1,8 +1,20 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 """
-The :mod:`~araucaria.linalg` module contains functions to perform linear algebra.
+The :mod:`~araucaria.linalg` module offers the following routines to
+perform linear algebra operations:
+
+.. list-table::
+   :widths: auto
+   :header-rows: 1
+
+   * - Function
+     - Description
+   * - :func:`~araucaria.linalg.la.cond_num`
+     - Computes the condition number of a collection.
+   * - :func:`~araucaria.linalg.la.matrix_rank`
+     - Computes the matrix rank of a collection.
+   * - :func:`~araucaria.linalg.la.imd`
+     - Computes the interpolative matrix decomposition of a collection.
 """
-#from .cond import cond
-#from .pca import pca
-#from .interpolative import interp_decomp
+from .la import cond_num, matrix_rank, imd

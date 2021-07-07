@@ -21,7 +21,7 @@ from scipy.constants import m_e   # electron mass
 from scipy.constants import eV    # electron volt in joules
 
 from typing import List, Tuple
-from numpy import ndarray, array, inf
+from numpy import ndarray, array, std, gradient, inf
 from scipy.interpolate import interp1d
 from .. import Group, Collection
 from ..utils import check_objattrs, index_xrange
@@ -246,3 +246,7 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
     # converting list to array
     matrix = array(matrix).T
     return (xvals, matrix)
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()

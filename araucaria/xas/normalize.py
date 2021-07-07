@@ -11,6 +11,8 @@ The :mod:`~araucaria.xas.normalize` module offers the following functions to nor
      - Description
    * - :func:`find_e0`
      - Calculates the absorption threshold energy of a scan.
+   * - :func:`guess_edge`
+     - Estimates the nearest absorption edge for a scan.
    * - :func:`pre_edge`
      - Pre-edge substaction and normalization of a scan.
 """
@@ -18,6 +20,7 @@ from warnings import warn
 from numpy import ndarray, array, inf, gradient, isfinite, isinf, where, ptp
 from scipy import polyfit, polyval
 from .. import Group
+from ..xrdb import nearest_edge
 from ..utils import index_nearest, check_objattrs, check_xrange
 
 def find_e0(group: Group, method: str='maxder', tol: float=1e-4,
@@ -67,7 +70,7 @@ def find_e0(group: Group, method: str='maxder', tol: float=1e-4,
     -----
     If ``method=maxder`` the absorption threshold will be calculated as the 
     maximum derivative in absorption.
-    
+
     If ``method=halfedge`` the absorption threshold will be calculated iteratively 
     as half the edge step. This method calls :func:`~araucaria.xas.normalize.pre_edge`
     to compute the edge step at each iteration. Parameters for the pre-edge calculation
@@ -92,10 +95,10 @@ def find_e0(group: Group, method: str='maxder', tol: float=1e-4,
     to compute the edge step by :func:`~araucaria.xas.normalize.pre_edge`.
     Therefore, different parameters for calculation of the edge step will yield 
     different values of `e0` by this method.
-    
+
     Currently ``method=halfedge`` considers a maximum of 10 iterations to compute
     `e0`.
-    
+
     Examples
     --------
     >>> # computing e0 as the maximum derivative
@@ -108,7 +111,7 @@ def find_e0(group: Group, method: str='maxder', tol: float=1e-4,
     >>> # find e0 of reference scan
     >>> find_e0(group, use_mu_ref=True)
     29203.249
-    
+
     >>> # computing e0 as half the edge step
     >>> find_e0(group, method='halfedge', use_mu_ref=True)
     29200.62
@@ -186,15 +189,100 @@ def find_e0(group: Group, method: str='maxder', tol: float=1e-4,
 
     if update:
         group.e0 = e0
-
     return e0
 
+def guess_edge(group: Group, e0: float=None, update:bool =False) -> dict:
+    """Estimates the nearest absorption edge for a XAFS scan.
+
+    Parameters
+    ----------
+    group
+        Group containing the spectrum for pre-edge substraction and normalization.
+    e0
+        Absorption threshold energy. If None it will seach for the 
+        value stored in ``group.e0``. Otherwise it will be calculated
+        using :func:`~araucaria.xas.normalize.find_e0`. with default 
+        parameters.
+    update
+        Indicates if the group should be updated with the normalization attributes.
+        The default is False.
+
+    Returns
+    -------
+    :
+        Dictionary with the following arguments:
+        
+        - ``atsym``   : atomic symbol for the absorption edge.
+        - ``edge``    : absorption edge in Siegbanh notation.
+
+    Raises
+    ------
+    TypeError
+        If ``group`` is not a valid Group instance.
+    AttributeError
+        If attribute ``energy`` does not exist in ``group``.
+    IndexError
+        If ``e0`` is outside the range of ``group.energy``.
+
+    See also
+    --------
+    :func:`~araucaria.xrdb.xray.nearest_edge`
+        Returns the nearest x-ray edge for a given energy.
+
+    Example
+    -------
+    >>> from araucaria.testdata import get_testpath
+    >>> from araucaria import Group
+    >>> from araucaria.io import read_dnd
+    >>> from araucaria.xas import find_e0
+    >>> from araucaria.utils import check_objattrs
+    >>> fpath = get_testpath('dnd_testfile1.dat')
+    >>> group = read_dnd(fpath, scan='mu')  # extracting mu and mu_ref scans
+    >>> attrs = ['atsym', 'edge']
+    >>> e0    = find_e0(group)
+    >>> edge  = guess_edge(group, e0, update=True)
+    >>> check_objattrs(group, Group, attrs)
+    [True, True]
+    >>> print(edge)
+    {'atsym': 'Sn', 'edge': 'K'}
+    """
+    # checking class and attributes
+    check_objattrs(group, Group, attrlist=['energy'], exceptions=True)
+
+    # storing energy and mu as indepedent arrays
+    energy = group.energy
+
+    # assigning e0
+    if e0 is not None:
+        if e0 < min(energy) or e0 > max(energy):
+            raise IndexError('e0 is outside the energy range.')
+        else:
+            e0 = energy[index_nearest(energy, e0)]
+            
+    elif hasattr(group, 'e0'):
+        if group.e0 < min(energy) or group.e0 > max(energy):
+            raise IndexError('group.e0 is outside the energy range.')
+        else:
+            e0 = energy[index_nearest(energy, group.e0)]
+    else:
+        e0 = find_e0(group, update=False)
+
+    # estimating edge
+    edge = nearest_edge(e0)
+    content = {'atsym' : edge[0],
+               'edge'  : edge[1],
+               }
+
+    if update:
+        group.add_content(content)
+
+    return content
 
 def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
              pre_range: list=[-inf,-50], post_range: list=[100,inf],
              update:bool =False) -> dict:
     """Pre-edge substaction and normalization of a XAFS scan.
-    
+
     Parameters
     ----------
     group
@@ -223,7 +311,7 @@ def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
     -------
     :
         Dictionary with the following arguments:
-        
+
         - ``e0``           : absorption threshold energy :math:`E_0`.
         - ``edge_step``    : absorption edge step :math:`\Delta \mu(E_0)`.
         - ``norm``         : array with normalized :math:`\mu(E)`.
@@ -253,7 +341,8 @@ def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
 
     See also
     --------
-    :func:`~araucaria.plot.fig_pre_edge.fig_pre_edge`: Plot the results of pre-edge substraction and normalization.
+    :func:`~araucaria.plot.fig_pre_edge.fig_pre_edge`
+        Plot the results of pre-edge substraction and normalization.
 
     Notes
     -----
@@ -270,10 +359,10 @@ def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
        4. The edge step is deterimned by extrapolating both curves to `e0`.
        5. A flattetned spectrum is calculated by removing the polynomial above the edge from the
           normalized spectrum, while maintaining the offset of the polynomial at ``e0``.
-    
+
     If ``update=True`` the contents of the returned dictionary will be
     included as attributes of ``group``.
-    
+
     Example
     -------
     >>> from araucaria.testdata import get_testpath
@@ -361,14 +450,14 @@ def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
 
     # normalized mu
     norm = (mu - pre_edge) / edge_step
-    
+
     # flattened mu
     flat       = ( (mu - post_edge) / edge_step + 1.0)
     flat[:ie0] = norm[:ie0]
-    
+
     # output dictionaries
     pre_edge_pars.update({'nvict': nvict, 'nnorm': nnorm})
-    
+
     content = {'e0'           : e0,
                'edge_step'    : edge_step,
                'norm'         : norm,
@@ -379,8 +468,12 @@ def pre_edge(group: Group, e0: float=None, nvict: int=0, nnorm: int=2,
                'post_coefs'   : post_coefs,
                'pre_edge_pars': pre_edge_pars,
                }
-    
+
     if update:
         group.add_content(content)
 
     return content
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
