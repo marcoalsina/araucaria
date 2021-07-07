@@ -7,7 +7,8 @@ from scipy.signal import savgol_filter
 from .. import Group
 from ..utils import check_objattrs
 from ..xas.normalize import find_e0
-from ..xas.xasutils import roll_med
+#from ..xas.xasutils import roll_med
+from ..stats.signal import roll_med
 from ..stats.genesd import genesd
 
 def deglitch(group: Group, e_window: Union[str,list]='xas', sg_window_length: int=9, 

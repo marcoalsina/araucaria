@@ -9,3 +9,4 @@ Statistics module
    stats/stats_genesd
    stats/stats_cluster
    stats/stats_pca
+   stats/stats_signal

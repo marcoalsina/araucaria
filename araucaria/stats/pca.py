@@ -7,7 +7,7 @@ its variance.
 Dimensionality reduction is achieved by changing the basis of the dataset 
 in such way that the new vectors constitute an orthonormal basis.
 
-Lets consider a given m by n matrix :math:`X` with m observations and n variables.
+Lets consider a m by n matrix :math:`X`  (m observations and n variables).
 Mathematically, PCA computes the eigenvalues and eigenvectors of the covariance
 matrix. If observations in :math:`X` are centered, then the covariance is proportional
 to :math:`X^TX`:
