@@ -2,7 +2,6 @@
 
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-green.svg)](https://github.com/marcoalsina/araucaria/blob/master/LICENSE)
 ![GitHub branch checks state](https://img.shields.io/github/checks-status/marcoalsina/araucaria/master)
-
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/marcoalsina/araucaria?include_prereleases)
 
 
@@ -19,7 +18,7 @@ The following install options are curently available for the alpha version of `a
 
 ### Install with pip
 
-You can install `araucaria` directly with ``pip``:
+You can install `araucaria` directly with ``pip``. Simply execute the following command in a terminal:
 
  ```console
  name@machine:~$ pip install araucaria
@@ -27,7 +26,7 @@ You can install `araucaria` directly with ``pip``:
 
 ### Install with Git
 
-If you have [`Git`](https://git-scm.com/) in your machine, you can execute the following command in the console:
+If you have [`Git`](https://git-scm.com/) installed in your machine, you can install ``araucaria`` by executing the following command in a terminal:
 
 ```console
 name@machine:~$ pip install git+https://github.com/marcoalsina/araucaria.git
@@ -42,8 +41,7 @@ name@machine:~$ conda activate <yourenvironment>
 
 ### Install with http
 
-Alternatively, you can download the source code and install ``araucaria`` directly.
-Open up a `terminal` and execute the following commands:
+Alternatively, you can download the source code and install ``araucaria`` by executing the following commands in a  `terminal`:
 
 ```console
 name@machine:~$ wget https://github.com/marcoalsina/araucaria/archive/master.zip

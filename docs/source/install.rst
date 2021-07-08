@@ -32,7 +32,7 @@ Once your conda environment has been configured, you have the following install 
 
 Install with pip
 ----------------
-You can install `araucaria` directly with ``pip``:
+You can install ``araucaria`` directly with ``pip``. Simply execute the following command in a terminal:
 
 .. code-block:: bash
 
@@ -42,7 +42,7 @@ You can install `araucaria` directly with ``pip``:
 Install with Git
 ----------------
 
-If you have `Git <https://git-scm.com/>`_ installed in your machine, you can install ``araucaria`` directly by executing the following command in a terminal:
+If you have `Git <https://git-scm.com/>`_ installed in your machine, you can install ``araucaria`` by executing the following command in a terminal:
 
 .. code-block:: bash
 
@@ -52,8 +52,8 @@ If you have `Git <https://git-scm.com/>`_ installed in your machine, you can ins
 Install with HTTP
 -----------------
 
-Alternatively, you can download the source code and install ``araucaria`` directly.
-Open up a terminal and execute the following commands:
+Alternatively, you can download the source code and install ``araucaria`` by executing
+the following commands in a terminal:
 
 .. code-block:: bash
 
