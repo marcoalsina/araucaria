@@ -3,6 +3,8 @@
 [![License](https://img.shields.io/badge/License-BSD%202--Clause-green.svg)](https://github.com/marcoalsina/araucaria/blob/master/LICENSE)
 ![GitHub branch checks state](https://img.shields.io/github/checks-status/marcoalsina/araucaria/master)
 
+![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/marcoalsina/araucaria?include_prereleases)
+
 
 `araucaria` is a Python library to read, process and analyze X-ray absorption fine structure 
 (XAFS) spectra. The library is designed to be modular, transparent, and light-weight, allowing 
@@ -14,6 +16,14 @@ Additional functionality will be added on a regular basis.
 
 ## How to install
 The following install options are curently available for the alpha version of `araucaria`:
+
+### Install with pip
+
+You can install `araucaria` directly with ``pip``:
+
+ ```console
+ name@machine:~$ pip install araucaria
+ ```
 
 ### Install with Git
 

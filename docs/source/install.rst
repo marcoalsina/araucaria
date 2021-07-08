@@ -16,7 +16,7 @@ If you have Anaconda or Miniconda installed in your machine, make sure to activa
 
 In most cases ``araucaria`` should install correctly in a conda environment. However, you may prefer to create a `new enviromnent <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file>`_ for the library, particularly if you want to work on new features or compile a local copy of the documentation.
 
-In such cases you could use following ``yaml`` environment file: :download:`araucaria.yml <_downloads/araucaria.yml>`.
+In such cases you could use the following ``yaml`` environment file: :download:`araucaria.yml <_downloads/araucaria.yml>`.
 Once downloaded you can execute the following commands in a terminal to create and activate a development environment for araucaria:
 
 .. code-block:: bash
@@ -26,8 +26,18 @@ Once downloaded you can execute the following commands in a terminal to create a
 
 Once your conda environment has been configured, you have the following install options:
 
+- :ref:`Install with pip`
 - :ref:`Install with Git`
 - :ref:`Install with HTTP`
+
+Install with pip
+----------------
+You can install `araucaria` directly with ``pip``:
+
+.. code-block:: bash
+
+	name@machine:~$ pip install araucaria
+
 
 Install with Git
 ----------------
