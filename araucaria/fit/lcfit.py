@@ -76,7 +76,7 @@ from numpy import ndarray, where, gradient, around, inf, sum
 from scipy.interpolate import interp1d
 from lmfit import Parameter, Parameters, minimize, fit_report
 from .. import Group, Dataset, Collection
-from ..utils import check_objattrs, index_xrange
+from ..utils import check_dictkeys, check_objattrs, index_xrange
 
 def lcf(collection: Collection, fit_region: str='xanes',
         fit_range: list=[-inf,inf], scantag: str='scan',
@@ -411,14 +411,14 @@ def lcf_report(out: Dataset) -> str:
         .format(name, val)
     return (header+fit_report(out.min_pars))
 
-def sum_references(pars: Parameter, data: dict) -> ndarray:
+def sum_references(pars: Parameters, data: dict) -> ndarray:
     """Returns the sum of references weighted by amplitude coefficients.
     
     Parameters
     ----------
     pars
         Parameter object from ``lmfit`` containing the amplitude
-        coefficients for each reference spectrum. At least attribute
+        coefficients for each reference spectrum. At least key
         'amp1' should exist in the object.
     data
         Dictionary with the reference arrays. At leasr key 'ref1'
@@ -428,10 +428,17 @@ def sum_references(pars: Parameter, data: dict) -> ndarray:
     -------
     :
         Sum of references weighted by amplitude coefficients.
-        
+
+    Raises
+    ------
+    KeyError
+        If 'amp' keys do not exist in ``pars``.
+    KeyError
+        If 'ref' keys do not exist in ``data``.
+
     Important
-    -----
-    The number of 'amp' attributes in ``pars`` should match the 
+    ---------
+    The number of 'amp' keys in ``pars`` should match the 
     number of 'ref' keys in ``data``.
 
     Example
@@ -446,10 +453,18 @@ def sum_references(pars: Parameter, data: dict) -> ndarray:
     >>> allclose(sum_references(pars, data), 1.8)
     True
     """
+    # checking keys in pars and data 
+    index   = range(1, len(pars)+1)
+    parkeys = ['amp'+str(i) for i in index]
+    datkeys = ['ref'+str(i) for i in index]
+
+    check_dictkeys(pars, keylist= parkeys, exceptions=True)
+    check_dictkeys(data, keylist= datkeys, exceptions=True)
+
     return (sum([pars['amp'+str(i)]* data['ref'+str(i)] 
                    for i in range(1,len(pars)+1)], axis=0))
 
-def residuals(pars: Parameter , data: dict) -> ndarray:
+def residuals(pars: Parameters, data: dict) -> ndarray:
     """Residuals between a spectrum and a linear combination of references.
     
     Parameters

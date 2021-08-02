@@ -18,4 +18,4 @@ from .deglitch import deglitch
 from .normalize import find_e0, guess_edge, pre_edge
 from .autobk import autobk
 from .xasft import ftwindow, xftf, xftr, xftf_kwin, xftr_kwin
-from .xasutils import etok, ktoe, get_mapped_data
+from .xasutils import etok, ktoe, get_mapped_data, compute_bins, rebin

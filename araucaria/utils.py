@@ -11,8 +11,10 @@ The :mod:`~araucaria.utils` module offers the following utility functions:
      - Description
    * - :func:`get_version`
      - Returns version of araucaria.
+   * - :func:`check_dictkeys`
+     - Check keys in a dictionary.
    * - :func:`check_objattrs`
-     - Check type and attributes of an object.
+     - Check type and attributes of an object. 
    * - :func:`check_xrange`
      - Range values for an array.
    * - :func:`index_xrange`
@@ -35,7 +37,6 @@ from ast import literal_eval
 from numpy import (ndarray, diff, abs, argwhere, where, 
                    ravel, apply_along_axis, isnan, isinf)
 from scipy.interpolate import interp1d
-
 
 def get_version(dependencies:bool=False) -> str:
     """Returns installed version of araucaria.
@@ -81,6 +82,48 @@ def get_version(dependencies:bool=False) -> str:
 
     return verf
 
+def check_dictkeys(obj: dict, keylist: list=None, 
+                   exceptions: bool=False) -> List[bool]:
+    """Check keys in a dictionary.
+    
+    Parameters
+    ----------
+    obj
+        Dictionary to check.
+    keylist
+        List with names of attributes to check.
+    exceptions
+        Condition to raise exceptions if keys 
+        are not in the dictionary. The default is False.
+    
+    Returns
+    -------
+    :
+        List with booleans for each tested key in the dictionary.
+
+    Raises
+    ------
+    TypeError
+        If ``obj`` is not a :class:`dict` instance.
+
+    Example
+    -------
+    >>> from araucaria.utils import check_dictkeys
+    >>> obj   = {'val_1': 1, 'val_2': 2}
+    >>> keys  = ['val_1', 'val_2', 'val_3']
+    >>> check_dictkeys(obj, keys)
+    [True, True, False]
+    """
+    boolist = []
+    for key in keylist:
+        if key not in obj:
+            if exceptions:
+                raise AttributeError("%s dictionary has no '%s' key." % (objtype.__name__, attr))
+            else:
+                boolist.append(False)
+        else:
+            boolist.append(True)
+    return boolist
 
 def check_objattrs(obj: object, objtype: TypeVar, attrlist: list=None, 
                    exceptions: bool=False) -> List[bool]:
@@ -136,7 +179,6 @@ def check_objattrs(obj: object, objtype: TypeVar, attrlist: list=None,
                 boolist.append(False)
         else:
             boolist.append(True)
-
     return boolist
 
 def check_xrange(x_range: list, x: ndarray, refval: float=None) -> list:

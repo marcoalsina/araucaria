@@ -4,4 +4,4 @@
 The :mod:`~araucaria.testdata` module contain the test datasets
 used for documenting functionality and testing.
 """
-from .utils import get_testfiles, get_testpath
+from .test import get_testfiles, get_testpath

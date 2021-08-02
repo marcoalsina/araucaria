@@ -15,14 +15,20 @@ The :mod:`~araucaria.xas.xasutils` module offers the following XAFS utility func
      - Converts photo-electron wavenumber to energy.
    * - :func:`get_mapped_data`
      - Returns data mapped to a common domain in a collection.
+   * - :func:`compute_bins`
+     - Computes bin sequence for an energy array.
+   * - :func:`rebin`
+     - Rebins XAFS spectra in a group.
 """
 from scipy.constants import hbar  # reduced planck constant
 from scipy.constants import m_e   # electron mass
 from scipy.constants import eV    # electron volt in joules
 
-from typing import List, Tuple
-from numpy import ndarray, array, std, gradient, inf
+from typing import List, Tuple, Union
+from numpy import (ndarray, array, std, gradient, inf, ediff1d, nan, isnan,
+                   abs, arange, append, concatenate, delete, sign)
 from scipy.interpolate import interp1d
+from scipy.stats import binned_statistic
 from .. import Group, Collection
 from ..utils import check_objattrs, index_xrange
 
@@ -68,7 +74,7 @@ def etok(energy: ndarray) -> ndarray:
     10.24633
     """
     from numpy import sqrt
-    return sqrt(energy/k2e)
+    return sign(energy) * sqrt(abs(energy)/k2e)
 
 def ktoe(k: ndarray) -> ndarray:
     """Converts photo-electron wavenumber to energy.
@@ -246,6 +252,266 @@ def get_mapped_data(collection: Collection, taglist: List[str]=['all'],
     # converting list to array
     matrix = array(matrix).T
     return (xvals, matrix)
+
+def compute_bins(ref_energy: float, e_step: float=0.5, bkg_pars: list=[-300, -20, 5], 
+                 exafs_pars: list=[3, 15, 0.05], ndigits: int=4) -> ndarray:
+    """Computes bin sequence for an energy array.
+
+    Parameters
+    ----------
+    ref_energy:
+        Reference energy for computing bins (eV). Both background range
+        and exafs range are computed with respect to this value.
+    e_step:
+        Energy increment step for XANES bins (eV).
+        The default is 0.5.
+    bkg_pars:
+        Parameters for background bins (eV). Should include
+        initial energy value, final energy value, and energy increment step.
+        The detault is [-300, -20, 5].
+    exafs_pars:
+        Parameters for EXAFS bins (inverse angstrom). Should include
+        initial k value, final k value, and k increment step.
+        The default is [3, 15, 0.05].
+    ndigits:
+        Number of decimal places to round bins.
+        The default is 4.
+
+    Returns
+    -------
+    :
+        Array with bin edges.
+
+    Raises
+    ------
+    ValueError
+        If len of ``bkg_pars`` or ``exafs_pars`` is smaller than 3.
+
+    See also
+    --------
+    :func:`rebin`: Rebins spectra in a group.
+
+    Notes
+    -----
+    Computation of bins is performed considering 3 regions:
+
+    - background region: defined by ``bkg_pars``.
+    - XANES region: between ``bkg_pars`` and ``exafs_pars``, and defined by ``e_step``.
+    - EXAFS region: defined by ``exafs_pars``.
+
+    Bin sizes are adjusted between regions in order to follow the
+    energy limits established by ``bkg_pars`` and ``exafs_ pars``.
+
+    Example
+    -------
+    >>> from numpy import around, allclose
+    >>> from araucaria.xas import compute_bins
+    >>> from araucaria.xas import ktoe
+    >>> ndigits    = 4
+    >>> edge       = 7112
+    >>> bkg_pars   = [-300, -50, 10]
+    >>> exafs_pars = [2, 10, 0.05]
+    >>> bin_edges  = compute_bins(ref_energy=edge, bkg_pars=bkg_pars, 
+    ...                           exafs_pars=exafs_pars, ndigits=ndigits)
+    >>> # verifying bin edges 
+    >>> minval = edge + bkg_pars[0] - bkg_pars[2]/2           # minimum bin edge value
+    >>> maxval = edge + ktoe(exafs_pars[1] + exafs_pars[2]/2) # maximum bin edge value
+    >>> vals   = around((minval, maxval), ndigits)            # rounding to ndigits
+    >>> allclose((bin_edges[0], bin_edges[-1]), vals)
+    True
+    """
+    if len(bkg_pars) < 3:
+        raise ValueError("'bkg_pars' should provide at least 3 values.")
+    if len(exafs_pars) < 3:
+        raise ValueError("'exafs_pars should provide at least 3 values.")
+
+    # computing bin edges for background region
+    ival      = ref_energy + bkg_pars[0] - bkg_pars[2]/2
+    fval      = ref_energy + bkg_pars[1] + bkg_pars[2]/2
+    bkg_edges = arange(ival, fval, bkg_pars[2])
+    bkg_edges = bkg_edges.round(ndigits)
+
+    # computing bin edges at the edge    
+    ival      = bkg_pars[1] + e_step/2 + ref_energy
+    fval      = ktoe(exafs_pars[0]) + ref_energy + e_step/2
+    ene_edges = arange(ival, fval, e_step)
+    ene_edges = ene_edges.round(ndigits)
+
+    # computing bind esges for exafs region
+    step = exafs_pars[2]
+    ival = exafs_pars[0] + step/2
+    fval = exafs_pars[1] + step
+    exafs_edges = []
+    for kval in arange(ival, fval, step):
+        exafs_edges.append( ktoe(kval) + ref_energy )
+    exafs_edges = array(exafs_edges).round(ndigits)
+
+    # concatenating bin edges
+    bin_edges = concatenate((bkg_edges, ene_edges, exafs_edges))
+    return bin_edges
+
+def rebin(group: Group, statistic: str='mean',
+          bins: Union[int, list]=10, remove_nans: bool=True,
+          update: bool=False) -> dict:
+    """Rebins XAFS spectra in a group.
+
+    Parameters
+    ----------
+    group:
+         Group containing the spectrum to rebin.
+    statistic:
+        The statistic to compute for rebinning. See
+        :func:`~scipy.stats.binned_statistic` for valid names.
+        The default is 'mean'.
+    bins:
+        If :class:`int`, it defines the number of equal-width bins in the 
+        given range. If a sequence, it defines the bin edges, including 
+        the rightmost edge, allowing for non-uniform bin widths.
+        The default is 10.
+    remove_nans:
+        Indicates if bins with :data:`~numpy.nan` values should be removed.
+        The default is True.
+    update:
+         Indicates if the group should be updated with the rebin attributes.
+         The default is False.
+
+    Returns
+    -------
+    :
+        Dictionary with the following parameters:
+        
+        - ``energy``     : rebinned energy values.
+        - ``mu``         : rebinned transmission :math:`\mu(E)`, 
+          if ``mu`` attribute exists in the group.
+        - ``fluo``       : rebinned fluorescence :math:`\mu(E)`, 
+          if ``fluo`` attribute exists in the group.
+        - ``mu_ref``     : rebinned reference :math:`\mu(E)`, 
+          if ``mu_ref`` attribute exists in the group.
+        - ``rebin_stats``: additional rebin statistics. 
+
+    Raises
+    ------
+    TypeError
+        If ``group`` is not a valid Group instance.
+    AttributeError
+        If attribute ``energy`` does not exist in ``group``.
+
+    Important
+    ---------
+    Bins with no data are removed by default to prevent
+    :data:`~numpy.nan` values in the rebinned group arrays.
+    As a consecuence , the total number of bins might be 
+    smaller than originally specified, and bins will exhibit 
+    varying width.
+    
+    You can override this default behavior by specifying ``remove_nans=False``.
+
+    Example
+    -------
+    .. plot::
+        :context: reset
+
+        >>> from araucaria import Group
+        >>> from araucaria.testdata import get_testpath
+        >>> from araucaria.io import read_xmu
+        >>> from araucaria.xas import rebin
+        >>> from araucaria.utils import check_objattrs
+        >>> fpath = get_testpath('xmu_testfile.xmu')
+        >>> # extracting mu and mu_ref scans
+        >>> group_mu = read_xmu(fpath, scan='mu')
+        >>> bins    = 600             # number of bins
+        >>> regroup = group_mu.copy() # rebinning copy of group
+        >>> rebin   = rebin(regroup, bins=bins, update=True)
+        >>> attrs   = ['energy', 'mu', 'mu_ref', 'rebin_stats']
+        >>> check_objattrs(regroup, Group, attrs)
+        [True, True, True, True]
+
+        >>> # plotting rebinned spectrum
+        >>> from araucaria.plot import fig_xas_template
+        >>> import matplotlib.pyplot as plt
+        >>> figpars = {'e_range' : (11850, 11900)}   # energy range
+        >>> fig, ax = fig_xas_template(panels='x', fig_pars=figpars)
+        >>> stdev = regroup.rebin_stats['mu_std']    # std of rebinned mu
+        >>> line  = ax.plot(group_mu.energy, group_mu.mu, label='original')
+        >>> line  = ax.errorbar(regroup.energy, regroup.mu, yerr=stdev, marker='o',
+        ...                     capsize=3.0, label='rebinned')
+        >>> leg   = ax.legend(edgecolor='k')
+        >>> lab   = ax.set_ylabel('abs [a.u]')
+        >>> plt.show(block=False)
+    """
+    # checking class and attributes
+    check_objattrs(group, Group, attrlist=['energy'], exceptions=True)
+
+    # storing energy and mu as indepedent arrays
+    energy = group.energy
+    mode   = group.get_mode()
+    mu     = getattr(group, mode)
+
+    # rebining mu
+    rebin_mu, bin_edges, binnumber = binned_statistic(energy, mu, statistic=statistic, bins=bins)
+    rebin_energy = ediff1d(bin_edges)/2 + bin_edges[:-1]
+
+    # computing std
+    stdev = []
+    for i in range(len(rebin_mu)):
+        index = (binnumber == i+1)
+        if not any(index):
+            # testing if all indexes are false
+            stdev.append(nan)
+        else:
+            stdev.append( std( mu[index] ) )
+    stdev = array(stdev)
+
+    if remove_nans:
+        # removing nans
+        nindex       = isnan(rebin_mu)
+        edges_nindex = append(nindex.copy(), False)
+        rebin_mu     = delete(rebin_mu, nindex)
+        bin_edges    = delete(bin_edges, edges_nindex)
+        rebin_energy = delete(rebin_energy, nindex)
+        stdev        = delete(stdev,nindex)
+
+    # storing results
+    bin_std     = mode + '_std'
+    rebin_stats = {'energy_edges': bin_edges,
+                   'binnumber'   : binnumber,
+                   bin_std       : stdev}
+    content     = {mode          : rebin_mu,
+                   'energy'      : rebin_energy}
+
+    if group.has_ref and mode in ('mu', 'fluo'):
+        # rebinning mu_ref (if exists)
+        mu_ref = group.mu_ref
+        rebin_mu_ref, bin_edges, binnumber = \
+        binned_statistic(energy, mu_ref, statistic=statistic, bins=bins)
+
+        # computing ref_std
+        stdev = []
+        for i in range(len(rebin_mu_ref)):
+            index = (binnumber == i+1)
+            if not any(index):
+                stdev.append(nan)
+            else:
+                stdev.append( std( mu_ref[index] ) )
+        stdev = array(stdev)
+
+        if remove_nans:
+            # removing nans
+            nindex       = isnan(rebin_mu_ref)
+            rebin_mu_ref = delete(rebin_mu_ref, nindex)
+            stdev        = delete(stdev,nindex)
+
+        # storing mu_ref results
+        content['mu_ref']               = rebin_mu_ref
+        rebin_stats['mu_ref_std']       = stdev
+
+    # storing rebin statistics
+    content['rebin_stats'] = rebin_stats
+
+    # updating group
+    if update:
+        group.add_content(content)
+    return content
 
 if __name__ == '__main__':
     import doctest

@@ -6,3 +6,4 @@ Fit module
    :hidden:
    
    fit/fit_lcf
+   fit/fit_feffit

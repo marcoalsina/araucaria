@@ -1,6 +1,14 @@
 Changelog
 =========
 
+ver 0.1.12
+----------
+- :mod:`~.fit.feffit` submodule added: support for feffit on EXAFS spectra (:mod:`~araucaria.fit` module).
+- binning functions moved to (:mod:`~araucaria.xas.xasutils` module).
+- added :func:`~.utils.check_dictkeys` function (:mod:`~araucaria.utils` module).
+- updated labels for EXAFS plots in :func:`~.plot.template.fig_xas_template` function (:mod:`~.plot` module).
+
+
 ver 0.1.11
 ----------
 - :mod:`~.stats.signal` submodule added: functions to filter and analyze univariate data.

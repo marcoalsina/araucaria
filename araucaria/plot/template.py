@@ -118,7 +118,7 @@ def fig_xas_template(panels: str='xx', fig_pars: FigPars=None,
     --------
     .. plot::
         :context: reset
-        
+
         >>> import matplotlib.pyplot as plt
         >>> from araucaria.plot import fig_xas_template
         >>> pars = {'e_range' : (0,100),
@@ -199,6 +199,8 @@ def fig_xas_template(panels: str='xx', fig_pars: FigPars=None,
             ax.set_xlabel(r'$k$ [$\AA^{-1}$]')
             if k == 0:
                 ax.set_ylabel(r'$\chi(k)$')
+            elif k == 1:
+                ax.set_ylabel(r'$k\chi(k)$ [$\AA$]')
             else:
                 ax.set_ylabel(r'$k^%i\chi(k)$ [$\AA^{%i}$]' % (k, k) )
             keys = ['k_range', 'chi_range', 'k_ticks', 'chi_ticks']
@@ -214,6 +216,8 @@ def fig_xas_template(panels: str='xx', fig_pars: FigPars=None,
             ax.set_xlabel(r'$q$ [$\AA^{-1}$]')
             if k == 0:
                 ax.set_ylabel(r'$\chi(q)$')
+            elif k == 1:
+                ax.set_ylabel(r'$q\chi(q)$ [$\AA$]')
             else:
                 ax.set_ylabel(r'$q^%i\chi(q)$ [$\AA^{%i}$]' % (k, k) )
             keys = ['q_range', 'chi_range', 'q_ticks', 'chi_ticks']   

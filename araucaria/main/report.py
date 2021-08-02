@@ -213,7 +213,7 @@ class Report:
         else:
             for name in names:
                 if name not in self.names:
-                    raise ValueError('%s is not a valid column name.')
+                    raise ValueError('%s is not a valid column name.' % name)
                 else:
                     cindex.append(self.names.index(name))
             if len(cindex) == 1:

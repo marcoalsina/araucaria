@@ -22,23 +22,23 @@ from araucaria import testdata
 
 def get_testfiles() -> list:
     """Returns the available test files.
-    
+
     Parameters
     ----------
     None
-    
+
     Returns
     -------
     :
         List with available test files.
-    
+
     Example
     -------
     >>> from araucaria.testdata import get_testfiles
     >>> testfiles = get_testfiles()
     >>> for file in testfiles:
-    ...    if 'dnd' in file:
-    ...        print(file)
+    ...     if 'dnd' in file:
+    ...         print(file)
     dnd_glitchfile.dat
     dnd_testfile1.dat
     dnd_testfile2.dat

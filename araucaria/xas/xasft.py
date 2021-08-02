@@ -442,7 +442,7 @@ def xftr(group: Group , r_range: list=[0,20], rweight: int=0,
     kstep = pi/(rstep*nfft)
     
     # setting scale for output
-    if chir.dtype == dtype('complex128'):
+    if chir.dtype == dtype(complex):
         scale = 0.5
     else:
         scale = 1.0
@@ -452,7 +452,7 @@ def xftr(group: Group , r_range: list=[0,20], rweight: int=0,
         dr2 = dr1
     r_range.sort()
     win   = ftwindow(r_, x_range=r_range, dx1=dr1, dx2=dr2, win=win)
-    cchir = zeros(nfft, dtype='complex128')
+    cchir = zeros(nfft, dtype=complex)
     cchir[:len(chir)] = chir * r_[:len(chir)]**rweight
     
     # calculating xftr
@@ -530,7 +530,7 @@ def xftf_kwin(chi: ndarray, nfft: int=2048, kstep: float=0.05) -> ndarray:
         >>> fig.tight_layout()
         >>> plt.show(block=False)
     """
-    cchi = zeros(nfft, dtype='complex128')
+    cchi = zeros(nfft, dtype=complex)
     cchi[0:len(chi)] = chi
     chir = (kstep / sqrt(pi)) * fft(cchi)[:int(nfft/2)]
     return chir
@@ -582,13 +582,13 @@ def xftr_kwin(chir: ndarray, nfft: int=2048, kstep: float=0.05) -> ndarray:
         >>> line = ax[0].plot(freq, abs(chir))
         >>> xlim = ax[0].set_xlim(0,2)
         >>> xlab = ax[0].set_xlabel('$R/\pi$ [$\AA$]')
-        >>> line = ax[1].plot(k, chiq)
+        >>> line = ax[1].plot(k, chiq.real)
         >>> text = ax[1].set_xlabel(r'$q(\AA^{-1})$')
         >>> text = ax[1].set_ylabel(r'$\chi(q)$')
         >>> fig.tight_layout()
         >>> plt.show(block=False)
     """
-    cchi = zeros(nfft, dtype='complex128')
+    cchi = zeros(nfft, dtype=complex)
     cchi[0:len(chir)] = chir
     chiq = (4*sqrt(pi)/kstep) * ifft(cchi)[:int(nfft/2)]
     return chiq
