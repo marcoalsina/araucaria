@@ -25,7 +25,8 @@ References
 ----------
 
 .. [1] J.J. Kas et al. (2020) The FEFF Code. In International Tables of Crystallography, 
-   Volume I. X-Ray Absorption Spectroscopy and Related Techniques, https://doi.org/10.1107/S1574870720003274.
+   Volume I. X-Ray Absorption Spectroscopy and Related Techniques, 
+   https://doi.org/10.1107/S1574870720003274.
 
 .. [2] M. Newville (2004) EXAFS analysis using FEFF and FEFFIT, 
    Journal of Synchrotron Radiation 8(2): 96-100,
@@ -215,14 +216,17 @@ class FeffPath(object):
         for key in self.feffdat:
             self.feffdat[key].flags.writeable = False
 
-    def get_chi(self, pars: Parameters=None, kstep: float=None) -> Tuple[ndarray, ndarray]:
+    def get_chi(self, parsdict: dict=None, params: Parameters=None,  
+                kstep: float=None) -> Tuple[ndarray, ndarray]:
         """Returns :math:`\chi(k)` for the Feff path.
 
         Parameters
         ----------
-        pars
-            Parameter object from ``lmfit``. It will consider the following keys:
-            
+        parsdict
+            Dictionary with either parameter values, or parameter names of 
+            an ``lmfit`` Parameters object. At least one of the following 
+            keys should be available:
+
             - ``s02``    : amplitude reduction factor for the path.
             - ``sigma2`` : debye-waller factor for the path.
             - ``degen``  : path degeneracy.
@@ -233,8 +237,12 @@ class FeffPath(object):
             - ``c4``     : fourth cumulant parameter.
 
             The default is None, which assigns the Feff path value for ``degen``,
-            one for ``s02``, and zero for remaining parameters.
-
+            one for ``s02``, and zero for the remaining parameters. These default
+            values will also be used if any of the listed keys is absent.
+        params
+            Parameter object from ``lmfit`` contaning the paramater names established 
+            in ``dictpars``.
+            The default is None.
         kstep
             Step in k array.
             The default is None, which returns the original k-spacing of the Feff data file.
@@ -250,6 +258,10 @@ class FeffPath(object):
         -------
         AttributeError
             If the self instance has no ``feffdat`` attribute.
+        TypeError
+            If ``params`` is not a valid Parameters instance from ``lmfit``.
+        NameError
+            If ``parsdict`` contains strings and no ``params`` object is provided.
 
         Example
         -------
@@ -269,46 +281,60 @@ class FeffPath(object):
             >>> lin      = ax.plot(k, k**kw*chi)
             >>> plt.show(block=False)
         """
-        # checking self attribute
-        check_objattrs(self, FeffPath, attrlist=['feffdat'], exceptions=True)
-
         # check pars attribute
         req_keys   = ['s02', 'sigma2', 'degen', 'deltaR', 'deltaE', 'ei', 'c3', 'c4']
         def_values = [  1.0,      0.0,     1.0,      0.0,      0.0,  0.0,  0.0, 0.0 ]
 
-        params = {}
-        if pars is None:
+        # checking self attribute
+        check_objattrs(self, FeffPath, attrlist=['feffdat'], exceptions=True)
+
+        values = {}
+        if parsdict is None:
+        # default values
             for i, key in enumerate(req_keys):
                 if key == 'degen':
-                    params[key] = self.path_pars[key]
+                    values[key] = self.path_pars[key]
                 else:
-                    params[key] = def_values[i]
-        else:
+                    values[key] = def_values[i]
+        elif params is None:
+        # parsdict are values
             for i, key in enumerate(req_keys):
-                if key in pars:
-                    params[key] = pars[key]
+                if key in parsdict:
+                    values[key] = parsdict[key]
                 else:
                     if key == 'degen':
-                        params[key] = self.path_pars[key]
+                        values[key] = self.path_pars[key]
                     else:
-                        params[key] = def_values[i]
+                        values[key] = def_values[i]
+        else:
+        # using parameters object
+            check_objattrs(params, Parameters)
+            for i, key in enumerate(req_keys):
+                if key in parsdict:
+                    pkey = parsdict[key]
+                    values[key] = params[pkey].value
+                else:
+                    if key == 'degen':
+                        values[key] = self.path_pars[key]
+                    else:
+                        values[key] = def_values[i]
 
         # computing k shifted and approximating k=0
-        k_n = etok( ktoe(self.feffdat['k']) - params['deltaE'] )
+        k_n = etok( ktoe(self.feffdat['k']) - values['deltaE'] )
         k_s = where(k_n == 0, 1e-10, k_n)
 
         # computing complex wavenumber
-        p = sqrt( (self.feffdat['real_p'] + (1j/ self.feffdat['lambd']))**2 - 1j*etok(params['ei']))
+        p = sqrt( (self.feffdat['real_p'] + (1j/ self.feffdat['lambd']))**2 - 1j*etok(values['ei']))
 
         # computing complex chi(k)
-        chi_feff  = params['degen']*params['s02']*self.feffdat['red_factor']*self.feffdat['mag_feff']
-        chi_feff /= ( k_s * (self.path_pars['reff'] + params['deltaR'] )**2 )
+        chi_feff  = values['degen']*values['s02']*self.feffdat['red_factor']*self.feffdat['mag_feff']
+        chi_feff /= ( k_s * (self.path_pars['reff'] + values['deltaR'] )**2 )
         chi_feff  = chi_feff.astype(complex)
-        chi_feff *= exp(-2 * self.path_pars['reff'] * p.imag - 2 * ( p**2 ) * params['sigma2'] \
-                    + 2 * (p**4) * params['c4'] / 3)
+        chi_feff *= exp(-2 * self.path_pars['reff'] * p.imag - 2 * ( p**2 ) * values['sigma2'] \
+                    + 2 * (p**4) * values['c4'] / 3)
         chi_feff *= exp(1j * (2 * k_n * self.path_pars['reff'] + self.feffdat['phase_feff'] + \
-                    self.feffdat['real_phc'] + 2 * p * ( params['deltaR'] - \
-                    (2 * params['sigma2'] / self.path_pars['reff'] )) - 4 * (p**3) * params['c3'] / 3))
+                    self.feffdat['real_phc'] + 2 * p * ( values['deltaR'] - \
+                    (2 * values['sigma2'] / self.path_pars['reff'] )) - 4 * (p**3) * values['c3'] / 3))
 
         # retaning the imaginary part
         chi_feff = chi_feff.imag
@@ -318,4 +344,4 @@ class FeffPath(object):
             chi_feff = interp_yvals(k_n, chi_feff, kvals)
             return kvals, chi_feff
         else:
-            return k_s, chi_feff
+            return k_n, chi_feff

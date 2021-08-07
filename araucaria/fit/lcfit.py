@@ -5,7 +5,8 @@ Linear combination fitting (LCF) refers to the interpretation of an unknown XAFS
 summation of known XAFS reference signals.
 
 For the case of the XANES region of an unknown spectrum :math:`\mu_s(E)`, LCF translates into 
-obtaining the amplitude coefficients :math:`\\alpha_i` that minimize the residuals of the following equation:
+obtaining the amplitude coefficients :math:`\\alpha_i` that minimize the residuals of the 
+following equation:
 
 .. math::
     
@@ -421,7 +422,7 @@ def sum_references(pars: Parameters, data: dict) -> ndarray:
         coefficients for each reference spectrum. At least key
         'amp1' should exist in the object.
     data
-        Dictionary with the reference arrays. At leasr key 'ref1'
+        Dictionary with the reference arrays. At least key 'ref1'
         should exist in the dictionary.
     
     Returns
@@ -461,7 +462,7 @@ def sum_references(pars: Parameters, data: dict) -> ndarray:
     check_dictkeys(pars, keylist= parkeys, exceptions=True)
     check_dictkeys(data, keylist= datkeys, exceptions=True)
 
-    return (sum([pars['amp'+str(i)]* data['ref'+str(i)] 
+    return (sum([pars['amp'+str(i)].value * data['ref'+str(i)] 
                    for i in range(1,len(pars)+1)], axis=0))
 
 def residuals(pars: Parameters, data: dict) -> ndarray:
