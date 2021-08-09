@@ -10,4 +10,4 @@ The following submodules are currently implemented:
 - The :class:`~araucaria.fit.feffit` module contains classes and routines to perform Feffit analysis.
 """
 from .lcfit import lcf, lcf_report, sum_references, residuals
-from .feffit import FeffPath
+from .feffit import FeffPath, fftochi

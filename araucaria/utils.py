@@ -17,6 +17,8 @@ The :mod:`~araucaria.utils` module offers the following utility functions:
      - Check type and attributes of an object. 
    * - :func:`check_xrange`
      - Range values for an array.
+   * - :func:`count_decimals`
+     - Returns the number of decimals in a float value.
    * - :func:`index_xrange`
      - Index of values in given range for an array.
    * - :func:`index_dups`
@@ -27,15 +29,19 @@ The :mod:`~araucaria.utils` module offers the following utility functions:
      - Index of nearest value in an array.
    * - :func:`interp_yvals`
      - Returns interpolated values for 1-D function.
+   * - :func:`maxminval`
+     - Returns the maximum value for a set of minimum values.
+   * - :func:`minmaxval`
+     - Returns the minimum value for a set of maximum values.
    * - :func:`read_fdicts`
      - Reads file with multiple dictionaries.
 """
-from typing import List, Union, TypeVar
+from typing import List, Tuple, Union, TypeVar
 from pathlib import Path
 from re import findall
 from ast import literal_eval
-from numpy import (ndarray, diff, abs, argwhere, where, 
-                   ravel, apply_along_axis, isnan, isinf)
+from numpy import (ndarray, diff, abs, argwhere, where, modf, 
+                   allclose, ravel, apply_along_axis, isnan, isinf)
 from scipy.interpolate import interp1d
 
 def get_version(dependencies:bool=False) -> str:
@@ -118,7 +124,7 @@ def check_dictkeys(obj: dict, keylist: list=None,
     for key in keylist:
         if key not in obj:
             if exceptions:
-                raise AttributeError("%s dictionary has no '%s' key." % (objtype.__name__, attr))
+                raise AttributeError("dictionary has no '%s' key." % (attr))
             else:
                 boolist.append(False)
         else:
@@ -239,6 +245,56 @@ def check_xrange(x_range: list, x: ndarray, refval: float=None) -> list:
         x_max = xmax
 
     return [x_min, x_max]
+
+def count_decimals(x: float, minval: int=None, maxval: int=None) -> int:
+    """Returns the number of decimals in a number.
+
+    Parameters
+    ----------
+    x
+        Numeric value.
+
+    minval
+        Minimum number of decimals to return.
+        The default is None.
+
+    maxval
+        Maximum number of decimals to return.
+        The default is None.
+
+    Returns
+    -------
+    :
+        Number of decimals.
+
+    Notes
+    -----
+    Decimals are approximated by converting ``x`` to a string
+    and counting the number of digits after the decimal point.
+    This is a naive approximation, so the value must be expressed 
+    with an explicitely limited number of decimals.
+    
+    If unsure of the expression, as a precaution you can set the 
+    ``minval`` and ``maxval`` parameters.
+
+    Example
+    -------
+    >>> from araucaria.utils import count_decimals
+    >>> count_decimals(1.234)
+    3
+    >>> count_decimals(1.2345678 ,maxval=6)
+    6
+    >>> count_decimals(1.234, minval=2)
+    3
+"""
+    sd = len(str(float(x)).split('.')[1])
+    if minval is not None:
+        if sd < minval:
+            sd = minval
+    if maxval is not None:
+        if sd > maxval:
+            sd = maxval
+    return sd
 
 def index_xrange(x_range: list, x: ndarray, refval: float=None) -> ndarray:
     """Returns indexes of range values inside an array.
@@ -534,6 +590,81 @@ def interp_yvals(x: ndarray, y: ndarray, xnew: ndarray,
     yvals = s(xnew)
 
     return yvals
+
+def maxminval(vallist: List[list], mult: float=None)-> float:
+    """Returns the maximum value for a set minimum values from lists. 
+    
+    Parameters
+    ----------
+    vallist
+        List containing multiple lists with values.
+        Lists can have different sizes and values can be disordered.
+    mult
+        Multiple to approximate the result to the closest higher
+        multiple value. The default is None.
+
+    Returns
+    -------
+    :
+        Maximum value for the set of minimum values.
+
+    Example
+    --------
+    >>> from araucaria.utils import maxminval
+    >>> val_list = [[1, 2, 3.23], [1.27, 2, 3, 4.5], [1.1, 3.5]]
+    >>> maxminval(val_list)
+    1.27
+    >>> maxminval(val_list, mult=0.05)
+    1.3
+    """
+    nmax = max([min(row) for row in vallist])
+    
+    if mult is None:
+        return nmax
+    else:
+        resid, inte = modf(nmax/mult)
+        if resid != 0:
+            inte = inte + 1
+
+        return inte * mult
+
+def minmaxval(vallist: List[list], mult: float=None)-> float:
+    """Returns the minimum value for a set maximum values from lists. 
+    
+    Parameters
+    ----------
+    vallist
+        List containing multiple lists with values.
+        Lists can have different sizes and values can be disordered.
+    mult
+        Multiple to approximate the result to the closest higher
+        multiple value. The default is None.
+
+    Returns
+    -------
+    :
+        Miminum value for the set of maximum values.
+
+    Example
+    -------
+    >>> from araucaria.utils import minmaxval
+    >>> val_list = [[1, 2, 3.23], [1.27, 2, 3, 4.5], [1.1, 3.5]]
+    >>> minmaxval(val_list)
+    3.23
+    >>> minmaxval(val_list, mult=0.05)
+    3.2
+    """
+    nmax = min([max(row) for row in vallist])
+
+    if mult is None:
+        return nmax
+    else:
+        resid, inte = modf(nmax/mult)
+        if allclose(resid,1):
+            # check for spurious errors
+            return (inte + 1) * mult
+        else:
+            return inte * mult
 
 def read_fdicts(fpath: Path) -> List[dict]:
     """Reads file with multiple dictionaries

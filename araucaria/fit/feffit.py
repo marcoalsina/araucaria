@@ -20,7 +20,28 @@ Some explanation goes here.
         &\\textrm{exp}(\,i\,\\{ 2kR_{\\textrm{eff}} + \delta(k) + 2p( \Delta R - 
         2 \sigma^2/R_{\\textrm{eff}}) \\frac{4}{3}p^3 c_3 \\}\,) \Big]
     \\end{align}
-    
+
+The :mod:`~araucaria.fit.feffit` module offers the following 
+classes and functions to perform EXAFS fitting based on Feff calculations: 
+
+.. list-table::
+   :widths: auto
+   :header-rows: 1
+
+   * - Class
+     - Description
+   * - :class:`FeffPath`
+     - Feffpath storage class.
+
+.. list-table::
+   :widths: auto
+   :header-rows: 1
+
+   * - Function
+     - Description
+   * - :func:`fefftochi`
+     - Returns chi(k) from a list of Feff paths.
+
 References
 ----------
 
@@ -36,12 +57,14 @@ References
    Journal of Synchrotron Radiation 14(5): 426-432,
    https://doi.org/10.1107/S0909049507031901.
 """
-from typing import Tuple
+from typing import Tuple, List
 from os.path import isfile, basename
 from pathlib import Path
-from numpy import ndarray, array, arange, sqrt, where, exp
+from numpy import (ndarray, array, sqrt, where, exp, arange,
+                   around, modf, argmin, argmax, delete, insert)
 from lmfit import Parameters
-from ..utils import check_objattrs, check_dictkeys, interp_yvals
+from ..utils import (check_objattrs, check_dictkeys, interp_yvals,
+                     count_decimals, maxminval, minmaxval)
 from ..xas.xasutils import ktoe, etok
 
 class FeffPath(object):
@@ -54,7 +77,7 @@ class FeffPath(object):
     ----------
     name : :class:`str`
         Name for the Feffpath. The default is None.
-    fpath: :class:`~pathlib.Path`
+    ffpath: :class:`~pathlib.Path`
         Path to Feffdat data file. The default is None.
 
     Attributes
@@ -62,23 +85,23 @@ class FeffPath(object):
     path_pars : :class:`dict`
         Dictionary with Feff path parameters:
         
-        - ``filename``: name of file.
-        - ``nlegs``   : number of path legs.
-        - ``degen``   : path degeneracy.
-        - ``reff``    : nominal path length.
-        - ``rnrmav``  : norman radius (bohr).
-        - ``edge``    : relative energy threshold (eV).
+        - ``filename`` (:class:`str`): name of file.
+        - ``nlegs`` (:class:`float`) : number of path legs.
+        - ``degen`` (:class:`float`) : path degeneracy.
+        - ``reff``  (:class:`float`) : nominal path length.
+        - ``rnrmav`` (:class:`float`): norman radius (bohr).
+        - ``edge`` (:class:`float`)  : relative energy threshold (eV).
 
     feffdat : :class:`dict`
         Dictionary with Feff scattering data (static arrays):
 
-        - ``k``          : photoelectron wavenumber in eV (:class:`ndarray`).
-        - ``real_phc``   : central atom phase shift (:class:`ndarray`).
-        - ``mag_feff``   : feff magnitude (:class:`ndarray`).
-        - ``phase_feff`` : scattering phase shift (:class:`ndarray`).
-        - ``red_factor`` : amplitude reduction factor (:class:`ndarray`).
-        - ``lambd``      : mean free path (:class:`ndarray`).
-        - ``real_p``     : real part of the complex wavenumber
+        - ``k`` (:class:`ndarray`)         : photoelectron wavenumber in eV.
+        - ``real_phc`` (:class:`ndarray`)  : central atom phase shift.
+        - ``mag_feff`` (:class:`ndarray`)  : feff magnitude.
+        - ``phase_feff`` (:class:`ndarray`): scattering phase shift.
+        - ``red_factor`` (:class:`ndarray`): amplitude reduction factor.
+        - ``lambd`` (:class:`ndarray`)     : mean free path.
+        - ``real_p`` (:class:`ndarray`)    : real part of the complex wavenumber
 
     geom : :class:`list`
         List with Feff path geometry parameters: x, y, z, ipot, atnum, atsym.
@@ -111,9 +134,9 @@ class FeffPath(object):
     >>> type(feffpath)
     <class 'araucaria.fit.feffit.FeffPath'>
     """
-    def __init__(self, fpath:Path=None, name: str=None):
-        if fpath is not None:
-            self.read_feffdat(fpath)
+    def __init__(self, ffpath:Path=None, name: str=None):
+        if ffpath is not None:
+            self.read_feffdat(ffpath)
         if name is None:
             name  = hex(id(self))
         self.name = name
@@ -124,12 +147,12 @@ class FeffPath(object):
         else:
             return '<Feffpath>'
 
-    def read_feffdat(self, fpath: Path) -> None:
+    def read_feffdat(self, ffpath: Path) -> None:
         """Reads a Feff data file.
 
         Parameters
         ----------
-        fpath
+        ffpath
             Path to Feffpath data file.
 
         Returns
@@ -156,11 +179,9 @@ class FeffPath(object):
         >>> feffpath.read_feffdat(fpath)
         >>> check_objattrs(feffpath, FeffPath, attrlist)
         [True, True, True]
-        
-
         """
         # veifying existence of path
-        if not isfile(fpath):
+        if not isfile(ffpath):
             raise IOError("file %s does not exists." % fpath)
 
         # containers for data
@@ -169,10 +190,10 @@ class FeffPath(object):
         self.geom      = [] # [x y z] pot atnum atsym
 
         # saving filename``
-        self.path_pars['filename'] = basename(fpath)
+        self.path_pars['filename'] = basename(ffpath)
 
         # reading file
-        with open(fpath, 'r') as file:
+        with open(ffpath, 'r') as file:
             # skipping header data
             for line in file:
                 if '----' in line:
@@ -217,7 +238,7 @@ class FeffPath(object):
             self.feffdat[key].flags.writeable = False
 
     def get_chi(self, parsdict: dict=None, params: Parameters=None,  
-                kstep: float=None) -> Tuple[ndarray, ndarray]:
+                kstep: float=0.05) -> Tuple[ndarray, ndarray]:
         """Returns :math:`\chi(k)` for the Feff path.
 
         Parameters
@@ -245,7 +266,7 @@ class FeffPath(object):
             The default is None.
         kstep
             Step in k array.
-            The default is None, which returns the original k-spacing of the Feff data file.
+            The default is 0.05 :math:`\\unicode{x212B}^{-1}`.
 
         Returns
         -------
@@ -263,6 +284,10 @@ class FeffPath(object):
         NameError
             If ``parsdict`` contains strings and no ``params`` object is provided.
 
+        Important
+        ---------
+        If present, negative values are stripped from the :math:`k` array and zero is included.
+
         Example
         -------
         .. plot::
@@ -270,7 +295,6 @@ class FeffPath(object):
 
             >>> from araucaria.testdata import get_testpath
             >>> from araucaria.fit import FeffPath
-            >>> from araucaria.utils import check_objattrs
             >>> from araucaria.plot import fig_xas_template
             >>> import matplotlib.pyplot as plt
             >>> fpath    = get_testpath('feff0001.dat')
@@ -279,6 +303,7 @@ class FeffPath(object):
             >>> kw       = 1
             >>> fig, ax  = fig_xas_template(panels='e', fig_pars={'kweight': kw})
             >>> lin      = ax.plot(k, k**kw*chi)
+            >>> fig.tight_layout()
             >>> plt.show(block=False)
         """
         # check pars attribute
@@ -320,28 +345,152 @@ class FeffPath(object):
                         values[key] = def_values[i]
 
         # computing k shifted and approximating k=0
-        k_n = etok( ktoe(self.feffdat['k']) - values['deltaE'] )
-        k_s = where(k_n == 0, 1e-10, k_n)
+        k_s   = etok( ktoe(self.feffdat['k']) - values['deltaE'] )
+        k_den = where(k_s == 0, 1e-10, k_s)
 
         # computing complex wavenumber
         p = sqrt( (self.feffdat['real_p'] + (1j/ self.feffdat['lambd']))**2 - 1j*etok(values['ei']))
 
         # computing complex chi(k)
         chi_feff  = values['degen']*values['s02']*self.feffdat['red_factor']*self.feffdat['mag_feff']
-        chi_feff /= ( k_s * (self.path_pars['reff'] + values['deltaR'] )**2 )
+        chi_feff /= ( k_den * (self.path_pars['reff'] + values['deltaR'] )**2 )
         chi_feff  = chi_feff.astype(complex)
         chi_feff *= exp(-2 * self.path_pars['reff'] * p.imag - 2 * ( p**2 ) * values['sigma2'] \
                     + 2 * (p**4) * values['c4'] / 3)
-        chi_feff *= exp(1j * (2 * k_n * self.path_pars['reff'] + self.feffdat['phase_feff'] + \
+        chi_feff *= exp(1j * (2 * k_s * self.path_pars['reff'] + self.feffdat['phase_feff'] + \
                     self.feffdat['real_phc'] + 2 * p * ( values['deltaR'] - \
                     (2 * values['sigma2'] / self.path_pars['reff'] )) - 4 * (p**3) * values['c3'] / 3))
 
-        # retaning the imaginary part
+        # retaining the imaginary part
         chi_feff = chi_feff.imag
 
-        if kstep is not None:
-            kvals = arange(k_n[0], k_n[-1]+kstep/2, kstep)
-            chi_feff = interp_yvals(k_n, chi_feff, kvals)
-            return kvals, chi_feff
+        # min k-value is computed as the maximum between zero and a multiple of kstep
+        # max k-value is computed as multiple of kstep
+        # values are rounded to avoid interpolation errors
+        dec      = count_decimals(kstep, maxval=4)
+        nmin     = max(0, modf(k_s[0]/kstep)[1])
+        nmin     = 0  if nmin == 0 else (nmin + 1)*kstep
+        nmax     = modf(k_s[-1]/kstep)[1] * kstep
+        k        = around(arange(nmin, nmax + kstep/2, kstep), dec)
+        chi_feff = interp_yvals(k_s, chi_feff, k)
+
+        return k, chi_feff
+
+def fftochi(ffpathlist: List[FeffPath], parslist: List[dict]=None, 
+              params: Parameters=None, kstep: float=0.05) -> Tuple[ndarray, ndarray]:
+    """Returns :math:`\chi(k)` for a list of Feff paths.
+
+    Parameters
+    ----------
+    ffpathlist
+        List with Feff paths to consider for the computation of :math:`\chi(k)`.
+    parslist
+        List of dictionaries with either parameter values, or parameter names of 
+        an ``lmfit`` Parameters object. At least one of the following 
+        keys should be available for each dictionary:
+
+            - ``s02``    : amplitude reduction factor for the path.
+            - ``sigma2`` : debye-waller factor for the path.
+            - ``degen``  : path degeneracy.
+            - ``deltaE`` : :math:`\Delta E` for the path (eV).
+            - ``deltaR`` : :math:`\Delta R` for the path (Angstrom).
+            - ``ei``     : :math:`E_i` for the path.
+            - ``c3``     : third cumulant parameter.
+            - ``c4``     : fourth cumulant parameter.
+
+        The default is None, which assigns the respective Feff path value for ``degen``,
+        one for ``s02``, and zero for the remaining parameters. These default
+        values will also be used if any of the listed keys is absent.
+    params
+        Parameter object from ``lmfit`` contaning the paramater names established 
+        in the dictionaries in ``parslist``.
+        The default is None.
+    kstep
+        Step in k array.
+        The default is 0.05 :math:`\\unicode{x212B}^{-1}`.
+
+    Returns
+    -------
+    :
+        Array with :math:`k` values.
+    :
+        Array with :math:`\chi(k)` values.
+
+    Raises
+    ------
+    TypeError
+        If items in ``ffpathlist`` are not FeffPath instances.
+
+    Important
+    ---------
+    The returned array will be restricted to the highest initial value 
+    and lowest final value in :math:`k` for the parameterized Feff paths.
+
+    Example
+    -------
+        .. plot::
+            :context: reset
+
+            >>> from araucaria.testdata import get_testpath
+            >>> from araucaria.fit import FeffPath, fftochi
+            >>> from araucaria.plot import fig_xas_template
+            >>> from lmfit import Parameters
+            >>> import matplotlib.pyplot as plt
+            >>> # reading feffpath files
+            >>> fpath1    = get_testpath('feff0001.dat')
+            >>> fpath2    = get_testpath('feff0002.dat')
+            >>> feffpath1 = FeffPath(fpath1)
+            >>> feffpath2 = FeffPath(fpath2)
+            >>> # path parameters
+            >>> params   = Parameters()
+            >>> params.add('sigma2_1'  , 0.005)
+            >>> params.add('sigma2_2' ,  0.007)
+            >>> fefflist = [feffpath1, feffpath2]
+            >>> parslist = [{'sigma2': 'sigma2_1'},
+            ...             {'sigma2': 'sigma2_2'}]
+            >>> k, chi   = fftochi(fefflist, parslist, params)
+            >>> # plotting parameters
+            >>> kw      = 1
+            >>> fig, ax = fig_xas_template(panels='e', fig_pars={'kweight': kw})
+            >>> lin     = ax.plot(k, k**kw*chi)
+            >>> fig.tight_layout()
+            >>> plt.show(block=False)
+    """
+    #checking feffpaths
+    for item in ffpathlist:
+        if isinstance(item, FeffPath):
+            pass
         else:
-            return k_n, chi_feff
+            raise TypeError('%s is not a valid FeffPath instance.' % item.__class__)
+
+    # containers for k and chi values
+    k_list   = []
+    chi_list = []
+
+    if parslist is not None:
+        if len(parslist) != len(ffpathlist):
+            raise IndexError("number of feffpaths doesn't matches the number of path dicts")
+
+        for i, ffpath in enumerate(ffpathlist):
+            k, chi = ffpath.get_chi(parslist[i], params)
+            k_list.append(k)
+            chi_list.append(chi)
+    else:
+        for ffpath in ffpathlist:
+            k, chi = ffpath.get_chi()
+            k_list.append(k)
+            chi_list.append(chi)
+
+    # computing k-values
+    # values are rounded to avoid interpolation errors
+    dec = count_decimals(kstep, maxval=4)
+    kmin = maxminval(k_list, kstep)
+    kmax = minmaxval(k_list, kstep)
+    k    = around(arange(kmin, kmax + kstep/2, kstep), dec)
+
+    # computing chi values
+    for i, chi in enumerate(chi_list):
+        chi_list[i] = interp_yvals(k_list[i], chi, k)
+
+    chi = array(chi_list).sum(axis=0)
+    return k, chi

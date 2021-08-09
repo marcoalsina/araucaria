@@ -88,6 +88,7 @@ def fig_merge(merge: Group, collection: Collection,
         >>> report, merge = merge(collection)
         >>> fig, ax = fig_merge(merge, collection)
         >>> leg     = ax[0].legend(fontsize=8)
+        >>> fig.tight_layout()
         >>> plt.show(block=False)
     """
     # checking class and attributes
@@ -221,6 +222,7 @@ def fig_pre_edge(group: Group, show_pre_edge: bool=True,
         >>> group   = read_dnd(fpath, scan='mu')
         >>> pre     = pre_edge(group, update=True)
         >>> fig, ax = fig_pre_edge(group)
+        >>> fig.tight_layout()
         >>> plt.show(block=False)
     """
     # checking class and attributes
@@ -327,6 +329,7 @@ def fig_autobk(group: Group, show_window: bool=True,
         >>> pre     = pre_edge(group, update=True)
         >>> bkg     = autobk(group, update=True)
         >>> fig, ax = fig_autobk(group, show_window=False)
+        >>> fig.tight_layout()
         >>> plt.show(block=False)
     """
     # checking class and attributes
