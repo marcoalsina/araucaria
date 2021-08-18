@@ -62,6 +62,7 @@ from os.path import isfile, basename
 from pathlib import Path
 from numpy import (ndarray, array, sqrt, where, exp, arange,
                    around, modf, argmin, argmax, delete, insert)
+from scipy.interpolate import UnivariateSpline
 from lmfit import Parameters
 from ..utils import (check_objattrs, check_dictkeys, interp_yvals,
                      count_decimals, maxminval, minmaxval)
@@ -102,6 +103,14 @@ class FeffPath(object):
         - ``red_factor`` (:class:`ndarray`): amplitude reduction factor.
         - ``lambd`` (:class:`ndarray`)     : mean free path.
         - ``real_p`` (:class:`ndarray`)    : real part of the complex wavenumber
+    
+    splines : :class:`dict`
+        Dictionary with splines based on Feff scattering data:
+        
+        - ``ph`` (:class:`InterpolatedUnivariateSpline`)     : phase shift (central atom + scattering phase shifts).
+        - ``amp`` (:class:`InterpolatedUnivariateSpline`)    : amplitude (feff magnitude * amplitude reduction factor).
+        - ``real_p`` (:class:`InterpolatedUnivariateSpline`) : real part of the complex wavenumber.
+        - ``lambd`` (:class:`InterpolatedUnivariateSpline`)  : mean free path.
 
     geom : :class:`list`
         List with Feff path geometry parameters: x, y, z, ipot, atnum, atsym.
@@ -188,7 +197,7 @@ class FeffPath(object):
         self.path_pars = {} # path parameters
         self.feffdat   = {} # scattering functions
         self.geom      = [] # [x y z] pot atnum atsym
-
+        self.splines   = {} # splines based on scattering functions
         # saving filename``
         self.path_pars['filename'] = basename(ffpath)
 
@@ -224,21 +233,36 @@ class FeffPath(object):
                 data.append([float(val) for val in line.strip().split()])
 
         # storing scattering values
-        data                       = array(data).T
-        self.feffdat['k']          = data[0]    # photoelectron wavenumber
-        self.feffdat['real_phc']   = data[1]    # central atom phase shift
-        self.feffdat['mag_feff']   = data[2]    # feff magnitude
-        self.feffdat['phase_feff'] = data[3]    # scattering phase shift
-        self.feffdat['red_factor'] = data[4]    # amplitude reduction factor
-        self.feffdat['lambd']      = data[5]    # mean free path
-        self.feffdat['real_p']     = data[6]    # real part of the complex wavenumber
+        data       = array(data).T
+        k          = data[0]    # photoelectron wavenumber
+        real_phc   = data[1]    # central atom phase shift
+        mag_feff   = data[2]    # feff magnitude
+        phase_feff = data[3]    # scattering phase shift
+        red_factor = data[4]    # amplitude reduction factor
+        lambd      = data[5]    # mean free path
+        real_p     = data[6]    # real part of the complex wavenumber
+        
+        self.feffdat['k']          = k
+        self.feffdat['real_phc']   = real_phc
+        self.feffdat['mag_feff']   = mag_feff
+        self.feffdat['phase_feff'] = phase_feff
+        self.feffdat['red_factor'] = red_factor
+        self.feffdat['lambd']      = lambd
+        self.feffdat['real_p']     = real_p
+        
         del data
         # locking arrays from modification
         for key in self.feffdat:
             self.feffdat[key].flags.writeable = False
+            
+        # storing splines based on scattering values
+        self.splines['ph']     = UnivariateSpline(k, phase_feff + real_phc, s=0)
+        self.splines['amp']    = UnivariateSpline(k, red_factor * mag_feff, s=0)
+        self.splines['real_p'] = UnivariateSpline(k, real_p, s=0)
+        self.splines['lambd']  = UnivariateSpline(k, lambd, s=0)
 
     def get_chi(self, parsdict: dict=None, params: Parameters=None,  
-                kstep: float=0.05) -> Tuple[ndarray, ndarray]:
+                kstep: float=0.05, kmax: float=20) -> Tuple[ndarray, ndarray]:
         """Returns :math:`\chi(k)` for the Feff path.
 
         Parameters
@@ -267,6 +291,10 @@ class FeffPath(object):
         kstep
             Step in k array.
             The default is 0.05 :math:`\\unicode{x212B}^{-1}`.
+		kmax
+            Maximum possible value in k array. The actual maximum will be the greatest
+			value less than or equal to kmax evenly divisible by the kstep.
+            The default is 20 :math:`\\unicode{x212B}^{-1}`.
 
         Returns
         -------
@@ -345,36 +373,32 @@ class FeffPath(object):
                         values[key] = def_values[i]
 
         # computing k shifted and approximating k=0
-        k_s   = etok( ktoe(self.feffdat['k']) - values['deltaE'] )
+        # first, an array built on specified kstep and kmax
+        k_arr = np.linspace(0, int(round(kmax/kstep, 6))*kstep, int(round(kmax/kstep, 6)+1))
+        k_s   = etok( ktoe(k_arr) - values['deltaE'] )
         k_den = where(k_s == 0, 1e-10, k_s)
-
+        
+        ph     = self.splines['ph'](k_den)
+        amp    = self.splines['amp'](k_den)
+        real_p = self.splines['real_p'](k_den)
+        lambd  = self.splines['lambd'](k_den)
+        
         # computing complex wavenumber
-        p = sqrt( (self.feffdat['real_p'] + (1j/ self.feffdat['lambd']))**2 - 1j*etok(values['ei']))
-
+        p = np.sqrt((real_p + (1j/lambd))**2 - 1j*etok(values['ei']))
+        
         # computing complex chi(k)
-        chi_feff  = values['degen']*values['s02']*self.feffdat['red_factor']*self.feffdat['mag_feff']
+        chi_feff  = values['degen'] * values['s02'] * amp
         chi_feff /= ( k_den * (self.path_pars['reff'] + values['deltaR'] )**2 )
         chi_feff  = chi_feff.astype(complex)
         chi_feff *= exp(-2 * self.path_pars['reff'] * p.imag - 2 * ( p**2 ) * values['sigma2'] \
                     + 2 * (p**4) * values['c4'] / 3)
-        chi_feff *= exp(1j * (2 * k_s * self.path_pars['reff'] + self.feffdat['phase_feff'] + \
-                    self.feffdat['real_phc'] + 2 * p * ( values['deltaR'] - \
+        chi_feff *= exp(1j * (2 * k_den * self.path_pars['reff'] + ph + 2 * p * ( values['deltaR'] - \
                     (2 * values['sigma2'] / self.path_pars['reff'] )) - 4 * (p**3) * values['c3'] / 3))
 
         # retaining the imaginary part
         chi_feff = chi_feff.imag
 
-        # min k-value is computed as the maximum between zero and a multiple of kstep
-        # max k-value is computed as multiple of kstep
-        # values are rounded to avoid interpolation errors
-        dec      = count_decimals(kstep, maxval=4)
-        nmin     = max(0, modf(k_s[0]/kstep)[1])
-        nmin     = 0  if nmin == 0 else (nmin + 1)*kstep
-        nmax     = modf(k_s[-1]/kstep)[1] * kstep
-        k        = around(arange(nmin, nmax + kstep/2, kstep), dec)
-        chi_feff = interp_yvals(k_s, chi_feff, k)
-
-        return k, chi_feff
+        return k_arr, chi_feff
 
 def fftochi(ffpathlist: List[FeffPath], parslist: List[dict]=None, 
               params: Parameters=None, kstep: float=0.05) -> Tuple[ndarray, ndarray]:
