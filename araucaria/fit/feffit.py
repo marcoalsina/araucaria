@@ -60,13 +60,16 @@ References
 from typing import Tuple, List
 from os.path import isfile, basename
 from pathlib import Path
-from numpy import (ndarray, array, sqrt, where, exp, arange,
-                   around, modf, argmin, argmax, delete, insert)
+from numpy import (ndarray, array, sqrt, where, exp, arange, linspace,
+                   around, modf, argmin, argmax, delete, insert, zeros)
 from scipy.interpolate import UnivariateSpline
-from lmfit import Parameters
+from lmfit import Parameters, Minimizer
+from lmfit.minimizer import MinimizerResult
 from ..utils import (check_objattrs, check_dictkeys, interp_yvals,
                      count_decimals, maxminval, minmaxval)
 from ..xas.xasutils import ktoe, etok
+from ..xas import xftf
+from .. import Group
 
 class FeffPath(object):
     """Feffpath storage class.
@@ -144,6 +147,8 @@ class FeffPath(object):
     <class 'araucaria.fit.feffit.FeffPath'>
     """
     def __init__(self, ffpath:Path=None, name: str=None):
+        self.params={}
+        self._params={}
         if ffpath is not None:
             self.read_feffdat(ffpath)
         if name is None:
@@ -261,40 +266,53 @@ class FeffPath(object):
         self.splines['real_p'] = UnivariateSpline(k, real_p, s=0)
         self.splines['lambd']  = UnivariateSpline(k, lambd, s=0)
 
-    def get_chi(self, parsdict: dict=None, params: Parameters=None,  
-                kstep: float=0.05, kmax: float=20) -> Tuple[ndarray, ndarray]:
+    def get_chi(self, degen: float=None, s02:float=1, sigma2: float=0, deltaR: float=0, 
+                deltaE: float=0, ei: float=0, c3: float=0, c4: float=0, params: Parameters=None,
+                kstep: float=0.05, kmax: float=20, k: ndarray=None) -> Tuple[ndarray, ndarray]:
         """Returns :math:`\chi(k)` for the Feff path.
 
         Parameters
         ----------
-        parsdict
-            Dictionary with either parameter values, or parameter names of 
-            an ``lmfit`` Parameters object. At least one of the following 
-            keys should be available:
-
-            - ``s02``    : amplitude reduction factor for the path.
-            - ``sigma2`` : debye-waller factor for the path.
-            - ``degen``  : path degeneracy.
-            - ``deltaE`` : :math:`\Delta E` for the path (eV).
-            - ``deltaR`` : :math:`\Delta R` for the path (Angstrom).
-            - ``ei``     : :math:`E_i` for the path.
-            - ``c3``     : third cumulant parameter.
-            - ``c4``     : fourth cumulant parameter.
-
-            The default is None, which assigns the Feff path value for ``degen``,
-            one for ``s02``, and zero for the remaining parameters. These default
-            values will also be used if any of the listed keys is absent.
+        degen
+            Path degeneracy.
+            For each path parameter, a float, int, or lmfit parameter may be input for the calculation.
+            The default is None, which will use the degen value from the feffpath.
+        s02
+            Amplitude reduction factor for the path.
+            The default is 1.
+        sigma2
+            Debye-waller factor for the path.
+            The default is 0.
+        deltaE
+            :math:`\Delta E` for the path (eV).
+            The default is 0.
+        deltaR
+            :math:`\Delta R` for the path (Angstrom).
+            The default is 0.
+        ei
+            :math:`E_i` for the path.
+            The default is 0.
+        c3
+            Third cumulant parameter.
+            The default is 0.
+        c4
+            Fourth cumulant parameter.
+            The default is 0.
         params
-            Parameter object from ``lmfit`` contaning the paramater names established 
-            in ``dictpars``.
+            lmfit Parameters to be used in chi calculations.
+            One may call parameters in this groupusing a string corresponding to the
+            Parameter name in the Parameters (e.g. s02='s02')
             The default is None.
         kstep
             Step in k array.
             The default is 0.05 :math:`\\unicode{x212B}^{-1}`.
-		kmax
+        kmax
             Maximum possible value in k array. The actual maximum will be the greatest
 			value less than or equal to kmax evenly divisible by the kstep.
             The default is 20 :math:`\\unicode{x212B}^{-1}`.
+        k
+            Optional array of k values to use for chi calculations.
+            The default is None.
 
         Returns
         -------
@@ -334,48 +352,27 @@ class FeffPath(object):
             >>> fig.tight_layout()
             >>> plt.show(block=False)
         """
-        # check pars attribute
-        req_keys   = ['s02', 'sigma2', 'degen', 'deltaR', 'deltaE', 'ei', 'c3', 'c4']
-        def_values = [  1.0,      0.0,     1.0,      0.0,      0.0,  0.0,  0.0, 0.0 ]
 
         # checking self attribute
         check_objattrs(self, FeffPath, attrlist=['feffdat'], exceptions=True)
-
-        values = {}
-        if parsdict is None:
-        # default values
-            for i, key in enumerate(req_keys):
-                if key == 'degen':
-                    values[key] = self.path_pars[key]
-                else:
-                    values[key] = def_values[i]
-        elif params is None:
-        # parsdict are values
-            for i, key in enumerate(req_keys):
-                if key in parsdict:
-                    values[key] = parsdict[key]
-                else:
-                    if key == 'degen':
-                        values[key] = self.path_pars[key]
-                    else:
-                        values[key] = def_values[i]
-        else:
-        # using parameters object
-            check_objattrs(params, Parameters)
-            for i, key in enumerate(req_keys):
-                if key in parsdict:
-                    pkey = parsdict[key]
-                    values[key] = params[pkey].value
-                else:
-                    if key == 'degen':
-                        values[key] = self.path_pars[key]
-                    else:
-                        values[key] = def_values[i]
-
+        
+        path_params = [degen, s02, sigma2, deltaR, deltaE, ei, c3, c4]
+        for i, path_param in enumerate(path_params):
+            if type(path_param) is str:
+                path_params[i] = params[path_param]
+        degen, s02, sigma2, deltaR, deltaE, ei, c3, c4 = path_params
+        
         # computing k shifted and approximating k=0
         # first, an array built on specified kstep and kmax
-        k_arr = np.linspace(0, int(round(kmax/kstep, 6))*kstep, int(round(kmax/kstep, 6)+1))
-        k_s   = etok( ktoe(k_arr) - values['deltaE'] )
+        if k is None:
+            k_arr = linspace(0, int(round(kmax/kstep, 6))*kstep, int(round(kmax/kstep, 6)+1))
+        else:
+            k_arr = k
+        
+        if degen is None:
+            degen = self.path_pars['degen']
+            
+        k_s   = etok( ktoe(k_arr) - deltaE )
         k_den = where(k_s == 0, 1e-10, k_s)
         
         ph     = self.splines['ph'](k_den)
@@ -384,54 +381,75 @@ class FeffPath(object):
         lambd  = self.splines['lambd'](k_den)
         
         # computing complex wavenumber
-        p = np.sqrt((real_p + (1j/lambd))**2 - 1j*etok(values['ei']))
+        p = sqrt((real_p + (1j/lambd))**2 - 1j*etok(ei))
         
         # computing complex chi(k)
-        chi_feff  = values['degen'] * values['s02'] * amp
-        chi_feff /= ( k_den * (self.path_pars['reff'] + values['deltaR'] )**2 )
+        chi_feff  = degen * s02 * amp
+        chi_feff /= ( k_den * (self.path_pars['reff'] + deltaR )**2 )
         chi_feff  = chi_feff.astype(complex)
-        chi_feff *= exp(-2 * self.path_pars['reff'] * p.imag - 2 * ( p**2 ) * values['sigma2'] \
-                    + 2 * (p**4) * values['c4'] / 3)
-        chi_feff *= exp(1j * (2 * k_den * self.path_pars['reff'] + ph + 2 * p * ( values['deltaR'] - \
-                    (2 * values['sigma2'] / self.path_pars['reff'] )) - 4 * (p**3) * values['c3'] / 3))
+        chi_feff *= exp(-2 * self.path_pars['reff'] * p.imag - 2 * ( p**2 ) * sigma2 \
+                    + 2 * (p**4) * c4 / 3)
+        chi_feff *= exp(1j * (2 * k_den * self.path_pars['reff'] + ph + 2 * p * ( deltaR - \
+                    (2 * sigma2 / self.path_pars['reff'] )) - 4 * (p**3) * c3 / 3))
 
         # retaining the imaginary part
         chi_feff = chi_feff.imag
-
+        
+        self.k_dat = k_arr
+        self.chi   = chi_feff
+        
         return k_arr, chi_feff
+    
+    def assign_params(self, assignment_dictionary: dict=None):
+        """Assigns parameters to be used in chi calculations to the feffpath.
+        One may assign either a string corresponding to the name of a ``Parameter`` 
+        or a float to the name of a ``get_chi`` variable.
+        
+        Parameters
+        ----------
+        assignment_dictionary
+            Dictionary matching get_chi inputs to parameter names or values.
+            Default is None.
+        
+        
+        >>> from araucaria.testdata import get_testpath
+        >>> from araucaria.fit import FeffPath
+        >>> from araucaria.utils import check_objattrs
+        >>> from lmfit import Parameters
+        >>> feffpath = FeffPath()
+        >>> # empty FeffPath instance
+        >>> params = Parameters()
+        >>> params.add('s02', value=1, min=0)
+        >>> assignment_dictionary = {'s02':'s02', 'sigma2':0.007}
+        >>> feffpath.assign_params(assignment_dictionary)
+        >>> feffpath.params
+        {'s02': 's02', 'sigma2': 0.007}
+        """        
+        self.params = assignment_dictionary
+        return    
 
-def fftochi(ffpathlist: List[FeffPath], parslist: List[dict]=None, 
-              params: Parameters=None, kstep: float=0.05) -> Tuple[ndarray, ndarray]:
+def fftochi(ffpathlist: List[FeffPath], params: Parameters=None, kstep: float=0.05,
+            kmax: float=20, k: ndarray=None) -> Tuple[ndarray, ndarray]:
     """Returns :math:`\chi(k)` for a list of Feff paths.
 
     Parameters
     ----------
     ffpathlist
         List with Feff paths to consider for the computation of :math:`\chi(k)`.
-    parslist
-        List of dictionaries with either parameter values, or parameter names of 
-        an ``lmfit`` Parameters object. At least one of the following 
-        keys should be available for each dictionary:
-
-            - ``s02``    : amplitude reduction factor for the path.
-            - ``sigma2`` : debye-waller factor for the path.
-            - ``degen``  : path degeneracy.
-            - ``deltaE`` : :math:`\Delta E` for the path (eV).
-            - ``deltaR`` : :math:`\Delta R` for the path (Angstrom).
-            - ``ei``     : :math:`E_i` for the path.
-            - ``c3``     : third cumulant parameter.
-            - ``c4``     : fourth cumulant parameter.
-
-        The default is None, which assigns the respective Feff path value for ``degen``,
-        one for ``s02``, and zero for the remaining parameters. These default
-        values will also be used if any of the listed keys is absent.
     params
         Parameter object from ``lmfit`` contaning the paramater names established 
-        in the dictionaries in ``parslist``.
+        in the dictionaries in ``params`` attribute within the Feff paths.
         The default is None.
     kstep
         Step in k array.
         The default is 0.05 :math:`\\unicode{x212B}^{-1}`.
+    kmax
+        Maximum possible value in k array. The actual maximum will be the greatest
+                    value less than or equal to kmax evenly divisible by the kstep.
+        The default is 20 :math:`\\unicode{x212B}^{-1}`.
+    k
+        Optional array of k values to use for chi calculations.
+        The default is None.
 
     Returns
     -------
@@ -469,14 +487,14 @@ def fftochi(ffpathlist: List[FeffPath], parslist: List[dict]=None,
             >>> params   = Parameters()
             >>> params.add('sigma2_1'  , 0.005)
             >>> params.add('sigma2_2' ,  0.007)
-            >>> fefflist = [feffpath1, feffpath2]
-            >>> parslist = [{'sigma2': 'sigma2_1'},
-            ...             {'sigma2': 'sigma2_2'}]
-            >>> k, chi   = fftochi(fefflist, parslist, params)
+            >>> feffpath1.assign_params({'sigma2':'sigma2_1'})
+            >>> feffpath2.assign_params({'sigma2':'sigma2_2'})
+            >>> fefflist  = [feffpath1, feffpath2]
+            >>> sum_paths = fftochi(fefflist, params)
             >>> # plotting parameters
             >>> kw      = 1
             >>> fig, ax = fig_xas_template(panels='e', fig_pars={'kweight': kw})
-            >>> lin     = ax.plot(k, k**kw*chi)
+            >>> lin     = ax.plot(sum_paths.k, sum_paths.k**kw*sum_paths.chi)
             >>> fig.tight_layout()
             >>> plt.show(block=False)
     """
@@ -488,33 +506,91 @@ def fftochi(ffpathlist: List[FeffPath], parslist: List[dict]=None,
             raise TypeError('%s is not a valid FeffPath instance.' % item.__class__)
 
     # containers for k and chi values
-    k_list   = []
-    chi_list = []
-
-    if parslist is not None:
-        if len(parslist) != len(ffpathlist):
-            raise IndexError("number of feffpaths doesn't matches the number of path dicts")
-
-        for i, ffpath in enumerate(ffpathlist):
-            k, chi = ffpath.get_chi(parslist[i], params)
-            k_list.append(k)
-            chi_list.append(chi)
+    
+    if k is None:
+        k_arr = linspace(0, int(round(kmax/kstep, 6))*kstep, int(round(kmax/kstep, 6)+1))
     else:
-        for ffpath in ffpathlist:
-            k, chi = ffpath.get_chi()
-            k_list.append(k)
-            chi_list.append(chi)
+        k_arr = k
+    
+    chi = zeros(len(k_arr))
+    
+    for i, path in enumerate(ffpathlist):
+        if path.params:
+            params._asteval.symtable['_rf'+str(i)] = path.path_pars['reff']
+            # allows 'reff' (and 'degen') to be used in expressions on more than
+            # one path by changing the name for each path
+            if 'degen' not in path.params.keys():
+                params._asteval.symtable['_dgn'+str(i)] = path.path_pars['degen']
+                # if degen is not specified, the value from the Feff calculation is used
+            for item in path.params.items(): #tupled parameters
+                if type(item[1]) == str:
+                    path._params[item[0]] = params[item[1]]
+                    
+                    if params[item[1]].expr:
+                        expr = params[item[1]].expr
+                        if 'reff' in expr:
+                            expr = expr.replace('reff','_rf'+str(i))
+                        if 'degen' in expr and 'degen' not in path.params.keys():
+                            expr = expr.replace('degen','_dgn'+str(i))
+                        path._params[item[0]].expr = expr
+                        
+                else:
+                    path._params[item[0]] = item[1]
+                    
+        path.get_chi(k=k_arr, **path._params)
+        chi += path.chi
+    
+    sum_paths = Group()
+    sum_paths.k = k_arr
+    sum_paths.chi = chi
+    return sum_paths
 
-    # computing k-values
-    # values are rounded to avoid interpolation errors
-    dec = count_decimals(kstep, maxval=4)
-    kmin = maxminval(k_list, kstep)
-    kmax = minmaxval(k_list, kstep)
-    k    = around(arange(kmin, kmax + kstep/2, kstep), dec)
-
-    # computing chi values
-    for i, chi in enumerate(chi_list):
-        chi_list[i] = interp_yvals(k_list[i], chi, k)
-
-    chi = array(chi_list).sum(axis=0)
-    return k, chi
+def fit_feff(data: Group, ffpathlist: List[FeffPath], params: Parameters=None, 
+             fitspace: str='k', r_range: tuple=(1,10), fitmethod: str='leastsq', 
+             **xftf_kws) -> MinimizerResult:
+    """Returns fit results from fitting data to calculations from list of Feff paths.
+    
+    Parameters
+    ----------
+    data
+        Group with EXAFS data to be fit by Feff paths.
+    ffpathlist
+        List with Feff paths to consider for the computation of :math:`\chi(k)`.
+    params
+        Parameter object from ``lmfit`` contaning the paramater names established 
+        in the dictionaries in ``params`` attribute within the Feff paths.
+        The default is None.
+    fitspace
+        Space upon which the fit will be performed. Options are 'k' or 'r'.
+        The default is 'k'.
+    r_range
+        Minimum and maximum values of r to use when fitting in r-space.
+        The default is (1,10).
+    fitmethod
+        Fitting method passed to ``lmfit``.
+        The default is 'leastsq'.
+    xftf_kws
+        Dictionary of parameters passed to the xftf function.        
+    """    
+    xftf(data, **xftf_kws, update=True)
+    
+    def fit_fcn(params, fitspace):
+        # function used in lmfit model
+        # returns the difference between the data and the Feff model
+        chi_model = fftochi(ffpathlist, params=params, k=data.k)
+        
+        if fitspace == 'k':
+            weighted_chi  = data.k**data.xftf_pars['kweight'] * data.chi * data.kwin
+            weighted_chim = data.k**data.xftf_pars['kweight'] * chi_model.chi * data.kwin
+            difference = weighted_chi - weighted_chim
+        elif fitspace == 'r':
+            xftf(chi_model, **xftf_kws, update=True)
+            condition  = where((data.r >= r_range[0]) & (data.r <= r_range[1]))
+            difference = data.chir[condition] - chi_model.chir[condition]
+            difference = difference.view(float)
+        
+        return(difference)
+    
+    fitter = Minimizer(fit_fcn, params, fcn_args=(fitspace))
+    out = fitter.minimize(method=fitmethod)
+    return(out)

@@ -315,12 +315,23 @@ def xftf(group: Group, k_range: list=[0,20], kweight: int=0,
     mag   = sqrt(out.real**2 + out.imag**2)
 
     # output dictionary
+    xftf_pars = {'k_range' : k_range,
+                 'kweight' : kweight,
+                 'dk1'     : dk1,
+                 'dk2'     : dk2,
+                 'win'     : win,
+                 'rmax_out': rmax_out,
+                 'nfft'    : nfft,
+                 'kstep'   : kstep,
+                 }
+    
     content = {'kwin'     : win[:len(chi)],
                'r'        : r[:rpts],
                'chir'     : out[:rpts],
                'chir_mag' : mag[:rpts],
                'chir_re'  : out.real[:rpts],
-               'chir_im'  : out.imag[:rpts]
+               'chir_im'  : out.imag[:rpts],
+               'xftf_pars': xftf_pars
                }
     if with_phase:
         content['chir_pha'] =  complex_phase(out[:rpts])
