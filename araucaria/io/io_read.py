@@ -139,7 +139,7 @@ def read_p65(fpath: Path, scan: str='mu', ref: bool=True, tol: float=1e-4) -> Gr
     elif scan == 'mu':
         usecols = (0, chdict['i0'], chdict['it1'], chdict['it2'])
     else:
-        usecols = (0, chdict['i0'], chdict['if'], chdict['it1'], chdict['it2'])
+        usecols = (0, chdict['i0'], chdict['it1'], chdict['if'], chdict['it2'])
 
     group     = read_rawfile(fpath, usecols, scan, ref, tol)
     return (group)
