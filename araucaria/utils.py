@@ -124,7 +124,7 @@ def check_dictkeys(obj: dict, keylist: list=None,
     for key in keylist:
         if key not in obj:
             if exceptions:
-                raise AttributeError("dictionary has no '%s' key." % (attr))
+                raise AttributeError("dictionary has no '%s' key." % (key))
             else:
                 boolist.append(False)
         else:

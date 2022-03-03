@@ -58,7 +58,7 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
         Distance (Å) for :math:`\chi(R)` above which the signal is ignored.
         The default is 1.0.
     k_range
-        Wavenumber range (:math:`Å^{-1}`).The default is [0, :data:`~numpy.inf`].
+        Wavenumber range (:math:`\\textrm{Å}^{-1}`).The default is [0, :data:`~numpy.inf`].
     kweight
         Exponent for weighting chi(k) by k**kweight.
         The default is 2.
@@ -69,7 +69,7 @@ def autobk(group: Group, rbkg: float=1.0, k_range: list=[0,inf],
     nfft
         Array size for the FT.  The default is 2048.
     kstep
-        Wavenumber step size for the FT (:math:`Å^{-1}`).  The default is 0.05.
+        Wavenumber step size for the FT (:math:`\\textrm{Å}^{-1}`).  The default is 0.05.
     k_std
         Optional k array for standard :math:`\chi(k)`.
     chi_std

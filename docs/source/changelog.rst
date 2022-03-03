@@ -9,6 +9,7 @@ ver 0.1.12
 - added :func:`~.utils.check_maxminval` and :func:`~.utils.check_minmaxval` functions (:mod:`~araucaria.utils` module).
 - added :func:`~.utils.count_decimals` function (:mod:`~araucaria.utils` module).
 - updated labels for EXAFS plots in :func:`~.plot.template.fig_xas_template` function (:mod:`~.plot` module).
+- fixed bug in exception of :func:`~.utils.check_dictkeys` function (:mod:`~araucaria.utils` module).
 
 
 ver 0.1.11

@@ -61,7 +61,7 @@ Where
 Therefore, the principal components can be computed as :math:`T=XV=U \\Sigma`.
 
 Dimensionality reduction
-------------------------
+************************
 
 A truncated matrix :math:`T_L` can be computed by retaining the L-largest 
 singular values and their corresponding singular vectors:
@@ -78,7 +78,7 @@ the principal components:
     t = U_L^T x
 
 Target transformation
----------------------
+*********************
 
 These principal components can be transformed back into the original space:
 
@@ -87,6 +87,9 @@ These principal components can be transformed back into the original space:
     \hat{x} = U_L t = U_L U_L^T x
 
 The latter is commonly referred to as **target transformation**.
+
+Contents of the PCA module
+**************************
 
 The :mod:`~araucaria.stats.pca` module offers the following 
 classes and functions to perform principal component analysis based on the SVD

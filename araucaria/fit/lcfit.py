@@ -23,8 +23,8 @@ Considering the following set of constraints:
 Where
 
 - :math:`E`          : photoelectron energy.
-- :math:`\mu_s(E)`   : normalized absorption of the fitted spectrum.
-- :math:`\mu_i(E)`   : normalized absorption of  reference spectrum "i".
+- :math:`\mu_s(E)`   : normalized absorption of fitted spectrum.
+- :math:`\mu_i(E)`   : normalized absorption of reference spectrum "i".
 - :math:`\\alpha_i`  : amplitude coefficient for reference spectrum "i".
 - :math:`\epsilon(E)`: residuals.
 - :math:`n`          : number of reference spectra.
@@ -47,10 +47,10 @@ Considering the following set of constraints:
 Where
 
 - :math:`k`          : photoelectron wavenumber.
-- :math:`\chi_s(k)`  : EXAFS modulation of the fitted spectrum.
-- :math:`\chi_i(E)`  : EXAFS modulation of the reference spectrum "i".
+- :math:`\chi_s(k)`  : EXAFS of the fitted spectrum.
+- :math:`\chi_i(E)`  : EXAFS of the reference spectrum "i".
 - :math:`\epsilon(k)`: residuals.
-- :math:`kw`         : weighting coefficient for the photoelectron wavenumber.
+- :math:`kw`         : k-weighting coefficient.
 
 The :mod:`~araucaria.fit.lcf` module offers the following functions to perform linear 
 combintation fitting (LCF):
@@ -91,7 +91,7 @@ def lcf(collection: Collection, fit_region: str='xanes',
         Collection containing the group for LCF analysis and the groups
         with the reference scans.
     fit_region
-        XAFS region to perform the LCF. Accepted values are 'dxanes',
+        XAFS region to perform LCF. Accepted values are 'dxanes',
         'xanes', or 'exafs'. The default is 'xanes'.
     fit_range
         Domain range in absolute values. Energy units are expected

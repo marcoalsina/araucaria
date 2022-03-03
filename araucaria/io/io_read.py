@@ -8,7 +8,6 @@ The :mod:`~araucaria.io.io_read` submodule offers functions to perform the follo
 
 Read XAFS files
 ***************
-
 The following functions are currently implemented to read XAFS files:
 
 .. list-table::
