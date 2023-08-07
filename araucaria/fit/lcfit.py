@@ -390,7 +390,7 @@ def lcf_report(out: Dataset) -> str:
         Akaike info crit   = -645.778389
         Bayesian info crit = -639.880869
     [[Variables]]
-        amp1:  0.40034377 +/- 0.01195335 (2.99%) (init = 0.5)
+        amp1:  0.40034377 +/- 0.01195334 (2.99%) (init = 0.5)
         amp2:  0.59428689 +/- 0.01199230 (2.02%) (init = 0.5)
     """
     check_objattrs(out, Dataset, attrlist=['min_pars', 

@@ -72,7 +72,7 @@ from http.client import HTTPResponse
 import warnings
 from typing import List, Tuple, Union
 from pathlib import Path
-from numpy import loadtxt, delete, log, append, float, ndarray
+from numpy import loadtxt, delete, log, append, ndarray
 from .. import Group
 from ..utils import index_dups
 
